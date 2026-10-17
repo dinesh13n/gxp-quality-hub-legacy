@@ -1,0 +1,70 @@
+[
+ {
+  "id": "M8",
+  "file": "legacy_batch/shift_reconciliation.py",
+  "killed_by_golden": true,
+  "api_diffs": [],
+  "batch_diffs": [
+   "shift_reconciliation"
+  ]
+ },
+ {
+  "id": "M9",
+  "file": "app/gateway_bridge.py",
+  "killed_by_golden": false,
+  "api_diffs": [],
+  "batch_diffs": []
+ },
+ {
+  "id": "M10",
+  "file": "app/server.py",
+  "killed_by_golden": true,
+  "api_diffs": [
+   "/api/cases/C00000001",
+   "/api/cases/C00000005",
+   "/api/cases/C00000015",
+   "/api/cases/C00000019",
+   "/api/cases/C00000066"
+  ],
+  "batch_diffs": []
+ },
+ {
+  "id": "M12",
+  "file": "app/baseline.py",
+  "killed_by_golden": true,
+  "api_diffs": [],
+  "batch_diffs": [
+   "app.baseline",
+   "baseline_6000_seed4326"
+  ]
+ },
+ {
+  "id": "M13",
+  "file": "legacy_js/legacy_policy.js",
+  "killed_by_golden": true,
+  "api_diffs": [],
+  "batch_diffs": [
+   "js_policy_table",
+   "node_default"
+  ]
+ },
+ {
+  "id": "M14",
+  "file": "app/historical_estate.py",
+  "killed_by_golden": true,
+  "api_diffs": [],
+  "batch_diffs": [
+   "historical_estate_import_on_cleared_tables",
+   "historical_estate_import_on_shipped_db"
+  ]
+ },
+ {
+  "id": "M15",
+  "file": "services/source_gateway/server.py",
+  "killed_by_golden": true,
+  "api_diffs": [
+   "/api/failure?mode=timeout"
+  ],
+  "batch_diffs": []
+ }
+]

@@ -1,0 +1,532 @@
+{
+ "__TOTAL__": {
+  "executable": 651,
+  "hit": 312,
+  "pct": 47.9
+ },
+ "app/__init__.py": {
+  "executable": 1,
+  "hit": 0,
+  "missed_lines": [
+   1
+  ],
+  "pct": 0.0
+ },
+ "app/archived_documents.py": {
+  "executable": 18,
+  "hit": 0,
+  "missed_lines": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   16,
+   17,
+   18,
+   19,
+   20
+  ],
+  "pct": 0.0
+ },
+ "app/baseline.py": {
+  "executable": 13,
+  "hit": 13,
+  "missed_lines": [],
+  "pct": 100.0
+ },
+ "app/domain_data.py": {
+  "executable": 26,
+  "hit": 23,
+  "missed_lines": [
+   26,
+   27,
+   28
+  ],
+  "pct": 88.5
+ },
+ "app/enterprise_data.py": {
+  "executable": 26,
+  "hit": 26,
+  "missed_lines": [],
+  "pct": 100.0
+ },
+ "app/enterprise_legacy.py": {
+  "executable": 48,
+  "hit": 46,
+  "missed_lines": [
+   53,
+   62
+  ],
+  "pct": 95.8
+ },
+ "app/gateway_bridge.py": {
+  "executable": 39,
+  "hit": 24,
+  "missed_lines": [
+   21,
+   24,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   36,
+   37,
+   38,
+   39,
+   40,
+   41
+  ],
+  "pct": 61.5
+ },
+ "app/generate.py": {
+  "executable": 51,
+  "hit": 48,
+  "missed_lines": [
+   20,
+   49,
+   50
+  ],
+  "pct": 94.1
+ },
+ "app/generate_documents.py": {
+  "executable": 15,
+  "hit": 0,
+  "missed_lines": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15
+  ],
+  "pct": 0.0
+ },
+ "app/historical_estate.py": {
+  "executable": 21,
+  "hit": 0,
+  "missed_lines": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23
+  ],
+  "pct": 0.0
+ },
+ "app/historical_fixture.py": {
+  "executable": 61,
+  "hit": 59,
+  "missed_lines": [
+   40,
+   64
+  ],
+  "pct": 96.7
+ },
+ "app/integration.py": {
+  "executable": 8,
+  "hit": 8,
+  "missed_lines": [],
+  "pct": 100.0
+ },
+ "app/legacy_logic.py": {
+  "executable": 7,
+  "hit": 6,
+  "missed_lines": [
+   8
+  ],
+  "pct": 85.7
+ },
+ "app/operational_report.py": {
+  "executable": 14,
+  "hit": 13,
+  "missed_lines": [
+   13
+  ],
+  "pct": 92.9
+ },
+ "app/partner_feeds.py": {
+  "executable": 65,
+  "hit": 14,
+  "missed_lines": [
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   39,
+   40,
+   41,
+   42,
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50,
+   51,
+   52,
+   53,
+   54,
+   55,
+   56,
+   57,
+   58,
+   59,
+   61,
+   62,
+   63,
+   64,
+   65,
+   66,
+   67,
+   68,
+   69,
+   70,
+   71,
+   73,
+   74
+  ],
+  "pct": 21.5
+ },
+ "app/server.py": {
+  "executable": 66,
+  "hit": 0,
+  "missed_lines": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   39,
+   40,
+   41,
+   42,
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50,
+   51,
+   52,
+   53,
+   54,
+   55,
+   56,
+   57,
+   58,
+   59,
+   60
+  ],
+  "pct": 0.0
+ },
+ "app/store.py": {
+  "executable": 18,
+  "hit": 18,
+  "missed_lines": [],
+  "pct": 100.0
+ },
+ "app/workshop_check.py": {
+  "executable": 14,
+  "hit": 0,
+  "missed_lines": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15
+  ],
+  "pct": 0.0
+ },
+ "legacy_batch/__init__.py": {
+  "executable": 1,
+  "hit": 0,
+  "missed_lines": [
+   1
+  ],
+  "pct": 0.0
+ },
+ "legacy_batch/shift_reconciliation.py": {
+  "executable": 16,
+  "hit": 14,
+  "missed_lines": [
+   17,
+   18
+  ],
+  "pct": 87.5
+ },
+ "ops/legacy_log_sampler.py": {
+  "executable": 4,
+  "hit": 0,
+  "missed_lines": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "pct": 0.0
+ },
+ "scripts/offline_inventory.py": {
+  "executable": 34,
+  "hit": 0,
+  "missed_lines": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35
+  ],
+  "pct": 0.0
+ },
+ "scripts/rehearse_local.py": {
+  "executable": 12,
+  "hit": 0,
+  "missed_lines": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13
+  ],
+  "pct": 0.0
+ },
+ "scripts/smoke.py": {
+  "executable": 24,
+  "hit": 0,
+  "missed_lines": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   22,
+   23,
+   24,
+   25
+  ],
+  "pct": 0.0
+ },
+ "scripts/verify_preloaded.py": {
+  "executable": 5,
+  "hit": 0,
+  "missed_lines": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "pct": 0.0
+ },
+ "services/__init__.py": {
+  "executable": 1,
+  "hit": 0,
+  "missed_lines": [
+   1
+  ],
+  "pct": 0.0
+ },
+ "services/source_gateway/__init__.py": {
+  "executable": 1,
+  "hit": 0,
+  "missed_lines": [
+   1
+  ],
+  "pct": 0.0
+ },
+ "services/source_gateway/server.py": {
+  "executable": 42,
+  "hit": 0,
+  "missed_lines": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   39,
+   40,
+   41,
+   42,
+   43,
+   44
+  ],
+  "pct": 0.0
+ }
+}

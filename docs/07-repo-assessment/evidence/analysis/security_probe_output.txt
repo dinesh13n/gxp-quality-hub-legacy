@@ -1,0 +1,11 @@
+/api/cases/%ff => (404, {'Server': 'BaseHTTP/0.6 Python/3.10.12', 'Content-Type': 'application/json; charset=utf-8'}, b'{"error": "not found"}')
+/api/cases?limit=99999999999999999999999999 => (200, {'Server': 'BaseHTTP/0.6 Python/3.10.12', 'Content-Type': 'application/json; charset=utf-8'}, b'{"items": [{"id": "C00000001", "account_id": "ACCT-000023", "segment": "legacy-v1", "site": "JP-KN", "region": "EMEA", "created_at": "2025-04-18T22:00')
+/api/cases?limit=1e3 => (400, {'Server': 'BaseHTTP/0.6 Python/3.10.12', 'Content-Type': 'application/json; charset=utf-8'}, b'{"error": "invalid pagination"}')
+/api/cases/..%2f..%2fetc%2fpasswd => (404, {'Server': 'BaseHTTP/0.6 Python/3.10.12', 'Content-Type': 'application/json; charset=utf-8'}, b'{"error": "not found"}')
+/api/partners/partner_feeds;x => (404, {'Server': 'BaseHTTP/0.6 Python/3.10.12', 'Content-Type': 'application/json; charset=utf-8'}, b'{"error": "unknown partner resource"}')
+//api/cases => (200, {'Server': 'BaseHTTP/0.6 Python/3.10.12', 'Content-Type': 'application/json; charset=utf-8'}, b'{"items": [{"id": "C00000001", "account_id": "ACCT-000023", "segment": "legacy-v1", "site": "JP-KN", "region": "EMEA", "created_at": "2025-04-18T22:00')
+/api/cases?limit=5&limit=7 => (200, {'Server': 'BaseHTTP/0.6 Python/3.10.12', 'Content-Type': 'application/json; charset=utf-8'}, b'{"items": [{"id": "C00000001", "account_id": "ACCT-000023", "segment": "legacy-v1", "site": "JP-KN", "region": "EMEA", "created_at": "2025-04-18T22:00')
+/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa => (414, {'Server': 'BaseHTTP/0.6 Python/3.10.12', 'Content-Type': 'text/html;charset=utf-8'}, b'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"\n        "http://www.w3.org/TR/html4/strict.dtd">\n<html>\n    <head>\n        <meta http-equiv="Content')
+100_parallel_requests_statuses => (['200'], 1.26)
+STDERR tail: s?limit=100 HTTP/1.1" 200 -
+

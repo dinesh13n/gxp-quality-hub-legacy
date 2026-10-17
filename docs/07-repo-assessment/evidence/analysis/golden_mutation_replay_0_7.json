@@ -1,0 +1,97 @@
+[
+ {
+  "id": "M1",
+  "file": "app/legacy_logic.py",
+  "killed_by_golden": true,
+  "api_diffs": [
+   "/api/cases",
+   "/api/cases?limit=1000",
+   "/api/cases?limit=3&offset=2",
+   "api_all_cases_priority"
+  ],
+  "batch_diffs": [
+   "app.baseline",
+   "baseline_6000_seed4326",
+   "priority_truth_table"
+  ]
+ },
+ {
+  "id": "M2",
+  "file": "app/legacy_logic.py",
+  "killed_by_golden": true,
+  "api_diffs": [
+   "/api/cases",
+   "/api/cases?limit=1000",
+   "/api/cases?limit=3&offset=2",
+   "api_all_cases_priority"
+  ],
+  "batch_diffs": [
+   "priority_truth_table"
+  ]
+ },
+ {
+  "id": "M3",
+  "file": "app/legacy_logic.py",
+  "killed_by_golden": true,
+  "api_diffs": [
+   "/api/cases/C00000001",
+   "/api/cases/C00000005",
+   "/api/cases/C00000015",
+   "/api/cases/C00000019",
+   "/api/cases/C00000066"
+  ],
+  "batch_diffs": [
+   "manual_review_truth_table"
+  ]
+ },
+ {
+  "id": "M4",
+  "file": "app/legacy_logic.py",
+  "killed_by_golden": true,
+  "api_diffs": [
+   "/api/cases",
+   "/api/cases?limit=-5",
+   "/api/cases?limit=0",
+   "/api/cases?limit=1000",
+   "/api/cases?offset=-1&limit=2",
+   "api_all_cases_priority"
+  ],
+  "batch_diffs": [
+   "baseline_6000_seed4326",
+   "priority_truth_table"
+  ]
+ },
+ {
+  "id": "M5",
+  "file": "app/partner_feeds.py",
+  "killed_by_golden": true,
+  "api_diffs": [],
+  "batch_diffs": [
+   "partner_error_reasons",
+   "partner_reconcile_sequence",
+   "partner_status_after_all"
+  ]
+ },
+ {
+  "id": "M6",
+  "file": "app/partner_feeds.py",
+  "killed_by_golden": true,
+  "api_diffs": [],
+  "batch_diffs": [
+   "partner_error_reasons",
+   "partner_reconcile_sequence",
+   "partner_status_after_all"
+  ]
+ },
+ {
+  "id": "M7",
+  "file": "app/partner_feeds.py",
+  "killed_by_golden": true,
+  "api_diffs": [],
+  "batch_diffs": [
+   "partner_error_reasons",
+   "partner_reconcile_sequence",
+   "partner_status_after_all"
+  ]
+ }
+]

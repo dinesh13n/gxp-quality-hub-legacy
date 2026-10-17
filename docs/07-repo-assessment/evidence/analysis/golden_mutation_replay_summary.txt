@@ -1,0 +1,3 @@
+Golden-baseline mutation replay (sandbox). 14 mutants M1-M10,M12-M15 (M11 omitted: multi-line replacement not in replay set).
+Existing unittest suite: 1 of 15 mutants killed (M4) per evidence/mutation_probe.log (14 of 15 survived incl. M11).
+Golden baseline (api + batch captures): 13 of 14 killed; M9 survived API/batch capture and was KILLED once golden/lib_golden (library edge cases) was added.

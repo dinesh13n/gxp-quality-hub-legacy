@@ -1,0 +1,27 @@
+test_relationships (test_domain.DomainTests) ... ok
+test_domain_tables_populated (test_enterprise.EnterpriseDataTests) ... ok
+test_foreign_keys (test_enterprise.EnterpriseDataTests) ... ok
+test_repeat_seed_same_first_row (test_enterprise_legacy_v6.EnterpriseLegacyTests) ... ok
+test_reproducible_entities_and_foreign_keys (test_enterprise_legacy_v6.EnterpriseLegacyTests) ... ok
+test_seeded_and_relational (test_historical_fixture.HistoricalFixtureTests) ... ok
+test_contract (test_partner_feeds.TestPartnerFeeds) ... ok
+test_required_tables (test_partner_feeds.TestPartnerFeeds) ... ok
+test_idempotent_ingestion (test_source_gateway.TestGatewayAndDomain) ... ok
+test_invalid_rejected (test_source_gateway.TestGatewayAndDomain) ... ok
+test_relations (test_source_gateway.TestGatewayAndDomain) ... ok
+test_baseline (test_workflow.WorkflowTests) ... ok
+test_feed_parser (test_workflow.WorkflowTests) ... ok
+test_fixture_and_counts (test_workflow.WorkflowTests) ... ok
+test_priority (test_workflow.WorkflowTests) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.628s
+
+OK
+
+real	0m0.719s
+user	0m0.312s
+sys	0m0.052s
+EXIT=0
+POST legacy.sqlite3 efc82d768e3951e5385be19cc8ab5adf537ef8c65a57421dcadc7e88ca890e88
+{'cases': 125, 'events': 145, 'source_messages': 15, 'operating_costs': 36, 'batch_records': 125, 'materials': 30, 'deviations': 42, 'lab_results': 125, 'capa_actions': 21, 'sop_versions': 45, 'gateway_inbox': 1}

@@ -1,0 +1,1179 @@
+{
+ "duplicate_6line_windows": [
+  [
+   "app/gateway_bridge.py:42",
+   "app/generate.py:51",
+   "app/historical_estate.py:23",
+   "app/historical_fixture.py:65",
+   "app/partner_feeds.py:75",
+   "app/server.py:66",
+   "services/source_gateway/server.py:44"
+  ],
+  [
+   "tests/test_enterprise_legacy_v6.py:22",
+   "tests/test_source_gateway.py:18",
+   "tests/test_workflow.py:25"
+  ]
+ ],
+ "files": {
+  "app/__init__.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 0,
+   "indent_style": "4-space/none",
+   "lines": 0,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 0,
+   "max_line_len": 0,
+   "module_cc": 1,
+   "module_docstring": false,
+   "non_blank": 0,
+   "top_funcs": []
+  },
+  "app/archived_documents.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "1-space",
+   "lines": 20,
+   "lines_gt_160": 3,
+   "lines_with_semicolon_statements": 6,
+   "max_func_cc": 5,
+   "max_line_len": 195,
+   "module_cc": 6,
+   "module_docstring": true,
+   "non_blank": 20,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 5,
+     "end": 18,
+     "has_docstring": false,
+     "line": 5,
+     "loc": 14,
+     "name": "generate"
+    }
+   ]
+  },
+  "app/baseline.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "4-space/none",
+   "lines": 13,
+   "lines_gt_160": 1,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 9,
+   "max_line_len": 377,
+   "module_cc": 10,
+   "module_docstring": false,
+   "non_blank": 13,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 9,
+     "end": 12,
+     "has_docstring": false,
+     "line": 5,
+     "loc": 8,
+     "name": "baseline"
+    }
+   ]
+  },
+  "app/domain_data.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "1-space",
+   "lines": 28,
+   "lines_gt_160": 2,
+   "lines_with_semicolon_statements": 1,
+   "max_func_cc": 4,
+   "max_line_len": 256,
+   "module_cc": 5,
+   "module_docstring": false,
+   "non_blank": 26,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 4,
+     "end": 23,
+     "has_docstring": false,
+     "line": 4,
+     "loc": 20,
+     "name": "generate_domain"
+    }
+   ]
+  },
+  "app/enterprise_data.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "4-space/none",
+   "lines": 27,
+   "lines_gt_160": 4,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 15,
+   "max_line_len": 753,
+   "module_cc": 15,
+   "module_docstring": false,
+   "non_blank": 26,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 15,
+     "end": 27,
+     "has_docstring": false,
+     "line": 7,
+     "loc": 21,
+     "name": "expand"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 18,
+     "has_docstring": false,
+     "line": 18,
+     "loc": 1,
+     "name": "ts"
+    }
+   ]
+  },
+  "app/enterprise_legacy.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "4-space/none",
+   "lines": 62,
+   "lines_gt_160": 27,
+   "lines_with_semicolon_statements": 10,
+   "max_func_cc": 25,
+   "max_line_len": 455,
+   "module_cc": 28,
+   "module_docstring": true,
+   "non_blank": 62,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 25,
+     "end": 56,
+     "has_docstring": false,
+     "line": 8,
+     "loc": 49,
+     "name": "generate"
+    },
+    {
+     "annotated": false,
+     "cc": 3,
+     "end": 60,
+     "has_docstring": false,
+     "line": 57,
+     "loc": 4,
+     "name": "_flush"
+    }
+   ]
+  },
+  "app/gateway_bridge.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 4,
+   "indent_style": "4-space/none",
+   "lines": 42,
+   "lines_gt_160": 4,
+   "lines_with_semicolon_statements": 5,
+   "max_func_cc": 8,
+   "max_line_len": 282,
+   "module_cc": 15,
+   "module_docstring": true,
+   "non_blank": 42,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 8,
+     "end": 26,
+     "has_docstring": false,
+     "line": 13,
+     "loc": 14,
+     "name": "apply"
+    },
+    {
+     "annotated": false,
+     "cc": 4,
+     "end": 41,
+     "has_docstring": false,
+     "line": 35,
+     "loc": 7,
+     "name": "main"
+    },
+    {
+     "annotated": false,
+     "cc": 3,
+     "end": 34,
+     "has_docstring": false,
+     "line": 27,
+     "loc": 8,
+     "name": "pull"
+    }
+   ]
+  },
+  "app/generate.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "4-space/none",
+   "lines": 51,
+   "lines_gt_160": 5,
+   "lines_with_semicolon_statements": 3,
+   "max_func_cc": 15,
+   "max_line_len": 540,
+   "module_cc": 16,
+   "module_docstring": false,
+   "non_blank": 51,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 15,
+     "end": 47,
+     "has_docstring": false,
+     "line": 4,
+     "loc": 44,
+     "name": "generate"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 50,
+     "has_docstring": false,
+     "line": 48,
+     "loc": 3,
+     "name": "main"
+    }
+   ]
+  },
+  "app/generate_documents.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "1-space",
+   "lines": 15,
+   "lines_gt_160": 2,
+   "lines_with_semicolon_statements": 2,
+   "max_func_cc": 6,
+   "max_line_len": 566,
+   "module_cc": 7,
+   "module_docstring": false,
+   "non_blank": 15,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 6,
+     "end": 13,
+     "has_docstring": false,
+     "line": 4,
+     "loc": 10,
+     "name": "generate"
+    }
+   ]
+  },
+  "app/historical_estate.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "4-space/none",
+   "lines": 23,
+   "lines_gt_160": 3,
+   "lines_with_semicolon_statements": 2,
+   "max_func_cc": 5,
+   "max_line_len": 229,
+   "module_cc": 6,
+   "module_docstring": true,
+   "non_blank": 23,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 5,
+     "end": 20,
+     "has_docstring": false,
+     "line": 6,
+     "loc": 15,
+     "name": "import_csv"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 22,
+     "has_docstring": false,
+     "line": 21,
+     "loc": 2,
+     "name": "main"
+    }
+   ]
+  },
+  "app/historical_fixture.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "4-space/none",
+   "lines": 65,
+   "lines_gt_160": 10,
+   "lines_with_semicolon_statements": 23,
+   "max_func_cc": 23,
+   "max_line_len": 394,
+   "module_cc": 24,
+   "module_docstring": true,
+   "non_blank": 65,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 23,
+     "end": 62,
+     "has_docstring": false,
+     "line": 11,
+     "loc": 52,
+     "name": "generate"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 64,
+     "has_docstring": false,
+     "line": 63,
+     "loc": 2,
+     "name": "main"
+    }
+   ]
+  },
+  "app/integration.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "4-space/none",
+   "lines": 8,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 4,
+   "max_line_len": 113,
+   "module_cc": 5,
+   "module_docstring": false,
+   "non_blank": 8,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 4,
+     "end": 7,
+     "has_docstring": false,
+     "line": 3,
+     "loc": 5,
+     "name": "consume_source_messages"
+    }
+   ]
+  },
+  "app/legacy_logic.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "4-space/none",
+   "lines": 8,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 6,
+   "max_line_len": 80,
+   "module_cc": 7,
+   "module_docstring": false,
+   "non_blank": 8,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 6,
+     "end": 6,
+     "has_docstring": false,
+     "line": 2,
+     "loc": 5,
+     "name": "priority"
+    },
+    {
+     "annotated": false,
+     "cc": 2,
+     "end": 8,
+     "has_docstring": false,
+     "line": 7,
+     "loc": 2,
+     "name": "manual_review_required"
+    }
+   ]
+  },
+  "app/operational_report.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "4-space/none",
+   "lines": 15,
+   "lines_gt_160": 2,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 3,
+   "max_line_len": 245,
+   "module_cc": 4,
+   "module_docstring": true,
+   "non_blank": 15,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 3,
+     "end": 14,
+     "has_docstring": false,
+     "line": 6,
+     "loc": 9,
+     "name": "run"
+    }
+   ]
+  },
+  "app/partner_feeds.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 4,
+   "indent_style": "4-space/none",
+   "lines": 75,
+   "lines_gt_160": 15,
+   "lines_with_semicolon_statements": 11,
+   "max_func_cc": 17,
+   "max_line_len": 475,
+   "module_cc": 26,
+   "module_docstring": true,
+   "non_blank": 74,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 17,
+     "end": 59,
+     "has_docstring": false,
+     "line": 21,
+     "loc": 39,
+     "name": "generate"
+    },
+    {
+     "annotated": false,
+     "cc": 7,
+     "end": 71,
+     "has_docstring": false,
+     "line": 60,
+     "loc": 12,
+     "name": "reconcile"
+    },
+    {
+     "annotated": false,
+     "cc": 2,
+     "end": 20,
+     "has_docstring": false,
+     "line": 11,
+     "loc": 10,
+     "name": "init"
+    }
+   ]
+  },
+  "app/server.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 4,
+   "indent_style": "4-space/none",
+   "lines": 66,
+   "lines_gt_160": 2,
+   "lines_with_semicolon_statements": 7,
+   "max_func_cc": 28,
+   "max_line_len": 199,
+   "module_cc": 29,
+   "module_docstring": false,
+   "non_blank": 66,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 28,
+     "end": 60,
+     "has_docstring": false,
+     "line": 11,
+     "loc": 50,
+     "name": "do_GET"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 65,
+     "has_docstring": false,
+     "line": 62,
+     "loc": 4,
+     "name": "main"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 10,
+     "has_docstring": false,
+     "line": 8,
+     "loc": 3,
+     "name": "respond"
+    }
+   ]
+  },
+  "app/store.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "4-space/none",
+   "lines": 19,
+   "lines_gt_160": 1,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 2,
+   "max_line_len": 922,
+   "module_cc": 3,
+   "module_docstring": false,
+   "non_blank": 19,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 2,
+     "end": 16,
+     "has_docstring": false,
+     "line": 6,
+     "loc": 11,
+     "name": "connect"
+    },
+    {
+     "annotated": false,
+     "cc": 2,
+     "end": 19,
+     "has_docstring": false,
+     "line": 17,
+     "loc": 3,
+     "name": "setup"
+    }
+   ]
+  },
+  "app/workshop_check.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "1-space",
+   "lines": 15,
+   "lines_gt_160": 1,
+   "lines_with_semicolon_statements": 1,
+   "max_func_cc": 9,
+   "max_line_len": 193,
+   "module_cc": 10,
+   "module_docstring": true,
+   "non_blank": 15,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 9,
+     "end": 14,
+     "has_docstring": false,
+     "line": 5,
+     "loc": 10,
+     "name": "main"
+    }
+   ]
+  },
+  "legacy_batch/__init__.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 0,
+   "indent_style": "4-space/none",
+   "lines": 0,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 0,
+   "max_line_len": 0,
+   "module_cc": 1,
+   "module_docstring": false,
+   "non_blank": 0,
+   "top_funcs": []
+  },
+  "legacy_batch/shift_reconciliation.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "4-space/none",
+   "lines": 18,
+   "lines_gt_160": 1,
+   "lines_with_semicolon_statements": 5,
+   "max_func_cc": 6,
+   "max_line_len": 265,
+   "module_cc": 7,
+   "module_docstring": true,
+   "non_blank": 18,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 6,
+     "end": 15,
+     "has_docstring": false,
+     "line": 6,
+     "loc": 10,
+     "name": "run"
+    }
+   ]
+  },
+  "ops/legacy_log_sampler.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 0,
+   "indent_style": "1-space",
+   "lines": 4,
+   "lines_gt_160": 1,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 0,
+   "max_line_len": 253,
+   "module_cc": 2,
+   "module_docstring": false,
+   "non_blank": 4,
+   "top_funcs": []
+  },
+  "scripts/offline_inventory.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 0,
+   "indent_style": "1-space",
+   "lines": 35,
+   "lines_gt_160": 1,
+   "lines_with_semicolon_statements": 5,
+   "max_func_cc": 0,
+   "max_line_len": 202,
+   "module_cc": 20,
+   "module_docstring": true,
+   "non_blank": 35,
+   "top_funcs": []
+  },
+  "scripts/rehearse_local.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 0,
+   "indent_style": "1-space",
+   "lines": 13,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 1,
+   "max_func_cc": 0,
+   "max_line_len": 97,
+   "module_cc": 6,
+   "module_docstring": true,
+   "non_blank": 13,
+   "top_funcs": []
+  },
+  "scripts/smoke.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "4-space/none",
+   "lines": 25,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 1,
+   "max_func_cc": 11,
+   "max_line_len": 138,
+   "module_cc": 12,
+   "module_docstring": false,
+   "non_blank": 25,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 11,
+     "end": 24,
+     "has_docstring": false,
+     "line": 4,
+     "loc": 21,
+     "name": "run"
+    }
+   ]
+  },
+  "scripts/verify_preloaded.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 0,
+   "indent_style": "4-space/none",
+   "lines": 6,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 0,
+   "max_line_len": 84,
+   "module_cc": 1,
+   "module_docstring": true,
+   "non_blank": 6,
+   "top_funcs": []
+  },
+  "services/__init__.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 0,
+   "indent_style": "4-space/none",
+   "lines": 0,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 0,
+   "max_line_len": 0,
+   "module_cc": 1,
+   "module_docstring": false,
+   "non_blank": 0,
+   "top_funcs": []
+  },
+  "services/source_gateway/__init__.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 0,
+   "indent_style": "4-space/none",
+   "lines": 0,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 0,
+   "max_line_len": 0,
+   "module_cc": 1,
+   "module_docstring": false,
+   "non_blank": 0,
+   "top_funcs": []
+  },
+  "services/source_gateway/server.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 4,
+   "indent_style": "4-space/none",
+   "lines": 44,
+   "lines_gt_160": 4,
+   "lines_with_semicolon_statements": 4,
+   "max_func_cc": 20,
+   "max_line_len": 407,
+   "module_cc": 21,
+   "module_docstring": true,
+   "non_blank": 44,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 20,
+     "end": 40,
+     "has_docstring": false,
+     "line": 11,
+     "loc": 30,
+     "name": "do_GET"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 43,
+     "has_docstring": false,
+     "line": 42,
+     "loc": 2,
+     "name": "main"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 10,
+     "has_docstring": false,
+     "line": 9,
+     "loc": 2,
+     "name": "reply"
+    }
+   ]
+  },
+  "tests/test_domain.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 3,
+   "indent_style": "1-space",
+   "lines": 15,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 2,
+   "max_func_cc": 2,
+   "max_line_len": 104,
+   "module_cc": 2,
+   "module_docstring": false,
+   "non_blank": 15,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 2,
+     "end": 15,
+     "has_docstring": false,
+     "line": 10,
+     "loc": 6,
+     "name": "test_relationships"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 7,
+     "has_docstring": false,
+     "line": 4,
+     "loc": 4,
+     "name": "setUp"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 9,
+     "has_docstring": false,
+     "line": 8,
+     "loc": 2,
+     "name": "tearDown"
+    }
+   ]
+  },
+  "tests/test_enterprise.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "1-space",
+   "lines": 12,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 3,
+   "max_line_len": 86,
+   "module_cc": 4,
+   "module_docstring": false,
+   "non_blank": 12,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 3,
+     "end": 9,
+     "has_docstring": false,
+     "line": 5,
+     "loc": 5,
+     "name": "test_domain_tables_populated"
+    },
+    {
+     "annotated": false,
+     "cc": 2,
+     "end": 12,
+     "has_docstring": false,
+     "line": 10,
+     "loc": 3,
+     "name": "test_foreign_keys"
+    }
+   ]
+  },
+  "tests/test_enterprise_legacy_v6.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "1-space",
+   "lines": 22,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 3,
+   "max_func_cc": 4,
+   "max_line_len": 131,
+   "module_cc": 6,
+   "module_docstring": false,
+   "non_blank": 22,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 4,
+     "end": 21,
+     "has_docstring": false,
+     "line": 15,
+     "loc": 7,
+     "name": "test_repeat_seed_same_first_row"
+    },
+    {
+     "annotated": false,
+     "cc": 2,
+     "end": 14,
+     "has_docstring": false,
+     "line": 6,
+     "loc": 9,
+     "name": "test_reproducible_entities_and_foreign_keys"
+    }
+   ]
+  },
+  "tests/test_historical_fixture.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 1,
+   "indent_style": "4-space/none",
+   "lines": 14,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 6,
+   "max_line_len": 145,
+   "module_cc": 6,
+   "module_docstring": false,
+   "non_blank": 14,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 6,
+     "end": 14,
+     "has_docstring": false,
+     "line": 5,
+     "loc": 10,
+     "name": "test_seeded_and_relational"
+    }
+   ]
+  },
+  "tests/test_partner_feeds.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 2,
+   "indent_style": "1-space",
+   "lines": 15,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 0,
+   "max_func_cc": 3,
+   "max_line_len": 106,
+   "module_cc": 3,
+   "module_docstring": false,
+   "non_blank": 15,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 3,
+     "end": 15,
+     "has_docstring": false,
+     "line": 9,
+     "loc": 7,
+     "name": "test_required_tables"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 8,
+     "has_docstring": false,
+     "line": 5,
+     "loc": 4,
+     "name": "test_contract"
+    }
+   ]
+  },
+  "tests/test_source_gateway.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 3,
+   "indent_style": "4-space/none",
+   "lines": 18,
+   "lines_gt_160": 1,
+   "lines_with_semicolon_statements": 1,
+   "max_func_cc": 2,
+   "max_line_len": 169,
+   "module_cc": 3,
+   "module_docstring": false,
+   "non_blank": 18,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 2,
+     "end": 15,
+     "has_docstring": false,
+     "line": 11,
+     "loc": 5,
+     "name": "test_idempotent_ingestion"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 10,
+     "has_docstring": false,
+     "line": 6,
+     "loc": 5,
+     "name": "test_relations"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 17,
+     "has_docstring": false,
+     "line": 16,
+     "loc": 2,
+     "name": "test_invalid_rejected"
+    }
+   ]
+  },
+  "tests/test_workflow.py": {
+   "funcs_annotated": 0,
+   "funcs_with_docstring": 0,
+   "functions": 6,
+   "indent_style": "4-space/none",
+   "lines": 25,
+   "lines_gt_160": 0,
+   "lines_with_semicolon_statements": 3,
+   "max_func_cc": 2,
+   "max_line_len": 111,
+   "module_cc": 3,
+   "module_docstring": false,
+   "non_blank": 25,
+   "top_funcs": [
+    {
+     "annotated": false,
+     "cc": 2,
+     "end": 14,
+     "has_docstring": false,
+     "line": 10,
+     "loc": 5,
+     "name": "test_fixture_and_counts"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 7,
+     "has_docstring": false,
+     "line": 4,
+     "loc": 4,
+     "name": "setUp"
+    },
+    {
+     "annotated": false,
+     "cc": 1,
+     "end": 9,
+     "has_docstring": false,
+     "line": 8,
+     "loc": 2,
+     "name": "tearDown"
+    }
+   ]
+  }
+ },
+ "findings": {
+  "broad_except": [
+   "app/operational_report.py:13",
+   "scripts/offline_inventory.py:18",
+   "scripts/offline_inventory.py:30",
+   "scripts/smoke.py:17"
+  ],
+  "file_deletion": [
+   "app/archived_documents.py:7"
+  ],
+  "sql_string_building": [
+   "app/domain_data.py:16",
+   "app/domain_data.py:22",
+   "app/enterprise_data.py:11",
+   "app/enterprise_data.py:13",
+   "app/enterprise_data.py:27",
+   "app/enterprise_legacy.py:26",
+   "app/enterprise_legacy.py:59",
+   "app/enterprise_legacy.py:55",
+   "app/gateway_bridge.py:19",
+   "app/generate.py:17",
+   "app/generate.py:18",
+   "app/operational_report.py:9",
+   "app/operational_report.py:10",
+   "app/operational_report.py:11",
+   "app/partner_feeds.py:26",
+   "app/server.py:31",
+   "app/server.py:42",
+   "app/server.py:32",
+   "app/server.py:43",
+   "app/workshop_check.py:10",
+   "scripts/offline_inventory.py:15",
+   "services/source_gateway/server.py:32",
+   "services/source_gateway/server.py:22",
+   "services/source_gateway/server.py:22",
+   "tests/test_enterprise.py:9",
+   "tests/test_source_gateway.py:13"
+  ],
+  "subprocess_use": [
+   "scripts/smoke.py:5",
+   "scripts/smoke.py:11",
+   "scripts/verify_preloaded.py:5"
+  ],
+  "urlopen_no_scheme_check": [
+   "app/gateway_bridge.py:29",
+   "scripts/smoke.py:19",
+   "scripts/smoke.py:15"
+  ]
+ },
+ "internal_imports": {
+  "app/__init__.py": [],
+  "app/archived_documents.py": [],
+  "app/baseline.py": [
+   "app.legacy_logic",
+   "app.store"
+  ],
+  "app/domain_data.py": [
+   "app.store"
+  ],
+  "app/enterprise_data.py": [
+   "app.store"
+  ],
+  "app/enterprise_legacy.py": [],
+  "app/gateway_bridge.py": [
+   "app.store"
+  ],
+  "app/generate.py": [
+   "app.domain_data",
+   "app.enterprise_data",
+   "app.store"
+  ],
+  "app/generate_documents.py": [
+   "app.enterprise_data"
+  ],
+  "app/historical_estate.py": [
+   "app.store"
+  ],
+  "app/historical_fixture.py": [],
+  "app/integration.py": [
+   "app.store"
+  ],
+  "app/legacy_logic.py": [],
+  "app/operational_report.py": [
+   "app.store"
+  ],
+  "app/partner_feeds.py": [
+   "app.store"
+  ],
+  "app/server.py": [
+   "app.enterprise_data",
+   "app.legacy_logic",
+   "app.partner_feeds",
+   "app.store"
+  ],
+  "app/store.py": [],
+  "app/workshop_check.py": [
+   "app.partner_feeds",
+   "app.store"
+  ],
+  "legacy_batch/__init__.py": [],
+  "legacy_batch/shift_reconciliation.py": [],
+  "ops/legacy_log_sampler.py": [],
+  "scripts/offline_inventory.py": [],
+  "scripts/rehearse_local.py": [],
+  "scripts/smoke.py": [],
+  "scripts/verify_preloaded.py": [],
+  "services/__init__.py": [],
+  "services/source_gateway/__init__.py": [],
+  "services/source_gateway/server.py": [],
+  "tests/test_domain.py": [
+   "app.generate",
+   "app.store"
+  ],
+  "tests/test_enterprise.py": [
+   "app.enterprise_data",
+   "app.store"
+  ],
+  "tests/test_enterprise_legacy_v6.py": [
+   "app.enterprise_legacy",
+   "legacy_batch.shift_reconciliation"
+  ],
+  "tests/test_historical_fixture.py": [
+   "app.historical_fixture"
+  ],
+  "tests/test_partner_feeds.py": [
+   "app.partner_feeds",
+   "app.store"
+  ],
+  "tests/test_source_gateway.py": [
+   "app",
+   "app.store"
+  ],
+  "tests/test_workflow.py": [
+   "app.baseline",
+   "app.generate",
+   "app.integration",
+   "app.legacy_logic",
+   "app.store"
+  ]
+ },
+ "pagination_clamp_copies": 3,
+ "totals": {
+  "funcs_annotated": 0,
+  "funcs_with_docstring": 0,
+  "functions": 58,
+  "py_files": 35,
+  "py_lines": 818
+ }
+}

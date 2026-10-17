@@ -1,0 +1,15 @@
+M1 | SURVIVED (suite still green) | urgent amount threshold 50000 -> 1 | app/legacy_logic.py
+M2 | SURVIVED (suite still green) | 'review' tier removed | app/legacy_logic.py
+M3 | SURVIVED (suite still green) | manual_review_required always False | app/legacy_logic.py
+M4 | KILLED | CLOSED no longer archived | app/legacy_logic.py | Ran 15 tests in 0.649s  FAILED (failures=1) 
+M5 | SURVIVED (suite still green) | negative-quantity rejection removed | app/partner_feeds.py
+M6 | SURVIVED (suite still green) | replay duplicate detection removed | app/partner_feeds.py
+M7 | SURVIVED (suite still green) | schema/key validation removed | app/partner_feeds.py
+M8 | SURVIVED (suite still green) | night-shift threshold comparison inverted | legacy_batch/shift_reconciliation.py
+M9 | SURVIVED (suite still green) | unknown business_key no longer rejected | app/gateway_bridge.py
+M10 | SURVIVED (suite still green) | API manual_review flag hard-wired False | app/server.py
+M11 | SURVIVED (suite still green) | partners pagination ignores limit/offset | app/server.py
+M12 | SURVIVED (suite still green) | baseline urgent_cases hard-wired 0 | app/baseline.py
+M13 | SURVIVED (suite still green) | JS tolerance 5% -> 50% (not Python; suite has no JS tests) | legacy_js/legacy_policy.js
+M14 | SURVIVED (suite still green) | idempotent file import removed | app/historical_estate.py
+M15 | SURVIVED (suite still green) | gateway failure-mode 503 -> 200 | services/source_gateway/server.py

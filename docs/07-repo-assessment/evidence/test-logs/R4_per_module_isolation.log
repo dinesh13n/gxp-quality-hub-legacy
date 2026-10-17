@@ -1,0 +1,71 @@
+##### test_domain
+test_relationships (tests.test_domain.DomainTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.089s
+
+OK
+EXIT=0
+POST {'cases': 125, 'events': 145, 'source_messages': 15, 'operating_costs': 36, 'batch_records': 125, 'materials': 30, 'deviations': 42, 'lab_results': 125, 'capa_actions': 21, 'sop_versions': 45, 'gateway_inbox': 1}
+##### test_enterprise
+test_domain_tables_populated (tests.test_enterprise.EnterpriseDataTests) ... ok
+test_foreign_keys (tests.test_enterprise.EnterpriseDataTests) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+EXIT=0
+POST {'cases': 125, 'events': 145, 'source_messages': 15, 'operating_costs': 36, 'batch_records': 125, 'materials': 30, 'deviations': 42, 'lab_results': 125, 'capa_actions': 21, 'sop_versions': 45, 'gateway_inbox': 1}
+##### test_enterprise_legacy_v6
+test_repeat_seed_same_first_row (tests.test_enterprise_legacy_v6.EnterpriseLegacyTests) ... ok
+test_reproducible_entities_and_foreign_keys (tests.test_enterprise_legacy_v6.EnterpriseLegacyTests) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.143s
+
+OK
+EXIT=0
+POST {'cases': 125, 'events': 145, 'source_messages': 15, 'operating_costs': 36, 'batch_records': 125, 'materials': 30, 'deviations': 42, 'lab_results': 125, 'capa_actions': 21, 'sop_versions': 45, 'gateway_inbox': 1}
+##### test_historical_fixture
+test_seeded_and_relational (tests.test_historical_fixture.HistoricalFixtureTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.181s
+
+OK
+EXIT=0
+POST {'cases': 125, 'events': 145, 'source_messages': 15, 'operating_costs': 36, 'batch_records': 125, 'materials': 30, 'deviations': 42, 'lab_results': 125, 'capa_actions': 21, 'sop_versions': 45, 'gateway_inbox': 1}
+##### test_partner_feeds
+test_contract (tests.test_partner_feeds.TestPartnerFeeds) ... ok
+test_required_tables (tests.test_partner_feeds.TestPartnerFeeds) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.008s
+
+OK
+EXIT=0
+POST {'cases': 125, 'events': 145, 'source_messages': 15, 'operating_costs': 36, 'batch_records': 125, 'materials': 30, 'deviations': 42, 'lab_results': 125, 'capa_actions': 21, 'sop_versions': 45, 'gateway_inbox': 1}
+##### test_source_gateway
+test_idempotent_ingestion (tests.test_source_gateway.TestGatewayAndDomain) ... ok
+test_invalid_rejected (tests.test_source_gateway.TestGatewayAndDomain) ... ok
+test_relations (tests.test_source_gateway.TestGatewayAndDomain) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK
+EXIT=0
+POST {'cases': 125, 'events': 145, 'source_messages': 15, 'operating_costs': 36, 'batch_records': 125, 'materials': 30, 'deviations': 42, 'lab_results': 125, 'capa_actions': 21, 'sop_versions': 45, 'gateway_inbox': 1}
+##### test_workflow
+test_baseline (tests.test_workflow.WorkflowTests) ... ok
+test_feed_parser (tests.test_workflow.WorkflowTests) ... ok
+test_fixture_and_counts (tests.test_workflow.WorkflowTests) ... ok
+test_priority (tests.test_workflow.WorkflowTests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.258s
+
+OK
+EXIT=0
+POST {'cases': 125, 'events': 145, 'source_messages': 15, 'operating_costs': 36, 'batch_records': 125, 'materials': 30, 'deviations': 42, 'lab_results': 125, 'capa_actions': 21, 'sop_versions': 45, 'gateway_inbox': 1}

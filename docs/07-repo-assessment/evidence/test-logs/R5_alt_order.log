@@ -1,0 +1,17 @@
+test_baseline (tests.test_workflow.WorkflowTests) ... ok
+test_feed_parser (tests.test_workflow.WorkflowTests) ... ok
+test_fixture_and_counts (tests.test_workflow.WorkflowTests) ... ok
+test_priority (tests.test_workflow.WorkflowTests) ... ok
+test_idempotent_ingestion (tests.test_source_gateway.TestGatewayAndDomain) ... ok
+test_invalid_rejected (tests.test_source_gateway.TestGatewayAndDomain) ... ok
+test_relations (tests.test_source_gateway.TestGatewayAndDomain) ... ok
+test_domain_tables_populated (tests.test_enterprise.EnterpriseDataTests) ... ok
+test_foreign_keys (tests.test_enterprise.EnterpriseDataTests) ... ok
+test_relationships (tests.test_domain.DomainTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.257s
+
+OK
+EXIT=0
+POST {'cases': 180, 'events': 207, 'source_messages': 24, 'operating_costs': 36, 'batch_records': 180, 'materials': 30, 'deviations': 60, 'lab_results': 180, 'capa_actions': 30, 'sop_versions': 45, 'gateway_inbox': 1}

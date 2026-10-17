@@ -1,0 +1,233 @@
+## python3 scripts/offline_inventory.py
+{
+  "ready": true,
+  "problems": [],
+  "inventory": {
+    "data/legacy.sqlite3": {
+      "tables": {
+        "cases": 125,
+        "events": 145,
+        "source_messages": 15,
+        "operating_costs": 36,
+        "materials": 30,
+        "batch_records": 125,
+        "partner_feeds": 8567,
+        "reference_versions": 180,
+        "policy_exceptions": 224,
+        "upstream_outages": 72,
+        "batch_runs": 60,
+        "gateway_inbox": 1,
+        "gateway_checkpoints": 0,
+        "vendor_file_imports": 1,
+        "vendor_file_rows": 2400,
+        "deviations": 42,
+        "lab_results": 125,
+        "capa_actions": 21,
+        "sop_versions": 45
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/enterprise_legacy.sqlite3": {
+      "tables": {
+        "organizations": 96,
+        "operational_objects": 12500,
+        "state_history": 12500,
+        "document_links": 12500,
+        "evidence_events": 12500,
+        "policy_register": 40,
+        "cross_references": 4166,
+        "workflow_tasks": 6250,
+        "financial_adjustments": 3125,
+        "integration_attempts": 2500,
+        "access_audit": 4167,
+        "retention_events": 2084
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/lake/tiny/reference.sqlite3": {
+      "tables": {
+        "master_data": 480
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/lake/tiny/finance.sqlite3": {
+      "tables": {
+        "ledger": 960
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/lake/bundled/reference.sqlite3": {
+      "tables": {
+        "master_data": 480
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/lake/bundled/finance.sqlite3": {
+      "tables": {
+        "ledger": 20000
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "tiny": {
+      "transactions": 2400,
+      "events": 9500,
+      "documents": 360,
+      "manifest": {
+        "domain": "Pharma batch deviation and CAPA",
+        "tier": "tiny",
+        "seed": 7421,
+        "transaction_rows": 2400,
+        "event_rows": 9500,
+        "documents": 360,
+        "master_data_rows": 480,
+        "synthetic_only": true,
+        "historical_years": "2021-2026",
+        "sha256_partner_export": "d5f841003e666012a16a78b73e5d2fd28a4bf39a609fdf76650d0fa8154f6a85"
+      }
+    },
+    "bundled": {
+      "transactions": 50000,
+      "events": 100000,
+      "documents": 600,
+      "manifest": {
+        "domain": "Pharma batch deviation and CAPA",
+        "tier": "bundled",
+        "seed": 7421,
+        "transaction_rows": 50000,
+        "event_rows": 100000,
+        "documents": 600,
+        "master_data_rows": 480,
+        "synthetic_only": true,
+        "historical_years": "2021-2026",
+        "sha256_partner_export": "0531214458463825231531e5de6b0ccb7e2b577060edeb92ebada6effaf94b22"
+      }
+    },
+    "documents": 1,
+    "archive_documents": 421
+  }
+}
+EXIT=0
+## python3 scripts/verify_preloaded.py
+{
+  "ready": true,
+  "problems": [],
+  "inventory": {
+    "data/legacy.sqlite3": {
+      "tables": {
+        "cases": 125,
+        "events": 145,
+        "source_messages": 15,
+        "operating_costs": 36,
+        "materials": 30,
+        "batch_records": 125,
+        "partner_feeds": 8567,
+        "reference_versions": 180,
+        "policy_exceptions": 224,
+        "upstream_outages": 72,
+        "batch_runs": 60,
+        "gateway_inbox": 1,
+        "gateway_checkpoints": 0,
+        "vendor_file_imports": 1,
+        "vendor_file_rows": 2400,
+        "deviations": 42,
+        "lab_results": 125,
+        "capa_actions": 21,
+        "sop_versions": 45
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/enterprise_legacy.sqlite3": {
+      "tables": {
+        "organizations": 96,
+        "operational_objects": 12500,
+        "state_history": 12500,
+        "document_links": 12500,
+        "evidence_events": 12500,
+        "policy_register": 40,
+        "cross_references": 4166,
+        "workflow_tasks": 6250,
+        "financial_adjustments": 3125,
+        "integration_attempts": 2500,
+        "access_audit": 4167,
+        "retention_events": 2084
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/lake/tiny/reference.sqlite3": {
+      "tables": {
+        "master_data": 480
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/lake/tiny/finance.sqlite3": {
+      "tables": {
+        "ledger": 960
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/lake/bundled/reference.sqlite3": {
+      "tables": {
+        "master_data": 480
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "data/lake/bundled/finance.sqlite3": {
+      "tables": {
+        "ledger": 20000
+      },
+      "integrity": "ok",
+      "foreign_key_errors": 0
+    },
+    "tiny": {
+      "transactions": 2400,
+      "events": 9500,
+      "documents": 360,
+      "manifest": {
+        "domain": "Pharma batch deviation and CAPA",
+        "tier": "tiny",
+        "seed": 7421,
+        "transaction_rows": 2400,
+        "event_rows": 9500,
+        "documents": 360,
+        "master_data_rows": 480,
+        "synthetic_only": true,
+        "historical_years": "2021-2026",
+        "sha256_partner_export": "d5f841003e666012a16a78b73e5d2fd28a4bf39a609fdf76650d0fa8154f6a85"
+      }
+    },
+    "bundled": {
+      "transactions": 50000,
+      "events": 100000,
+      "documents": 600,
+      "manifest": {
+        "domain": "Pharma batch deviation and CAPA",
+        "tier": "bundled",
+        "seed": 7421,
+        "transaction_rows": 50000,
+        "event_rows": 100000,
+        "documents": 600,
+        "master_data_rows": 480,
+        "synthetic_only": true,
+        "historical_years": "2021-2026",
+        "sha256_partner_export": "0531214458463825231531e5de6b0ccb7e2b577060edeb92ebada6effaf94b22"
+      }
+    },
+    "documents": 1,
+    "archive_documents": 421
+  }
+}
+EXIT=0
+## python3 scripts/rehearse_local.py
+{"python": "3.10.12", "offline_ready": true, "problems": []}
+EXIT=0
