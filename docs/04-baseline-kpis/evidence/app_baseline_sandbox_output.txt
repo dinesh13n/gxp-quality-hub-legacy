@@ -1,0 +1,10 @@
+# Command: cd $HOME/fde_sbx/stage4 (full repo copy, E1 sandbox) && python3 -m app.baseline   (Python 3.10.12, 2026-10-17)
+{
+  "records": 125,
+  "open_cases": 89,
+  "urgent_cases": 2,
+  "mean_amount": 4982.61,
+  "sites": 6,
+  "hours_per_case": 0.603
+}
+# After run: sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt (from repo root) -> OK (all 1,512 files); git status --porcelain -> only ?? docs/04-baseline-kpis/

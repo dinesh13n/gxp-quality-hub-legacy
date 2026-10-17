@@ -1,0 +1,104 @@
+{
+ "objects": 12500,
+ "history_rows_per_object_max": 1,
+ "history_distinct_transitions": [
+  [
+   "OPEN",
+   "CLOSED",
+   2079
+  ],
+  [
+   "OPEN",
+   "ESCALATED",
+   2079
+  ],
+  [
+   "OPEN",
+   "HOLD",
+   2083
+  ],
+  [
+   "OPEN",
+   "OPEN",
+   2090
+  ],
+  [
+   "OPEN",
+   "REOPENED",
+   2079
+  ],
+  [
+   "OPEN",
+   "REVIEW",
+   2090
+  ]
+ ],
+ "history_from_state_always_OPEN": 1,
+ "history_at_equals_object_event_at": [
+  12500,
+  12500
+ ],
+ "evidence_arrival_delay_hours": {
+  "n": 12500,
+  "median": 36.0,
+  "p90": 63.0,
+  "negative": 0
+ },
+ "evidence_strength": [
+  [
+   0,
+   2500
+  ],
+  [
+   1,
+   2500
+  ],
+  [
+   2,
+   2500
+  ],
+  [
+   3,
+   2500
+  ],
+  [
+   4,
+   2500
+  ]
+ ],
+ "evidence_events_per_object_max": 1,
+ "objects_closed_with_strength0_evidence": 416,
+ "objects_closed": 2079,
+ "injection_marker_notes": 9,
+ "workflow_task_status": [
+  [
+   "CLOSED",
+   945
+  ],
+  [
+   "ESCALATED",
+   945
+  ],
+  [
+   "HOLD",
+   1136
+  ],
+  [
+   "OPEN",
+   1140
+  ],
+  [
+   "REOPENED",
+   1134
+  ],
+  [
+   "REVIEW",
+   950
+  ]
+ ],
+ "event_at_range": [
+  "2021-01-01T00:00:00+00:00",
+  "2026-03-15T03:12:11+00:00"
+ ],
+ "negative_value_objects": 50
+}
