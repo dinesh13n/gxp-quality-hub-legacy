@@ -1,0 +1,47 @@
+{
+  "context": "GMP quality deviation and batch review",
+  "system": "ElectronicBatchRecord",
+  "other": "LIMS-QMS",
+  "units": [
+    "BATCH",
+    "MATERIAL",
+    "SAMPLE"
+  ],
+  "states": [
+    "OPEN",
+    "INVESTIGATING",
+    "QA_REVIEW",
+    "DISPOSITIONED",
+    "REOPENED"
+  ],
+  "kinds": [
+    "OOS_RESULT",
+    "DEVIATION",
+    "CAPA_UPDATE"
+  ],
+  "part": [
+    "TABLET",
+    "STERILE_VIAL",
+    "API",
+    "BIOLOGIC"
+  ],
+  "docs": [
+    "sop",
+    "coa",
+    "batch-record"
+  ],
+  "faults": [
+    "out of specification",
+    "unclosed deviation",
+    "missing signature",
+    "sample retest conflict",
+    "expired calibration"
+  ],
+  "policies": [
+    "qa_signature",
+    "oos_hold",
+    "sop_effective_date",
+    "electronic_record_retention"
+  ],
+  "legacy": "A completion flag is interpreted differently in MES and QA records."
+}

@@ -1,0 +1,16 @@
+{
+  "count": 420,
+  "synthetic": true,
+  "languages": [
+    "en",
+    "de",
+    "hi",
+    "ja",
+    "pt",
+    "es"
+  ],
+  "format_counts": {
+    "eml": 210,
+    "html": 210
+  }
+}

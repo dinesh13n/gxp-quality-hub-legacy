@@ -1,0 +1,5 @@
+[project]
+name = "gxp-quality-hub-legacy"
+version = "0.1.0"
+requires-python = ">=3.10"
+description = "Synthetic legacy enterprise workflow"

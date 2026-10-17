@@ -1,0 +1,45 @@
+services:
+  legacy:
+    build: .
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8080
+      LEGACY_DB: /var/lib/legacy/legacy.sqlite3
+    ports:
+      - "${HOST_PORT:-8080}:8080"
+    volumes:
+      - legacy_data:/var/lib/legacy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health',timeout=2)"]
+      interval: 10s
+      timeout: 4s
+      retries: 5
+  source-gateway:
+    build: .
+    command: ["python", "-m", "services.source_gateway.server"]
+    environment:
+      HOST: 0.0.0.0
+      SOURCE_PORT: 8090
+      LEGACY_DB: /opt/legacy/data/legacy.sqlite3
+    ports:
+      - "${SOURCE_HOST_PORT:-8090}:8090"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health',timeout=2)"]
+      interval: 10s
+      timeout: 4s
+      retries: 5
+  bridge:
+    build: .
+    command: ["sh", "-c", "sleep 5; python -m app.gateway_bridge --source-url http://source-gateway:8090 --limit 50"]
+    environment:
+      LEGACY_DB: /var/lib/legacy/legacy.sqlite3
+    volumes:
+      - legacy_data:/var/lib/legacy
+    depends_on:
+      legacy:
+        condition: service_healthy
+      source-gateway:
+        condition: service_healthy
+    restart: "no"
+volumes:
+  legacy_data:

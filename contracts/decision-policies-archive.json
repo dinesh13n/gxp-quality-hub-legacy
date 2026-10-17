@@ -1,0 +1,191 @@
+{
+  "context": "Pharma batch deviation and CAPA",
+  "historical_versions": [
+    {
+      "effective_from": "2022-01-01",
+      "effective_to": "2022-12-31",
+      "region": "APAC",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "operations_lead"
+      ],
+      "limit": 15000,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2022-01-01",
+      "effective_to": "2022-12-31",
+      "region": "EMEA",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "operations_lead"
+      ],
+      "limit": 16100,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2022-01-01",
+      "effective_to": "2022-12-31",
+      "region": "AMER",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "operations_lead"
+      ],
+      "limit": 17200,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2023-01-01",
+      "effective_to": "2023-12-31",
+      "region": "APAC",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "operations_lead"
+      ],
+      "limit": 17500,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2023-01-01",
+      "effective_to": "2023-12-31",
+      "region": "EMEA",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "operations_lead"
+      ],
+      "limit": 18600,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2023-01-01",
+      "effective_to": "2023-12-31",
+      "region": "AMER",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "operations_lead"
+      ],
+      "limit": 19700,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2024-01-01",
+      "effective_to": "2024-12-31",
+      "region": "APAC",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "operations_lead"
+      ],
+      "limit": 20000,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2024-01-01",
+      "effective_to": "2024-12-31",
+      "region": "EMEA",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "operations_lead"
+      ],
+      "limit": 21100,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2024-01-01",
+      "effective_to": "2024-12-31",
+      "region": "AMER",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "operations_lead"
+      ],
+      "limit": 22200,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2025-01-01",
+      "effective_to": "2025-12-31",
+      "region": "APAC",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "business_owner",
+        "risk_control"
+      ],
+      "limit": 22500,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2025-01-01",
+      "effective_to": "2025-12-31",
+      "region": "EMEA",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "business_owner",
+        "risk_control"
+      ],
+      "limit": 23600,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2025-01-01",
+      "effective_to": "2025-12-31",
+      "region": "AMER",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "business_owner",
+        "risk_control"
+      ],
+      "limit": 24700,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2026-01-01",
+      "effective_to": "2026-12-31",
+      "region": "APAC",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "business_owner",
+        "risk_control"
+      ],
+      "limit": 25000,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2026-01-01",
+      "effective_to": "2026-12-31",
+      "region": "EMEA",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "business_owner",
+        "risk_control"
+      ],
+      "limit": 26100,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    },
+    {
+      "effective_from": "2026-01-01",
+      "effective_to": "2026-12-31",
+      "region": "AMER",
+      "rule": "batch_disposition",
+      "approval_roles": [
+        "business_owner",
+        "risk_control"
+      ],
+      "limit": 27200,
+      "currency": "USD",
+      "regulatory_context": "21 CFR Part 11 and GMP data integrity principles"
+    }
+  ]
+}

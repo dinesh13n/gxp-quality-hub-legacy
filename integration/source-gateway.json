@@ -1,0 +1,19 @@
+{
+  "domain": "Life Sciences",
+  "parent_table": "batch_records",
+  "parent_key": "batch_id",
+  "child_table": "deviations",
+  "child_key": "batch_id",
+  "event_kind": "batch_quality",
+  "event_types": [
+    "batch_created",
+    "lab_test",
+    "deviation_review",
+    "qa_disposition"
+  ],
+  "sources": [
+    "mes",
+    "lims",
+    "qms"
+  ]
+}

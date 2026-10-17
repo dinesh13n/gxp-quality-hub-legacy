@@ -1,0 +1,16 @@
+{
+  "slug": "gxp-quality-hub-legacy",
+  "domain": "Life Sciences \u2014 Pharma Quality Intelligence",
+  "object": "Manufacturing batch",
+  "singular": "batch",
+  "plural": "batches",
+  "partition": "site_code",
+  "metric": "deviation_count",
+  "unit": "count",
+  "owner": "Quality",
+  "workflow": "Batch quality review and deviation processing",
+  "legacy_incident": "Open deviation awaiting QA disposition",
+  "okstatus": "released",
+  "business_measure": "batch quality cases reviewed",
+  "seed": 4326
+}
