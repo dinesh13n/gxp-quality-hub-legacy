@@ -1,0 +1,13 @@
+Stage 15 INC-04 mutation gate (synthetic, unvalidated). Each mutant is applied to the working tree, the INC-04 group
+(-k TST_POL -k TST_CO_03 -k INC04) is run in a sandbox copy, the mutant is reverted (git checkout), sandbox copies deleted.
+Result = KILLED when at least one test fails. Counts are per-method results of the 36-method group (before S08 was added).
+
+M1  hub/policy/engine.py         op 'gt' compares with >=                          KILLED  (4 FAIL)
+M2  hub/policy/service.py        _decision_problem accepts any decision (OD-16)     KILLED  (1 FAIL)
+M3  hub/policy/asfound.py        JS tolerance factor 1.05 -> 1.00                   KILLED  (4 FAIL)
+M4  hub/policy/service.py        overlap check disabled                             KILLED  (1 FAIL)
+M5  hub/policy/gate.py           holder-list membership check skipped               KILLED  (2 FAIL)
+M6  hub/policy/engine.py         matched default row no longer marks `defaulted`   KILLED  (3 FAIL; incl. TST-POL-19)
+M7  hub/policy/service.py        authority_ref check made a no-op                   KILLED  (1 FAIL; TST-POL-09)
+M8  hub/policy/migrations/M002   policy_object_no_update trigger removed            KILLED  (1 FAIL; TST-POL-25)
+8/8 KILLED.

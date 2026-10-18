@@ -1,0 +1,267 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 37,
+  "skipped": 0
+ },
+ "label": "final-INC04",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 63.9,
+ "tail": "false. ... ok\ntest_TST_POL_22_a_1000_evaluations_bit_identical_in_two_processes (test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability)\nTST-POL-22 / AC-POL-22: the same (ruleset version, inputs) evaluated 1000 times in this process and in two child ... ok\ntest_TST_POL_22_b_evaluation_performs_no_io_clock_or_randomness (test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability)\nTST-POL-22 / AC-POL-22: with file, network, clock, randomness and database access patched to RAISE, evaluate still returns the same result. ... ok\ntest_TST_POL_22_c_engine_imports_only_pure_modules (test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability)\nTST-POL-22 / BEH-POL-06: hub/policy/engine.py imports only decimal plus the pure hub.policy.inputs / errors modules (static check). ... ok\ntest_TST_POL_23_non_decimal_amounts_are_rejected (test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability)\nTST-POL-23 / AC-POL-23: amount 'abc', null, NaN (and infinities, bool, blank) -> E-POL-INPUT-INVALID, no outcome, for every amount-taking function. ... ok\ntest_TST_POL_25_policy_version_rows_are_immutable (test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability)\nTST-POL-25 / AC-POL-25: an UPDATE (or DELETE) of any policy_object / policy_events / rule_set / rule_row row is rejected by trigger. ... ok\n\n----------------------------------------------------------------------\nRan 37 tests in 10.128s\n\nOK\n",
+ "test_ids": [
+  "TST-CO-03",
+  "TST-POL-01",
+  "TST-POL-02",
+  "TST-POL-03",
+  "TST-POL-04",
+  "TST-POL-05",
+  "TST-POL-06",
+  "TST-POL-07",
+  "TST-POL-08",
+  "TST-POL-09",
+  "TST-POL-10",
+  "TST-POL-11",
+  "TST-POL-12",
+  "TST-POL-13",
+  "TST-POL-14",
+  "TST-POL-15",
+  "TST-POL-16",
+  "TST-POL-17",
+  "TST-POL-18",
+  "TST-POL-19",
+  "TST-POL-20",
+  "TST-POL-21",
+  "TST-POL-22",
+  "TST-POL-23",
+  "TST-POL-25"
+ ],
+ "tests": [
+  {
+   "case": "test_inc04_supplementary.TST_HUB_INC04_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC04_S01_m002_applier_and_policy_cli"
+  },
+  {
+   "case": "test_inc04_supplementary.TST_HUB_INC04_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC04_S02_activation_refusal_matrix"
+  },
+  {
+   "case": "test_inc04_supplementary.TST_HUB_INC04_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC04_S03_no_holders_configured_blocks_every_zone_h_action"
+  },
+  {
+   "case": "test_inc04_supplementary.TST_HUB_INC04_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC04_S04_loader_is_idempotent_fails_closed_and_never_executes_legacy"
+  },
+  {
+   "case": "test_inc04_supplementary.TST_HUB_INC04_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC04_S05_engine_edges_and_documented_deltas_to_legacy"
+  },
+  {
+   "case": "test_inc04_supplementary.TST_HUB_INC04_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC04_S06_audit_failure_rolls_the_change_back"
+  },
+  {
+   "case": "test_inc04_supplementary.TST_HUB_INC04_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC04_S07_policy_service_requires_m002"
+  },
+  {
+   "case": "test_inc04_supplementary.TST_HUB_INC04_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC04_S08_rollback_l2_restore_then_rebuild_is_content_identical"
+  },
+  {
+   "case": "test_tst_co_03_golden_parity.TST_CO_03_GoldenParity",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_03_a_ct01_ct03_ct13_goldens_zero_difference"
+  },
+  {
+   "case": "test_tst_co_03_golden_parity.TST_CO_03_GoldenParity",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_03_b_night_shift_reconciliation_golden"
+  },
+  {
+   "case": "test_tst_co_03_golden_parity.TST_CO_03_GoldenParity",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_03_c_rule_sets_equal_the_legacy_code_run_in_the_sandbox"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_01_fresh_install_five_candidates_none_adopted"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_02_service_actor_cannot_adopt"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_03_holder_adopts_with_authority"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_04_overlapping_adoption_refused"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_05_accepted_open_is_not_adopted"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_06_elapsed_under_both_clocks_no_verdict"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_07_business_calendar_needs_calendar_ref"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_08_adopted_clock_verdicts_at_the_boundary"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_09_empty_authority_ref_stores_nothing"
+  },
+  {
+   "case": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_10_threshold_edit_event_and_service_actor_rejected"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_11_loader_lists_three_read_only_inactive_sets"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_12_priority_truth_table_byte_equal"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_13_manual_review_table"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_14_js_thresholds_and_tolerance"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_15_batch_flags_equal_row_predicate_and_rows_not_multiplied"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_16_no_active_set_refuses"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_17_explicit_ref_is_a_what_if"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_18_activation_needs_holder_and_recorded_decision"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_19_unmatched_region_year_returns_999999_marked"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_20_unknown_status_falls_through_marked"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_21_known_inputs_reaching_the_last_row_are_not_defaulted"
+  },
+  {
+   "case": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_22_a_1000_evaluations_bit_identical_in_two_processes"
+  },
+  {
+   "case": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_22_b_evaluation_performs_no_io_clock_or_randomness"
+  },
+  {
+   "case": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_22_c_engine_imports_only_pure_modules"
+  },
+  {
+   "case": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_23_non_decimal_amounts_are_rejected"
+  },
+  {
+   "case": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_25_policy_version_rows_are_immutable"
+  }
+ ],
+ "unittest_rc": 0
+}

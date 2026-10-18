@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "transformation-log.md"
-version: "v0.3"
+version: "v0.4"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS. INC-04 (policy & rule service: M002, as-found rule sets inactive, activation with a recorded human decision) added in v0.4."
 evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "git log main..stage-15-inc01-harness", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
-supersedes: "v0.2 (INC-01 + INC-02)"
+supersedes: "v0.3 (INC-01 .. INC-03)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -22,7 +22,8 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 | INC-01 | `stage-15-inc01-harness` | TB-01 FX-BASE125 fixture + hash gate; TB-02 subprocess runner; TB-03 ported captures + CT-H3 normaliser + reviewed `--update-golden`; TB-04 CT-01..CT-16 + M1..M15 gate; TB-05 `ac_links` for CT-04..CT-16 (C3) | DONE WITH CONDITIONS | none | exit criteria met: CT-01..CT-16 green, 15/15 killed, 2 identical runs, shipped tests as-found |
 | INC-02 | `stage-15-inc02-hub-skeleton` | TB-06 `hub/` skeleton + runtime self-check + sandbox guard; TB-07 No-AI deny-list + egress guard (+ Untrusted type, zero-model-call tripwire); TB-08 RO adapters AD-01/02/08, deviation register DV-01..09 `proposed`, `hub golden-compare`, M000 | DONE WITH CONDITIONS | none | exit criteria met: 10/10 planned tests green; golden-compare lists DV-01..09 UNAPPROVED, exit 6 (AC-CO-01); INC-01 harness 134/134, 15/15 killed |
 | INC-03 | `stage-15-inc03-hub-db-audit` | TB-09..TB-11 | DONE WITH CONDITIONS (see TL-6) | none | see TL-6 |
-| INC-04..INC-09 | — | TB-12..TB-21 | NOT STARTED | — | — |
+| INC-04 | `stage-15-inc04-rule-service` | TB-12 | DONE WITH CONDITIONS (see TL-8) | none | see TL-8 |
+| INC-05..INC-09 | — | TB-13..TB-21 | NOT STARTED | — | — |
 
 ### TL-2 INC-01 steps (in order)
 1. [Verified Fact] Read OD log (OD-03a, OD-08, OD-09, OD-11..OD-13), Stage 0B write boundaries / stop conditions, Stage 7 plan + scripts + goldens, Stage 13 C3, Stage 14 backlog/gates/roadmap.
@@ -95,7 +96,38 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 | DEV-26 | AC-CO-09 / BEH-CO-06 "replay-safety suite passes" in the rehearsal | not runnable (G2 suite arrives INC-06) | [Verified Fact] | re-rehearse then |
 | DEV-27 | All execution in the sandbox (OD-03a) | once, `python3` imported `hub/security/openapi_routes.py` from the working tree to generate `route_registry.json` (reads only `docs/12-specs/contracts/openapi.yaml`; no legacy code, no `data/` access); stray `__pycache__` removed; checksum rc 0 | [Verified Fact] | process slip, no data impact; later regeneration must run in the sandbox |
 
+### TL-8 INC-04 register entry and steps (branch `stage-15-inc04-rule-service`)
+| Increment | Branch | Backlog | Status | Blocking | Exit evidence |
+|---|---|---|---|---|---|
+| INC-04 | `stage-15-inc04-rule-service` | TB-12 C4 policy & rule service: policy objects (candidate / adopted / accepted-open), table-driven rule sets as data, pure engine, `defaulted` marker (DV-06), AD-06 as-found importer (3 sets, inactive, read-only), activation with a recorded human decision, M002 | DONE WITH CONDITIONS | none | 25/25 planned test IDs green (29 methods: TST-CO-03 + TST-POL-01..23 + TST-POL-25) + 8 supplementary (TST-HUB-INC04-S01..S08) = 37 ok; INC-02/03 suites unchanged (A 45 ok, B 40 ok + 1 skipped, C 5 ok with inner 123 run / 0 egress / 0 model calls); harness 134/134; mutation 8/8 KILLED; backup checksum rc 0 before and after |
+
+1. [Verified Fact] Read the OD log (OD-03/03a, OD-08, OD-12, OD-14..OD-16), Stage 15 prompt, Stage 14 backlog TB-12 / adapter AD-06 / schema plan M002 / gates TG-3 / rollback (INC-04 = L1 + L2 rebuild), `increment-test-map.csv` (25 INC-04 rows), Stage 12 F03 (BEH-POL-01..11, AC-POL-01..25), ADR-007, error catalogue, OpenAPI OP-POL-*, DDL v0.1 (SCH-POLICY / SCH-RULE-SET), the Stage 7 goldens and the INC-02/03 hub code and tests.
+2. [Verified Fact] `787c290` design notes (`inc04-design-notes.md`, decisions D-01..D-12) written first so a dead session leaves the reasoning on the branch.
+3. [Verified Fact] `a3f529f` skeleton: error codes, M002 SQL + applier (`hub/policy/schema.py`), strict Decimal parsing, pure engine. `55fd4ed` as-found importer (AST/regex cross-checks, sha256 pins), rule-set documents, `PolicyService` (policy objects, adoption through Zone H, clocks, rule-set load / fork / edit, activation with a recorded decision), local Zone H check, `python -m hub.policy`.
+4. [Verified Fact] `3013cfd`, `623a975`, `355ef65`: test helpers, 25 planned IDs, supplementary S01..S07. `7439198`: CLI `status` now refuses on M002 drift (found while writing S01). `86f1a9a`: S08 (rollback L2 restore then rebuild).
+5. [Verified Fact] First sandbox run of the INC-04 group: 36/36 ok at the first attempt (`evidence/inc04/hub-inc04-first_report.json`). Because that is unusual, an 8-mutant gate was run (below): 8/8 killed, so the tests do detect broken engine, gate, decision, overlap, authority, default-marker, tolerance and immutability code.
+6. [Verified Fact] Final runs at code HEAD `86f1a9a`: INC-04 group 37 ok; A 45 ok; B 40 ok + 1 skipped (CO-14 e, no python3.9); C 5 ok (inner full suite 123 run, 122 ok, 2 skipped, 0 egress attempts, `model_calls_total` 0); characterisation harness 134/134 PASS (shipped 15 tests OK as-found). Backup manifest `sha256sum -c` rc 0 before and after (`evidence/inc04/checksum-log.txt`).
+7. [Verified Fact] Sandbox copies (`c_pristine`, `scratch`) deleted after every run; device disk 6.0 GB free at start.
+
+### TL-9 INC-04 deviations from the Stage 14 plan / specs
+| ID | Plan / spec | Actual | Tag | Reason / follow-up |
+|---|---|---|---|---|
+| DEV-28 | schema-migration-plan M002 applied by the forward runner (`hub/store/forward/`) | M002 lives in `hub/policy/migrations/` and is applied by `python -m hub.policy migrate` (backup first), recorded with its sha256 in its own insert-only table `policy_schema_migrations`; `schema_migrations` still lists M000, M001 only | [Verified Fact] | a file in `hub/store/forward/` joins `migrate.known_versions()` and breaks the INC-03 test S01 (`applied == ["M001"]`); `migrate.py` and that test are frozen by the add-only rule (TST-CO-05 c). Fold into the main runner at Stage 16/17 with a one-line test update (RTD-37) |
+| DEV-29 | "reproduce legacy outputs exactly" (AD-06) | legacy JS matches PARTIAL years: `threshold('APAC', 202)`, `(…, 2)` and `(…, '')` all return 15000 (the 2022 row) via `startsWith(String(year))`; the service needs the 4-digit year text and falls back to 999999 with `defaulted = true` | [Verified Fact] node run in the sandbox (S05) | a prefix match is a defect, not a rule; every golden / grid value (630 JS cases) is identical. Needs Dinesh's preserve-or-fix call under OD-S12-13 (RTD-41) |
+| DEV-30 | BEH-POL-11 / AC-POL-23 / TST-POL-23 class B "test both modes" | only the specified default is built: amount 'abc', null, NaN, infinity, boolean, blank -> `E-POL-INPUT-INVALID`; no "preserve" mode. Legacy (golden CT-13): 'abc' -> not allowed, null -> allowed (JS coercion) | [Verified Fact] | OD-S12-13 stays open; the legacy results are pinned in TST-POL-23 so a future preserve mode can be compared |
+| DEV-31 | branch `stage-15-inc04-policy-rules` (TG-3) | `stage-15-inc04-rule-service` (created by the orchestrator) | [Verified Fact] | matches OD-11 E-6 pattern |
+| DEV-32 | "25 tests: TST-POL-* + TST-CO-03" | TST-POL-24 does not exist in the test map (AC-POL-24 divergence report is R2); 25 IDs = TST-CO-03 + TST-POL-01..23 + TST-POL-25. Divergence report (BEH-POL-10, `GET /rules/divergence`) not built | [Verified Fact] | scope = test map (RTD-39) |
+| DEV-33 | OP-POL-01..07 HTTP routes; "same marker in the API response, pack and trace text" (AC-POL-19) | no HTTP server exists; the service API (`PolicyService`) and `python -m hub.policy` (status / migrate / seed / load-as-found / rulesets / policies / evaluate) are the surface; the marker is tested in the result object (= API body), in the trace text; "pack" does not exist yet (INC-08) | [Verified Fact] | Zone H actions are service calls that need an authenticated human session; no CLI path activates anything. Re-test when the HTTP layer / reviewer pack exist (RTD-39) |
+| DEV-34 | F02 gate service performs Zone H eligibility | `hub/policy/gate.py` implements the same rules locally (human + role dispositioner + in `zone_h.holders` + re-auth window; E-GATE-NO-HOLDERS / E-GATE-NOT-AUTHORISED; every attempt audited ZONE_H_ATTEMPT) | [Verified Fact] | gate service arrives with INC-05; replace then (RTD-40) |
+| DEV-35 | F03 BEH-POL-08: setting the active pointer is ZH-06 | OD-16 adds "activation requires a recorded human decision": implemented as audit record `POLICY_DECISION_RECORDED` (human holder, `decision = activate`, function, ruleset_ref, authority_ref, reason) whose `audit_seq` must be passed to `activate`; checked for kind, actor, holder status, exact function / ruleset, single use and an intact audit chain | [Inference] | mechanism chosen by the build agent (A-15-04-1); Stage 12 addendum + Dinesh's confirmation (RTD-38, RTD-43) |
+| DEV-36 | BEH-POL-05 withdrawal / `POLICY_WITHDRAWN` | not built (DDL status enum has no withdrawn value); an adopted window can therefore not be superseded by a new adoption of the same tag in the same window | [Verified Fact] | RTD-39 |
+| DEV-37 | error registry (82 codes) | addenda E-POL-DECISION-REQUIRED, E-POL-ASFOUND-DRIFT, E-POL-INVALID; exit codes chosen: E-POL-* 23 (as-found drift 24), E-GATE-* 19; hub.policy reuses 15 (migration drift) and 22 (store not migrated) | [Verified Fact] | RTD-38 |
+| DEV-38 | DDL v0.1 verbatim | five DDL tables verbatim + addenda: immutability triggers on `rule_set` / `rule_row`, pointer-integrity trigger on `active_ruleset`, `policy_schema_migrations`; `rule_row.outcome` is JSON `{function, kind(rule/domain/param/register), …}` and a condition value may be `{"$input": name}` | [Verified Fact] | rule-set.schema.json allows any `value`; Stage 12 files not edited in place (HAR-13) -> RTD-38 |
+| DEV-39 | All execution in the sandbox (OD-03a) | twice a `python3 -B` snippet imported `hub.policy.engine` from the working tree (pure arithmetic, no legacy code, no `data/` access) and once `py_compile` ran there (pycache removed); checksum rc 0 | [Verified Fact] | process slip like DEV-27; no data impact |
+| DEV-40 | INC-03: TST-CO-12 inner suite 86 tests | 123 tests (122 ok, 2 skipped); group C 103-115 s, inside the 180 s device cap but with less headroom | [Verified Fact] | RTD-44 |
+
 ## Evidence References
+- INC-04 evidence: `docs/15-modernization/evidence/inc04/` (hub-final-{A,B,C,INC04} reports + unittest results, hub-final-C_inner-egress-run.json, char-regression-inc04_report.json, mutation-gate-inc04.txt, checksum-log.txt); design notes `docs/15-modernization/inc04-design-notes.md`; commits `git log --oneline main..stage-15-inc04-rule-service`.
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - Commits: `git log --oneline main..stage-15-inc01-harness`.
 - Run reports: `docs/15-modernization/evidence/inc01/{final-A,final-B,mut-1..mut-4}_report.json`, `summary.txt`, `checksum-log.txt`.
@@ -113,6 +145,7 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 - DEV-02, DEV-04, DEV-05 carried as open items (see `remaining-technical-debt.md`).
 - INC-02: DEV-08..DEV-16 carried as open items (RTD-13..RTD-22).
 - INC-03: DEV-17..DEV-27 carried as open items (RTD-23..RTD-36).
+- INC-04: DEV-28..DEV-40 carried as open items (RTD-37..RTD-45); DEV-29 / DEV-30 need Dinesh's OD-S12-13 decision, DEV-35 his confirmation of the decision mechanism.
 
 ## Residual Risks
 - RR-TL-1 INC-01 proves the harness on this device only; another runtime (3.12, other JDK/Node) is unverified.
@@ -125,3 +158,4 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
+| v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |

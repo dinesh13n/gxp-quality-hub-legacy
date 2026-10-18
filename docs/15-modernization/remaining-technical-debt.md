@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "remaining-technical-debt.md"
-version: "v0.3"
+version: "v0.4"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS. INC-04 (policy & rule service: M002, as-found rule sets inactive, activation with a recorded human decision) added in v0.4."
 evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "docs/07-repo-assessment/technical-debt-register.md", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
-supersedes: "v0.2 (INC-01 + INC-02)"
+supersedes: "v0.3 (INC-01 .. INC-03)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -63,6 +63,19 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | RTD-35 | Route registry generated from the DRAFT OpenAPI; regeneration manual (TST-SEC-01 a detects drift) | must be regenerated (in the sandbox) when OpenAPI changes | — | Stage 16/17 | [Verified Fact] |
 | RTD-36 | No process lock during restore ("stop process" is procedural) | concurrent writer could race a restore | — | when a daemon exists | [Inference] |
 
+### INC-04 additions
+| ID | Debt | Impact | Owner | Due | Tag |
+|---|---|---|---|---|---|
+| RTD-37 | M002 is applied by `hub.policy.schema` with its own version table; `hub.admin status` / `migrate` do not know it; two runners, three migration locations | operator must remember `hub.policy migrate`; a restore to a pre-M002 backup drops the policy tables (S08) | — | Stage 16/17: move M002 into `hub/store/forward/` and update INC-03 S01 + `migrate.py` | [Verified Fact] |
+| RTD-38 | Stage 12 addenda: DDL (immutability / pointer triggers, `policy_schema_migrations`, `rule_row.outcome` JSON shape, `$input` values), error registry (E-POL-DECISION-REQUIRED, E-POL-ASFOUND-DRIFT, E-POL-INVALID; exit codes 23 / 24 / 19), `POLICY_DECISION_RECORDED` + `POLICY_SEEDED` / `RULESET_LOADED` / `POLICY_SCHEMA_APPLIED` audit actions, function domain lists | specs and code diverge | Engagement lead (Dinesh Naik) | Stage 16/17 | [Verified Fact] |
+| RTD-39 | Not built: divergence report (BEH-POL-10, AC-POL-24, R2), policy withdrawal (BEH-POL-05), HTTP routes OP-POL-01..07, reviewer-pack / report surfaces of the `defaulted` marker, listing filters beyond kind / status | R2 and API parts of F03 missing | — | INC-05+ / R2 | [Verified Fact] |
+| RTD-40 | `hub/policy/gate.py` duplicates the F02 holder check | two places to change | — | INC-05 | [Verified Fact] |
+| RTD-41 | DEV-29 / DEV-30: preserve-or-fix of the JS partial-year match and of non-numeric amounts; no "preserve" mode exists | behaviour differs from legacy on degenerate inputs | Engagement lead (Dinesh Naik) | OD-S12-13 / Stage 30 | [Verified Fact] |
+| RTD-42 | Exact Decimal vs IEEE doubles: 870 grid cases identical, untested last-bit boundaries unknown | possible 1-ulp differences at x1.05 boundaries | — | Stage 16 | [Unknown] |
+| RTD-43 | Decision mechanism (DEV-35): a recorded decision has no expiry, is not re-verified against the holder's re-auth, and `activate` re-verifies the whole audit chain (O(n)) | design choice by the build agent; cost grows with hold-all audit | Engagement lead (Dinesh Naik) | Stage 24 / confirmation of A-15-04-1 | [Assumption] |
+| RTD-44 | Group C (`-k TST_CO_12`) re-runs the whole suite under the egress guard: 123 tests, 103-115 s of the 180 s device cap | next increments will hit the cap | — | before INC-05: split the inner run or raise the cap | [Verified Fact] |
+| RTD-45 | `active_ruleset` is a pointer table without a delete guard (history is `policy_events` + audit); custom rule sets can be created and edited but have no review / approval flow beyond activation | pointer history relies on events | — | Stage 24 | [Inference] |
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `transformation-log.md` TL-3; `behavior-preservation-evidence.md` residual risks.
@@ -75,6 +88,7 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 
 ## Unresolved Issues
 - INC-03: RTD-23 (Stage 12 addenda) and RTD-26 (security values, Stage 24) need decisions by Dinesh (owner).
+- INC-04: RTD-41 (preserve-or-fix, OD-S12-13), RTD-43 (decision mechanism) and RTD-38 (addenda) need decisions by Dinesh (owner).
 - RTD-01, RTD-03, RTD-06 need decisions by Dinesh (owner) before or during INC-02.
 
 ## Residual Risks
@@ -86,3 +100,4 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
+| v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |

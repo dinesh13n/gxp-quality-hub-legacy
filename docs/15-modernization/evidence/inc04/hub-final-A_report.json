@@ -1,0 +1,306 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 45,
+  "skipped": 0
+ },
+ "label": "final-A",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 63.4,
+ "tail": "me without approval -> exit 9 E-SEC-EXPOSURE-NOT-APPROVED. ... ok\ntest_TST_SEC_16_c_approved_without_tls_refused_with_tls_allowed (test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard)\nTST-SEC-16 / AC-SEC-16: approval + reference but no TLS -> refused; with TLS cert/key settings -> starts. ... ok\ntest_TST_SEC_18_a_code_base_clean (test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep)\nTST-SEC-18 / AC-SEC-18: hub/ + tests/hub secret scan 0; hub/ deletion grep 0; store retention triggers complete. ... ok\ntest_TST_SEC_18_b_positive_controls (test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep)\nTST-SEC-18: planted key block / token / credential assignment and a retained-table delete are each detected. ... ok\ntest_TST_SEC_18_c_cli_scan (test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep)\nTST-SEC-18: `python -m hub.admin scan --data-dir` -> exit 0, clean. ... ok\ntest_TST_SEC_21_a_restart_with_changed_holders (test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded)\nTST-SEC-21 / AC-SEC-21: run 1 (holders []), run 2 (holders ['synthetic-holder']) -> two CONFIG_LOADED with each config hash. ... ok\ntest_TST_SEC_21_b_default_holders_empty (test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded)\nTST-SEC-21: default config ships zone_h.holders = [] and reauth window 300 s (Stage 12 proposal, Stage 24 to confirm). ... ok\n\n----------------------------------------------------------------------\nRan 45 tests in 18.130s\n\nOK\n",
+ "test_ids": [
+  "TST-CO-10",
+  "TST-CO-15",
+  "TST-SEC-01",
+  "TST-SEC-04",
+  "TST-SEC-05",
+  "TST-SEC-06",
+  "TST-SEC-09",
+  "TST-SEC-10",
+  "TST-SEC-11",
+  "TST-SEC-12",
+  "TST-SEC-13",
+  "TST-SEC-14",
+  "TST-SEC-15",
+  "TST-SEC-16",
+  "TST-SEC-18",
+  "TST-SEC-21"
+ ],
+ "tests": [
+  {
+   "case": "test_inc03_supplementary.TST_HUB_INC03_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC03_S01_migration_runner"
+  },
+  {
+   "case": "test_inc03_supplementary.TST_HUB_INC03_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC03_S02_backup_restore_roundtrip"
+  },
+  {
+   "case": "test_inc03_supplementary.TST_HUB_INC03_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC03_S03_inc02_commands_on_m001_store"
+  },
+  {
+   "case": "test_inc03_supplementary.TST_HUB_INC03_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC03_S04_anchor_path_configuration"
+  },
+  {
+   "case": "test_inc03_supplementary.TST_HUB_INC03_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC03_S05_zone_h_holder_and_reauth"
+  },
+  {
+   "case": "test_tst_co_10_release_blocked.TST_CO_10_ReleaseBlocked",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_10_a_g2_failing_blocks_ready"
+  },
+  {
+   "case": "test_tst_co_10_release_blocked.TST_CO_10_ReleaseBlocked",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_10_b_not_run_also_blocks_and_all_pass_control"
+  },
+  {
+   "case": "test_tst_co_15_release_checklist.TST_CO_15_ReleaseChecklist",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_15_a_checklist_every_gate_recorded_and_blocking"
+  },
+  {
+   "case": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_01_a_registry_matches_contract_and_declares_permissions"
+  },
+  {
+   "case": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_01_b_unauthenticated_401_except_public"
+  },
+  {
+   "case": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_01_c_unregistered_route_denied_by_default"
+  },
+  {
+   "case": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_01_d_healthz_contract_has_no_case_data"
+  },
+  {
+   "case": "test_tst_sec_04_fresh_install.TST_SEC_04_FreshInstall",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_04_a_zero_users_after_fresh_migrate"
+  },
+  {
+   "case": "test_tst_sec_04_fresh_install.TST_SEC_04_FreshInstall",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_04_b_any_login_fails_generically"
+  },
+  {
+   "case": "test_tst_sec_04_fresh_install.TST_SEC_04_FreshInstall",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_04_c_cli_fresh_install_lists_no_users"
+  },
+  {
+   "case": "test_tst_sec_05_lockout.TST_SEC_05_Lockout",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_05_a_default_5_15_15"
+  },
+  {
+   "case": "test_tst_sec_05_lockout.TST_SEC_05_Lockout",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_05_b_configurable"
+  },
+  {
+   "case": "test_tst_sec_05_lockout.TST_SEC_05_Lockout",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_05_c_failures_outside_window_do_not_lock"
+  },
+  {
+   "case": "test_tst_sec_06_credential_store.TST_SEC_06_CredentialStore",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_06_a_pbkdf2_per_user_salt"
+  },
+  {
+   "case": "test_tst_sec_06_credential_store.TST_SEC_06_CredentialStore",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_06_b_tokens_only_as_sha256_and_no_plaintext_anywhere"
+  },
+  {
+   "case": "test_tst_sec_06_credential_store.TST_SEC_06_CredentialStore",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_06_c_iteration_and_length_floors"
+  },
+  {
+   "case": "test_tst_sec_09_audit_events.TST_SEC_09_AuditEvents",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_09_a_one_record_per_action_chain_linked"
+  },
+  {
+   "case": "test_tst_sec_10_verify_audit_ok.TST_SEC_10_VerifyAuditOk",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_10_a_library_verify_ok"
+  },
+  {
+   "case": "test_tst_sec_10_verify_audit_ok.TST_SEC_10_VerifyAuditOk",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_10_b_cli_verify_audit_ok"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_a_details_edited"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_b_record_deleted"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_c_two_records_swapped"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_d_tail_deleted_after_anchor"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_e_cli_exit_17"
+  },
+  {
+   "case": "test_tst_sec_12_truncation_limit.TST_SEC_12_TruncationAfterLastAnchor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_12_a_tail_after_last_anchor_undetected"
+  },
+  {
+   "case": "test_tst_sec_12_truncation_limit.TST_SEC_12_TruncationAfterLastAnchor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_12_b_deleting_into_the_anchored_range_is_detected"
+  },
+  {
+   "case": "test_tst_sec_13_insert_only_triggers.TST_SEC_13_InsertOnlyTriggers",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_13_a_audit_update_delete_rejected"
+  },
+  {
+   "case": "test_tst_sec_13_insert_only_triggers.TST_SEC_13_InsertOnlyTriggers",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_13_b_other_retained_tables_reject_delete"
+  },
+  {
+   "case": "test_tst_sec_14_audit_write_failure.TST_SEC_14_AuditWriteFailure",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_14_a_changes_rolled_back"
+  },
+  {
+   "case": "test_tst_sec_15_no_secrets_in_audit_logs.TST_SEC_15_NoSecretsInAuditOrLogs",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_15_a_login_failure_audit_and_logs_clean"
+  },
+  {
+   "case": "test_tst_sec_15_no_secrets_in_audit_logs.TST_SEC_15_NoSecretsInAuditOrLogs",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_15_b_credential_keys_refused_in_details"
+  },
+  {
+   "case": "test_tst_sec_15_no_secrets_in_audit_logs.TST_SEC_15_NoSecretsInAuditOrLogs",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_15_c_cli_user_create_never_echoes_password"
+  },
+  {
+   "case": "test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_16_a_default_loopback_starts"
+  },
+  {
+   "case": "test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_16_b_non_loopback_without_approval_refused"
+  },
+  {
+   "case": "test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_16_c_approved_without_tls_refused_with_tls_allowed"
+  },
+  {
+   "case": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_18_a_code_base_clean"
+  },
+  {
+   "case": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_18_b_positive_controls"
+  },
+  {
+   "case": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_18_c_cli_scan"
+  },
+  {
+   "case": "test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_21_a_restart_with_changed_holders"
+  },
+  {
+   "case": "test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_21_b_default_holders_empty"
+  }
+ ],
+ "unittest_rc": 0
+}

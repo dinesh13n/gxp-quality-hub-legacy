@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "test-execution-log.md"
-version: "v0.3"
+version: "v0.4"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS. INC-04 (policy & rule service: M002, as-found rule sets inactive, activation with a recorded human decision) added in v0.4."
 evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
-supersedes: "v0.2 (INC-01 + INC-02)"
+supersedes: "v0.3 (INC-01 .. INC-03)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -106,6 +106,40 @@ Totals: 10/10 planned test IDs green - 43 test methods for the planned IDs (42 o
 | TST-HUB-INC03-S01..S05 | (supplementary) | `test_inc03_supplementary.py` (5) | PASS | migrations, backup/restore, INC-02 compat, anchor config, Zone H |
 Totals: 16/16 planned INC-03 test IDs green - 40 methods + 5 supplementary = 45; INC-02: 46 methods, 45 ok + 1 skipped; 0 failures, 0 errors.
 
+### INC-04 runs (device Python 3.10.12 / SQLite 3.37.2 / Node v22.23.2; hub runs from `~/fde_sbx/s15-inc04/<label>/c_pristine`; harness under `~/fde_sbx/s15-inc04/`)
+| # | Label | Code HEAD | Command (from repo root) | Result | Wall | Checksum rc | Tag |
+|---|---|---|---|---|---|---|---|
+| 41 | first | 7439198 | `tests/hub/run_hub_tests.py --sandbox-root ~/fde_sbx/s15-inc04 --label D -k TST_POL -k TST_CO_03 -k INC04` | 36 run, 36 ok (25 planned IDs + S01..S07) | 66 s | 0/0 | [Verified Fact] |
+| 42 | A | 7439198 | `--label A -k TST_SEC -k TST_CO_10 -k TST_CO_15 -k INC03` | 45/45 ok | 77 s | 0/0 | [Verified Fact] |
+| 43 | B | 7439198 | `--label B -k TST_CO_01 -k TST_CO_02 -k TST_CO_04 -k TST_CO_05 -k TST_CO_06 -k TST_CO_07 -k TST_CO_11 -k TST_CO_13 -k TST_CO_14 -k INC02` | 41 run: 40 ok, 1 skipped | 84 s | 0/0 | [Verified Fact] |
+| 44 | C | 7439198 | `--label C -k TST_CO_12` | 5/5 ok | 115 s | 0/0 | [Verified Fact] |
+| 45 | char-regression-inc04 | 7439198 | `tests/characterization/run_characterization.py --sandbox-root ~/fde_sbx/s15-inc04 --label char-regression-inc04` | 134/134 PASS | 88 s | 0 | [Verified Fact] |
+| 46-53 | mutants M1..M8 | working tree + mutant | `~/fde_sbx/s15-inc04/mut.sh` (apply, run INC-04 group, `git checkout`, delete copies) | 8/8 KILLED (`evidence/inc04/mutation-gate-inc04.txt`) | ~66 s each | 0 | [Verified Fact] |
+| 54 | final-INC04 | 86f1a9a | `--label final-INC04 -k TST_POL -k TST_CO_03 -k INC04` | 37 run, 37 ok (adds S08) | 64 s | 0/0 | [Verified Fact] |
+| 55 | final-A | 86f1a9a | as #42 | 45/45 ok | 63 s | 0/0 | [Verified Fact] |
+| 56 | final-B | 86f1a9a | as #43 | 41 run: 40 ok, 1 skipped (CO-14 e) | 80 s | 0/0 | [Verified Fact] |
+| 57 | final-C | 86f1a9a | as #44 | 5/5 ok; inner full suite 123 run, 122 ok, 2 skipped, egress [], model_calls_total 0 | 103 s | 0/0 | [Verified Fact] |
+| 58 | char-final | 86f1a9a | as #45 `--label char-final` | 134/134 PASS, shipped 15 OK as-found | 71 s | 0 | [Verified Fact] |
+
+### INC-04 planned tests (Stage 13 IDs, increment-test-map) - final-INC04
+| Test ID | AC | Test methods (tests/hub/) | Result | Class / note |
+|---|---|---|---|---|
+| TST-CO-03 | AC-CO-03 | `test_tst_co_03_golden_parity.py` a-c (3) | PASS | A; goldens CT-01 / CT-03 / CT-13, night-shift golden, legacy code in the sandbox (python + node) |
+| TST-POL-01 | AC-POL-01 | `test_tst_pol_01_10_policy_objects.py` (1) | PASS | A |
+| TST-POL-02 | AC-POL-02 | same file (1) | PASS | A |
+| TST-POL-03 | AC-POL-03 | same file (1) | PASS | A |
+| TST-POL-04 | AC-POL-04 | same file (1) | PASS | A (planned kind nfr-measurement; functional here) |
+| TST-POL-05 .. 08 | AC-POL-05 .. 08 | same file (4) | PASS | A |
+| TST-POL-09, -10 | AC-POL-09, -10 | same file (2) | PASS | A |
+| TST-POL-11 .. 18 | AC-POL-11 .. 18 | `test_tst_pol_11_21_rule_sets.py` (8) | PASS | A; 12-14 are golden parity; 18 includes the recorded-decision flow |
+| TST-POL-19, -20, -21 | AC-POL-19, -20, -21 | same file (3) | PASS | B (OD-S12-04): as-found value preserved and marked |
+| TST-POL-22 | AC-POL-22 | `test_tst_pol_22_25_purity_inputs_immutability.py` a-c (3) | PASS | A; 1000 evaluations x 3 processes; I/O patched to raise; static import check |
+| TST-POL-23 | AC-POL-23 | same file (1) | PASS | B (OD-S12-13): reject mode only (DEV-30) |
+| TST-POL-25 | AC-POL-25 | same file (1) | PASS | A |
+| TST-HUB-INC04-S01..S08 | (supplementary) | `test_inc04_supplementary.py` (8) | PASS | M002 applier + CLI, activation refusal matrix, no-holders, loader drift / purity, engine edges + legacy deltas, audit rollback, M002 required, L2 rollback + rebuild |
+Totals: 25/25 planned INC-04 test IDs green - 29 methods + 8 supplementary = 37 ok, 0 failures, 0 errors, 0 skipped. TST-POL-24 is not in the test map (DEV-32). Prior suites unchanged: INC-03 A 45 ok; INC-02 B 40 ok + 1 skipped; C 5 ok.
+[Verified Fact] The first INC-04 run passed at once; the 8-mutant gate was run for that reason and killed every mutant. [Inference] TST-POL-09 and S02 contain subTest loops: the `_driver.py` recorder does not record subTest failures (RTD-28), so `unittest_rc` (0) is the authoritative result alongside `report.json`.
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `docs/15-modernization/evidence/inc01/*_report.json`, `summary.txt`, `checksum-log.txt`.
@@ -130,3 +164,4 @@ Totals: 16/16 planned INC-03 test IDs green - 40 methods + 5 supplementary = 45;
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
+| v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
