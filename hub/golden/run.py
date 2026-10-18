@@ -15,6 +15,8 @@ from hub.store import db
 
 def run(data_dir, legacy_root=None, probes_path=None, golden_dir=None, observations_path=None):
     data_dir = sandbox.assert_safe_path(data_dir, "hub data directory")
+    if legacy_root:
+        sandbox.assert_safe_path(legacy_root, "legacy source root")
     probes = compare.load_probes(probes_path or compare.PROBES_PATH)
     captures = CaptureSet.from_golden_dir(golden_dir or DEFAULT_GOLDEN_DIR)
     con = db.open_hub(data_dir)
