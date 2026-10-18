@@ -1,0 +1,38 @@
+"""Zone H eligibility check for policy actions ZH-05 (adopt), ZH-06 (activate rule set), ZH-10 (policy change).
+
+There is no gate service until INC-05, so the same rules F02 will apply are enforced here (D-11):
+  not a human / lacks role dispositioner / integration actor         -> E-GATE-NOT-AUTHORISED
+  zone_h.holders is empty (ships empty, OD-S12-06)                    -> E-GATE-NO-HOLDERS
+  principal not in zone_h.holders                                     -> E-GATE-NOT-AUTHORISED
+  last re-authentication older than zone_h.reauth_window_seconds      -> E-GATE-NOT-AUTHORISED
+Every attempt writes a ZONE_H_ATTEMPT audit record (success or denied) in its own transaction, so a refusal
+leaves a trace. Returns the audit_seq of the attempt record (the holder_check_ref).
+"""
+from hub.policy.errors import GateNoHolders, GateNotAuthorised
+from hub.security import audit
+from hub.security.canonical import parse
+
+ZONE_H_ACTIONS = {"ZH-05": "POLICY_ADOPT", "ZH-06": "RULESET_ACTIVATE", "ZH-10": "POLICY_CHANGE"}
+
+
+def require_holder(con, settings, clock, anchor, sess, zh, correlation_id, object_ref):
+    p = sess.principal
+    holders = settings["zone_h"]["holders"]
+    err, reason = None, None
+    if p.kind != "human" or "dispositioner" not in p.roles:
+        err, reason = GateNotAuthorised, "not_a_human_dispositioner"
+    elif not holders:
+        err, reason = GateNoHolders, "no_holders_configured"
+    elif p.principal_id not in holders:
+        err, reason = GateNotAuthorised, "not_a_holder"
+    else:
+        age = parse(clock()).timestamp() - parse(sess.reauth_at).timestamp()
+        if age > settings["zone_h"]["reauth_window_seconds"]:
+            err, reason = GateNotAuthorised, "reauth_required"
+    rec = audit.append(con, clock, anchor=anchor, actor=p.principal_id, actor_kind=p.actor_kind, action="ZONE_H_ATTEMPT",
+                       outcome="denied" if err else "success", correlation_id=correlation_id, object_ref=object_ref,
+                       reason=reason, details={"zh": zh, "zone_h_action": ZONE_H_ACTIONS[zh], "reason": reason or "accepted",
+                                               "holders_configured": len(holders)})
+    if err:
+        raise err({"zh": zh, "reason": reason})
+    return rec["audit_seq"]

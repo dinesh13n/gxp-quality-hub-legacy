@@ -1,0 +1,9 @@
+{
+ "schema": "as-found-pins/v1",
+ "note": "sha256 of the legacy rule sources, read as text/data and never imported or executed (AD-06, A-14-07). Changing a pin = reviewed PR. The legacy SQLite file is pinned by hub/adapters/baseline_pins.json. Synthetic, unvalidated.",
+ "sources": {
+  "app/legacy_logic.py": "432be534193beedfb2df29735a1c89b72fbbe47d983f4b3142db97d5b6c2edd0",
+  "legacy_js/legacy_policy.js": "1d67b590d4a34ee293fd66cb6d1c558244dad7741400fc5d0b4b5fd081231cf5",
+  "contracts/decision-policies-archive.json": "a9a9cf0114d63d8fa8a344ab2ed9ae4711c5a397eabc4959bc52366767bdd7c0"
+ }
+}
