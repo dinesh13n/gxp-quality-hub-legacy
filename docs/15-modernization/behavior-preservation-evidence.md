@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "behavior-preservation-evidence.md"
-version: "v0.3"
+version: "v0.4"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS. INC-04 (policy & rule service: M002, as-found rule sets inactive, activation with a recorded human decision) added in v0.4."
 evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
-supersedes: "v0.2 (INC-01 + INC-02)"
+supersedes: "v0.3 (INC-01 .. INC-03)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -128,6 +128,26 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 | Working-tree data | backup manifest rc 0 after every session | `evidence/inc03/checksum-log.txt` | [Verified Fact] |
 [Inference] INC-03 changes no legacy behaviour: it adds new modules only, the legacy goldens are unchanged and no approved-behaviour change was needed (`approved-behavior-changes.md` ABC-INC03).
 
+### BP-INC04 INC-04 behaviour preservation (code HEAD `86f1a9a`, device Python 3.10.12, SQLite 3.37.2, Node v22.23.2)
+| Check | Result | Evidence | Tag |
+|---|---|---|---|
+| as-found-python vs Stage 7 goldens CT-01 / CT-03 | 120 / 120 PRIORITY and 20 / 20 MANUAL_REVIEW outcomes equal (byte-equal JSON) | TST-POL-12, TST-POL-13, TST-CO-03 a | [Verified Fact] |
+| as-found-js vs CT-13 | 32 / 32 thresholds, tolerance 26250 allowed / 26250.01 denied, 7 / 7 comparable allow cases equal; 'abc' and null excluded (DEV-30) | TST-POL-14, TST-CO-03 a | [Verified Fact] |
+| as-found-batch vs `shift_reconciliation` golden | flagged_count 3 / 53 / 210 / 5454 for limits 50 / 100 / 500 / 12500 reproduced by evaluating the legacy LEFT JOIN rows one by one | TST-CO-03 b | [Verified Fact] |
+| Rule sets vs the LEGACY CODE executed in the sandbox copy | python grid 5 statuses x 4 severities x 12 amounts = 240 cases and JS grid 5 regions x 9 years x 14 amounts = 630 cases (every x1.05 boundary incl. 26250.01, 28560.01, 1048948.96): 0 differences | TST-CO-03 c | [Verified Fact] |
+| Documented deltas to legacy | partial-year prefix match (DEV-29), non-numeric / null amount (DEV-30); both are in new modules, pinned by tests, and need OD-S12-13 | TST-HUB-INC04-S05, TST-POL-23 | [Verified Fact] |
+| Default values preserved AND marked | 999999 fallback -> `defaulted`, `NO_MATCH_REGION_YEAR`; PRIORITY `queue` with unknown status / severity -> `UNKNOWN_INPUT_VALUE`; known inputs reaching the last row -> `defaulted = false` | TST-POL-19, -20, -21 | [Verified Fact] |
+| Nothing active ships | fresh store: 0 adopted policies, 0 active pointers; loading the 3 as-found sets leaves `active_ruleset` empty; evaluate without a ref -> E-POL-NO-ACTIVE-RULESET | TST-POL-01, -11, -16, S01 | [Verified Fact] |
+| Activation needs a recorded human decision | refused (and audited `denied`) for none / malformed / unknown / non-decision / other function / other set / non-holder / consumed / broken-chain decisions | S02 (9 refusal cases) | [Verified Fact] |
+| Rule evaluation is pure and deterministic | 1000 evaluations bit-identical in this process and two child processes (PYTHONHASHSEED 0, 12345); same result with open / socket / time / urandom / sqlite3 / subprocess patched to raise | TST-POL-22 | [Verified Fact] |
+| Legacy paths and data | TST-CO-05 a/b/c ok; harness 134 / 134 PASS, shipped 15 tests OK as-found (post-DB `750336f3…` = Stage 7 R1), capture digests unchanged; backup manifest rc 0 before and after | `evidence/inc04/hub-final-B_report.json`, `char-regression-inc04_report.json`, `checksum-log.txt` | [Verified Fact] |
+| INC-02 / INC-03 hub behaviour | A 45 ok; B 40 ok + 1 skipped (same as INC-03 final); golden-compare still lists DV-01..09 UNAPPROVED, exit 6 | `hub-final-A_report.json`, `hub-final-B_report.json` | [Verified Fact] |
+| No-AI / egress | full suite (123 tests) under the egress guard: 0 attempts, `model_calls_total` 0; deny-list scan of hub/ + tests/hub clean (TST-CO-11 d) | `hub-final-C_inner-egress-run.json` | [Verified Fact] |
+| Rollback (L2 restore + rebuild) | restore of the pre-M002 backup: no policy tables, audit chain verifies; re-apply M002 + seed + load -> identical rule-set content hashes | TST-HUB-INC04-S08 | [Verified Fact] |
+| Mutation gate | 8 / 8 KILLED (engine `>` -> `>=`, decision check off, tolerance 1.00, overlap off, holder membership off, default marker off, authority check off, immutability trigger removed) | `evidence/inc04/mutation-gate-inc04.txt` | [Verified Fact] |
+[Inference] INC-04 changes no legacy behaviour: it adds new modules only, legacy goldens are unchanged, and no approved-behaviour change was needed (`approved-behavior-changes.md` ABC-INC04). [Assumption] The python domain lists (statuses OPEN / UNDER_REVIEW / CLOSED / ESCALATED / REOPENED, severities LOW..CRITICAL) come from the shipped data and goldens (A-12-F03-2), not from the legacy code, which has no domain. Confirm: Engagement lead (Dinesh Naik).
+[Inference] Exact Decimal arithmetic replaces IEEE doubles; 870 grid cases show no difference, but a difference at the last binary digit of a x1.05 boundary cannot be excluded for untested values (RTD-42).
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `docs/15-modernization/evidence/inc01/final-A_report.json`, `final-B_report.json` (full per-check results + unittest output), `mut-1..mut-4_report.json`, `summary.txt`, `checksum-log.txt`.
@@ -156,3 +176,4 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
+| v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |

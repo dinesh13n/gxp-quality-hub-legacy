@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "changed-components.md"
-version: "v0.3"
+version: "v0.4"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS. INC-04 (policy & rule service: M002, as-found rule sets inactive, activation with a recorded human decision) added in v0.4."
 evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "git diff --name-status main..stage-15-inc01-harness", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
-supersedes: "v0.2 (INC-01 + INC-02)"
+supersedes: "v0.3 (INC-01 .. INC-03)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -74,6 +74,20 @@ INC-01 adds one new component — the characterisation harness (C11 change-safet
 
 [Verified Fact] `git diff --name-status main..HEAD` lists only `A` entries plus `M` for `docs/15-modernization/*.md` (TST-CO-05 c green). Existing hub files (`hub/cli.py`, `hub/config.py`, `hub/store/db.py`, `hub/core/errors.py`, M000) and INC-02 tests are unchanged; INC-03 reuses `db.open_hub`, `config.load`, `sandbox`, `egress`, `no_ai`, `metrics`.
 
+### CC-7 INC-04 additions (all new files, status `A`; no existing file modified)
+| Path | Component | Backlog | Tag |
+|---|---|---|---|
+| `hub/policy/migrations/M002_policy_rules.sql` | `policy_object`, `policy_events`, `rule_set`, `rule_row`, `active_ruleset` (DDL v0.1 verbatim) + immutability / pointer triggers | TB-12 | [Verified Fact] |
+| `hub/policy/schema.py` | M002 applier: backup-before-migrate, `policy_schema_migrations`, drift / not-migrated refusal | TB-12 | [Verified Fact] |
+| `hub/policy/engine.py`, `hub/policy/inputs.py` | pure table-driven evaluation (imports only decimal / re) and strict Decimal parsing | TB-12 | [Verified Fact] |
+| `hub/policy/rulesets.py`, `hub/policy/asfound.py`, `hub/policy/as_found_pins.json` | rule-set documents (validate, content hash) and the AD-06 importer for `as-found-python` / `-js` / `-batch` (text / data read, sha256 pins, never executes legacy code) | TB-12 / AD-06 | [Verified Fact] |
+| `hub/policy/service.py`, `hub/policy/clocks.py`, `hub/policy/gate.py`, `hub/policy/errors.py` | `PolicyService` (policy objects, rule sets, evaluation, activation with a recorded decision), clock verdicts, local Zone H check, E-POL-* / E-GATE-* codes | TB-12 | [Verified Fact] |
+| `hub/policy/{__init__,__main__,cli}.py` | `python -m hub.policy` operator CLI (never activates) | TB-12 | [Verified Fact] |
+| `tests/hub/_inc04.py`, `tests/hub/test_tst_co_03_golden_parity.py`, `tests/hub/test_tst_pol_{01_10_policy_objects,11_21_rule_sets,22_25_purity_inputs_immutability}.py`, `tests/hub/test_inc04_supplementary.py` | 25 planned INC-04 test IDs (29 methods) + 8 supplementary | — | [Verified Fact] |
+| `docs/15-modernization/inc04-design-notes.md`, `docs/15-modernization/evidence/inc04/*` | design decisions D-01..D-12, run evidence | — | [Verified Fact] |
+
+[Verified Fact] `git diff --name-status main..HEAD` lists only `A` entries plus `M` for `docs/15-modernization/*.md` (TST-CO-05 c green). `hub/core/errors.py`, `hub/store/*`, `hub/security/*`, `hub/cli.py`, `hub/admin/*`, M000 / M001 and all INC-02 / INC-03 tests are unchanged; INC-04 reuses `db.open_hub`, `audit.change`/`append`/`verify`, `legacy_sqlite.open_snapshot`, `legacy_captures`, `backup.backup`, `migrate.check`, `Authenticator` sessions and `settings`.
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `git diff --stat main..stage-15-inc01-harness`; `evidence/inc01/final-A_report.json` (`legacy_suite`).
@@ -97,3 +111,4 @@ INC-01 adds one new component — the characterisation harness (C11 change-safet
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
+| v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |

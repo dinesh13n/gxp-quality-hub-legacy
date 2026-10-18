@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "refactoring-decisions.md"
-version: "v0.3"
+version: "v0.4"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS. INC-04 (policy & rule service: M002, as-found rule sets inactive, activation with a recorded human decision) added in v0.4."
 evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
-supersedes: "v0.2 (INC-01 + INC-02)"
+supersedes: "v0.3 (INC-01 .. INC-03)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -65,6 +65,21 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 | RD-37 | CONFIG_LOADED (config sha256 + holders + anchor_every) appended at the start of every store-opening `hub.admin` run (after migration for `migrate`, after verification for `restore`) | only on config change | AC-SEC-21 "process restarted" | — | [Verified Fact] |
 | RD-38 | Full-increment rollback rehearsed with `git archive main hub` into the sandbox | `git checkout` | no checkout/switch allowed; working tree untouched | — | [Verified Fact] |
 
+### INC-04 decisions
+| ID | Decision | Alternatives | Rationale | Approval | Tag |
+|---|---|---|---|---|---|
+| RD-39 | New package `hub/policy/` with its own CLI `python -m hub.policy`; no existing file touched | extend `hub/cli.py`, `hub/store/migrate.py` | add-only rule (TST-CO-05 c) | — | [Verified Fact] |
+| RD-40 | M002 in `hub/policy/migrations/`, applied by `hub.policy.schema` after a backup, recorded in `policy_schema_migrations` | `hub/store/forward/M002_*.sql` | the forward directory is scanned by `migrate.known_versions()`; INC-03 S01 (frozen) pins `applied == ["M001"]` | — | [Verified Fact] (DEV-28) |
+| RD-41 | Rule sets are data: rows `{row_id, ordinal, conditions[], outcome{function, kind, …}, is_default}`; kinds rule / domain / param / register; first match wins by ordinal; conditions ANDed; value may be `{"$input": field}` | code per rule set; columns for domains / params | DDL v0.1 unchanged; one engine for three very different legacy rules | A-14-07 | [Inference] |
+| RD-42 | Engine is a pure function (imports decimal / re only); numbers are exact `Decimal` parsed strictly (bool, NaN, infinity, None, odd strings rejected) | float arithmetic as legacy; permissive `Decimal(str)` | AC-POL-22 purity, AC-POL-23, no silent coercion | — | [Verified Fact] |
+| RD-43 | `defaulted` precedence NULL_INPUT > UNKNOWN_INPUT_VALUE > matched default row; the as-found value is always kept; the PRIORITY catch-all row is not a "default row" | mark every fall-through | AC-POL-19/20/21 | OD-S12-04 | [Verified Fact] |
+| RD-44 | `as-found-batch` = the row-level predicate; threshold is an input or looked up by (region, policy_code) among `active = 1` register rows; one result per input; `valid_from` / `valid_to` ignored as in legacy | reproduce the JOIN; honour validity windows | AC-POL-15, BB-07 fan-out is an adapter defect | OD-S12-13 | [Verified Fact] |
+| RD-45 | Importer reads legacy sources as text / data, sha256-pins them, cross-checks constants (AST for Python, regex for JS), reads the register through the INC-02 read-only snapshot adapter; reload is a no-op, divergence is E-POL-ASFOUND-DRIFT | import the legacy modules; call node | AD-06 "never imported as code"; fail closed | A-14-07 | [Verified Fact] |
+| RD-46 | Activation = `record_activation_decision` (audit record) + `activate(decision_seq)`; decision is single-use, tied to function + ruleset, by a human holder, in an intact chain; refusals are audited | single Zone H call; free-text approval reference | OD-16 "recorded human decision", F03 BEH-POL-08 | A-15-04-1 | [Inference] |
+| RD-47 | Zone H check implemented locally in `hub/policy/gate.py` (same rules as F02) | wait for INC-05 | the policy actions are needed now; one place to replace | — | [Verified Fact] |
+| RD-48 | Editing a rule row = new version of a CUSTOM set (copy of any set); as-found sets can only be forked; `rule_set` / `rule_row` are immutable by trigger | in-place edit | BEH-POL-07, AC-POL-11/25, versioned history | — | [Verified Fact] |
+| RD-49 | Every policy change = one transaction of data + `policy_events` + audit record (`audit.change`); a denied attempt writes its own audit record before the error | audit after commit | AC-SEC-14 pattern, F03 BEH-POL-05 | — | [Verified Fact] |
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `tests/characterization/harness.py` (`NORMALISATION_RULES`, guard), `run_characterization.py`; commits 2633062, 0283660, e1eb1d2, ed43a0a.
@@ -87,3 +102,4 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
+| v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |

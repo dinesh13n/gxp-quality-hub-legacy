@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "modernization-summary.md"
-version: "v0.3"
+version: "v0.4"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS. INC-04 (policy & rule service: M002, as-found rule sets inactive, activation with a recorded human decision) added in v0.4."
 evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
-supersedes: "v0.2 (INC-01 + INC-02)"
+supersedes: "v0.3 (INC-01 .. INC-03)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -60,6 +60,15 @@ Orchestrator: review + PR + squash-merge INC-02 (OD-13). INC-03 (audit trail, AD
 - Conditions: Stage 12 addenda (RTD-23/24); security values are proposals for Stage 24 (RTD-26); C2 parts outside INC-03 (RTD-27); G1/G2/G4/G8/G9/G10 not evaluable yet - every release checklist blocks (RTD-32); runner disk use (RTD-31) and subTest recording gap (RTD-28).
 - Stage 15 overall: **IN PROGRESS** (INC-04..INC-09 not started; OD-S12-17 question to Dinesh is due before INC-06 per OD-12).
 
+### MS-INC04 INC-04 summary (branch `stage-15-inc04-rule-service`) - DONE WITH CONDITIONS
+- [Verified Fact] Delivered TB-12: policy objects (candidate / adopted / accepted-open, versioned, immutable), table-driven rule sets as data with a pure Decimal engine and the `defaulted` marker, AD-06 importer that loads the three as-found rule sets (Python priority > 50,000 + manual review; JS regional limit x1.05 with 999,999 fallback; night-shift 2,500-8,500 thresholds) as named, versioned, read-only, **inactive** candidates, clock verdicts (none without an adopted clock), and activation that is refused unless a human Zone H holder recorded a decision in the hash-chained audit trail. M002 and `python -m hub.policy`.
+- [Verified Fact] Nothing ships adopted or active: a fresh store has 5 candidate policies and no active rule set; `zone_h.holders` is still empty, so nobody can adopt or activate until Dinesh names holders (OD-S12-06).
+- [Verified Fact] Tests: 25/25 planned IDs green (29 methods) + 8 supplementary; INC-02 / INC-03 suites unchanged (A 45, B 40 + 1 skipped, C 5); harness 134/134; mutation 8/8 KILLED; legacy and `data/` byte-identical (checksum rc 0).
+- [Verified Fact] Parity: 120 + 20 + 32 golden rows and 870 live legacy-vs-service grid cases (python, node in the sandbox) show no difference; the night-shift golden is reproduced for four limits.
+- Conditions: DEV-29 / DEV-30 (OD-S12-13 preserve-or-fix, Dinesh), DEV-28 (M002 outside the main runner, RTD-37), DEV-35 (decision mechanism to confirm, RTD-43), Stage 12 addenda (RTD-38), not built: divergence report, withdrawal, HTTP routes (RTD-39), group C headroom (RTD-44).
+- How to run: `python3 -B tests/hub/run_hub_tests.py --sandbox-root ~/fde_sbx/<x> --label D -k TST_POL -k TST_CO_03 -k INC04` (about 65 s); delete `c_pristine` and `scratch` afterwards.
+- Stage 15 overall: **IN PROGRESS** (INC-05..INC-09 not started; OD-S12-17 question to Dinesh is due before INC-06 per OD-12).
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - All INC-01 artifacts in this folder; `evidence/inc01/`.
@@ -83,3 +92,4 @@ Orchestrator: review + PR + squash-merge INC-02 (OD-13). INC-03 (audit trail, AD
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
+| v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
