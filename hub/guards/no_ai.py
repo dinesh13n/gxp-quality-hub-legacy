@@ -14,7 +14,7 @@ import re
 
 from hub.core.errors import DenylistImport
 
-# R1 - AI / ML / LLM modules (top-level import names). Prefix families match "<name>" and "<name>_*".
+# R1 - AI / ML / LLM modules (top-level import names). Prefix families match any top-level name starting with the family name.
 DENY_MODULES = (
     "openai", "anthropic", "transformers", "torch", "torchvision", "tensorflow", "keras", "jax", "flax",
     "langchain", "langchain_core", "langchain_community", "langgraph", "llama_index", "llama_cpp", "llama",
@@ -56,8 +56,8 @@ def _deny_module(module):
         return hit
     top = module.split(".")[0]
     for fam in DENY_PREFIX_FAMILIES:
-        if top.startswith(fam + "_"):
-            return fam + "_*"
+        if top.startswith(fam):  # e.g. torchaudio, langchain_openai, openai_agents (heuristic, ADR-002)
+            return fam + "*"
     return None
 
 
@@ -113,7 +113,7 @@ def _dist_hit(name):
     if n in DENY_DISTRIBUTIONS:
         return n
     for fam in DENY_PREFIX_FAMILIES:
-        if n.startswith(fam + "_"):
+        if n.startswith(fam):
             return n
     return None
 
