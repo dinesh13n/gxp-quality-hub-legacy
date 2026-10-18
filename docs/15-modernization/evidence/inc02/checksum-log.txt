@@ -1,0 +1,8 @@
+# Stage 15 INC-02 - backup manifest checks (sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt, run from the repo root; 1,512 entries)
+2026-10-18 before INC-02 code execution (smoke run)            rc=0
+2026-10-18 hub runner pre/post, labels dev1..dev5               rc_pre=0 rc_post=0 (every run)
+2026-10-18 INC-01 harness regression (inc02-regress)            rc=0 after
+2026-10-18 hub runner final-A                                   rc_pre=0 rc_post=0
+2026-10-18 mutation gate inc02-mut-1..3                         rc=0 after
+2026-10-18 hub runner final-B                                   rc_pre=0 rc_post=0
+2026-10-18 after evidence capture (this line)                   rc=0

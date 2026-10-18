@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "behavior-preservation-evidence.md"
-version: "v0.1"
+version: "v0.2"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 only (characterisation harness + hermetic fixtures + mutation gate). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)"]
-supersedes: "none"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
+supersedes: "v0.1 (INC-01 only)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -99,9 +99,26 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 | CT-16 | AC-CO-L16 | FR-GATE-01 | — |
 [Inference] C3 is met at the test-metadata level; formal adoption of AC-CO-L04..L16 into `docs/12-specs/acceptance-criteria.md` needs a Stage 12/13 addendum (not done here; that file is not edited in place).
 
+### BP-8 INC-02 - legacy behaviour unchanged (code at `23b3250`)
+| Check | Result | Evidence | Tag |
+|---|---|---|---|
+| INC-01 harness regression (`run_characterization.py`, label `inc02-regress`) | 134/134 checks, CT-01..CT-16 PASS, shipped suite ran=15 OK as-found (post-DB sha 750336f3… = Stage 7 R1), **0 differences** | `evidence/inc02/char-regression-inc02_report.json` | [Verified Fact] |
+| Capture digests vs INC-01 `final-A` | identical (api c6db0a43…, batch 40237661…, lib c5797c3b…, supplement c3cbab2c…) | same file, `capture_digests_equal_inc01_final_A: true` | [Verified Fact] |
+| Mutation gate (3 chunks `inc02-mut-1..3`) | 15/15 KILLED | `evidence/inc02/mutation-gate-inc02.txt` | [Verified Fact] |
+| Legacy source paths vs tag `baseline-as-found` | `git diff` empty; no untracked files (TST-CO-05 a/b) | hub final-A/B reports | [Verified Fact] |
+| Branch vs `main` | every change is an added file except Stage 15's own docs (TST-CO-05 c) | `git diff --name-status main..HEAD` | [Verified Fact] |
+| Working-tree data | backup manifest `sha256sum -c --quiet` rc 0 before/after every execution (1,512 entries) | `evidence/inc02/checksum-log.txt` | [Verified Fact] |
+| Hub access to legacy stores | only per-run snapshot copies of the sandbox FX-BASE125 copy, opened `mode=ro&immutable=1` + authorizer; 13 write forms refused; source and snapshot sha256 unchanged (TST-CO-04) | `hub/adapters/legacy_sqlite.py`; TST-CO-04 | [Verified Fact] |
+
+### BP-9 INC-02 golden-compare on FX-BASE125 (new side vs legacy goldens)
+[Verified Fact] `python -m hub golden-compare` on the 125-case baseline: 11 probes, **2 identical** (CT-12 `true_total_amount` 622,826.44; CT-10 active policies per region), **9 UNAPPROVED** = DV-01..DV-09 (all `proposed`), 0 NOT-RUN, exit 6 (E-CO-UNAPPROVED-DEVIATION) - exactly the AC-CO-01 expectation. DV-01 is computed live: legacy 742,956.61 vs new 622,826.44; DV-08 live: 118 vs 500 distinct entities in the first 500. These are differences between legacy and the *proposed new behaviour*; no legacy behaviour changed. Evidence: `evidence/inc02/golden-compare-baseline.{json,txt}`.
+[Verified Fact] With matching approved register rows (throw-away test fixture, not a HAR-06 approval) the exit is 0 (TST-CO-01 c); an approval whose values do not match the observation does not cover it (TST-CO-01 d); an unlisted golden change is UNAPPROVED (TST-CO-02).
+[Verified Fact] Determinism: golden-compare and deviation-register output byte-identical across 18 environments (PYTHONHASHSEED 0/1/random x TZ UTC/Asia/Kolkata/America/Los_Angeles x LC_ALL C/en_IN.UTF-8) (TST-CO-13).
+
 ## Evidence References
 - `docs/15-modernization/evidence/inc01/final-A_report.json`, `final-B_report.json` (full per-check results + unittest output), `mut-1..mut-4_report.json`, `summary.txt`, `checksum-log.txt`.
 - `tests/characterization/golden/MANIFEST.sha256` (golden integrity), `fixtures/FX-BASE125.sha256`.
+- INC-02: `docs/15-modernization/evidence/inc02/`; `tests/hub/`; `hub/golden/probes_inc02.json`; `hub/coexistence/seed_inc02.json`.
 
 ## Assumptions
 - A-15-01 [Assumption] The Stage 0A backup `../_data-backup-2026-10-17/data` is the authoritative copy of the OD-09 baseline (its manifest equals the working tree, checksum rc 0). Confirm: Engagement lead (Dinesh Naik).
@@ -109,6 +126,7 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 
 ## Unknowns
 - U-15-02 Behaviour on Python 3.12 / other JDK/Node versions (CT-H5) — not measurable on this device.
+- INC-02: behaviour of the declared DV targets once real modules exist (U-15-02).
 
 ## Unresolved Issues
 - AC-CO-L04..L16 not yet adopted into Stage 12 specs (GAP-13-06 partially closed).
@@ -116,8 +134,10 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 ## Residual Risks
 - RR-BP-1 N4 compares tail-truncated stderr on the common suffix; a change confined to the clipped start of such a tail would not be detected (affects 1 check, `node_cwd_other`).
 - RR-BP-2 Goldens depend on the git-ignored baseline data; protection is the FX-BASE125 hash gate + backup manifest.
+- INC-02: 7 of 9 DV new-side values are declared, not computed (DEV-08); BP-9 proves the comparison machinery and register discipline, not the future modules.
 
 ## Change History
 | Version | Date | Author/agent | Change |
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
+| v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |

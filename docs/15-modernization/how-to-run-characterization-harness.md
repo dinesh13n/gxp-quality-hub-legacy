@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "how-to-run-characterization-harness.md"
-version: "v0.1"
+version: "v0.2"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 only (characterisation harness + hermetic fixtures + mutation gate). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/characterization/README.md"]
-supersedes: "none"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/characterization/README.md", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
+supersedes: "v0.1 (INC-01 only)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -35,6 +35,13 @@ Python ≥ 3.10 (evidence on 3.10.12), `java` (JDK 11+) and `node` (≥ 18) on P
 ### Reading a failure
 A failing check prints `CT-xx FAIL ... first: <check> :: <path> golden=... actual=...`. On unmodified legacy code any failure is D5 UNEXPLAINED → STOP-12; do not edit goldens or normalisation to make it pass.
 
+### INC-02 hub tests [Verified Fact]
+```sh
+python3 -B tests/hub/run_hub_tests.py [--label NAME] [--sandbox-root DIR] [-k PATTERN]
+```
+The runner refuses (exit 2) if the backup manifest check fails before the run or the sandbox root is unsafe; it builds `<sandbox-root>/<label>/c_pristine` with the INC-01 hash-gated fixture, runs `tests/hub/_driver.py` inside it (HUB_WORKTREE_ROOT, HUB_SANDBOX_ROOT, HUB_LEGACY_ROOT set), re-checks the manifest and writes `<label>/report.json` and `<label>/unittest-result.json`. Exit 0 = all green and checksums rc 0; 1 = a test failed; 2 = refused / checksum failure. Test files must never be run directly from the working tree (`require_sandbox()` refuses).
+Hub CLI (from a sandbox copy): `python -m hub selfcheck | init --data-dir D | deviations --data-dir D | golden-compare --data-dir D --legacy-root <sandbox copy> [--json] | no-ai-check [paths]`.
+
 ## Evidence References
 - `tests/characterization/run_characterization.py` docstring.
 
@@ -54,3 +61,4 @@ A failing check prints `CT-xx FAIL ... first: <check> :: <path> golden=... actua
 | Version | Date | Author/agent | Change |
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
+| v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |

@@ -1,0 +1,8 @@
+Stage 15 INC-02 evidence summary (branch stage-15-inc02-hub-skeleton; code at 23b3250; device Python 3.10.12 / SQLite 3.37.2)
+- hub tests (tests/hub/run_hub_tests.py, sandbox ~/fde_sbx/s15-inc02): final-A and final-B: 46 tests, 45 ok, 0 FAIL, 0 ERROR, 1 skipped
+  (TST-CO-14 e: no python3.9 on device; 3.9 simulated in TST-CO-14 b). Planned IDs covered: TST-CO-01,-02,-04,-05,-06,-07,-11,-12,-13,-14 (10/10 green).
+- golden-compare on FX-BASE125 (all DV proposed): probes=11 identical=2 UNAPPROVED=9 (DV-01..DV-09) NOT-RUN=0 exit=6 (as specified by AC-CO-01).
+- INC-01 characterisation regression (inc02-regress): 134/134 checks, CT-01..CT-16 PASS, capture digests identical to INC-01 final-A, shipped suite as-found (ran=15 OK).
+- mutation gate (3 chunks): 15/15 KILLED.
+- backup manifest: rc 0 before/after every execution (checksum-log.txt).
+- tripwires: model_calls_total=0, egress_attempts_total=0 (CLI runs and the egress-guarded inner suite, TST-CO-12 e).

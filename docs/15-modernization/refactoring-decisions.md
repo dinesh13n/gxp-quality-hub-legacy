@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "refactoring-decisions.md"
-version: "v0.1"
+version: "v0.2"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 only (characterisation harness + hermetic fixtures + mutation gate). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)"]
-supersedes: "none"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
+supersedes: "v0.1 (INC-01 only)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -30,6 +30,22 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 | RD-10 | C3 delivered as `ac_links` metadata with proposed AC-CO-L04..L16 | edit Stage 12 acceptance criteria | Stage 12 docs not edited in place (OD-10 pattern); TB-05 specifies test metadata | addendum pending | [Inference] |
 | RD-11 | Four captures run concurrently per run; mutants sequential | all sequential | separate sandbox copies and ephemeral ports make them independent; determinism verified (6 runs) | — | [Verified Fact] |
 
+### INC-02 decisions
+| ID | Decision | Alternatives | Rationale / evidence | Approval | Tag |
+|---|---|---|---|---|---|
+| RD-12 | New top-level `hub/` package beside the legacy estate, run as `python -m hub`; no `pyproject.toml` change | `src/` layout + entry point | E-2b and OD-S12-12 defaults (OD-14); avoids HAR-07 | OD-14 (accepted on Dinesh's instruction, OD-12) | [Verified Fact] |
+| RD-13 | Legacy stores read only via per-run snapshot copies opened `mode=ro&immutable=1` plus an SQLite authorizer (deny all but SELECT/READ/FUNCTION/RECURSIVE and read pragmas) plus pinned sha256 and table/column lists | `mode=ro` on the source file | AS-2 rules 3-4; immutable snapshot avoids lock contention with legacy writers (TR-09); authorizer is defence in depth | E-5 at risk | [Verified Fact] |
+| RD-14 | golden-compare new-side providers: `baseline_ro` (computed over RO snapshots) and `declared` (F10-2 target) until modules exist | wait for modules; compare legacy-vs-legacy | lets AC-CO-01/02 be proven now; declared probes are replaced per increment (DEV-08) | — | [Inference] |
+| RD-15 | A difference counts as approved only if the DV row is `approved`, has a non-empty `approval_ref` AND its legacy/new values equal the observation (canonical JSON) | match on golden_ref only | prevents a stale approval from covering a changed behaviour (TST-CO-01 d) | — | [Verified Fact] |
+| RD-16 | No product command approves or edits deviations; approval_ref only references Dinesh's decision outside the product | `hub deviations approve` | BEH-CO-02; STOP-07 spirit (no automated approvals) | — | [Verified Fact] |
+| RD-17 | Sandbox guard refuses any path inside a directory holding `.git`, plus HUB_WORKTREE_ROOT, the backup, ancestors, `/` and `$HOME` | env var only | protects the original repo even if the env var is missing | — | [Verified Fact] |
+| RD-18 | Egress guard patches connect/connect_ex/sendto/getaddrinfo; loopback/AF_UNIX allowed; hostnames never resolved; installed at every CLI start | patch connect only | DNS resolution itself is egress; children spawned by tests are also guarded | — | [Verified Fact] |
+| RD-19 | Exit codes for codes without a specified exit: 9 deny-list, 10 legacy write, 11 egress, 12 untrusted use, 13 schema drift, 14 tripwire, 15 migration drift, 3 kill switch, 2 fixture/config | reuse 1 | distinguishable in CI; needs Stage 12 addendum (RTD-13) | — | [Verified Fact] |
+| RD-20 | `tests/hub/` without `__init__.py`; runner reuses INC-01 `harness.build_pristine` (hash-gated FX-BASE125 copy) and runs tests inside the copy with HUB_* env vars | own copy logic | one proven sandbox path; shipped CI discovery unchanged | — | [Verified Fact] |
+| RD-21 | AC-CO-12 "full acceptance suite" = TST-CO-12 e re-runs all other INC-02 tests in a child with the egress guard installed (recursion guard HUB_EGRESS_INNER) | patch only inside one test | literal reading of AC-CO-12 | — | [Verified Fact] |
+| RD-22 | Hidden CLI test seams `--assume-python`, `--assume-sqlite`, `--observations` | monkeypatch in-process | exercises the real start-up / CLI path; documented as test-only | — | [Verified Fact] |
+| RD-23 | Untrusted runtime guard delivered in INC-02 (ADR-002 B(3)) | defer to INC-06 | requested in INC-02 scope; static type check deferred (RTD-16) | — | [Verified Fact] |
+
 ## Evidence References
 - `tests/characterization/harness.py` (`NORMALISATION_RULES`, guard), `run_characterization.py`; commits 2633062, 0283660, e1eb1d2, ed43a0a.
 
@@ -49,3 +65,4 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 | Version | Date | Author/agent | Change |
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
+| v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |

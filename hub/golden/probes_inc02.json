@@ -1,0 +1,201 @@
+{
+ "increment": "INC-02",
+ "note": "Probe catalogue for hub golden-compare. legacy = value read by AD-08 from the active INC-01 goldens; new = baseline_ro (computed over read-only snapshots) or declared (F10-2 target value, replaced by the owning module's live output when that module is built). Synthetic, unvalidated.",
+ "probes": [
+  {
+   "golden_ref": "CT-07:lib.missing_field",
+   "legacy": {
+    "path": [
+     "missing_field"
+    ],
+    "source": "lib"
+   },
+   "new": {
+    "basis": "F10-2 DV-09",
+    "provider": "declared",
+    "value": {
+     "quarantined": 1,
+     "reason": "envelope_invalid",
+     "received": 1
+    }
+   }
+  },
+  {
+   "golden_ref": "CT-08:batch.partner_error_reasons[quantity out of range]",
+   "legacy": {
+    "path": [
+     "partner_error_reasons",
+     {
+      "as_map": true
+     },
+     "quantity out of range"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "F10-2 DV-03",
+    "provider": "declared",
+    "value": {
+     "quantity_lt_0": "NEGATIVE_VALUE flag; kept; reviewer queue"
+    }
+   }
+  },
+  {
+   "golden_ref": "CT-08:batch.partner_error_reasons[replayed source message]",
+   "legacy": {
+    "path": [
+     "partner_error_reasons",
+     {
+      "as_map": true
+     },
+     "replayed source message"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "F10-2 DV-02",
+    "provider": "declared",
+    "value": {
+     "replay_changed_content": "REVISED_CONFLICT",
+     "replay_identical_content": "NOOP_DUPLICATE"
+    }
+   }
+  },
+  {
+   "golden_ref": "CT-08:batch.partner_status_after_all",
+   "legacy": {
+    "path": [
+     "partner_status_after_all"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "F10-2 DV-07",
+    "provider": "declared",
+    "value": {
+     "legacy_table": "untouched",
+     "outcomes": "append-only"
+    }
+   }
+  },
+  {
+   "golden_ref": "CT-10:batch.shift_active_policies_per_region",
+   "legacy": {
+    "path": [
+     "shift_active_policies_per_region"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "provider": "baseline_ro",
+    "query": "active_policies_per_region"
+   }
+  },
+  {
+   "golden_ref": "CT-10:batch.shift_distinct_objects_in_first_500_joined_rows",
+   "legacy": {
+    "path": [
+     "shift_distinct_objects_in_first_500_joined_rows"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "provider": "baseline_ro",
+    "query": "distinct_entities_first_500"
+   }
+  },
+  {
+   "golden_ref": "CT-11:batch.java_tiny.stdout#count",
+   "legacy": {
+    "path": [
+     "java_tiny",
+     "stdout",
+     {
+      "regex": "count=(\\d+)"
+     }
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "F10-2 DV-04",
+    "provider": "declared",
+    "value": {
+     "UNPARSABLE_AMOUNT": 10,
+     "summed_rows": 2390
+    }
+   }
+  },
+  {
+   "golden_ref": "CT-12:batch.sql_report_1_total_gross",
+   "legacy": {
+    "path": [
+     "sql_report_1_total_gross"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "provider": "baseline_ro",
+    "query": "month_end_total"
+   }
+  },
+  {
+   "golden_ref": "CT-12:batch.true_total_amount",
+   "legacy": {
+    "path": [
+     "true_total_amount"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "provider": "baseline_ro",
+    "query": "month_end_total"
+   }
+  },
+  {
+   "golden_ref": "CT-13:batch.js_policy_table.allows[7:9]",
+   "legacy": {
+    "path": [
+     "js_policy_table",
+     "allows",
+     {
+      "slice": [
+       7,
+       9
+      ]
+     }
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "F10-2 DV-05",
+    "provider": "declared",
+    "value": {
+     "abc": "E-POL-INPUT-INVALID",
+     "null": "E-POL-INPUT-INVALID"
+    }
+   }
+  },
+  {
+   "golden_ref": "CT-13:batch.js_policy_table.table[0]",
+   "legacy": {
+    "path": [
+     "js_policy_table",
+     "table",
+     0
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "F10-2 DV-06",
+    "provider": "declared",
+    "value": {
+     "defaulted": true,
+     "region": "APAC",
+     "threshold": 999999,
+     "year": 2019
+    }
+   }
+  }
+ ],
+ "schema": "golden-probes/v1"
+}

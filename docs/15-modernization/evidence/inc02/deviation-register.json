@@ -1,0 +1,93 @@
+{
+ "coexistence_inventory": [
+  {
+   "description": "Protected parallel workflow for older customers (FR-CO-02, OPD-15). Exposed read-only; the product cannot alter, disable or retire it.",
+   "item_id": "CO-WF-01",
+   "owner": "Unknown",
+   "status": "protected"
+  }
+ ],
+ "deviation_register": [
+  {
+   "approval_ref": null,
+   "dev_id": "DV-01",
+   "golden_ref": "CT-12:batch.sql_report_1_total_gross",
+   "justification": "SQL report 1 total inflated by LEFT JOIN events fan-out (BB-08); new month_end_total sums cases once. F10-2 DV-01 (fix).",
+   "legacy_value": "742956.61",
+   "new_value": "622826.44",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-02",
+   "golden_ref": "CT-08:batch.partner_error_reasons[replayed source message]",
+   "justification": "Legacy marks every REPLAY as DUPLICATE (BB-05); new distinguishes identical vs changed content. F10-2 DV-02 (fix).",
+   "legacy_value": "64",
+   "new_value": "{\"replay_changed_content\":\"REVISED_CONFLICT\",\"replay_identical_content\":\"NOOP_DUPLICATE\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-03",
+   "golden_ref": "CT-08:batch.partner_error_reasons[quantity out of range]",
+   "justification": "Legacy rejects negative quantity; new keeps it flagged for review. F10-2 DV-03 (change of class).",
+   "legacy_value": "154",
+   "new_value": "{\"quantity_lt_0\":\"NEGATIVE_VALUE flag; kept; reviewer queue\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-04",
+   "golden_ref": "CT-11:batch.java_tiny.stdout#count",
+   "justification": "Legacy Java silently skips blank amounts; new reports UNPARSABLE_AMOUNT (quarantine). F10-2 DV-04 (fix).",
+   "legacy_value": "\"2390\"",
+   "new_value": "{\"UNPARSABLE_AMOUNT\":10,\"summed_rows\":2390}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-05",
+   "golden_ref": "CT-13:batch.js_policy_table.allows[7:9]",
+   "justification": "Legacy JS tolerance with &#x27;abc&#x27;/null is undefined behaviour; new rejects invalid input. F10-2 DV-05 (fix).",
+   "legacy_value": "[[\"abc\",\"APAC\",2026,false],[null,\"APAC\",2026,true]]",
+   "new_value": "{\"abc\":\"E-POL-INPUT-INVALID\",\"null\":\"E-POL-INPUT-INVALID\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-06",
+   "golden_ref": "CT-13:batch.js_policy_table.table[0]",
+   "justification": "Unknown region/year default 999999 kept but marked defaulted. F10-2 DV-06 (additive).",
+   "legacy_value": "[\"APAC\",2019,999999]",
+   "new_value": "{\"defaulted\":true,\"region\":\"APAC\",\"threshold\":999999,\"year\":2019}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-07",
+   "golden_ref": "CT-08:batch.partner_status_after_all",
+   "justification": "Legacy reconcile overwrites processing_status in place; new appends outcomes and leaves the legacy table untouched. F10-2 DV-07 (fix).",
+   "legacy_value": "[[\"ACCEPTED\",7917],[\"DUPLICATE\",64],[\"REJECTED\",586]]",
+   "new_value": "{\"legacy_table\":\"untouched\",\"outcomes\":\"append-only\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-08",
+   "golden_ref": "CT-10:batch.shift_distinct_objects_in_first_500_joined_rows",
+   "justification": "Night-shift join multiplies rows (118 distinct objects in first 500); new evaluates per entity (500 distinct in first 500). F10-2 DV-08 (fix).",
+   "legacy_value": "118",
+   "new_value": "500",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-09",
+   "golden_ref": "CT-07:lib.missing_field",
+   "justification": "Legacy counts invalid gateway events but does not store them; new stores them in quarantine. F10-2 DV-09 (fix).",
+   "legacy_value": "{\"accepted\":0,\"duplicates\":0,\"invalid\":1,\"received\":1}",
+   "new_value": "{\"quarantined\":1,\"reason\":\"envelope_invalid\",\"received\":1}",
+   "status": "proposed"
+  }
+ ]
+}
