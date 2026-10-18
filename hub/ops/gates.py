@@ -30,13 +30,12 @@ def g6_scan(con):
 def g7_backup_restore(data_dir, anchor_path, scratch_root, clock):
     """Back up the live store + anchor, restore into a scratch data dir + scratch anchor, compare checksums and
     verify the audit chain of the restored copy against the restored anchor."""
-    import sqlite3
     label = "g7-" + backup_mod._stamp(clock())
     bk = backup_mod.backup(data_dir, anchor_path, os.path.join(scratch_root, "backups"), label, clock)
     rdata = os.path.join(scratch_root, "restore-" + label, "data")
     ranchor = os.path.join(scratch_root, "restore-" + label, "anchor", backup_mod.ANCHOR_NAME)
     rep = backup_mod.restore(bk["path"], rdata, ranchor, clock)
-    con = sqlite3.connect("file:%s?mode=ro" % os.path.join(rdata, db.HUB_DB_NAME), uri=True)
+    con = db.open_hub(rdata)
     try:
         ver = audit.verify(con, ranchor)
     finally:

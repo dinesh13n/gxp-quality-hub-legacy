@@ -1,6 +1,6 @@
 """Backup / restore of the hub store together with the audit anchor file (BEH-CO-06, gate G7, ADR-015, TB-11).
 
-backup(): online-consistent copy via the sqlite3 backup API (source opened read-only), plus the anchor file,
+backup(): consistent copy via VACUUM INTO on the hub-store connection (hub.store.db.open_hub), plus the anchor file,
           plus MANIFEST.json and SHA256SUMS (`sha256sum -c` compatible). Destination must be sandbox-safe.
 restore(): verifies the backup's checksums FIRST (E-STORE-BACKUP-INVALID, nothing touched), then sets the current
            hub.sqlite3 and anchor file ASIDE under <data_dir>/pre-restore/<stamp>/ (hold-all, OD-S12-09: nothing is
@@ -10,7 +10,6 @@ import hashlib
 import json
 import os
 import shutil
-import sqlite3
 
 from hub.guards import sandbox
 from hub.security.errors import BackupInvalid
@@ -31,17 +30,13 @@ def _stamp(ts):
     return ts.replace(":", "").replace("-", "").replace(".", "")
 
 
-def _store_facts(path):
-    con = sqlite3.connect("file:%s?mode=ro" % path, uri=True)
-    try:
-        versions = [r[0] for r in con.execute("SELECT version FROM schema_migrations ORDER BY version")]
-        head = None
-        if con.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='audit_log'").fetchone():
-            r = con.execute("SELECT audit_seq, hash FROM audit_log ORDER BY audit_seq DESC LIMIT 1").fetchone()
-            head = {"audit_seq": r[0], "hash": r[1]} if r else {"audit_seq": 0, "hash": None}
-        return versions, head
-    finally:
-        con.close()
+def _store_facts(con):
+    versions = [r[0] for r in con.execute("SELECT version FROM schema_migrations ORDER BY version")]
+    head = None
+    if con.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='audit_log'").fetchone():
+        r = con.execute("SELECT audit_seq, hash FROM audit_log ORDER BY audit_seq DESC LIMIT 1").fetchone()
+        head = {"audit_seq": r[0], "hash": r[1]} if r else {"audit_seq": 0, "hash": None}
+    return versions, head
 
 
 def backup(data_dir, anchor_path, dest_root, label, clock):
@@ -54,18 +49,22 @@ def backup(data_dir, anchor_path, dest_root, label, clock):
     if os.path.exists(dest):
         raise BackupInvalid({"reason": "backup label already exists (backups are never overwritten)", "label": label})
     os.makedirs(dest)
-    src = sqlite3.connect("file:%s?mode=ro" % src_path, uri=True)
-    dst = sqlite3.connect(os.path.join(dest, db.HUB_DB_NAME))
+    # All hub-store connections go through hub.store.db.open_hub (TST-CO-04 d); the copy is made with
+    # VACUUM INTO (SQLite >= 3.27, floor 3.37) from that connection: a transactionally consistent snapshot.
+    con = db.open_hub(data_dir)
     try:
-        src.backup(dst)
+        before = _store_facts(con)
+        con.execute("VACUUM INTO ?", (os.path.join(dest, db.HUB_DB_NAME),))
+        after = _store_facts(con)
     finally:
-        dst.close()
-        src.close()
+        con.close()
+    if before != after:
+        raise BackupInvalid({"reason": "store changed while the backup was taken; retry", "label": label})
+    versions, head = after
     files = {db.HUB_DB_NAME: sha256_file(os.path.join(dest, db.HUB_DB_NAME))}
     if anchor_path and os.path.isfile(anchor_path):
         shutil.copy2(anchor_path, os.path.join(dest, ANCHOR_NAME))
         files[ANCHOR_NAME] = sha256_file(os.path.join(dest, ANCHOR_NAME))
-    versions, head = _store_facts(os.path.join(dest, db.HUB_DB_NAME))
     manifest = {"schema": "hub-backup/v1", "label": label, "created_at": clock(), "files": files,
                 "schema_versions": versions, "audit_head": head, "anchor_included": ANCHOR_NAME in files}
     with open(os.path.join(dest, "MANIFEST.json"), "w", encoding="utf-8") as f:

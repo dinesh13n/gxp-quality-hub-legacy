@@ -65,7 +65,7 @@ def status(data_dir):
     path = os.path.join(data_dir, db.HUB_DB_NAME)
     if not os.path.isfile(path):
         return {"store": "absent", "applied": [], "pending": [v for v, _ in known_versions()], "code_head": head_version()}
-    con = sqlite3.connect("file:%s?mode=ro" % path, uri=True)
+    con = db.open_hub(data_dir)  # existing store only (checked above); M000 + seed are idempotent
     try:
         app, pending = check(con)
     finally:
@@ -91,8 +91,7 @@ def migrate(data_dir, backup_root, anchor_path, clock, target=None):
         return {"from": frm, "to": frm, "applied": [], "backup": None}
     label = "pre-migrate-%s-to-%s-%s" % (frm, pending[-1][0], backup_mod._stamp(clock()))
     bk = backup_mod.backup(data_dir, anchor_path, backup_root, label, clock)
-    con = sqlite3.connect(os.path.join(data_dir, db.HUB_DB_NAME))
-    con.execute("PRAGMA foreign_keys = ON")
+    con = db.open_hub(data_dir)
     done = []
     try:
         for version, digest, sql in pending:
