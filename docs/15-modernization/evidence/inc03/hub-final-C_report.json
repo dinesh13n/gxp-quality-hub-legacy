@@ -1,0 +1,51 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 5,
+  "skipped": 0
+ },
+ "label": "final-C",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 107.7,
+ "tail": "test_TST_CO_12_a_non_loopback_refused_before_send (test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire)\nTST-CO-12: connect/connect_ex/sendto/getaddrinfo to non-loopback targets raise E-CO-EGRESS-ATTEMPT and are counted. ... ok\ntest_TST_CO_12_b_loopback_allowed (test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire)\nTST-CO-12: loopback (the legacy gateway's only network, ADR-015) is allowed and not counted. ... ok\ntest_TST_CO_12_c_model_call_tripwire (test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire)\nTST-CO-12 / BEH-OBS-06: model_calls_total starts at 0; any recorded model call trips E-OBS-TRIPWIRE. ... ok\ntest_TST_CO_12_d_no_model_call_sites_in_product (test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire)\nTST-CO-12: no hub module calls record_model_call (the sensor exists only for future re-qualification). ... ok\ntest_TST_CO_12_e_full_suite_under_egress_guard (test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire)\nTST-CO-12 / AC-CO-12: full INC-02 suite (all other tests) with the egress guard installed -> ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 56.163s\n\nOK\n",
+ "test_ids": [
+  "TST-CO-12"
+ ],
+ "tests": [
+  {
+   "case": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_12_a_non_loopback_refused_before_send"
+  },
+  {
+   "case": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_12_b_loopback_allowed"
+  },
+  {
+   "case": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_12_c_model_call_tripwire"
+  },
+  {
+   "case": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_12_d_no_model_call_sites_in_product"
+  },
+  {
+   "case": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_12_e_full_suite_under_egress_guard"
+  }
+ ],
+ "unittest_rc": 0
+}

@@ -1,0 +1,489 @@
+{
+ "generated_by": "hub.security.openapi_routes.parse",
+ "note": "Route registry (BEH-SEC-01): every route declares a permission (x-roles); 'public' = no authentication. Deny by default.",
+ "routes": [
+  {
+   "method": "GET",
+   "op_id": "OP-SEC-03",
+   "path": "/api/v2/audit/records",
+   "roles": [
+    "compliance",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-SEC-04",
+   "path": "/api/v2/audit/verify",
+   "roles": [
+    "compliance",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-SEC-01",
+   "path": "/api/v2/auth/login",
+   "roles": [
+    "public"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-SEC-02",
+   "path": "/api/v2/auth/logout",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "finance_read",
+    "integration",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-SEC-05",
+   "path": "/api/v2/auth/reauth",
+   "roles": [
+    "dispositioner"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-POL-08",
+   "path": "/api/v2/cases/{case_id}/clocks",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-DEC-02",
+   "path": "/api/v2/cases/{case_id}/events",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-DEC-06",
+   "path": "/api/v2/cases/{case_id}/evidence",
+   "roles": [
+    "compliance",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-GATE-01",
+   "path": "/api/v2/cases/{case_id}/evidence-pack",
+   "roles": [
+    "dispositioner"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-DEC-05",
+   "path": "/api/v2/cases/{case_id}/facts",
+   "roles": [
+    "compliance",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-REV-02",
+   "path": "/api/v2/cases/{case_id}/rule-trace",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-DEC-03",
+   "path": "/api/v2/cases/{case_id}/state",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-DEC-01",
+   "path": "/api/v2/cases/{case_id}/transitions",
+   "roles": [
+    "compliance",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-ID-05",
+   "path": "/api/v2/crosswalk/findings",
+   "roles": [
+    "compliance",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-ID-02",
+   "path": "/api/v2/crosswalk/links",
+   "roles": [
+    "compliance",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-ID-03",
+   "path": "/api/v2/crosswalk/links/{link_id}/retract",
+   "roles": [
+    "compliance",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-ID-01",
+   "path": "/api/v2/crosswalk/lookup",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-ID-04",
+   "path": "/api/v2/crosswalk/view",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-REV-04",
+   "path": "/api/v2/drafts",
+   "roles": [
+    "compliance",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-DEC-04",
+   "path": "/api/v2/events/{event_id}",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-GATE-04",
+   "path": "/api/v2/flags/{flag_id}/overrides",
+   "roles": [
+    "compliance",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-GATE-03",
+   "path": "/api/v2/gate/status",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-INT-03",
+   "path": "/api/v2/intake/conflicts/{raw_id}/resolve",
+   "roles": [
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-INT-01",
+   "path": "/api/v2/intake/items",
+   "roles": [
+    "integration"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-INT-02",
+   "path": "/api/v2/intake/items/{raw_id}",
+   "roles": [
+    "compliance",
+    "integration",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-INT-04",
+   "path": "/api/v2/intake/sources/{source}/delays",
+   "roles": [
+    "compliance",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-MET-03",
+   "path": "/api/v2/metrics/backlog",
+   "roles": [
+    "compliance",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-MET-05",
+   "path": "/api/v2/metrics/case-cost",
+   "roles": [
+    "compliance",
+    "finance_read",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-MET-08",
+   "path": "/api/v2/metrics/combine",
+   "roles": [
+    "compliance",
+    "finance_read",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-MET-02",
+   "path": "/api/v2/metrics/month-end-total",
+   "roles": [
+    "compliance",
+    "finance_read",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-MET-07",
+   "path": "/api/v2/metrics/registry",
+   "roles": [
+    "compliance",
+    "finance_read",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-MET-06",
+   "path": "/api/v2/metrics/source-quality",
+   "roles": [
+    "compliance",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-MET-01",
+   "path": "/api/v2/metrics/time-to-close",
+   "roles": [
+    "compliance",
+    "finance_read",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-MET-04",
+   "path": "/api/v2/metrics/values/{value_id}/reproduce",
+   "roles": [
+    "compliance",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-POL-01",
+   "path": "/api/v2/policies",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "finance_read",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-POL-02",
+   "path": "/api/v2/policies",
+   "roles": [
+    "compliance",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-POL-03",
+   "path": "/api/v2/policies/{policy_id}/versions/{version}",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "finance_read",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-REV-01",
+   "path": "/api/v2/queues/exceptions",
+   "roles": [
+    "compliance",
+    "integration",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-POL-07",
+   "path": "/api/v2/rules/divergence",
+   "roles": [
+    "compliance",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-POL-06",
+   "path": "/api/v2/rules/evaluate",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-POL-04",
+   "path": "/api/v2/rulesets",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-POL-05",
+   "path": "/api/v2/rulesets/{ruleset_id}/{version}",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-RUN-02",
+   "path": "/api/v2/runs",
+   "roles": [
+    "compliance",
+    "integration",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-RUN-01",
+   "path": "/api/v2/runs",
+   "roles": [
+    "compliance",
+    "integration",
+    "quality_lead"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-RUN-03",
+   "path": "/api/v2/runs/{run_id}",
+   "roles": [
+    "compliance",
+    "integration",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-REV-03",
+   "path": "/api/v2/search",
+   "roles": [
+    "compliance",
+    "dispositioner",
+    "quality_lead",
+    "reviewer"
+   ]
+  },
+  {
+   "method": "POST",
+   "op_id": "OP-GATE-02",
+   "path": "/api/v2/zone-h/actions",
+   "roles": [
+    "dispositioner"
+   ]
+  },
+  {
+   "method": "GET",
+   "op_id": "OP-SYS-01",
+   "path": "/healthz",
+   "roles": [
+    "public"
+   ]
+  }
+ ],
+ "source": "docs/12-specs/contracts/openapi.yaml (Stage 12 v0.1 DRAFT)"
+}

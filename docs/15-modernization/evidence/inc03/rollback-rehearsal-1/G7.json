@@ -1,0 +1,29 @@
+{
+ "backup": "g7-20261018T150147546345Z",
+ "restore": {
+  "audit_head": {
+   "audit_seq": 7,
+   "hash": "a84aa5d443d1b1b5815345c82fba07b5360612819ae280ab79c40667fed01c44"
+  },
+  "backup": "g7-20261018T150147546345Z",
+  "checksum_match": true,
+  "restored": {
+   "audit-anchor.jsonl": "0ae2bb4550b00527ef17436c0c1b23f4682aa8a19d24fa3867d6b1bd98de69c4",
+   "hub.sqlite3": "3b219da3d024c1192e8c76406b63fefc3392c6867a0dc8ed601763e3dd7be473"
+  },
+  "schema_versions": [
+   "M000",
+   "M001"
+  ],
+  "set_aside": [],
+  "set_aside_dir": null
+ },
+ "verify_audit": {
+  "anchors_checked": 3,
+  "head_hash": "a84aa5d443d1b1b5815345c82fba07b5360612819ae280ab79c40667fed01c44",
+  "head_seq": 7,
+  "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
+  "records": 7,
+  "status": "ok"
+ }
+}

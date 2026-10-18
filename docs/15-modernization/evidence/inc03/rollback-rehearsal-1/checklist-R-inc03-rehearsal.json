@@ -1,0 +1,94 @@
+{
+ "blocking": [
+  "G1",
+  "G2",
+  "G4",
+  "G8",
+  "G9",
+  "G10"
+ ],
+ "gates": [
+  {
+   "check": "golden diff: unapproved differences = 0",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G1-not-evaluated",
+   "gate": "G1",
+   "note": "OD-S12-13 open (golden-compare exits 6 by design)",
+   "result": "fail",
+   "source": "FR-CO-01"
+  },
+  {
+   "check": "replay-safety suite (AC-INT-04/05) passes",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G2",
+   "note": null,
+   "result": "not_run",
+   "source": "FR-CO-03, FR-INT-02"
+  },
+  {
+   "check": "verify-audit ok",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G3.json",
+   "gate": "G3",
+   "note": "evaluated by hub.admin",
+   "result": "pass",
+   "source": "FR-SEC-02"
+  },
+  {
+   "check": "verify-projection 0 mismatches",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G4",
+   "note": null,
+   "result": "not_run",
+   "source": "FR-DEC-02"
+  },
+  {
+   "check": "No-AI tripwire: deny-list clean, no egress, model_calls_total = 0",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G5.json",
+   "gate": "G5",
+   "note": "evaluated by hub.admin",
+   "result": "pass",
+   "source": "FR-CO-04"
+  },
+  {
+   "check": "secret scan 0; deletion-path grep 0",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G6.json",
+   "gate": "G6",
+   "note": "evaluated by hub.admin",
+   "result": "pass",
+   "source": "PNFR-08, PNFR-10"
+  },
+  {
+   "check": "backup/restore rehearsal checksum match",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G7.json",
+   "gate": "G7",
+   "note": "evaluated by hub.admin",
+   "result": "pass",
+   "source": "PNFR-05, FR-CO-03"
+  },
+  {
+   "check": "Zone H negative tests (AC-GATE-09/11/12) pass",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G8",
+   "note": null,
+   "result": "not_run",
+   "source": "FR-GATE-01/03"
+  },
+  {
+   "check": "planted-string fixture suite (86/22/44) 0 effects",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G9",
+   "note": null,
+   "result": "not_run",
+   "source": "PNFR-13"
+  },
+  {
+   "check": "determinism: bit-identical across PYTHONHASHSEED/TZ/locale",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G10",
+   "note": null,
+   "result": "not_run",
+   "source": "PNFR-17"
+  }
+ ],
+ "ready_allowed": false,
+ "release_id": "R-inc03-rehearsal"
+}

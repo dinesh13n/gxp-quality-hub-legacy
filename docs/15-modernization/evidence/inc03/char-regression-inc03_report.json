@@ -1,0 +1,875 @@
+{
+ "capture_digests": {
+  "api": "c6db0a43e695aa024c9cb4f2dbb64b37c0bdb0d7e7048a9b2beabda71b78cd13",
+  "batch": "40237661b2d84e1a3a1d5b76bdaf6dd34dbccbe93217f627748539963342136f",
+  "lib": "c5797c3be83d59b80f236498b44bd76719df2b8cd17440ce311a21784171389d",
+  "supplement": "c3cbab2cc8e4bea6672171804fddb011f894992997f1a3d2e0504d55e3086d25"
+ },
+ "captures": {
+  "api": {
+   "rc": 0,
+   "seconds": 1.2,
+   "stderr_tail": "",
+   "stdout_tail": "captured 39 api 16 gateway {'archive': 36, 'queue': 70, 'review': 17, 'urgent': 2}\n"
+  },
+  "batch": {
+   "rc": 0,
+   "seconds": 12.3,
+   "stderr_tail": "",
+   "stdout_tail": "ok 58\n"
+  },
+  "lib": {
+   "rc": 0,
+   "seconds": 0.8,
+   "stderr_tail": "",
+   "stdout_tail": "\n \"consume_first3\": [\n  {\n   \"message_id\": \"M000000110\",\n   \"payload\": {\n    \"ref\": \"C00000110\",\n    \"schema_version\": \"1\",\n    \"status\": \"OPEN\"\n   }\n  },\n  {\n   \"message_id\": \"M000000007\",\n   \"payload\": {\n    \"ref\": \"C00000007\",\n    \"schema_version\": \"1\",\n    \"status\": \"CLOSED\"\n   }\n  },\n  {\n   \"m\n"
+  },
+  "supplement": {
+   "rc": 0,
+   "seconds": 1.8,
+   "stderr_tail": "",
+   "stdout_tail": "ok 8\n"
+  }
+ },
+ "checks_passed": 134,
+ "checks_total": 134,
+ "ct_all_pass": true,
+ "ct_results": {
+  "CT-01": [
+   {
+    "check": "batch:priority_truth_table",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-02": [
+   {
+    "check": "api:api_all_cases_priority",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api:api_priority_distribution",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "invariant:priority_distribution_36_70_17_2",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-03": [
+   {
+    "check": "batch:manual_review_truth_table",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000001",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000005",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000015",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000019",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000066",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api:meta",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-04": [
+   {
+    "check": "api.api:/",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000001",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000001'%20OR%201=1--",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000005",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000015",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000019",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/C00000066",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases/NOPE",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases?limit=-5",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases?limit=0",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases?limit=1000",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases?limit=3&offset=2",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases?limit=abc",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases?offset=-1&limit=2",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/cases?offset=9999",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/domain/bogus",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/domain/capa_actions",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/domain/deviations",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/domain/lab_results",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/domain/lab_results?limit=3&offset=0",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/domain/sop_versions",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/incidents",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/metrics",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/partners/batch_runs",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/partners/bogus",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/partners/partner_feeds",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/partners/partner_feeds?limit=2&offset=8566",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/partners/partner_feeds?limit=x",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/partners/policy_exceptions",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/partners/reference_versions",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/api/partners/upstream_outages",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/health",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:/nope",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-05": [
+   {
+    "check": "batch:app.baseline",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:app.operational_report",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:baseline_6000_seed4326",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:operational_report_6000",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:pristine_db_after_readonly_cli",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-06": [
+   {
+    "check": "api.gateway:/api/catalog",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/events?limit=1000&offset=0",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/events?limit=3&offset=18",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/events?limit=3&source=mes",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/events?limit=5",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/events?limit=x",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/events?source=bogus",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/failure",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/failure?mode=rate_limit",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/failure?mode=schema",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/failure?mode=timeout",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/failure?mode=weird",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/record/BT00000000",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/api/record/NOPE",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/health",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.gateway:/nope",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-07": [
+   {
+    "check": "batch:gateway_bridge_sequence",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:gateway_inbox_after",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:gateway_inbox_event_type_counts",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:gateway_checkpoint",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:gateway_schema_0.9_events_stored",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:gateway_offset_past_end",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:gateway_unreachable",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "lib:*",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-08": [
+   {
+    "check": "batch:partner_reconcile_sequence",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:partner_status_after_all",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:partner_error_reasons",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:partner_batch_runs_rows_after_reconcile",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-09": [
+   {
+    "check": "batch:historical_estate_import_on_shipped_db",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:historical_estate_import_on_cleared_tables",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:vendor_rows_after",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:vendor_import_id_shipped",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-10": [
+   {
+    "check": "batch:shift_reconciliation",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:shift_distinct_objects_in_first_500_joined_rows",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:shift_active_policies_per_region",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-11": [
+   {
+    "check": "batch:java_tiny",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:java_bundled",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:java_noargs",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:csv_reference_tiny",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:csv_reference_bundled",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-12": [
+   {
+    "check": "batch:sql_report_1",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:sql_report_1_total_gross",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:true_total_amount",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:sql_report_2",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "derived:sql_file_report_1_vs_stage7",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "derived:sql_file_report_2_vs_stage7",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "supplement:sql_file_statement_count",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "supplement:sql_file_results",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-13": [
+   {
+    "check": "batch:js_policy_table",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:node_default",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:node_cwd_other",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-14": [
+   {
+    "check": "batch:cases_regen_match",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:cases_shipped_hashes",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:partner_regen_default",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:partner_regen_equals_shipped",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:partner_regen_hashes",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:enterprise_legacy_regen",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:enterprise_legacy_regen_equals_shipped",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:enterprise_legacy_shipped_hashes",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:historical_fixture_tiny_manifest_equal_shipped",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:historical_fixture_tiny_csv_equal_shipped",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:historical_fixture_tiny_events_equal",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:historical_fixture_tiny_reference_table_equal",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:historical_fixture_tiny_finance_table_equal",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:archived_documents_regen",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:archived_documents_regen_equals_shipped",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:archived_documents_file_counts",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:generate_documents_regen",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:generate_documents_equals_shipped",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-15": [
+   {
+    "check": "batch:workshop_check",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "batch:workshop_check_empty_db",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "r7:scripts/offline_inventory.py",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "r7:scripts/rehearse_local.py",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "r7:scripts/verify_preloaded.py",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-16": [
+   {
+    "check": "api.api:METHOD DELETE /api/cases",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:METHOD HEAD /api/cases",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:METHOD POST /api/cases",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "api.api:METHOD PUT /api/cases",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "supplement:write_methods_api",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "supplement:write_methods_gateway",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "supplement:static_cases_writers",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "supplement:static_disposition_or_write_handlers",
+    "diff": null,
+    "pass": true
+   },
+   {
+    "check": "supplement:source_db_unchanged_by_supplement",
+    "diff": null,
+    "pass": true
+   }
+  ],
+  "CT-17": "NOT-RUN: no golden exists (U-07-05); Stage 14 GF-4",
+  "CT-18": "NOT-RUN: Docker unavailable, HAR-05; Stage 14 GF-4"
+ },
+ "label": "inc03-regress",
+ "legacy_suite": {
+  "diff": null,
+  "equals_stage7_R1": true,
+  "parsed": {
+   "post_db_sha256": "750336f3ff3ee9238d8859962958061c4d6ed17151a814794409f4748d7d459c",
+   "ran": 15,
+   "result": "OK",
+   "tests": [
+    [
+     "test_baseline (test_workflow.WorkflowTests)",
+     "ok"
+    ],
+    [
+     "test_contract (test_partner_feeds.TestPartnerFeeds)",
+     "ok"
+    ],
+    [
+     "test_domain_tables_populated (test_enterprise.EnterpriseDataTests)",
+     "ok"
+    ],
+    [
+     "test_feed_parser (test_workflow.WorkflowTests)",
+     "ok"
+    ],
+    [
+     "test_fixture_and_counts (test_workflow.WorkflowTests)",
+     "ok"
+    ],
+    [
+     "test_foreign_keys (test_enterprise.EnterpriseDataTests)",
+     "ok"
+    ],
+    [
+     "test_idempotent_ingestion (test_source_gateway.TestGatewayAndDomain)",
+     "ok"
+    ],
+    [
+     "test_invalid_rejected (test_source_gateway.TestGatewayAndDomain)",
+     "ok"
+    ],
+    [
+     "test_priority (test_workflow.WorkflowTests)",
+     "ok"
+    ],
+    [
+     "test_relations (test_source_gateway.TestGatewayAndDomain)",
+     "ok"
+    ],
+    [
+     "test_relationships (test_domain.DomainTests)",
+     "ok"
+    ],
+    [
+     "test_repeat_seed_same_first_row (test_enterprise_legacy_v6.EnterpriseLegacyTests)",
+     "ok"
+    ],
+    [
+     "test_reproducible_entities_and_foreign_keys (test_enterprise_legacy_v6.EnterpriseLegacyTests)",
+     "ok"
+    ],
+    [
+     "test_required_tables (test_partner_feeds.TestPartnerFeeds)",
+     "ok"
+    ],
+    [
+     "test_seeded_and_relational (test_historical_fixture.HistoricalFixtureTests)",
+     "ok"
+    ]
+   ]
+  },
+  "rc": 0
+ },
+ "log": [
+  "INC-01 characterisation harness  label=inc03-regress  sandbox=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/char/inc03-regress",
+  "  protected worktree (never executed in) = /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/mnt/Case-Execution/gxp-quality-hub-legacy",
+  "  FX-BASE125 hash gate: 1512 files verified, legacy.sqlite3=c254649f57e2..",
+  "  capture api        rc=0    1.2s",
+  "  capture batch      rc=0   12.3s",
+  "  capture lib        rc=0    0.8s",
+  "  capture supplement rc=0    1.8s",
+  "  CT checks: 134/134 passed",
+  "  CT-01  PASS   1 checks",
+  "  CT-02  PASS   3 checks",
+  "  CT-03  PASS   7 checks",
+  "  CT-04  PASS  35 checks",
+  "  CT-05  PASS   5 checks",
+  "  CT-06  PASS  16 checks",
+  "  CT-07  PASS   8 checks",
+  "  CT-08  PASS   4 checks",
+  "  CT-09  PASS   4 checks",
+  "  CT-10  PASS   3 checks",
+  "  CT-11  PASS   5 checks",
+  "  CT-12  PASS   8 checks",
+  "  CT-13  PASS   3 checks",
+  "  CT-14  PASS  18 checks",
+  "  CT-15  PASS   5 checks",
+  "  CT-16  PASS   9 checks",
+  "  CT-17  NOT-RUN: no golden exists (U-07-05); Stage 14 GF-4",
+  "  CT-18  NOT-RUN: Docker unavailable, HAR-05; Stage 14 GF-4",
+  "  shipped tests/test_*.py: ran=15 result=OK post_db=750336f3ff3e.. equals Stage 7 R1=True",
+  "OVERALL PASS  (39s)"
+ ],
+ "normalisation_rules": [
+  [
+   "N1",
+   "absolute sandbox copy paths (Stage 7 ~/fde_sbx/stage7/c_*, INC-01 ~/fde_sbx/<run>/c_*) -> <SBX>"
+  ],
+  [
+   "N2",
+   "python interpreter path in recorded command lines (sys.executable / /usr/bin/python3) -> <PY>"
+  ],
+  [
+   "N3",
+   "JVM banner line \"Picked up JAVA_TOOL_OPTIONS: ...\" (device proxy agent, environment-only) removed"
+  ],
+  [
+   "N4",
+   "tail-truncated stderr fields (stderr[-800:], err[-200:], stderr[-200:]): compared on the common suffix after N1-N3 when the raw capture hit the truncation cap (window start shifts with path length)"
+  ]
+ ],
+ "overall": "PASS",
+ "seconds": 38.8,
+ "started": "2026-10-18T15:03:01",
+ "tools": {
+  "java": "openjdk version \"11.0.32.1\" 2026-08-18",
+  "node": "v22.23.2",
+  "python": "3.10.12",
+  "sqlite": "3.37.2"
+ },
+ "unittest_output": "test_CT_01 (__main__.CT_01) ... ok\ntest_CT_02 (__main__.CT_02) ... ok\ntest_CT_03 (__main__.CT_03) ... ok\ntest_CT_04 (__main__.CT_04) ... ok\ntest_CT_05 (__main__.CT_05) ... ok\ntest_CT_06 (__main__.CT_06) ... ok\ntest_CT_07 (__main__.CT_07) ... ok\ntest_CT_08 (__main__.CT_08) ... ok\ntest_CT_09 (__main__.CT_09) ... ok\ntest_CT_10 (__main__.CT_10) ... ok\ntest_CT_11 (__main__.CT_11) ... ok\ntest_CT_12 (__main__.CT_12) ... ok\ntest_CT_13 (__main__.CT_13) ... ok\ntest_CT_14 (__main__.CT_14) ... ok\ntest_CT_15 (__main__.CT_15) ... ok\ntest_CT_16 (__main__.CT_16) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.010s\n\nOK\n",
+ "worktree_head": "68b93f31307aea2dfb3a0212f5af4c59e0690ade"
+}

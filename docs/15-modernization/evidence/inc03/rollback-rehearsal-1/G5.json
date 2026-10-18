@@ -1,0 +1,7 @@
+{
+ "denylist_findings": [],
+ "tripwires": {
+  "egress_attempts_total": 0,
+  "model_calls_total": 0
+ }
+}

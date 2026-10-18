@@ -1,0 +1,211 @@
+{
+ "records": [
+  {
+   "detail": null,
+   "id": "test_inc02_supplementary.TST_HUB_INC02_Supplementary.test_TST_HUB_INC02_S01_untrusted_never_reaches_decision_params",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc02_supplementary.TST_HUB_INC02_Supplementary.test_TST_HUB_INC02_S02_flags_defaults_and_kill_switch",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc02_supplementary.TST_HUB_INC02_Supplementary.test_TST_HUB_INC02_S03_m000_migration",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_a_all_proposed_dv01_dv09_unapproved_exit6",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_b_register_describes_the_actual_goldens",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_c_matching_approved_rows_exit0",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_d_approval_must_match_observed_values",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_e_approved_requires_approval_ref",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_a_unchanged_priority_is_identical",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_b_changed_priority_of_one_case_unapproved_exit6",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_c_approval_for_another_golden_does_not_leak",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_d_missing_capture_is_not_run_and_fails",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_e_real_goldens_unlisted_change_fails",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_f_tampered_golden_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_a_each_legacy_db_opened_read_only",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_b_every_write_attempt_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_c_legacy_files_byte_identical_after_attempts",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_d_only_ro_uri_connections_to_legacy",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_e_schema_drift_and_hash_mismatch_fail_closed",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_f_working_tree_source_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_05_legacy_paths_unchanged.TST_CO_05_LegacyPathsUnchanged.test_TST_CO_05_a_no_diff_vs_baseline_as_found",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_05_legacy_paths_unchanged.TST_CO_05_LegacyPathsUnchanged.test_TST_CO_05_b_no_untracked_files_in_legacy_paths",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_05_legacy_paths_unchanged.TST_CO_05_LegacyPathsUnchanged.test_TST_CO_05_c_branch_only_adds_files_outside_stage15_docs",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_a_data_dir_inside_repo_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_b_backup_ancestor_home_root_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_c_legacy_root_in_worktree_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_d_any_git_worktree_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_e_sandbox_data_dir_accepted",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_07_backup_manifest.TST_CO_07_BackupManifestAfterRun.test_TST_CO_07_a_sha256sum_rc0_after_sandbox_run",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_07_backup_manifest.TST_CO_07_BackupManifestAfterRun.test_TST_CO_07_b_python_verifier_agrees",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist.test_TST_CO_11_a_openai_dependency_fails_build",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist.test_TST_CO_11_b_import_rules",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist.test_TST_CO_11_c_requirements_manifest",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist.test_TST_CO_11_d_real_tree_is_clean",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_13_determinism.TST_CO_13_Determinism.test_TST_CO_13_a_bit_identical_across_hashseed_tz_locale",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_13_determinism.TST_CO_13_Determinism.test_TST_CO_13_b_no_random_or_wallclock_in_core",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_a_floor_310_starts_and_prints_versions",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_b_python39_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_c_sqlite_below_floor_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_d_floor_312_mode",
+   "status": "ok"
+  },
+  {
+   "detail": "python3.9 not installed on this device (simulated in TST-CO-14 b)",
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_e_real_old_interpreter_if_present",
+   "status": "skipped"
+  }
+ ],
+ "successful": true,
+ "tests_run": 41
+}

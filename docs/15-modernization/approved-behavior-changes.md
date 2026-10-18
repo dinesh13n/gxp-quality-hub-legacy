@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "approved-behavior-changes.md"
-version: "v0.2"
+version: "v0.3"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
-supersedes: "v0.1 (INC-01 only)"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
+supersedes: "v0.2 (INC-01 + INC-02)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -28,7 +28,13 @@ supersedes: "v0.1 (INC-01 only)"
 | DV-01..DV-09 | registered in `deviation_register` with status **proposed** (F10-2 values; `hub/coexistence/seed_inc02.json`) | see `evidence/inc02/deviation-register.json` | see same | **none** - Dinesh's per-item decision OD-S12-13 is open; the product has no approve command | recorded INC-02; implemented INC-04..INC-08 | [Verified Fact] |
 [Verified Fact] Because every DV row is `proposed`, `hub golden-compare` reports DV-01..DV-09 UNAPPROVED and exits 6 - the specified AC-CO-01 behaviour, not a defect. The "approved" rows used in TST-CO-01 c/d are throw-away test fixtures in a sandbox DB (approval_ref `TEST-FIXTURE-NOT-A-HAR06-APPROVAL-*`), not approvals.
 
+### ABC-INC03 INC-03
+[Verified Fact] No legacy behaviour changed in INC-03 and no approval was needed or recorded: all new behaviour (authentication, audit chain, migrations, backup/restore, release checklist) lives in new hub modules that the legacy estate does not call. DV-01..DV-09 remain `proposed` (OD-15; decided at Stage 30).
+[Verified Fact] New-module behaviour that differs from a DRAFT spec is recorded as a deviation (DEV-17..DEV-27), not as an approved change.
+[Assumption] The security control VALUES (PBKDF2 600,000 iterations, lockout 5 / 15 min / 15 min, session 30 min idle / 8 h absolute, step-up re-auth 300 s, password length 12) are Stage 12 proposals (A-12-F09-1) implemented as configuration; they are NOT approved values. Confirm: Engagement lead (Dinesh Naik) at Stage 24.
+
 ## Evidence References
+- INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `behavior-preservation-evidence.md` BP-2 (D3/D4 = 0, D5 = 0); `docs/14-transformation/transformation-gates.md` TG-4.
 
 ## Assumptions
@@ -49,3 +55,4 @@ supersedes: "v0.1 (INC-01 only)"
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
+| v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
