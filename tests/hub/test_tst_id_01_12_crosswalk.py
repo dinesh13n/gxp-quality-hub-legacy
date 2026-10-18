@@ -178,7 +178,7 @@ class TST_ID_01_12_Crosswalk(unittest.TestCase):
         """TST-ID-10 / AC-ID-10: a link between an unregistered type pair -> E-ID-PAIR-NOT-REGISTERED (LT-06 pairs are the only human-only pairs)."""
         ds = self.store()
         for ft, fi, tt, ti in (("case", "C00000001", "lab_result", "LAB00000001"), ("document", "DOC-00000001", "batch", "BT00000001"),
-                               ("case", "C00000001", "feed_item", "FEED-000000001")):
+                               ("lab_result", "LAB00000001", "document", "DOC-00000001")):
             with self.assertRaises(E.PairNotRegistered):
                 ds.cw.create_human_link(ds.sess("rev"), ft, fi, tt, ti, "r", correlation_id="t-hl")
         with self.assertRaises(E.PairNotRegistered):
