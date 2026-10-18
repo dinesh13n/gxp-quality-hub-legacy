@@ -1,0 +1,25 @@
+INC-01 harness evidence summary (generated from the report.json files in this folder)
+tools: {'java': 'openjdk version "11.0.32.1" 2026-08-18', 'node': 'v22.23.2', 'python': '3.10.12', 'sqlite': '3.37.2'}
+worktree_head A/B: ed43a0aeaaa2a79dac1d5085f96756dac530334c ed43a0aeaaa2a79dac1d5085f96756dac530334c
+final-A: overall=PASS checks=134/134 seconds=35.2 legacy_suite_equals_R1=True ran=15 post_db=750336f3ff3ee9238d8859962958061c4d6ed17151a814794409f4748d7d459c
+  capture_digests: {'api': 'c6db0a43e695aa024c9cb4f2dbb64b37c0bdb0d7e7048a9b2beabda71b78cd13', 'batch': '40237661b2d84e1a3a1d5b76bdaf6dd34dbccbe93217f627748539963342136f', 'lib': 'c5797c3be83d59b80f236498b44bd76719df2b8cd17440ce311a21784171389d', 'supplement': 'c3cbab2cc8e4bea6672171804fddb011f894992997f1a3d2e0504d55e3086d25'}
+final-B: overall=PASS checks=134/134 seconds=36.7 legacy_suite_equals_R1=True ran=15 post_db=750336f3ff3ee9238d8859962958061c4d6ed17151a814794409f4748d7d459c
+  capture_digests: {'api': 'c6db0a43e695aa024c9cb4f2dbb64b37c0bdb0d7e7048a9b2beabda71b78cd13', 'batch': '40237661b2d84e1a3a1d5b76bdaf6dd34dbccbe93217f627748539963342136f', 'lib': 'c5797c3be83d59b80f236498b44bd76719df2b8cd17440ce311a21784171389d', 'supplement': 'c3cbab2cc8e4bea6672171804fddb011f894992997f1a3d2e0504d55e3086d25'}
+determinism (CG-6): capture digests identical = True ; per-check results identical = True
+per-CT check counts: {'CT-01': 1, 'CT-02': 3, 'CT-03': 7, 'CT-04': 35, 'CT-05': 5, 'CT-06': 16, 'CT-07': 8, 'CT-08': 4, 'CT-09': 4, 'CT-10': 3, 'CT-11': 5, 'CT-12': 8, 'CT-13': 3, 'CT-14': 18, 'CT-15': 5, 'CT-16': 9, 'CT-17': 'NOT-RUN: no golden exists (U-07-05); Stage 14 GF-4', 'CT-18': 'NOT-RUN: Docker unavailable, HAR-05; Stage 14 GF-4'}
+M1   KILLED   by CT-01,CT-02,CT-04,CT-05 captures_failed=[] 25.8s  urgent amount threshold 50000 -> 1
+M2   KILLED   by CT-01,CT-02,CT-04 captures_failed=[] 33.0s  'review' tier removed
+M3   KILLED   by CT-03,CT-04 captures_failed=[] 9.8s  manual_review_required always False
+M4   KILLED   by CT-01,CT-02,CT-04,CT-05 captures_failed=[] 10.3s  CLOSED no longer archived
+M5   KILLED   by CT-08 captures_failed=[] 10.1s  negative-quantity rejection removed
+M6   KILLED   by CT-08 captures_failed=[] 13.4s  replay duplicate detection removed
+M7   KILLED   by CT-08 captures_failed=[] 38.3s  schema/key validation removed
+M8   KILLED   by CT-10 captures_failed=[] 10.6s  night-shift threshold comparison inverted
+M9   KILLED   by CT-07 captures_failed=[] 10.1s  unknown business_key no longer rejected
+M10  KILLED   by CT-03,CT-04 captures_failed=[] 19.3s  API manual_review flag hard-wired False
+M11  KILLED   by CT-04 captures_failed=[] 33.4s  partners pagination ignores limit/offset
+M12  KILLED   by CT-05 captures_failed=[] 9.7s  baseline urgent_cases hard-wired 0
+M13  KILLED   by CT-13 captures_failed=[] 9.7s  JS tolerance 5% -> 50%
+M14  KILLED   by CT-09 captures_failed=[] 29.5s  idempotent file import removed
+M15  KILLED   by CT-06 captures_failed=[] 26.6s  gateway failure-mode 503 -> 200
+mutation gate (CT-H6/CG-3): 15/15 KILLED

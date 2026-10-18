@@ -1,0 +1,798 @@
+{
+ "schema": "ct-catalogue/v1",
+ "stage": "15 INC-01",
+ "source_plan": "docs/07-repo-assessment/characterization-test-plan.md",
+ "c3_note": "Stage 13 condition C3: CT-04..CT-16 carry ac_links (existing AC/FR plus one proposed AC-CO-Lxx each). CT-01..CT-03 are already linked by AC-CO-03.",
+ "tests": [
+  {
+   "id": "CT-01",
+   "workflow": "CW-01",
+   "priority": "P1",
+   "title": "priority() truth table, 120 combinations incl. the 50,000 boundary",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "priority_truth_table"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "AC-CO-03",
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-POL-04"
+    ],
+    "deviation_rows": [],
+    "proposed_ac": null
+   }
+  },
+  {
+   "id": "CT-02",
+   "workflow": "CW-01",
+   "priority": "P1",
+   "title": "priority of all 125 shipped cases via the API and distribution archive 36 / queue 70 / review 17 / urgent 2",
+   "checks": [
+    {
+     "src": "api",
+     "key": "api_all_cases_priority"
+    },
+    {
+     "src": "api",
+     "key": "api_priority_distribution"
+    },
+    {
+     "src": "invariant",
+     "name": "priority_distribution_36_70_17_2"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "AC-CO-03",
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-POL-04"
+    ],
+    "deviation_rows": [],
+    "proposed_ac": null
+   }
+  },
+  {
+   "id": "CT-03",
+   "workflow": "CW-01/02",
+   "priority": "P1",
+   "title": "manual_review_required() truth table (20) and the flag in /api/cases/<id> for the sampled cases (CLOSED+HIGH stays True)",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "manual_review_truth_table"
+    },
+    {
+     "src": "api_section",
+     "section": "api",
+     "match": "^/api/cases/C\\d+$"
+    },
+    {
+     "src": "api",
+     "key": "meta"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "AC-CO-03",
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-POL-04"
+    ],
+    "deviation_rows": [],
+    "proposed_ac": null
+   }
+  },
+  {
+   "id": "CT-04",
+   "workflow": "CW-02/10/13",
+   "priority": "P1",
+   "title": "all HTTP responses of BB-02 (39 requests): status, content-type, body/sha256, pagination clamps, 400/404/501, advertised routes, static incident",
+   "checks": [
+    {
+     "src": "api_section",
+     "section": "api",
+     "match": ".*"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-SEC-01"
+    ],
+    "deviation_rows": [],
+    "proposed_ac": {
+     "id": "AC-CO-L04",
+     "given": "the 39 Stage 7 API requests (golden api_golden_run1.json 'api')",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "status, content type, sha256 and body of every response equal the golden after CT-H3 normalisation; any difference fails the run (D5)",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-05",
+   "workflow": "CW-03/11",
+   "priority": "P1",
+   "title": "app.baseline and app.operational_report on the shipped DB and on the 6,000/4326 alternative dataset; read-only CLI leaves the DB byte-identical",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "app.baseline"
+    },
+    {
+     "src": "batch",
+     "key": "app.operational_report"
+    },
+    {
+     "src": "batch",
+     "key": "baseline_6000_seed4326"
+    },
+    {
+     "src": "batch",
+     "key": "operational_report_6000"
+    },
+    {
+     "src": "batch",
+     "key": "pristine_db_after_readonly_cli"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-MET-06"
+    ],
+    "deviation_rows": [],
+    "proposed_ac": {
+     "id": "AC-CO-L05",
+     "given": "baseline/operational_report CLIs",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "rc, stdout and stderr equal the golden for both datasets and the shipped DB sha256 is unchanged (c254649f...d70aa)",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-06",
+   "workflow": "CW-04",
+   "priority": "P1",
+   "title": "source gateway: all 16 responses incl. failure modes, schema 0.9 cadence, message_id derivation, paging",
+   "checks": [
+    {
+     "src": "api_section",
+     "section": "gateway",
+     "match": ".*"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-INT-04"
+    ],
+    "deviation_rows": [
+     "DV-09"
+    ],
+    "proposed_ac": {
+     "id": "AC-CO-L06",
+     "given": "the 16 Stage 7 gateway requests",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "every response equals the golden (status, content type, sha256, body)",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-07",
+   "workflow": "CW-04",
+   "priority": "P1",
+   "title": "gateway bridge: ingest sequence, checkpoint, idempotency, invalid handling, unreachable source; library edge cases",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "gateway_bridge_sequence"
+    },
+    {
+     "src": "batch",
+     "key": "gateway_inbox_after"
+    },
+    {
+     "src": "batch",
+     "key": "gateway_inbox_event_type_counts"
+    },
+    {
+     "src": "batch",
+     "key": "gateway_checkpoint"
+    },
+    {
+     "src": "batch",
+     "key": "gateway_schema_0.9_events_stored"
+    },
+    {
+     "src": "batch",
+     "key": "gateway_offset_past_end"
+    },
+    {
+     "src": "batch",
+     "key": "gateway_unreachable"
+    },
+    {
+     "src": "lib",
+     "key": "*"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-INT-02",
+     "FR-INT-05"
+    ],
+    "deviation_rows": [
+     "DV-09"
+    ],
+    "proposed_ac": {
+     "id": "AC-CO-L07",
+     "given": "a local gateway on 127.0.0.1 and the 5-step bridge sequence plus 9 library edge cases",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "sequence outputs, inbox counts, checkpoint (primary,125) and library results equal the golden",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-08",
+   "workflow": "CW-05",
+   "priority": "P1",
+   "title": "partner reconcile: outcome rules, 1000-row cap, 10-run sequence, final status / error-reason distribution, batch_runs untouched",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "partner_reconcile_sequence"
+    },
+    {
+     "src": "batch",
+     "key": "partner_status_after_all"
+    },
+    {
+     "src": "batch",
+     "key": "partner_error_reasons"
+    },
+    {
+     "src": "batch",
+     "key": "partner_batch_runs_rows_after_reconcile"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-INT-01",
+     "FR-INT-02",
+     "FR-RUN-03"
+    ],
+    "deviation_rows": [
+     "DV-02",
+     "DV-03",
+     "DV-07"
+    ],
+    "proposed_ac": {
+     "id": "AC-CO-L08",
+     "given": "repeated `app.partner_feeds --reconcile` until a zero run",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "per-run counts and final ACCEPTED 7917 / DUPLICATE 64 / REJECTED 586 equal the golden",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-09",
+   "workflow": "CW-06",
+   "priority": "P2",
+   "title": "vendor file import: first/second import, blank-amount storage, digest key",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "historical_estate_import_on_shipped_db"
+    },
+    {
+     "src": "batch",
+     "key": "historical_estate_import_on_cleared_tables"
+    },
+    {
+     "src": "batch",
+     "key": "vendor_rows_after"
+    },
+    {
+     "src": "batch",
+     "key": "vendor_import_id_shipped"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-INT-02"
+    ],
+    "deviation_rows": [],
+    "proposed_ac": {
+     "id": "AC-CO-L09",
+     "given": "importing data/lake/tiny/partner_export.csv twice (shipped DB and cleared tables)",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "import results, digest d5f841003e666012a16a78b7 and stored rows (2400, 10 blank, 4 tenants) equal the golden",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-10",
+   "workflow": "CW-07",
+   "priority": "P1",
+   "title": "night-shift reconciliation for limits 500/100/50/12500 and the 118-distinct-object fan-out finding",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "shift_reconciliation"
+    },
+    {
+     "src": "batch",
+     "key": "shift_distinct_objects_in_first_500_joined_rows"
+    },
+    {
+     "src": "batch",
+     "key": "shift_active_policies_per_region"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-RUN-03",
+     "FR-MET-04"
+    ],
+    "deviation_rows": [
+     "DV-08"
+    ],
+    "proposed_ac": {
+     "id": "AC-CO-L10",
+     "given": "legacy_batch.shift_reconciliation with each limit",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "processed / flagged_count / by_tenant / preview equal the golden",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-11",
+   "workflow": "CW-08",
+   "priority": "P1",
+   "title": "Java ReconcileLegacy totals on tiny + bundled CSV, usage rc 2, cross-checked with a decimal reference",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "java_tiny"
+    },
+    {
+     "src": "batch",
+     "key": "java_bundled"
+    },
+    {
+     "src": "batch",
+     "key": "java_noargs"
+    },
+    {
+     "src": "batch",
+     "key": "csv_reference_tiny"
+    },
+    {
+     "src": "batch",
+     "key": "csv_reference_bundled"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-MET-04"
+    ],
+    "deviation_rows": [
+     "DV-04"
+    ],
+    "proposed_ac": {
+     "id": "AC-CO-L11",
+     "given": "JDK 11 single-file run of legacy_java/ReconcileLegacy.java",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "stdout/rc equal the golden (count=2390 total=10497082.12 on tiny) and the decimal reference totals are unchanged",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-12",
+   "workflow": "CW-08",
+   "priority": "P1",
+   "title": "SQL report 1 rows and the 742,956.61 vs 622,826.44 discrepancy; report 2 rows; and the statements of sql/legacy_reports.sql themselves",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "sql_report_1"
+    },
+    {
+     "src": "batch",
+     "key": "sql_report_1_total_gross"
+    },
+    {
+     "src": "batch",
+     "key": "true_total_amount"
+    },
+    {
+     "src": "batch",
+     "key": "sql_report_2"
+    },
+    {
+     "src": "derived",
+     "name": "sql_file_matches_stage7_reports"
+    },
+    {
+     "src": "supp",
+     "key": "sql_file_statement_count"
+    },
+    {
+     "src": "supp",
+     "key": "sql_file_results"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-MET-04"
+    ],
+    "deviation_rows": [
+     "DV-01"
+    ],
+    "proposed_ac": {
+     "id": "AC-CO-L12",
+     "given": "the month-end SQL",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "report rows equal the golden, gross 742,956.61 vs true 622,826.44 is reproduced, and sql/legacy_reports.sql yields the same rows (gross rounded to 2 dp)",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-13",
+   "workflow": "CW-09",
+   "priority": "P1",
+   "title": "JS threshold table (32 pairs), tolerance cases, cwd dependence",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "js_policy_table"
+    },
+    {
+     "src": "batch",
+     "key": "node_default"
+    },
+    {
+     "src": "batch",
+     "key": "node_cwd_other"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-POL-04",
+     "FR-POL-06"
+    ],
+    "deviation_rows": [
+     "DV-05",
+     "DV-06"
+    ],
+    "proposed_ac": {
+     "id": "AC-CO-L13",
+     "given": "node 22 running legacy_js/legacy_policy.js",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "threshold table, legacyAllows cases, default output and the ENOENT failure outside the repo cwd equal the golden",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-14",
+   "workflow": "CW-12",
+   "priority": "P2",
+   "title": "regeneration equivalence: generate 125/4100 (and 125/4326, 6000/4326), enterprise_legacy, historical_fixture tiny, archived_documents, generate_documents; partner feeds documented as NOT reproducible (D2)",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "cases_regen_match"
+    },
+    {
+     "src": "batch",
+     "key": "cases_shipped_hashes"
+    },
+    {
+     "src": "batch",
+     "key": "partner_regen_default"
+    },
+    {
+     "src": "batch",
+     "key": "partner_regen_equals_shipped"
+    },
+    {
+     "src": "batch",
+     "key": "partner_regen_hashes"
+    },
+    {
+     "src": "batch",
+     "key": "enterprise_legacy_regen"
+    },
+    {
+     "src": "batch",
+     "key": "enterprise_legacy_regen_equals_shipped"
+    },
+    {
+     "src": "batch",
+     "key": "enterprise_legacy_shipped_hashes"
+    },
+    {
+     "src": "batch",
+     "key": "historical_fixture_tiny_manifest_equal_shipped"
+    },
+    {
+     "src": "batch",
+     "key": "historical_fixture_tiny_csv_equal_shipped"
+    },
+    {
+     "src": "batch",
+     "key": "historical_fixture_tiny_events_equal"
+    },
+    {
+     "src": "batch",
+     "key": "historical_fixture_tiny_reference_table_equal"
+    },
+    {
+     "src": "batch",
+     "key": "historical_fixture_tiny_finance_table_equal"
+    },
+    {
+     "src": "batch",
+     "key": "archived_documents_regen"
+    },
+    {
+     "src": "batch",
+     "key": "archived_documents_regen_equals_shipped"
+    },
+    {
+     "src": "batch",
+     "key": "archived_documents_file_counts"
+    },
+    {
+     "src": "batch",
+     "key": "generate_documents_regen"
+    },
+    {
+     "src": "batch",
+     "key": "generate_documents_equals_shipped"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [],
+    "deviation_rows": [],
+    "proposed_ac": {
+     "id": "AC-CO-L14",
+     "given": "each generator run in its own sandbox copy",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "table hashes / file equality flags equal the golden (125/4100 reproduces the shipped cases tables; partner_feeds regen differs from shipped exactly as recorded)",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-15",
+   "workflow": "CW-12",
+   "priority": "P2",
+   "title": "readiness scripts: workshop_check on pristine and empty DB; offline_inventory / verify_preloaded / rehearse_local vs Stage 7 R7 log",
+   "checks": [
+    {
+     "src": "batch",
+     "key": "workshop_check"
+    },
+    {
+     "src": "batch",
+     "key": "workshop_check_empty_db"
+    },
+    {
+     "src": "r7"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-CO-03"
+    ],
+    "deviation_rows": [],
+    "proposed_ac": {
+     "id": "AC-CO-L15",
+     "given": "the readiness scripts",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "rc and stdout equal the golden / Stage 7 R7 log (first 6000 bytes)",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-16",
+   "workflow": "CW-14",
+   "priority": "P1",
+   "title": "boundary / absence: write methods -> 501 on /api/cases (Stage 7) and on every route of both services (INC-01 supplement); static scan of modules writing `cases`; no disposition handler",
+   "checks": [
+    {
+     "src": "api_section",
+     "section": "api",
+     "match": "^METHOD "
+    },
+    {
+     "src": "supp",
+     "key": "write_methods_api"
+    },
+    {
+     "src": "supp",
+     "key": "write_methods_gateway"
+    },
+    {
+     "src": "supp",
+     "key": "static_cases_writers"
+    },
+    {
+     "src": "supp",
+     "key": "static_disposition_or_write_handlers"
+    },
+    {
+     "src": "supp",
+     "key": "source_db_unchanged_by_supplement"
+    }
+   ],
+   "ac_links": {
+    "existing": [
+     "FR-CO-01",
+     "BEH-CO-01",
+     "AC-CO-01",
+     "AC-CO-02",
+     "AC-CO-05",
+     "AC-CO-07"
+    ],
+    "functional_requirements": [
+     "FR-GATE-01"
+    ],
+    "deviation_rows": [],
+    "proposed_ac": {
+     "id": "AC-CO-L16",
+     "given": "POST/PUT/DELETE/PATCH on every route and a source scan",
+     "when": "the INC-01 characterisation harness runs on the unmodified legacy code in a sandbox copy with fixture FX-BASE125",
+     "then": "statuses equal the golden (501 on the API), the set of modules writing `cases` equals the as-found generator set and no disposition/release/e-signature handler exists",
+     "status": "PROPOSED (test metadata; adoption into docs/12-specs/acceptance-criteria.md is a Stage 12/13 addendum, not an in-place edit)"
+    }
+   }
+  },
+  {
+   "id": "CT-17",
+   "workflow": "cross",
+   "priority": "P3",
+   "title": "concurrency smoke",
+   "checks": [],
+   "status": "NOT-RUN",
+   "reason": "no golden exists (U-07-05); Stage 14 GF-4"
+  },
+  {
+   "id": "CT-18",
+   "workflow": "cross",
+   "priority": "P3",
+   "title": "docker/compose smoke",
+   "checks": [],
+   "status": "NOT-RUN",
+   "reason": "Docker unavailable, HAR-05; Stage 14 GF-4"
+  }
+ ]
+}

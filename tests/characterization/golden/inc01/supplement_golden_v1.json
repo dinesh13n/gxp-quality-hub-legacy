@@ -1,0 +1,277 @@
+{
+ "_golden_meta": {
+  "captured_label": "golden-supp",
+  "note": "NEW versioned golden; becomes active only via golden/INDEX.json + MANIFEST.sha256 in a reviewed PR (CT-H4)",
+  "reviewed_by": "claude-fde-agent (author); PR review pending (orchestrator, OD-13)",
+  "source": "supplement",
+  "worktree_head": "2633062fa09f08757449a0de333a50da3c785a5a"
+ },
+ "readiness_scripts": {
+  "scripts/offline_inventory.py": {
+   "rc": 0,
+   "stdout_head6000": "{\n  \"ready\": true,\n  \"problems\": [],\n  \"inventory\": {\n    \"data/legacy.sqlite3\": {\n      \"tables\": {\n        \"cases\": 125,\n        \"events\": 145,\n        \"source_messages\": 15,\n        \"operating_costs\": 36,\n        \"materials\": 30,\n        \"batch_records\": 125,\n        \"partner_feeds\": 8567,\n        \"reference_versions\": 180,\n        \"policy_exceptions\": 224,\n        \"upstream_outages\": 72,\n        \"batch_runs\": 60,\n        \"gateway_inbox\": 1,\n        \"gateway_checkpoints\": 0,\n        \"vendor_file_imports\": 1,\n        \"vendor_file_rows\": 2400,\n        \"deviations\": 42,\n        \"lab_results\": 125,\n        \"capa_actions\": 21,\n        \"sop_versions\": 45\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/enterprise_legacy.sqlite3\": {\n      \"tables\": {\n        \"organizations\": 96,\n        \"operational_objects\": 12500,\n        \"state_history\": 12500,\n        \"document_links\": 12500,\n        \"evidence_events\": 12500,\n        \"policy_register\": 40,\n        \"cross_references\": 4166,\n        \"workflow_tasks\": 6250,\n        \"financial_adjustments\": 3125,\n        \"integration_attempts\": 2500,\n        \"access_audit\": 4167,\n        \"retention_events\": 2084\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/lake/tiny/reference.sqlite3\": {\n      \"tables\": {\n        \"master_data\": 480\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/lake/tiny/finance.sqlite3\": {\n      \"tables\": {\n        \"ledger\": 960\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/lake/bundled/reference.sqlite3\": {\n      \"tables\": {\n        \"master_data\": 480\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/lake/bundled/finance.sqlite3\": {\n      \"tables\": {\n        \"ledger\": 20000\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"tiny\": {\n      \"transactions\": 2400,\n      \"events\": 9500,\n      \"documents\": 360,\n      \"manifest\": {\n        \"domain\": \"Pharma batch deviation and CAPA\",\n        \"tier\": \"tiny\",\n        \"seed\": 7421,\n        \"transaction_rows\": 2400,\n        \"event_rows\": 9500,\n        \"documents\": 360,\n        \"master_data_rows\": 480,\n        \"synthetic_only\": true,\n        \"historical_years\": \"2021-2026\",\n        \"sha256_partner_export\": \"d5f841003e666012a16a78b73e5d2fd28a4bf39a609fdf76650d0fa8154f6a85\"\n      }\n    },\n    \"bundled\": {\n      \"transactions\": 50000,\n      \"events\": 100000,\n      \"documents\": 600,\n      \"manifest\": {\n        \"domain\": \"Pharma batch deviation and CAPA\",\n        \"tier\": \"bundled\",\n        \"seed\": 7421,\n        \"transaction_rows\": 50000,\n        \"event_rows\": 100000,\n        \"documents\": 600,\n        \"master_data_rows\": 480,\n        \"synthetic_only\": true,\n        \"historical_years\": \"2021-2026\",\n        \"sha256_partner_export\": \"0531214458463825231531e5de6b0ccb7e2b577060edeb92ebada6effaf94b22\"\n      }\n    },\n    \"documents\": 1,\n    \"archive_documents\": 421\n  }\n}\n"
+  },
+  "scripts/rehearse_local.py": {
+   "rc": 0,
+   "stdout_head6000": "{\"python\": \"3.10.12\", \"offline_ready\": true, \"problems\": []}\n"
+  },
+  "scripts/verify_preloaded.py": {
+   "rc": 0,
+   "stdout_head6000": "{\n  \"ready\": true,\n  \"problems\": [],\n  \"inventory\": {\n    \"data/legacy.sqlite3\": {\n      \"tables\": {\n        \"cases\": 125,\n        \"events\": 145,\n        \"source_messages\": 15,\n        \"operating_costs\": 36,\n        \"materials\": 30,\n        \"batch_records\": 125,\n        \"partner_feeds\": 8567,\n        \"reference_versions\": 180,\n        \"policy_exceptions\": 224,\n        \"upstream_outages\": 72,\n        \"batch_runs\": 60,\n        \"gateway_inbox\": 1,\n        \"gateway_checkpoints\": 0,\n        \"vendor_file_imports\": 1,\n        \"vendor_file_rows\": 2400,\n        \"deviations\": 42,\n        \"lab_results\": 125,\n        \"capa_actions\": 21,\n        \"sop_versions\": 45\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/enterprise_legacy.sqlite3\": {\n      \"tables\": {\n        \"organizations\": 96,\n        \"operational_objects\": 12500,\n        \"state_history\": 12500,\n        \"document_links\": 12500,\n        \"evidence_events\": 12500,\n        \"policy_register\": 40,\n        \"cross_references\": 4166,\n        \"workflow_tasks\": 6250,\n        \"financial_adjustments\": 3125,\n        \"integration_attempts\": 2500,\n        \"access_audit\": 4167,\n        \"retention_events\": 2084\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/lake/tiny/reference.sqlite3\": {\n      \"tables\": {\n        \"master_data\": 480\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/lake/tiny/finance.sqlite3\": {\n      \"tables\": {\n        \"ledger\": 960\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/lake/bundled/reference.sqlite3\": {\n      \"tables\": {\n        \"master_data\": 480\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"data/lake/bundled/finance.sqlite3\": {\n      \"tables\": {\n        \"ledger\": 20000\n      },\n      \"integrity\": \"ok\",\n      \"foreign_key_errors\": 0\n    },\n    \"tiny\": {\n      \"transactions\": 2400,\n      \"events\": 9500,\n      \"documents\": 360,\n      \"manifest\": {\n        \"domain\": \"Pharma batch deviation and CAPA\",\n        \"tier\": \"tiny\",\n        \"seed\": 7421,\n        \"transaction_rows\": 2400,\n        \"event_rows\": 9500,\n        \"documents\": 360,\n        \"master_data_rows\": 480,\n        \"synthetic_only\": true,\n        \"historical_years\": \"2021-2026\",\n        \"sha256_partner_export\": \"d5f841003e666012a16a78b73e5d2fd28a4bf39a609fdf76650d0fa8154f6a85\"\n      }\n    },\n    \"bundled\": {\n      \"transactions\": 50000,\n      \"events\": 100000,\n      \"documents\": 600,\n      \"manifest\": {\n        \"domain\": \"Pharma batch deviation and CAPA\",\n        \"tier\": \"bundled\",\n        \"seed\": 7421,\n        \"transaction_rows\": 50000,\n        \"event_rows\": 100000,\n        \"documents\": 600,\n        \"master_data_rows\": 480,\n        \"synthetic_only\": true,\n        \"historical_years\": \"2021-2026\",\n        \"sha256_partner_export\": \"0531214458463825231531e5de6b0ccb7e2b577060edeb92ebada6effaf94b22\"\n      }\n    },\n    \"documents\": 1,\n    \"archive_documents\": 421\n  }\n}\n"
+  }
+ },
+ "source_db_unchanged_by_supplement": true,
+ "sql_file_results": [
+  [
+   [
+    "EMEA",
+    "OPEN",
+    14,
+    110203.36
+   ],
+   [
+    "EMEA",
+    "UNDER_REVIEW",
+    7,
+    104689.45
+   ],
+   [
+    "APAC",
+    "OPEN",
+    14,
+    97990.12
+   ],
+   [
+    "AMER",
+    "UNDER_REVIEW",
+    15,
+    73343.35
+   ],
+   [
+    "EMEA",
+    "CLOSED",
+    16,
+    64067.70999999998
+   ],
+   [
+    "APAC",
+    "UNDER_REVIEW",
+    8,
+    62116.39000000001
+   ],
+   [
+    "AMER",
+    "CLOSED",
+    11,
+    58155.75
+   ],
+   [
+    "AMER",
+    "OPEN",
+    14,
+    46515.6
+   ],
+   [
+    "APAC",
+    "CLOSED",
+    9,
+    40808.72
+   ],
+   [
+    "AMER",
+    "ESCALATED",
+    4,
+    23205.019999999997
+   ],
+   [
+    "AMER",
+    "REOPENED",
+    2,
+    21959.699999999997
+   ],
+   [
+    "APAC",
+    "REOPENED",
+    5,
+    19278.04
+   ],
+   [
+    "APAC",
+    "ESCALATED",
+    3,
+    9468.82
+   ],
+   [
+    "EMEA",
+    "REOPENED",
+    1,
+    7012.32
+   ],
+   [
+    "EMEA",
+    "ESCALATED",
+    2,
+    4142.26
+   ]
+  ],
+  [
+   [
+    "batch_exception",
+    "T-EAST",
+    136
+   ],
+   [
+    "batch_exception",
+    "T-NORTH",
+    151
+   ],
+   [
+    "batch_exception",
+    "T-SOUTH",
+    151
+   ],
+   [
+    "batch_exception",
+    "T-WEST",
+    162
+   ],
+   [
+    "capa_action",
+    "T-EAST",
+    151
+   ],
+   [
+    "capa_action",
+    "T-NORTH",
+    145
+   ],
+   [
+    "capa_action",
+    "T-SOUTH",
+    159
+   ],
+   [
+    "capa_action",
+    "T-WEST",
+    145
+   ],
+   [
+    "oos_lab",
+    "T-EAST",
+    155
+   ],
+   [
+    "oos_lab",
+    "T-NORTH",
+    132
+   ],
+   [
+    "oos_lab",
+    "T-SOUTH",
+    156
+   ],
+   [
+    "oos_lab",
+    "T-WEST",
+    157
+   ],
+   [
+    "sop_change",
+    "T-EAST",
+    134
+   ],
+   [
+    "sop_change",
+    "T-NORTH",
+    147
+   ],
+   [
+    "sop_change",
+    "T-SOUTH",
+    146
+   ],
+   [
+    "sop_change",
+    "T-WEST",
+    173
+   ]
+  ]
+ ],
+ "sql_file_statement_count": 2,
+ "static_cases_writers": [
+  "app/generate.py"
+ ],
+ "static_disposition_or_write_handlers": {},
+ "write_methods_api": {
+  "DELETE /": 501,
+  "DELETE /api/cases": 501,
+  "DELETE /api/cases/C00000001": 501,
+  "DELETE /api/domain/capa_actions": 501,
+  "DELETE /api/domain/deviations": 501,
+  "DELETE /api/incidents": 501,
+  "DELETE /api/metrics": 501,
+  "DELETE /api/partners/batch_runs": 501,
+  "DELETE /api/partners/partner_feeds": 501,
+  "DELETE /health": 501,
+  "DELETE /nope": 501,
+  "PATCH /": 501,
+  "PATCH /api/cases": 501,
+  "PATCH /api/cases/C00000001": 501,
+  "PATCH /api/domain/capa_actions": 501,
+  "PATCH /api/domain/deviations": 501,
+  "PATCH /api/incidents": 501,
+  "PATCH /api/metrics": 501,
+  "PATCH /api/partners/batch_runs": 501,
+  "PATCH /api/partners/partner_feeds": 501,
+  "PATCH /health": 501,
+  "PATCH /nope": 501,
+  "POST /": 501,
+  "POST /api/cases": 501,
+  "POST /api/cases/C00000001": 501,
+  "POST /api/domain/capa_actions": 501,
+  "POST /api/domain/deviations": 501,
+  "POST /api/incidents": 501,
+  "POST /api/metrics": 501,
+  "POST /api/partners/batch_runs": 501,
+  "POST /api/partners/partner_feeds": 501,
+  "POST /health": 501,
+  "POST /nope": 501,
+  "PUT /": 501,
+  "PUT /api/cases": 501,
+  "PUT /api/cases/C00000001": 501,
+  "PUT /api/domain/capa_actions": 501,
+  "PUT /api/domain/deviations": 501,
+  "PUT /api/incidents": 501,
+  "PUT /api/metrics": 501,
+  "PUT /api/partners/batch_runs": 501,
+  "PUT /api/partners/partner_feeds": 501,
+  "PUT /health": 501,
+  "PUT /nope": 501
+ },
+ "write_methods_gateway": {
+  "DELETE /api/catalog": 501,
+  "DELETE /api/events": 501,
+  "DELETE /api/failure": 501,
+  "DELETE /api/record/NOPE": 501,
+  "DELETE /health": 501,
+  "DELETE /nope": 501,
+  "PATCH /api/catalog": 501,
+  "PATCH /api/events": 501,
+  "PATCH /api/failure": 501,
+  "PATCH /api/record/NOPE": 501,
+  "PATCH /health": 501,
+  "PATCH /nope": 501,
+  "POST /api/catalog": 501,
+  "POST /api/events": 501,
+  "POST /api/failure": 501,
+  "POST /api/record/NOPE": 501,
+  "POST /health": 501,
+  "POST /nope": 501,
+  "PUT /api/catalog": 501,
+  "PUT /api/events": 501,
+  "PUT /api/failure": 501,
+  "PUT /api/record/NOPE": 501,
+  "PUT /health": 501,
+  "PUT /nope": 501
+ }
+}

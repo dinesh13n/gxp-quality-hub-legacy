@@ -1,0 +1,12 @@
+{
+ "schema": "golden-index/v1",
+ "note": "Active goldens. Stage 7 files are byte copies of docs/07-repo-assessment/evidence/golden/*.json and test-logs/R1,R7 (sha256 identical to docs/07-repo-assessment/evidence/SHA256SUMS-evidence.txt). Changing an entry = reviewed PR (CT-H4).",
+ "sources": {
+  "api": "stage7/api_golden_run1.json",
+  "batch": "stage7/batch_golden_run1.json",
+  "lib": "stage7/lib_golden_run1.json",
+  "r1": "stage7/R1_unittest_fresh.log",
+  "r7": "stage7/R7_readonly_scripts.log",
+  "supplement": "inc01/supplement_golden_v1.json"
+ }
+}
