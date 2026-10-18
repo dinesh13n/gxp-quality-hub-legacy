@@ -1,0 +1,18 @@
+Working-tree data integrity checks for Stage 15 INC-01 (OD-03a / CG-5 / STOP-01)
+Command (from repo root): sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt   (1,512 files)
+Every legacy execution ran in ~/fde_sbx/s15-inc01/<label>/ (outside the working tree).
+
+session                       when (2026-10-18, sequence)   checksum rc
+before any execution          #0  pre                        0
+run-1 (first harness run)     #1  post                       0
+golden-supp attempt 1         #2  (background process was terminated by the device shell when the call ended; no output written)
+golden-supp (rerun)           #3  post                       0
+det-run-A                     #4  post                       0
+det-run-B                     #5  post                       0
+mut-1 (M1-M5)                 #6  post                       0
+mut-2 (M6-M9)                 #7  post                       0
+mut-3 (M10-M13)               #8  post                       0
+mut-4 (M14-M15)               #9  post                       0
+neg-fx (tampered fixture, refused rc 2)  #10 post            0
+final-A / final-B             #11 pre 0, post                0
+git status --porcelain after every session: only new files under tests/characterization/ (before commit) or clean.

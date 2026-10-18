@@ -1,0 +1,123 @@
+---
+stage: "15 — Transform Bad Repo → Good Repo"
+artifact: "behavior-preservation-evidence.md"
+version: "v0.1"
+date: "2026-10-18"
+author_agent: "claude-fde-agent"
+status: "DRAFT"
+scope: "INC-01 only (characterisation harness + hermetic fixtures + mutation gate). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)"]
+supersedes: "none"
+---
+**Label: synthetic repository, unvalidated against any organisation.**
+
+## Summary
+INC-01 changes no legacy behaviour (only new files). This file records the evidence that (a) the untouched legacy code still reproduces every Stage 7 golden, (b) the harness is deterministic, (c) the harness actually detects behaviour change (mutation gate), and (d) the working-tree data were never touched. **Result: D5 UNEXPLAINED = 0; 134/134 checks green in two consecutive runs; 15/15 mutants killed; checksum rc 0 after every session.**
+
+## Findings
+<!-- each tagged [Verified Fact] / [Inference] / [Assumption] / [Unknown] -->
+### BP-1 CT results on unmodified legacy (runs `final-A`, `final-B`, HEAD ed43a0a, Python 3.10.12, SQLite 3.37.2, OpenJDK 11.0.32.1, Node v22.23.2)
+| CT | Workflow | Checks | Golden source | Result A / B | Tag |
+|---|---|---|---|---|---|
+| CT-01 | CW-01 priority truth table (120) | 1 | stage7 batch | PASS / PASS | [Verified Fact] |
+| CT-02 | CW-01 125-case priorities, 36/70/17/2 | 3 | stage7 api + invariant | PASS / PASS | [Verified Fact] |
+| CT-03 | CW-01/02 manual review (20 + 6 sampled cases + meta) | 7 | stage7 batch/api | PASS / PASS | [Verified Fact] |
+| CT-04 | CW-02/10/13 HTTP responses | 35 | stage7 api | PASS / PASS | [Verified Fact] |
+| CT-05 | CW-03/11 baseline + operational report (125 and 6000/4326) | 5 | stage7 batch | PASS / PASS | [Verified Fact] |
+| CT-06 | CW-04 gateway responses | 16 | stage7 api | PASS / PASS | [Verified Fact] |
+| CT-07 | CW-04 bridge sequence + library edge cases | 8 | stage7 batch + lib | PASS / PASS | [Verified Fact] |
+| CT-08 | CW-05 reconcile sequence | 4 | stage7 batch | PASS / PASS | [Verified Fact] |
+| CT-09 | CW-06 vendor import | 4 | stage7 batch | PASS / PASS | [Verified Fact] |
+| CT-10 | CW-07 night shift | 3 | stage7 batch | PASS / PASS | [Verified Fact] |
+| CT-11 | CW-08 Java totals | 5 | stage7 batch | PASS / PASS | [Verified Fact] |
+| CT-12 | CW-08 SQL report (742,956.61 vs 622,826.44) + `sql/legacy_reports.sql` itself | 8 | stage7 batch + INC-01 supplement | PASS / PASS | [Verified Fact] |
+| CT-13 | CW-09 JS policy | 3 | stage7 batch | PASS / PASS | [Verified Fact] |
+| CT-14 | CW-12 regeneration equivalence | 18 | stage7 batch | PASS / PASS | [Verified Fact] |
+| CT-15 | CW-12 readiness scripts | 5 | stage7 batch + R7 log | PASS / PASS | [Verified Fact] |
+| CT-16 | CW-14 boundary (501 everywhere, only `app/generate.py` writes `cases`, no disposition handler) | 9 | stage7 api + INC-01 supplement | PASS / PASS | [Verified Fact] |
+| CT-17 | concurrency | — | none | NOT-RUN (no golden, U-07-05) | [Verified Fact] |
+| CT-18 | docker | — | none | NOT-RUN (HAR-05) | [Verified Fact] |
+Total 134 checks: 127 against Stage 7 goldens/logs, 7 against the INC-01 supplement golden v1 (captured on the unmodified code; see `refactoring-decisions.md` RD-04).
+
+### BP-2 Behaviour-difference classification (Stage 14 TG-4)
+| Class | Count | Detail | Tag |
+|---|---|---|---|
+| D0 IDENTICAL | 132 | equal without any normalisation (the API capture is byte-identical to `api_golden_run1.json`, sha256 c6db0a43…) | [Verified Fact] |
+| D1 NORMALISED | 2 | `batch:generate_documents_regen` (N1 sandbox path in stdout); `batch:node_cwd_other` (N1 path + N4 tail window: 724 common trailing characters compared, incl. the ENOENT error and Node version) | [Verified Fact] |
+| D2 KNOWN-NON-REPRODUCIBLE | 0 | partner-feed regeneration differs from shipped exactly as the golden records (`partner_regen_equals_shipped` all false) → compared as D0 | [Verified Fact] |
+| D3 / D4 | 0 | no deviation rows used (DV-01..09 remain `proposed`, not needed for INC-01) | [Verified Fact] |
+| **D5 UNEXPLAINED** | **0** | | [Verified Fact] |
+N2 (python path) and N3 (JVM `JAVA_TOOL_OPTIONS` banner) were not exercised on this device (same interpreter path, same banner as Stage 7); they exist for other environments. [Verified Fact]
+
+### BP-3 Determinism (CG-6)
+[Verified Fact] `final-A` and `final-B` produce identical canonical capture digests (api c6db0a43…, batch 40237661…, lib c5797c3b…, supplement c3cbab2c…) and identical per-check results; the same digests were also obtained in `run-1`, `golden-supp`, `det-run-A`, `det-run-B` (6 runs). Raw batch bytes differ between runs only by the sandbox path (label) embedded in two fields — removed by N1/N4.
+
+### BP-4 Mutation gate (CT-H6, CG-3): 15/15 KILLED
+| Mutant | Change | Killed by |
+|---|---|---|
+| M1 | urgent threshold 50000→1 | CT-01, CT-02, CT-04, CT-05 |
+| M2 | 'review' tier removed | CT-01, CT-02, CT-04 |
+| M3 | manual_review_required always False | CT-03, CT-04 |
+| M4 | CLOSED no longer archived | CT-01, CT-02, CT-04, CT-05 |
+| M5 | negative-quantity rejection removed | CT-08 |
+| M6 | replay duplicate detection removed | CT-08 |
+| M7 | schema/key validation removed | CT-08 |
+| M8 | night-shift comparison inverted | CT-10 |
+| M9 | unknown business_key accepted | CT-07 (library golden) |
+| M10 | API manual_review flag False | CT-03, CT-04 |
+| M11 | partners pagination ignores limit/offset | CT-04 |
+| M12 | baseline urgent_cases 0 | CT-05 |
+| M13 | JS tolerance 5%→50% | CT-13 |
+| M14 | idempotent import removed | CT-09 |
+| M15 | gateway timeout 503→200 | CT-06 |
+[Verified Fact] Compared with Stage 7: shipped suite kills 1/15 (M4); Stage 7 golden replay killed 14/14 (M11 not replayed). INC-01 adds M11 and kills all 15. Every mutant was killed by a CT comparison, none merely by a crashing capture.
+
+### BP-5 Shipped tests still as-found (TG-3 INC-01 exit criterion)
+[Verified Fact] In a fresh sandbox copy `python -m unittest discover -s tests -v` runs the same 15 tests, result OK, and leaves `legacy.sqlite3` with sha256 750336f3… — identical to Stage 7 R1 (`golden/stage7/R1_unittest_fresh.log`). The new directory has no `__init__.py`, so discovery is unchanged (Ran 15, not more).
+
+### BP-6 Legacy paths and data untouched
+- [Verified Fact] `git diff --name-status main..HEAD | grep -v '^A'` is empty (only added files); `git diff --stat baseline-as-found..HEAD -- app legacy_batch legacy_java legacy_js sql contracts integration services scripts ops tests/test_*.py data` is empty (CG-4, AC-CO-05).
+- [Verified Fact] `sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt` rc 0 before the first and after every execution session (12 checks, `evidence/inc01/checksum-log.txt`) (CG-5, AC-CO-07).
+- [Verified Fact] Guard tests: sandbox roots inside the repo, inside `data/`, at the repo parent, `~/mnt`, `/`, and inside the backup were refused with E-CO-NOT-SANDBOX (rc 2) (AC-CO-06); a fixture with one changed byte was refused with E-FX-HASH (rc 2) (CT-H1).
+
+### BP-7 Stage 13 condition C3 — acceptance links for CT-04..CT-16
+Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing FR-CO-01, BEH-CO-01, AC-CO-01, AC-CO-02, AC-CO-05, AC-CO-07, the CT-specific FR(s) below, and one **proposed** AC (given/when/then in the catalogue).
+| CT | Proposed AC | CT-specific FR | DV rows |
+|---|---|---|---|
+| CT-04 | AC-CO-L04 | FR-SEC-01 | — |
+| CT-05 | AC-CO-L05 | FR-MET-06 | — |
+| CT-06 | AC-CO-L06 | FR-INT-04 | DV-09 |
+| CT-07 | AC-CO-L07 | FR-INT-02, FR-INT-05 | DV-09 |
+| CT-08 | AC-CO-L08 | FR-INT-01, FR-INT-02, FR-RUN-03 | DV-02, DV-03, DV-07 |
+| CT-09 | AC-CO-L09 | FR-INT-02 | — |
+| CT-10 | AC-CO-L10 | FR-RUN-03, FR-MET-04 | DV-08 |
+| CT-11 | AC-CO-L11 | FR-MET-04 | DV-04 |
+| CT-12 | AC-CO-L12 | FR-MET-04 | DV-01 |
+| CT-13 | AC-CO-L13 | FR-POL-04, FR-POL-06 | DV-05, DV-06 |
+| CT-14 | AC-CO-L14 | — | — |
+| CT-15 | AC-CO-L15 | FR-CO-03 | — |
+| CT-16 | AC-CO-L16 | FR-GATE-01 | — |
+[Inference] C3 is met at the test-metadata level; formal adoption of AC-CO-L04..L16 into `docs/12-specs/acceptance-criteria.md` needs a Stage 12/13 addendum (not done here; that file is not edited in place).
+
+## Evidence References
+- `docs/15-modernization/evidence/inc01/final-A_report.json`, `final-B_report.json` (full per-check results + unittest output), `mut-1..mut-4_report.json`, `summary.txt`, `checksum-log.txt`.
+- `tests/characterization/golden/MANIFEST.sha256` (golden integrity), `fixtures/FX-BASE125.sha256`.
+
+## Assumptions
+- A-15-01 [Assumption] The Stage 0A backup `../_data-backup-2026-10-17/data` is the authoritative copy of the OD-09 baseline (its manifest equals the working tree, checksum rc 0). Confirm: Engagement lead (Dinesh Naik).
+- A-15-02 [Assumption] Self-review of the supplement golden v1 by the authoring agent is provisional; the PR review (OD-13) is the real review.
+
+## Unknowns
+- U-15-02 Behaviour on Python 3.12 / other JDK/Node versions (CT-H5) — not measurable on this device.
+
+## Unresolved Issues
+- AC-CO-L04..L16 not yet adopted into Stage 12 specs (GAP-13-06 partially closed).
+
+## Residual Risks
+- RR-BP-1 N4 compares tail-truncated stderr on the common suffix; a change confined to the clipped start of such a tail would not be detected (affects 1 check, `node_cwd_other`).
+- RR-BP-2 Goldens depend on the git-ignored baseline data; protection is the FX-BASE125 hash gate + backup manifest.
+
+## Change History
+| Version | Date | Author/agent | Change |
+|---|---|---|---|
+| v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
