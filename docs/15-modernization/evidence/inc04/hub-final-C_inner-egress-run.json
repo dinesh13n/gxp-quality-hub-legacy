@@ -1,0 +1,631 @@
+{
+ "egress_attempts": [],
+ "records": [
+  {
+   "detail": null,
+   "id": "test_inc02_supplementary.TST_HUB_INC02_Supplementary.test_TST_HUB_INC02_S01_untrusted_never_reaches_decision_params",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc02_supplementary.TST_HUB_INC02_Supplementary.test_TST_HUB_INC02_S02_flags_defaults_and_kill_switch",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc02_supplementary.TST_HUB_INC02_Supplementary.test_TST_HUB_INC02_S03_m000_migration",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc03_supplementary.TST_HUB_INC03_Supplementary.test_TST_HUB_INC03_S01_migration_runner",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc03_supplementary.TST_HUB_INC03_Supplementary.test_TST_HUB_INC03_S02_backup_restore_roundtrip",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc03_supplementary.TST_HUB_INC03_Supplementary.test_TST_HUB_INC03_S03_inc02_commands_on_m001_store",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc03_supplementary.TST_HUB_INC03_Supplementary.test_TST_HUB_INC03_S04_anchor_path_configuration",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc03_supplementary.TST_HUB_INC03_Supplementary.test_TST_HUB_INC03_S05_zone_h_holder_and_reauth",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc04_supplementary.TST_HUB_INC04_Supplementary.test_TST_HUB_INC04_S01_m002_applier_and_policy_cli",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc04_supplementary.TST_HUB_INC04_Supplementary.test_TST_HUB_INC04_S02_activation_refusal_matrix",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc04_supplementary.TST_HUB_INC04_Supplementary.test_TST_HUB_INC04_S03_no_holders_configured_blocks_every_zone_h_action",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc04_supplementary.TST_HUB_INC04_Supplementary.test_TST_HUB_INC04_S04_loader_is_idempotent_fails_closed_and_never_executes_legacy",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc04_supplementary.TST_HUB_INC04_Supplementary.test_TST_HUB_INC04_S05_engine_edges_and_documented_deltas_to_legacy",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc04_supplementary.TST_HUB_INC04_Supplementary.test_TST_HUB_INC04_S06_audit_failure_rolls_the_change_back",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc04_supplementary.TST_HUB_INC04_Supplementary.test_TST_HUB_INC04_S07_policy_service_requires_m002",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_inc04_supplementary.TST_HUB_INC04_Supplementary.test_TST_HUB_INC04_S08_rollback_l2_restore_then_rebuild_is_content_identical",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_a_all_proposed_dv01_dv09_unapproved_exit6",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_b_register_describes_the_actual_goldens",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_c_matching_approved_rows_exit0",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_d_approval_must_match_observed_values",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline.test_TST_CO_01_e_approved_requires_approval_ref",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_a_unchanged_priority_is_identical",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_b_changed_priority_of_one_case_unapproved_exit6",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_c_approval_for_another_golden_does_not_leak",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_d_missing_capture_is_not_run_and_fails",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_e_real_goldens_unlisted_change_fails",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden.test_TST_CO_02_f_tampered_golden_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_03_golden_parity.TST_CO_03_GoldenParity.test_TST_CO_03_a_ct01_ct03_ct13_goldens_zero_difference",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_03_golden_parity.TST_CO_03_GoldenParity.test_TST_CO_03_b_night_shift_reconciliation_golden",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_03_golden_parity.TST_CO_03_GoldenParity.test_TST_CO_03_c_rule_sets_equal_the_legacy_code_run_in_the_sandbox",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_a_each_legacy_db_opened_read_only",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_b_every_write_attempt_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_c_legacy_files_byte_identical_after_attempts",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_d_only_ro_uri_connections_to_legacy",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_e_schema_drift_and_hash_mismatch_fail_closed",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters.test_TST_CO_04_f_working_tree_source_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_05_legacy_paths_unchanged.TST_CO_05_LegacyPathsUnchanged.test_TST_CO_05_a_no_diff_vs_baseline_as_found",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_05_legacy_paths_unchanged.TST_CO_05_LegacyPathsUnchanged.test_TST_CO_05_b_no_untracked_files_in_legacy_paths",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_05_legacy_paths_unchanged.TST_CO_05_LegacyPathsUnchanged.test_TST_CO_05_c_branch_only_adds_files_outside_stage15_docs",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_a_data_dir_inside_repo_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_b_backup_ancestor_home_root_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_c_legacy_root_in_worktree_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_d_any_git_worktree_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard.test_TST_CO_06_e_sandbox_data_dir_accepted",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_07_backup_manifest.TST_CO_07_BackupManifestAfterRun.test_TST_CO_07_a_sha256sum_rc0_after_sandbox_run",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_07_backup_manifest.TST_CO_07_BackupManifestAfterRun.test_TST_CO_07_b_python_verifier_agrees",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_10_release_blocked.TST_CO_10_ReleaseBlocked.test_TST_CO_10_a_g2_failing_blocks_ready",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_10_release_blocked.TST_CO_10_ReleaseBlocked.test_TST_CO_10_b_not_run_also_blocks_and_all_pass_control",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist.test_TST_CO_11_a_openai_dependency_fails_build",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist.test_TST_CO_11_b_import_rules",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist.test_TST_CO_11_c_requirements_manifest",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist.test_TST_CO_11_d_real_tree_is_clean",
+   "status": "ok"
+  },
+  {
+   "detail": "TST-CO-12 is the outer driver of the egress-guarded run",
+   "id": "setUpModule (test_tst_co_12_egress_tripwire)",
+   "status": "skipped"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_13_determinism.TST_CO_13_Determinism.test_TST_CO_13_a_bit_identical_across_hashseed_tz_locale",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_13_determinism.TST_CO_13_Determinism.test_TST_CO_13_b_no_random_or_wallclock_in_core",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_a_floor_310_starts_and_prints_versions",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_b_python39_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_c_sqlite_below_floor_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_d_floor_312_mode",
+   "status": "ok"
+  },
+  {
+   "detail": "python3.9 not installed on this device (simulated in TST-CO-14 b)",
+   "id": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor.test_TST_CO_14_e_real_old_interpreter_if_present",
+   "status": "skipped"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_15_release_checklist.TST_CO_15_ReleaseChecklist.test_TST_CO_15_a_checklist_every_gate_recorded_and_blocking",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_01_fresh_install_five_candidates_none_adopted",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_02_service_actor_cannot_adopt",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_03_holder_adopts_with_authority",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_04_overlapping_adoption_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_05_accepted_open_is_not_adopted",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_06_elapsed_under_both_clocks_no_verdict",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_07_business_calendar_needs_calendar_ref",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_08_adopted_clock_verdicts_at_the_boundary",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_09_empty_authority_ref_stores_nothing",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_01_10_policy_objects.TST_POL_PolicyObjects.test_TST_POL_10_threshold_edit_event_and_service_actor_rejected",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_11_loader_lists_three_read_only_inactive_sets",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_12_priority_truth_table_byte_equal",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_13_manual_review_table",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_14_js_thresholds_and_tolerance",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_15_batch_flags_equal_row_predicate_and_rows_not_multiplied",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_16_no_active_set_refuses",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_17_explicit_ref_is_a_what_if",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_18_activation_needs_holder_and_recorded_decision",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_19_unmatched_region_year_returns_999999_marked",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_20_unknown_status_falls_through_marked",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets.test_TST_POL_21_known_inputs_reaching_the_last_row_are_not_defaulted",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability.test_TST_POL_22_a_1000_evaluations_bit_identical_in_two_processes",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability.test_TST_POL_22_b_evaluation_performs_no_io_clock_or_randomness",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability.test_TST_POL_22_c_engine_imports_only_pure_modules",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability.test_TST_POL_23_non_decimal_amounts_are_rejected",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability.test_TST_POL_25_policy_version_rows_are_immutable",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry.test_TST_SEC_01_a_registry_matches_contract_and_declares_permissions",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry.test_TST_SEC_01_b_unauthenticated_401_except_public",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry.test_TST_SEC_01_c_unregistered_route_denied_by_default",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry.test_TST_SEC_01_d_healthz_contract_has_no_case_data",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_04_fresh_install.TST_SEC_04_FreshInstall.test_TST_SEC_04_a_zero_users_after_fresh_migrate",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_04_fresh_install.TST_SEC_04_FreshInstall.test_TST_SEC_04_b_any_login_fails_generically",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_04_fresh_install.TST_SEC_04_FreshInstall.test_TST_SEC_04_c_cli_fresh_install_lists_no_users",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_05_lockout.TST_SEC_05_Lockout.test_TST_SEC_05_a_default_5_15_15",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_05_lockout.TST_SEC_05_Lockout.test_TST_SEC_05_b_configurable",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_05_lockout.TST_SEC_05_Lockout.test_TST_SEC_05_c_failures_outside_window_do_not_lock",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_06_credential_store.TST_SEC_06_CredentialStore.test_TST_SEC_06_a_pbkdf2_per_user_salt",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_06_credential_store.TST_SEC_06_CredentialStore.test_TST_SEC_06_b_tokens_only_as_sha256_and_no_plaintext_anywhere",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_06_credential_store.TST_SEC_06_CredentialStore.test_TST_SEC_06_c_iteration_and_length_floors",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_09_audit_events.TST_SEC_09_AuditEvents.test_TST_SEC_09_a_one_record_per_action_chain_linked",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_10_verify_audit_ok.TST_SEC_10_VerifyAuditOk.test_TST_SEC_10_a_library_verify_ok",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_10_verify_audit_ok.TST_SEC_10_VerifyAuditOk.test_TST_SEC_10_b_cli_verify_audit_ok",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection.test_TST_SEC_11_a_details_edited",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection.test_TST_SEC_11_b_record_deleted",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection.test_TST_SEC_11_c_two_records_swapped",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection.test_TST_SEC_11_d_tail_deleted_after_anchor",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection.test_TST_SEC_11_e_cli_exit_17",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_12_truncation_limit.TST_SEC_12_TruncationAfterLastAnchor.test_TST_SEC_12_a_tail_after_last_anchor_undetected",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_12_truncation_limit.TST_SEC_12_TruncationAfterLastAnchor.test_TST_SEC_12_b_deleting_into_the_anchored_range_is_detected",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_13_insert_only_triggers.TST_SEC_13_InsertOnlyTriggers.test_TST_SEC_13_a_audit_update_delete_rejected",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_13_insert_only_triggers.TST_SEC_13_InsertOnlyTriggers.test_TST_SEC_13_b_other_retained_tables_reject_delete",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_14_audit_write_failure.TST_SEC_14_AuditWriteFailure.test_TST_SEC_14_a_changes_rolled_back",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_15_no_secrets_in_audit_logs.TST_SEC_15_NoSecretsInAuditOrLogs.test_TST_SEC_15_a_login_failure_audit_and_logs_clean",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_15_no_secrets_in_audit_logs.TST_SEC_15_NoSecretsInAuditOrLogs.test_TST_SEC_15_b_credential_keys_refused_in_details",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_15_no_secrets_in_audit_logs.TST_SEC_15_NoSecretsInAuditOrLogs.test_TST_SEC_15_c_cli_user_create_never_echoes_password",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard.test_TST_SEC_16_a_default_loopback_starts",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard.test_TST_SEC_16_b_non_loopback_without_approval_refused",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard.test_TST_SEC_16_c_approved_without_tls_refused_with_tls_allowed",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep.test_TST_SEC_18_a_code_base_clean",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep.test_TST_SEC_18_b_positive_controls",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep.test_TST_SEC_18_c_cli_scan",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded.test_TST_SEC_21_a_restart_with_changed_holders",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded.test_TST_SEC_21_b_default_holders_empty",
+   "status": "ok"
+  }
+ ],
+ "successful": true,
+ "tests_run": 123,
+ "tripwires": {
+  "egress_attempts_total": 0,
+  "model_calls_total": 0
+ }
+}
