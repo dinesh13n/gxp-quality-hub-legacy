@@ -1,0 +1,24 @@
+{
+  "version": "0.1",
+  "label": "synthetic, unvalidated",
+  "source": "docs/12-specs/features/f05-identity-crosswalk.md F05-2; id patterns observed in the shipped data (Assumption A-15-05-3)",
+  "id_types": {
+    "case": "^C[0-9]{8}$",
+    "batch": "^BT[0-9]{8}$",
+    "deviation": "^DEV[0-9]{8}$",
+    "capa": "^CAPA[0-9]{8}$",
+    "lab_result": "^LAB[0-9]{8}$",
+    "feed_item": "^(FEED|REPLAY)-[0-9]{9}$",
+    "document": "^DOC-[0-9]{8}$"
+  },
+  "link_types": [
+    {"code": "LT-01", "from_type": "deviation", "to_type": "batch", "key_used": "deviations.batch_id = batch_records.batch_id", "creator_kind": "rule"},
+    {"code": "LT-02", "from_type": "capa", "to_type": "deviation", "key_used": "capa_actions.deviation_id = deviations.deviation_id", "creator_kind": "rule"},
+    {"code": "LT-03", "from_type": "lab_result", "to_type": "batch", "key_used": "lab_results.batch_id = batch_records.batch_id", "creator_kind": "rule"},
+    {"code": "LT-04", "from_type": "feed_item", "to_type": "case", "key_used": "partner_feeds.ref_id = cases.id", "creator_kind": "rule"},
+    {"code": "LT-05", "from_type": "document", "to_type": "case", "key_used": "document.reference = cases.id", "creator_kind": "rule"},
+    {"code": "LT-06", "from_type": "case", "to_type": "batch", "key_used": "human decision (no key exists)", "creator_kind": "human"},
+    {"code": "LT-06", "from_type": "case", "to_type": "deviation", "key_used": "human decision (no key exists)", "creator_kind": "human"},
+    {"code": "LT-06", "from_type": "case", "to_type": "capa", "key_used": "human decision (no key exists)", "creator_kind": "human"}
+  ]
+}
