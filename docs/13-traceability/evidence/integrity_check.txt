@@ -1,0 +1,4 @@
+Post-run integrity check (orchestrator) 2026-10-18T12:05:50Z
+OK 1512
+git status:
+?? docs/13-traceability/

@@ -1,0 +1,1581 @@
+{
+ "ACC6_pairs_not_in_Implements": 214,
+ "ACC6_pairs_total": 232,
+ "AC_decision_dependent": 35,
+ "AC_decision_dependent_all": [
+  "TST-CO-14",
+  "TST-DEC-15",
+  "TST-DEC-16",
+  "TST-DEC-17",
+  "TST-DEC-18",
+  "TST-DEC-19",
+  "TST-DEC-20",
+  "TST-DEC-21",
+  "TST-DEC-26",
+  "TST-DEC-27",
+  "TST-DEC-28",
+  "TST-GATE-01",
+  "TST-GATE-02",
+  "TST-GATE-03",
+  "TST-GATE-04",
+  "TST-GATE-05",
+  "TST-GATE-06",
+  "TST-GATE-07",
+  "TST-GATE-08",
+  "TST-GATE-22",
+  "TST-INT-06",
+  "TST-INT-12",
+  "TST-INT-13",
+  "TST-INT-14",
+  "TST-INT-15",
+  "TST-OBS-07",
+  "TST-POL-19",
+  "TST-POL-20",
+  "TST-POL-21",
+  "TST-POL-23",
+  "TST-REV-16",
+  "TST-RUN-01",
+  "TST-RUN-02",
+  "TST-RUN-03",
+  "TST-SEC-18"
+ ],
+ "AC_unresolvable_to_FR_PNFR": [
+  "AC-CO-06",
+  "AC-CO-14",
+  "AC-OBS-07"
+ ],
+ "AC_with_CT_range": [
+  "AC-CO-03"
+ ],
+ "AC_without_any_req": [
+  "AC-CO-06",
+  "AC-CO-14",
+  "AC-OBS-07"
+ ],
+ "AC_without_fr_or_pnfr_direct": [
+  "AC-CO-06",
+  "AC-CO-14",
+  "AC-DEC-26",
+  "AC-GATE-04",
+  "AC-GATE-10",
+  "AC-GATE-17",
+  "AC-MET-16",
+  "AC-OBS-07",
+  "AC-POL-04",
+  "AC-POL-23",
+  "AC-REV-16",
+  "AC-RUN-11",
+  "AC-RUN-14"
+ ],
+ "BEH_with_ac": 108,
+ "BEH_without_ac": [],
+ "BEH_without_req": [
+  "BEH-CO-09",
+  "BEH-OBS-08"
+ ],
+ "BEH_without_req_detail": {
+  "BEH-CO-09": "OD-S12-12",
+  "BEH-OBS-08": "ADR-016"
+ },
+ "BR_covered": 13,
+ "BR_no_fr_or_pnfr": [],
+ "BR_only_r2_frs": [],
+ "BR_uncovered": [],
+ "CT_explicit_link": {
+  "CT-01": [
+   "AC-CO-03"
+  ],
+  "CT-02": [
+   "AC-CO-03"
+  ],
+  "CT-03": [
+   "AC-CO-03"
+  ]
+ },
+ "CT_fr_links": {
+  "CT-01": [
+   "FR-CO-01",
+   "FR-POL-04"
+  ],
+  "CT-02": [
+   "FR-CO-01",
+   "FR-POL-04"
+  ],
+  "CT-03": [
+   "FR-CO-01",
+   "FR-POL-04"
+  ],
+  "CT-04": [],
+  "CT-05": [],
+  "CT-06": [],
+  "CT-07": [],
+  "CT-08": [],
+  "CT-09": [],
+  "CT-10": [],
+  "CT-11": [],
+  "CT-12": [],
+  "CT-13": [],
+  "CT-14": [],
+  "CT-15": [],
+  "CT-16": [],
+  "CT-17": [],
+  "CT-18": []
+ },
+ "CT_in_FR_verification": {
+  "FR-GATE-01": [
+   "CT-16"
+  ],
+  "FR-POL-04": [
+   "CT-01"
+  ]
+ },
+ "CT_no_ac_link": [
+  "CT-04",
+  "CT-05",
+  "CT-06",
+  "CT-07",
+  "CT-08",
+  "CT-09",
+  "CT-10",
+  "CT-11",
+  "CT-12",
+  "CT-13",
+  "CT-14",
+  "CT-15",
+  "CT-16",
+  "CT-17",
+  "CT-18"
+ ],
+ "CT_spec_mentions": {
+  "CT-01": [
+   "12-specs/acceptance-criteria.md",
+   "12-specs/acceptance-criteria.md (range)",
+   "12-specs/features/f03-policy-definitions-rule-service.md",
+   "12-specs/features/f10-coexistence-change-safety.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)",
+   "12-specs/interface-contracts.md",
+   "12-specs/spec-readiness.md"
+  ],
+  "CT-02": [
+   "12-specs/acceptance-criteria.md (range)",
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-03": [
+   "12-specs/acceptance-criteria.md",
+   "12-specs/acceptance-criteria.md (range)",
+   "12-specs/features/f10-coexistence-change-safety.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-04": [
+   "12-specs/api-contracts.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-05": [
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-06": [
+   "12-specs/features/f04-safe-intake-exceptions.md",
+   "12-specs/features/f04-safe-intake-exceptions.md (range)",
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-07": [
+   "12-specs/features/f04-safe-intake-exceptions.md (range)",
+   "12-specs/features/f06-scheduled-runs.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-08": [
+   "12-specs/features/f04-safe-intake-exceptions.md (range)",
+   "12-specs/features/f06-scheduled-runs.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-09": [
+   "12-specs/features/f04-safe-intake-exceptions.md",
+   "12-specs/features/f04-safe-intake-exceptions.md (range)",
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-10": [
+   "12-specs/features/f06-scheduled-runs.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-11": [
+   "12-specs/acceptance-criteria.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)",
+   "12-specs/interface-contracts.md",
+   "12-specs/spec-readiness.md"
+  ],
+  "CT-12": [
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-13": [
+   "12-specs/features/f03-policy-definitions-rule-service.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)",
+   "12-specs/interface-contracts.md",
+   "12-specs/spec-readiness.md"
+  ],
+  "CT-14": [
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-15": [
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ],
+  "CT-16": [
+   "12-specs/api-contracts.md",
+   "12-specs/features/f02-human-disposition-gate.md",
+   "12-specs/features/f10-coexistence-change-safety.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)",
+   "12-specs/security-spec.md"
+  ],
+  "CT-17": [
+   "12-specs/acceptance-criteria.md",
+   "12-specs/error-handling-spec.md",
+   "12-specs/features/f06-scheduled-runs.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)",
+   "12-specs/observability-spec.md",
+   "12-specs/spec-readiness.md"
+  ],
+  "CT-18": [
+   "12-specs/features/f10-coexistence-change-safety.md",
+   "12-specs/features/f10-coexistence-change-safety.md (range)"
+  ]
+ },
+ "CT_zero_spec_mention": [],
+ "ERR_asserted_by_AC": 55,
+ "ERR_in_AC_but_undefined": [],
+ "ERR_not_asserted_by_AC": [
+  "E-AUTH-BAD-CREDENTIALS",
+  "E-CO-EGRESS-ATTEMPT",
+  "E-CO-UNAPPROVED-DEVIATION",
+  "E-DEC-CASE-NOT-FOUND",
+  "E-DEC-FIELD-TOO-LONG",
+  "E-GATE-UNKNOWN-ACTION",
+  "E-ID-LINK-NOT-FOUND",
+  "E-ID-NOT-FOUND",
+  "E-ID-SELF-LINK",
+  "E-INT-CONFLICT-ALREADY-RESOLVED",
+  "E-INT-ENVELOPE-INVALID",
+  "E-INT-ITEM-NOT-FOUND",
+  "E-INT-SOURCE-UNREACHABLE",
+  "E-MET-UNKNOWN-METRIC",
+  "E-POL-NOT-FOUND",
+  "E-POL-UNKNOWN-FUNCTION",
+  "E-REQ-INVALID",
+  "E-REV-NOT-FOUND",
+  "E-REV-QUERY-TOO-LONG",
+  "E-REV-SEARCH-DISABLED",
+  "E-REV-TEMPLATE-INVALID",
+  "E-RUN-ABANDONED",
+  "E-RUN-TOTALS-MISMATCH",
+  "E-RUN-UNKNOWN-JOB",
+  "E-SEC-AUDIT-TAMPER-DETECTED",
+  "E-SYS-DB-BUSY",
+  "E-SYS-INTERNAL"
+ ],
+ "ERR_total": 82,
+ "EV_without_req": [],
+ "FR_R1_full_chain": 43,
+ "FR_R2_ids": [
+  "FR-ID-03",
+  "FR-ID-04",
+  "FR-INT-08",
+  "FR-MET-07",
+  "FR-MET-08",
+  "FR-POL-05",
+  "FR-REV-03",
+  "FR-REV-04",
+  "FR-SEC-03"
+ ],
+ "FR_full_chain": 52,
+ "FR_has_B": [
+  "FR-CO-01",
+  "FR-DEC-01",
+  "FR-DEC-05",
+  "FR-DEC-06",
+  "FR-GATE-03",
+  "FR-GATE-04",
+  "FR-GATE-05",
+  "FR-INT-02",
+  "FR-INT-04",
+  "FR-INT-06",
+  "FR-POL-01",
+  "FR-POL-03",
+  "FR-POL-06",
+  "FR-RUN-01",
+  "FR-SEC-02"
+ ],
+ "FR_has_C": [
+  "FR-DEC-01",
+  "FR-INT-03",
+  "FR-MET-03",
+  "FR-REV-03"
+ ],
+ "FR_only_C": [],
+ "FR_sbr_levels": null,
+ "FR_with_ac": 52,
+ "FR_with_beh": 52,
+ "FR_with_beh_or_sbr": 52,
+ "FR_with_ct": 3,
+ "FR_with_neg": 44,
+ "FR_with_op": 45,
+ "FR_with_opd_in_text": {
+  "FR-DEC-05": [
+   "OPD-07"
+  ],
+  "FR-GATE-05": [
+   "OPD-05"
+  ],
+  "FR-POL-06": [
+   "OPD-04"
+  ],
+  "FR-RUN-01": [
+   "OPD-11"
+  ]
+ },
+ "FR_with_sbr": 37,
+ "FR_without_ac": [],
+ "FR_without_beh": [],
+ "FR_without_negative": [
+  "FR-INT-03",
+  "FR-INT-06",
+  "FR-INT-08",
+  "FR-MET-03",
+  "FR-MET-07",
+  "FR-POL-05",
+  "FR-POL-06",
+  "FR-RUN-02"
+ ],
+ "FR_without_op": [
+  "FR-CO-01",
+  "FR-CO-02",
+  "FR-CO-03",
+  "FR-CO-04",
+  "FR-INT-05",
+  "FR-INT-07",
+  "FR-SEC-03"
+ ],
+ "FR_without_sbr": [
+  "FR-CO-02",
+  "FR-CO-03",
+  "FR-DEC-04",
+  "FR-GATE-02",
+  "FR-ID-03",
+  "FR-ID-04",
+  "FR-INT-01",
+  "FR-INT-08",
+  "FR-MET-05",
+  "FR-MET-08",
+  "FR-POL-05",
+  "FR-REV-01",
+  "FR-REV-02",
+  "FR-REV-03",
+  "FR-REV-04"
+ ],
+ "NFR_covered": 16,
+ "NFR_no_fr_or_pnfr": [],
+ "NFR_only_r2_frs": [
+  "NFR-12"
+ ],
+ "NFR_uncovered": [],
+ "OD_not_referenced_by_AC": [
+  "OD-S12-01",
+  "OD-S12-02",
+  "OD-S12-08",
+  "OD-S12-14",
+  "OD-S12-18",
+  "OD-S12-19"
+ ],
+ "OD_not_referenced_via_chain": [
+  "OD-S12-01",
+  "OD-S12-02",
+  "OD-S12-08",
+  "OD-S12-14",
+  "OD-S12-18",
+  "OD-S12-19"
+ ],
+ "OD_referenced_via_chain": [
+  "OD-S12-03",
+  "OD-S12-04",
+  "OD-S12-05",
+  "OD-S12-06",
+  "OD-S12-07",
+  "OD-S12-09",
+  "OD-S12-10",
+  "OD-S12-11",
+  "OD-S12-12",
+  "OD-S12-13",
+  "OD-S12-15",
+  "OD-S12-16",
+  "OD-S12-17"
+ ],
+ "OD_total": 19,
+ "OP_ac_path_direct_or_beh_or_fr": 48,
+ "OP_cited_by_AC": 3,
+ "OP_cited_by_AC_or_BEH": 12,
+ "OP_cited_by_BEH": 12,
+ "OP_no_beh_ref": [
+  "OP-DEC-02",
+  "OP-DEC-03",
+  "OP-DEC-04",
+  "OP-DEC-05",
+  "OP-DEC-06",
+  "OP-GATE-01",
+  "OP-GATE-02",
+  "OP-GATE-03",
+  "OP-GATE-04",
+  "OP-ID-01",
+  "OP-ID-02",
+  "OP-ID-03",
+  "OP-ID-04",
+  "OP-ID-05",
+  "OP-INT-01",
+  "OP-INT-02",
+  "OP-INT-03",
+  "OP-INT-04",
+  "OP-MET-01",
+  "OP-MET-02",
+  "OP-MET-03",
+  "OP-MET-04",
+  "OP-MET-05",
+  "OP-MET-06",
+  "OP-MET-07",
+  "OP-MET-08",
+  "OP-POL-01",
+  "OP-POL-02",
+  "OP-POL-03",
+  "OP-POL-04",
+  "OP-POL-05",
+  "OP-POL-06",
+  "OP-POL-07",
+  "OP-POL-08",
+  "OP-REV-01",
+  "OP-REV-02",
+  "OP-REV-03",
+  "OP-REV-04",
+  "OP-RUN-01",
+  "OP-RUN-02",
+  "OP-RUN-03",
+  "OP-SEC-01",
+  "OP-SEC-02",
+  "OP-SEC-03",
+  "OP-SEC-04",
+  "OP-SEC-05",
+  "OP-SYS-01"
+ ],
+ "OP_only_via_fr": [
+  "OP-DEC-02",
+  "OP-DEC-03",
+  "OP-DEC-05",
+  "OP-DEC-06",
+  "OP-GATE-02",
+  "OP-ID-03",
+  "OP-ID-05",
+  "OP-INT-01",
+  "OP-INT-02",
+  "OP-INT-03",
+  "OP-INT-04",
+  "OP-MET-01",
+  "OP-MET-02",
+  "OP-MET-03",
+  "OP-MET-04",
+  "OP-MET-06",
+  "OP-MET-07",
+  "OP-MET-08",
+  "OP-POL-01",
+  "OP-POL-02",
+  "OP-POL-03",
+  "OP-POL-04",
+  "OP-POL-05",
+  "OP-POL-06",
+  "OP-POL-07",
+  "OP-POL-08",
+  "OP-RUN-01",
+  "OP-RUN-02",
+  "OP-RUN-03",
+  "OP-SEC-01",
+  "OP-SEC-02",
+  "OP-SEC-03",
+  "OP-SEC-04",
+  "OP-SEC-05",
+  "OP-SYS-01"
+ ],
+ "OP_r2": [
+  "OP-ID-04",
+  "OP-ID-05",
+  "OP-INT-04",
+  "OP-MET-05",
+  "OP-MET-06",
+  "OP-POL-07",
+  "OP-REV-03",
+  "OP-REV-04"
+ ],
+ "OP_with_ac_via_beh": 1,
+ "OP_without_ac_via_beh": [
+  "OP-DEC-02",
+  "OP-DEC-03",
+  "OP-DEC-04",
+  "OP-DEC-05",
+  "OP-DEC-06",
+  "OP-GATE-01",
+  "OP-GATE-02",
+  "OP-GATE-03",
+  "OP-GATE-04",
+  "OP-ID-01",
+  "OP-ID-02",
+  "OP-ID-03",
+  "OP-ID-04",
+  "OP-ID-05",
+  "OP-INT-01",
+  "OP-INT-02",
+  "OP-INT-03",
+  "OP-INT-04",
+  "OP-MET-01",
+  "OP-MET-02",
+  "OP-MET-03",
+  "OP-MET-04",
+  "OP-MET-05",
+  "OP-MET-06",
+  "OP-MET-07",
+  "OP-MET-08",
+  "OP-POL-01",
+  "OP-POL-02",
+  "OP-POL-03",
+  "OP-POL-04",
+  "OP-POL-05",
+  "OP-POL-06",
+  "OP-POL-07",
+  "OP-POL-08",
+  "OP-REV-01",
+  "OP-REV-02",
+  "OP-REV-03",
+  "OP-REV-04",
+  "OP-RUN-01",
+  "OP-RUN-02",
+  "OP-RUN-03",
+  "OP-SEC-01",
+  "OP-SEC-02",
+  "OP-SEC-03",
+  "OP-SEC-04",
+  "OP-SEC-05",
+  "OP-SYS-01"
+ ],
+ "OP_without_fr": [],
+ "PNFR_has_B": [
+  "PNFR-08",
+  "PNFR-10"
+ ],
+ "PNFR_only_C": [
+  "PNFR-01",
+  "PNFR-02",
+  "PNFR-03",
+  "PNFR-04",
+  "PNFR-05"
+ ],
+ "PNFR_with_ac": 20,
+ "PNFR_without_ac": [],
+ "PNFR_without_beh_or_sbr": [
+  "PNFR-01",
+  "PNFR-03",
+  "PNFR-04",
+  "PNFR-05"
+ ],
+ "RC_covered": 8,
+ "RC_no_fr_or_pnfr": [],
+ "RC_only_r2_frs": [],
+ "RC_uncovered": [],
+ "SBR_direct_ac": 2,
+ "SBR_no_path": [],
+ "SBR_param_ids": [
+  "SBR-DEC-03",
+  "SBR-GATE-03",
+  "SBR-INT-01",
+  "SBR-INT-07",
+  "SBR-POL-04",
+  "SBR-POL-06",
+  "SBR-RUN-04"
+ ],
+ "SBR_via_beh_text": 3,
+ "SBR_via_fr_only": [
+  "SBR-CO-01",
+  "SBR-CO-02",
+  "SBR-CO-03",
+  "SBR-DEC-01",
+  "SBR-DEC-02",
+  "SBR-DEC-04",
+  "SBR-DEC-05",
+  "SBR-DEC-06",
+  "SBR-DEC-07",
+  "SBR-GATE-01",
+  "SBR-GATE-02",
+  "SBR-GATE-03",
+  "SBR-GATE-04",
+  "SBR-GATE-05",
+  "SBR-ID-01",
+  "SBR-ID-02",
+  "SBR-ID-03",
+  "SBR-INT-02",
+  "SBR-INT-04",
+  "SBR-INT-05",
+  "SBR-INT-06",
+  "SBR-INT-07",
+  "SBR-INT-08",
+  "SBR-MET-01",
+  "SBR-MET-02",
+  "SBR-MET-03",
+  "SBR-MET-04",
+  "SBR-MET-05",
+  "SBR-MET-06",
+  "SBR-MET-07",
+  "SBR-POL-01",
+  "SBR-POL-02",
+  "SBR-POL-03",
+  "SBR-POL-04",
+  "SBR-POL-05",
+  "SBR-POL-06",
+  "SBR-POL-07",
+  "SBR-POL-08",
+  "SBR-RUN-01",
+  "SBR-RUN-02",
+  "SBR-RUN-03",
+  "SBR-RUN-04",
+  "SBR-SEC-01",
+  "SBR-SEC-02",
+  "SBR-SEC-03"
+ ],
+ "SBR_with_ac": 2,
+ "SBR_without_ac": [
+  "SBR-CO-01",
+  "SBR-CO-02",
+  "SBR-CO-03",
+  "SBR-DEC-01",
+  "SBR-DEC-02",
+  "SBR-DEC-04",
+  "SBR-DEC-05",
+  "SBR-DEC-06",
+  "SBR-DEC-07",
+  "SBR-GATE-01",
+  "SBR-GATE-02",
+  "SBR-GATE-03",
+  "SBR-GATE-04",
+  "SBR-GATE-05",
+  "SBR-ID-01",
+  "SBR-ID-02",
+  "SBR-ID-03",
+  "SBR-INT-02",
+  "SBR-INT-03",
+  "SBR-INT-04",
+  "SBR-INT-05",
+  "SBR-INT-06",
+  "SBR-INT-07",
+  "SBR-INT-08",
+  "SBR-MET-01",
+  "SBR-MET-02",
+  "SBR-MET-03",
+  "SBR-MET-04",
+  "SBR-MET-05",
+  "SBR-MET-06",
+  "SBR-MET-07",
+  "SBR-POL-01",
+  "SBR-POL-02",
+  "SBR-POL-03",
+  "SBR-POL-04",
+  "SBR-POL-05",
+  "SBR-POL-06",
+  "SBR-POL-07",
+  "SBR-POL-08",
+  "SBR-RUN-01",
+  "SBR-RUN-02",
+  "SBR-RUN-03",
+  "SBR-RUN-04",
+  "SBR-SEC-01",
+  "SBR-SEC-02",
+  "SBR-SEC-03"
+ ],
+ "SBR_without_req": [],
+ "SCH_without_req": [
+  "SCH-ERROR"
+ ],
+ "SEC_threats_without_req": [],
+ "SUC_covered": 11,
+ "SUC_no_fr_or_pnfr": [],
+ "SUC_only_r2_frs": [
+  "SUC-08"
+ ],
+ "SUC_uncovered": [],
+ "ac_kind": {
+  "edge": 41,
+  "negative": 105,
+  "positive": 95
+ },
+ "ac_total": 241,
+ "beh_total": 108,
+ "ct_total": 18,
+ "dangling_refs": {},
+ "fr_moscow_release": {
+  "Could/R2": 2,
+  "Must/R1": 40,
+  "Should/R1": 3,
+  "Should/R2": 7
+ },
+ "fr_release": {
+  "R1": 43,
+  "R2": 9
+ },
+ "fr_total": 52,
+ "op_release": {
+  "R1": 40,
+  "R2": 8
+ },
+ "op_total": 48,
+ "pnfr_total": 20,
+ "sbr_param": 7,
+ "sbr_total": 48,
+ "spec_inconsistency_counts": {
+  "BEH": 98
+ },
+ "spec_internal_inconsistencies": [
+  [
+   "BEH",
+   "BEH-CO-01",
+   [
+    "AC-CO-01",
+    "AC-CO-02",
+    "AC-CO-03"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-CO-02",
+   [
+    "AC-CO-01"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-CO-03",
+   [
+    "AC-CO-04",
+    "AC-CO-05"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-CO-04",
+   [
+    "AC-CO-06",
+    "AC-CO-07"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-CO-05",
+   [
+    "AC-CO-08"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-CO-06",
+   [
+    "AC-CO-09",
+    "AC-CO-10"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-CO-07",
+   [
+    "AC-CO-11",
+    "AC-CO-12"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-CO-08",
+   [
+    "AC-CO-13"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-CO-09",
+   [
+    "AC-CO-14"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-01",
+   [
+    "AC-DEC-02",
+    "AC-DEC-03",
+    "AC-DEC-04"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-02",
+   [
+    "AC-DEC-05",
+    "AC-DEC-07"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-03",
+   [
+    "AC-DEC-05"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-04",
+   [
+    "AC-DEC-06",
+    "AC-DEC-08"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-05",
+   [
+    "AC-DEC-09",
+    "AC-DEC-10",
+    "AC-DEC-11"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-06",
+   [
+    "AC-DEC-12",
+    "AC-DEC-13",
+    "AC-DEC-14"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-07",
+   [
+    "AC-DEC-15",
+    "AC-DEC-16",
+    "AC-DEC-17",
+    "AC-DEC-18",
+    "AC-DEC-19",
+    "AC-DEC-27",
+    "AC-DEC-28"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-08",
+   [
+    "AC-DEC-20",
+    "AC-DEC-21"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-09",
+   [
+    "AC-DEC-22",
+    "AC-DEC-23"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-DEC-11",
+   [
+    "AC-SEC-14"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-GATE-01",
+   [
+    "AC-GATE-09",
+    "AC-GATE-12",
+    "AC-GATE-21"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-GATE-02",
+   [
+    "AC-GATE-11",
+    "AC-GATE-13",
+    "AC-GATE-14"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-GATE-03",
+   [
+    "AC-GATE-15",
+    "AC-GATE-16"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-GATE-05",
+   [
+    "AC-GATE-01",
+    "AC-GATE-02",
+    "AC-GATE-22"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-GATE-06",
+   [
+    "AC-GATE-03",
+    "AC-GATE-05",
+    "AC-GATE-06",
+    "AC-GATE-07",
+    "AC-GATE-08"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-GATE-07",
+   [
+    "AC-GATE-09"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-GATE-08",
+   [
+    "AC-GATE-18",
+    "AC-GATE-19",
+    "AC-GATE-20"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-GATE-09",
+   [
+    "AC-GATE-01"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-ID-01",
+   [
+    "AC-ID-01",
+    "AC-ID-02",
+    "AC-ID-09",
+    "AC-ID-10",
+    "AC-ID-11"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-ID-02",
+   [
+    "AC-ID-03",
+    "AC-ID-04",
+    "AC-ID-05"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-ID-03",
+   [
+    "AC-ID-02",
+    "AC-ID-03"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-ID-04",
+   [
+    "AC-ID-06",
+    "AC-ID-07",
+    "AC-ID-08",
+    "AC-ID-09",
+    "AC-ID-10"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-ID-05",
+   [
+    "AC-ID-12"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-ID-06",
+   [
+    "AC-ID-13",
+    "AC-ID-14",
+    "AC-ID-17"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-ID-07",
+   [
+    "AC-ID-15",
+    "AC-ID-16"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-ID-08",
+   [
+    "AC-ID-15"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-01",
+   [
+    "AC-INT-01",
+    "AC-INT-02",
+    "AC-INT-03",
+    "AC-INT-29"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-02",
+   [
+    "AC-INT-05",
+    "AC-INT-06",
+    "AC-INT-07"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-03",
+   [
+    "AC-INT-04",
+    "AC-INT-05"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-04",
+   [
+    "AC-INT-07",
+    "AC-INT-08"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-05",
+   [
+    "AC-INT-09",
+    "AC-INT-10",
+    "AC-INT-11",
+    "AC-INT-15",
+    "AC-INT-16"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-06",
+   [
+    "AC-INT-14"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-07",
+   [
+    "AC-INT-20",
+    "AC-INT-21"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-08",
+   [
+    "AC-INT-17",
+    "AC-INT-18",
+    "AC-INT-19"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-09",
+   [
+    "AC-INT-22",
+    "AC-INT-23",
+    "AC-INT-24"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-11",
+   [
+    "AC-INT-25",
+    "AC-INT-26",
+    "AC-INT-27"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-INT-12",
+   [
+    "AC-INT-28"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-01",
+   [
+    "AC-MET-01",
+    "AC-MET-15"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-02",
+   [
+    "AC-MET-02"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-03",
+   [
+    "AC-MET-03",
+    "AC-MET-04",
+    "AC-MET-05"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-04",
+   [
+    "AC-MET-06",
+    "AC-MET-07",
+    "AC-MET-08"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-05",
+   [
+    "AC-MET-09",
+    "AC-MET-10",
+    "AC-MET-11",
+    "AC-MET-13"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-06",
+   [
+    "AC-MET-12"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-07",
+   [
+    "AC-MET-14"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-08",
+   [
+    "AC-MET-17",
+    "AC-MET-18"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-10",
+   [
+    "AC-MET-19"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-MET-11",
+   [
+    "AC-MET-20"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-OBS-02",
+   [
+    "AC-OBS-02",
+    "AC-OBS-03"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-OBS-03",
+   [
+    "AC-OBS-07"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-OBS-04",
+   [
+    "AC-OBS-05"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-OBS-05",
+   [
+    "AC-OBS-08"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-OBS-06",
+   [
+    "AC-OBS-06"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-OBS-07",
+   [
+    "AC-NFR-10"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-OBS-08",
+   [
+    "AC-OBS-02"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-01",
+   [
+    "AC-POL-01",
+    "AC-POL-25"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-02",
+   [
+    "AC-POL-01",
+    "AC-POL-06"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-03",
+   [
+    "AC-POL-02",
+    "AC-POL-03",
+    "AC-POL-05"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-04",
+   [
+    "AC-POL-06",
+    "AC-POL-07",
+    "AC-POL-08"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-05",
+   [
+    "AC-POL-09",
+    "AC-POL-10"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-06",
+   [
+    "AC-POL-12"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-07",
+   [
+    "AC-POL-11",
+    "AC-POL-12",
+    "AC-POL-13",
+    "AC-POL-14"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-08",
+   [
+    "AC-POL-16",
+    "AC-POL-17",
+    "AC-POL-18"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-09",
+   [
+    "AC-POL-19",
+    "AC-POL-20",
+    "AC-POL-21"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-POL-10",
+   [
+    "AC-POL-24"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-REV-01",
+   [
+    "AC-REV-01",
+    "AC-REV-02",
+    "AC-REV-03",
+    "AC-REV-04"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-REV-02",
+   [
+    "AC-REV-05",
+    "AC-REV-06",
+    "AC-REV-07",
+    "AC-REV-08"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-REV-03",
+   [
+    "AC-REV-09",
+    "AC-REV-10",
+    "AC-REV-11"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-REV-04",
+   [
+    "AC-REV-12",
+    "AC-REV-13",
+    "AC-REV-14"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-REV-05",
+   [
+    "AC-REV-10",
+    "AC-REV-17"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-REV-07",
+   [
+    "AC-REV-18"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-REV-08",
+   [
+    "AC-REV-19"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-RUN-01",
+   [
+    "AC-RUN-04"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-RUN-02",
+   [
+    "AC-RUN-01",
+    "AC-RUN-03"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-RUN-03",
+   [
+    "AC-RUN-05"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-RUN-04",
+   [
+    "AC-RUN-06"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-RUN-05",
+   [
+    "AC-RUN-08",
+    "AC-RUN-09",
+    "AC-RUN-10"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-RUN-08",
+   [
+    "AC-RUN-15"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-RUN-09",
+   [
+    "AC-NFR-02"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-01",
+   [
+    "AC-SEC-01",
+    "AC-SEC-02"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-02",
+   [
+    "AC-SEC-04",
+    "AC-SEC-05",
+    "AC-SEC-06",
+    "AC-SEC-07"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-03",
+   [
+    "AC-SEC-08"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-04",
+   [
+    "AC-SEC-03"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-05",
+   [
+    "AC-SEC-09",
+    "AC-SEC-13",
+    "AC-SEC-14"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-06",
+   [
+    "AC-SEC-10",
+    "AC-SEC-11",
+    "AC-SEC-12"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-07",
+   [
+    "AC-OBS-04",
+    "AC-SEC-15",
+    "AC-SEC-18"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-08",
+   [
+    "AC-SEC-16"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-09",
+   [
+    "AC-SEC-17"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-10",
+   [
+    "AC-SEC-19",
+    "AC-SEC-20"
+   ]
+  ],
+  [
+   "BEH",
+   "BEH-SEC-11",
+   [
+    "AC-SEC-18"
+   ]
+  ]
+ ],
+ "stage_paths_used": {
+  "15": "docs/15-modernization/",
+  "16": "docs/16-repo-validation/",
+  "25": "docs/25-governance/",
+  "26": "docs/26-tevv/",
+  "27": "docs/27-hardening/",
+  "28": "docs/28-resilience/",
+  "30": "docs/30-release/",
+  "31": "docs/31-observability/",
+  "32": "docs/32-finops/"
+ },
+ "test_classes": {
+  "A: executable now in sandbox (no open decision)": 197,
+  "B: decision-dependent (test both modes)": 35,
+  "C: synthetic/sandbox proxy only": 9
+ },
+ "test_levels": {
+  "api": 16,
+  "characterization/golden": 6,
+  "contract": 5,
+  "database": 9,
+  "nfr-measurement": 10,
+  "service/unit": 180,
+  "static/introspection": 12,
+  "ui/manual-walkthrough": 3
+ },
+ "tests_by_execute_stage": {
+  "16": 196,
+  "25": 1,
+  "26": 26,
+  "27": 1,
+  "28": 3,
+  "30": 1,
+  "31": 12,
+  "32": 1
+ },
+ "tests_with_vague_terms": [],
+ "upstream_counts": {
+  "BR": 13,
+  "NFR": 16,
+  "RC": 8,
+  "SUC": 11
+ }
+}
