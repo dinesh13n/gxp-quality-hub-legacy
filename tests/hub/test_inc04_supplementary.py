@@ -261,6 +261,31 @@ class TST_HUB_INC04_Supplementary(unittest.TestCase):
         finally:
             st.close()
 
+    def test_TST_HUB_INC04_S08_rollback_l2_restore_then_rebuild_is_content_identical(self):
+        """S08 (rollback-strategy INC-04: L1 + L2 rebuild): restore the pre-M002 backup -> no policy tables, audit chain verifies; re-applying
+        M002, seed and the as-found load reproduces identical rule-set content hashes (the rebuild script is the CLI)."""
+        base = S.tmpdir("s08-")
+        cfg = H.write_config(base)
+        d = os.path.join(base, "data")
+        bk = os.path.join(base, "bk")
+        self.assertEqual(H.admin(["migrate", "--data-dir", d, "--backup-root", bk], cfg).returncode, 0)
+        p = policy_cli(["migrate", "--data-dir", d, "--backup-root", bk], cfg)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        label = json.loads(p.stdout)["backup"]["label"]
+        self.assertEqual(policy_cli(["seed", "--data-dir", d], cfg).returncode, 0)
+        run_dir = S.tmpdir("s08run-")
+        first = json.loads(policy_cli(["load-as-found", "--data-dir", d, "--legacy-root", S.LEGACY_ROOT, "--run-dir", run_dir], cfg).stdout)["rulesets"]
+        p = H.admin(["restore", "--data-dir", d, "--backup", os.path.join(bk, label)], cfg)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        rep = H.out_json(p)
+        self.assertEqual((rep["verify_audit"]["status"], rep["schema_after_restore"]), ("ok", ["M000", "M001"]))
+        self.assertEqual(json.loads(policy_cli(["status", "--data-dir", d], cfg).stdout)["state"], "absent")
+        self.assertEqual(policy_cli(["migrate", "--data-dir", d, "--backup-root", bk], cfg).returncode, 0)
+        self.assertEqual(policy_cli(["seed", "--data-dir", d], cfg).returncode, 0)
+        second = json.loads(policy_cli(["load-as-found", "--data-dir", d, "--legacy-root", S.LEGACY_ROOT, "--run-dir", run_dir], cfg).stdout)["rulesets"]
+        self.assertEqual([(r["ruleset_ref"], r["content_sha256"]) for r in first], [(r["ruleset_ref"], r["content_sha256"]) for r in second])
+        self.assertEqual([r["loaded"] for r in second], [True, True, True])
+
 
 if __name__ == "__main__":
     unittest.main()
