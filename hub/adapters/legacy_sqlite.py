@@ -58,7 +58,7 @@ class ReadOnlyLegacy(object):
             return self._con.execute(sql, params).fetchall()
         except sqlite3.DatabaseError as e:
             msg = str(e).lower()
-            if "not authorized" in msg or "readonly" in msg or "read-only" in msg:
+            if "authoriz" in msg or "readonly" in msg or "read-only" in msg:
                 raise LegacyWriteRefused({"store": self.store, "sqlite": str(e)})
             raise
 
@@ -91,6 +91,9 @@ def open_snapshot(legacy_root, store, run_dir, pinned=True):
     snap_dir = os.path.join(run_dir, "snapshots")
     os.makedirs(snap_dir, exist_ok=True)
     snap = os.path.join(snap_dir, store)
+    if os.path.exists(snap):  # previous snapshot in this guarded run dir (read-only file): replace it
+        os.chmod(snap, 0o644)
+        os.remove(snap)
     shutil.copyfile(src, snap)
     os.chmod(snap, 0o444)
     digest = sha256_file(snap)
