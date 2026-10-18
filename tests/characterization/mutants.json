@@ -1,0 +1,112 @@
+{
+ "schema": "mutants/v1",
+ "source": "docs/07-repo-assessment/evidence/scripts/mutation_probe.sh (M1-M15, verbatim from/to strings)",
+ "gate": "all 15 must be KILLED (CT-H6, Stage 14 CG-3)",
+ "mutants": [
+  {
+   "id": "M1",
+   "file": "app/legacy_logic.py",
+   "from": "amount > 50000",
+   "to": "amount > 1",
+   "description": "urgent amount threshold 50000 -> 1"
+  },
+  {
+   "id": "M2",
+   "file": "app/legacy_logic.py",
+   "from": "if severity=='HIGH' or status=='ESCALATED': return 'review'",
+   "to": "if False: return 'review'",
+   "description": "'review' tier removed"
+  },
+  {
+   "id": "M3",
+   "file": "app/legacy_logic.py",
+   "from": "return severity in ('HIGH','CRITICAL') or status in ('ESCALATED','REOPENED')",
+   "to": "return False",
+   "description": "manual_review_required always False"
+  },
+  {
+   "id": "M4",
+   "file": "app/legacy_logic.py",
+   "from": "if status=='CLOSED': return 'archive'",
+   "to": "if False: return 'archive'",
+   "description": "CLOSED no longer archived"
+  },
+  {
+   "id": "M5",
+   "file": "app/partner_feeds.py",
+   "from": "elif payload.get('quantity',0)<0:",
+   "to": "elif False:",
+   "description": "negative-quantity rejection removed"
+  },
+  {
+   "id": "M6",
+   "file": "app/partner_feeds.py",
+   "from": "elif row['processing_status']=='REPLAY':",
+   "to": "elif False:",
+   "description": "replay duplicate detection removed"
+  },
+  {
+   "id": "M7",
+   "file": "app/partner_feeds.py",
+   "from": "if not key or row['schema_rev']=='unsupported':",
+   "to": "if False:",
+   "description": "schema/key validation removed"
+  },
+  {
+   "id": "M8",
+   "file": "legacy_batch/shift_reconciliation.py",
+   "from": "row['value']>row['threshold']",
+   "to": "row['value']<row['threshold']",
+   "description": "night-shift threshold comparison inverted"
+  },
+  {
+   "id": "M9",
+   "file": "app/gateway_bridge.py",
+   "from": "if not present:",
+   "to": "if False:",
+   "description": "unknown business_key no longer rejected"
+  },
+  {
+   "id": "M10",
+   "file": "app/server.py",
+   "from": "r['manual_review_required']=manual_review_required(r['status'],r['severity'])",
+   "to": "r['manual_review_required']=False",
+   "description": "API manual_review flag hard-wired False"
+  },
+  {
+   "id": "M11",
+   "file": "app/server.py",
+   "from": "limit=max(1,min(100,int(q.get('limit',['20'])[0])));offset=max(0,int(q.get('offset',['0'])[0]))\n            except ValueError:return self.respond(400,{'error':'invalid pagination'})\n            with connect() as c:\n                rows=[dict(x) for x in c.execute('SELECT * FROM '+table+' LIMIT ? OFFSET ?',(limit,offset))]\n                total=c.execute('SELECT COUNT(*) FROM '+table).fetchone()[0]\n            return self.respond(200,{'resource':table,'total':total,'items':rows})\n        if u.path.startswith('/api/domain/')",
+   "to": "limit=1;offset=0\n            except ValueError:return self.respond(400,{'error':'invalid pagination'})\n            with connect() as c:\n                rows=[dict(x) for x in c.execute('SELECT * FROM '+table+' LIMIT ? OFFSET ?',(limit,offset))]\n                total=c.execute('SELECT COUNT(*) FROM '+table).fetchone()[0]\n            return self.respond(200,{'resource':table,'total':total,'items':rows})\n        if u.path.startswith('/api/domain/')",
+   "description": "partners pagination ignores limit/offset"
+  },
+  {
+   "id": "M12",
+   "file": "app/baseline.py",
+   "from": "'urgent_cases':sum(priority(r['status'],r['severity'],r['amount'])=='urgent' for r in data)",
+   "to": "'urgent_cases':0",
+   "description": "baseline urgent_cases hard-wired 0"
+  },
+  {
+   "id": "M13",
+   "file": "legacy_js/legacy_policy.js",
+   "from": "*1.05",
+   "to": "*1.5",
+   "description": "JS tolerance 5% -> 50%"
+  },
+  {
+   "id": "M14",
+   "file": "app/historical_estate.py",
+   "from": "if exists:return {'status':'already_imported','import_id':digest,'rows':0}",
+   "to": "pass",
+   "description": "idempotent file import removed"
+  },
+  {
+   "id": "M15",
+   "file": "services/source_gateway/server.py",
+   "from": "if mode=='timeout':return self.reply(503",
+   "to": "if mode=='timeout':return self.reply(200",
+   "description": "gateway failure-mode 503 -> 200"
+  }
+ ]
+}

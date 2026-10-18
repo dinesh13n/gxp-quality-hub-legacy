@@ -1,0 +1,79 @@
+{
+ "consume_first3": [
+  {
+   "message_id": "M000000110",
+   "payload": {
+    "ref": "C00000110",
+    "schema_version": "1",
+    "status": "OPEN"
+   }
+  },
+  {
+   "message_id": "M000000007",
+   "payload": {
+    "ref": "C00000007",
+    "schema_version": "1",
+    "status": "CLOSED"
+   }
+  },
+  {
+   "message_id": "M000000022",
+   "payload": {
+    "ref": "C00000022",
+    "schema_version": "1",
+    "status": "CLOSED"
+   }
+  }
+ ],
+ "consume_limit0": [],
+ "empty": {
+  "accepted": 0,
+  "duplicates": 0,
+  "invalid": 0,
+  "received": 0
+ },
+ "missing_field": {
+  "accepted": 0,
+  "duplicates": 0,
+  "invalid": 1,
+  "received": 1
+ },
+ "non_dict": {
+  "accepted": 0,
+  "duplicates": 0,
+  "invalid": 3,
+  "received": 3
+ },
+ "ok_then_dup": [
+  {
+   "accepted": 1,
+   "duplicates": 0,
+   "invalid": 0,
+   "received": 1
+  },
+  {
+   "accepted": 0,
+   "duplicates": 1,
+   "invalid": 0,
+   "received": 1
+  }
+ ],
+ "same_msg_different_key_is_dup": {
+  "accepted": 0,
+  "duplicates": 1,
+  "invalid": 0,
+  "received": 1
+ },
+ "sql_injection_key": {
+  "accepted": 0,
+  "duplicates": 0,
+  "invalid": 1,
+  "received": 1
+ },
+ "unknown_key": {
+  "accepted": 0,
+  "duplicates": 0,
+  "invalid": 1,
+  "received": 1
+ }
+}

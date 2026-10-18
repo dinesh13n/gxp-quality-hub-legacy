@@ -1,0 +1,2274 @@
+{
+ "app.baseline": {
+  "cmd": "/usr/bin/python3 -m app.baseline",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "{\n  \"records\": 125,\n  \"open_cases\": 89,\n  \"urgent_cases\": 2,\n  \"mean_amount\": 4982.61,\n  \"sites\": 6,\n  \"hours_per_case\": 0.603\n}\n"
+ },
+ "app.operational_report": {
+  "cmd": "/usr/bin/python3 -m app.operational_report",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "{\n  \"domain\": \"Life Sciences\",\n  \"parent_records\": 125,\n  \"detail_records\": 42,\n  \"parents_with_detail\": 42,\n  \"parents_without_detail\": 83,\n  \"ingested_source_messages\": 1\n}\n"
+ },
+ "archived_documents_file_counts": {
+  "regen": 421,
+  "shipped": 421
+ },
+ "archived_documents_regen": {
+  "cmd": "/usr/bin/python3 -m app.archived_documents",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "{\"count\": 420, \"synthetic\": true, \"languages\": [\"en\", \"de\", \"hi\", \"ja\", \"pt\", \"es\"], \"format_counts\": {\"eml\": 210, \"html\": 210}}\n"
+ },
+ "archived_documents_regen_equals_shipped": true,
+ "baseline_6000_seed4326": {
+  "cmd": "/usr/bin/python3 -m app.baseline",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "{\n  \"records\": 6000,\n  \"open_cases\": 4251,\n  \"urgent_cases\": 159,\n  \"mean_amount\": 4403.0,\n  \"sites\": 6,\n  \"hours_per_case\": 0.601\n}\n"
+ },
+ "cases_regen_match": {
+  "125/4100": {
+   "equals_shipped": {
+    "batch_records": true,
+    "capa_actions": true,
+    "cases": true,
+    "deviations": true,
+    "events": true,
+    "lab_results": true,
+    "materials": true,
+    "operating_costs": true,
+    "sop_versions": true,
+    "source_messages": true
+   },
+   "hashes": {
+    "batch_records": {
+     "rows": 125,
+     "sha256": "ff690186a4043498"
+    },
+    "capa_actions": {
+     "rows": 21,
+     "sha256": "adb5bc356e574de8"
+    },
+    "cases": {
+     "rows": 125,
+     "sha256": "f218bf3b2ef3519c"
+    },
+    "deviations": {
+     "rows": 42,
+     "sha256": "d3c7af0ac387a6fe"
+    },
+    "events": {
+     "rows": 145,
+     "sha256": "caf27af2566ad80b"
+    },
+    "lab_results": {
+     "rows": 125,
+     "sha256": "7ba77c0efde0361a"
+    },
+    "materials": {
+     "rows": 30,
+     "sha256": "b542246f3cb04ef3"
+    },
+    "operating_costs": {
+     "rows": 36,
+     "sha256": "ca5ea4890abbca65"
+    },
+    "sop_versions": {
+     "rows": 45,
+     "sha256": "10e2ee89c4cc0b03"
+    },
+    "source_messages": {
+     "rows": 15,
+     "sha256": "64513a32dd7d9ffd"
+    }
+   },
+   "rc": 0,
+   "stderr": "",
+   "stdout": "{\"enterprise\": {\"deviations\": 42, \"lab_results\": 125, \"capa_actions\": 21, \"sop_versions\": 45}, \"cases\": 125, \"events\": 145, \"messages\": 15, \"seed\": 4100, \"domain\": {\"entity\": \"materials\", \"entity_count\": 30, \"detail\": \"batch_records\", \"detail_count\": 125}}"
+  },
+  "125/4326": {
+   "equals_shipped": {
+    "batch_records": false,
+    "capa_actions": false,
+    "cases": false,
+    "deviations": false,
+    "events": false,
+    "lab_results": false,
+    "materials": false,
+    "operating_costs": false,
+    "sop_versions": true,
+    "source_messages": false
+   },
+   "hashes": {
+    "batch_records": {
+     "rows": 125,
+     "sha256": "7d059b3efc997cb0"
+    },
+    "capa_actions": {
+     "rows": 21,
+     "sha256": "64b97e4ce7e4600a"
+    },
+    "cases": {
+     "rows": 125,
+     "sha256": "6fea23a122798d6f"
+    },
+    "deviations": {
+     "rows": 42,
+     "sha256": "9cff32a9d35838f2"
+    },
+    "events": {
+     "rows": 155,
+     "sha256": "f5501fb021b81f40"
+    },
+    "lab_results": {
+     "rows": 125,
+     "sha256": "4ddd6f44c348f4b7"
+    },
+    "materials": {
+     "rows": 30,
+     "sha256": "944bfa444707be4d"
+    },
+    "operating_costs": {
+     "rows": 36,
+     "sha256": "913e1831b4ac7bb2"
+    },
+    "sop_versions": {
+     "rows": 45,
+     "sha256": "10e2ee89c4cc0b03"
+    },
+    "source_messages": {
+     "rows": 12,
+     "sha256": "485cb23a51709c06"
+    }
+   },
+   "rc": 0,
+   "stderr": "",
+   "stdout": "{\"enterprise\": {\"deviations\": 42, \"lab_results\": 125, \"capa_actions\": 21, \"sop_versions\": 45}, \"cases\": 125, \"events\": 155, \"messages\": 12, \"seed\": 4326, \"domain\": {\"entity\": \"materials\", \"entity_count\": 30, \"detail\": \"batch_records\", \"detail_count\": 125}}"
+  },
+  "6000/4326": {
+   "equals_shipped": {
+    "batch_records": false,
+    "capa_actions": false,
+    "cases": false,
+    "deviations": false,
+    "events": false,
+    "lab_results": false,
+    "materials": false,
+    "operating_costs": false,
+    "sop_versions": true,
+    "source_messages": false
+   },
+   "hashes": {
+    "batch_records": {
+     "rows": 6000,
+     "sha256": "2449cda3663f971b"
+    },
+    "capa_actions": {
+     "rows": 1000,
+     "sha256": "b2806b78d5840f9c"
+    },
+    "cases": {
+     "rows": 6000,
+     "sha256": "94c63547270d974d"
+    },
+    "deviations": {
+     "rows": 2000,
+     "sha256": "a33e853d52207bbe"
+    },
+    "events": {
+     "rows": 7001,
+     "sha256": "327b2172dfbe1e26"
+    },
+    "lab_results": {
+     "rows": 6000,
+     "sha256": "c96e0a04064e5664"
+    },
+    "materials": {
+     "rows": 750,
+     "sha256": "35ff078bfc741842"
+    },
+    "operating_costs": {
+     "rows": 36,
+     "sha256": "3102b48abbd05deb"
+    },
+    "sop_versions": {
+     "rows": 45,
+     "sha256": "10e2ee89c4cc0b03"
+    },
+    "source_messages": {
+     "rows": 701,
+     "sha256": "d2f51cf6c3b0c119"
+    }
+   },
+   "rc": 0,
+   "stderr": "",
+   "stdout": "{\"enterprise\": {\"deviations\": 2000, \"lab_results\": 6000, \"capa_actions\": 1000, \"sop_versions\": 45}, \"cases\": 6000, \"events\": 7001, \"messages\": 701, \"seed\": 4326, \"domain\": {\"entity\": \"materials\", \"entity_count\": 750, \"detail\": \"batch_records\", \"detail_count\": 6000}}"
+  }
+ },
+ "cases_shipped_hashes": {
+  "batch_records": {
+   "rows": 125,
+   "sha256": "ff690186a4043498"
+  },
+  "capa_actions": {
+   "rows": 21,
+   "sha256": "adb5bc356e574de8"
+  },
+  "cases": {
+   "rows": 125,
+   "sha256": "f218bf3b2ef3519c"
+  },
+  "deviations": {
+   "rows": 42,
+   "sha256": "d3c7af0ac387a6fe"
+  },
+  "events": {
+   "rows": 145,
+   "sha256": "caf27af2566ad80b"
+  },
+  "lab_results": {
+   "rows": 125,
+   "sha256": "7ba77c0efde0361a"
+  },
+  "materials": {
+   "rows": 30,
+   "sha256": "b542246f3cb04ef3"
+  },
+  "operating_costs": {
+   "rows": 36,
+   "sha256": "ca5ea4890abbca65"
+  },
+  "sop_versions": {
+   "rows": 45,
+   "sha256": "10e2ee89c4cc0b03"
+  },
+  "source_messages": {
+   "rows": 15,
+   "sha256": "64513a32dd7d9ffd"
+  }
+ },
+ "csv_reference_bundled": {
+  "decimal_total": "218191169.74",
+  "float_total": 218191169.74,
+  "negative_rows": 236,
+  "summed_rows": 49800,
+  "unparsable_rows": 200
+ },
+ "csv_reference_tiny": {
+  "decimal_total": "10497082.12",
+  "float_total": 10497082.12,
+  "negative_rows": 11,
+  "summed_rows": 2390,
+  "unparsable_rows": 10
+ },
+ "enterprise_legacy_regen": {
+  "cmd": "/usr/bin/python3 -m app.enterprise_legacy",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "{\"integrity\": \"ok\", \"fk_violations\": 0, \"entities\": {\"organizations\": 96, \"operational_objects\": 12500, \"state_history\": 12500, \"document_links\": 12500, \"evidence_events\": 12500, \"policy_register\": 40, \"cross_references\": 4166, \"workflow_tasks\": 6250, \"financial_adjustments\": 3125, \"integration_attempts\": 2500, \"access_audit\": 4167, \"retention_events\": 2084}}\n"
+ },
+ "enterprise_legacy_regen_equals_shipped": {
+  "access_audit": true,
+  "cross_references": true,
+  "document_links": true,
+  "evidence_events": true,
+  "financial_adjustments": true,
+  "integration_attempts": true,
+  "operational_objects": true,
+  "organizations": true,
+  "policy_register": true,
+  "retention_events": true,
+  "state_history": true,
+  "workflow_tasks": true
+ },
+ "enterprise_legacy_shipped_hashes": {
+  "access_audit": {
+   "rows": 4167,
+   "sha256": "02d6c3c1f680be1c"
+  },
+  "cross_references": {
+   "rows": 4166,
+   "sha256": "e89d12c6d4dbb4c1"
+  },
+  "document_links": {
+   "rows": 12500,
+   "sha256": "06a99158be22cb1f"
+  },
+  "evidence_events": {
+   "rows": 12500,
+   "sha256": "cc32ec3fde030e48"
+  },
+  "financial_adjustments": {
+   "rows": 3125,
+   "sha256": "c356852adfca41f0"
+  },
+  "integration_attempts": {
+   "rows": 2500,
+   "sha256": "9cbaac7c1badffc9"
+  },
+  "operational_objects": {
+   "rows": 12500,
+   "sha256": "13608035c747eed7"
+  },
+  "organizations": {
+   "rows": 96,
+   "sha256": "78b90fc4ed5ce7c0"
+  },
+  "policy_register": {
+   "rows": 40,
+   "sha256": "72500f05f438f10d"
+  },
+  "retention_events": {
+   "rows": 2084,
+   "sha256": "fc9d692148c7e795"
+  },
+  "state_history": {
+   "rows": 12500,
+   "sha256": "dfdf7daf47fcc684"
+  },
+  "workflow_tasks": {
+   "rows": 6250,
+   "sha256": "91683c8fde0ad483"
+  }
+ },
+ "gateway_bridge_sequence": [
+  {
+   "args": [
+    "--limit",
+    "50"
+   ],
+   "err": "",
+   "out": "{\"accepted\": 50, \"duplicates\": 0, \"invalid\": 0, \"received\": 50}",
+   "rc": 0
+  },
+  {
+   "args": [
+    "--limit",
+    "50"
+   ],
+   "err": "",
+   "out": "{\"accepted\": 50, \"duplicates\": 0, \"invalid\": 0, \"received\": 50}",
+   "rc": 0
+  },
+  {
+   "args": [
+    "--limit",
+    "50",
+    "--offset",
+    "0"
+   ],
+   "err": "",
+   "out": "{\"accepted\": 0, \"duplicates\": 50, \"invalid\": 0, \"received\": 50}",
+   "rc": 0
+  },
+  {
+   "args": [
+    "--limit",
+    "200",
+    "--offset",
+    "0"
+   ],
+   "err": "",
+   "out": "{\"accepted\": 25, \"duplicates\": 100, \"invalid\": 0, \"received\": 125}",
+   "rc": 0
+  },
+  {
+   "args": [
+    "--limit",
+    "50"
+   ],
+   "err": "",
+   "out": "{\"accepted\": 0, \"duplicates\": 0, \"invalid\": 0, \"received\": 0}",
+   "rc": 0
+  }
+ ],
+ "gateway_checkpoint": [
+  [
+   "primary",
+   125
+  ]
+ ],
+ "gateway_inbox_after": [
+  126,
+  125,
+  126
+ ],
+ "gateway_inbox_event_type_counts": [
+  [
+   "batch_created",
+   33
+  ],
+  [
+   "deviation_review",
+   31
+  ],
+  [
+   "lab_test",
+   31
+  ],
+  [
+   "qa_disposition",
+   31
+  ]
+ ],
+ "gateway_offset_past_end": {
+  "count": 0,
+  "items": [],
+  "next_offset": 5000
+ },
+ "gateway_schema_0.9_events_stored": 7,
+ "gateway_unreachable": {
+  "cmd": "/usr/bin/python3 -m app.gateway_bridge --source-url http://127.0.0.1:1",
+  "rc": 1,
+  "stderr": "+str(offset)+'&limit='+str(limit),timeout=5) as response:\n  File \"/usr/lib/python3.10/urllib/request.py\", line 216, in urlopen\n    return opener.open(url, data, timeout)\n  File \"/usr/lib/python3.10/urllib/request.py\", line 519, in open\n    response = self._open(req, data)\n  File \"/usr/lib/python3.10/urllib/request.py\", line 536, in _open\n    result = self._call_chain(self.handle_open, protocol, protocol +\n  File \"/usr/lib/python3.10/urllib/request.py\", line 496, in _call_chain\n    result = func(*args)\n  File \"/usr/lib/python3.10/urllib/request.py\", line 1377, in http_open\n    return self.do_open(http.client.HTTPConnection, req)\n  File \"/usr/lib/python3.10/urllib/request.py\", line 1351, in do_open\n    raise URLError(err)\nurllib.error.URLError: <urlopen error [Errno 111] Connection refused>\n",
+  "stdout": ""
+ },
+ "generate_documents_equals_shipped": true,
+ "generate_documents_regen": {
+  "cmd": "/usr/bin/python3 -m app.generate_documents",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/stage7/c_gen2/data/documents/source_documents.jsonl\n"
+ },
+ "historical_estate_import_on_cleared_tables": [
+  "{\"status\": \"accepted\", \"import_id\": \"d5f841003e666012a16a78b7\", \"rows\": 2400}",
+  "{\"status\": \"already_imported\", \"import_id\": \"d5f841003e666012a16a78b7\", \"rows\": 0}"
+ ],
+ "historical_estate_import_on_shipped_db": [
+  "{\"status\": \"already_imported\", \"import_id\": \"d5f841003e666012a16a78b7\", \"rows\": 0}",
+  "{\"status\": \"already_imported\", \"import_id\": \"d5f841003e666012a16a78b7\", \"rows\": 0}"
+ ],
+ "historical_fixture_tiny_csv_equal_shipped": true,
+ "historical_fixture_tiny_events_equal": true,
+ "historical_fixture_tiny_finance_table_equal": true,
+ "historical_fixture_tiny_manifest_equal_shipped": true,
+ "historical_fixture_tiny_reference_table_equal": true,
+ "java_bundled": {
+  "cmd": "java legacy_java/ReconcileLegacy.java data/lake/bundled/partner_export.csv",
+  "rc": 0,
+  "stderr": "Picked up JAVA_TOOL_OPTIONS: -javaagent:/usr/local/lib/node_modules_global/lib/node_modules/@anthropic-ai/sandbox-runtime/vendor/java-proxy-agent/srt-proxy-agent.jar\n",
+  "stdout": "Pharma batch deviation and CAPA: legacy reconciliation count=49800 total=218191169.74 eventTypes={batch_exception=12450, capa_action=12450, oos_lab=12450, sop_change=12450}\n"
+ },
+ "java_noargs": {
+  "cmd": "java legacy_java/ReconcileLegacy.java",
+  "rc": 2,
+  "stderr": "Picked up JAVA_TOOL_OPTIONS: -javaagent:/usr/local/lib/node_modules_global/lib/node_modules/@anthropic-ai/sandbox-runtime/vendor/java-proxy-agent/srt-proxy-agent.jar\nusage: java ReconcileLegacy <csv>\n",
+  "stdout": ""
+ },
+ "java_tiny": {
+  "cmd": "java legacy_java/ReconcileLegacy.java data/lake/tiny/partner_export.csv",
+  "rc": 0,
+  "stderr": "Picked up JAVA_TOOL_OPTIONS: -javaagent:/usr/local/lib/node_modules_global/lib/node_modules/@anthropic-ai/sandbox-runtime/vendor/java-proxy-agent/srt-proxy-agent.jar\n",
+  "stdout": "Pharma batch deviation and CAPA: legacy reconciliation count=2390 total=10497082.12 eventTypes={batch_exception=597, capa_action=598, oos_lab=598, sop_change=597}\n"
+ },
+ "js_policy_table": {
+  "allows": [
+   [
+    27000,
+    "APAC",
+    2026,
+    false
+   ],
+   [
+    26250,
+    "APAC",
+    2026,
+    true
+   ],
+   [
+    26250.01,
+    "APAC",
+    2026,
+    false
+   ],
+   [
+    1000000,
+    "IN",
+    2026,
+    true
+   ],
+   [
+    1000000,
+    "APAC",
+    2021,
+    true
+   ],
+   [
+    0,
+    "APAC",
+    2026,
+    true
+   ],
+   [
+    -5,
+    "APAC",
+    2026,
+    true
+   ],
+   [
+    "abc",
+    "APAC",
+    2026,
+    false
+   ],
+   [
+    null,
+    "APAC",
+    2026,
+    true
+   ]
+  ],
+  "keys": [
+   "context",
+   "historical_versions"
+  ],
+  "table": [
+   [
+    "APAC",
+    2019,
+    999999
+   ],
+   [
+    "APAC",
+    2021,
+    999999
+   ],
+   [
+    "APAC",
+    2022,
+    15000
+   ],
+   [
+    "APAC",
+    2023,
+    17500
+   ],
+   [
+    "APAC",
+    2024,
+    20000
+   ],
+   [
+    "APAC",
+    2025,
+    22500
+   ],
+   [
+    "APAC",
+    2026,
+    25000
+   ],
+   [
+    "APAC",
+    2027,
+    999999
+   ],
+   [
+    "EMEA",
+    2019,
+    999999
+   ],
+   [
+    "EMEA",
+    2021,
+    999999
+   ],
+   [
+    "EMEA",
+    2022,
+    16100
+   ],
+   [
+    "EMEA",
+    2023,
+    18600
+   ],
+   [
+    "EMEA",
+    2024,
+    21100
+   ],
+   [
+    "EMEA",
+    2025,
+    23600
+   ],
+   [
+    "EMEA",
+    2026,
+    26100
+   ],
+   [
+    "EMEA",
+    2027,
+    999999
+   ],
+   [
+    "AMER",
+    2019,
+    999999
+   ],
+   [
+    "AMER",
+    2021,
+    999999
+   ],
+   [
+    "AMER",
+    2022,
+    17200
+   ],
+   [
+    "AMER",
+    2023,
+    19700
+   ],
+   [
+    "AMER",
+    2024,
+    22200
+   ],
+   [
+    "AMER",
+    2025,
+    24700
+   ],
+   [
+    "AMER",
+    2026,
+    27200
+   ],
+   [
+    "AMER",
+    2027,
+    999999
+   ],
+   [
+    "IN",
+    2019,
+    999999
+   ],
+   [
+    "IN",
+    2021,
+    999999
+   ],
+   [
+    "IN",
+    2022,
+    999999
+   ],
+   [
+    "IN",
+    2023,
+    999999
+   ],
+   [
+    "IN",
+    2024,
+    999999
+   ],
+   [
+    "IN",
+    2025,
+    999999
+   ],
+   [
+    "IN",
+    2026,
+    999999
+   ],
+   [
+    "IN",
+    2027,
+    999999
+   ]
+  ],
+  "versions": [
+   [
+    "APAC",
+    "2022-01-01",
+    15000
+   ],
+   [
+    "EMEA",
+    "2022-01-01",
+    16100
+   ],
+   [
+    "AMER",
+    "2022-01-01",
+    17200
+   ],
+   [
+    "APAC",
+    "2023-01-01",
+    17500
+   ],
+   [
+    "EMEA",
+    "2023-01-01",
+    18600
+   ],
+   [
+    "AMER",
+    "2023-01-01",
+    19700
+   ],
+   [
+    "APAC",
+    "2024-01-01",
+    20000
+   ],
+   [
+    "EMEA",
+    "2024-01-01",
+    21100
+   ],
+   [
+    "AMER",
+    "2024-01-01",
+    22200
+   ],
+   [
+    "APAC",
+    "2025-01-01",
+    22500
+   ],
+   [
+    "EMEA",
+    "2025-01-01",
+    23600
+   ],
+   [
+    "AMER",
+    "2025-01-01",
+    24700
+   ],
+   [
+    "APAC",
+    "2026-01-01",
+    25000
+   ],
+   [
+    "EMEA",
+    "2026-01-01",
+    26100
+   ],
+   [
+    "AMER",
+    "2026-01-01",
+    27200
+   ]
+  ]
+ },
+ "manual_review_truth_table": [
+  [
+   "OPEN",
+   "LOW",
+   false
+  ],
+  [
+   "OPEN",
+   "MEDIUM",
+   false
+  ],
+  [
+   "OPEN",
+   "HIGH",
+   true
+  ],
+  [
+   "OPEN",
+   "CRITICAL",
+   true
+  ],
+  [
+   "UNDER_REVIEW",
+   "LOW",
+   false
+  ],
+  [
+   "UNDER_REVIEW",
+   "MEDIUM",
+   false
+  ],
+  [
+   "UNDER_REVIEW",
+   "HIGH",
+   true
+  ],
+  [
+   "UNDER_REVIEW",
+   "CRITICAL",
+   true
+  ],
+  [
+   "CLOSED",
+   "LOW",
+   false
+  ],
+  [
+   "CLOSED",
+   "MEDIUM",
+   false
+  ],
+  [
+   "CLOSED",
+   "HIGH",
+   true
+  ],
+  [
+   "CLOSED",
+   "CRITICAL",
+   true
+  ],
+  [
+   "ESCALATED",
+   "LOW",
+   true
+  ],
+  [
+   "ESCALATED",
+   "MEDIUM",
+   true
+  ],
+  [
+   "ESCALATED",
+   "HIGH",
+   true
+  ],
+  [
+   "ESCALATED",
+   "CRITICAL",
+   true
+  ],
+  [
+   "REOPENED",
+   "LOW",
+   true
+  ],
+  [
+   "REOPENED",
+   "MEDIUM",
+   true
+  ],
+  [
+   "REOPENED",
+   "HIGH",
+   true
+  ],
+  [
+   "REOPENED",
+   "CRITICAL",
+   true
+  ]
+ ],
+ "node_cwd_other": {
+  "cmd": "node /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/stage7/c_jvm/legacy_js/legacy_policy.js",
+  "rc": 1,
+  "stderr": "rectory, open 'contracts/decision-policies-archive.json'\n    at Object.readFileSync (node:fs:440:20)\n    at Object.<anonymous> (/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/stage7/c_jvm/legacy_js/legacy_policy.js:3:32)\n    at Module._compile (node:internal/modules/cjs/loader:1781:14)\n    at Object..js (node:internal/modules/cjs/loader:1913:10)\n    at Module.load (node:internal/modules/cjs/loader:1505:32)\n    at Function._load (node:internal/modules/cjs/loader:1309:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: 'contracts/decision-policies-archive.json'\n}\n\nNode.js v22.23.2\n",
+  "stdout": ""
+ },
+ "node_default": {
+  "cmd": "node legacy_js/legacy_policy.js",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "{\"domain\":\"Pharma batch deviation and CAPA\",\"threshold\":25000,\"example\":false}\n"
+ },
+ "operational_report_6000": {
+  "cmd": "/usr/bin/python3 -m app.operational_report",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "{\n  \"domain\": \"Life Sciences\",\n  \"parent_records\": 6000,\n  \"detail_records\": 2000,\n  \"parents_with_detail\": 2000,\n  \"parents_without_detail\": 4000,\n  \"ingested_source_messages\": 1\n}\n"
+ },
+ "partner_batch_runs_rows_after_reconcile": 60,
+ "partner_error_reasons": [
+  [
+   null,
+   7917
+  ],
+  [
+   "quantity out of range",
+   154
+  ],
+  [
+   "replayed source message",
+   64
+  ],
+  [
+   "schema/key validation",
+   432
+  ]
+ ],
+ "partner_reconcile_sequence": [
+  "{\"accepted\": 912, \"rejected\": 80, \"duplicate\": 8, \"skipped\": 0}",
+  "{\"accepted\": 921, \"rejected\": 71, \"duplicate\": 8, \"skipped\": 0}",
+  "{\"accepted\": 924, \"rejected\": 68, \"duplicate\": 8, \"skipped\": 0}",
+  "{\"accepted\": 925, \"rejected\": 65, \"duplicate\": 10, \"skipped\": 0}",
+  "{\"accepted\": 937, \"rejected\": 57, \"duplicate\": 6, \"skipped\": 0}",
+  "{\"accepted\": 924, \"rejected\": 70, \"duplicate\": 6, \"skipped\": 0}",
+  "{\"accepted\": 925, \"rejected\": 66, \"duplicate\": 9, \"skipped\": 0}",
+  "{\"accepted\": 931, \"rejected\": 64, \"duplicate\": 5, \"skipped\": 0}",
+  "{\"accepted\": 518, \"rejected\": 45, \"duplicate\": 4, \"skipped\": 0}",
+  "{\"accepted\": 0, \"rejected\": 0, \"duplicate\": 0, \"skipped\": 0}"
+ ],
+ "partner_regen_default": {
+  "cmd": "/usr/bin/python3 -m app.partner_feeds",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "{\"partner_feeds\": 8567, \"reference_versions\": 180, \"policy_exceptions\": 224, \"upstream_outages\": 72, \"batch_runs\": 60}\n"
+ },
+ "partner_regen_equals_shipped": {
+  "batch_runs": false,
+  "partner_feeds": false,
+  "policy_exceptions": false,
+  "reference_versions": false,
+  "upstream_outages": false
+ },
+ "partner_regen_hashes": {
+  "regen": {
+   "batch_runs": {
+    "rows": 60,
+    "sha256": "1d67cf31637b7b7b"
+   },
+   "partner_feeds": {
+    "rows": 8567,
+    "sha256": "2cba8b0b066d8c95"
+   },
+   "policy_exceptions": {
+    "rows": 224,
+    "sha256": "78aedf8a6ac4bd45"
+   },
+   "reference_versions": {
+    "rows": 180,
+    "sha256": "59b3bbb67e39470e"
+   },
+   "upstream_outages": {
+    "rows": 72,
+    "sha256": "bd012c0c97d657ba"
+   }
+  },
+  "shipped": {
+   "batch_runs": {
+    "rows": 60,
+    "sha256": "a5836c6f3a035869"
+   },
+   "partner_feeds": {
+    "rows": 8567,
+    "sha256": "c3c1449f31c1d857"
+   },
+   "policy_exceptions": {
+    "rows": 224,
+    "sha256": "ed19b0f588ca9209"
+   },
+   "reference_versions": {
+    "rows": 180,
+    "sha256": "aa36e8da26f73a19"
+   },
+   "upstream_outages": {
+    "rows": 72,
+    "sha256": "674cbd31fe74893f"
+   }
+  }
+ },
+ "partner_status_after_all": [
+  [
+   "ACCEPTED",
+   7917
+  ],
+  [
+   "DUPLICATE",
+   64
+  ],
+  [
+   "REJECTED",
+   586
+  ]
+ ],
+ "priority_truth_table": [
+  [
+   "OPEN",
+   "LOW",
+   0,
+   "queue"
+  ],
+  [
+   "OPEN",
+   "LOW",
+   1,
+   "queue"
+  ],
+  [
+   "OPEN",
+   "LOW",
+   50000,
+   "queue"
+  ],
+  [
+   "OPEN",
+   "LOW",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "LOW",
+   99999,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "LOW",
+   -1,
+   "queue"
+  ],
+  [
+   "OPEN",
+   "MEDIUM",
+   0,
+   "queue"
+  ],
+  [
+   "OPEN",
+   "MEDIUM",
+   1,
+   "queue"
+  ],
+  [
+   "OPEN",
+   "MEDIUM",
+   50000,
+   "queue"
+  ],
+  [
+   "OPEN",
+   "MEDIUM",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "MEDIUM",
+   99999,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "MEDIUM",
+   -1,
+   "queue"
+  ],
+  [
+   "OPEN",
+   "HIGH",
+   0,
+   "review"
+  ],
+  [
+   "OPEN",
+   "HIGH",
+   1,
+   "review"
+  ],
+  [
+   "OPEN",
+   "HIGH",
+   50000,
+   "review"
+  ],
+  [
+   "OPEN",
+   "HIGH",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "HIGH",
+   99999,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "HIGH",
+   -1,
+   "review"
+  ],
+  [
+   "OPEN",
+   "CRITICAL",
+   0,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "CRITICAL",
+   1,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "CRITICAL",
+   50000,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "CRITICAL",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "CRITICAL",
+   99999,
+   "urgent"
+  ],
+  [
+   "OPEN",
+   "CRITICAL",
+   -1,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "LOW",
+   0,
+   "queue"
+  ],
+  [
+   "UNDER_REVIEW",
+   "LOW",
+   1,
+   "queue"
+  ],
+  [
+   "UNDER_REVIEW",
+   "LOW",
+   50000,
+   "queue"
+  ],
+  [
+   "UNDER_REVIEW",
+   "LOW",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "LOW",
+   99999,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "LOW",
+   -1,
+   "queue"
+  ],
+  [
+   "UNDER_REVIEW",
+   "MEDIUM",
+   0,
+   "queue"
+  ],
+  [
+   "UNDER_REVIEW",
+   "MEDIUM",
+   1,
+   "queue"
+  ],
+  [
+   "UNDER_REVIEW",
+   "MEDIUM",
+   50000,
+   "queue"
+  ],
+  [
+   "UNDER_REVIEW",
+   "MEDIUM",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "MEDIUM",
+   99999,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "MEDIUM",
+   -1,
+   "queue"
+  ],
+  [
+   "UNDER_REVIEW",
+   "HIGH",
+   0,
+   "review"
+  ],
+  [
+   "UNDER_REVIEW",
+   "HIGH",
+   1,
+   "review"
+  ],
+  [
+   "UNDER_REVIEW",
+   "HIGH",
+   50000,
+   "review"
+  ],
+  [
+   "UNDER_REVIEW",
+   "HIGH",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "HIGH",
+   99999,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "HIGH",
+   -1,
+   "review"
+  ],
+  [
+   "UNDER_REVIEW",
+   "CRITICAL",
+   0,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "CRITICAL",
+   1,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "CRITICAL",
+   50000,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "CRITICAL",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "CRITICAL",
+   99999,
+   "urgent"
+  ],
+  [
+   "UNDER_REVIEW",
+   "CRITICAL",
+   -1,
+   "urgent"
+  ],
+  [
+   "CLOSED",
+   "LOW",
+   0,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "LOW",
+   1,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "LOW",
+   50000,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "LOW",
+   50000.01,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "LOW",
+   99999,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "LOW",
+   -1,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "MEDIUM",
+   0,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "MEDIUM",
+   1,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "MEDIUM",
+   50000,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "MEDIUM",
+   50000.01,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "MEDIUM",
+   99999,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "MEDIUM",
+   -1,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "HIGH",
+   0,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "HIGH",
+   1,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "HIGH",
+   50000,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "HIGH",
+   50000.01,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "HIGH",
+   99999,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "HIGH",
+   -1,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "CRITICAL",
+   0,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "CRITICAL",
+   1,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "CRITICAL",
+   50000,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "CRITICAL",
+   50000.01,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "CRITICAL",
+   99999,
+   "archive"
+  ],
+  [
+   "CLOSED",
+   "CRITICAL",
+   -1,
+   "archive"
+  ],
+  [
+   "ESCALATED",
+   "LOW",
+   0,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "LOW",
+   1,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "LOW",
+   50000,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "LOW",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "LOW",
+   99999,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "LOW",
+   -1,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "MEDIUM",
+   0,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "MEDIUM",
+   1,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "MEDIUM",
+   50000,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "MEDIUM",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "MEDIUM",
+   99999,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "MEDIUM",
+   -1,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "HIGH",
+   0,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "HIGH",
+   1,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "HIGH",
+   50000,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "HIGH",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "HIGH",
+   99999,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "HIGH",
+   -1,
+   "review"
+  ],
+  [
+   "ESCALATED",
+   "CRITICAL",
+   0,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "CRITICAL",
+   1,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "CRITICAL",
+   50000,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "CRITICAL",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "CRITICAL",
+   99999,
+   "urgent"
+  ],
+  [
+   "ESCALATED",
+   "CRITICAL",
+   -1,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "LOW",
+   0,
+   "queue"
+  ],
+  [
+   "REOPENED",
+   "LOW",
+   1,
+   "queue"
+  ],
+  [
+   "REOPENED",
+   "LOW",
+   50000,
+   "queue"
+  ],
+  [
+   "REOPENED",
+   "LOW",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "LOW",
+   99999,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "LOW",
+   -1,
+   "queue"
+  ],
+  [
+   "REOPENED",
+   "MEDIUM",
+   0,
+   "queue"
+  ],
+  [
+   "REOPENED",
+   "MEDIUM",
+   1,
+   "queue"
+  ],
+  [
+   "REOPENED",
+   "MEDIUM",
+   50000,
+   "queue"
+  ],
+  [
+   "REOPENED",
+   "MEDIUM",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "MEDIUM",
+   99999,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "MEDIUM",
+   -1,
+   "queue"
+  ],
+  [
+   "REOPENED",
+   "HIGH",
+   0,
+   "review"
+  ],
+  [
+   "REOPENED",
+   "HIGH",
+   1,
+   "review"
+  ],
+  [
+   "REOPENED",
+   "HIGH",
+   50000,
+   "review"
+  ],
+  [
+   "REOPENED",
+   "HIGH",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "HIGH",
+   99999,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "HIGH",
+   -1,
+   "review"
+  ],
+  [
+   "REOPENED",
+   "CRITICAL",
+   0,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "CRITICAL",
+   1,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "CRITICAL",
+   50000,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "CRITICAL",
+   50000.01,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "CRITICAL",
+   99999,
+   "urgent"
+  ],
+  [
+   "REOPENED",
+   "CRITICAL",
+   -1,
+   "urgent"
+  ]
+ ],
+ "pristine_db_after_readonly_cli": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+ "server_on_empty_db_cases_route": null,
+ "shift_active_policies_per_region": [
+  [
+   "AU",
+   4
+  ],
+  [
+   "BR",
+   4
+  ],
+  [
+   "DE",
+   5
+  ],
+  [
+   "GB",
+   4
+  ],
+  [
+   "IN",
+   4
+  ],
+  [
+   "JP",
+   4
+  ],
+  [
+   "US",
+   5
+  ],
+  [
+   "ZA",
+   4
+  ]
+ ],
+ "shift_distinct_objects_in_first_500_joined_rows": 118,
+ "shift_reconciliation": {
+  "100": {
+   "by_tenant": {
+    "TENANT-AMER": 27,
+    "TENANT-APAC": 24,
+    "TENANT-EMEA": 27,
+    "TENANT-SOUTH": 22
+   },
+   "flagged_count": 53,
+   "flagged_preview": [
+    {
+     "object_id": "GXP-00000010",
+     "owner_team": "MANUFACTURING",
+     "policy": "GXP-RULE-3",
+     "status": "OPEN",
+     "tenant": "TENANT-AMER"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-1",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-3",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-4",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-0",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-1",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-4",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000013",
+     "owner_team": "REGULATORY",
+     "policy": "GXP-RULE-0",
+     "status": "REVIEW",
+     "tenant": "TENANT-EMEA"
+    },
+    {
+     "object_id": "GXP-00000013",
+     "owner_team": "REGULATORY",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-EMEA"
+    },
+    {
+     "object_id": "GXP-00000013",
+     "owner_team": "REGULATORY",
+     "policy": "GXP-RULE-3",
+     "status": "REVIEW",
+     "tenant": "TENANT-EMEA"
+    }
+   ],
+   "processed": 100
+  },
+  "12500": {
+   "by_tenant": {
+    "TENANT-AMER": 3308,
+    "TENANT-APAC": 2944,
+    "TENANT-EMEA": 3308,
+    "TENANT-SOUTH": 2940
+   },
+   "flagged_count": 5454,
+   "flagged_preview": [
+    {
+     "object_id": "GXP-00000010",
+     "owner_team": "MANUFACTURING",
+     "policy": "GXP-RULE-3",
+     "status": "OPEN",
+     "tenant": "TENANT-AMER"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-1",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-3",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-4",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-0",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-1",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-4",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000013",
+     "owner_team": "REGULATORY",
+     "policy": "GXP-RULE-0",
+     "status": "REVIEW",
+     "tenant": "TENANT-EMEA"
+    },
+    {
+     "object_id": "GXP-00000013",
+     "owner_team": "REGULATORY",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-EMEA"
+    },
+    {
+     "object_id": "GXP-00000013",
+     "owner_team": "REGULATORY",
+     "policy": "GXP-RULE-3",
+     "status": "REVIEW",
+     "tenant": "TENANT-EMEA"
+    }
+   ],
+   "processed": 12500
+  },
+  "50": {
+   "by_tenant": {
+    "TENANT-AMER": 14,
+    "TENANT-APAC": 12,
+    "TENANT-EMEA": 14,
+    "TENANT-SOUTH": 10
+   },
+   "flagged_count": 3,
+   "flagged_preview": [
+    {
+     "object_id": "GXP-00000010",
+     "owner_team": "MANUFACTURING",
+     "policy": "GXP-RULE-3",
+     "status": "OPEN",
+     "tenant": "TENANT-AMER"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-1",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    }
+   ],
+   "processed": 50
+  },
+  "500": {
+   "by_tenant": {
+    "TENANT-AMER": 131,
+    "TENANT-APAC": 120,
+    "TENANT-EMEA": 133,
+    "TENANT-SOUTH": 116
+   },
+   "flagged_count": 210,
+   "flagged_preview": [
+    {
+     "object_id": "GXP-00000010",
+     "owner_team": "MANUFACTURING",
+     "policy": "GXP-RULE-3",
+     "status": "OPEN",
+     "tenant": "TENANT-AMER"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-1",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-3",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000011",
+     "owner_team": "QC",
+     "policy": "GXP-RULE-4",
+     "status": "REVIEW",
+     "tenant": "TENANT-SOUTH"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-0",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-1",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000012",
+     "owner_team": "QA",
+     "policy": "GXP-RULE-4",
+     "status": "REVIEW",
+     "tenant": "TENANT-APAC"
+    },
+    {
+     "object_id": "GXP-00000013",
+     "owner_team": "REGULATORY",
+     "policy": "GXP-RULE-0",
+     "status": "REVIEW",
+     "tenant": "TENANT-EMEA"
+    },
+    {
+     "object_id": "GXP-00000013",
+     "owner_team": "REGULATORY",
+     "policy": "GXP-RULE-2",
+     "status": "REVIEW",
+     "tenant": "TENANT-EMEA"
+    },
+    {
+     "object_id": "GXP-00000013",
+     "owner_team": "REGULATORY",
+     "policy": "GXP-RULE-3",
+     "status": "REVIEW",
+     "tenant": "TENANT-EMEA"
+    }
+   ],
+   "processed": 500
+  }
+ },
+ "sql_report_1": [
+  [
+   "EMEA",
+   "OPEN",
+   14,
+   110203.36
+  ],
+  [
+   "EMEA",
+   "UNDER_REVIEW",
+   7,
+   104689.45
+  ],
+  [
+   "APAC",
+   "OPEN",
+   14,
+   97990.12
+  ],
+  [
+   "AMER",
+   "UNDER_REVIEW",
+   15,
+   73343.35
+  ],
+  [
+   "EMEA",
+   "CLOSED",
+   16,
+   64067.71
+  ],
+  [
+   "APAC",
+   "UNDER_REVIEW",
+   8,
+   62116.39
+  ],
+  [
+   "AMER",
+   "CLOSED",
+   11,
+   58155.75
+  ],
+  [
+   "AMER",
+   "OPEN",
+   14,
+   46515.6
+  ],
+  [
+   "APAC",
+   "CLOSED",
+   9,
+   40808.72
+  ],
+  [
+   "AMER",
+   "ESCALATED",
+   4,
+   23205.02
+  ],
+  [
+   "AMER",
+   "REOPENED",
+   2,
+   21959.7
+  ],
+  [
+   "APAC",
+   "REOPENED",
+   5,
+   19278.04
+  ],
+  [
+   "APAC",
+   "ESCALATED",
+   3,
+   9468.82
+  ],
+  [
+   "EMEA",
+   "REOPENED",
+   1,
+   7012.32
+  ],
+  [
+   "EMEA",
+   "ESCALATED",
+   2,
+   4142.26
+  ]
+ ],
+ "sql_report_1_total_gross": 742956.61,
+ "sql_report_2": [
+  [
+   "batch_exception",
+   "T-EAST",
+   136
+  ],
+  [
+   "batch_exception",
+   "T-NORTH",
+   151
+  ],
+  [
+   "batch_exception",
+   "T-SOUTH",
+   151
+  ],
+  [
+   "batch_exception",
+   "T-WEST",
+   162
+  ],
+  [
+   "capa_action",
+   "T-EAST",
+   151
+  ],
+  [
+   "capa_action",
+   "T-NORTH",
+   145
+  ],
+  [
+   "capa_action",
+   "T-SOUTH",
+   159
+  ],
+  [
+   "capa_action",
+   "T-WEST",
+   145
+  ],
+  [
+   "oos_lab",
+   "T-EAST",
+   155
+  ],
+  [
+   "oos_lab",
+   "T-NORTH",
+   132
+  ],
+  [
+   "oos_lab",
+   "T-SOUTH",
+   156
+  ],
+  [
+   "oos_lab",
+   "T-WEST",
+   157
+  ],
+  [
+   "sop_change",
+   "T-EAST",
+   134
+  ],
+  [
+   "sop_change",
+   "T-NORTH",
+   147
+  ],
+  [
+   "sop_change",
+   "T-SOUTH",
+   146
+  ],
+  [
+   "sop_change",
+   "T-WEST",
+   173
+  ]
+ ],
+ "true_total_amount": 622826.44,
+ "vendor_import_id_shipped": [
+  [
+   "d5f841003e666012a16a78b7",
+   "partner_export.csv",
+   2400,
+   "ACCEPTED"
+  ]
+ ],
+ "vendor_rows_after": [
+  2400,
+  10,
+  4
+ ],
+ "workshop_check": {
+  "cmd": "/usr/bin/python3 -m app.workshop_check",
+  "rc": 0,
+  "stderr": "",
+  "stdout": "{\"profile\": \"GMP quality deviation and batch review\", \"counts\": {\"cases\": 125, \"events\": 145, \"source_messages\": 15, \"partner_feeds\": 8567, \"reference_versions\": 180, \"policy_exceptions\": 224, \"upstream_outages\": 72, \"batch_runs\": 60}, \"foreign_key_errors\": 0, \"integrity\": \"ok\", \"ok\": true}\n"
+ },
+ "workshop_check_empty_db": {
+  "cmd": "/usr/bin/python3 -m app.workshop_check",
+  "rc": 1,
+  "stderr": "",
+  "stdout": "{\"profile\": \"GMP quality deviation and batch review\", \"counts\": {\"cases\": 0, \"events\": 0, \"source_messages\": 0, \"partner_feeds\": 0, \"reference_versions\": 0, \"policy_exceptions\": 0, \"upstream_outages\": 0, \"batch_runs\": 0}, \"foreign_key_errors\": 0, \"integrity\": \"ok\", \"ok\": false}\n"
+ }
+}
