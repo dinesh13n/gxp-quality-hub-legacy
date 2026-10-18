@@ -1,0 +1,8 @@
+{
+ "findings": [],
+ "scanned": [
+  "hub",
+  "tests/hub",
+  "pyproject.toml"
+ ]
+}
