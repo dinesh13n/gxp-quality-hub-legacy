@@ -1,0 +1,242 @@
+test_id,ac,level,evidence_class,open_decision,release,increment,assignment_rule,status
+TST-CO-01,AC-CO-01,characterization/golden,A,,R1,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-02,AC-CO-02,characterization/golden,A,,R1,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-03,AC-CO-03,characterization/golden,A,,R1,INC-04,override (dependency),PLANNED / NOT-RUN
+TST-CO-04,AC-CO-04,service/unit,A,,R1,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-05,AC-CO-05,service/unit,A,,R1,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-06,AC-CO-06,service/unit,A,,?,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-07,AC-CO-07,nfr-measurement,A,,R1,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-08,AC-CO-08,api,A,,R1,INC-08,override (dependency),PLANNED / NOT-RUN
+TST-CO-09,AC-CO-09,nfr-measurement,A,,R1,INC-06,override (dependency),PLANNED / NOT-RUN
+TST-CO-10,AC-CO-10,service/unit,A,,R1,INC-03,override (dependency),PLANNED / NOT-RUN
+TST-CO-11,AC-CO-11,service/unit,A,,R1,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-12,AC-CO-12,service/unit,A,,R1,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-13,AC-CO-13,service/unit,A,,R1,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-14,AC-CO-14,database,B,OD-S12-12,?,INC-02,prefix,PLANNED / NOT-RUN
+TST-CO-15,AC-CO-15,service/unit,A,,R1,INC-03,override (dependency),PLANNED / NOT-RUN
+TST-DEC-01,AC-DEC-01,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-02,AC-DEC-02,database,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-03,AC-DEC-03,database,A,,R1/R1 (hold-all),INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-04,AC-DEC-04,static/introspection,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-05,AC-DEC-05,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-06,AC-DEC-06,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-07,AC-DEC-07,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-08,AC-DEC-08,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-09,AC-DEC-09,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-10,AC-DEC-10,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-11,AC-DEC-11,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-12,AC-DEC-12,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-13,AC-DEC-13,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-14,AC-DEC-14,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-15,AC-DEC-15,service/unit,B,OD-S12-07,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-16,AC-DEC-16,service/unit,B,OD-S12-07,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-17,AC-DEC-17,service/unit,B,OD-S12-07,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-18,AC-DEC-18,service/unit,B,OD-S12-07,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-19,AC-DEC-19,service/unit,B,OD-S12-07,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-20,AC-DEC-20,service/unit,B,OD-S12-15,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-21,AC-DEC-21,service/unit,B,OD-S12-15,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-22,AC-DEC-22,api,C,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-DEC-23,AC-DEC-23,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-24,AC-DEC-24,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-25,AC-DEC-25,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-26,AC-DEC-26,service/unit,B,OD-S12-16,?,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-27,AC-DEC-27,service/unit,B,"OD-S12-03,OD-S12-07",R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-DEC-28,AC-DEC-28,service/unit,B,"OD-S12-03,OD-S12-07",R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-GATE-01,AC-GATE-01,service/unit,B,OD-S12-06,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-02,AC-GATE-02,service/unit,B,OD-S12-06,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-03,AC-GATE-03,service/unit,B,OD-S12-05,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-04,AC-GATE-04,service/unit,B,OD-S12-05,?,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-05,AC-GATE-05,service/unit,B,OD-S12-05,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-06,AC-GATE-06,service/unit,B,OD-S12-05,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-07,AC-GATE-07,service/unit,B,OD-S12-05,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-08,AC-GATE-08,service/unit,B,OD-S12-05,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-09,AC-GATE-09,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-10,AC-GATE-10,static/introspection,A,,?,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-11,AC-GATE-11,static/introspection,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-12,AC-GATE-12,database,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-13,AC-GATE-13,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-14,AC-GATE-14,contract,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-15,AC-GATE-15,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-16,AC-GATE-16,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-17,AC-GATE-17,service/unit,A,,?,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-18,AC-GATE-18,api,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-19,AC-GATE-19,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-20,AC-GATE-20,api,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-21,AC-GATE-21,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-GATE-22,AC-GATE-22,service/unit,B,OD-S12-06,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-ID-01,AC-ID-01,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-02,AC-ID-02,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-03,AC-ID-03,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-04,AC-ID-04,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-05,AC-ID-05,static/introspection,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-06,AC-ID-06,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-07,AC-ID-07,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-08,AC-ID-08,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-09,AC-ID-09,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-10,AC-ID-10,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-11,AC-ID-11,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-12,AC-ID-12,service/unit,A,,R1,INC-05,prefix,PLANNED / NOT-RUN
+TST-ID-13,AC-ID-13,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-ID-14,AC-ID-14,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-ID-15,AC-ID-15,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-ID-16,AC-ID-16,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-ID-17,AC-ID-17,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-INT-01,AC-INT-01,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-02,AC-INT-02,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-INT-03,AC-INT-03,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-04,AC-INT-04,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-05,AC-INT-05,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-06,AC-INT-06,service/unit,B,OD-S12-17,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-07,AC-INT-07,service/unit,C,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-08,AC-INT-08,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-09,AC-INT-09,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-10,AC-INT-10,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-11,AC-INT-11,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-12,AC-INT-12,contract,B,OD-S12-11,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-13,AC-INT-13,contract,B,OD-S12-11,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-14,AC-INT-14,contract,B,OD-S12-11,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-15,AC-INT-15,service/unit,B,OD-S12-13,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-16,AC-INT-16,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-17,AC-INT-17,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-18,AC-INT-18,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-19,AC-INT-19,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-20,AC-INT-20,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-21,AC-INT-21,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-22,AC-INT-22,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-23,AC-INT-23,static/introspection,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-24,AC-INT-24,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-25,AC-INT-25,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-26,AC-INT-26,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-27,AC-INT-27,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-INT-28,AC-INT-28,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-INT-29,AC-INT-29,service/unit,A,,R1,INC-06,prefix,PLANNED / NOT-RUN
+TST-MET-01,AC-MET-01,static/introspection,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-02,AC-MET-02,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-MET-03,AC-MET-03,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-04,AC-MET-04,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-05,AC-MET-05,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-06,AC-MET-06,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-07,AC-MET-07,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-08,AC-MET-08,service/unit,C,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-09,AC-MET-09,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-10,AC-MET-10,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-11,AC-MET-11,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-12,AC-MET-12,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-MET-13,AC-MET-13,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-14,AC-MET-14,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-15,AC-MET-15,nfr-measurement,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-16,AC-MET-16,service/unit,A,,?,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-17,AC-MET-17,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-18,AC-MET-18,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-MET-19,AC-MET-19,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-MET-20,AC-MET-20,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-MET-21,AC-MET-21,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-NFR-01,AC-NFR-01,nfr-measurement,C,,R1 measure,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-02,AC-NFR-02,service/unit,C,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-03,AC-NFR-03,service/unit,C,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-NFR-04,AC-NFR-04,service/unit,C,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-NFR-05,AC-NFR-05,nfr-measurement,C,,R1 (rehearsal),INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-06,AC-NFR-06,nfr-measurement,A,,R1 measure,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-07,AC-NFR-07,static/introspection,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-08,AC-NFR-08,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-09,AC-NFR-09,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-10,AC-NFR-10,service/unit,A,,R1 (hold-all),INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-11,AC-NFR-11,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-12,AC-NFR-12,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-NFR-13,AC-NFR-13,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-14,AC-NFR-14,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-15,AC-NFR-15,api,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-16,AC-NFR-16,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-17,AC-NFR-17,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-18,AC-NFR-18,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-19,AC-NFR-19,nfr-measurement,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-NFR-20,AC-NFR-20,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-OBS-01,AC-OBS-01,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-OBS-02,AC-OBS-02,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-OBS-03,AC-OBS-03,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-OBS-04,AC-OBS-04,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-OBS-05,AC-OBS-05,nfr-measurement,A,,R1 measure,INC-07,prefix,PLANNED / NOT-RUN
+TST-OBS-06,AC-OBS-06,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-OBS-07,AC-OBS-07,database,B,OD-S12-12,?,INC-07,prefix,PLANNED / NOT-RUN
+TST-OBS-08,AC-OBS-08,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-OBS-09,AC-OBS-09,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-POL-01,AC-POL-01,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-02,AC-POL-02,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-03,AC-POL-03,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-04,AC-POL-04,nfr-measurement,A,,?,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-05,AC-POL-05,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-06,AC-POL-06,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-07,AC-POL-07,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-08,AC-POL-08,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-09,AC-POL-09,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-10,AC-POL-10,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-11,AC-POL-11,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-12,AC-POL-12,characterization/golden,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-13,AC-POL-13,characterization/golden,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-14,AC-POL-14,characterization/golden,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-15,AC-POL-15,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-16,AC-POL-16,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-17,AC-POL-17,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-18,AC-POL-18,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-19,AC-POL-19,service/unit,B,OD-S12-04,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-20,AC-POL-20,service/unit,B,OD-S12-04,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-21,AC-POL-21,service/unit,B,OD-S12-04,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-22,AC-POL-22,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-23,AC-POL-23,service/unit,B,OD-S12-13,?,INC-04,prefix,PLANNED / NOT-RUN
+TST-POL-24,AC-POL-24,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-POL-25,AC-POL-25,service/unit,A,,R1,INC-04,prefix,PLANNED / NOT-RUN
+TST-REV-01,AC-REV-01,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-02,AC-REV-02,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-03,AC-REV-03,ui/manual-walkthrough,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-04,AC-REV-04,ui/manual-walkthrough,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-05,AC-REV-05,api,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-06,AC-REV-06,service/unit,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-07,AC-REV-07,static/introspection,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-08,AC-REV-08,ui/manual-walkthrough,A,,R1,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-09,AC-REV-09,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-REV-10,AC-REV-10,service/unit,A,,R1/R2,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-11,AC-REV-11,database,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-REV-12,AC-REV-12,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-REV-13,AC-REV-13,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-REV-14,AC-REV-14,service/unit,A,,R1/R2,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-15,AC-REV-15,service/unit,C,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-REV-16,AC-REV-16,service/unit,B,OD-S12-12,?,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-17,AC-REV-17,contract,A,,R1/R2,INC-08,prefix,PLANNED / NOT-RUN
+TST-REV-18,AC-REV-18,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-REV-19,AC-REV-19,nfr-measurement,A,,R1 measure,INC-08,prefix,PLANNED / NOT-RUN
+TST-RUN-01,AC-RUN-01,database,B,OD-S12-10,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-02,AC-RUN-02,database,B,OD-S12-10,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-03,AC-RUN-03,service/unit,B,OD-S12-10,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-04,AC-RUN-04,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-RUN-05,AC-RUN-05,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-06,AC-RUN-06,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-07,AC-RUN-07,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-08,AC-RUN-08,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-09,AC-RUN-09,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-10,AC-RUN-10,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-11,AC-RUN-11,service/unit,A,,?,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-12,AC-RUN-12,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-13,AC-RUN-13,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-14,AC-RUN-14,service/unit,A,,?,INC-07,prefix,PLANNED / NOT-RUN
+TST-RUN-15,AC-RUN-15,service/unit,A,,R1,INC-07,prefix,PLANNED / NOT-RUN
+TST-SEC-01,AC-SEC-01,static/introspection,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-02,AC-SEC-02,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-SEC-03,AC-SEC-03,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-SEC-04,AC-SEC-04,service/unit,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-05,AC-SEC-05,service/unit,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-06,AC-SEC-06,service/unit,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-07,AC-SEC-07,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-SEC-08,AC-SEC-08,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-SEC-09,AC-SEC-09,service/unit,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-10,AC-SEC-10,service/unit,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-11,AC-SEC-11,static/introspection,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-12,AC-SEC-12,static/introspection,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-13,AC-SEC-13,database,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-14,AC-SEC-14,service/unit,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-15,AC-SEC-15,service/unit,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-16,AC-SEC-16,service/unit,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-17,AC-SEC-17,api,A,,R1,INC-08,needs HTTP/UI surface (C1),PLANNED / NOT-RUN
+TST-SEC-18,AC-SEC-18,static/introspection,B,OD-S12-09,R1/R1 (hold-all),INC-03,prefix,PLANNED / NOT-RUN
+TST-SEC-19,AC-SEC-19,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-SEC-20,AC-SEC-20,service/unit,A,,R2,INC-09,R2-only requirement,PLANNED / NOT-RUN
+TST-SEC-21,AC-SEC-21,service/unit,A,,R1,INC-03,prefix,PLANNED / NOT-RUN
