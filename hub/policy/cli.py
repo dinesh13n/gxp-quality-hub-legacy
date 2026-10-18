@@ -63,6 +63,8 @@ def _cmd(r, a):
     con = r.open_store()
     if a.cmd == "status":
         st = schema.status(con)
+        if st["state"] == "drift":
+            schema.require(con)  # raises E-STORE-MIGRATION-DRIFT (exit 15)
         if st["state"] == "applied":
             svc = PolicyService(con, r.s, r.clock, r.anchor)
             st.update(policies=len(svc.list_policies()), rulesets=[x["ruleset_ref"] for x in svc.list_rulesets()],
