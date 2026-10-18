@@ -1,0 +1,31 @@
+{
+ "records": [
+  {
+   "detail": null,
+   "id": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire.test_TST_CO_12_a_non_loopback_refused_before_send",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire.test_TST_CO_12_b_loopback_allowed",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire.test_TST_CO_12_c_model_call_tripwire",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire.test_TST_CO_12_d_no_model_call_sites_in_product",
+   "status": "ok"
+  },
+  {
+   "detail": null,
+   "id": "test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire.test_TST_CO_12_e_full_suite_under_egress_guard",
+   "status": "ok"
+  }
+ ],
+ "successful": true,
+ "tests_run": 5
+}
