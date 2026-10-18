@@ -262,5 +262,22 @@ def load_json(path):
         return json.load(f)
 
 
+DIGEST_TAIL_CHARS = 400
+
+
+def _canon(obj, key=None):
+    if isinstance(obj, str):
+        s = norm_str(obj)
+        # N4 for digests: a tail-truncated field's window start depends on the sandbox path length,
+        # so the run digest keeps only the last DIGEST_TAIL_CHARS normalised characters of such fields.
+        return s[-DIGEST_TAIL_CHARS:] if key in TAIL_KEYS else s
+    if isinstance(obj, list):
+        return [_canon(x) for x in obj]
+    if isinstance(obj, dict):
+        return {k: _canon(v, k) for k, v in obj.items()}
+    return obj
+
+
 def canonical_bytes(obj):
-    return json.dumps(normalise(obj), sort_keys=True, indent=1, default=str).encode('utf-8')
+    """Normalised, path-independent serialisation used for the determinism digest (CG-6)."""
+    return json.dumps(_canon(obj), sort_keys=True, indent=1, default=str).encode('utf-8')
