@@ -1,0 +1,275 @@
+{
+ "note": "OD-09 baseline (125 cases, seed 4100). sha256 copied from tests/characterization/fixtures/FX-BASE125.sha256; table/column lists read once (mode=ro&immutable=1) from a sandbox copy of the Stage 0A backup. Changing a pin = reviewed PR.",
+ "schema": "legacy-baseline-pins/v1",
+ "stores": {
+  "enterprise_legacy.sqlite3": {
+   "adapter": "AD-02",
+   "rel_path": "data/enterprise_legacy.sqlite3",
+   "sha256": "210f4bafd858155f79dd4654fd3c9f4817c6e3d9325bc320bea4a8945fdb4c0b",
+   "tables": {
+    "access_audit": [
+     "audit_id",
+     "actor",
+     "tenant",
+     "object_id",
+     "action",
+     "recorded_at",
+     "access_reason"
+    ],
+    "cross_references": [
+     "ref_id",
+     "from_object",
+     "to_object",
+     "relationship"
+    ],
+    "document_links": [
+     "doc_id",
+     "object_id",
+     "doc_kind",
+     "revision",
+     "language",
+     "source_name"
+    ],
+    "evidence_events": [
+     "event_id",
+     "object_id",
+     "source",
+     "kind",
+     "event_time",
+     "arrival_time",
+     "schema_version",
+     "payload"
+    ],
+    "financial_adjustments": [
+     "adjust_id",
+     "object_id",
+     "currency",
+     "amount",
+     "entry_type",
+     "booked_at"
+    ],
+    "integration_attempts": [
+     "attempt_id",
+     "object_id",
+     "provider",
+     "status",
+     "attempt_no",
+     "response_ms",
+     "error_code"
+    ],
+    "operational_objects": [
+     "object_id",
+     "tenant",
+     "org_id",
+     "region",
+     "entity_type",
+     "status",
+     "value",
+     "owner_team",
+     "event_at",
+     "revision"
+    ],
+    "organizations": [
+     "org_id",
+     "tenant",
+     "region",
+     "name",
+     "valid_from"
+    ],
+    "policy_register": [
+     "policy_id",
+     "region",
+     "policy_code",
+     "active",
+     "valid_from",
+     "valid_to",
+     "threshold",
+     "owner_team"
+    ],
+    "retention_events": [
+     "retention_id",
+     "object_id",
+     "retention_class",
+     "expiry_date",
+     "legal_hold"
+    ],
+    "state_history": [
+     "history_id",
+     "object_id",
+     "from_state",
+     "to_state",
+     "at_utc",
+     "actor"
+    ],
+    "workflow_tasks": [
+     "task_id",
+     "object_id",
+     "queue",
+     "status",
+     "assigned_to",
+     "due_at"
+    ]
+   }
+  },
+  "legacy.sqlite3": {
+   "adapter": "AD-01",
+   "rel_path": "data/legacy.sqlite3",
+   "sha256": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+   "tables": {
+    "batch_records": [
+     "batch_id",
+     "material_id",
+     "batch_site",
+     "observed_assay",
+     "assay_unit",
+     "qa_status"
+    ],
+    "batch_runs": [
+     "run_id",
+     "partner",
+     "started_at",
+     "input_count",
+     "accepted_count",
+     "rejected_count",
+     "result"
+    ],
+    "capa_actions": [
+     "capa_id",
+     "deviation_id",
+     "action_owner",
+     "due_at",
+     "state"
+    ],
+    "cases": [
+     "id",
+     "account_id",
+     "segment",
+     "site",
+     "region",
+     "created_at",
+     "status",
+     "severity",
+     "amount",
+     "note",
+     "version"
+    ],
+    "deviations": [
+     "deviation_id",
+     "batch_id",
+     "opened_at",
+     "classification",
+     "root_cause",
+     "status"
+    ],
+    "events": [
+     "id",
+     "case_id",
+     "recorded_at",
+     "event_type",
+     "payload"
+    ],
+    "gateway_checkpoints": [
+     "stream",
+     "next_offset",
+     "last_sync"
+    ],
+    "gateway_inbox": [
+     "message_id",
+     "external_ref",
+     "source_system",
+     "event_type",
+     "event_time",
+     "received_at",
+     "raw_payload",
+     "status"
+    ],
+    "lab_results": [
+     "result_id",
+     "batch_id",
+     "analyte",
+     "result_value",
+     "unit",
+     "test_status",
+     "measured_at"
+    ],
+    "materials": [
+     "material_id",
+     "material_name",
+     "source_site",
+     "spec_version"
+    ],
+    "operating_costs": [
+     "period",
+     "labor_hours",
+     "total_cases",
+     "infrastructure_usd"
+    ],
+    "partner_feeds": [
+     "feed_id",
+     "partner",
+     "schema_rev",
+     "source_ts",
+     "ingest_ts",
+     "ref_id",
+     "record_kind",
+     "raw_json",
+     "processing_status",
+     "error_reason"
+    ],
+    "policy_exceptions": [
+     "exception_id",
+     "ref_id",
+     "policy_code",
+     "outcome",
+     "actor",
+     "recorded_at",
+     "explanation"
+    ],
+    "reference_versions": [
+     "ref_key",
+     "version",
+     "valid_from",
+     "valid_to",
+     "data_json"
+    ],
+    "sop_versions": [
+     "sop_id",
+     "version",
+     "effective_at",
+     "retired_at"
+    ],
+    "source_messages": [
+     "id",
+     "source",
+     "received_at",
+     "body"
+    ],
+    "upstream_outages": [
+     "incident_id",
+     "system_name",
+     "began",
+     "resolved",
+     "symptom",
+     "recovery_action"
+    ],
+    "vendor_file_imports": [
+     "id",
+     "source_file",
+     "received_at",
+     "count",
+     "state"
+    ],
+    "vendor_file_rows": [
+     "import_id",
+     "line_no",
+     "tenant",
+     "external_id",
+     "message_kind",
+     "amount_text",
+     "received_ts",
+     "payload"
+    ]
+   }
+  }
+ }
+}
