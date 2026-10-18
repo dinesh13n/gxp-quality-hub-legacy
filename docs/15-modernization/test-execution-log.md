@@ -155,6 +155,23 @@ Totals: 25/25 planned INC-04 test IDs green - 29 methods + 8 supplementary = 37 
 - RTD-09 (chunked mutation gate).
 - INC-02: TST-CO-14 e skipped (no python3.9); hub suite + inner egress-guarded rerun takes 110-130 s, close to the 180 s device-call cap (RTD-19).
 
+## INC-05 (branch `stage-15-inc05-decision-record`)
+Evidence labels: Verified Fact unless marked. Sandbox copies only (OD-03/03a); checksum rc 0 before and after every run; sandboxes deleted. Synthetic, unvalidated test data except the shipped 125-case baseline.
+
+| Group | Selector | Result | Wall |
+|---|---|---|---|
+| INC05 | `-k TST_DEC -k TST_ID -k INC05` | 53 ok (27 TST-DEC, 12 TST-ID, 14 supplementary S01-S14) | 52 s |
+| E05EGRESS | `-k E05EGRESS` | 1 ok (INC-05 modules under the egress guard: 0 attempts, model_calls_total 0) | 65 s |
+| A | SEC, CO-10, CO-15, INC03 | 45 ok | 63 s |
+| B | CO-01/02/04/05/06/07/11/13/14, INC02 | 40 ok, 1 skipped (as before, no python3.9) | 77 s |
+| C | CO-12 | 5 ok | 102 s |
+| INC04 | `-k INC04 -k TST_POL` | 34 ok | 51 s |
+| Harness | run_characterization.py | OVERALL PASS (CT-17/18 NOT-RUN as before) | 36 s |
+
+- TST-DEC-22 is an INC-08 test and is not run here (Verified Fact: test map).
+- TST-CO-12 is frozen; INC-05 modules skip in its inner run (`HUB_EGRESS_INNER`) and run under the guard in E05EGRESS instead (DEV-52, resolves RTD-44).
+- Process slip (DEV-53): one pure-import check ran in the working tree (no data touched, no pycache); all later syntax checks used `ast.parse`.
+
 ## Residual Risks
 - RR-TE-1 Timings are from a 2-CPU device VM and will differ in CI.
 
@@ -165,3 +182,4 @@ Totals: 25/25 planned INC-04 test IDs green - 29 methods + 8 supplementary = 37 
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
+| v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |

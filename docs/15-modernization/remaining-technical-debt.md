@@ -91,6 +91,18 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 - INC-04: RTD-41 (preserve-or-fix, OD-S12-13), RTD-43 (decision mechanism) and RTD-38 (addenda) need decisions by Dinesh (owner).
 - RTD-01, RTD-03, RTD-06 need decisions by Dinesh (owner) before or during INC-02.
 
+## INC-05 additions
+| ID | Item | Label |
+|---|---|---|
+| RTD-46 | Remove `hub/policy/gate.py` and its import in `hub/policy/service.py` once a non-add edit is permitted; `GatedPolicyService` then folds into `PolicyService`. | Verified Fact |
+| RTD-47 | Stage 12 addendum for exit codes 25/26/27, new error codes, settings keys and the `decision_idempotency` table. | Verified Fact |
+| RTD-48 | OD-S12-15 `rule` derivation mode and case creation (OD-S12-19) not built; human decision pending. | Unknown |
+| RTD-49 | Evidence access matrix and CLOSE_EXCEPTION-as-closing-transition need owner confirmation (A-15-05-1, DEV-46). | Assumption |
+| RTD-50 | Imported `occurred_at` is the case creation time proxy; legacy `events` history not imported. | Verified Fact |
+| RTD-51 | Third Zone H copy in `hub/security/authz.py`. | Verified Fact |
+| RTD-52 | Mutation gate for INC-05 not run. | Verified Fact |
+| RTD-44 | Resolved by DEV-52 (E05EGRESS). | Verified Fact |
+
 ## Residual Risks
 - RR-RTD-1 Until RTD-01/02 are closed, behaviour preservation depends on someone running the harness manually before each merge (OD-13 orchestrator check).
 
@@ -101,3 +113,4 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
+| v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |

@@ -147,6 +147,28 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 - INC-03: DEV-17..DEV-27 carried as open items (RTD-23..RTD-36).
 - INC-04: DEV-28..DEV-40 carried as open items (RTD-37..RTD-45); DEV-29 / DEV-30 need Dinesh's OD-S12-13 decision, DEV-35 his confirmation of the decision mechanism.
 
+## INC-05 (branch `stage-15-inc05-decision-record`)
+Decision record service (hash-chained, append-only `decision_events`, rebuildable `case_state`), crosswalk, backfill of the 125 baseline cases (seed 4100, OD-09), shared Zone H gate. All new files under `hub/`, `tests/hub/`, `docs/15-modernization/`; legacy code and `data/` byte-identical (Verified Fact: `git diff --name-status main` shows only A outside docs).
+
+| ID | Deviation / choice | Label |
+|---|---|---|
+| DEV-41 | DEV-34 closed by subclass `GatedPolicyService` (overrides `_zone_h`); frozen `hub/policy/gate.py` and its import stay because non-add edits are barred outside docs. Physical removal is RTD-46. | Verified Fact |
+| DEV-42 | M003 applied by `hub.decision.schema` with its own table `decision_schema_migrations` (INC-04 D-02 precedent); needs M001+M002; `schema_migrations` untouched. | Verified Fact |
+| DEV-43 | Plan text says LEGACY_IMPORTED; DDL/spec use CASE_IMPORTED; DDL followed. | Inference |
+| DEV-44 | FACT_RECEIVED written only when `received_at` is given at create (AC-DEC-01 seq 1..6). | Assumption |
+| DEV-45 | OD-S12-15 `rule` derivation mode not built; only `human_only`. Case creation disabled by default (OD-S12-19). | Verified Fact |
+| DEV-46 | CLOSE_EXCEPTION event is itself the closing transition (ZH-04). | Assumption |
+| DEV-47 | Evidence access matrix: `restricted` readable by quality_lead, compliance, dispositioner; others by all four read roles (A-15-05-1). | Assumption |
+| DEV-48 | Imported events use `occurred_at = cases.created_at` as a proxy; as_of for imported cases is therefore a proxy. Legacy `events` rows are not imported. | Verified Fact |
+| DEV-49 | Exit codes E-DEC-* 25, E-ID-* 26, E-DEC-BACKFILL-MISMATCH 27 and extra error codes / settings keys are INC-05 choices needing a Stage 12 addendum. | Verified Fact |
+| DEV-50 | Stale re-auth now raises E-GATE-REAUTH-REQUIRED (401) via the shared gate; the INC-04 local copy raised E-GATE-NOT-AUTHORISED. | Verified Fact |
+| DEV-51 | `hub/security/authz.py` remains a third copy of Zone H logic (frozen). | Verified Fact |
+| DEV-52 | INC-05 test modules skip in TST-CO-12's inner run; separate E05EGRESS test covers the guard. | Verified Fact |
+| DEV-53 | One import check ran in the working tree (like DEV-27/39); no data or pycache written. | Verified Fact |
+
+Backfill result (Verified Fact, sandbox): 125 cases, 250 events, states CLOSED 36 / ESCALATED 9 / OPEN 42 / REOPENED 8 / UNDER_REVIEW 30; 8 REOPENED cases marked `LEGACY_UNEVIDENCED_REOPEN`; projection mismatches 0; CT-02 priority distribution archive 36 / queue 70 / review 17 / urgent 2 through the inactive as-found rule set. Crosswalk rule run: LT-01 42, LT-02 21, LT-03 125, LT-04 173, LT-05 30 links; 8,394 feed and 1,170 document orphans reported, none guessed.
+`zone_h.holders` stays empty in shipped config; tests use synthetic holders (synthetic, unvalidated).
+
 ## Residual Risks
 - RR-TL-1 INC-01 proves the harness on this device only; another runtime (3.12, other JDK/Node) is unverified.
 - RR-TL-3 INC-03 audit tamper evidence is limited by an unsigned same-host anchor file and undetectable tail truncation after the last anchor (R-SEC-1).
@@ -159,3 +181,4 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
+| v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |

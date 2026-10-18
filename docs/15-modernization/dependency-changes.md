@@ -57,6 +57,9 @@ supersedes: "v0.3 (INC-01 .. INC-03)"
 ## Unresolved Issues
 - OD-S12-12 runtime decision (INC-02).
 
+## INC-05
+None. Standard library only; no `random`/`secrets` in `hub/`; no network, model or fuzzy-matching import in INC-05 packages (TST-ID-05, S12). TST-CO-11 and TST-CO-13 pass. Verified Fact.
+
 ## Residual Risks
 - RR-DC-1 CI pins Python 3.12 while INC-01 evidence is 3.10.12 only.
 
@@ -67,3 +70,4 @@ supersedes: "v0.3 (INC-01 .. INC-03)"
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
+| v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
