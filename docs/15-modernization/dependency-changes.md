@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "dependency-changes.md"
-version: "v0.1"
+version: "v0.2"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 only (characterisation harness + hermetic fixtures + mutation gate). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "pyproject.toml (unchanged)"]
-supersedes: "none"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "pyproject.toml (unchanged)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
+supersedes: "v0.1 (INC-01 only)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -25,6 +25,16 @@ supersedes: "none"
 | SQLite | 3.37.2 | same | none | [Verified Fact] |
 | Network egress | — | servers bound to 127.0.0.1 only; no outbound call | none | [Verified Fact] |
 [Verified Fact] No AI/LLM/ML import or call was added (OD-08); the No-AI deny-list guard itself is INC-02 (TB-07).
+
+### INC-02
+| Item | Before | After | Change | Tag |
+|---|---|---|---|---|
+| Python packages | stdlib only | stdlib only (`hub/` imports: argparse, ast, hashlib, html, ipaddress, json, os, re, shutil, socket, sqlite3, sys, threading, urllib.parse, datetime, functools, copy) | none | [Verified Fact] |
+| `pyproject.toml` | `requires-python >=3.10`, no deps | unchanged (OD-14 / OD-S12-12: run as `python -m hub`) | none | [Verified Fact] |
+| Runtime floor | undecided (OD-S12-12) | enforced at start-up: Python >= 3.10, SQLite >= 3.37 (default); 3.12 selectable | new guard, no dependency | [Verified Fact] |
+| No-AI deny-list | none | `hub/guards/no_ai.py` (R1 AI/ML imports, R2 HTTP clients outside `adapters/`, R3 manifests); `python -m hub no-ai-check` clean on hub/, tests/hub/, pyproject.toml | new guard | [Verified Fact] |
+| Network egress | none | `python -m hub` installs a loopback-only egress guard; tripwires 0 | new guard | [Verified Fact] |
+| CI | `.github/workflows/verify.yml` | unchanged (OD-14) | none | [Verified Fact] |
 
 ## Evidence References
 - `evidence/inc01/final-A_report.json` `tools`; `pyproject.toml`.
@@ -45,3 +55,4 @@ supersedes: "none"
 | Version | Date | Author/agent | Change |
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
+| v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
