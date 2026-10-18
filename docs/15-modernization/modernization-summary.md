@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "modernization-summary.md"
-version: "v0.2"
+version: "v0.3"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
-supersedes: "v0.1 (INC-01 only)"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
+supersedes: "v0.2 (INC-01 + INC-02)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -53,7 +53,15 @@ sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt
 ### Next (after INC-02)
 Orchestrator: review + PR + squash-merge INC-02 (OD-13). INC-03 (audit trail, ADR-005) uses OD-12 defaults; STOP and ask Dinesh on OD-S12-17 before INC-06; Dinesh's OD-S12-13 decisions on DV-01..DV-09 needed before INC-04 merges (RTD-20).
 
+### MS-INC03 INC-03 summary (branch `stage-15-inc03-hub-db-audit`) - DONE WITH CONDITIONS
+- [Verified Fact] Delivered TB-09 (forward-only migration runner, M001, backup-before-migrate), TB-10 (C2: offline users/roles in the DB, PBKDF2 + lockout + hashed sessions, deny-by-default route authorisation + Zone H holder/re-auth check, hash-chained insert-only audit with config-path anchor, `verify-audit`, CONFIG_LOADED), TB-11 (backup/restore with manifest; release checklist G1-G10) and the first rollback rehearsal (PASS except the G2 clause, which cannot run yet).
+- [Verified Fact] Tests: 16/16 planned INC-03 IDs green (40 methods) + 5 supplementary; INC-02 46 methods unchanged; INC-01 harness 134/134 with identical digests; mutation 15/15; backup manifest rc 0 after every session.
+- [Verified Fact] Refactoring decision on users/roles: DB addendum (RD-24), holders in config (default []), permission matrix as data.
+- Conditions: Stage 12 addenda (RTD-23/24); security values are proposals for Stage 24 (RTD-26); C2 parts outside INC-03 (RTD-27); G1/G2/G4/G8/G9/G10 not evaluable yet - every release checklist blocks (RTD-32); runner disk use (RTD-31) and subTest recording gap (RTD-28).
+- Stage 15 overall: **IN PROGRESS** (INC-04..INC-09 not started; OD-S12-17 question to Dinesh is due before INC-06 per OD-12).
+
 ## Evidence References
+- INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - All INC-01 artifacts in this folder; `evidence/inc01/`.
 
 ## Assumptions
@@ -74,3 +82,4 @@ Orchestrator: review + PR + squash-merge INC-02 (OD-13). INC-03 (audit trail, AD
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
+| v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |

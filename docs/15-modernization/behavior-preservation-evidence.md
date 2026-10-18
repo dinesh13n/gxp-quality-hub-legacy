@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "behavior-preservation-evidence.md"
-version: "v0.2"
+version: "v0.3"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
-supersedes: "v0.1 (INC-01 only)"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
+supersedes: "v0.2 (INC-01 + INC-02)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -115,7 +115,21 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 [Verified Fact] With matching approved register rows (throw-away test fixture, not a HAR-06 approval) the exit is 0 (TST-CO-01 c); an approval whose values do not match the observation does not cover it (TST-CO-01 d); an unlisted golden change is UNAPPROVED (TST-CO-02).
 [Verified Fact] Determinism: golden-compare and deviation-register output byte-identical across 18 environments (PYTHONHASHSEED 0/1/random x TZ UTC/Asia/Kolkata/America/Los_Angeles x LC_ALL C/en_IN.UTF-8) (TST-CO-13).
 
+### BP-INC03 INC-03 behaviour preservation
+| Check | Result | Evidence | Tag |
+|---|---|---|---|
+| Legacy source paths unchanged vs `baseline-as-found`; branch adds files only (except Stage 15 docs) | TST-CO-05 a/b/c ok | `evidence/inc03/hub-final-B_report.json` | [Verified Fact] |
+| INC-01 characterisation harness | 134/134 PASS, shipped 15 tests OK as-found (post-DB 750336f3…), `capture_digests` identical to INC-02 regression | `evidence/inc03/char-regression-inc03_report.json` | [Verified Fact] |
+| Mutation gate | 15/15 KILLED (4 chunks) | `evidence/inc03/mutation-gate-inc03.txt` | [Verified Fact] |
+| INC-02 hub behaviour (golden-compare, adapters, guards, register, runtime floor, determinism) | 46 methods: 45 ok, 1 skipped (same as INC-02 final-A/B) | `hub-final-B_report.json`, `hub-final-C_report.json` | [Verified Fact] |
+| golden-compare still lists DV-01..09 UNAPPROVED, exit 6 (OD-15) | yes (TST-CO-01, and inside TST-CO-15) | final-A/B | [Verified Fact] |
+| INC-02 `init` still creates an M000-only store (S03) and INC-02 commands work on an M001 store | yes (INC-02 S03; INC-03 S03; rehearsal step 8) | final-B, rehearsal transcript | [Verified Fact] |
+| No-AI / egress | full suite under egress guard: 0 attempts, model_calls_total 0 | `hub-final-C_inner-egress-run.json` | [Verified Fact] |
+| Working-tree data | backup manifest rc 0 after every session | `evidence/inc03/checksum-log.txt` | [Verified Fact] |
+[Inference] INC-03 changes no legacy behaviour: it adds new modules only, the legacy goldens are unchanged and no approved-behaviour change was needed (`approved-behavior-changes.md` ABC-INC03).
+
 ## Evidence References
+- INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `docs/15-modernization/evidence/inc01/final-A_report.json`, `final-B_report.json` (full per-check results + unittest output), `mut-1..mut-4_report.json`, `summary.txt`, `checksum-log.txt`.
 - `tests/characterization/golden/MANIFEST.sha256` (golden integrity), `fixtures/FX-BASE125.sha256`.
 - INC-02: `docs/15-modernization/evidence/inc02/`; `tests/hub/`; `hub/golden/probes_inc02.json`; `hub/coexistence/seed_inc02.json`.
@@ -141,3 +155,4 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
+| v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |

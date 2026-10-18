@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "test-execution-log.md"
-version: "v0.2"
+version: "v0.3"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
-supersedes: "v0.1 (INC-01 only)"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
+supersedes: "v0.2 (INC-01 + INC-02)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -67,7 +67,47 @@ Totals: CT checks 134 (127 Stage 7-golden-backed + 7 INC-01 supplement), 16 CT e
 | TST-HUB-INC02-S01..S03 | (supplementary) | `test_inc02_supplementary.py` (3) | PASS | Untrusted, flags/kill switch, M000 |
 Totals: 10/10 planned test IDs green - 43 test methods for the planned IDs (42 ok, 1 skipped) + 3 supplementary = 46 methods; 0 failures, 0 errors. TST-CO-12 e additionally re-runs the other 41 methods under the egress guard (all green).
 
+### INC-03 runs (device Python 3.10.12 / SQLite 3.37.2; hub runs from `~/fde_sbx/s15-inc03/<label>/c_pristine`; harness runs under `~/fde_sbx/s15-inc03/char`)
+| # | Label | HEAD | Command (from repo root unless stated) | Result | Wall | Checksum rc | Tag |
+|---|---|---|---|---|---|---|---|
+| 25 | smoke, smoke2 | c21526b-wip | `python -m hub.admin ...` in `~/fde_sbx/s15-inc03/smoke*` (copy of hub/) | all commands as designed; deviation_register delete guard missing -> fixed in M001 | <10 s | 0 | [Verified Fact] |
+| 26 | dev1 | c21526b+tests | `tests/hub/run_hub_tests.py --sandbox-root ~/fde_sbx/s15-inc03 --label dev1 -k TST_SEC -k TST_CO_10 -k TST_CO_15 -k INC03` | 45 run, unittest rc 1: TST-SEC-13 b subTests failed (empty tables) -> fixed; recorder showed them as ok (RTD-28) | 67 s | 0/0 | [Verified Fact] |
+| 27 | dev2 | +fix | `... --label dev2 -k TST_SEC_13` | 2/2 ok | 47 s | 0/0 | [Verified Fact] |
+| 28 | reg-B (1st) | 69aa843 | INC-02 split | aborted: ENOSPC on the device (sandbox only) | 78 s | 0 | [Verified Fact] |
+| 29 | reg-B | 69aa843 | `... --label reg-B -k TST_CO_01 -k TST_CO_02 -k TST_CO_04 -k TST_CO_05 -k TST_CO_06 -k TST_CO_07 -k TST_CO_11 -k TST_CO_13 -k TST_CO_14 -k INC02` | 41 run: 39 ok, 1 FAIL (TST-CO-04 d: new sqlite3.connect sites), 1 skipped -> fixed (RD-33) | 79 s | 0/0 | [Verified Fact] |
+| 30 | dev3 | 68b93f3 (pre-commit tree) | `... -k TST_SEC -k TST_CO_10 -k TST_CO_15 -k INC03 -k TST_CO_04` | 51/51 ok | 68 s | 0/0 | [Verified Fact] |
+| 31 | reg-C | 68b93f3 | `... --label reg-C -k TST_CO_12` | 5/5 ok; inner full suite 86 run, 85 ok, 2 skipped, 0 egress, 0 model calls | 119 s | 0/0 | [Verified Fact] |
+| 32 | rehearsal-1 | main 8a01da7 / 68b93f3 | `~/fde_sbx/s15-inc03/rehearsal-1/rehearse.sh` | PASS (rollback-rehearsal-inc03.md) | ~3 s | 0 | [Verified Fact] |
+| 33 | inc03-regress | 68b93f3 | `tests/characterization/run_characterization.py --sandbox-root ~/fde_sbx/s15-inc03/char --label inc03-regress` | 134/134 PASS, shipped 15 OK as-found, digests == INC-02 | 39 s | 0 | [Verified Fact] |
+| 34-37 | inc03-mut-1..4 | 68b93f3 | `... --mutation-gate --mutants M1-M5 / M6-M9 / M10-M13 / M14,M15 --no-legacy-suite` | 5+4+4+2 = 15/15 KILLED | 169/105/88/104 s | 0 | [Verified Fact] |
+| 38 | final-A | 68b93f3 | `run_hub_tests.py --sandbox-root ~/fde_sbx/s15-inc03 --label final-A -k TST_SEC -k TST_CO_10 -k TST_CO_15 -k INC03` | 45/45 ok | 68 s | 0/0 | [Verified Fact] |
+| 39 | final-B | 68b93f3 | `... --label final-B` + INC-02 split of #29 | 41 run: 40 ok, 1 skipped (CO-14 e) | 95 s | 0/0 | [Verified Fact] |
+| 40 | final-C | 68b93f3 | `... --label final-C -k TST_CO_12` | 5/5 ok; inner 86 run, 85 ok, 2 skipped, egress [], model_calls_total 0 | 108 s | 0/0 | [Verified Fact] |
+
+### INC-03 planned tests (Stage 13 IDs, increment-test-map) - final-A
+| Test ID | AC | Test methods (tests/hub/) | Result | Class / note |
+|---|---|---|---|---|
+| TST-CO-10 | AC-CO-10 | `test_tst_co_10_release_blocked.py` a-b (2) | PASS | A |
+| TST-CO-15 | AC-CO-15 | `test_tst_co_15_release_checklist.py` a (1) | PASS | A; G1 from golden-compare (exit 6), G2/4/8/9/10 not_run |
+| TST-SEC-01 | AC-SEC-01 | `test_tst_sec_01_route_registry.py` a-d (4) | PASS | A; decision-point level (DEV-20) |
+| TST-SEC-04 | AC-SEC-04 | `test_tst_sec_04_fresh_install.py` a-c (3) | PASS | A |
+| TST-SEC-05 | AC-SEC-05 | `test_tst_sec_05_lockout.py` a-c (3) | PASS | A; values = Stage 12 proposals |
+| TST-SEC-06 | AC-SEC-06 | `test_tst_sec_06_credential_store.py` a-c (3) | PASS | A |
+| TST-SEC-09 | AC-SEC-09 | `test_tst_sec_09_audit_events.py` a (1) | PASS | A; decision/policy via C2 API (DEV-21) |
+| TST-SEC-10 | AC-SEC-10 | `test_tst_sec_10_verify_audit_ok.py` a-b (2) | PASS | A |
+| TST-SEC-11 | AC-SEC-11 | `test_tst_sec_11_tamper_detection.py` a-e (5) | PASS | A |
+| TST-SEC-12 | AC-SEC-12 | `test_tst_sec_12_truncation_limit.py` a-b (2) | PASS | A; documents R-SEC-1 |
+| TST-SEC-13 | AC-SEC-13 | `test_tst_sec_13_insert_only_triggers.py` a-b (2) | PASS | A |
+| TST-SEC-14 | AC-SEC-14 | `test_tst_sec_14_audit_write_failure.py` a (1) | PASS | A |
+| TST-SEC-15 | AC-SEC-15 | `test_tst_sec_15_no_secrets_in_audit_logs.py` a-c (3) | PASS | A |
+| TST-SEC-16 | AC-SEC-16 | `test_tst_sec_16_exposure_guard.py` a-c (3) | PASS | A; startup-check (DEV-22) |
+| TST-SEC-18 | AC-SEC-18 | `test_tst_sec_18_secret_scan_deletion_grep.py` a-c (3) | PASS | B (OD-S12-09 hold-all, OD-15) |
+| TST-SEC-21 | AC-SEC-21 | `test_tst_sec_21_config_loaded.py` a-b (2) | PASS | A |
+| TST-HUB-INC03-S01..S05 | (supplementary) | `test_inc03_supplementary.py` (5) | PASS | migrations, backup/restore, INC-02 compat, anchor config, Zone H |
+Totals: 16/16 planned INC-03 test IDs green - 40 methods + 5 supplementary = 45; INC-02: 46 methods, 45 ok + 1 skipped; 0 failures, 0 errors.
+
 ## Evidence References
+- INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `docs/15-modernization/evidence/inc01/*_report.json`, `summary.txt`, `checksum-log.txt`.
 - INC-02: `docs/15-modernization/evidence/inc02/hub-final-{A,B}_report.json`, `hub-final-{A,B}_unittest-result.json`, `char-regression-inc02_report.json`, `mutation-gate-inc02.txt`, `checksum-log.txt`.
 
@@ -89,3 +129,4 @@ Totals: 10/10 planned test IDs green - 43 test methods for the planned IDs (42 o
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
+| v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |

@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "changed-components.md"
-version: "v0.2"
+version: "v0.3"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "git diff --name-status main..stage-15-inc01-harness", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
-supersedes: "v0.1 (INC-01 only)"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "git diff --name-status main..stage-15-inc01-harness", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
+supersedes: "v0.2 (INC-01 + INC-02)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -61,7 +61,21 @@ INC-01 adds one new component — the characterisation harness (C11 change-safet
 [Verified Fact] `git diff --name-status main..HEAD` lists only `A` entries plus `M` on `docs/15-modernization/*.md` (Stage 15's own artifacts). No change to `app/`, `services/`, `legacy_*`, `sql/`, `scripts/`, `integration/`, `contracts/`, `data/`, existing `tests/*.py`, `tests/characterization/`, `.github/`, `Dockerfile`, `pyproject.toml` (TST-CO-05).
 [Verified Fact] `tests/hub/` has no `__init__.py`: the shipped `python -m unittest discover -s tests` still collects 15 tests (regression run: shipped suite ran=15 OK).
 
+### CC-6 INC-03 additions (all new files, status `A`; no existing file modified)
+| Path | Component | Backlog | Tag |
+|---|---|---|---|
+| `hub/store/forward/M001_access_audit.sql` | audit_log (DDL v0.1 verbatim) + DDL addendum: principal, principal_role, session, login_attempt, release_record, release_gate_result; hold-all triggers incl. deviation_register delete guard | TB-09/10 | [Verified Fact] |
+| `hub/store/migrate.py` | forward-only runner, backup-before-migrate, drift / unknown-version refusal | TB-09 | [Verified Fact] |
+| `hub/security/{canonical,audit,auth,authz,exposure,scan,settings,errors,openapi_routes}.py`, `hub/security/route_registry.json` | C2: canonical JSON + clock, hash chain + anchor + verify, PBKDF2 authenticator + lockout + sessions, deny-by-default authorisation + Zone H check, exposure guard, secret/deletion scan, security settings, INC-03 error codes, route registry | TB-10 | [Verified Fact] |
+| `hub/ops/{backup,release,gates}.py` | backup/restore with manifest; release checklist G1-G10; G3/G5/G6/G7 evaluators | TB-11 | [Verified Fact] |
+| `hub/admin/{__init__,__main__,cli}.py` | `python -m hub.admin` operator CLI | TB-09..11 | [Verified Fact] |
+| `tests/hub/_inc03.py`, `tests/hub/test_tst_sec_{01,04,05,06,09,10,11,12,13,14,15,16,18,21}_*.py`, `tests/hub/test_tst_co_{10,15}_*.py`, `tests/hub/test_inc03_supplementary.py` | 16 planned INC-03 tests + 5 supplementary | — | [Verified Fact] |
+| `docs/15-modernization/rollback-rehearsal-inc03.md`, `docs/15-modernization/evidence/inc03/*` | rollback procedure + rehearsal 1, run evidence | — | [Verified Fact] |
+
+[Verified Fact] `git diff --name-status main..HEAD` lists only `A` entries plus `M` for `docs/15-modernization/*.md` (TST-CO-05 c green). Existing hub files (`hub/cli.py`, `hub/config.py`, `hub/store/db.py`, `hub/core/errors.py`, M000) and INC-02 tests are unchanged; INC-03 reuses `db.open_hub`, `config.load`, `sandbox`, `egress`, `no_ai`, `metrics`.
+
 ## Evidence References
+- INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `git diff --stat main..stage-15-inc01-harness`; `evidence/inc01/final-A_report.json` (`legacy_suite`).
 - INC-02: `git diff --name-status main..stage-15-inc02-hub-skeleton`; `hub/`; `tests/hub/`.
 
@@ -82,3 +96,4 @@ INC-01 adds one new component — the characterisation harness (C11 change-safet
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
+| v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |

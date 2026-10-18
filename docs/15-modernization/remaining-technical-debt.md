@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "remaining-technical-debt.md"
-version: "v0.2"
+version: "v0.3"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "docs/07-repo-assessment/technical-debt-register.md", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
-supersedes: "v0.1 (INC-01 only)"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "docs/07-repo-assessment/technical-debt-register.md", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
+supersedes: "v0.2 (INC-01 + INC-02)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -45,7 +45,26 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | RTD-21 | Exit code 2 shared by usage error, E-FX-HASH and E-CFG-INVALID | ambiguous in scripts | — | with RTD-13 | [Verified Fact] |
 | RTD-22 | `coexistence_inventory` triggers block all updates, including a future legitimate owner assignment for CO-WF-01 (OPD-15) | needs a migration when the owner is known | — | when OPD-15 answered | [Inference] |
 
+### INC-03 additions
+| ID | Debt | Impact | Owner | Due | Tag |
+|---|---|---|---|---|---|
+| RTD-23 | Stage 12 addenda: DDL (M001 tables + deviation_register delete trigger), hub-config schema (`auth.*`, `network.tls`), error-handling spec (E-SEC-SECRET-IN-AUDIT, E-SEC-SCAN-FINDINGS, E-CO-RELEASE-BLOCKED, E-STORE-BACKUP-INVALID, E-AUTH-PASSWORD-POLICY, E-STORE-NOT-MIGRATED, trigger message E-SEC-RETAINED; exit codes 16-22) | specs lag the code | Engagement lead (Dinesh Naik) | Stage 16/17 (HAR-13) | [Verified Fact] |
+| RTD-24 | Exit code 9 means both E-CO-DENYLIST-IMPORT (INC-02) and E-SEC-EXPOSURE-NOT-APPROVED (spec) | ambiguous in scripts | — | with RTD-23 | [Verified Fact] |
+| RTD-25 | `python -m hub.admin` separate from `python -m hub`; two migration directories | operator UX, two runners | — | when hub/cli.py may change (INC-04+) | [Verified Fact] |
+| RTD-26 | Security values are Stage 12 proposals (A-12-F09-1): PBKDF2 600k, lockout 5/15/15, session 30 min/8 h, re-auth 300 s, password >= 12 | not policy-backed | Engagement lead (Dinesh Naik) | Stage 24 | [Assumption] |
+| RTD-27 | Not built: service bearer tokens + rotation (BEH-SEC-03), user disable / role revoke / password change commands, CSRF/cookie flags (no web layer), C3 read reasons (R2) | C2 incomplete beyond INC-03 scope | — | INC-04+ / OD-S12-06 | [Verified Fact] |
+| RTD-28 | INC-02 `tests/hub/_driver.py` recorder does not record subTest failures (per-test status `ok` while unittest rc=1) | report.json counts can overstate passes; `unittest_rc` is authoritative | — | next change to the runner | [Verified Fact] |
+| RTD-29 | Audit anchor is an unsigned local file on the same host; tail truncation after the last anchor undetectable (R-SEC-1, TST-SEC-12) | tamper evidence limited | Engagement lead (Dinesh Naik) | OD-S12-18 for real deployment / Stage 24 | [Verified Fact] |
+| RTD-30 | Hold-all means unbounded growth of audit_log, login_attempt, session | storage growth | Engagement lead (Dinesh Naik) | retention policy OD-S12-09 | [Inference] |
+| RTD-31 | Hub runner leaves ~470 MB per run in `<label>/scratch` + 61 MB `c_pristine`; device disk filled (ENOSPC) in INC-03; INC-02 copies removed (reports kept) | runs can fail on disk space | — | runner cleanup option | [Verified Fact] |
+| RTD-32 | G1, G2, G4, G8, G9, G10 have no evaluator in INC-03 -> every release checklist is blocked (correct, but not yet useful) | release gate incomplete | owning increments | INC-04..INC-08 | [Verified Fact] |
+| RTD-33 | L2 restore loses records written after the backup from the live store (kept only in `pre-restore/`); after rollback to the pre-migration backup a roll-forward starts a new chain | RPO window; chain continuity across rollback | — | Stage 28/30 | [Verified Fact] |
+| RTD-34 | Lockout is per principal only; unknown-principal attempts and source rate limiting not controlled (no server) | brute force across names | — | INC-04+ / Stage 24 | [Inference] |
+| RTD-35 | Route registry generated from the DRAFT OpenAPI; regeneration manual (TST-SEC-01 a detects drift) | must be regenerated (in the sandbox) when OpenAPI changes | — | Stage 16/17 | [Verified Fact] |
+| RTD-36 | No process lock during restore ("stop process" is procedural) | concurrent writer could race a restore | — | when a daemon exists | [Inference] |
+
 ## Evidence References
+- INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `transformation-log.md` TL-3; `behavior-preservation-evidence.md` residual risks.
 
 ## Assumptions
@@ -55,6 +74,7 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 - U-15-01 CI fixture provisioning approach.
 
 ## Unresolved Issues
+- INC-03: RTD-23 (Stage 12 addenda) and RTD-26 (security values, Stage 24) need decisions by Dinesh (owner).
 - RTD-01, RTD-03, RTD-06 need decisions by Dinesh (owner) before or during INC-02.
 
 ## Residual Risks
@@ -65,3 +85,4 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
+| v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |

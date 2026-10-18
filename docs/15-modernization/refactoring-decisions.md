@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "refactoring-decisions.md"
-version: "v0.2"
+version: "v0.3"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
-supersedes: "v0.1 (INC-01 only)"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
+supersedes: "v0.2 (INC-01 + INC-02)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -46,7 +46,27 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 | RD-22 | Hidden CLI test seams `--assume-python`, `--assume-sqlite`, `--observations` | monkeypatch in-process | exercises the real start-up / CLI path; documented as test-only | — | [Verified Fact] |
 | RD-23 | Untrusted runtime guard delivered in INC-02 (ADR-002 B(3)) | defer to INC-06 | requested in INC-02 scope; static type check deferred (RTD-16) | — | [Verified Fact] |
 
+### INC-03 decisions
+| ID | Decision | Alternatives | Rationale | Approval | Tag |
+|---|---|---|---|---|---|
+| RD-24 | **Users/roles in the DB** (M001 addendum: principal, principal_role, session, login_attempt); permission matrix as versioned DATA (`hub/security/route_registry.json` generated from the OpenAPI x-roles = SEC-3); Zone H holders in CONFIG (`zone_h.holders`, default []) | users in a config file; matrix in DB | lockout counters and sessions need durable transactional state audited in the same transaction (BEH-SEC-02/05); credentials in config files spread secrets; SEC-2 says "holder list is configuration"; matrix "is data" (BEH-SEC-04) | resolves the Stage 14 M001 Unknown; DDL addendum (A-14-08) | [Inference] |
+| RD-25 | Forward migrations in `hub/store/forward/`, applied only by `hub.admin migrate` after an automatic pre-migration backup; M000 stays with `db.open_hub` | put M001 in `migrations/` | INC-02 `init` contract (S03: M000 only) preserved; add-only rule; backup-before-migrate needs an explicit operator step | — | [Verified Fact] |
+| RD-26 | Operator commands under `python -m hub.admin` | edit `hub/cli.py` | add-only rule (TST-CO-05 c) | — | [Verified Fact] |
+| RD-27 | Hash = sha256(prev_hash_hex ‖ canonical(record)); record = all SCH-AUDIT fields except prev_hash/hash (incl. audit_seq, details as object); genesis 64×"0"; canonical JSON sorted keys, `(",",":")`, ensure_ascii; UTC `…ffffffZ` | hash raw row | BEH-SEC-05 literal; seq inside the hash makes moves detectable | — | [Verified Fact] |
+| RD-28 | `verify` classifies the first break: gap -> missing_record; link/content mismatch -> reordered if the row verifies at another position, else altered_record; anchored head absent/different -> head_mismatch | report "broken" only | AC-SEC-11 asks for the kind | — | [Verified Fact] |
+| RD-29 | Anchor = JSON-lines file, append + fsync, every `audit.anchor_every` records and at the end of every `hub.admin` run; `audit.anchor_path` REQUIRED (no default), absolute, outside the DB dir, sandbox-safe | derived default path | OD-S12-18 default "set in config" (OD-15); an implicit path could land beside the DB | OD-15 | [Verified Fact] |
+| RD-30 | Session tokens / salts from `os.urandom` (not `secrets`) | `secrets` | TST-CO-13 b forbids importing `secrets` in hub/; both use the OS CSPRNG | — | [Verified Fact] |
+| RD-31 | Lockout state = insert-only `login_attempt` rows with a `lockout_started` marker; failures counted since the last success/lockout inside the window; locked attempts do not extend the lock; dummy PBKDF2 for unknown/locked principals; generic errors | counter column on principal | hold-all, auditability, timing equalisation | values = A-12-F09-1 | [Verified Fact] |
+| RD-32 | `audit.change()` = BEGIN IMMEDIATE, change, audit insert, COMMIT; audit failure -> ROLLBACK + E-SEC-AUDIT-WRITE-FAILED; credential-like keys refused in `details` | audit after commit | AC-SEC-14, BEH-SEC-07 | — | [Verified Fact] |
+| RD-33 | All hub-store connections via `db.open_hub`; backups with `VACUUM INTO` from that connection (facts read before/after, mismatch -> refuse) | sqlite3 backup API on a 2nd connection | TST-CO-04 d single connection point (found by reg-B); SQLite floor 3.37 supports VACUUM INTO | — | [Verified Fact] |
+| RD-34 | Restore verifies first, sets the current store + anchor aside under `pre-restore/<ts>/`, never deletes | overwrite | hold-all (OD-S12-09/OD-15); forensic copy of a tampered store | OD-15 | [Verified Fact] |
+| RD-35 | Release checklist rows insert-only, results pass/fail/not_run, a DB trigger refuses `ready` unless 10 passes; a new release id per attempt | mutable rows | AC-CO-10 defence in depth; evidence immutability | — | [Verified Fact] |
+| RD-36 | Exit codes: 16 scan findings, 17 audit tamper, 18 audit write failed / secret in audit, 19 auth errors, 20 release blocked, 21 backup invalid, 22 store not migrated; 9 exposure (as specified) | reuse 1 | distinguishable; needs Stage 12 addendum | — | [Verified Fact] |
+| RD-37 | CONFIG_LOADED (config sha256 + holders + anchor_every) appended at the start of every store-opening `hub.admin` run (after migration for `migrate`, after verification for `restore`) | only on config change | AC-SEC-21 "process restarted" | — | [Verified Fact] |
+| RD-38 | Full-increment rollback rehearsed with `git archive main hub` into the sandbox | `git checkout` | no checkout/switch allowed; working tree untouched | — | [Verified Fact] |
+
 ## Evidence References
+- INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `tests/characterization/harness.py` (`NORMALISATION_RULES`, guard), `run_characterization.py`; commits 2633062, 0283660, e1eb1d2, ed43a0a.
 
 ## Assumptions
@@ -66,3 +86,4 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
+| v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |

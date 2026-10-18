@@ -1,13 +1,13 @@
 ---
 stage: "15 — Transform Bad Repo → Good Repo"
 artifact: "transformation-log.md"
-version: "v0.2"
+version: "v0.3"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
 status: "DRAFT"
-scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; Stage 15 overall status: IN PROGRESS."
-evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "git log main..stage-15-inc01-harness", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)"]
-supersedes: "v0.1 (INC-01 only)"
+scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS."
+evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "git log main..stage-15-inc01-harness", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
+supersedes: "v0.2 (INC-01 + INC-02)"
 ---
 **Label: synthetic repository, unvalidated against any organisation.**
 
@@ -21,7 +21,8 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 |---|---|---|---|---|---|
 | INC-01 | `stage-15-inc01-harness` | TB-01 FX-BASE125 fixture + hash gate; TB-02 subprocess runner; TB-03 ported captures + CT-H3 normaliser + reviewed `--update-golden`; TB-04 CT-01..CT-16 + M1..M15 gate; TB-05 `ac_links` for CT-04..CT-16 (C3) | DONE WITH CONDITIONS | none | exit criteria met: CT-01..CT-16 green, 15/15 killed, 2 identical runs, shipped tests as-found |
 | INC-02 | `stage-15-inc02-hub-skeleton` | TB-06 `hub/` skeleton + runtime self-check + sandbox guard; TB-07 No-AI deny-list + egress guard (+ Untrusted type, zero-model-call tripwire); TB-08 RO adapters AD-01/02/08, deviation register DV-01..09 `proposed`, `hub golden-compare`, M000 | DONE WITH CONDITIONS | none | exit criteria met: 10/10 planned tests green; golden-compare lists DV-01..09 UNAPPROVED, exit 6 (AC-CO-01); INC-01 harness 134/134, 15/15 killed |
-| INC-03..INC-09 | — | TB-09..TB-21 | NOT STARTED | — | — |
+| INC-03 | `stage-15-inc03-hub-db-audit` | TB-09..TB-11 | DONE WITH CONDITIONS (see TL-6) | none | see TL-6 |
+| INC-04..INC-09 | — | TB-12..TB-21 | NOT STARTED | — | — |
 
 ### TL-2 INC-01 steps (in order)
 1. [Verified Fact] Read OD log (OD-03a, OD-08, OD-09, OD-11..OD-13), Stage 0B write boundaries / stop conditions, Stage 7 plan + scripts + goldens, Stage 13 C3, Stage 14 backlog/gates/roadmap.
@@ -67,7 +68,35 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 | DEV-15 | deny-list "project" scope | scans `hub/`, `tests/hub/`, root `pyproject.toml` / `requirements*.txt`; the legacy estate is out of scope (`app/gateway_bridge.py` uses `urllib.request`) | [Verified Fact] | RTD-17 |
 | DEV-16 | `coexistence_inventory` (BEH-CO-05) not in INC-02 test map | created in M000 (plan row M000) with update/delete-blocking triggers; covered only by supplementary S03 | [Verified Fact] | TST-CO-08 planned later |
 
+### TL-6 INC-03 register entry and steps (branch `stage-15-inc03-hub-db-audit`)
+| Increment | Branch | Backlog | Status | Blocking | Exit evidence |
+|---|---|---|---|---|---|
+| INC-03 | `stage-15-inc03-hub-db-audit` | TB-09 forward-only runner + M001 + backup-before-migrate; TB-10 C2 users/roles (offline `hub.admin user`), audit hash chain, `verify-audit`, anchor via config; TB-11 backup/restore + first rollback rehearsal | DONE WITH CONDITIONS | none | 16/16 planned tests green (40 methods) + 5 supplementary; INC-02 46 methods unchanged (45 ok, 1 skip); harness 134/134, 0 diffs; mutation 15/15; rollback rehearsal 1 PASS (G2 clause not runnable) |
+
+1. [Verified Fact] Read OD log (OD-03a, OD-08, OD-09, OD-11..OD-15), engagement context, Stage 0B write boundaries, Stage 15 prompt; Stage 14 backlog TB-09..TB-11, schema-migration plan (M001 users/roles "[addendum or config — Unknown]"), rollback strategy (INC-03 L1+L2, first rehearsal), gates (TG-3 INC-03 row), feature-flag plan (`audit.anchor_path`, `zone_h.holders`); Stage 12 F09 (BEH-SEC-01..11, AC-SEC-01..21), F10 (G1-G10, BEH-CO-06, AC-CO-10/15), DDL v0.1, audit-record / hub-config schemas, security-spec SEC-2/3, error-handling spec, OpenAPI x-roles; increment-test-map (16 INC-03 tests).
+2. [Verified Fact] `c21526b` M001 (`hub/store/forward/`), `hub/store/migrate.py`, `hub/security/*` (canonical JSON, audit chain/anchor/verify, PBKDF2 authenticator + lockout, route authorisation + Zone H check, exposure guard, scan), `hub/ops/*` (backup/restore, release checklist, gate evaluators), `python -m hub.admin`. Sandbox smoke (`~/fde_sbx/s15-inc03/smoke*`): migrate, user create, verify-audit, scan, startup-check, release-checklist, backup/restore all as designed; the smoke exposed that M000 left `deviation_register` deletable -> hold-all trigger added in M001.
+3. [Verified Fact] `69aa843` 16 planned tests + 5 supplementary. dev1: TST-SEC-13 b failed (empty tables never fire row triggers - test seeding gap) -> fixed; the run also showed that the INC-02 `_driver.py` recorder reports subTest failures as `ok` (RTD-28).
+4. [Verified Fact] reg-B (INC-02 regression) failed TST-CO-04 d: new `sqlite3.connect` calls outside the allowed store/runtime/adapter files. Fixed in `68b93f3` by routing every hub-store connection through `hub.store.db.open_hub` and taking backups with `VACUUM INTO` (no INC-02 test changed). A first reg-B attempt hit ENOSPC on the device (old INC-02 sandbox copies); 5.5 GB of disposable INC-02 `c_pristine/`+`scratch/` copies were removed (WB-10), reports kept (RTD-31).
+5. [Verified Fact] At `68b93f3`: final-A/B/C green (summary.txt); INC-01 harness `inc03-regress` 134/134, capture digests == INC-02 regression; mutation gate 4 chunks 15/15 KILLED; rollback rehearsal 1 PASS; backup manifest rc 0 after every session.
+6. [Verified Fact] `e61e94c` evidence; then these Stage 15 docs (v0.3) and `rollback-rehearsal-inc03.md` (v0.1).
+
+### TL-7 INC-03 deviations from the Stage 14 plan / specs
+| ID | Plan / spec | Actual | Tag | Reason / follow-up |
+|---|---|---|---|---|
+| DEV-17 | branch `stage-15-inc03-store-audit` (TG-3) | `stage-15-inc03-hub-db-audit` (created by the orchestrator) | [Verified Fact] | matches OD-11 E-6 pattern |
+| DEV-18 | `hub user create`, `hub verify-audit` (BEH-SEC-02/06) | `python -m hub.admin user create` / `verify-audit` | [Verified Fact] | `hub/cli.py` frozen by the add-only rule (TST-CO-05 c); fold in later (RTD-25) |
+| DEV-19 | schema-migration-plan M001 "users/roles [addendum or config — Unknown]" | DB addendum (principal, principal_role, session, login_attempt) + release tables; permission matrix as data file; holders in config | [Verified Fact] | RD-24; Stage 12 DDL not edited (A-14-08) -> RTD-23 |
+| DEV-20 | AC-SEC-01 "every registered route called" | no HTTP server in INC-03; tested on the single authorisation decision point + route registry generated from the OpenAPI x-roles (planned level: static/introspection) | [Verified Fact] | re-test against real handlers in INC-04+ |
+| DEV-21 | AC-SEC-09 decision event + policy change | producers do not exist; exercised through the C2 API they must use (`audit.change`) | [Verified Fact] | re-run when INC-04/05 producers exist |
+| DEV-22 | AC-SEC-16 "the server starts" | `hub.admin startup-check` runs the start-up guard (no listener yet) | [Verified Fact] | server must call `exposure.check_startup` first (INC-04+) |
+| DEV-23 | E-SEC-EXPOSURE-NOT-APPROVED exit 9 (spec) | kept 9 as specified; collides with INC-02 E-CO-DENYLIST-IMPORT = 9 | [Verified Fact] | RTD-24 |
+| DEV-24 | BEH-SEC-03 service bearer tokens (rotatable) | service principals can be created and are refused interactive login and Zone H; bearer tokens not built | [Verified Fact] | RTD-27 |
+| DEV-25 | AC-CO-15 "recorded pass/fail" | third value `not_run` for gates without an evaluator; it blocks like `fail` | [Verified Fact] | never assumes pass; RTD-32 |
+| DEV-26 | AC-CO-09 / BEH-CO-06 "replay-safety suite passes" in the rehearsal | not runnable (G2 suite arrives INC-06) | [Verified Fact] | re-rehearse then |
+| DEV-27 | All execution in the sandbox (OD-03a) | once, `python3` imported `hub/security/openapi_routes.py` from the working tree to generate `route_registry.json` (reads only `docs/12-specs/contracts/openapi.yaml`; no legacy code, no `data/` access); stray `__pycache__` removed; checksum rc 0 | [Verified Fact] | process slip, no data impact; later regeneration must run in the sandbox |
+
 ## Evidence References
+- INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - Commits: `git log --oneline main..stage-15-inc01-harness`.
 - Run reports: `docs/15-modernization/evidence/inc01/{final-A,final-B,mut-1..mut-4}_report.json`, `summary.txt`, `checksum-log.txt`.
 - INC-02 commits: `git log --oneline main..stage-15-inc02-hub-skeleton`; evidence `docs/15-modernization/evidence/inc02/` (summary.txt, hub-final-A/B reports, golden-compare-baseline.*, char-regression-inc02_report.json, mutation-gate-inc02.txt, checksum-log.txt).
@@ -83,9 +112,11 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 ## Unresolved Issues
 - DEV-02, DEV-04, DEV-05 carried as open items (see `remaining-technical-debt.md`).
 - INC-02: DEV-08..DEV-16 carried as open items (RTD-13..RTD-22).
+- INC-03: DEV-17..DEV-27 carried as open items (RTD-23..RTD-36).
 
 ## Residual Risks
 - RR-TL-1 INC-01 proves the harness on this device only; another runtime (3.12, other JDK/Node) is unverified.
+- RR-TL-3 INC-03 audit tamper evidence is limited by an unsigned same-host anchor file and undetectable tail truncation after the last anchor (R-SEC-1).
 - RR-TL-2 golden-compare gate G1 stays red (exit 6) by design until Dinesh decides DV-01..DV-09 (OD-S12-13 / HAR-06); a red gate could be normalised by habit.
 
 ## Change History
@@ -93,3 +124,4 @@ Chronological log of every Stage 15 increment. **INC-01 (P0 "make change observa
 |---|---|---|---|
 | v0.1 | 2026-10-18 | claude-fde-agent | INC-01 (branch `stage-15-inc01-harness`). |
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
+| v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
