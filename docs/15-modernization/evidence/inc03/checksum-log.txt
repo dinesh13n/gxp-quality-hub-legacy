@@ -1,0 +1,14 @@
+Stage 15 INC-03 - backup manifest checks (sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt from the repo root; 1,512 entries)
+All executions ran under $HOME/fde_sbx/s15-inc03/ (outside the working tree).
+smoke / smoke2 (hub.admin CLI smoke)                rc=0
+dev1 hub runner (pre/post)                          rc=0/0
+dev2 hub runner -k TST_SEC_13 (pre/post)            rc=0/0
+reg-B (attempt 1: ENOSPC on device; sandbox only)   rc=0 (checked separately after the failure)
+reg-B hub runner (pre/post)                         rc=0/0
+dev3 hub runner (pre/post)                          rc=0/0
+reg-C hub runner -k TST_CO_12 (pre/post)            rc=0/0
+rollback rehearsal 1 (step 9)                       rc=0
+INC-01 harness inc03-regress                        rc=0
+mutation gate inc03-mut-1..4                        rc=0 (after mut-4)
+final-A / final-B / final-C hub runner (pre/post)   rc=0/0 each
+evidence collection (this file)                     rc=0

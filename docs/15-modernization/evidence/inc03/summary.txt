@@ -1,0 +1,15 @@
+Stage 15 INC-03 (branch stage-15-inc03-hub-db-audit) - evidence summary. Code HEAD at test time: 68b93f3.
+Device: Python 3.10.12, SQLite 3.37.2. Sandbox: ~/fde_sbx/s15-inc03/<label> (outside the working tree).
+
+Hub suite (tests/hub/run_hub_tests.py, chunked with -k to stay under the 180 s device-call cap):
+  final-A  -k TST_SEC -k TST_CO_10 -k TST_CO_15 -k INC03        45 run: 45 ok              (68 s)
+  final-B  -k TST_CO_01..07,11,13,14 -k INC02 (INC-02 minus CO-12) 41 run: 40 ok, 1 skipped (95 s)
+  final-C  -k TST_CO_12 (its test e re-runs the WHOLE suite under the egress guard)  5 ok (108 s);
+           inner run: 86 run, 85 ok, 2 skipped (CO-14 e no python3.9; CO-12 module self-skip), egress_attempts [], model_calls_total 0
+  INC-03 planned tests: 16/16 IDs green (40 methods) + 5 supplementary (TST-HUB-INC03-S01..S05)
+  INC-02 tests: 46 methods, 45 ok + 1 skipped (unchanged from INC-02 final-A/B)
+INC-01 harness regression inc03-regress: 134/134 PASS, shipped 15 tests OK as-found, capture_digests == INC-02 regression
+Mutation gate (4 chunks): 15/15 KILLED
+Rollback rehearsal 1: PASS (see rollback-rehearsal-1/transcript.txt and docs/15-modernization/rollback-rehearsal-inc03.md)
+Release checklist dry run R-inc03-rehearsal: G3/G5/G6/G7 pass; G1 fail (OD-S12-13 open); G2/G4/G8/G9/G10 not_run -> release blocked (by design)
+Backup manifest checksum: rc 0 before/after every execution session (checksum-log.txt)

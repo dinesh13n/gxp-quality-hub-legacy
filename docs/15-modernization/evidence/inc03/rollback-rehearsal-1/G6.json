@@ -1,0 +1,13 @@
+{
+ "clean": true,
+ "deletion_findings": [],
+ "deletion_scope": [
+  "hub"
+ ],
+ "scanned": [
+  "hub",
+  "tests/hub"
+ ],
+ "secret_findings": [],
+ "tables_without_delete_trigger": []
+}

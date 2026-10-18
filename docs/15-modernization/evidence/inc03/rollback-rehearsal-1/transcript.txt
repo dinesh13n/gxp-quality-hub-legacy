@@ -1,0 +1,617 @@
+
+### 0. prepare code trees from git (read-only: git archive), config
+main=8a01da7 inc03=68b93f3
+{"audit": {"anchor_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/anchor/audit-anchor.jsonl", "anchor_every": 100}}
+
+### 1. pre-release state: INC-02 code creates the M000 store
+$ python3 -B -m hub init --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data
+{
+ "deviation_register_rows": 9,
+ "hub_db": "hub.sqlite3"
+}
+[rc=0]
+M000 store sha=7e01edae287eb36e9912e160831a58afa9af78e8db78ec39a982978b5aeba234
+
+### 2. release INC-03: migrate (backup-before-migrate B0), create users, checklist, verify
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json migrate --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data --backup-root /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/backups
+{
+ "applied": [
+  "M001"
+ ],
+ "backup": {
+  "files": {
+   "hub.sqlite3": "f38e62b93aa85b01112866db3eb6a3a513026b86b4a42b6b441a1014d9b52603"
+  },
+  "label": "pre-migrate-M000-to-M001-20261018T150146825682Z",
+  "path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/backups/pre-migrate-M000-to-M001-20261018T150146825682Z",
+  "schema_versions": [
+   "M000"
+  ]
+ },
+ "from": "M000",
+ "to": "M001"
+}
+[rc=0]
+B0=pre-migrate-M000-to-M001-20261018T150146825682Z
+f38e62b93aa85b01112866db3eb6a3a513026b86b4a42b6b441a1014d9b52603  hub.sqlite3
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json user create --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data --principal alice --role reviewer
+{
+ "created": {
+  "kind": "human",
+  "principal_id": "alice",
+  "roles": [
+   "reviewer"
+  ],
+  "status": "active"
+ }
+}
+[rc=0]
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json user create --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data --principal bob --role quality_lead
+{
+ "created": {
+  "kind": "human",
+  "principal_id": "bob",
+  "roles": [
+   "quality_lead"
+  ],
+  "status": "active"
+ }
+}
+[rc=0]
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json release-checklist --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data --release R-inc03-rehearsal --evidence-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev --scratch-root /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/scratch --gate G1=fail:/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G1-not-evaluated:OD-S12-13 open (golden-compare exits 6 by design)
+{
+ "blocking": [
+  "G1",
+  "G2",
+  "G4",
+  "G8",
+  "G9",
+  "G10"
+ ],
+ "gates": [
+  {
+   "check": "golden diff: unapproved differences = 0",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G1-not-evaluated",
+   "gate": "G1",
+   "note": "OD-S12-13 open (golden-compare exits 6 by design)",
+   "result": "fail",
+   "source": "FR-CO-01"
+  },
+  {
+   "check": "replay-safety suite (AC-INT-04/05) passes",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G2",
+   "note": null,
+   "result": "not_run",
+   "source": "FR-CO-03, FR-INT-02"
+  },
+  {
+   "check": "verify-audit ok",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G3.json",
+   "gate": "G3",
+   "note": "evaluated by hub.admin",
+   "result": "pass",
+   "source": "FR-SEC-02"
+  },
+  {
+   "check": "verify-projection 0 mismatches",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G4",
+   "note": null,
+   "result": "not_run",
+   "source": "FR-DEC-02"
+  },
+  {
+   "check": "No-AI tripwire: deny-list clean, no egress, model_calls_total = 0",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G5.json",
+   "gate": "G5",
+   "note": "evaluated by hub.admin",
+   "result": "pass",
+   "source": "FR-CO-04"
+  },
+  {
+   "check": "secret scan 0; deletion-path grep 0",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G6.json",
+   "gate": "G6",
+   "note": "evaluated by hub.admin",
+   "result": "pass",
+   "source": "PNFR-08, PNFR-10"
+  },
+  {
+   "check": "backup/restore rehearsal checksum match",
+   "evidence_path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/ev/G7.json",
+   "gate": "G7",
+   "note": "evaluated by hub.admin",
+   "result": "pass",
+   "source": "PNFR-05, FR-CO-03"
+  },
+  {
+   "check": "Zone H negative tests (AC-GATE-09/11/12) pass",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G8",
+   "note": null,
+   "result": "not_run",
+   "source": "FR-GATE-01/03"
+  },
+  {
+   "check": "planted-string fixture suite (86/22/44) 0 effects",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G9",
+   "note": null,
+   "result": "not_run",
+   "source": "PNFR-13"
+  },
+  {
+   "check": "determinism: bit-identical across PYTHONHASHSEED/TZ/locale",
+   "evidence_path": "none (gate not run in this build)",
+   "gate": "G10",
+   "note": null,
+   "result": "not_run",
+   "source": "PNFR-17"
+  }
+ ],
+ "ready_allowed": false,
+ "release_id": "R-inc03-rehearsal"
+}
+[rc=0]
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json verify-audit --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data
+{
+ "anchors_checked": 4,
+ "head_hash": "e1416432e389e7a47c382e7e43e6d2136e8cddb767ca0465185ae3363be80c7d",
+ "head_seq": 8,
+ "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
+ "records": 8,
+ "status": "ok"
+}
+[rc=0]
+
+### 3. post-release backup B1, then more activity (carol) after B1
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json backup --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data --dest-root /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/backups --label B1
+{
+ "anchor_included": true,
+ "audit_head": {
+  "audit_seq": 11,
+  "hash": "9d275e30ad2054c082acef9d8b7ee1678da2aff34ae28e1695903caab9a30f42"
+ },
+ "created_at": "2026-10-18T15:01:47.717242Z",
+ "files": {
+  "audit-anchor.jsonl": "8092005c01c30d7da8568f6cac1b3d58c51d0ac18956eab7d05d98a80c3c072a",
+  "hub.sqlite3": "78b8b0ea46a290e7f8fac6b6e47d92b982c8068731eadfdd9f594927bc70660c"
+ },
+ "label": "B1",
+ "path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/backups/B1",
+ "schema": "hub-backup/v1",
+ "schema_versions": [
+  "M000",
+  "M001"
+ ]
+}
+[rc=0]
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json user create --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data --principal carol --role compliance
+{
+ "created": {
+  "kind": "human",
+  "principal_id": "carol",
+  "roles": [
+   "compliance"
+  ],
+  "status": "active"
+ }
+}
+[rc=0]
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json user list --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data
+{
+ "principals": [
+  {
+   "kind": "human",
+   "principal_id": "alice",
+   "roles": [
+    "reviewer"
+   ],
+   "status": "active"
+  },
+  {
+   "kind": "human",
+   "principal_id": "bob",
+   "roles": [
+    "quality_lead"
+   ],
+   "status": "active"
+  },
+  {
+   "kind": "human",
+   "principal_id": "carol",
+   "roles": [
+    "compliance"
+   ],
+   "status": "active"
+  }
+ ]
+}
+[rc=0]
+
+### 4. INCIDENT: offline tamper of audit row 5 (triggers dropped) -> verify-audit must fail (exit 17)
+tampered audit_seq 5 (offline attacker)
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json verify-audit --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data
+{
+ "code": "E-SEC-AUDIT-TAMPER-DETECTED",
+ "details": {
+  "first_broken_seq": 5,
+  "kind": "altered_record",
+  "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
+  "records": 14,
+  "status": "broken"
+ },
+ "message": "verify-audit found a broken chain or anchor mismatch"
+}
+{
+ "first_broken_seq": 5,
+ "kind": "altered_record",
+ "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
+ "records": 14,
+ "status": "broken"
+}
+[rc=17]
+
+### 5. ROLLBACK L2 to B1: stop (CLI, no daemon) -> restore hub.sqlite3 + anchor -> checksum -> verify -> restart
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json restore --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data --backup /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/backups/B1
+{
+ "audit_head": {
+  "audit_seq": 11,
+  "hash": "9d275e30ad2054c082acef9d8b7ee1678da2aff34ae28e1695903caab9a30f42"
+ },
+ "backup": "B1",
+ "checksum_match": true,
+ "restored": {
+  "audit-anchor.jsonl": "8092005c01c30d7da8568f6cac1b3d58c51d0ac18956eab7d05d98a80c3c072a",
+  "hub.sqlite3": "78b8b0ea46a290e7f8fac6b6e47d92b982c8068731eadfdd9f594927bc70660c"
+ },
+ "schema_after_restore": [
+  "M000",
+  "M001"
+ ],
+ "schema_versions": [
+  "M000",
+  "M001"
+ ],
+ "set_aside": [
+  "hub.sqlite3",
+  "audit-anchor.jsonl"
+ ],
+ "set_aside_dir": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data/pre-restore/20261018T150148245874Z",
+ "verify_audit": {
+  "anchors_checked": 6,
+  "head_hash": "9d275e30ad2054c082acef9d8b7ee1678da2aff34ae28e1695903caab9a30f42",
+  "head_seq": 11,
+  "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
+  "records": 11,
+  "status": "ok"
+ }
+}
+[rc=0]
+restored sha=fdfe027c1dbd60360c65ee00fc5683305a26c321dc534acf36ae467a906249f5 manifest=78b8b0ea46a290e7f8fac6b6e47d92b982c8068731eadfdd9f594927bc70660c
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json verify-audit --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data
+{
+ "anchors_checked": 7,
+ "head_hash": "9f62efac9127d359426c29f8435ba55610b4569355ff38acc1327eb9ffd84dbd",
+ "head_seq": 13,
+ "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
+ "records": 13,
+ "status": "ok"
+}
+[rc=0]
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json user list --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data
+{
+ "principals": [
+  {
+   "kind": "human",
+   "principal_id": "alice",
+   "roles": [
+    "reviewer"
+   ],
+   "status": "active"
+  },
+  {
+   "kind": "human",
+   "principal_id": "bob",
+   "roles": [
+    "quality_lead"
+   ],
+   "status": "active"
+  }
+ ]
+}
+[rc=0]
+set aside (not deleted):
+/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data/pre-restore:
+20261018T150148245874Z
+
+/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data/pre-restore/20261018T150148245874Z:
+audit-anchor.jsonl
+hub.sqlite3
+
+### 6. FULL INCREMENT ROLLBACK (L1 code -> INC-02 + L2 store -> B0 pre-migration)
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json restore --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data --backup /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/backups/pre-migrate-M000-to-M001-20261018T150146825682Z
+{
+ "audit_head": null,
+ "backup": "pre-migrate-M000-to-M001-20261018T150146825682Z",
+ "checksum_match": true,
+ "restored": {
+  "hub.sqlite3": "f38e62b93aa85b01112866db3eb6a3a513026b86b4a42b6b441a1014d9b52603"
+ },
+ "schema_after_restore": [
+  "M000"
+ ],
+ "schema_versions": [
+  "M000"
+ ],
+ "set_aside": [
+  "hub.sqlite3",
+  "audit-anchor.jsonl"
+ ],
+ "set_aside_dir": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data/pre-restore/20261018T150148498711Z",
+ "verify_audit": {
+  "reason": "restored store is below M001 (no audit_log)",
+  "status": "not_applicable"
+ }
+}
+[rc=0]
+restored sha=f38e62b93aa85b01112866db3eb6a3a513026b86b4a42b6b441a1014d9b52603 B0 manifest=f38e62b93aa85b01112866db3eb6a3a513026b86b4a42b6b441a1014d9b52603
+schema_migrations ['M000']
+tables ['coexistence_inventory', 'deviation_register', 'schema_migrations']
+$ python3 -B -m hub deviations --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data
+{
+ "coexistence_inventory": [
+  {
+   "description": "Protected parallel workflow for older customers (FR-CO-02, OPD-15). Exposed read-only; the product cannot alter, disable or retire it.",
+   "item_id": "CO-WF-01",
+   "owner": "Unknown",
+   "status": "protected"
+  }
+ ],
+ "deviation_register": [
+  {
+   "approval_ref": null,
+   "dev_id": "DV-01",
+   "golden_ref": "CT-12:batch.sql_report_1_total_gross",
+   "justification": "SQL report 1 total inflated by LEFT JOIN events fan-out (BB-08); new month_end_total sums cases once. F10-2 DV-01 (fix).",
+   "legacy_value": "742956.61",
+   "new_value": "622826.44",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-02",
+   "golden_ref": "CT-08:batch.partner_error_reasons[replayed source message]",
+   "justification": "Legacy marks every REPLAY as DUPLICATE (BB-05); new distinguishes identical vs changed content. F10-2 DV-02 (fix).",
+   "legacy_value": "64",
+   "new_value": "{\"replay_changed_content\":\"REVISED_CONFLICT\",\"replay_identical_content\":\"NOOP_DUPLICATE\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-03",
+   "golden_ref": "CT-08:batch.partner_error_reasons[quantity out of range]",
+   "justification": "Legacy rejects negative quantity; new keeps it flagged for review. F10-2 DV-03 (change of class).",
+   "legacy_value": "154",
+   "new_value": "{\"quantity_lt_0\":\"NEGATIVE_VALUE flag; kept; reviewer queue\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-04",
+   "golden_ref": "CT-11:batch.java_tiny.stdout#count",
+   "justification": "Legacy Java silently skips blank amounts; new reports UNPARSABLE_AMOUNT (quarantine). F10-2 DV-04 (fix).",
+   "legacy_value": "\"2390\"",
+   "new_value": "{\"UNPARSABLE_AMOUNT\":10,\"summed_rows\":2390}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-05",
+   "golden_ref": "CT-13:batch.js_policy_table.allows[7:9]",
+   "justification": "Legacy JS tolerance with &#x27;abc&#x27;/null is undefined behaviour; new rejects invalid input. F10-2 DV-05 (fix).",
+   "legacy_value": "[[\"abc\",\"APAC\",2026,false],[null,\"APAC\",2026,true]]",
+   "new_value": "{\"abc\":\"E-POL-INPUT-INVALID\",\"null\":\"E-POL-INPUT-INVALID\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-06",
+   "golden_ref": "CT-13:batch.js_policy_table.table[0]",
+   "justification": "Unknown region/year default 999999 kept but marked defaulted. F10-2 DV-06 (additive).",
+   "legacy_value": "[\"APAC\",2019,999999]",
+   "new_value": "{\"defaulted\":true,\"region\":\"APAC\",\"threshold\":999999,\"year\":2019}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-07",
+   "golden_ref": "CT-08:batch.partner_status_after_all",
+   "justification": "Legacy reconcile overwrites processing_status in place; new appends outcomes and leaves the legacy table untouched. F10-2 DV-07 (fix).",
+   "legacy_value": "[[\"ACCEPTED\",7917],[\"DUPLICATE\",64],[\"REJECTED\",586]]",
+   "new_value": "{\"legacy_table\":\"untouched\",\"outcomes\":\"append-only\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-08",
+   "golden_ref": "CT-10:batch.shift_distinct_objects_in_first_500_joined_rows",
+   "justification": "Night-shift join multiplies rows (118 distinct objects in first 500); new evaluates per entity (500 distinct in first 500). F10-2 DV-08 (fix).",
+   "legacy_value": "118",
+   "new_value": "500",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-09",
+   "golden_ref": "CT-07:lib.missing_field",
+   "justification": "Legacy counts invalid gateway events but does not store them; new stores them in quarantine. F10-2 DV-09 (fix).",
+   "legacy_value": "{\"accepted\":0,\"duplicates\":0,\"invalid\":1,\"received\":1}",
+   "new_value": "{\"quarantined\":1,\"reason\":\"envelope_invalid\",\"received\":1}",
+   "status": "proposed"
+  }
+ ]
+}
+[rc=0]
+$ python3 -B -m hub selfcheck
+{
+ "data_origin": "synthetic",
+ "dependencies": "stdlib only (OD-08)",
+ "runtime": {
+  "floor": "3.10",
+  "floor_python": "3.10",
+  "floor_source": "OD-S12-12 default (OD-14)",
+  "floor_sqlite": "3.37.0",
+  "fts5": true,
+  "python": "3.10.12",
+  "sqlite": "3.37.2"
+ },
+ "tripwires": {
+  "egress_attempts_total": 0,
+  "model_calls_total": 0
+ }
+}
+[rc=0]
+
+### 7. ROLL FORWARD again with INC-03 code (new pre-migration backup), verify
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json migrate --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data --backup-root /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/backups
+{
+ "applied": [
+  "M001"
+ ],
+ "backup": {
+  "files": {
+   "hub.sqlite3": "692501d2fdc017392c6b8efb516fcc9acf84ccdae16d9fd2bd48cf1016006de5"
+  },
+  "label": "pre-migrate-M000-to-M001-20261018T150148688865Z",
+  "path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/backups/pre-migrate-M000-to-M001-20261018T150148688865Z",
+  "schema_versions": [
+   "M000"
+  ]
+ },
+ "from": "M000",
+ "to": "M001"
+}
+[rc=0]
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json verify-audit --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data
+{
+ "anchors_checked": 1,
+ "head_hash": "dc47d585b4f96a7e7a0dfcd4e9dd687cd95a5fa3200465acaca2b5f200dbd482",
+ "head_seq": 2,
+ "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
+ "records": 2,
+ "status": "ok"
+}
+[rc=0]
+$ python3 -B -m hub.admin --config /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/hub-config.json status --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/live/data
+{
+ "applied": [
+  "M000",
+  "M001"
+ ],
+ "code_head": "M001",
+ "pending": [],
+ "store": "present"
+}
+[rc=0]
+
+### 8. forward-compat probe: INC-02 code against an M001 store copy
+$ python3 -B -m hub deviations --data-dir /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s15-inc03/rehearsal-1/probe
+{
+ "coexistence_inventory": [
+  {
+   "description": "Protected parallel workflow for older customers (FR-CO-02, OPD-15). Exposed read-only; the product cannot alter, disable or retire it.",
+   "item_id": "CO-WF-01",
+   "owner": "Unknown",
+   "status": "protected"
+  }
+ ],
+ "deviation_register": [
+  {
+   "approval_ref": null,
+   "dev_id": "DV-01",
+   "golden_ref": "CT-12:batch.sql_report_1_total_gross",
+   "justification": "SQL report 1 total inflated by LEFT JOIN events fan-out (BB-08); new month_end_total sums cases once. F10-2 DV-01 (fix).",
+   "legacy_value": "742956.61",
+   "new_value": "622826.44",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-02",
+   "golden_ref": "CT-08:batch.partner_error_reasons[replayed source message]",
+   "justification": "Legacy marks every REPLAY as DUPLICATE (BB-05); new distinguishes identical vs changed content. F10-2 DV-02 (fix).",
+   "legacy_value": "64",
+   "new_value": "{\"replay_changed_content\":\"REVISED_CONFLICT\",\"replay_identical_content\":\"NOOP_DUPLICATE\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-03",
+   "golden_ref": "CT-08:batch.partner_error_reasons[quantity out of range]",
+   "justification": "Legacy rejects negative quantity; new keeps it flagged for review. F10-2 DV-03 (change of class).",
+   "legacy_value": "154",
+   "new_value": "{\"quantity_lt_0\":\"NEGATIVE_VALUE flag; kept; reviewer queue\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-04",
+   "golden_ref": "CT-11:batch.java_tiny.stdout#count",
+   "justification": "Legacy Java silently skips blank amounts; new reports UNPARSABLE_AMOUNT (quarantine). F10-2 DV-04 (fix).",
+   "legacy_value": "\"2390\"",
+   "new_value": "{\"UNPARSABLE_AMOUNT\":10,\"summed_rows\":2390}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-05",
+   "golden_ref": "CT-13:batch.js_policy_table.allows[7:9]",
+   "justification": "Legacy JS tolerance with &#x27;abc&#x27;/null is undefined behaviour; new rejects invalid input. F10-2 DV-05 (fix).",
+   "legacy_value": "[[\"abc\",\"APAC\",2026,false],[null,\"APAC\",2026,true]]",
+   "new_value": "{\"abc\":\"E-POL-INPUT-INVALID\",\"null\":\"E-POL-INPUT-INVALID\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-06",
+   "golden_ref": "CT-13:batch.js_policy_table.table[0]",
+   "justification": "Unknown region/year default 999999 kept but marked defaulted. F10-2 DV-06 (additive).",
+   "legacy_value": "[\"APAC\",2019,999999]",
+   "new_value": "{\"defaulted\":true,\"region\":\"APAC\",\"threshold\":999999,\"year\":2019}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-07",
+   "golden_ref": "CT-08:batch.partner_status_after_all",
+   "justification": "Legacy reconcile overwrites processing_status in place; new appends outcomes and leaves the legacy table untouched. F10-2 DV-07 (fix).",
+   "legacy_value": "[[\"ACCEPTED\",7917],[\"DUPLICATE\",64],[\"REJECTED\",586]]",
+   "new_value": "{\"legacy_table\":\"untouched\",\"outcomes\":\"append-only\"}",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-08",
+   "golden_ref": "CT-10:batch.shift_distinct_objects_in_first_500_joined_rows",
+   "justification": "Night-shift join multiplies rows (118 distinct objects in first 500); new evaluates per entity (500 distinct in first 500). F10-2 DV-08 (fix).",
+   "legacy_value": "118",
+   "new_value": "500",
+   "status": "proposed"
+  },
+  {
+   "approval_ref": null,
+   "dev_id": "DV-09",
+   "golden_ref": "CT-07:lib.missing_field",
+   "justification": "Legacy counts invalid gateway events but does not store them; new stores them in quarantine. F10-2 DV-09 (fix).",
+   "legacy_value": "{\"accepted\":0,\"duplicates\":0,\"invalid\":1,\"received\":1}",
+   "new_value": "{\"quarantined\":1,\"reason\":\"envelope_invalid\",\"received\":1}",
+   "status": "proposed"
+  }
+ ]
+}
+[rc=0]
+
+### 9. data checksum
+[backup manifest rc=0]
