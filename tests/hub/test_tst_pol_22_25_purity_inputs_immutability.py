@@ -152,7 +152,7 @@ class TST_POL_PurityInputsImmutability(unittest.TestCase):
             st.svc.adopt(st.sess("holder-1"), "D-OPS", 1, "2026-01-01", "ops-owner", AUTH)
             st.svc.accept_open(st.sess("holder-1"), "D-FIN", 1, "deferred (synthetic)", AUTH)
             con = st.con
-            snap = lambda: [con.execute("SELECT count(*), group_concat(hex(randomblob(0)) || policy_id || version || status) FROM policy_object").fetchone(),
+            snap = lambda: [con.execute("SELECT count(*), group_concat(policy_id || version || status) FROM policy_object").fetchone(),
                             con.execute("SELECT count(*) FROM policy_events").fetchone(), con.execute("SELECT count(*) FROM rule_row").fetchone()]
             before = snap()
             n = 0
