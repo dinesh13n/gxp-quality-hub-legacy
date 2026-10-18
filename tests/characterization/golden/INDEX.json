@@ -7,6 +7,6 @@
   "lib": "stage7/lib_golden_run1.json",
   "r1": "stage7/R1_unittest_fresh.log",
   "r7": "stage7/R7_readonly_scripts.log",
-  "supplement": ""
+  "supplement": "inc01/supplement_golden_v1.json"
  }
 }
