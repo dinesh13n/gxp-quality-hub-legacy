@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "E-GATE-NO-HOLDERS",
+    "message": "No authorised holder configured",
+    "correlation_id": "c-1"
+  }
+}

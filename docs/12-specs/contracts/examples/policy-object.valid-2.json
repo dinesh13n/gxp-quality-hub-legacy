@@ -1,0 +1,18 @@
+{
+  "policy_id": "C-OPS",
+  "version": 1,
+  "kind": "CLOCK",
+  "name": "receipt to ops-closed",
+  "definition_tag": "C-OPS",
+  "body": {
+    "clock_start_event": "FACT_RECEIVED",
+    "clock_stop_event": "FACT_OPS_CLOSED",
+    "candidate_duration_hours": 48,
+    "duration_hours": null,
+    "calendar_basis": "wall_clock"
+  },
+  "owner": "unassigned",
+  "status": "candidate",
+  "created_by": "seed",
+  "created_at": "2026-10-18T10:00:00Z"
+}

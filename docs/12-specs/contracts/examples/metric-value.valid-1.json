@@ -1,0 +1,18 @@
+{
+  "value_id": "MV1",
+  "metric_id": "month_end_total",
+  "metric_version": 1,
+  "definition_tag": null,
+  "policy_version": null,
+  "value": "622826.44",
+  "n": 125,
+  "partial": false,
+  "denominator": "cases",
+  "exclusions": "none",
+  "basis": "event_derived",
+  "data_origin": "synthetic",
+  "label": "synthetic, unvalidated",
+  "inputs_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "code_version": "v0.1",
+  "computed_at": "2026-10-18T10:00:00Z"
+}

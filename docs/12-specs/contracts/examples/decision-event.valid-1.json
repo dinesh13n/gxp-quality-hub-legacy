@@ -1,0 +1,18 @@
+{
+  "event_id": "EV-1",
+  "case_id": "C00000001",
+  "seq": 1,
+  "event_type": "CASE_CREATED",
+  "from_state": null,
+  "to_state": "OPEN",
+  "affects_state": true,
+  "actor": "user-1",
+  "actor_kind": "human",
+  "occurred_at": "2026-10-18T10:00:00Z",
+  "recorded_at": "2026-10-18T10:00:00Z",
+  "basis": "created from intake",
+  "evidence_refs": [],
+  "cycle": 1,
+  "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

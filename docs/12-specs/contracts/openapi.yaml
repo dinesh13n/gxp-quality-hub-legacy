@@ -1,0 +1,2458 @@
+# OpenAPI 3.0.3 - Stage 12 v0.1 DRAFT (synthetic, unvalidated). x-* extensions carry roles/requirements for Stage 13 traceability.
+openapi: 3.0.3
+info:
+  title: GxP Quality Hub target API (Stage 12 spec)
+  version: 0.1.0-draft
+  description: DRAFT specification of the NEW /api/v2 surface. Synthetic, unvalidated. Legacy /api/* is untouched. Schemas referenced by relative
+    file path.
+servers:
+- url: http://127.0.0.1:8081
+security:
+- session: []
+- bearer: []
+paths:
+  /api/v2/cases/{case_id}/transitions:
+    post:
+      operationId: OP_DEC_01
+      summary: 'Append a state-changing decision event (BEH-DEC-01..10). With close_exception the call is Zone H: use OP-GATE-02 ZH-04.'
+      x-op-id: OP-DEC-01
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-DEC-01
+      - FR-DEC-03
+      - FR-DEC-05
+      x-release: R1
+      parameters:
+      - name: case_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransitionRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/decision-event.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-DEC-IMMUTABLE, E-DEC-TIME-ORDER, E-DEC-REOPEN-EXPLICIT, E-DEC-EVIDENCE-REQUIRED, E-DEC-EVIDENCE-UNRESOLVED,
+            E-DEC-SEQ-CONFLICT, E-DEC-IDEMPOTENCY-MISMATCH, E-DEC-NOOP, E-DEC-CASE-NOT-FOUND, E-DEC-FIELD-TOO-LONG, E-GATE-NOT-AUTHORISED (status
+            per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/cases/{case_id}/events:
+    get:
+      operationId: OP_DEC_02
+      summary: List events of a case in seq order (cursor paging, limit<=100).
+      x-op-id: OP-DEC-02
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-DEC-01
+      - FR-DEC-02
+      x-release: R1
+      parameters:
+      - name: case_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPage'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-DEC-CASE-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/cases/{case_id}/state:
+    get:
+      operationId: OP_DEC_03
+      summary: Current state or state at ?as_of=<ISO UTC>.
+      x-op-id: OP-DEC-03
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-DEC-02
+      x-release: R1
+      parameters:
+      - name: case_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseStateView'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-DEC-CASE-NOT-FOUND, E-DEC-NOT-YET-EXISTS (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/events/{event_id}:
+    get:
+      operationId: OP_DEC_04
+      summary: One event with resolved evidence and source (denied evidence redacted).
+      x-op-id: OP-DEC-04
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-DEC-04
+      x-release: R1
+      parameters:
+      - name: event_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventWithEvidence'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-DEC-CASE-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/cases/{case_id}/facts:
+    post:
+      operationId: OP_DEC_05
+      summary: Record FACT_OPS_CLOSED or FACT_EVIDENCE_COMPLETE (FACT_RECEIVED is written at case creation/import).
+      x-op-id: OP-DEC-05
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-DEC-06
+      x-release: R1
+      parameters:
+      - name: case_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FactRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/decision-event.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-DEC-TIME-ORDER, E-DEC-SEQ-CONFLICT, E-DEC-CASE-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/cases/{case_id}/evidence:
+    post:
+      operationId: OP_DEC_06
+      summary: Attach an evidence record (EVIDENCE_ATTACHED event).
+      x-op-id: OP-DEC-06
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-DEC-04
+      - FR-DEC-05
+      x-release: R1
+      parameters:
+      - name: case_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/evidence-record.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-DEC-CASE-NOT-FOUND, E-DEC-FIELD-TOO-LONG (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/cases/{case_id}/evidence-pack:
+    get:
+      operationId: OP_GATE_01
+      summary: Read-only evidence pack with pack_hash.
+      x-op-id: OP-GATE-01
+      x-roles:
+      - dispositioner
+      x-implements:
+      - FR-GATE-02
+      x-release: R1
+      parameters:
+      - name: case_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidencePack'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-DEC-CASE-NOT-FOUND, E-GATE-NO-HOLDERS (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/zone-h/actions:
+    post:
+      operationId: OP_GATE_02
+      summary: Single choke point for every Zone H action ZH-01..ZH-10.
+      x-op-id: OP-GATE-02
+      x-roles:
+      - dispositioner
+      x-implements:
+      - FR-GATE-01
+      - FR-GATE-03
+      - FR-GATE-04
+      - FR-GATE-05
+      x-release: R1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZoneHRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZoneHResult'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-GATE-NOT-AUTHORISED, E-GATE-NO-HOLDERS, E-GATE-MODE-NONE, E-GATE-VALUES-UNSET, E-GATE-PACK-STALE, E-GATE-REAUTH-REQUIRED,
+            E-GATE-UNKNOWN-ACTION, E-GATE-EXTREF-INVALID, E-POL-AUTHORITY-REQUIRED, E-POL-OVERLAP (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/gate/status:
+    get:
+      operationId: OP_GATE_03
+      summary: Gate mode, values_set, holders_configured, available.
+      x-op-id: OP-GATE-03
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-GATE-04
+      - FR-GATE-05
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GateStatus'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/flags/{flag_id}/overrides:
+    post:
+      operationId: OP_GATE_04
+      summary: Override, dismiss or refuse a rule-generated item (reason required).
+      x-op-id: OP-GATE-04
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-GATE-06
+      x-release: R1
+      parameters:
+      - name: flag_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OverrideRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OverrideResult'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-GATE-REASON-REQUIRED, E-REV-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/policies:
+    get:
+      operationId: OP_POL_01
+      summary: List policy objects (filters kind, status).
+      x-op-id: OP-POL-01
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - finance_read
+      - dispositioner
+      x-implements:
+      - FR-POL-01
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyPage'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+    post:
+      operationId: OP_POL_02
+      summary: Create a CANDIDATE policy object or a new candidate version. Adoption/edit of adopted content is Zone H (OP-GATE-02).
+      x-op-id: OP-POL-02
+      x-roles:
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-POL-01
+      - FR-POL-02
+      - FR-POL-03
+      x-release: R1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyCreateRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/policy-object.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-POL-AUTHORITY-REQUIRED, E-POL-CLOCK-CALENDAR-REQUIRED, E-POL-OVERLAP (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/policies/{policy_id}/versions/{version}:
+    get:
+      operationId: OP_POL_03
+      summary: One policy version with change events.
+      x-op-id: OP-POL-03
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - finance_read
+      - dispositioner
+      x-implements:
+      - FR-POL-01
+      - FR-POL-03
+      x-release: R1
+      parameters:
+      - name: policy_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/policy-object.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-POL-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/rulesets:
+    get:
+      operationId: OP_POL_04
+      summary: List loaded rule sets and active pointers.
+      x-op-id: OP-POL-04
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-POL-04
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetPage'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/rulesets/{ruleset_id}/{version}:
+    get:
+      operationId: OP_POL_05
+      summary: One rule set with rows.
+      x-op-id: OP-POL-05
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-POL-04
+      x-release: R1
+      parameters:
+      - name: ruleset_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/rule-set.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-POL-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/rules/evaluate:
+    post:
+      operationId: OP_POL_06
+      summary: Pure rule evaluation (explicit ruleset_ref or active set).
+      x-op-id: OP-POL-06
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-POL-04
+      - FR-POL-06
+      x-release: R1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluateRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/rule-result.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-POL-NO-ACTIVE-RULESET, E-POL-INPUT-INVALID, E-POL-UNKNOWN-FUNCTION, E-POL-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/rules/divergence:
+    get:
+      operationId: OP_POL_07
+      summary: Divergence report across loaded rule sets (R2).
+      x-op-id: OP-POL-07
+      x-roles:
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-POL-05
+      x-release: R2
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DivergenceReport'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-POL-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/cases/{case_id}/clocks:
+    get:
+      operationId: OP_POL_08
+      summary: Elapsed time under every configured clock; verdict only for adopted clocks.
+      x-op-id: OP-POL-08
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-POL-02
+      - FR-DEC-06
+      x-release: R1
+      parameters:
+      - name: case_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClockElapsed'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-DEC-CASE-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/intake/items:
+    post:
+      operationId: OP_INT_01
+      summary: Receive one item (raw stored, outcome appended).
+      x-op-id: OP-INT-01
+      x-roles:
+      - integration
+      x-implements:
+      - FR-INT-01
+      - FR-INT-02
+      - FR-INT-04
+      x-release: R1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntakeRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntakeReceipt'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-INT-ENVELOPE-INVALID, E-INT-URL-SCHEME-REFUSED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/intake/items/{raw_id}:
+    get:
+      operationId: OP_INT_02
+      summary: Raw record, outcome history, contract_check.
+      x-op-id: OP-INT-02
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - integration
+      x-implements:
+      - FR-INT-01
+      - FR-INT-06
+      x-release: R1
+      parameters:
+      - name: raw_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntakeItemView'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-INT-ITEM-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/intake/conflicts/{raw_id}/resolve:
+    post:
+      operationId: OP_INT_03
+      summary: Human resolution of a REVISED_CONFLICT (accept_revision | keep_original | reject_both).
+      x-op-id: OP-INT-03
+      x-roles:
+      - reviewer
+      - quality_lead
+      x-implements:
+      - FR-INT-03
+      x-release: R1
+      parameters:
+      - name: raw_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConflictResolution'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntakeItemView'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-INT-ITEM-NOT-FOUND, E-INT-RESOLUTION-REASON-REQUIRED, E-INT-CONFLICT-ALREADY-RESOLVED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/intake/sources/{source}/delays:
+    get:
+      operationId: OP_INT_04
+      summary: Delay/missing/revised per source (R2).
+      x-op-id: OP-INT-04
+      x-roles:
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-INT-08
+      x-release: R2
+      parameters:
+      - name: source
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DelayReport'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-INT-ITEM-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/crosswalk/lookup:
+    get:
+      operationId: OP_ID_01
+      summary: Direct links for an identifier (?id=&id_type=).
+      x-op-id: OP-ID-01
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-ID-01
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkList'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-ID-AMBIGUOUS-TYPE, E-ID-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/crosswalk/links:
+    post:
+      operationId: OP_ID_02
+      summary: Create a human link (registered pair, reason required).
+      x-op-id: OP-ID-02
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-ID-01
+      - FR-ID-02
+      x-release: R1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/crosswalk-link.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-ID-LINK-EXISTS, E-ID-PAIR-NOT-REGISTERED, E-ID-SELF-LINK, E-ID-REASON-REQUIRED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/crosswalk/links/{link_id}/retract:
+    post:
+      operationId: OP_ID_03
+      summary: Retract a link (event, reason required).
+      x-op-id: OP-ID-03
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-ID-01
+      x-release: R1
+      parameters:
+      - name: link_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetractRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/crosswalk-link.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-ID-LINK-NOT-FOUND, E-ID-REASON-REQUIRED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/crosswalk/view:
+    get:
+      operationId: OP_ID_04
+      summary: Joined read-only view of the connected set (R2).
+      x-op-id: OP-ID-04
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-ID-04
+      x-release: R2
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JoinedView'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-ID-AMBIGUOUS-TYPE, E-ID-NOT-FOUND (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/crosswalk/findings:
+    get:
+      operationId: OP_ID_05
+      summary: Consistency findings (R2).
+      x-op-id: OP-ID-05
+      x-roles:
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-ID-03
+      x-release: R2
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindingPage'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/runs:
+    post:
+      operationId: OP_RUN_01
+      summary: Manual trigger of a job (closed catalogue).
+      x-op-id: OP-RUN-01
+      x-roles:
+      - quality_lead
+      - compliance
+      - integration
+      x-implements:
+      - FR-RUN-01
+      - FR-RUN-02
+      - FR-RUN-03
+      x-release: R1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/run-record.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-RUN-UNKNOWN-JOB, E-RUN-ALREADY-RUNNING, E-RUN-SCHEDULE-DISABLED, E-RUN-CHECKPOINT-INVALID (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+    get:
+      operationId: OP_RUN_02
+      summary: List run records.
+      x-op-id: OP-RUN-02
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - integration
+      x-implements:
+      - FR-RUN-02
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunPage'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/runs/{run_id}:
+    get:
+      operationId: OP_RUN_03
+      summary: One run record with events.
+      x-op-id: OP-RUN-03
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - integration
+      x-implements:
+      - FR-RUN-02
+      x-release: R1
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/run-record.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-RUN-UNKNOWN-JOB (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/metrics/time-to-close:
+    get:
+      operationId: OP_MET_01
+      summary: Median and p90 per configured clock (separate series).
+      x-op-id: OP-MET-01
+      x-roles:
+      - quality_lead
+      - compliance
+      - finance_read
+      x-implements:
+      - FR-MET-03
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/metric-value.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-MET-DEFINITION-REQUIRED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/metrics/month-end-total:
+    get:
+      operationId: OP_MET_02
+      summary: Month-end total (cutoff_ts, denominator_ref, source required).
+      x-op-id: OP-MET-02
+      x-roles:
+      - quality_lead
+      - compliance
+      - finance_read
+      x-implements:
+      - FR-MET-04
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/metric-value.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-MET-CUTOFF-REQUIRED, E-MET-UNPARSABLE-INPUT, E-MET-SOURCE-REFUSED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/metrics/backlog:
+    get:
+      operationId: OP_MET_03
+      summary: Backlog ageing and unresolved-exception rate per site (definition tag required).
+      x-op-id: OP-MET-03
+      x-roles:
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-MET-05
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/metric-value.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-MET-DEFINITION-REQUIRED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/metrics/values/{value_id}/reproduce:
+    get:
+      operationId: OP_MET_04
+      summary: Recompute a stored metric value and diff.
+      x-op-id: OP-MET-04
+      x-roles:
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-MET-06
+      x-release: R1
+      parameters:
+      - name: value_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReproduceResult'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-MET-NOT-REPRODUCIBLE, E-MET-UNKNOWN-METRIC (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/metrics/case-cost:
+    get:
+      operationId: OP_MET_05
+      summary: 'Placeholder: not available until cost input exists (R2).'
+      x-op-id: OP-MET-05
+      x-roles:
+      - quality_lead
+      - compliance
+      - finance_read
+      x-implements:
+      - FR-MET-08
+      x-release: R2
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-MET-NOT-AVAILABLE (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/metrics/source-quality:
+    get:
+      operationId: OP_MET_06
+      summary: Unmatched rate and reconciliation delay per source (R2).
+      x-op-id: OP-MET-06
+      x-roles:
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-MET-07
+      x-release: R2
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/metric-value.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/metrics/registry:
+    get:
+      operationId: OP_MET_07
+      summary: Metric registry with documentation, tags, windows.
+      x-op-id: OP-MET-07
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - finance_read
+      x-implements:
+      - FR-MET-01
+      - FR-MET-06
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricRegistry'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/metrics/combine:
+    post:
+      operationId: OP_MET_08
+      summary: Arithmetic/comparison of metric values; refuses mixed tags.
+      x-op-id: OP-MET-08
+      x-roles:
+      - quality_lead
+      - compliance
+      - finance_read
+      x-implements:
+      - FR-MET-02
+      x-release: R1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CombineRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: schemas/metric-value.schema.json
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-MET-TAG-MIX (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/queues/exceptions:
+    get:
+      operationId: OP_REV_01
+      summary: Exception queue view (filters queue, reason, source, min_age_hours).
+      x-op-id: OP-REV-01
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - integration
+      x-implements:
+      - FR-REV-02
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionPage'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/cases/{case_id}/rule-trace:
+    get:
+      operationId: OP_REV_02
+      summary: Template-generated rule-trace explanation.
+      x-op-id: OP-REV-02
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-REV-01
+      x-release: R1
+      parameters:
+      - name: case_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleTraceView'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-DEC-CASE-NOT-FOUND, E-POL-NO-ACTIVE-RULESET (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/search:
+    get:
+      operationId: OP_REV_03
+      summary: Keyword/field search over documents (fixed grammar; R2).
+      x-op-id: OP-REV-03
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - dispositioner
+      x-implements:
+      - FR-REV-03
+      x-release: R2
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchPage'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-REV-QUERY-INVALID, E-REV-QUERY-TOO-LONG, E-REV-SEARCH-DISABLED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/drafts:
+    post:
+      operationId: OP_REV_04
+      summary: Create a template draft owned by the author (R2, Could).
+      x-op-id: OP-REV-04
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-REV-04
+      x-release: R2
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DraftView'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-REV-TEMPLATE-INVALID (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/auth/login:
+    post:
+      operationId: OP_SEC_01
+      summary: Login (rate-limited, lockout).
+      x-op-id: OP-SEC-01
+      x-roles:
+      - public
+      x-implements:
+      - FR-SEC-01
+      x-release: R1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+        4xx:
+          description: 'Errors: E-AUTH-BAD-CREDENTIALS, E-AUTH-LOCKED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+      security: []
+  /api/v2/auth/logout:
+    post:
+      operationId: OP_SEC_02
+      summary: Logout.
+      x-op-id: OP-SEC-02
+      x-roles:
+      - reviewer
+      - quality_lead
+      - compliance
+      - finance_read
+      - integration
+      - dispositioner
+      x-implements:
+      - FR-SEC-01
+      x-release: R1
+      parameters: []
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-AUTH-UNAUTHENTICATED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/audit/records:
+    get:
+      operationId: OP_SEC_03
+      summary: Read audit records (cursor).
+      x-op-id: OP-SEC-03
+      x-roles:
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-SEC-02
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditPage'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/audit/verify:
+    post:
+      operationId: OP_SEC_04
+      summary: Verify the audit chain against the anchor.
+      x-op-id: OP-SEC-04
+      x-roles:
+      - quality_lead
+      - compliance
+      x-implements:
+      - FR-SEC-02
+      x-release: R1
+      parameters: []
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditVerifyResult'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-SEC-AUDIT-TAMPER-DETECTED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /api/v2/auth/reauth:
+    post:
+      operationId: OP_SEC_05
+      summary: Step-up re-authentication, returns short-lived reauth_token.
+      x-op-id: OP-SEC-05
+      x-roles:
+      - dispositioner
+      x-implements:
+      - FR-GATE-03
+      x-release: R1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReauthRequest'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReauthToken'
+        '401':
+          description: E-AUTH-UNAUTHENTICATED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        '403':
+          description: E-AUTH-FORBIDDEN or E-GATE-NOT-AUTHORISED
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+        4xx:
+          description: 'Errors: E-AUTH-BAD-CREDENTIALS, E-AUTH-LOCKED (status per error-handling-spec.md)'
+          content:
+            application/json:
+              schema:
+                $ref: schemas/error-envelope.schema.json
+  /healthz:
+    get:
+      operationId: OP_SYS_01
+      summary: Liveness only; no data.
+      x-op-id: OP-SYS-01
+      x-roles:
+      - public
+      x-implements:
+      - FR-SEC-01
+      x-release: R1
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+      security: []
+components:
+  securitySchemes:
+    session:
+      type: apiKey
+      in: cookie
+      name: hub_session
+    bearer:
+      type: http
+      scheme: bearer
+  schemas:
+    TransitionRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        to_state: enum case_status
+        event_type: STATUS_CHANGE|REOPEN
+        basis: string<=2000
+        evidence_refs: array<ev_id>
+        expected_seq: integer
+        occurred_at: ISO UTC (optional)
+      required:
+      - to_state
+      - event_type
+      - basis
+      - expected_seq
+    EventPage:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        items: array<decision-event>
+        next: cursor|null
+      required:
+      - items
+    CaseStateView:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        case_id: string
+        state: enum
+        as_of: ISO UTC
+        cycle: integer
+        last_seq: integer
+      required:
+      - case_id
+      - state
+      - as_of
+    EventWithEvidence:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        event: decision-event
+        evidence: array<evidence-record|{ev_id,access:denied}|{ev_id,unresolvable:true}>
+      required:
+      - event
+      - evidence
+    FactRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        fact_type: FACT_OPS_CLOSED|FACT_EVIDENCE_COMPLETE
+        occurred_at: ISO UTC (optional)
+        basis: string
+        expected_seq: integer
+      required:
+      - fact_type
+      - expected_seq
+    EvidenceRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        kind: document|intake_item|crosswalk_object|external_ref
+        source: string
+        source_ref: string
+        source_hash: string (optional)
+        access_level: engineering|quality|operations|restricted
+      required:
+      - kind
+      - source
+      - source_ref
+      - access_level
+    EvidencePack:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        case: object
+        history: array<decision-event>
+        linked_objects: object by type incl. 'none found'
+        evidence: array
+        rule_traces: array<rule-result>
+        open_findings: array
+        overrides: array
+        policy_versions: object
+        active_rulesets: object
+        pack_hash: sha256
+      required:
+      - case
+      - history
+      - linked_objects
+      - evidence
+      - rule_traces
+      - pack_hash
+    ZoneHRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        action: ZH-01..ZH-10
+        case_id: string (ZH-01..04)
+        payload: object by action (decision, basis, evidence_refs, external reference, policy ref, mode, values, schedule flag...)
+        pack_hash: sha256 (ZH-01..03)
+        authority_ref: string non-empty
+        reauth_token: string from OP-SEC-05
+      required:
+      - action
+      - authority_ref
+      - reauth_token
+    ZoneHResult:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        action: ZH-xx
+        event_ref: string
+        mode_at_write: event|external_ref|null
+        audit_seq: integer
+      required:
+      - action
+      - event_ref
+      - audit_seq
+    GateStatus:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        mode: none|event|external_ref
+        values_set: boolean
+        holders_configured: integer
+        available: boolean
+      required:
+      - mode
+      - values_set
+      - holders_configured
+      - available
+    OverrideRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        action: override|dismiss|refuse
+        reason: string non-empty
+        replacement: any (optional)
+      required:
+      - action
+      - reason
+    OverrideResult:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        event_id: string
+        flag_id: string
+        original_output_retained: 'true'
+      required:
+      - event_id
+      - flag_id
+    PolicyPage:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        items: array<policy-object>
+        next: cursor|null
+      required:
+      - items
+    PolicyCreateRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        policy_id: string
+        kind: DEFINITION|CLOCK|CLOSURE|CONSISTENCY|CUTOFF
+        name: string
+        definition_tag: string
+        body: object (kind-specific)
+        owner: string|unassigned
+        authority_ref: string non-empty
+      required:
+      - policy_id
+      - kind
+      - name
+      - body
+      - authority_ref
+    RuleSetPage:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        items: array<{ruleset_id,version,name,origin,read_only,functions}>
+        active: object function->ruleset
+      required:
+      - items
+      - active
+    EvaluateRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        function: PRIORITY|MANUAL_REVIEW|AMOUNT_LIMIT|SHIFT_FLAG
+        ruleset_ref: ruleset_id@version (optional)
+        inputs: object
+      required:
+      - function
+      - inputs
+    DivergenceReport:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        compared_sets: array
+        inputs: integer
+        divergent: array<{input,outputs,traces}>
+      required:
+      - compared_sets
+      - divergent
+    ClockElapsed:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        case_id: string
+        clocks: array<{policy_ref,status,elapsed_hours,verdict}>
+      required:
+      - case_id
+      - clocks
+    IntakeRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        source: partner_feed|gateway|source_messages|vendor_csv
+        envelope: object per partner-feed-envelope (or source equivalent)
+        idempotency_key: string
+      required:
+      - source
+      - envelope
+    IntakeReceipt:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        raw_id: string
+        outcome: enum
+        primary_reason: enum|null
+        queue: enum|null
+        contract_check: pass|fail|not_bound
+      required:
+      - raw_id
+      - outcome
+    IntakeItemView:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        raw: raw-intake
+        outcomes: array<intake-outcome>
+        conflicts_with: array
+      required:
+      - raw
+      - outcomes
+    ConflictResolution:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        resolution: accept_revision|keep_original|reject_both
+        reason: string non-empty
+      required:
+      - resolution
+      - reason
+    DelayReport:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        source: string
+        items: array<{raw_id,delay_hours,flag}>
+        summary: object
+      required:
+      - source
+      - items
+    LinkList:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        id: string
+        id_type: string
+        links: array<crosswalk-link>
+      required:
+      - id
+      - links
+    LinkRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        from_type: string
+        from_id: string
+        to_type: string
+        to_id: string
+        reason: string non-empty
+      required:
+      - from_type
+      - from_id
+      - to_type
+      - to_id
+      - reason
+    RetractRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        reason: string non-empty
+      required:
+      - reason
+    JoinedView:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        entities: array<{type,id,access}>
+        links: array
+        truncated: boolean
+        total: integer
+      required:
+      - entities
+      - truncated
+    FindingPage:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        items: array<{rule_ref,object_refs,detected_at,policy_version}>
+      required:
+      - items
+    RunRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        job: enum job catalogue
+        trigger: manual
+        batch_size: integer (optional)
+        until_empty: boolean
+      required:
+      - job
+    RunPage:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        items: array<run-record>
+        next: cursor|null
+      required:
+      - items
+    ReproduceResult:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        value_id: string
+        equal: boolean
+        diff: object|null
+      required:
+      - value_id
+      - equal
+    MetricRegistry:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        items: array<metric-definition>
+      required:
+      - items
+    CombineRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        values: array<value_id>
+        op: sum|ratio|difference|compare
+      required:
+      - values
+      - op
+    ExceptionPage:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        items: array<{raw_id,primary_reason,all_reasons,queue,source,receipt_time,age_hours,matched_case,flag_id}>
+        next: cursor|null
+        total: integer
+      required:
+      - items
+      - total
+    RuleTraceView:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        case_id: string
+        explanations: array<{function,ruleset_ref,text,defaulted,flag_id}>
+      required:
+      - case_id
+      - explanations
+    SearchPage:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        engine: fts5|fallback
+        items: array<hit>
+        total: integer (permitted rows only)
+        next: cursor|null
+      required:
+      - engine
+      - items
+      - total
+    DraftRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        template_id: string
+        fields: object
+      required:
+      - template_id
+    DraftView:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        draft_id: string
+        template_id: string
+        fields: object
+        owner: string
+      required:
+      - draft_id
+    LoginRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        username: string
+        password: string
+      required:
+      - username
+      - password
+    SessionInfo:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        user: string
+        roles: array
+        expires_idle_at: ISO UTC
+        expires_abs_at: ISO UTC
+        csrf_token: string
+      required:
+      - user
+      - roles
+    Empty:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types: {}
+      required: []
+    AuditPage:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        items: array<audit-record>
+        next: cursor|null
+      required:
+      - items
+    AuditVerifyResult:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        ok: boolean
+        checked: integer
+        first_broken_seq: integer|null
+        failure_kind: altered|missing|reordered|head_mismatch|null
+      required:
+      - ok
+      - checked
+    ReauthRequest:
+      type: object
+      description: Request shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        password: string
+      required:
+      - password
+    ReauthToken:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        reauth_token: string
+        expires_in_seconds: integer
+      required:
+      - reauth_token
+    Health:
+      type: object
+      description: Response shape (informal types in 'x-types'; machine-strict JSON Schema generation is a Stage 13/15 task)
+      x-types:
+        status: ok
+      required:
+      - status

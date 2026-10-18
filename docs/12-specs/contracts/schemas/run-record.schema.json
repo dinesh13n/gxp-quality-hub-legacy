@@ -1,0 +1,178 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:run-record",
+  "title": "run-record",
+  "description": "Run record (FR-RUN-02/03; DC-15) (Stage 12 v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "job": {
+      "enum": [
+        "intake_partner_feed",
+        "intake_gateway",
+        "intake_source_messages",
+        "intake_vendor_csv",
+        "backfill_legacy",
+        "rebuild_projection",
+        "verify_projection",
+        "verify_audit",
+        "metrics_snapshot"
+      ]
+    },
+    "trigger": {
+      "enum": [
+        "manual",
+        "scheduled"
+      ]
+    },
+    "triggered_by": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|\\+00:00)$"
+    },
+    "ended_at": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|\\+00:00)$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "outcome": {
+      "enum": [
+        "running",
+        "finished",
+        "failed",
+        "abandoned",
+        "refused"
+      ]
+    },
+    "inputs_seen": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "outcomes_by_type": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "detail": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "limit_reached": {
+      "type": "boolean"
+    },
+    "batch_size": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "backlog_remaining": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "checkpoint": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "config_version": {
+      "type": "string"
+    },
+    "code_version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "job",
+    "trigger",
+    "triggered_by",
+    "started_at",
+    "outcome",
+    "inputs_seen",
+    "outcomes_by_type",
+    "errors",
+    "limit_reached",
+    "batch_size",
+    "backlog_remaining",
+    "config_version",
+    "code_version"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "enum": [
+              "finished",
+              "failed",
+              "abandoned",
+              "refused"
+            ]
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [
+          "ended_at"
+        ],
+        "properties": {
+          "ended_at": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|\\+00:00)$"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "limit_reached": {
+            "const": true
+          }
+        },
+        "required": [
+          "limit_reached"
+        ]
+      },
+      "then": {
+        "required": [
+          "checkpoint"
+        ],
+        "properties": {
+          "checkpoint": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ]
+}

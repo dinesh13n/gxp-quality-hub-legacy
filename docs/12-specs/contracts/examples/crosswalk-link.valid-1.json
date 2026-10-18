@@ -1,0 +1,11 @@
+{
+  "link_id": "L1",
+  "from_type": "deviation",
+  "from_id": "D1",
+  "to_type": "batch",
+  "to_id": "BT00000001",
+  "key_used": "batch_id",
+  "creator_kind": "rule",
+  "creator": "LT-01",
+  "created_at": "2026-10-18T10:00:00Z"
+}

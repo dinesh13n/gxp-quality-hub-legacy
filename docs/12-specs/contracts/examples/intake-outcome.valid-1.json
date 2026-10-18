@@ -1,0 +1,12 @@
+{
+  "raw_id": "r2",
+  "outcome_seq": 1,
+  "outcome": "NOOP_DUPLICATE",
+  "primary_reason": null,
+  "all_reasons": [],
+  "queue": null,
+  "contract_check": "not_bound",
+  "counts_toward_totals": false,
+  "run_id": "R1",
+  "decided_at": "2026-10-18T10:00:00Z"
+}

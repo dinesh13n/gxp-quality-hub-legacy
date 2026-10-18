@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:partner-feed-payload",
+  "title": "partner-feed-payload",
+  "description": "Inbound partner payload L2 (DC-02); observed vocabularies (FND-INT-4); notes are Untrusted (Stage 12 v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "object_type": {
+      "enum": [
+        "BATCH",
+        "SAMPLE",
+        "MATERIAL"
+      ]
+    },
+    "subtype": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "unit": {
+      "enum": [
+        "lb",
+        "kg",
+        "hour",
+        "each",
+        "percent",
+        "ppm"
+      ]
+    },
+    "currency": {
+      "enum": [
+        "USD",
+        "GBP",
+        "INR",
+        "JPY",
+        "EUR"
+      ]
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "quality_flag": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "source_version": {
+      "type": [
+        "string",
+        "number"
+      ]
+    },
+    "business_key": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "object_type",
+    "state",
+    "source_version"
+  ],
+  "additionalProperties": true
+}

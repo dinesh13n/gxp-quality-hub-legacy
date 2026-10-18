@@ -1,0 +1,13 @@
+{
+  "object_type": "BATCH",
+  "subtype": "BIOLOGIC",
+  "state": "OPEN",
+  "quantity": -4.942,
+  "unit": "kg",
+  "currency": "USD",
+  "policy_version": "2021-A",
+  "quality_flag": "NA",
+  "notes": "x",
+  "source_version": "1",
+  "business_key": "C00001297"
+}

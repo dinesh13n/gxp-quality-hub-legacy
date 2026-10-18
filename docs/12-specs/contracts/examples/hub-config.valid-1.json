@@ -1,0 +1,17 @@
+{
+  "zone_h": {
+    "holders": [],
+    "reauth_window_seconds": 300
+  },
+  "disposition": {
+    "mode": "none",
+    "values": []
+  },
+  "closure": {
+    "unconfigured_behaviour": "treat_label_CLOSED_as_closing"
+  },
+  "schedule": {
+    "enabled": false
+  },
+  "data_origin": "synthetic"
+}

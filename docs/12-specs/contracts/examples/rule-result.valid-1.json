@@ -1,0 +1,18 @@
+{
+  "outcome": 999999,
+  "trace": [
+    {
+      "row_id": "JS-default",
+      "ordinal": 99,
+      "matched": true,
+      "inputs_used": {
+        "region": "MARS",
+        "year": 2026
+      }
+    }
+  ],
+  "defaulted": true,
+  "defaulted_reason": "NO_MATCH_REGION_YEAR",
+  "ruleset_ref": "as-found-js@1",
+  "authoritative": false
+}

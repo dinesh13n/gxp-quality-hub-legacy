@@ -1,0 +1,196 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:hub-config",
+  "title": "hub-config",
+  "description": "Hub configuration; defaults = safe fresh install (empty holders, mode none, schedule disabled) (Stage 12 v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "zone_h": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "holders",
+        "reauth_window_seconds"
+      ],
+      "properties": {
+        "holders": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "description": "ships empty (FR-GATE-04)"
+        },
+        "reauth_window_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600
+        }
+      }
+    },
+    "disposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "values"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "none",
+            "event",
+            "external_ref"
+          ]
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "closure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unconfigured_behaviour"
+      ],
+      "properties": {
+        "unconfigured_behaviour": {
+          "enum": [
+            "treat_label_CLOSED_as_closing",
+            "none"
+          ]
+        }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "contract_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "contract_file",
+          "mode"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "contract_file": {
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "enforce",
+              "record_only"
+            ]
+          }
+        }
+      }
+    },
+    "network": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "bind": {
+          "type": "string"
+        },
+        "exposure_approved": {
+          "type": "boolean"
+        },
+        "exposure_approval_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "properties": {
+        "anchor_path": {
+          "type": "string"
+        },
+        "anchor_every": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "runs": {
+      "type": "object",
+      "properties": {
+        "batch_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "heartbeat_stale_seconds": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "data_origin": {
+      "enum": [
+        "synthetic",
+        "production"
+      ]
+    }
+  },
+  "required": [
+    "zone_h",
+    "disposition",
+    "closure",
+    "schedule",
+    "data_origin"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "disposition": {
+            "properties": {
+              "mode": {
+                "const": "event"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          }
+        },
+        "required": [
+          "disposition"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disposition": {
+            "required": [
+              "values"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

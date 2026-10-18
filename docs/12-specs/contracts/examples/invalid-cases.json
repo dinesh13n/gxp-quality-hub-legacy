@@ -1,0 +1,378 @@
+[
+  {
+    "schema": "decision-event",
+    "case": "system actor Zone H",
+    "expected": "reject",
+    "instance": {
+      "event_id": "EV-1",
+      "case_id": "C00000001",
+      "seq": 1,
+      "event_type": "DISPOSITION_RECORDED",
+      "from_state": null,
+      "to_state": null,
+      "affects_state": false,
+      "actor": "user-1",
+      "actor_kind": "system",
+      "occurred_at": "2026-10-18T10:00:00Z",
+      "recorded_at": "2026-10-18T10:00:00Z",
+      "basis": "created from intake",
+      "evidence_refs": [],
+      "cycle": 1,
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "first_error": "'holder_check_ref' is a required property"
+  },
+  {
+    "schema": "decision-event",
+    "case": "state event without to_state",
+    "expected": "reject",
+    "instance": {
+      "event_id": "EV-1",
+      "case_id": "C00000001",
+      "seq": 1,
+      "event_type": "CASE_CREATED",
+      "from_state": null,
+      "to_state": null,
+      "affects_state": true,
+      "actor": "user-1",
+      "actor_kind": "human",
+      "occurred_at": "2026-10-18T10:00:00Z",
+      "recorded_at": "2026-10-18T10:00:00Z",
+      "basis": "created from intake",
+      "evidence_refs": [],
+      "cycle": 1,
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "first_error": "None is not of type 'string'"
+  },
+  {
+    "schema": "decision-event",
+    "case": "basis too long",
+    "expected": "reject",
+    "instance": {
+      "event_id": "EV-1",
+      "case_id": "C00000001",
+      "seq": 1,
+      "event_type": "CASE_CREATED",
+      "from_state": null,
+      "to_state": "OPEN",
+      "affects_state": true,
+      "actor": "user-1",
+      "actor_kind": "human",
+      "occurred_at": "2026-10-18T10:00:00Z",
+      "recorded_at": "2026-10-18T10:00:00Z",
+      "basis": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "evidence_refs": [],
+      "cycle": 1,
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "first_error": "'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  },
+  {
+    "schema": "decision-event",
+    "case": "REOPEN to wrong state",
+    "expected": "reject",
+    "instance": {
+      "event_id": "EV-1",
+      "case_id": "C00000001",
+      "seq": 1,
+      "event_type": "REOPEN",
+      "from_state": "CLOSED",
+      "to_state": "OPEN",
+      "affects_state": true,
+      "actor": "user-1",
+      "actor_kind": "human",
+      "occurred_at": "2026-10-18T10:00:00Z",
+      "recorded_at": "2026-10-18T10:00:00Z",
+      "basis": "created from intake",
+      "evidence_refs": [],
+      "cycle": 1,
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "first_error": "'REOPENED' was expected"
+  },
+  {
+    "schema": "policy-object",
+    "case": "adopted without owner",
+    "expected": "reject",
+    "instance": {
+      "policy_id": "D-OPS",
+      "version": 1,
+      "kind": "DEFINITION",
+      "name": "D-OPS",
+      "definition_tag": "D-OPS",
+      "body": {
+        "text": "Operations marks the case closed"
+      },
+      "owner": "unassigned",
+      "status": "adopted",
+      "created_by": "seed",
+      "created_at": "2026-10-18T10:00:00Z",
+      "effective_from": "2026-01-01"
+    },
+    "first_error": "{'const': 'unassigned'} is not allowed for 'unassigned'"
+  },
+  {
+    "schema": "policy-object",
+    "case": "business calendar w/o ref",
+    "expected": "reject",
+    "instance": {
+      "policy_id": "C-OPS",
+      "version": 1,
+      "kind": "CLOCK",
+      "name": "receipt to ops-closed",
+      "definition_tag": "C-OPS",
+      "body": {
+        "clock_start_event": "a",
+        "clock_stop_event": "b",
+        "calendar_basis": "business_calendar"
+      },
+      "owner": "unassigned",
+      "status": "candidate",
+      "created_by": "seed",
+      "created_at": "2026-10-18T10:00:00Z"
+    },
+    "first_error": "'calendar_ref' is a required property"
+  },
+  {
+    "schema": "rule-result",
+    "case": "defaulted without reason",
+    "expected": "reject",
+    "instance": {
+      "outcome": 999999,
+      "trace": [
+        {
+          "row_id": "JS-default",
+          "ordinal": 99,
+          "matched": true,
+          "inputs_used": {
+            "region": "MARS",
+            "year": 2026
+          }
+        }
+      ],
+      "defaulted": true,
+      "defaulted_reason": null,
+      "ruleset_ref": "as-found-js@1",
+      "authoritative": false
+    },
+    "first_error": "None is not of type 'string'"
+  },
+  {
+    "schema": "intake-outcome",
+    "case": "duplicate counted",
+    "expected": "reject",
+    "instance": {
+      "raw_id": "r2",
+      "outcome_seq": 1,
+      "outcome": "NOOP_DUPLICATE",
+      "primary_reason": null,
+      "all_reasons": [],
+      "queue": null,
+      "contract_check": "not_bound",
+      "counts_toward_totals": true,
+      "run_id": "R1",
+      "decided_at": "2026-10-18T10:00:00Z"
+    },
+    "first_error": "False was expected"
+  },
+  {
+    "schema": "intake-outcome",
+    "case": "quarantine w/o reason",
+    "expected": "reject",
+    "instance": {
+      "raw_id": "r2",
+      "outcome_seq": 1,
+      "outcome": "QUARANTINED",
+      "primary_reason": null,
+      "all_reasons": [],
+      "queue": null,
+      "contract_check": "not_bound",
+      "counts_toward_totals": false,
+      "run_id": "R1",
+      "decided_at": "2026-10-18T10:00:00Z"
+    },
+    "first_error": "None is not of type 'string'"
+  },
+  {
+    "schema": "intake-outcome",
+    "case": "resolved without reason",
+    "expected": "reject",
+    "instance": {
+      "raw_id": "r2",
+      "outcome_seq": 1,
+      "outcome": "CONFLICT_RESOLVED",
+      "primary_reason": null,
+      "all_reasons": [],
+      "queue": null,
+      "contract_check": "not_bound",
+      "counts_toward_totals": true,
+      "run_id": "R1",
+      "decided_at": "2026-10-18T10:00:00Z",
+      "resolution": "keep_original"
+    },
+    "first_error": "'resolution_reason' is a required property"
+  },
+  {
+    "schema": "crosswalk-link",
+    "case": "human link w/o reason",
+    "expected": "reject",
+    "instance": {
+      "link_id": "L1",
+      "from_type": "deviation",
+      "from_id": "D1",
+      "to_type": "batch",
+      "to_id": "BT00000001",
+      "key_used": "batch_id",
+      "creator_kind": "human",
+      "creator": "LT-01",
+      "created_at": "2026-10-18T10:00:00Z"
+    },
+    "first_error": "'reason' is a required property"
+  },
+  {
+    "schema": "run-record",
+    "case": "limit reached w/o checkpoint",
+    "expected": "reject",
+    "instance": {
+      "run_id": "R1",
+      "job": "intake_partner_feed",
+      "trigger": "manual",
+      "triggered_by": "user-2",
+      "started_at": "2026-10-18T10:00:00Z",
+      "ended_at": "2026-10-18T10:00:00Z",
+      "outcome": "finished",
+      "inputs_seen": 1000,
+      "outcomes_by_type": {
+        "VALIDATED": 900,
+        "QUARANTINED": 100
+      },
+      "errors": [],
+      "limit_reached": true,
+      "batch_size": 1000,
+      "backlog_remaining": 1500,
+      "checkpoint": null,
+      "config_version": "c1",
+      "code_version": "v0.1"
+    },
+    "first_error": "None is not of type 'object'"
+  },
+  {
+    "schema": "run-record",
+    "case": "finished w/o ended_at",
+    "expected": "reject",
+    "instance": {
+      "run_id": "R1",
+      "job": "intake_partner_feed",
+      "trigger": "manual",
+      "triggered_by": "user-2",
+      "started_at": "2026-10-18T10:00:00Z",
+      "ended_at": null,
+      "outcome": "finished",
+      "inputs_seen": 1000,
+      "outcomes_by_type": {
+        "VALIDATED": 900,
+        "QUARANTINED": 100
+      },
+      "errors": [],
+      "limit_reached": true,
+      "batch_size": 1000,
+      "backlog_remaining": 1500,
+      "checkpoint": {
+        "receipt_time": "2026-10-18T10:00:00Z",
+        "raw_id": "r1000"
+      },
+      "config_version": "c1",
+      "code_version": "v0.1"
+    },
+    "first_error": "None is not of type 'string'"
+  },
+  {
+    "schema": "metric-value",
+    "case": "synthetic w/o label",
+    "expected": "reject",
+    "instance": {
+      "value_id": "MV1",
+      "metric_id": "month_end_total",
+      "metric_version": 1,
+      "definition_tag": null,
+      "policy_version": null,
+      "value": "622826.44",
+      "n": 125,
+      "partial": false,
+      "denominator": "cases",
+      "exclusions": "none",
+      "basis": "event_derived",
+      "data_origin": "synthetic",
+      "label": "validated",
+      "inputs_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "code_version": "v0.1",
+      "computed_at": "2026-10-18T10:00:00Z"
+    },
+    "first_error": "'synthetic, unvalidated' was expected"
+  },
+  {
+    "schema": "metric-value",
+    "case": "null value w/o reason",
+    "expected": "reject",
+    "instance": {
+      "value_id": "MV1",
+      "metric_id": "month_end_total",
+      "metric_version": 1,
+      "definition_tag": null,
+      "policy_version": null,
+      "value": null,
+      "n": 125,
+      "partial": false,
+      "denominator": "cases",
+      "exclusions": "none",
+      "basis": "event_derived",
+      "data_origin": "synthetic",
+      "label": "synthetic, unvalidated",
+      "inputs_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "code_version": "v0.1",
+      "computed_at": "2026-10-18T10:00:00Z"
+    },
+    "first_error": "'null_reason' is a required property"
+  },
+  {
+    "schema": "hub-config",
+    "case": "unknown disposition mode",
+    "expected": "reject",
+    "instance": {
+      "zone_h": {
+        "holders": [],
+        "reauth_window_seconds": 300
+      },
+      "disposition": {
+        "mode": "auto",
+        "values": []
+      },
+      "closure": {
+        "unconfigured_behaviour": "treat_label_CLOSED_as_closing"
+      },
+      "schedule": {
+        "enabled": false
+      },
+      "data_origin": "synthetic"
+    },
+    "first_error": "'auto' is not one of ['none', 'event', 'external_ref']"
+  },
+  {
+    "schema": "error-envelope",
+    "case": "bad code",
+    "expected": "reject",
+    "instance": {
+      "error": {
+        "code": "oops",
+        "message": "m",
+        "correlation_id": "c"
+      }
+    },
+    "first_error": "'oops' does not match '^E-[A-Z]+(-[A-Z0-9]+)+$'"
+  }
+]

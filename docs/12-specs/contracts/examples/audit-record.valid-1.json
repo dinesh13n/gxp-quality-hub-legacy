@@ -1,0 +1,12 @@
+{
+  "audit_seq": 1,
+  "occurred_at": "2026-10-18T10:00:00Z",
+  "actor": "user-1",
+  "actor_kind": "human",
+  "action": "LOGIN_FAILED",
+  "outcome": "denied",
+  "correlation_id": "c",
+  "details": {},
+  "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

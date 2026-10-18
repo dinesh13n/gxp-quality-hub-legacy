@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:partner-feed-envelope",
+  "title": "partner-feed-envelope",
+  "description": "Inbound partner feed envelope L1 (DC-01); schema_rev support is checked by rule (1.0, 1.1, 2.0), unsupported is a valid envelope that is quarantined (Stage 12 v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "feed_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "partner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_rev": {
+      "type": "string"
+    },
+    "source_ts": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|\\+00:00)$"
+    },
+    "ref_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "record_kind": {
+      "enum": [
+        "OOS_RESULT",
+        "DEVIATION",
+        "CAPA_UPDATE"
+      ]
+    },
+    "raw_json": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "feed_id",
+    "partner",
+    "schema_rev",
+    "source_ts",
+    "ref_id",
+    "record_kind",
+    "raw_json"
+  ],
+  "additionalProperties": false
+}

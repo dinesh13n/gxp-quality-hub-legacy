@@ -1,0 +1,14 @@
+{
+  "policy_id": "D-OPS",
+  "version": 1,
+  "kind": "DEFINITION",
+  "name": "D-OPS",
+  "definition_tag": "D-OPS",
+  "body": {
+    "text": "Operations marks the case closed"
+  },
+  "owner": "unassigned",
+  "status": "candidate",
+  "created_by": "seed",
+  "created_at": "2026-10-18T10:00:00Z"
+}
