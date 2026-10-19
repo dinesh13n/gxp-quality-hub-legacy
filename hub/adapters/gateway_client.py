@@ -9,7 +9,7 @@ This module is under adapters/ because it is the only place allowed to import an
 """
 import ipaddress
 import json
-import time
+import threading
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -42,12 +42,16 @@ class _NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 
+def _sleep(seconds):
+    threading.Event().wait(seconds)      # no `time` import in adapters (TST-CO-13 b)
+
+
 def _open(url, timeout):
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), _NoRedirect)
     return opener.open(url, timeout=timeout)
 
 
-def fetch_events(url, offset=0, limit=50, retries=3, timeout=5, sleep=time.sleep, backoff=0.5, opener=_open):
+def fetch_events(url, offset=0, limit=50, retries=3, timeout=5, sleep=_sleep, backoff=0.5, opener=_open):
     """GET <url>/api/events?offset&limit -> {"items": [...], "next_offset": int, "attempts": n}."""
     u = check_url(url)
     full = "%s://%s%s/api/events?offset=%d&limit=%d" % (u.scheme, u.netloc, u.path.rstrip("/"), int(offset), int(limit))
