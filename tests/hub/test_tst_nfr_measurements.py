@@ -50,7 +50,12 @@ def tearDownModule():
 
 
 def report(test_id, obj):
-    print("NFR-REPORT %s %s" % (test_id, json.dumps(obj, sort_keys=True)))
+    line = "NFR-REPORT %s %s" % (test_id, json.dumps(obj, sort_keys=True))
+    print(line)
+    path = os.environ.get("HUB_NFR_REPORT_FILE")  # optional: collect the measurement lines for the evidence file (the runner keeps only the tail of the output)
+    if path:
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(line + "\n")
 
 
 class TST_NFR_Measurements(unittest.TestCase):

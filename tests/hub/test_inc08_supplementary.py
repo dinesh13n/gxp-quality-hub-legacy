@@ -247,7 +247,7 @@ class TST_HUB_INC08_Supplementary(unittest.TestCase):
     def test_TST_HUB_INC08_S09_untrusted_text_lint_is_clean_on_the_new_modules(self):
         """S09: the static untrusted-text check finds no U1 (an Untrusted-derived value passed as a decision parameter) in hub/web, hub/gate or hub/review;
         its U2 / U3 findings there are exactly the reviewed set (storage and output wrappers of typed free text; parameters that merely share a name with a
-        decision parameter) so any new site is a review item; a planted violation is still flagged. (The lint is built for hub/intake: RTD-66.)"""
+        decision parameter) so any new site is a review item; a planted violation is still flagged. (The lint is built for hub/intake: RTD-71.)"""
         root = os.path.join(S.CODE_ROOT, "hub")
         found = untrusted_lint.check_paths([os.path.join(root, d) for d in ("web", "gate", "review")])
         self.assertEqual([f for f in found if f["rule"] == "U1"], [])
