@@ -148,6 +148,8 @@ class WebApp(object):
             resp = self._dispatch(con, req, cid, info)
         except HubError as e:
             resp = self._error(e, cid)
+            if info.get("kind") == "ui" and e.code in ("E-AUTH-UNAUTHENTICATED", "E-AUTH-SESSION-EXPIRED"):
+                resp = Response(303, b"", "text/plain", [("Location", "/ui/login")])
         except Exception:  # noqa: BLE001 - fail closed: generic 500, no detail on the wire
             resp = self._error(HubError(), cid)
             resp.status = 500
@@ -185,7 +187,7 @@ class WebApp(object):
             self.metrics.auth_failure("unknown_route")
             self._deny(con, cid, "anonymous", "system", "route_not_registered", "route", req)
             raise AuthForbidden({"reason": "route not registered (deny by default)"})
-        info["op_id"] = route["op_id"]
+        info["op_id"], info["kind"] = route["op_id"], kind
         body = None
         if req.method == "POST":
             ctype = req.headers.get("content-type", "").split(";")[0].strip().lower()
@@ -194,10 +196,10 @@ class WebApp(object):
                 if body is None:
                     raise ReqInvalid({"pointer": "", "reason": "form posts use application/x-www-form-urlencoded"})
             elif ctype == "application/json":
-                body = wire.parse_json(req.body)
+                if req.body or route["op_id"] not in ("OP-SEC-02", "OP-SEC-04"):
+                    body = wire.parse_json(req.body)
             elif req.body or route["op_id"] not in ("OP-SEC-02", "OP-SEC-04"):
-                if route["op_id"] not in ("OP-SEC-02", "OP-SEC-04"):
-                    raise ReqInvalid({"pointer": "", "reason": "Content-Type must be application/json"})
+                raise ReqInvalid({"pointer": "", "reason": "Content-Type must be application/json"})
         token = self._token(req)
         public = "public" in route["roles"]
         choke = route["op_id"] in CHOKE_OPS
