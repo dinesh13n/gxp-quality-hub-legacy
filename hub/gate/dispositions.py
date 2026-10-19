@@ -115,11 +115,11 @@ class DispositionService(DecisionService):
                 raise GatePayloadInvalid({"field": "pack_hash", "reason": "must be a sha256 hex string when given"})
         p = sess.principal
         try:
-            return self._store_disposition(sess, p, zh, case_id, ev_type, basis, refs, body, m, pack_hash, holder_audit_seq, correlation_id)
+            return self._store_disposition(sess, p, zh, case_id, ev_type, basis, refs, body, m, pack_hash, holder_audit_seq, correlation_id, payload)
         except GatePackStale as e:
             self._refuse(sess, zh, case_id, e, correlation_id)
 
-    def _store_disposition(self, sess, p, zh, case_id, ev_type, basis, refs, body, m, pack_hash, holder_audit_seq, correlation_id):
+    def _store_disposition(self, sess, p, zh, case_id, ev_type, basis, refs, body, m, pack_hash, holder_audit_seq, correlation_id, payload):
         with audit.change(self.con, self.clock, anchor=self.anchor, actor=p.principal_id, actor_kind=p.actor_kind, action=ev_type,
                           outcome="success", correlation_id=correlation_id, object_ref="case:%s" % case_id[:40], details={}) as ctx:
             head = self._head(case_id)

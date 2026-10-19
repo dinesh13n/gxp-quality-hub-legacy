@@ -247,7 +247,10 @@ def op_OP_POL_08(ctx):
     cid = ctx.params["case_id"]
     d = dec(ctx)
     d.state(ctx.sess, cid, None, ctx.cid)  # existence + read role of the decision service
-    return 200, pol(ctx).clock_report([{"case_id": cid, "events": d.all_events(cid)}])[0]
+    events = {}
+    for e in d.all_events(cid):
+        events.setdefault(e["event_type"], e["occurred_at"])  # the first occurrence of each clock event
+    return 200, pol(ctx).clock_report([{"case_id": cid, "events": events}])[0]
 
 
 # ---------------------------------------------------------------------------------------------------- intake

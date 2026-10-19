@@ -83,6 +83,7 @@ class WebApp(object):
         self.anchor = audit.Anchor(self.anchor_path, self.s["audit"]["anchor_every"])
         self.documents, self.sources, self.run_resources, self.site_of = documents, dict(sources or {}), run_resources, site_of
         self.body_limit = body_limit
+        self.last_exception = None
         self.table = Table()
         self.metrics = HttpMetrics()
         self.config_hash = sec_settings.config_hash(cfg)
@@ -150,7 +151,8 @@ class WebApp(object):
             resp = self._error(e, cid)
             if info.get("kind") == "ui" and e.code in ("E-AUTH-UNAUTHENTICATED", "E-AUTH-SESSION-EXPIRED"):
                 resp = Response(303, b"", "text/plain", [("Location", "/ui/login")])
-        except Exception:  # noqa: BLE001 - fail closed: generic 500, no detail on the wire
+        except Exception as exc:  # noqa: BLE001 - fail closed: generic 500, no detail on the wire
+            self.last_exception = exc  # diagnostic hook for tests; never serialised
             resp = self._error(HubError(), cid)
             resp.status = 500
         finally:
