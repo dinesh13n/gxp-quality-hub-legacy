@@ -68,6 +68,7 @@ class TST_HUB_INC08_Supplementary(unittest.TestCase):
         self.assertEqual(con.execute("SELECT count(*) FROM audit_log WHERE action = 'WEB_SCHEMA_APPLIED'").fetchone()[0], 1)
         with self.assertRaises(sqlite3.DatabaseError):  # the checksum row is retained (insert-only)
             con.execute("UPDATE web_schema_migrations SET sha256 = ?", ("0" * 64,))
+        con.rollback()
         sql = wschema.migration()[1]
         with mock.patch.object(wschema, "migration", lambda: ("0" * 64, sql)):  # the migration file changed after it was applied
             self.assertEqual(wschema.status(con)["state"], "drift")
