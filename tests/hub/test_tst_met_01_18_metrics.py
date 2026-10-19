@@ -54,14 +54,14 @@ class _Base(unittest.TestCase):
         """specs: [(ops_hours | None, evidence_hours | None)]; every case is received 100 days before the (advanced) test clock."""
         st.clock.advance(120 * 86400)
         base = parse(st.now()) - datetime.timedelta(days=100)
-        ids = []
+        ids, who = [], st.fresh("rev")
         for i, (ops, evid) in enumerate(specs):
             cid = "C%s%06d" % (prefix, i)
             rec = fmt(base + i * HOUR)
-            st.mk(cid, occurred_at=rec, received_at=rec)
+            st.svc.create_case(who, cid, "OPEN", "synthetic case", rec, rec, "t-mk")
             facts = sorted([(h, t) for h, t in ((ops, "FACT_OPS_CLOSED"), (evid, "FACT_EVIDENCE_COMPLETE")) if h is not None])
             for h, t in facts:
-                st.svc.record_fact(st.sess("rev"), cid, t, occurred_at=fmt(base + i * HOUR + datetime.timedelta(hours=h)), correlation_id="t-cyc")
+                st.svc.record_fact(who, cid, t, occurred_at=fmt(base + i * HOUR + datetime.timedelta(hours=h)), correlation_id="t-cyc")
             ids.append(cid)
         return ids
 

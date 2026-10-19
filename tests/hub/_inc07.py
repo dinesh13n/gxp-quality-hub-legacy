@@ -67,7 +67,13 @@ class RStore(D.DStore):
         self.sched = ScheduleService(self.con, self.s, self.clock, self.anchor)
 
     def enable_schedule(self, who="holder-1"):
-        return self.sched.set_enabled(self.reauth(who), True, AUTH, "t-sched")
+        tok = self.authn.login(who, self.pw, "t-sched-login")  # fresh session: the test clock may have moved since the template tokens were issued
+        return self.sched.set_enabled(self.authn.reauthenticate(tok, self.pw, "t-sched-reauth"), True, AUTH, "t-sched")
+
+    def fresh(self, name):
+        """A new session at the CURRENT test-clock time (the template tokens idle out when a test moves the clock)."""
+        tok = self.authn.login(name, self.pw, "t-fresh-login")
+        return self.authn.authenticate(tok, "t-fresh")
 
     def run_service(self, hooks=None, con=None):
         return RunService(con or self.con, self.s, self.clock, self.anchor, self.cfg, hooks)

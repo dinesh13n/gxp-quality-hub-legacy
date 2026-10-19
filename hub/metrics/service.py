@@ -16,7 +16,7 @@ from hub.decision.service import DecisionService, norm_ts
 from hub.metrics import values as V
 from hub.metrics.errors import (MetCutoffRequired, MetDefinitionRequired, MetNotAvailable, MetNotReproducible, MetSourceRefused,
                                 MetUnknownMetric, MetUnparsableInput)
-from hub.metrics.registry import NEEDS_PARAMS, Registry
+from hub.metrics.registry import BUILTIN, NEEDS_PARAMS, Registry
 from hub.metrics.sources import ALLOWED, parse_amount
 from hub.policy import clocks
 from hub.policy.errors import NotFound
@@ -56,7 +56,13 @@ class MetricsService(object):
         return V.LABEL if self.data_origin == "synthetic" else ""
 
     def _mv(self, metric_id, **kw):
-        d = self.registry.get(metric_id)
+        try:
+            d = self.registry.get(metric_id)
+        except MetUnknownMetric:
+            if metric_id not in set(b["metric_id"] for b in BUILTIN):
+                raise
+            self.registry.seed_builtin()  # the built-in KPI definitions are registered on first use (insert-only catalogue rows)
+            d = self.registry.get(metric_id)
         base = dict(metric_version=d["version"], definition_tag=d["definition_tag"], denominator=d["denominator"], exclusions=d["exclusions"],
                     basis=d["basis"], data_origin=self.data_origin, label=self._label(), code_version=CODE_VERSION)
         base.update(kw)

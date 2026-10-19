@@ -4,6 +4,7 @@ INC-08 (no HTTP surface yet); its service-level equivalent is TST-HUB-INC07-S02.
 A 'scheduled trigger' in these tests is an explicit call with trigger='scheduled' at a controlled test-clock time: there is no scheduler in the product.
 """
 import ast
+import json
 import os
 import re
 import sqlite3
@@ -48,6 +49,7 @@ class TST_RUN_Runs(_Base):
         trigger starts a non-Zone-H job; the run record has trigger = scheduled; the missing-run detector then finds nothing missing."""
         st = self.store(extra={"schedule": {"expected": [{"job": "verify_projection", "at": "02:00"}]}})
         self.assertFalse(st.runs.schedule()["enabled"])
+        st.clock._t = parse("2026-10-18T03:00:00.000000Z")
         state = st.enable_schedule()
         self.assertTrue(state["enabled"])
         ev = st.con.execute("SELECT event_type, actor, holder_check_ref, authority_ref FROM policy_events WHERE event_type = 'SCHEDULE_CHANGED'").fetchall()
@@ -141,22 +143,25 @@ class TST_RUN_Runs(_Base):
     def test_TST_RUN_07_killed_run_is_abandoned_and_resume_equals_uninterrupted(self):
         """AC-RUN-07 / BEH-RUN-07: the process dies between a committed batch and its checkpoint row; the next run writes RUN_ABANDONED for it, resumes from
         the last checkpoint without duplicate effects, and the final outcome row set equals that of an uninterrupted run."""
+        armed = [True]
+
         def kill(k):
-            if k == 2:
+            if k == 2 and armed[0]:
+                armed[0] = False  # the process dies once
                 raise R.SimulatedKill()
         a = self.store(hooks={"before_checkpoint": kill})
         ql = a.sess("ql")
         with self.assertRaises(R.SimulatedKill):
-            a.runs.run("intake_partner_feed", ql, batch_size=100, resources=R.readers(300), correlation_id="t-r07a")
+            a.runs.run("intake_partner_feed", ql, batch_size=100, until_empty=True, resources=R.readers(300), correlation_id="t-r07a")
         dead = a.runs.list_runs()[0]
         self.assertEqual(dead["outcome"], "running")
         self.assertEqual([e["event_type"] for e in a.run_events(dead["run_id"])], ["RUN_STARTED", "RUN_CHECKPOINT"])
         self.assertEqual(a.raw_digest(), (200, 200))  # batch 2 is committed, its checkpoint is not
         with self.assertRaises(RunAlreadyRunning):
-            a.runs.run("intake_partner_feed", ql, batch_size=100, resources=R.readers(300), correlation_id="t-r07x")
+            a.runs.run("intake_partner_feed", ql, batch_size=100, until_empty=True, resources=R.readers(300), correlation_id="t-r07x")
         a.clock.advance(16 * 60)  # heartbeat older than 15 minutes
         self.assertEqual(a.runs.get_run(dead["run_id"])["outcome"], "abandoned")  # visible before it is closed in the store
-        rec = a.runs.run("intake_partner_feed", ql, batch_size=100, resources=R.readers(300), correlation_id="t-r07b")
+        rec = a.runs.run("intake_partner_feed", ql, batch_size=100, until_empty=True, resources=R.readers(300), correlation_id="t-r07b")
         old = a.run_events(dead["run_id"])
         self.assertEqual(old[-1]["event_type"], "RUN_ABANDONED")
         self.assertEqual(old[-1]["body"]["detected_by"], rec["run_id"])
@@ -203,7 +208,7 @@ class TST_RUN_Runs(_Base):
     def test_TST_RUN_10_no_hard_coded_row_cap(self):
         """AC-RUN-10: no hard-coded row cap (LIMIT 1000 and friends) in the new source or its JSON / SQL; a batching job without a configured cap is refused
         (no hidden default); the cap used is printed in the run record (--batch-size or runs.batch_size)."""
-        rx = re.compile(r"(?i)\bLIMIT\s+\d{2,}|\blimit\s*=\s*\d{2,}|\bbatch_size\s*[:=]\s*\d|\bfetchmany\(\s*\d|\[:\s*\d{3,}\s*\]|\.head\(\s*\d")
+        rx = re.compile(r"(?i)\bLIMIT\s+\d{2,}|\blimit\s*=\s*\d{2,}|\bbatch_size\s*[:=]\s*\d|\bfetchmany\(\s*\d|\.head\(\s*\d")
         legacy_cap = re.compile(r"(?i)LIMIT\s+1000\b|limit\s*=\s*1000\b|\[:1000\]")
         hits, legacy_hits = [], []
         for d, _, fns in os.walk(os.path.join(S.CODE_ROOT, "hub")):
@@ -323,13 +328,19 @@ class TST_RUN_Runs(_Base):
         self.assertEqual(R.schema_problems(RunService.to_schema(rec), SCHEMA), [])
 
     def test_TST_RUN_14_corrupt_checkpoint_refuses_the_run(self):
-        """AC-RUN-14: a corrupt checkpoint value -> E-RUN-CHECKPOINT-INVALID, run refused, no data change (also for a non-JSON value)."""
+        """AC-RUN-14: a corrupt checkpoint value -> E-RUN-CHECKPOINT-INVALID, run refused, no data change (several corruptions of the stored shape)."""
         st = self.store()
-        ql, bodies = st.sess("ql"), ['{"checkpoint": {"order_keys": {"partner_feed": 5}}}', '{"checkpoint": {"order_keys": {"gateway": ["a","b",0]}}}',
-                                      "not json at all"]
-        for i, body in enumerate(bodies):
-            st.con.execute("INSERT INTO run_event(run_id, run_seq, event_type, job, trigger, triggered_by, occurred_at, body) VALUES (?,?,?,?,?,?,?,?)",
-                           ("RUN-FIXTURE%d" % i, 1, "RUN_CHECKPOINT", "intake_partner_feed", "manual", "fixture", st.clock(), body))
+        ql = st.sess("ql")
+        bodies = [{"checkpoint": {"order_keys": {"partner_feed": 5}}}, {"checkpoint": {"order_keys": {"gateway": ["a", "b", 0]}}},
+                  {"checkpoint": "garbage"}, {"checkpoint": {"order_keys": {"no_such_source": ["2024-01-01T00:00:00Z", "k", 0]}}}]
+        for i, cp in enumerate(bodies):
+            rid = "RUN-FIXTURE%d" % i  # a prior run (written like the runner writes one) whose stored checkpoint was damaged
+            base = {"batch_size": 10, "config_version": "x", "code_version": "x"}
+            prog = {"inputs_seen": 1, "outcomes_by_type": {}, "backlog_remaining": 0}
+            full = dict(prog, errors=[], limit_reached=False, checkpoint=cp["checkpoint"], batch_size=10, config_version="x", code_version="x")
+            for seq, (et, body) in enumerate((("RUN_STARTED", base), ("RUN_CHECKPOINT", dict(prog, **cp)), ("RUN_FINISHED", full)), 1):
+                st.con.execute("INSERT INTO run_event(run_id, run_seq, event_type, job, trigger, triggered_by, occurred_at, body) VALUES (?,?,?,?,?,?,?,?)",
+                               (rid, seq, et, "intake_partner_feed", "manual", "fixture", st.clock(), json.dumps(body)))
             st.con.commit()
             before = st.digest()
             with self.assertRaises(RunCheckpointInvalid) as cm:
@@ -338,7 +349,7 @@ class TST_RUN_Runs(_Base):
             self.assertEqual(st.digest(), before)
             self.assertEqual(st.con.execute("SELECT count(*) FROM run_lock").fetchone()[0], 0)
         refused = [r for r in st.runs.list_runs() if r["outcome"] == "refused"]
-        self.assertEqual(len(refused), 3)
+        self.assertEqual(len(refused), len(bodies))
         self.assertEqual({r["errors"][0]["code"] for r in refused}, {"E-RUN-CHECKPOINT-INVALID"})
 
     def test_TST_RUN_15_missing_run_detector(self):

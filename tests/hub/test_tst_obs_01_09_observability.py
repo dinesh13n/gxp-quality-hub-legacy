@@ -100,7 +100,7 @@ class TST_OBS_Observability(_Base):
     def test_TST_OBS_03_missing_run_detector_counts_the_absent_run(self):
         """AC-OBS-03: schedule enabled, one expected run absent -> run_missed_total = 1 and the run is listed (also exported as an observability sample)."""
         st = self.store(extra={"schedule": {"expected": [{"job": "verify_audit", "at": "02:00"}, {"job": "verify_projection", "at": "03:00"}]}})
-        st.clock._t = parse("2026-10-18T01:00:00.000000Z")
+        st.clock._t = parse("2026-10-18T04:00:00.000000Z")
         st.enable_schedule()
         st.clock._t = parse("2026-10-19T02:10:00.000000Z")
         st.runs.run("verify_audit", st.service_session(), trigger="scheduled", resources={"anchor_path": st.anchor_path}, correlation_id="t-o3")
