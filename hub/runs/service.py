@@ -227,6 +227,8 @@ class RunService(object):
             self.con.rollback()
         full = dict(self._base_body(bs), inputs_seen=0, outcomes_by_type={}, errors=[], limit_reached=False, backlog_remaining=0, checkpoint=None)
         full.update(body)
+        if full["batch_size"] is None:  # non-batching job: processed in one pass; the schema requires an integer >= 1 (DEV-67)
+            full["batch_size"] = max(1, full["inputs_seen"])
         with audit.change(self.con, self.clock, anchor=self.anchor, actor=p.principal_id, actor_kind=p.actor_kind, action=etype,
                           outcome="success" if etype == "RUN_FINISHED" and not full["errors"] else "error", correlation_id=cid,
                           object_ref="job:" + job, details={}) as ctx:
@@ -305,3 +307,8 @@ class RunService(object):
 
     def schedule(self):
         return schedule_state(self.con)
+
+    @staticmethod
+    def to_schema(rec):
+        """The run record exactly as run-record.schema.json describes it (no report-only fields)."""
+        return dict((k, rec[k]) for k in RECORD_FIELDS if not (k == "ended_at" and rec[k] is None))
