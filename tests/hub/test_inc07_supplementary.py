@@ -21,7 +21,7 @@ from hub.metrics import errors as met_errors, values as V
 from hub.metrics.errors import MetUnparsableInput
 from hub.metrics.sources import RowsSource
 from hub.obs import log as obslog
-from hub.runs import catalogue, detector, errors as run_errors, jobs as jobs_mod, schema as rschema, settings as rsettings
+from hub.runs import catalogue, detector, errors as run_errors, jobs as jobs_mod, schema as rschema, settings as rsettings, sources as rsources
 from hub.runs.errors import RunAlreadyRunning
 from hub.security import scan
 from hub.security.canonical import parse
@@ -472,6 +472,29 @@ class TST_HUB_INC07_Supplementary(_Base):
             self.assertEqual(audit.verify(con, ds.anchor_path)["status"], "ok")
         finally:
             con.close()
+
+
+    def test_TST_HUB_INC07_S19_shipped_sources_through_a_capped_run(self):
+        """S19: the shipped legacy streams (hash-gated snapshot, FX-BASE125) are ordered OrderedSources of 8,567 / 15 / 1 items and the 2,400-row tiny
+        vendor CSV; one capped run takes exactly the cap and reports the exact remaining backlog; the next run continues without overlap."""
+        from hub.adapters import intake_sources
+        st = self.store()
+        h = R.D.legacy_handle("p7s19-")
+        try:
+            readers = rsources.legacy_sources(h)
+        finally:
+            h.close()
+        self.assertEqual(dict((k, len(v.items)) for k, v in readers.items()), {"partner_feed": 8567, "source_message": 15, "gateway": 1})
+        vend, sha = rsources.vendor_csv_source(intake_sources.csv_path(S.LEGACY_ROOT, "tiny"))
+        self.assertEqual(len(vend.items), 2400)
+        self.assertRegex(sha, r"^[0-9a-f]{64}$")
+        r1 = st.runs.run("intake_partner_feed", st.sess("ql"), batch_size=200, resources={"readers": readers}, correlation_id="t-s19a")
+        self.assertEqual((r1["inputs_seen"], r1["limit_reached"], r1["backlog_remaining"]), (200, True, 8367))
+        r2 = st.runs.run("intake_partner_feed", st.sess("ql"), batch_size=200, resources={"readers": readers}, correlation_id="t-s19b")
+        self.assertEqual((r2["inputs_seen"], r2["backlog_remaining"]), (200, 8167))
+        self.assertEqual(st.raw_digest()[0], 400)
+        self.assertEqual(st.con.execute("SELECT count(*), count(DISTINCT raw_id) FROM intake_outcome").fetchone(), (400, 400))
+        self.assertEqual(sum(r2["outcomes_by_type"].values()), 200)
 
 
 if __name__ == "__main__":
