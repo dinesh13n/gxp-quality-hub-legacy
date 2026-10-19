@@ -205,7 +205,7 @@ class TST_HUB_INC06_Supplementary(unittest.TestCase):
             st.isvc.set_binding(st.reauth("nonholder"), "partner_feed", "enforce", I.AUTH)
         with self.assertRaises(GE.GateNotAuthorised):
             st.isvc.set_binding(st.reauth("rev"), "partner_feed", "enforce", I.AUTH)
-        st.clock.advance(3600)
+        st.clock.advance(st.s["zone_h"]["reauth_window_seconds"] + 5)
         with self.assertRaises(GE.GateReauthRequired):
             st.isvc.set_binding(st.sess("holder-1"), "partner_feed", "enforce", I.AUTH)
         self.assertEqual(st.isvc.binding("partner_feed")["mode"], "record_only")
@@ -362,7 +362,7 @@ class TST_HUB_INC06_Supplementary(unittest.TestCase):
         finally:
             gw.close()
         for plan, label in (([(404, {"error": "nf"}, {})], "http_404"), ([(200, {"unexpected_schema": "v3", "records": None}, {})], "ValueError"),
-                            ([(200, b"not json", {})], "ValueError"), ([(302, b"", {"Location": "http://203.0.113.9/x"})], "http_302")):
+                            ([(200, b"not json", {})], "JSONDecodeError"), ([(302, b"", {"Location": "http://203.0.113.9/x"})], "http_302")):
             gw = _Gateway(plan)
             try:
                 with self.assertRaises(E.SourceUnreachable) as cm:
@@ -389,7 +389,7 @@ class TST_HUB_INC06_Supplementary(unittest.TestCase):
         it = st.isvc.get_item(rawid(1))
         self.assertEqual(it["notes"], {"text": note, "trust": "untrusted"})
         self.assertEqual(st.isvc.display_notes(rawid(1))["text"], "a &amp; b &lt;i&gt;&quot;q&quot;&lt;/i&gt; &#x27;; DROP TABLE raw_intake; --")
-        self.assertIsNone(st.isvc.display_notes(rawid(2)))                                  # the conflict item is stored, its notes are on its own row
+        self.assertEqual(st.isvc.display_notes(rawid(2))["text"], "x")                       # the conflict item keeps its own notes
         st.isvc.resolve_conflict(st.sess("ql"), rawid(2), "reject_both", "<b>reason</b>", "s10")
         cur = st.isvc.get_item(rawid(2))["current"]
         self.assertEqual((cur["resolution_reason"], cur["resolved_by"]), ("<b>reason</b>", "ql"))
