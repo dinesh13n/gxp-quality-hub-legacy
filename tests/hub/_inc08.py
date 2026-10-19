@@ -190,3 +190,42 @@ class WStore(D.DStore):
 
     def close(self):
         D.DStore.close(self)
+
+
+_SHIPPED = {}
+
+
+def shipped_store():
+    """A WStore holding the whole shipped partner feed (8,567 deliveries, FX-BASE125 sandbox copy) ingested once per process; READ-ONLY for tests."""
+    if "st" not in _SHIPPED:
+        import _inc06 as I
+        st = WStore()
+        by, _ = I.legacy_deliveries()
+        st.isvc.ingest("partner_feed", by["partner_feed"], "full-web", "t-full-web")
+        _SHIPPED["st"] = st
+    return _SHIPPED["st"]
+
+
+def close_shipped():
+    st = _SHIPPED.pop("st", None)
+    if st is not None:
+        st.close()
+
+
+def corpus_provider():
+    """The shipped 1,200-document JSONL (sandbox copy) as the injected search document provider; None when the copy has no document file."""
+    path = os.path.join(S.LEGACY_ROOT, "data", "documents", "source_documents.jsonl")
+    if not os.path.isfile(path):
+        return None
+    import hashlib
+    docs = []
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                d = json.loads(line)
+                d["hash"] = hashlib.sha256(d["body"].encode("utf-8")).hexdigest()
+                docs.append(d)
+
+    def provider():
+        return docs
+    return provider

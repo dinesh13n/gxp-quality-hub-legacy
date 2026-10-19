@@ -113,6 +113,8 @@ class WebApp(object):
             audit.write_anchor(con, self.anchor_path)
         finally:
             con.close()
+        self.log.emit("fts_engine_selected", "INFO", correlation_id, op_id="OP-REV-03", outcome="success")  # the search engine in use (fallback; FTS5 is INC-09)
+        self.log.emit("startup_selfcheck", "INFO", correlation_id, op_id="OP-SYS-01", outcome="success")
         return rep
 
     def flush_metrics(self):

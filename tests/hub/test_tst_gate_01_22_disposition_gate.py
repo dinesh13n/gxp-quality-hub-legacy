@@ -166,7 +166,7 @@ class TST_GATE_Gate(_Base):
             st.authn.create_user("int-human", st.pw, ["integration"], "op")
         self.assertIn("non-human role", str(cm.exception))
         st.authn.create_user("int-human", st.pw, ["dispositioner"], "op")  # ... so one is built by adding the role afterwards, and made a holder
-        st.con.execute("INSERT INTO principal_role(principal_id, role) VALUES ('int-human', 'integration')")
+        st.con.execute("INSERT INTO principal_role(principal_id, role, granted_at, granted_by) VALUES ('int-human', 'integration', ?, 'op')", (st.clock(),))
         st.con.commit()
         htok = st.login_cookie("int-human")
         before, audits = st.zh_counts(), st.count("audit_log", "action = 'ZONE_H_ATTEMPT' AND outcome = 'denied'")
