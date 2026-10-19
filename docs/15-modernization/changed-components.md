@@ -105,6 +105,9 @@ INC-01 adds one new component — the characterisation harness (C11 change-safet
 ## INC-05 additions
 All new (no legacy file changed): `hub/gate/*` (shared Zone H gate, `GatedPolicyService`); `hub/decision/*` (M003 migration, schema applier, settings, access, service, backfill, CLI); `hub/crosswalk/*` (registry.json, service, sources); `tests/hub/_inc05.py` and four test modules (39 planned + 14 supplementary + 1 egress); `docs/15-modernization/inc05-design-notes.md`. Verified Fact (`git diff --stat main`).
 
+## INC-06 additions
+All new (no legacy file changed): `hub/intake/*` (M004, schema applier, canon, reasons, contracts, profiles, validate, service, untrusted lint, replay, CLI), `hub/adapters/intake_sources.py`, `hub/adapters/gateway_client.py`; `tests/hub/_inc06.py` and test modules (27 TST-INT, TST-CO-09, 14 supplementary, 1 egress); `docs/15-modernization/inc06-design-notes.md`, `rollback-rehearsal-inc06.md`, `evidence/inc06/`. Verified Fact (`git diff --stat main`).
+
 ## Residual Risks
 - RR-CC-1 `tests/characterization/` is a new WB-04-class path approved via OD-11 E-2; future increments must keep it free of `__init__.py` or CI discovery changes.
 
@@ -116,3 +119,4 @@ All new (no legacy file changed): `hub/gate/*` (shared Zone H gate, `GatedPolicy
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
+| v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |

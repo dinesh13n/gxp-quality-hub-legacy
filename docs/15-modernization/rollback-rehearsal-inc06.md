@@ -1,0 +1,2 @@
+# INC-06 rollback rehearsal (TST-CO-09)
+Verified Fact, sandbox only (OD-03/03a): TST-CO-09 passes. M004 is applied after a backup (`pre-intake-M004-` label); restoring the backup returns the store to its pre-M004 state (INC-01..05 tables intact, no intake tables). Roll-forward re-applies M004; a repeated idempotent backfill ingest skips 302 already-stored items and the raw count after roll-forward is 604. Rollback is by backup restore only; the raw/outcome tables are append-only by design and are not deleted by code. Synthetic, unvalidated data.

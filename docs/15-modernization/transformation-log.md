@@ -169,6 +169,22 @@ Decision record service (hash-chained, append-only `decision_events`, rebuildabl
 Backfill result (Verified Fact, sandbox): 125 cases, 250 events, states CLOSED 36 / ESCALATED 9 / OPEN 42 / REOPENED 8 / UNDER_REVIEW 30; 8 REOPENED cases marked `LEGACY_UNEVIDENCED_REOPEN`; projection mismatches 0; CT-02 priority distribution archive 36 / queue 70 / review 17 / urgent 2 through the inactive as-found rule set. Crosswalk rule run: LT-01 42, LT-02 21, LT-03 125, LT-04 173, LT-05 30 links; 8,394 feed and 1,170 document orphans reported, none guessed.
 `zone_h.holders` stays empty in shipped config; tests use synthetic holders (synthetic, unvalidated).
 
+## INC-06 (branch `stage-15-inc06-intake`)
+Data intake: source-contract validation (record_only default, enforce per source), idempotent intake by the OD-18 natural key, re-delivery handling, quarantine, untrusted text, hash-chained audit. Only added files under `hub/`, `tests/hub/`, `docs/15-modernization/`; legacy code and `data/` byte-identical (Verified Fact).
+
+| ID | Deviation / choice | Label |
+|---|---|---|
+| DEV-54 | NOOP_DUPLICATE precedes validation (SBR-INT-04), so replays of quarantined originals are NOOP: unsupported outcomes (223) plus NOOP (67) account for the spec's 224-row figure region, and enforce gives 8,500 QUARANTINED + 67 NOOP, not the spec text counts. | Verified Fact |
+| DEV-55 | Contract bindings are `policy_events` rows (ZH-10 gate), not config keys; default record_only (OD-S12-11). | Verified Fact |
+| DEV-56 | `intake_run_event` is a subset of the DDL `run_event`; INC-07 owns the full table (RTD-53). | Verified Fact |
+| DEV-57 | Unknown gateway partner maps to MISSING_ENVELOPE_FIELD. | Inference |
+| DEV-58 | Legacy REJECTED negative quantity vs hub FLAG (NEGATIVE_VALUE) is a recorded difference, pending OD-S12-13. | Verified Fact |
+| DEV-59 | M004 applied outside `schema_migrations` (own table, D-02); new tables are not in the frozen RETAINED_TABLES list except raw_intake / intake_outcome (RTD-52 style gap, RTD-54). | Verified Fact |
+| DEV-60 | Exit code 28 and E-INT-* codes, `gateway.retries` setting: INC-06 choices needing a Stage 12 addendum (RTD-55). | Verified Fact |
+| DEV-61 | Gateway client sleeps via `threading.Event().wait` because adapters may not import `time` (TST-CO-13 b); found by the regression run, fixed. | Verified Fact |
+| DEV-62 | INC-06 modules skip in TST-CO-12's inner run; E06EGRESS covers the guard (as DEV-52). | Verified Fact |
+| DEV-63 | `source_message` is the hub name for legacy `external-feed`; the 22 document bodies are out of scope (INC-07). | Verified Fact |
+
 ## Residual Risks
 - RR-TL-1 INC-01 proves the harness on this device only; another runtime (3.12, other JDK/Node) is unverified.
 - RR-TL-3 INC-03 audit tamper evidence is limited by an unsigned same-host anchor file and undetectable tail truncation after the last anchor (R-SEC-1).
@@ -182,3 +198,4 @@ Backfill result (Verified Fact, sandbox): 125 cases, 250 events, states CLOSED 3
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
+| v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
