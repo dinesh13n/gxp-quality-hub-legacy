@@ -1,5 +1,5 @@
 """Subprocess probe for TST-NFR-17: build the web app on an existing INC-08 store and print the sha256 of the status + body of a fixed list of GET
-requests. Run with different PYTHONHASHSEED / TZ / LC_ALL; the digest must not change. Usage: _probe8.py BASE CLOCK_START TOKENS_JSON."""
+requests. Run with different PYTHONHASHSEED / TZ / LC_ALL; the digest must not change. Usage: _probe8.py CONFIG_PATH DATA_DIR CLOCK_START TOKENS_JSON."""
 import hashlib
 import json
 import os
@@ -18,9 +18,9 @@ CALLS = (("/api/v2/queues/exceptions?limit=100", "rev"), ("/api/v2/cases/C900000
          ("/api/v2/gate/status", "rev"), ("/api/v2/search?q=x", "rev"), ("/api/v2/nothing", "rev"))
 
 
-def main(base, clock_start, tokens_json):
-    cfg = config.load(os.path.join(base, "hub-config.json"))
-    app = WebApp(os.path.join(base, "data"), cfg, FixedClock(start=clock_start))
+def main(cfg_path, data_dir, clock_start, tokens_json):
+    cfg = config.load(cfg_path)
+    app = WebApp(data_dir, cfg, FixedClock(start=clock_start))
     tokens = json.load(open(tokens_json))
     h = hashlib.sha256()
     for path, who in CALLS:
@@ -33,4 +33,4 @@ def main(base, clock_start, tokens_json):
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:4])
+    main(*sys.argv[1:5])
