@@ -148,6 +148,15 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 [Inference] INC-04 changes no legacy behaviour: it adds new modules only, legacy goldens are unchanged, and no approved-behaviour change was needed (`approved-behavior-changes.md` ABC-INC04). [Assumption] The python domain lists (statuses OPEN / UNDER_REVIEW / CLOSED / ESCALATED / REOPENED, severities LOW..CRITICAL) come from the shipped data and goldens (A-12-F03-2), not from the legacy code, which has no domain. Confirm: Engagement lead (Dinesh Naik).
 [Inference] Exact Decimal arithmetic replaces IEEE doubles; 870 grid cases show no difference, but a difference at the last binary digit of a x1.05 boundary cannot be excluded for untested values (RTD-42).
 
+### BP-INC07 INC-07 behaviour preservation (device Python 3.10.12, SQLite 3.37.2, Node v22.23.2)
+| Check | Result | Evidence | Tag |
+|---|---|---|---|
+| Legacy code and data | `git diff --name-status main`: only `A` entries; data checksum manifest rc 0 before and after every run | `evidence/inc07/` | [Verified Fact] |
+| Characterization harness | OVERALL PASS (CT-17/18 NOT-RUN as before); shipped tests/test_*.py 15 OK as-found, post-DB equals Stage 7 R1 | harness run `inc07-regress` | [Verified Fact] |
+| Legacy month-end total vs hub | legacy join gives 742,956.61 (BB-08 fan-out); hub single-table total is 622826.44 for the same 125 cases; the difference is the documented defect, not an approved change | TST-MET-09, TST-MET-11 | [Verified Fact] |
+| INC-02..06 groups | A 45 ok; B 40 ok + 1 skipped; C 5 ok; INC04+05 88 ok; INC06 43 ok | `test-execution-log.md` | [Verified Fact] |
+[Inference] INC-07 changes no legacy behaviour: it adds new modules only.
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `docs/15-modernization/evidence/inc01/final-A_report.json`, `final-B_report.json` (full per-check results + unittest output), `mut-1..mut-4_report.json`, `summary.txt`, `checksum-log.txt`.
@@ -177,3 +186,4 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
+| v0.5 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |

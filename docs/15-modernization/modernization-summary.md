@@ -88,6 +88,9 @@ Decision records are now appended only through a human-gated, hash-chained servi
 ## INC-06 summary
 Inbound records are now stored raw and immutably, deduplicated by the OD-18 natural key, validated against the declared source contract (record_only by default; enforce needs a human Zone H holder), quarantined or queued with reasons, matched by exact keys and audited per run. 28 planned tests (27 TST-INT + TST-CO-09) plus 14 supplementary and 1 egress test pass in sandboxes; INC-02..05 groups and the characterization harness stay green; data checksums rc 0. Open: RTD-53..57. No approvals fabricated; `zone_h.holders` is empty.
 
+## INC-07 summary
+Runs now have complete, append-only records (single-flight, explicit cap, exact backlog, checkpoint/resume with no duplicate effects), metrics are computed deterministically with definition tags and reproduce from stored inputs, and logs / reports / zero-tripwires are in place. THE SCHEDULER IS OFF (OD-19): nothing starts a run by itself, and the schedule flag can only be switched by a Zone H holder, so with the shipped empty holder list it stays off. 39 planned tests plus 19 supplementary and 1 egress test pass in sandboxes; INC-02..06 groups and the characterization harness stay green; data checksums rc 0. Baseline: month-end total 622826.44 (n 125), backlog 89 of 125 under D-OPS, time to close null (`no_completed_cycles`). Open: RTD-58..65; scheduler vs HAR-10 and the Zone H holders are human decisions. No approvals fabricated; `zone_h.holders` is empty.
+
 ## Residual Risks
 - RR-MS-1 Harness evidence is device-specific until it runs in CI on the target runtime.
 - RR-MS-2 Goldens and fixture are only as trustworthy as the backup; the hash gate detects but cannot repair drift.
@@ -101,3 +104,4 @@ Inbound records are now stored raw and immutably, deduplicated by the OD-18 natu
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
+| v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |

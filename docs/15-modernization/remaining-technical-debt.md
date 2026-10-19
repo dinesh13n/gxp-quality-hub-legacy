@@ -112,6 +112,18 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | RTD-56 | Untrusted-text lint (U1/U2/U3) is heuristic; it cannot prove absence of misuse (A-15-06-1). | Assumption |
 | RTD-57 | Enforce mode cannot be switched on until Dinesh names Zone H holders; DV for negative quantity (OD-S12-13) and the vendor CSV identifier pattern findings (all 2,400 rows) need a human decision. | Unknown |
 
+## INC-07 additions
+| ID | Item | Label |
+|---|---|---|
+| RTD-58 | Stage 12 addendum for exit codes 29/30, the E-RUN-* / E-MET-* codes, hub-config keys `schedule.expected`, `schedule.grace_minutes`, `runs.batch_size`, `runs.heartbeat_stale_seconds`, `site.timezone`, the `SCHEDULE_CHANGED` event type, E-RUN-UNKNOWN-JOB for an unknown run id, and new metric-value fields. | Verified Fact |
+| RTD-59 | Scheduler OFF (OD-19): scheduler vs HAR-10 is an open human decision; an external trigger would call `python -m hub.runs run --trigger scheduled`; "finished before 06:00 local" is unproven in production. | Unknown |
+| RTD-60 | Observability metrics not yet exported: http_*, auth_failures_total, audit_chain_verify_ok, projection_mismatch_count, exception_age_hours_p90, unmatched_reference_rate, db_busy_total, override_total, defaulted_outputs_total (need HTTP surface or later increments). | Verified Fact |
+| RTD-61 | No definition, clock duration or cut-off is adopted, so every metric verdict is `not_available_no_adopted_policy`; currency minor unit 2, median / p90 methods and the exception-rate formula are spec choices (A-12-F07-1/2); D-EVID backlog needs the evidence check (DEV-69). | Assumption |
+| RTD-62 | `site.timezone` is Unknown (U-12-F06-1): only UTC or a fixed offset is supported (no tz database, no DST). | Unknown |
+| RTD-63 | Frozen `hub/security/scan.py` RETAINED_TABLES does not list `run_event`, `metric_value`, `metric_definition`, `obs_metric` (same gap as RTD-54); their BEFORE UPDATE / DELETE triggers are tested in S08. | Verified Fact |
+| RTD-64 | TST-RUN-04, TST-MET-02/12/21 (INC-08) and TST-MET-19/20 (INC-09) not run; the API-level audit-correlation (AC-OBS-01) is tested at service level only. | Verified Fact |
+| RTD-65 | Mutation gate for INC-07 not run; live legacy readers are tested with the sandbox snapshot and the tiny vendor CSV only (S19), not with the full 100,000-row CSV tiers. | Verified Fact |
+
 ## Residual Risks
 - RR-RTD-1 Until RTD-01/02 are closed, behaviour preservation depends on someone running the harness manually before each merge (OD-13 orchestrator check).
 
@@ -124,3 +136,4 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
+| v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |

@@ -42,6 +42,9 @@ supersedes: "v0.3 (INC-01 .. INC-03)"
 | DEV-30 | amount 'abc' / null in the JS rule | not allowed / allowed (coercion) | `E-POL-INPUT-INVALID`, no outcome | **none** - OD-S12-13 open (BEH-POL-11 is the specified default) | INC-04 | [Verified Fact] |
 [Assumption] "A recorded human decision" (OD-16) is implemented as an audit-chain record `POLICY_DECISION_RECORDED` by a configured Zone H holder (DEV-35). Confirm: Engagement lead (Dinesh Naik). `zone_h.holders` ships empty (OD-S12-06): until Dinesh names holders, nothing can be adopted or activated.
 
+### ABC-INC07 INC-07
+[Verified Fact] No legacy behaviour changed and no approval was needed or recorded. The schedule flag ships OFF and can be switched only by a Zone H holder (none configured); no metric definition, clock duration or cut-off was adopted. The month-end total differs from the legacy report by design (single-table sum, BB-08), which is a defect correction pending the owner's acceptance, not an approved behaviour change.
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `behavior-preservation-evidence.md` BP-2 (D3/D4 = 0, D5 = 0); `docs/14-transformation/transformation-gates.md` TG-4.
@@ -66,3 +69,4 @@ supersedes: "v0.3 (INC-01 .. INC-03)"
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
+| v0.5 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
