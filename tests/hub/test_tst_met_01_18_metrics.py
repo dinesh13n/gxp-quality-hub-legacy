@@ -56,7 +56,7 @@ class _Base(unittest.TestCase):
         base = parse(st.now()) - datetime.timedelta(days=100)
         ids, who = [], st.fresh("rev")
         for i, (ops, evid) in enumerate(specs):
-            cid = "C%s%06d" % (prefix, i)
+            cid = "C%02d%06d" % (int(prefix), i)
             rec = fmt(base + i * HOUR)
             st.svc.create_case(who, cid, "OPEN", "synthetic case", rec, rec, "t-mk")
             facts = sorted([(h, t) for h, t in ((ops, "FACT_OPS_CLOSED"), (evid, "FACT_EVIDENCE_COMPLETE")) if h is not None])
@@ -236,7 +236,7 @@ class TST_MET_Metrics(_Base):
         con = R.cases_db([("A", 10.0, "2025-01-01T00:00:00Z", "S1"), ("B", 5.5, "2025-01-02T00:00:00Z", "S2")], [])
         src = CasesAmountSource(R.RO(con))
         me = st.met.month_end_total(CUTOFF, "fx", src)
-        sites = {"C%s%06d" % ("14", i): "S1" for i in range(3)}
+        sites = {"C14%06d" % i: "S1" for i in range(3)}
         bl = st.met.backlog_by_site("D-OPS", st.now(), site_of=sites)
         ex = st.met.unresolved_exception_rate("D-OPS", site_of=sites)
         # unrelated data arrive after the values were stored
