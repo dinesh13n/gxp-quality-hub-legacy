@@ -2,7 +2,7 @@
 
 * Every delivery gets a NEW `raw_intake` row (verbatim bytes); nothing is ever updated or deleted (SQLite triggers + no such method).
   Processing results go to the separate append-only `intake_outcome`; the current outcome is the highest outcome_seq per raw_id.
-  Legacy `partner_feeds.processing_status` is never read as truth and never written (the adapters read snapshots only).
+  The legacy partner_feeds status columns are never read as truth and never written (the adapters read snapshots only).
 * Stage order (SBR-INT-04): store raw -> identity / content-hash comparison (NOOP_DUPLICATE or REVISED_CONFLICT) -> validate (L1/L2/L3)
   -> classify (pure) -> match through the crosswalk (exact keys only, no link for quarantined items) -> outcome.
 * Identity = natural key (partner, record_kind, ref_id, source_ts) per OD-18; `business_key` / `feed_id` are not identities.

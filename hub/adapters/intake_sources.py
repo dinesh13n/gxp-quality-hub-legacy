@@ -2,7 +2,7 @@
 -> normalised deliveries for hub.intake.service.IntakeService.ingest.
 
 Read-only by construction: the legacy tables are read through the hash-gated snapshot handle of hub.adapters.legacy_sqlite (`mode=ro&immutable=1`
-on a sandbox copy; the working-tree data/ is never opened). Only identity / payload columns are selected: the legacy `processing_status` and
+on a sandbox copy; the working-tree data/ is never opened). Only identity / payload columns are selected: the legacy status columns and
 `error_reason` are never read as truth (BEH-INT-01). The CSV is parsed by header names, never by position (BEH-INT-11).
 """
 import csv
