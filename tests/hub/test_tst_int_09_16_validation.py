@@ -146,7 +146,7 @@ class TST_INT_09_16_Validation(unittest.TestCase):
         rep = st.isvc.ingest("gateway", by["gateway"], "t14b", "t14")
         self.assertEqual((rep["contract_check"], rep["outcomes"]), ({"fail": 1}, {"VALIDATED": 1}))   # gateway still record_only
         st.bind("gateway", "enforce")
-        rep = st.isvc.ingest("gateway", [dict(by["gateway"][0], source_key="GW-COPY-1", ref_id="BT00000000")], "t14c", "t14")
+        rep = st.isvc.ingest("gateway", [dict(by["gateway"][0], source_key="GW-COPY-1", ref_id="BT00000001", source_ts="2025-01-02T00:00:00Z")], "t14c", "t14")
         self.assertEqual(rep["outcomes"], {"QUARANTINED": 1})
         self.assertEqual(self.current(st, rawid(17))["primary_reason"], "CONTRACT_VIOLATION")
 
