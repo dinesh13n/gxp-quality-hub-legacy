@@ -60,6 +60,9 @@ supersedes: "v0.3 (INC-01 .. INC-03)"
 ## INC-05
 None. Standard library only; no `random`/`secrets` in `hub/`; no network, model or fuzzy-matching import in INC-05 packages (TST-ID-05, S12). TST-CO-11 and TST-CO-13 pass. Verified Fact.
 
+## INC-06
+None. Standard library only (the gateway client uses `urllib` under `hub/adapters/`, loopback only); no `random`/`secrets`/`time` in the disallowed places; no model import. TST-CO-11 and TST-CO-13 pass; pyproject and CI unchanged. Verified Fact.
+
 ## Residual Risks
 - RR-DC-1 CI pins Python 3.12 while INC-01 evidence is 3.10.12 only.
 
@@ -71,3 +74,4 @@ None. Standard library only; no `random`/`secrets` in `hub/`; no network, model 
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
+| v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |

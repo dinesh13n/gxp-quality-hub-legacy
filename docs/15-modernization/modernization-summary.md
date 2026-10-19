@@ -85,6 +85,9 @@ Orchestrator: review + PR + squash-merge INC-02 (OD-13). INC-03 (audit trail, AD
 ## INC-05 summary
 Decision records are now appended only through a human-gated, hash-chained service; the 125 shipped cases are backfilled read-only from the hash-gated snapshot with provenance; the crosswalk links by exact keys and reports orphans. 39 planned tests plus 14 supplementary and 1 egress test pass in sandboxes; INC-02/03/04 groups and the characterization harness stay green; data checksums rc 0. Open: RTD-46..52. No approvals were fabricated; `zone_h.holders` is empty.
 
+## INC-06 summary
+Inbound records are now stored raw and immutably, deduplicated by the OD-18 natural key, validated against the declared source contract (record_only by default; enforce needs a human Zone H holder), quarantined or queued with reasons, matched by exact keys and audited per run. 28 planned tests (27 TST-INT + TST-CO-09) plus 14 supplementary and 1 egress test pass in sandboxes; INC-02..05 groups and the characterization harness stay green; data checksums rc 0. Open: RTD-53..57. No approvals fabricated; `zone_h.holders` is empty.
+
 ## Residual Risks
 - RR-MS-1 Harness evidence is device-specific until it runs in CI on the target runtime.
 - RR-MS-2 Goldens and fixture are only as trustworthy as the backup; the hash gate detects but cannot repair drift.
@@ -97,3 +100,4 @@ Decision records are now appended only through a human-gated, hash-chained servi
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
+| v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |

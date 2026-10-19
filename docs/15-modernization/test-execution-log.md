@@ -172,6 +172,23 @@ Evidence labels: Verified Fact unless marked. Sandbox copies only (OD-03/03a); c
 - TST-CO-12 is frozen; INC-05 modules skip in its inner run (`HUB_EGRESS_INNER`) and run under the guard in E05EGRESS instead (DEV-52, resolves RTD-44).
 - Process slip (DEV-53): one pure-import check ran in the working tree (no data touched, no pycache); all later syntax checks used `ast.parse`.
 
+## INC-06 (branch `stage-15-inc06-intake`)
+Evidence labels: Verified Fact unless marked. Sandbox copies only (OD-03/03a); checksum rc 0 before and after every run; sandboxes deleted. Synthetic, unvalidated test data.
+
+| Group | Selector | Result | Wall |
+|---|---|---|---|
+| INC06 | `-k TST_INT -k TST_CO_09 -k INC06 -k E06EGRESS` | 43 ok (27 TST-INT, TST-CO-09, 14 supplementary S01-S14, 1 egress) | 94 s |
+| A | SEC, CO-10, CO-15, INC03 | 45 ok | 66 s |
+| B | CO-01/02/04/05/06/07/11/13/14, INC02 | 40 ok, 1 skipped (as before) | 80 s |
+| C | CO-12 | 5 ok | 107 s |
+| INC04 | `-k INC04 -k TST_POL` | 34 ok | 52 s |
+| INC05 | `-k TST_DEC -k TST_ID -k INC05 -k E05EGRESS` | 54 ok | 77 s |
+| Harness | run_characterization.py | OVERALL PASS (CT-17/18 NOT-RUN as before) | 47 s |
+
+- Planned INC-06 tests found in the increment map: 28 (TST-INT-01, 03..27, 29 = 27, plus TST-CO-09). TST-INT-02 belongs to INC-08 (HTTP) and TST-INT-28 to INC-09 (R2); neither is run.
+- First full run flagged TST-CO-13 b (and so TST-CO-12 e): `hub/adapters/gateway_client.py` imported `time`. Fixed by `threading.Event().wait` (DEV-61); groups B and C re-run green.
+- Shipped-source numbers: `evidence/inc06/shipped-source-profile.md`.
+
 ## Residual Risks
 - RR-TE-1 Timings are from a 2-CPU device VM and will differ in CI.
 
@@ -183,3 +200,4 @@ Evidence labels: Verified Fact unless marked. Sandbox copies only (OD-03/03a); c
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
+| v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |

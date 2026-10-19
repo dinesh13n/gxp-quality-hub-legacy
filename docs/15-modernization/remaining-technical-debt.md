@@ -103,6 +103,15 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | RTD-52 | Mutation gate for INC-05 not run. | Verified Fact |
 | RTD-44 | Resolved by DEV-52 (E05EGRESS). | Verified Fact |
 
+## INC-06 additions
+| ID | Item | Label |
+|---|---|---|
+| RTD-53 | Full `run_event` table (DDL) is owned by INC-07; `intake_run_event` is an interim subset. | Verified Fact |
+| RTD-54 | Frozen `hub/security/scan.py` RETAINED_TABLES lists only raw_intake and intake_outcome; `intake_item_attr` and `intake_run_event` need adding when edits are permitted. | Verified Fact |
+| RTD-55 | Stage 12 addendum for exit code 28, E-INT-* codes and `gateway.retries`. | Verified Fact |
+| RTD-56 | Untrusted-text lint (U1/U2/U3) is heuristic; it cannot prove absence of misuse (A-15-06-1). | Assumption |
+| RTD-57 | Enforce mode cannot be switched on until Dinesh names Zone H holders; DV for negative quantity (OD-S12-13) and the vendor CSV identifier pattern findings (all 2,400 rows) need a human decision. | Unknown |
+
 ## Residual Risks
 - RR-RTD-1 Until RTD-01/02 are closed, behaviour preservation depends on someone running the harness manually before each merge (OD-13 orchestrator check).
 
@@ -114,3 +123,4 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
+| v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
