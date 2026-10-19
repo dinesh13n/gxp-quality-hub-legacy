@@ -419,5 +419,60 @@ class TST_HUB_INC07_Supplementary(_Base):
             self.assertNotIn("batch_size", cfg.get("runs", {}), p)
 
 
+    def test_TST_HUB_INC07_S18_rollback_rehearsal_m005(self):
+        """S18 (rehearsal of rollback-rehearsal-inc07.md): pre-M005 backup -> apply M005 -> runs and a metric snapshot -> restore the backup (L2) ->
+        checksum matches, audit chain verifies, run / metric tables gone, decision record unchanged -> roll forward -> runs work again."""
+        from hub.metrics.service import MetricsService
+        from hub.ops import backup
+        from hub.runs.service import RunService
+        from hub.security import audit
+        ds = I.IStore(loaded=True)
+        base_events = ds.con.execute("SELECT count(*) FROM decision_events").fetchone()[0]
+        ds.close()
+        bk_root = os.path.join(ds.base, "rehearsal-backups")
+
+        def connect():
+            con = sqlite3.connect(os.path.join(ds.data, "hub.sqlite3"))
+            con.execute("PRAGMA foreign_keys = ON")
+            return con
+        res = rschema.apply(ds.data, bk_root, ds.anchor_path, ds.clock, "s18-apply")
+        self.assertTrue(res["applied"])
+        bk = res["backup"]
+        pre = backup.verify_backup(bk["path"])
+        self.assertNotIn("run_event", json.dumps(pre["schema_versions"]))
+        con = connect()
+        sess = ds.authn.__class__(con, ds.s, ds.clock, ds.anchor)
+        sess = sess.authenticate(ds.tokens["ql"], "s18")
+        rec = RunService(con, ds.s, ds.clock, ds.anchor, ds.cfg).run("verify_projection", sess, correlation_id="s18")
+        MetricsService(con, ds.s, ds.clock, ds.anchor, ds.cfg).time_to_close()
+        self.assertEqual(rec["outcome"], "finished")
+        audit.write_anchor(con, ds.anchor_path)
+        head_after = audit.head(con)
+        con.close()
+        rest = backup.restore(bk["path"], ds.data, ds.anchor_path, ds.clock)
+        self.assertTrue(rest["checksum_match"])
+        self.assertEqual(rest["restored"], pre["files"])
+        self.assertIn("hub.sqlite3", rest["set_aside"])
+        con = connect()
+        try:
+            names = set(r[0] for r in con.execute("SELECT name FROM sqlite_master"))
+            self.assertFalse(names & {"run_event", "run_lock", "metric_definition", "metric_value", "obs_metric", "runs_schema_migrations"})
+            self.assertEqual(con.execute("SELECT count(*) FROM decision_events").fetchone()[0], base_events)
+            self.assertEqual(audit.verify(con, ds.anchor_path)["status"], "ok")
+            self.assertLess(audit.head(con)[0], head_after[0])
+        finally:
+            con.close()
+        self.assertTrue(rschema.apply(ds.data, bk_root, ds.anchor_path, ds.clock, "s18-apply2")["applied"])
+        con = connect()
+        try:
+            sess = ds.authn.__class__(con, ds.s, ds.clock, ds.anchor).authenticate(ds.tokens["ql"], "s18b")
+            again = RunService(con, ds.s, ds.clock, ds.anchor, ds.cfg).run("verify_projection", sess, correlation_id="s18b")
+            self.assertEqual(again["outcome"], "finished")
+            self.assertEqual(con.execute("SELECT count(DISTINCT run_id) FROM run_event").fetchone()[0], 1)
+            self.assertEqual(audit.verify(con, ds.anchor_path)["status"], "ok")
+        finally:
+            con.close()
+
+
 if __name__ == "__main__":
     unittest.main()
