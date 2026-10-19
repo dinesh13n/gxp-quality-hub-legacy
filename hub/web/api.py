@@ -72,8 +72,20 @@ def intake(ctx):
     return ctx.svc("intake", lambda c: IntakeService(c.con, c.s, c.clock, c.anchor))
 
 
+def horizon(con):
+    """The newest record time the metrics read (decision events, intake receipts, intake outcomes). GET metric values are computed AS OF this instant, not
+    as of the wall clock, so two identical GETs give identical JSON until the data change (AC-MET-21); `computed_at` of a GET value is this data instant.
+    Values stored by the metrics_snapshot job carry the real time."""
+    rows = con.execute("SELECT max(x) FROM (SELECT max(recorded_at) AS x FROM decision_events UNION ALL SELECT max(receipt_time) FROM raw_intake"
+                       " UNION ALL SELECT max(decided_at) FROM intake_outcome)").fetchone()
+    return rows[0] or "1970-01-01T00:00:00.000000Z"
+
+
 def met(ctx):
-    return ctx.svc("met", lambda c: MetricsService(c.con, c.s, c.clock, c.anchor, c.app.cfg))
+    def make(c):
+        h = horizon(c.con)
+        return MetricsService(c.con, c.s, lambda: h, c.anchor, c.app.cfg)
+    return ctx.svc("met", make)
 
 
 def rev(ctx):

@@ -162,6 +162,10 @@ class WStore(D.DStore):
             sess, {"action": "ZH-08", "authority_ref": AUTH, "reauth_token": reauth.token_for(sess),
                    "payload": {"mode": mode, "values": list(values)}}, "t-mode")
 
+    def counts(self):
+        return dict((t, self.count(t)) for t in ("decision_events", "case_state", "evidence_record", "policy_events", "flag_action", "rule_trace",
+                                                  "crosswalk_link", "raw_intake", "run_event", "metric_value"))
+
     def count(self, table, where="1=1", args=()):
         return self.con.execute("SELECT count(*) FROM %s WHERE %s" % (table, where), args).fetchone()[0]
 
