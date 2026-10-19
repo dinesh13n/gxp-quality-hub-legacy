@@ -10,7 +10,6 @@ from the in-process metrics counters). Every response carries X-Correlation-Id (
 """
 import os
 import re
-import sqlite3
 
 from hub import web as hubweb
 from hub.core.errors import HubError
@@ -95,8 +94,8 @@ class WebApp(object):
 
     # ------------------------------------------------------------------ lifecycle
     def _connect(self):
-        con = sqlite3.connect(os.path.join(self.data_dir, db.HUB_DB_NAME), timeout=30)
-        con.execute("PRAGMA foreign_keys = ON")
+        con = db.open_hub(self.data_dir)  # the one sanctioned opener (TST-CO-04 d allows sqlite3.connect only in hub.store.db): guard + core migration check
+        con.execute("PRAGMA busy_timeout = 30000")
         return con
 
     def start(self, correlation_id="web-start"):
