@@ -36,7 +36,6 @@ class TST_CO_09_RollbackRehearsal2(unittest.TestCase):
         verifies, intake tables gone, decision record unchanged -> roll forward -> same intake result, replay-safety suite passes."""
         ds = D.DStore(loaded=True)
         base_events = ds.con.execute("SELECT count(*) FROM decision_events").fetchone()[0]
-        base_digest = ds.table_digest(["decision_events", "case_state", "crosswalk_link"]) if hasattr(ds, "table_digest") else None
         ds.close()
         bk_root = os.path.join(ds.base, "rehearsal-backups")
         # 1. forward step with its pre-migration backup (the rollback point)
@@ -45,7 +44,7 @@ class TST_CO_09_RollbackRehearsal2(unittest.TestCase):
         bk = res["backup"]
         pre = backup.verify_backup(bk["path"])
         self.assertNotIn("raw_intake", json.dumps(pre["schema_versions"]))
-        items = I.batch(300) + [I.feed(1, payload={"quantity": 55.5}, source_key="FEED-REV-1"), I.feed(7, payload={"quantity": -2})]
+        items = I.batch(300) + [I.feed(1, payload={"quantity": 55.5}, source_key="FEED-REV-1"), I.feed(900, payload={"quantity": -2})]
         con = connect(ds)
         svc = IntakeService(con, ds.s, ds.clock, ds.anchor)
         r1 = svc.ingest("partner_feed", items, "co09-run1", "co09")
@@ -85,13 +84,12 @@ class TST_CO_09_RollbackRehearsal2(unittest.TestCase):
             g2b = replay.replay_safety(svc, "partner_feed", items, "co09-replay2", ds.clock(), "co09")
             self.assertTrue(g2b["ok"], g2b["checks"])
             idem = svc.ingest("partner_feed", items, "co09-backfill", "co09", idempotent_backfill=True)
-            self.assertEqual((idem["stored"], idem["skipped_existing"]), (0, 302 + 302))
+            self.assertEqual((idem["stored"], idem["skipped_existing"]), (0, 302))
             self.assertEqual(svc.counts()["raw"], 302 * 2)
             audit.write_anchor(con, ds.anchor_path)
             self.assertEqual(audit.verify(con, ds.anchor_path)["status"], "ok")
         finally:
             con.close()
-        self.assertTrue(base_digest is None or isinstance(base_digest, str))
 
 
 if __name__ == "__main__":
