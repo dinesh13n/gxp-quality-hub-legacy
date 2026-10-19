@@ -108,6 +108,9 @@ All new (no legacy file changed): `hub/gate/*` (shared Zone H gate, `GatedPolicy
 ## INC-06 additions
 All new (no legacy file changed): `hub/intake/*` (M004, schema applier, canon, reasons, contracts, profiles, validate, service, untrusted lint, replay, CLI), `hub/adapters/intake_sources.py`, `hub/adapters/gateway_client.py`; `tests/hub/_inc06.py` and test modules (27 TST-INT, TST-CO-09, 14 supplementary, 1 egress); `docs/15-modernization/inc06-design-notes.md`, `rollback-rehearsal-inc06.md`, `evidence/inc06/`. Verified Fact (`git diff --stat main`).
 
+## INC-07 additions
+All new (no legacy or earlier-increment file changed): `hub/runs/*` (M005, schema applier, errors, settings, catalogue, flag, ZH-09 schedule service, sources, jobs, run service, detector, reports, CLI), `hub/metrics/*` (errors, values, registry, sources, service, CLI), `hub/obs/log.py`, `hub/obs/collect.py`; `tests/hub/_inc07.py` and test modules (39 planned, 19 supplementary, 1 egress); `docs/15-modernization/inc07-design-notes.md`, `rollback-rehearsal-inc07.md`, `evidence/inc07/`. Verified Fact (`git diff --name-status main`: only `A` outside the doc edits in `docs/15-modernization/`).
+
 ## Residual Risks
 - RR-CC-1 `tests/characterization/` is a new WB-04-class path approved via OD-11 E-2; future increments must keep it free of `__init__.py` or CI discovery changes.
 
@@ -120,3 +123,4 @@ All new (no legacy file changed): `hub/intake/*` (M004, schema applier, canon, r
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
+| v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |

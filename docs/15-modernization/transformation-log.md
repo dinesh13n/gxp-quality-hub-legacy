@@ -185,6 +185,25 @@ Data intake: source-contract validation (record_only default, enforce per source
 | DEV-62 | INC-06 modules skip in TST-CO-12's inner run; E06EGRESS covers the guard (as DEV-52). | Verified Fact |
 | DEV-63 | `source_message` is the hub name for legacy `external-feed`; the 22 document bodies are out of scope (INC-07). | Verified Fact |
 
+## INC-07 (branch `stage-15-inc07-runs-metrics`)
+Scheduled-run orchestration WITHOUT a scheduler (OD-19), run records, deterministic metrics with definition tags, structured logs and observability reports. Only added files under `hub/`, `tests/hub/`, `docs/15-modernization/`; legacy code and `data/` byte-identical (Verified Fact, `git diff --name-status main` shows only `A`).
+
+| ID | Deviation / choice | Label |
+|---|---|---|
+| DEV-64 | The schedule flag is the latest `SCHEDULE_CHANGED` policy event written through Zone H ZH-09, not a config key; config `schedule.enabled: true` is refused. | Verified Fact |
+| DEV-65 | Scheduler OFF (OD-19): `trigger = scheduled` is a caller-supplied label accepted only with the flag on; AC-RUN-01 is exercised by an explicit call at a controlled test-clock time. Scheduler vs HAR-10 stays open. | Verified Fact |
+| DEV-66 | Full `run_event` table created by M005; `intake_run_event` (INC-06) stays as the intake's own per-ingest record (RTD-53 closed for run records). | Verified Fact |
+| DEV-67 | run-record.schema.json requires an integer `batch_size` >= 1: non-batching jobs report `max(1, inputs_seen)`. | Verified Fact |
+| DEV-68 | Exit codes 29 (E-RUN-*) and 30 (E-MET-*); E-RUN-UNKNOWN-JOB is also used for an unknown run id (RTD-58). | Verified Fact |
+| DEV-69 | Backlog by site implements the state-based D-OPS definition only; D-EVID returns E-MET-NOT-AVAILABLE (needs the evidence check). A date-only `as_of` means end of day. | Verified Fact |
+| DEV-70 | CLI results on stdout, JSON log lines on stderr. | Verified Fact |
+| DEV-71 | Built-in KPI definitions are registered on first use (insert-only catalogue rows), so even an unstored computation may add definition rows. | Verified Fact |
+| DEV-72 | TST-RUN-04, TST-MET-02/12/21 belong to INC-08, TST-MET-19/20 to INC-09; not run here (service-level equivalents S02, S06, S07). | Verified Fact |
+| DEV-73 | INC-07 modules skip in TST-CO-12's inner run; E07EGRESS covers the guard (as DEV-52, DEV-62). | Verified Fact |
+| DEV-74 | Process slip (as DEV-53): one pure-import check of hub modules ran in the working tree early in the increment (python -B, no data touched, no files written); all later syntax checks used `ast.parse`. | Verified Fact |
+
+Steps (in order): M005 schema + applier; run service, jobs, sources, schedule flag; observability log and collectors; metrics package and detector; CLIs and reports; test helpers; 39 planned tests; first full run had 13 failing tests (3 FAIL, 10 ERROR) from problems in new code or tests (session expiry after test-clock moves, unseeded KPI registry, one-batch-per-run semantics, a too-broad regex), all fixed; supplementary tests S01..S19; regression groups.
+
 ## Residual Risks
 - RR-TL-1 INC-01 proves the harness on this device only; another runtime (3.12, other JDK/Node) is unverified.
 - RR-TL-3 INC-03 audit tamper evidence is limited by an unsigned same-host anchor file and undetectable tail truncation after the last anchor (R-SEC-1).
@@ -199,3 +218,4 @@ Data intake: source-contract validation (record_only default, enforce per source
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
+| v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |

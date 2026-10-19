@@ -189,6 +189,26 @@ Evidence labels: Verified Fact unless marked. Sandbox copies only (OD-03/03a); c
 - First full run flagged TST-CO-13 b (and so TST-CO-12 e): `hub/adapters/gateway_client.py` imported `time`. Fixed by `threading.Event().wait` (DEV-61); groups B and C re-run green.
 - Shipped-source numbers: `evidence/inc06/shipped-source-profile.md`.
 
+## INC-07 (branch `stage-15-inc07-runs-metrics`)
+Evidence labels: Verified Fact unless marked. Sandbox copies only (OD-03/03a); checksum rc 0 before and after every run; sandboxes deleted after every run. Synthetic, unvalidated test data except the shipped 125-case baseline. Device Python 3.10.12 / SQLite 3.37.2.
+
+| Group | Selector | Result | Wall |
+|---|---|---|---|
+| INC07 | `-k TST_RUN -k TST_MET -k TST_OBS -k INC07_S` | 58 ok (14 TST-RUN, 16 TST-MET, 9 TST-OBS = 39 planned; 19 supplementary S01-S19) | 62 s |
+| E07EGRESS | `-k E07EGRESS` | 1 ok (the 58 INC-07 tests under the egress guard: 0 attempts, model_calls_total 0) | 62 s |
+| A | SEC, CO-10, CO-15, INC03 | 45 ok | 65 s |
+| B | CO-01/02/04/05/06/07/11/13/14, INC02 | 40 ok, 1 skipped (as before, no python3.9) | 80 s |
+| C | CO-12 | 5 ok | 118 s |
+| INC04+05 | `-k INC04 -k TST_POL -k TST_DEC -k TST_ID -k INC05 -k E05EGRESS` | 88 ok | 79 s |
+| INC06 | `-k TST_INT -k TST_CO_09 -k INC06 -k E06EGRESS` | 43 ok | 96 s |
+| Harness | run_characterization.py | OVERALL PASS (CT-17/18 NOT-RUN as before) | 58 s |
+
+- Planned INC-07 tests found in the increment map: **39** (TST-RUN-01, 02, 03, 05..15 = 14; TST-MET-01, 03..11, 13..18 = 16; TST-OBS-01..09 = 9). TST-RUN-04, TST-MET-02, 12, 21 are INC-08 and TST-MET-19, 20 are INC-09; none is run (DEV-72).
+- First full run of the 39: 26 ok, 3 FAIL, 10 ERROR (expired test sessions after test-clock moves, KPI definitions not registered on first use, one batch per run without `until_empty`, a too-broad cap regex, fixture issues); all fixed in new code or tests, no frozen module changed.
+- TST-CO-12 is frozen; INC-07 modules skip in its inner run (`HUB_EGRESS_INNER`) and run under the guard in E07EGRESS (DEV-73).
+- Baseline numbers (622826.44, backlog 89, `no_completed_cycles`): `evidence/inc07/baseline-results.md`.
+- Rollback rehearsal of M005: S18, `rollback-rehearsal-inc07.md`.
+
 ## Residual Risks
 - RR-TE-1 Timings are from a 2-CPU device VM and will differ in CI.
 
@@ -201,3 +221,4 @@ Evidence labels: Verified Fact unless marked. Sandbox copies only (OD-03/03a); c
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
+| v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |

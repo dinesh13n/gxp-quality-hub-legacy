@@ -80,6 +80,16 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 | RD-48 | Editing a rule row = new version of a CUSTOM set (copy of any set); as-found sets can only be forked; `rule_set` / `rule_row` are immutable by trigger | in-place edit | BEH-POL-07, AC-POL-11/25, versioned history | — | [Verified Fact] |
 | RD-49 | Every policy change = one transaction of data + `policy_events` + audit record (`audit.change`); a denied attempt writes its own audit record before the error | audit after commit | AC-SEC-14 pattern, F03 BEH-POL-05 | — | [Verified Fact] |
 
+### INC-07 decisions
+| ID | Decision | Alternatives | Rationale | Approval | Tag |
+|---|---|---|---|---|---|
+| RD-50 | New packages `hub/runs`, `hub/metrics`, `hub/obs` (log, collect) with CLIs `python -m hub.runs` and `python -m hub.metrics`; no existing file touched | extend `hub/cli.py` | add-only rule (TST-CO-05 c) | - | [Verified Fact] |
+| RD-51 | M005 in `hub/runs/migrations/`, own applier and table `runs_schema_migrations` | `hub/store/forward/` | same reason as RD-40 | - | [Verified Fact] |
+| RD-52 | Flag = latest `SCHEDULE_CHANGED` policy event via ZH-09; only `schedule.py` imports the gate | config key; jobs call the gate | OD-S12-10, AC-RUN-12 | OD-19 | [Verified Fact] |
+| RD-53 | Run record = folded append-only events; single-flight lock with heartbeat; checkpoint = order keys; resume via idempotent backfill | mutable status row | auditability, kill/resume equality (AC-RUN-07) | - | [Verified Fact] |
+| RD-54 | Exact `Decimal` metrics; stored values keep params / inputs; `reproduce` bounded by `recorded_until` | floats; recompute from live data | AC-MET-13/14 | - | [Verified Fact] |
+| RD-55 | Log fields are a closed whitelist | free-form log messages | AC-OBS-04 by construction | - | [Verified Fact] |
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `tests/characterization/harness.py` (`NORMALISATION_RULES`, guard), `run_characterization.py`; commits 2633062, 0283660, e1eb1d2, ed43a0a.
@@ -103,3 +113,4 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 | v0.2 | 2026-10-18 | claude-fde-agent | INC-02 (branch `stage-15-inc02-hub-skeleton`): sections added; INC-01 content unchanged. |
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
+| v0.5 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |

@@ -63,6 +63,9 @@ None. Standard library only; no `random`/`secrets` in `hub/`; no network, model 
 ## INC-06
 None. Standard library only (the gateway client uses `urllib` under `hub/adapters/`, loopback only); no `random`/`secrets`/`time` in the disallowed places; no model import. TST-CO-11 and TST-CO-13 pass; pyproject and CI unchanged. Verified Fact.
 
+## INC-07
+None. Standard library only; no `time`/`random`/`secrets`/network/model import in `hub/runs`, `hub/metrics`, `hub/obs` (S14); no scheduling library or thread (S09). TST-CO-11 and TST-CO-13 pass; pyproject and CI unchanged. Verified Fact.
+
 ## Residual Risks
 - RR-DC-1 CI pins Python 3.12 while INC-01 evidence is 3.10.12 only.
 
@@ -75,3 +78,4 @@ None. Standard library only (the gateway client uses `urllib` under `hub/adapter
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
+| v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
