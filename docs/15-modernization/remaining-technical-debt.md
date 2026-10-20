@@ -136,6 +136,23 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | RTD-76 | Mutation gate for INC-08 not run (as RTD-65). | Verified Fact |
 | RTD-77 | The stdlib `ThreadingHTTPServer` has no TLS, rate limiting or slow-request protection; acceptable only because it is loopback-only; Stage 24 decides any exposure. | Assumption |
 
+## INC-09 additions
+| ID | Item | Label |
+|---|---|---|
+| RTD-78 | Stage 12 addendum: E-REV-INDEX-ABSENT, E-R2-INPUT-INVALID, exit code 32, exit code 19 for E-SEC-REASON-REQUIRED; audit actions SEARCH_SCHEMA_APPLIED / SEARCH_CORPUS_LOADED / SEARCH_CORPUS_DROPPED / C3_READ / RULE_DIVERGENCE_REPORTED / CONSISTENCY_CHECK_RUN / DRAFT_CREATED; config keys `search.fts`, `search.max_doc_chars`, `search.require_c3_reason`, `templates.enabled`, `crosswalk_view.*`, `intake_reports.*`; query parameters `reason`, `view`, `as_of`, `window_start`, `window_end`, `source`; response fields `engine_reason`, `depth_capped`, `null_outputs`, `count`. Owner: Engagement lead (Dinesh Naik), Stage 17. | Verified Fact |
+| RTD-79 | FTS5 + trigram are verified on the device runtime only (SQLite 3.37.2); the target runtime is Unknown (OD-S12-12), so `search.fts` stays off by default; the fallback engine is the guaranteed path. | Unknown |
+| RTD-80 | Ranking quality cannot be assessed on the shipped corpus (3 base sentences); the recall baseline (0.3776 over 61 generated queries) is not a quality figure; a human-labelled set (OPD-12) and RQ-1..RQ-3 evidence are needed. | Verified Fact |
+| RTD-81 | Two server entry points (`python -m hub.web serve` = R1 app, `python -m hub.r2 serve` = R2 app); one must be chosen before any exposure or cutover (Stage 27/30). | Verified Fact |
+| RTD-82 | The finance_read masking path is not reachable through any registered route (DEV-91); Stage 24 decides the finance read surface. | Verified Fact |
+| RTD-83 | Field classes C0..C3, the per-field map and the role matrix are PROPOSED (A-11-02, A-15-05-1, A-INC09-1); tenant filtering (BEH-SEC-10) has no tenant dimension in the hub store (the shipped legacy.sqlite3 has no tenant column). | Assumption |
+| RTD-84 | No CONSISTENCY policy is adopted and `zone_h.holders` is empty, so the consistency check yields nothing in the shipped configuration; there is no scheduled consistency run (scheduler off, OPD-11). | Verified Fact |
+| RTD-85 | The batch rule set gives no `amount_over_limit` for cases (no policy_code); the owner may redefine the normalised key (A-12-F03-1, OD-S12-04). | Verified Fact |
+| RTD-86 | PNFR-03 (4 h) and PNFR-04 (24 h) thresholds are Assumptions; 'risk signal' is undefined; the 2,234 future source_ts rows of the shipped feed were not re-measured in INC-09 (the delay report would flag them). | Assumption |
+| RTD-87 | FR-REV-04 template drafts are a Could: field sets illustrative, deferred by default, candidate for rejection at Stage 17. | Assumption |
+| RTD-88 | Archive items have no access level, locale or reference in the source; treated as restricted (MA-1); real classification Unknown. | Unknown |
+| RTD-89 | Mutation gate not run for INC-09 (as RTD-65 / RTD-76). | Verified Fact |
+| RTD-90 | The `reason` of a C3 read is a GET query parameter (it can appear in access logs of a future proxy); Stage 24 decides header/body transport (A-INC09-5). | Assumption |
+
 ## Residual Risks
 - RR-RTD-1 Until RTD-01/02 are closed, behaviour preservation depends on someone running the harness manually before each merge (OD-13 orchestrator check).
 
@@ -150,3 +167,4 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
 | v0.8 | 2026-10-19 | claude-fde-agent | INC-08 (branch `stage-15-inc08-http-reviewer`): sections added; earlier content unchanged. |
+| v0.9 | 2026-10-20 | claude-fde-agent | INC-09 (branch `stage-15-inc09-search-corpus`): sections added; earlier content unchanged. |

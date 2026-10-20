@@ -69,6 +69,9 @@ None. Standard library only; no `time`/`random`/`secrets`/network/model import i
 ## INC-08
 None. Standard library only (`http.server` / `socketserver` for the loopback listener in `hub/web/server.py`; no `http.client`, `urllib.request`, `ssl`, `socket` client or model import anywhere in `hub/web`, checked by TST-NFR-18); no `time`/`random`/`secrets` in the core modules (`os.urandom` for ids and tokens); the tests use a raw `socket` client on 127.0.0.1 only. TST-CO-11 and TST-CO-13 pass; pyproject and CI unchanged. Verified Fact.
 
+## INC-09
+None. Standard library only: `email` / `email.policy` and `html.parser` (archive item text), `unicodedata`, `math`, `decimal`, `hashlib`, `sqlite3`. SQLite FTS5 and the trigram tokenizer are runtime features detected at run time (`hub/search/fts.py`), never required: without them the fallback engine serves the same results. No `time`, `random`, `secrets`, socket, HTTP client or AI import in hub/search or hub/r2 (S08, TST-CO-11). No pyproject.toml or CI workflow change.
+
 ## Residual Risks
 - RR-DC-1 CI pins Python 3.12 while INC-01 evidence is 3.10.12 only.
 
@@ -83,3 +86,4 @@ None. Standard library only (`http.server` / `socketserver` for the loopback lis
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
 | v0.8 | 2026-10-19 | claude-fde-agent | INC-08 (branch `stage-15-inc08-http-reviewer`): sections added; earlier content unchanged. |
+| v0.9 | 2026-10-20 | claude-fde-agent | INC-09 (branch `stage-15-inc09-search-corpus`): sections added; earlier content unchanged. |

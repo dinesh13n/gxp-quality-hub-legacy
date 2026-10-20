@@ -230,6 +230,30 @@ Verified Fact, device Python 3.10.12 / SQLite 3.37.2; every run in a sandbox cop
 - Rollback rehearsal of M006: TST-NFR-05, `rollback-rehearsal-inc08.md`.
 - Not run: a mutation gate for INC-08 (RTD-76); the manual UI walkthroughs behind TST-REV-03/04/08 (automated stand-ins here, human walkthrough stays Stage 16).
 
+## INC-09 (branch `stage-15-inc09-search-corpus`)
+Verified Fact, device Python 3.10.12 / SQLite 3.37.2 (FTS5 + trigram present); every run in a sandbox copy under `~/fde_sbx/<label>` (OD-03a), deleted after the run; backup checksum rc 0 before and after every run (runner pre/post check) and `sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt` rc 0 after the session. Final runs on code commit `d3992d4` (after it only documents changed); each group in its own device call (cap 180 s). "Tests" = unittest time, "Wall" = runner time including the sandbox build (about 45-55 s).
+
+| Group | Selector | Result | Tests / Wall |
+|---|---|---|---|
+| INC09 | `-k I9_ -k INC09_S` | 33 ok (20 planned I9_, 13 supplementary S01-S13) | 13.8 s / 65.3 s |
+| E09 | `-k E09EGRESS` | 1 ok (the 33 INC-09 tests again under the egress guard: 0 egress attempts, model_calls_total 0, none skipped) | 14.0 s / 64.8 s |
+| A | `-k TST_SEC -k TST_CO_10 -k TST_CO_15 -k INC03` | 45 ok | 20.4 s / - |
+| B | `-k TST_CO_01 -k TST_CO_02 -k TST_CO_04 -k TST_CO_05 -k TST_CO_06 -k TST_CO_07 -k TST_CO_11 -k TST_CO_13 -k TST_CO_14 -k INC02` | 40 ok, 1 skipped (as before: no python3.9) | 43.3 s / - |
+| C | `-k TST_CO_12` (frozen, unchanged) | 5 ok | 70.3 s / 127.5 s |
+| INC04+05 | `-k INC04 -k TST_POL -k TST_DEC -k TST_ID -k INC05 -k E05EGRESS` | 88 ok | 23.3 s / 79.0 s |
+| INC06 | `-k TST_INT -k TST_CO_09 -k INC06 -k E06EGRESS` | 43 ok | 71.3 s / 127.1 s |
+| INC07 | `-k TST_RUN -k TST_MET -k TST_OBS -k INC07 -k E07EGRESS` | 59 ok | 49.7 s / 105.3 s |
+| INC08 gate | `-k TST_GATE -k TST_REV -k TST_CO_08` | 36 ok | 20.7 s / 77.0 s |
+| INC08 NFR | `-k TST_NFR -k I8_ -k INC08_S` | 42 ok | 22.0 s / 80.1 s |
+| E08 | `-k E08EGRESS` | 1 ok | 41.1 s / 97.3 s |
+| Harness | `run_characterization.py` | OVERALL PASS (CT-17/18 NOT-RUN as before; shipped tests OK, post_db equals Stage 7 R1) | 49 s |
+
+- Planned INC-09 tests found in the increment map: **20** (A = 17, C = 3), including the R2 items TST-NFR-03/04/12, TST-MET-19/20, TST-INT-28. All 20 pass; mapping `evidence/inc09/planned-tests.md`; printed figures `evidence/inc09/r2-measurements.md`.
+- Earlier group counts are unchanged (A 45, B 40 + 1 skip, C 5, INC04+05 88, INC06 43, INC07 59, INC08 36 + 42 + 1): the I9_ naming keeps every frozen selector's size. TST-CO-12 has no new test; its inner run skips the INC-09 modules. Group C took 127.5 s wall in the final run (114.6 s in an earlier run of the same session): inside the 180 s cap, with the device-load variance noted in RTD-89 of INC-08 / OD-21.
+- Development runs (smoke1..4, s13): one defect found and fixed in new code (the read-only snapshot handle returns lists: `divergence.legacy_case_inputs`), test fixes for expired template sessions after clock moves, the depth-cap expectation and the session table name. The first full runs of every earlier group were green.
+- Rollback: L1 drop-index (S04, S07) and L2 M007 backup restore (S13), `rollback-rehearsal-inc09.md`.
+- Not run: mutation gate for INC-09 (RTD-89); FTS5 on any runtime other than the device (RTD-79).
+
 ## Residual Risks
 - RR-TE-1 Timings are from a 2-CPU device VM and will differ in CI.
 
@@ -244,3 +268,4 @@ Verified Fact, device Python 3.10.12 / SQLite 3.37.2; every run in a sandbox cop
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
 | v0.8 | 2026-10-19 | claude-fde-agent | INC-08 (branch `stage-15-inc08-http-reviewer`): sections added; earlier content unchanged. |
+| v0.9 | 2026-10-20 | claude-fde-agent | INC-09 (branch `stage-15-inc09-search-corpus`): sections added; earlier content unchanged. |

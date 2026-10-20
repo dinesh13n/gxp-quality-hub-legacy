@@ -1,0 +1,23 @@
+{
+  "schema": "hub-draft-templates/v1",
+  "label": "synthetic, unvalidated",
+  "note": "Deterministic structured forms for deviation / CAPA narrative drafts (BEH-REV-07, R2 Could). Labels, field types and length limits only: the product never pre-fills a value. Field set is an Assumption (A-INC09-4) until a stakeholder asks for the feature.",
+  "templates": {
+    "deviation_narrative": {"version": 1, "title": "Deviation narrative (draft)",
+      "fields": [
+        {"name": "what_happened", "label": "What happened", "type": "text", "max_length": 2000},
+        {"name": "where_when", "label": "Where and when", "type": "text", "max_length": 500},
+        {"name": "immediate_actions", "label": "Immediate actions taken", "type": "text", "max_length": 2000},
+        {"name": "impact_assessment", "label": "Impact assessment", "type": "text", "max_length": 2000},
+        {"name": "references", "label": "Record references (ids)", "type": "text", "max_length": 500}
+      ]},
+    "capa_narrative": {"version": 1, "title": "CAPA narrative (draft)",
+      "fields": [
+        {"name": "problem_statement", "label": "Problem statement", "type": "text", "max_length": 2000},
+        {"name": "root_cause", "label": "Root cause (as investigated by the author)", "type": "text", "max_length": 2000},
+        {"name": "corrective_action", "label": "Corrective action", "type": "text", "max_length": 2000},
+        {"name": "preventive_action", "label": "Preventive action", "type": "text", "max_length": 2000},
+        {"name": "effectiveness_check", "label": "Effectiveness check plan", "type": "text", "max_length": 1000}
+      ]}
+  }
+}

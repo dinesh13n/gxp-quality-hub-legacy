@@ -157,6 +157,12 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 | INC-02..06 groups | A 45 ok; B 40 ok + 1 skipped; C 5 ok; INC04+05 88 ok; INC06 43 ok | `test-execution-log.md` | [Verified Fact] |
 [Inference] INC-07 changes no legacy behaviour: it adds new modules only.
 
+### BP-INC09 INC-09 behaviour preservation (code `d3992d4`, device Python 3.10.12, SQLite 3.37.2)
+- [Verified Fact] Legacy unchanged: `git diff --name-status main` shows no legacy path and no `data/` path; INC-01 harness OVERALL PASS (CT-01..CT-16, shipped tests as-found, post_db equals Stage 7 R1); backup checksum rc 0 before and after every run.
+- [Verified Fact] Earlier increments unchanged: no earlier hub module edited (subclass / delegation only); all earlier groups green with unchanged counts (test-execution-log INC-09); TST-SEC-01 (route registry pinned to the OpenAPI) green, so the R2 handlers use the frozen routes and roles.
+- [Verified Fact] R1 hub behaviour unchanged: `WebApp` (R1) still answers 501 for the five R2 operations; only `R2WebApp` serves them. Search stays disabled by default, FTS off by default, drafts off by default.
+- [Verified Fact] The corpus loader reads only the sandbox copy of `data/` (working tree refused, JSONL pinned) and writes only the hub store.
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `docs/15-modernization/evidence/inc01/final-A_report.json`, `final-B_report.json` (full per-check results + unittest output), `mut-1..mut-4_report.json`, `summary.txt`, `checksum-log.txt`.
@@ -187,3 +193,4 @@ Each CT carries `ac_links` in `tests/characterization/catalogue.json`: existing 
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
+| v0.9 | 2026-10-20 | claude-fde-agent | INC-09 (branch `stage-15-inc09-search-corpus`): sections added; earlier content unchanged. |

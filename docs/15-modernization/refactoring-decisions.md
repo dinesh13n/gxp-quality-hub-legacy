@@ -90,6 +90,17 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 | RD-54 | Exact `Decimal` metrics; stored values keep params / inputs; `reproduce` bounded by `recorded_until` | floats; recompute from live data | AC-MET-13/14 | - | [Verified Fact] |
 | RD-55 | Log fields are a closed whitelist | free-form log messages | AC-OBS-04 by construction | - | [Verified Fact] |
 
+### INC-09 decisions
+| ID | Decision | Alternative rejected | Reason | Reversal | Label |
+|---|---|---|---|---|---|
+| RD-56 | Extend frozen INC-08 classes by subclass (R2SearchService, R2WebApp) and delegate the API module | edit hub/review/search.py and hub/web/api.py | frozen earlier modules; additive rule | delete the new packages | [Verified Fact] |
+| RD-57 | FTS5 tables are derived objects outside M007 | virtual tables in the migration | M007 must apply on an FTS-less runtime; drop = rollback | `drop-index` | [Verified Fact] |
+| RD-58 | Same bm25 formula and excerpt on both engines | engine-specific order / snippet() | AC-REV-16 'same result order' holds generally; responses engine-independent | switch ranking per engine | [Verified Fact] |
+| RD-59 | Runtime probe with TEMP virtual tables on the store connection | `hub.runtime.fts5_available` (opens :memory:, no trigram) | trigram needed; TST-CO-04 d allows no new connect | - | [Verified Fact] |
+| RD-60 | C3 reads need a reason only when the permitted result holds restricted rows | reason on every search | callers who cannot read C3 are never asked; least friction consistent with MA-2 | config `search.require_c3_reason` | [Inference] |
+| RD-61 | Consistency findings with INSERT OR IGNORE on a unique key | read-then-insert | idempotent by construction (AC-ID-15) | - | [Verified Fact] |
+| RD-62 | Reports computed as of a data instant and not stored (OP-MET-06, delays) | store a metric_value per GET | INC-08 D-10 pattern; reproducible GETs | store via a job later | [Verified Fact] |
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `tests/characterization/harness.py` (`NORMALISATION_RULES`, guard), `run_characterization.py`; commits 2633062, 0283660, e1eb1d2, ed43a0a.
@@ -114,3 +125,4 @@ Design decisions taken while building INC-01. None changes legacy code; all are 
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
+| v0.9 | 2026-10-20 | claude-fde-agent | INC-09 (branch `stage-15-inc09-search-corpus`): sections added; earlier content unchanged. |
