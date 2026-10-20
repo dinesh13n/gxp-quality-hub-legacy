@@ -1,0 +1,1375 @@
+{
+ "backfill": {
+  "already_imported": 0,
+  "cases_in_source": 125,
+  "chain": {
+   "cases": 125,
+   "events": 250,
+   "status": "ok"
+  },
+  "events_written": 250,
+  "imported_now": 125,
+  "marked_legacy_reopen": 8,
+  "priority_distribution": null,
+  "priority_ruleset": null,
+  "projection": {
+   "cases": 125,
+   "detail": [],
+   "mismatches": 0,
+   "projection_rows": 125,
+   "status": "ok"
+  },
+  "source_db_sha256": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+  "state_counts": {
+   "CLOSED": 36,
+   "ESCALATED": 9,
+   "OPEN": 42,
+   "REOPENED": 8,
+   "UNDER_REVIEW": 30
+  }
+ },
+ "divergence": {
+  "out": {
+   "compared_sets": [
+    "as-found-batch@1",
+    "as-found-js@1",
+    "as-found-python@1"
+   ],
+   "count": 3,
+   "divergent": [
+    {
+     "input": {
+      "amount": 25109.59,
+      "case_id": "C00000059",
+      "region": "EMEA",
+      "severity": "LOW",
+      "status": "UNDER_REVIEW",
+      "year": "2023"
+     },
+     "outputs": {
+      "as-found-batch@1": null,
+      "as-found-js@1": true,
+      "as-found-python@1": false
+     },
+     "traces": {
+      "as-found-batch@1": [
+       {
+        "matched": false,
+        "reason": "no threshold (needs threshold or region + policy_code)",
+        "row_id": "BATCH-2"
+       }
+      ],
+      "as-found-js@1": [
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 1,
+        "row_id": "JS-01"
+       },
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 2,
+        "row_id": "JS-02"
+       },
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 3,
+        "row_id": "JS-03"
+       },
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 4,
+        "row_id": "JS-04"
+       },
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": true,
+        "ordinal": 5,
+        "row_id": "JS-05"
+       },
+       {
+        "inputs_used": {
+         "amount": "25109.59",
+         "threshold": 18600,
+         "tolerance_factor": "1.05"
+        },
+        "matched": false,
+        "ordinal": 1000,
+        "row_id": "AMOUNT_LIMIT-compare"
+       }
+      ],
+      "as-found-python@1": [
+       {
+        "inputs_used": {
+         "amount": "25109.59",
+         "limit": 50000
+        },
+        "matched": false,
+        "row_id": "PY-P3"
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "amount": 23499.13,
+      "case_id": "C00000077",
+      "region": "EMEA",
+      "severity": "LOW",
+      "status": "OPEN",
+      "year": "2023"
+     },
+     "outputs": {
+      "as-found-batch@1": null,
+      "as-found-js@1": true,
+      "as-found-python@1": false
+     },
+     "traces": {
+      "as-found-batch@1": [
+       {
+        "matched": false,
+        "reason": "no threshold (needs threshold or region + policy_code)",
+        "row_id": "BATCH-2"
+       }
+      ],
+      "as-found-js@1": [
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 1,
+        "row_id": "JS-01"
+       },
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 2,
+        "row_id": "JS-02"
+       },
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 3,
+        "row_id": "JS-03"
+       },
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 4,
+        "row_id": "JS-04"
+       },
+       {
+        "inputs_used": {
+         "region": "EMEA",
+         "year": "2023"
+        },
+        "matched": true,
+        "ordinal": 5,
+        "row_id": "JS-05"
+       },
+       {
+        "inputs_used": {
+         "amount": "23499.13",
+         "threshold": 18600,
+         "tolerance_factor": "1.05"
+        },
+        "matched": false,
+        "ordinal": 1000,
+        "row_id": "AMOUNT_LIMIT-compare"
+       }
+      ],
+      "as-found-python@1": [
+       {
+        "inputs_used": {
+         "amount": "23499.13",
+         "limit": 50000
+        },
+        "matched": false,
+        "row_id": "PY-P3"
+       }
+      ]
+     }
+    },
+    {
+     "input": {
+      "amount": 26894.94,
+      "case_id": "C00000080",
+      "region": "APAC",
+      "severity": "LOW",
+      "status": "OPEN",
+      "year": "2023"
+     },
+     "outputs": {
+      "as-found-batch@1": null,
+      "as-found-js@1": true,
+      "as-found-python@1": false
+     },
+     "traces": {
+      "as-found-batch@1": [
+       {
+        "matched": false,
+        "reason": "no threshold (needs threshold or region + policy_code)",
+        "row_id": "BATCH-2"
+       }
+      ],
+      "as-found-js@1": [
+       {
+        "inputs_used": {
+         "region": "APAC",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 1,
+        "row_id": "JS-01"
+       },
+       {
+        "inputs_used": {
+         "region": "APAC",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 2,
+        "row_id": "JS-02"
+       },
+       {
+        "inputs_used": {
+         "region": "APAC",
+         "year": "2023"
+        },
+        "matched": false,
+        "ordinal": 3,
+        "row_id": "JS-03"
+       },
+       {
+        "inputs_used": {
+         "region": "APAC",
+         "year": "2023"
+        },
+        "matched": true,
+        "ordinal": 4,
+        "row_id": "JS-04"
+       },
+       {
+        "inputs_used": {
+         "amount": "26894.94",
+         "threshold": 17500,
+         "tolerance_factor": "1.05"
+        },
+        "matched": false,
+        "ordinal": 1000,
+        "row_id": "AMOUNT_LIMIT-compare"
+       }
+      ],
+      "as-found-python@1": [
+       {
+        "inputs_used": {
+         "amount": "26894.94",
+         "limit": 50000
+        },
+        "matched": false,
+        "row_id": "PY-P3"
+       }
+      ]
+     }
+    }
+   ],
+   "inputs": 125,
+   "label": "synthetic, unvalidated",
+   "note": "divergence is reported, not resolved: no rule set is named correct (A-12-F03-1, OD-S12-04)",
+   "null_outputs": {
+    "as-found-batch@1": 125,
+    "as-found-js@1": 0,
+    "as-found-python@1": 0
+   },
+   "output_key": "amount_over_limit"
+  },
+  "rc": 0
+ },
+ "fixture_sha256": {
+  "enterprise_legacy.sqlite3": "210f4bafd858155f79dd4654fd3c9f4817c6e3d9325bc320bea4a8945fdb4c0b",
+  "legacy.sqlite3": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa"
+ },
+ "fixture_sha256_unchanged": true,
+ "golden_compare": {
+  "rc": 6,
+  "report": {
+   "baseline": {
+    "enterprise_legacy.sqlite3": {
+     "access": "mode=ro&immutable=1",
+     "adapter": "AD-02",
+     "source": "enterprise_legacy.sqlite3",
+     "source_sha256": "210f4bafd858155f79dd4654fd3c9f4817c6e3d9325bc320bea4a8945fdb4c0b"
+    },
+    "legacy.sqlite3": {
+     "access": "mode=ro&immutable=1",
+     "adapter": "AD-01",
+     "source": "legacy.sqlite3",
+     "source_sha256": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa"
+    }
+   },
+   "entries": [
+    {
+     "disposition": "UNAPPROVED",
+     "golden_ref": "CT-07:lib.missing_field",
+     "legacy": {
+      "accepted": 0,
+      "duplicates": 0,
+      "invalid": 1,
+      "received": 1
+     },
+     "new": {
+      "quarantined": 1,
+      "reason": "envelope_invalid",
+      "received": 1
+     },
+     "new_source": "declared:F10-2 DV-09 (target; owning module not built yet)",
+     "register": [
+      {
+       "dev_id": "DV-09",
+       "status": "proposed"
+      }
+     ]
+    },
+    {
+     "disposition": "UNAPPROVED",
+     "golden_ref": "CT-08:batch.partner_error_reasons[quantity out of range]",
+     "legacy": 154,
+     "new": {
+      "quantity_lt_0": "NEGATIVE_VALUE flag; kept; reviewer queue"
+     },
+     "new_source": "declared:F10-2 DV-03 (target; owning module not built yet)",
+     "register": [
+      {
+       "dev_id": "DV-03",
+       "status": "proposed"
+      }
+     ]
+    },
+    {
+     "disposition": "UNAPPROVED",
+     "golden_ref": "CT-08:batch.partner_error_reasons[replayed source message]",
+     "legacy": 64,
+     "new": {
+      "replay_changed_content": "REVISED_CONFLICT",
+      "replay_identical_content": "NOOP_DUPLICATE"
+     },
+     "new_source": "declared:F10-2 DV-02 (target; owning module not built yet)",
+     "register": [
+      {
+       "dev_id": "DV-02",
+       "status": "proposed"
+      }
+     ]
+    },
+    {
+     "disposition": "UNAPPROVED",
+     "golden_ref": "CT-08:batch.partner_status_after_all",
+     "legacy": [
+      [
+       "ACCEPTED",
+       7917
+      ],
+      [
+       "DUPLICATE",
+       64
+      ],
+      [
+       "REJECTED",
+       586
+      ]
+     ],
+     "new": {
+      "legacy_table": "untouched",
+      "outcomes": "append-only"
+     },
+     "new_source": "declared:F10-2 DV-07 (target; owning module not built yet)",
+     "register": [
+      {
+       "dev_id": "DV-07",
+       "status": "proposed"
+      }
+     ]
+    },
+    {
+     "disposition": "identical",
+     "golden_ref": "CT-10:batch.shift_active_policies_per_region",
+     "legacy": [
+      [
+       "AU",
+       4
+      ],
+      [
+       "BR",
+       4
+      ],
+      [
+       "DE",
+       5
+      ],
+      [
+       "GB",
+       4
+      ],
+      [
+       "IN",
+       4
+      ],
+      [
+       "JP",
+       4
+      ],
+      [
+       "US",
+       5
+      ],
+      [
+       "ZA",
+       4
+      ]
+     ],
+     "new": [
+      [
+       "AU",
+       4
+      ],
+      [
+       "BR",
+       4
+      ],
+      [
+       "DE",
+       5
+      ],
+      [
+       "GB",
+       4
+      ],
+      [
+       "IN",
+       4
+      ],
+      [
+       "JP",
+       4
+      ],
+      [
+       "US",
+       5
+      ],
+      [
+       "ZA",
+       4
+      ]
+     ],
+     "new_source": "baseline_ro:active_policies_per_region (read-only snapshot)"
+    },
+    {
+     "disposition": "UNAPPROVED",
+     "golden_ref": "CT-10:batch.shift_distinct_objects_in_first_500_joined_rows",
+     "legacy": 118,
+     "new": 500,
+     "new_source": "baseline_ro:distinct_entities_first_500 (read-only snapshot)",
+     "register": [
+      {
+       "dev_id": "DV-08",
+       "status": "proposed"
+      }
+     ]
+    },
+    {
+     "disposition": "UNAPPROVED",
+     "golden_ref": "CT-11:batch.java_tiny.stdout#count",
+     "legacy": "2390",
+     "new": {
+      "UNPARSABLE_AMOUNT": 10,
+      "summed_rows": 2390
+     },
+     "new_source": "declared:F10-2 DV-04 (target; owning module not built yet)",
+     "register": [
+      {
+       "dev_id": "DV-04",
+       "status": "proposed"
+      }
+     ]
+    },
+    {
+     "disposition": "UNAPPROVED",
+     "golden_ref": "CT-12:batch.sql_report_1_total_gross",
+     "legacy": 742956.61,
+     "new": 622826.44,
+     "new_source": "baseline_ro:month_end_total (read-only snapshot)",
+     "register": [
+      {
+       "dev_id": "DV-01",
+       "status": "proposed"
+      }
+     ]
+    },
+    {
+     "disposition": "identical",
+     "golden_ref": "CT-12:batch.true_total_amount",
+     "legacy": 622826.44,
+     "new": 622826.44,
+     "new_source": "baseline_ro:month_end_total (read-only snapshot)"
+    },
+    {
+     "disposition": "UNAPPROVED",
+     "golden_ref": "CT-13:batch.js_policy_table.allows[7:9]",
+     "legacy": [
+      [
+       "abc",
+       "APAC",
+       2026,
+       false
+      ],
+      [
+       null,
+       "APAC",
+       2026,
+       true
+      ]
+     ],
+     "new": {
+      "abc": "E-POL-INPUT-INVALID",
+      "null": "E-POL-INPUT-INVALID"
+     },
+     "new_source": "declared:F10-2 DV-05 (target; owning module not built yet)",
+     "register": [
+      {
+       "dev_id": "DV-05",
+       "status": "proposed"
+      }
+     ]
+    },
+    {
+     "disposition": "UNAPPROVED",
+     "golden_ref": "CT-13:batch.js_policy_table.table[0]",
+     "legacy": [
+      "APAC",
+      2019,
+      999999
+     ],
+     "new": {
+      "defaulted": true,
+      "region": "APAC",
+      "threshold": 999999,
+      "year": 2019
+     },
+     "new_source": "declared:F10-2 DV-06 (target; owning module not built yet)",
+     "register": [
+      {
+       "dev_id": "DV-06",
+       "status": "proposed"
+      }
+     ]
+    }
+   ],
+   "error": "E-CO-UNAPPROVED-DEVIATION",
+   "exit_code": 6,
+   "schema": "golden-compare/v1",
+   "summary": {
+    "NOT-RUN": 0,
+    "UNAPPROVED": 9,
+    "approved_deviation": 0,
+    "identical": 2,
+    "probes": 11
+   },
+   "tripwires": {
+    "egress_attempts_total": 0,
+    "model_calls_total": 0
+   }
+  }
+ },
+ "ingest": {
+  "counts": {
+   "noop_duplicate": 67,
+   "outcomes": 10983,
+   "raw": 10983,
+   "runs": 4
+  },
+  "legacy_db_sha256_after": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+  "legacy_db_sha256_before": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+  "rc": 0,
+  "runs": {
+   "gateway": {
+    "binding": {
+     "contract_file": "source-contract-v1",
+     "mode": "record_only",
+     "origin": "default",
+     "source": "gateway"
+    },
+    "contract_check": {
+     "fail": 1
+    },
+    "first_raw_id": "RAW-0000008583",
+    "last_raw_id": "RAW-0000008583",
+    "linked": 0,
+    "noop_duplicate": 0,
+    "outcomes": {
+     "VALIDATED": 1
+    },
+    "outcomes_digest": "221e9a830f4c8b816544231d6f47ed6d2f2881775144865182ec164442f5b78b",
+    "queues": {},
+    "reasons": {},
+    "received": 1,
+    "revised_conflict": 0,
+    "run_id": "legacy-gateway-cli-15b50b8a2321d5dc",
+    "skipped_existing": 0,
+    "source": "gateway",
+    "status": "finished",
+    "stored": 1
+   },
+   "partner_feed": {
+    "binding": {
+     "contract_file": "source-contract-v1",
+     "mode": "record_only",
+     "origin": "default",
+     "source": "partner_feed"
+    },
+    "contract_check": {
+     "fail": 8567
+    },
+    "first_raw_id": "RAW-0000000001",
+    "last_raw_id": "RAW-0000008567",
+    "linked": 168,
+    "noop_duplicate": 67,
+    "outcomes": {
+     "EXCEPTION": 8109,
+     "NOOP_DUPLICATE": 67,
+     "QUARANTINED": 223,
+     "VALIDATED": 165,
+     "VALIDATED_WITH_FLAGS": 3
+    },
+    "outcomes_digest": "4a50d7151ced475024419ffe4e867e3da2fc1605f89e7c93f5a0c65604f0b98a",
+    "queues": {
+     "flagged_value": 3,
+     "quarantine_invalid": 223,
+     "unmatched": 8109
+    },
+    "reasons": {
+     "NEGATIVE_VALUE": 161,
+     "NO_BUSINESS_KEY": 208,
+     "UNMATCHED_REF": 7903,
+     "UNSUPPORTED_REVISION": 223
+    },
+    "received": 8567,
+    "revised_conflict": 0,
+    "run_id": "legacy-partner_feed-cli-15b50b8a2321d5dc",
+    "skipped_existing": 0,
+    "source": "partner_feed",
+    "status": "finished",
+    "stored": 8567
+   },
+   "source_message": {
+    "binding": {
+     "contract_file": "source-contract-v1",
+     "mode": "record_only",
+     "origin": "default",
+     "source": "source_message"
+    },
+    "contract_check": {
+     "pass": 15
+    },
+    "first_raw_id": "RAW-0000008568",
+    "last_raw_id": "RAW-0000008582",
+    "linked": 0,
+    "noop_duplicate": 0,
+    "outcomes": {
+     "VALIDATED": 15
+    },
+    "outcomes_digest": "1aa6d98762010efb17d4390033da23db9073212e38f8dc7675954d4347b2ad30",
+    "queues": {},
+    "reasons": {},
+    "received": 15,
+    "revised_conflict": 0,
+    "run_id": "legacy-source_message-cli-15b50b8a2321d5dc",
+    "skipped_existing": 0,
+    "source": "source_message",
+    "status": "finished",
+    "stored": 15
+   },
+   "vendor_csv": {
+    "binding": {
+     "contract_file": "source-contract-v1",
+     "mode": "record_only",
+     "origin": "default",
+     "source": "vendor_csv"
+    },
+    "contract_check": {
+     "fail": 2400
+    },
+    "first_raw_id": "RAW-0000008584",
+    "last_raw_id": "RAW-0000010983",
+    "linked": 0,
+    "noop_duplicate": 0,
+    "outcomes": {
+     "QUARANTINED": 10,
+     "VALIDATED_WITH_FLAGS": 2390
+    },
+    "outcomes_digest": "99be82fad88a5857982bc3059a72361118a8ecdfad1511b55c46028832d43233",
+    "queues": {
+     "flagged_value": 2390,
+     "quarantine_invalid": 10
+    },
+    "reasons": {
+     "IDENTIFIER_PATTERN": 2400,
+     "NEGATIVE_VALUE": 11,
+     "UNKNOWN_CURRENCY": 382,
+     "UNPARSABLE_AMOUNT": 10
+    },
+    "received": 2400,
+    "revised_conflict": 0,
+    "run_id": "legacy-vendor_csv-cli-15b50b8a2321d5dc",
+    "skipped_existing": 0,
+    "source": "vendor_csv",
+    "status": "finished",
+    "stored": 2400
+   }
+  }
+ },
+ "intake_current_outcomes": [
+  [
+   "gateway",
+   "VALIDATED",
+   null,
+   1
+  ],
+  [
+   "partner_feed",
+   "EXCEPTION",
+   "NO_BUSINESS_KEY",
+   206
+  ],
+  [
+   "partner_feed",
+   "EXCEPTION",
+   "UNMATCHED_REF",
+   7903
+  ],
+  [
+   "partner_feed",
+   "NOOP_DUPLICATE",
+   null,
+   67
+  ],
+  [
+   "partner_feed",
+   "QUARANTINED",
+   "UNSUPPORTED_REVISION",
+   223
+  ],
+  [
+   "partner_feed",
+   "VALIDATED",
+   null,
+   165
+  ],
+  [
+   "partner_feed",
+   "VALIDATED_WITH_FLAGS",
+   "NEGATIVE_VALUE",
+   3
+  ],
+  [
+   "source_message",
+   "VALIDATED",
+   null,
+   15
+  ],
+  [
+   "vendor_csv",
+   "QUARANTINED",
+   "UNPARSABLE_AMOUNT",
+   10
+  ],
+  [
+   "vendor_csv",
+   "VALIDATED_WITH_FLAGS",
+   "IDENTIFIER_PATTERN",
+   2001
+  ],
+  [
+   "vendor_csv",
+   "VALIDATED_WITH_FLAGS",
+   "NEGATIVE_VALUE",
+   11
+  ],
+  [
+   "vendor_csv",
+   "VALIDATED_WITH_FLAGS",
+   "UNKNOWN_CURRENCY",
+   378
+  ]
+ ],
+ "intake_reason_mentions": {
+  "BLANK_AMOUNT": 0,
+  "MISSING_ENVELOPE_FIELD": 0,
+  "NEGATIVE_VALUE": 172,
+  "QUANTITY": 0,
+  "REVISED_CONFLICT": 0,
+  "UNPARSABLE_AMOUNT": 10
+ },
+ "label": "synthetic, unvalidated - method validation only",
+ "legacy_partner_status_after_hub_intake": [
+  [
+   "NEW",
+   8000
+  ],
+  [
+   "REPLAY",
+   67
+  ],
+  [
+   "RETRY",
+   500
+  ]
+ ],
+ "load_as_found": {
+  "active": {},
+  "rulesets": [
+   {
+    "content_sha256": "79b135e7e42381a7e8a10fb32ac0ed2d7e7befbfb8ea0aae52bf8e93b1abcdb1",
+    "loaded": true,
+    "ruleset_ref": "as-found-python@1"
+   },
+   {
+    "content_sha256": "aaf4138962b999e55dab1cfab3e9c921b0b4312ea41d1a6194f2863c05f41a5f",
+    "loaded": true,
+    "ruleset_ref": "as-found-js@1"
+   },
+   {
+    "content_sha256": "6fd29a4484e2a9259475a17b3a2b62a70c229deba56885d5cece218d165c83a2",
+    "loaded": true,
+    "ruleset_ref": "as-found-batch@1"
+   }
+  ]
+ },
+ "month_end": {
+  "out": {
+   "text": "MET-MONTH-END-TOTAL [tag=None policy=None status=None] 622826.44 n=125 -- synthetic, unvalidated",
+   "value": {
+    "basis": "event_derived",
+    "code_version": "0.2.0-inc02+inc07",
+    "computed_at": "2026-10-20T14:11:45.259996Z",
+    "data_origin": "synthetic",
+    "definition_tag": null,
+    "denominator": "cases:125 (FX-BASE125)",
+    "detail": {
+     "currency_minor_unit": 2,
+     "flags": [],
+     "rounding": "ROUND_HALF_EVEN at presentation only",
+     "source": "cases.amount"
+    },
+    "errors": [],
+    "exclusions": "none",
+    "inputs_hash": "667ee35d44234c857a6c4a5df141f926f665a531899cb61be334bb5e3a2e7df6",
+    "label": "synthetic, unvalidated",
+    "metric_id": "MET-MONTH-END-TOTAL",
+    "metric_version": 1,
+    "n": 125,
+    "null_reason": null,
+    "partial": false,
+    "policy_status": null,
+    "policy_version": null,
+    "value": "622826.44",
+    "value_id": "MV-00000001",
+    "window_end": "2030-01-01T00:00:00.000000Z",
+    "window_start": null
+   }
+  },
+  "rc": 0
+ },
+ "policy_evaluate": {
+  "APAC_2019": {
+   "out": {
+    "authoritative": false,
+    "defaulted": true,
+    "defaulted_reason": "NO_MATCH_REGION_YEAR",
+    "outcome": {
+     "allowed": true,
+     "threshold": 999999
+    },
+    "ruleset_ref": "as-found-js@1",
+    "trace": [
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 1,
+      "row_id": "JS-01"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 2,
+      "row_id": "JS-02"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 3,
+      "row_id": "JS-03"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 4,
+      "row_id": "JS-04"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 5,
+      "row_id": "JS-05"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 6,
+      "row_id": "JS-06"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 7,
+      "row_id": "JS-07"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 8,
+      "row_id": "JS-08"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 9,
+      "row_id": "JS-09"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 10,
+      "row_id": "JS-10"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 11,
+      "row_id": "JS-11"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 12,
+      "row_id": "JS-12"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 13,
+      "row_id": "JS-13"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 14,
+      "row_id": "JS-14"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "2019"
+      },
+      "matched": false,
+      "ordinal": 15,
+      "row_id": "JS-15"
+     },
+     {
+      "inputs_used": {},
+      "matched": true,
+      "ordinal": 99,
+      "row_id": "JS-default"
+     },
+     {
+      "inputs_used": {
+       "amount": "0",
+       "threshold": 999999,
+       "tolerance_factor": "1.05"
+      },
+      "matched": true,
+      "ordinal": 1000,
+      "row_id": "AMOUNT_LIMIT-compare"
+     }
+    ]
+   },
+   "rc": 0
+  },
+  "APAC_2026_abc": {
+   "out": null,
+   "rc": 23
+  },
+  "APAC_2026_null": {
+   "out": null,
+   "rc": 23
+  },
+  "APAC_202_partial": {
+   "out": {
+    "authoritative": false,
+    "defaulted": true,
+    "defaulted_reason": "NO_MATCH_REGION_YEAR",
+    "outcome": {
+     "allowed": true,
+     "threshold": 999999
+    },
+    "ruleset_ref": "as-found-js@1",
+    "trace": [
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 1,
+      "row_id": "JS-01"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 2,
+      "row_id": "JS-02"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 3,
+      "row_id": "JS-03"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 4,
+      "row_id": "JS-04"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 5,
+      "row_id": "JS-05"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 6,
+      "row_id": "JS-06"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 7,
+      "row_id": "JS-07"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 8,
+      "row_id": "JS-08"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 9,
+      "row_id": "JS-09"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 10,
+      "row_id": "JS-10"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 11,
+      "row_id": "JS-11"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 12,
+      "row_id": "JS-12"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 13,
+      "row_id": "JS-13"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 14,
+      "row_id": "JS-14"
+     },
+     {
+      "inputs_used": {
+       "region": "APAC",
+       "year": "202"
+      },
+      "matched": false,
+      "ordinal": 15,
+      "row_id": "JS-15"
+     },
+     {
+      "inputs_used": {},
+      "matched": true,
+      "ordinal": 99,
+      "row_id": "JS-default"
+     },
+     {
+      "inputs_used": {
+       "amount": "0",
+       "threshold": 999999,
+       "tolerance_factor": "1.05"
+      },
+      "matched": true,
+      "ordinal": 1000,
+      "row_id": "AMOUNT_LIMIT-compare"
+     }
+    ]
+   },
+   "rc": 0
+  },
+  "no_ref_no_active": {
+   "out": null,
+   "rc": 23
+  }
+ },
+ "python": "3.13.16",
+ "seconds": 7.8,
+ "sqlite": "3.45.1",
+ "steps": {
+  "hub golden-compare": [
+   {
+    "rc": 6,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.admin migrate": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.admin verify-audit": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.decision backfill": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.decision migrate": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.intake ingest-legacy": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.intake migrate": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.metrics month-end": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.policy evaluate": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   },
+   {
+    "rc": 23,
+    "stderr_tail": "{\n \"code\": \"E-POL-INPUT-INVALID\",\n \"details\": {\n  \"field\": \"amount\",\n  \"reason\": \"not a plain decimal string\"\n },\n \"message\": \"a decimal input is missing, non-numeric, NaN or infinite\"\n}\n"
+   },
+   {
+    "rc": 23,
+    "stderr_tail": "{\n \"code\": \"E-POL-INPUT-INVALID\",\n \"details\": {\n  \"field\": \"amount\",\n  \"reason\": \"null or boolean\"\n },\n \"message\": \"a decimal input is missing, non-numeric, NaN or infinite\"\n}\n"
+   },
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   },
+   {
+    "rc": 23,
+    "stderr_tail": "{\n \"code\": \"E-POL-NO-ACTIVE-RULESET\",\n \"details\": {\n  \"function\": \"AMOUNT_LIMIT\"\n },\n \"message\": \"no active rule set and no explicit ruleset_ref\"\n}\n"
+   }
+  ],
+  "hub.policy load-as-found": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.policy migrate": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.policy seed": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.r2 divergence": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.runs migrate": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.search migrate": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ],
+  "hub.web migrate": [
+   {
+    "rc": 0,
+    "stderr_tail": ""
+   }
+  ]
+ },
+ "verify_audit_rc": 0
+}

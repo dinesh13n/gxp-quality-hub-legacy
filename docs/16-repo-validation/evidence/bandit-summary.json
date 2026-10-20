@@ -1,0 +1,1354 @@
+{
+ "tool": "bandit 1.9.4",
+ "label": "static scan; synthetic repository",
+ "hub": {
+  "loc": 11888,
+  "issues": 41,
+  "by_severity_confidence": {
+   "MEDIUM/MEDIUM": 22,
+   "MEDIUM/LOW": 13,
+   "LOW/HIGH": 3,
+   "LOW/MEDIUM": 3
+  },
+  "by_rule": {
+   "B608 hardcoded_sql_expressions": 35,
+   "B110 try_except_pass": 3,
+   "B105 hardcoded_password_string": 3
+  },
+  "items": [
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/crosswalk/service.py",
+    "line": 61
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/crosswalk/service.py",
+    "line": 81
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/crosswalk/service.py",
+    "line": 194
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/decision/schema.py",
+    "line": 82
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/decision/service.py",
+    "line": 146
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/decision/service.py",
+    "line": 176
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/decision/service.py",
+    "line": 220
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/decision/service.py",
+    "line": 451
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/decision/service.py",
+    "line": 457
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/decision/service.py",
+    "line": 597
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/decision/service.py",
+    "line": 619
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/gate/pack.py",
+    "line": 30
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/intake/schema.py",
+    "line": 86
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/intake/service.py",
+    "line": 287
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/intake/service.py",
+    "line": 331
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/metrics/registry.py",
+    "line": 104
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/metrics/registry.py",
+    "line": 110
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/policy/schema.py",
+    "line": 80
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/policy/service.py",
+    "line": 96
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/policy/service.py",
+    "line": 103
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/policy/service.py",
+    "line": 118
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/policy/service.py",
+    "line": 121
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/policy/service.py",
+    "line": 146
+   },
+   {
+    "rule": "B110",
+    "sev": "LOW",
+    "file": "hub/r2/cli.py",
+    "line": 116
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/r2/consistency.py",
+    "line": 94
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/r2/intake_reports.py",
+    "line": 55
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/runs/schema.py",
+    "line": 88
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/runs/service.py",
+    "line": 283
+   },
+   {
+    "rule": "B110",
+    "sev": "LOW",
+    "file": "hub/search/cli.py",
+    "line": 81
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/search/corpus.py",
+    "line": 149
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/search/engine.py",
+    "line": 175
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/search/engine.py",
+    "line": 179
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/search/schema.py",
+    "line": 82
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/security/audit.py",
+    "line": 153
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "hub/security/settings.py",
+    "line": 26
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "hub/security/settings.py",
+    "line": 34
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/store/migrate.py",
+    "line": 101
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/web/api.py",
+    "line": 141
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "hub/web/app.py",
+    "line": 211
+   },
+   {
+    "rule": "B110",
+    "sev": "LOW",
+    "file": "hub/web/cli.py",
+    "line": 110
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "hub/web/schema.py",
+    "line": 90
+   }
+  ]
+ },
+ "legacy": {
+  "loc": 689,
+  "issues": 45,
+  "by_severity_confidence": {
+   "LOW/HIGH": 19,
+   "MEDIUM/MEDIUM": 22,
+   "MEDIUM/HIGH": 3,
+   "HIGH/HIGH": 1
+  },
+  "by_rule": {
+   "B311 blacklist": 9,
+   "B608 hardcoded_sql_expressions": 22,
+   "B310 blacklist": 3,
+   "B324 hashlib": 1,
+   "B404 blacklist": 3,
+   "B603 subprocess_without_shell_equals_true": 3,
+   "B101 assert_used": 4
+  },
+  "items": [
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "app/archived_documents.py",
+    "line": 6
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "app/domain_data.py",
+    "line": 5
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/domain_data.py",
+    "line": 16
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/domain_data.py",
+    "line": 22
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "app/enterprise_data.py",
+    "line": 8
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/enterprise_data.py",
+    "line": 13
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/enterprise_data.py",
+    "line": 27
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "app/enterprise_legacy.py",
+    "line": 10
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/enterprise_legacy.py",
+    "line": 26
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/enterprise_legacy.py",
+    "line": 55
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/enterprise_legacy.py",
+    "line": 59
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/gateway_bridge.py",
+    "line": 19
+   },
+   {
+    "rule": "B310",
+    "sev": "MEDIUM",
+    "file": "app/gateway_bridge.py",
+    "line": 29
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "app/generate.py",
+    "line": 6
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/generate.py",
+    "line": 18
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "app/generate_documents.py",
+    "line": 6
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "app/historical_fixture.py",
+    "line": 14
+   },
+   {
+    "rule": "B324",
+    "sev": "HIGH",
+    "file": "app/historical_fixture.py",
+    "line": 49
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/operational_report.py",
+    "line": 9
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/operational_report.py",
+    "line": 10
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/operational_report.py",
+    "line": 11
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "app/partner_feeds.py",
+    "line": 22
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/partner_feeds.py",
+    "line": 26
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/server.py",
+    "line": 31
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/server.py",
+    "line": 32
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/server.py",
+    "line": 42
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/server.py",
+    "line": 43
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "app/workshop_check.py",
+    "line": 10
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "ops/legacy_log_sampler.py",
+    "line": 2
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "scripts/offline_inventory.py",
+    "line": 15
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "scripts/rehearse_local.py",
+    "line": 2
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "scripts/smoke.py",
+    "line": 1
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "scripts/smoke.py",
+    "line": 5
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "scripts/smoke.py",
+    "line": 7
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "scripts/smoke.py",
+    "line": 8
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "scripts/smoke.py",
+    "line": 11
+   },
+   {
+    "rule": "B310",
+    "sev": "MEDIUM",
+    "file": "scripts/smoke.py",
+    "line": 15
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "scripts/smoke.py",
+    "line": 15
+   },
+   {
+    "rule": "B310",
+    "sev": "MEDIUM",
+    "file": "scripts/smoke.py",
+    "line": 19
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "scripts/smoke.py",
+    "line": 19
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "scripts/verify_preloaded.py",
+    "line": 3
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "scripts/verify_preloaded.py",
+    "line": 5
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "services/source_gateway/server.py",
+    "line": 22
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "services/source_gateway/server.py",
+    "line": 22
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "services/source_gateway/server.py",
+    "line": 32
+   }
+  ]
+ },
+ "tests": {
+  "loc": 11403,
+  "issues": 128,
+  "by_severity_confidence": {
+   "LOW/HIGH": 80,
+   "MEDIUM/HIGH": 6,
+   "MEDIUM/MEDIUM": 25,
+   "MEDIUM/LOW": 5,
+   "LOW/MEDIUM": 10,
+   "HIGH/MEDIUM": 2
+  },
+  "by_rule": {
+   "B404 blacklist": 27,
+   "B603 subprocess_without_shell_equals_true": 35,
+   "B310 blacklist": 6,
+   "B608 hardcoded_sql_expressions": 25,
+   "B108 hardcoded_tmp_directory": 1,
+   "B607 start_process_with_partial_path": 3,
+   "B101 assert_used": 9,
+   "B105 hardcoded_password_string": 10,
+   "B104 hardcoded_bind_all_interfaces": 4,
+   "B311 blacklist": 3,
+   "B613 trojansource": 2,
+   "B110 try_except_pass": 3
+  },
+  "items": [
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/api.py",
+    "line": 8
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/api.py",
+    "line": 30
+   },
+   {
+    "rule": "B310",
+    "sev": "MEDIUM",
+    "file": "tests/characterization/capture/api.py",
+    "line": 34
+   },
+   {
+    "rule": "B310",
+    "sev": "MEDIUM",
+    "file": "tests/characterization/capture/api.py",
+    "line": 43
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/characterization/capture/api.py",
+    "line": 56
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/batch.py",
+    "line": 17
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/batch.py",
+    "line": 33
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/characterization/capture/batch.py",
+    "line": 42
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/batch.py",
+    "line": 90
+   },
+   {
+    "rule": "B310",
+    "sev": "MEDIUM",
+    "file": "tests/characterization/capture/batch.py",
+    "line": 94
+   },
+   {
+    "rule": "B310",
+    "sev": "MEDIUM",
+    "file": "tests/characterization/capture/batch.py",
+    "line": 107
+   },
+   {
+    "rule": "B108",
+    "sev": "MEDIUM",
+    "file": "tests/characterization/capture/batch.py",
+    "line": 138
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/lib.py",
+    "line": 3
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/lib.py",
+    "line": 26
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/supplement.py",
+    "line": 16
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/supplement.py",
+    "line": 40
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/capture/supplement.py",
+    "line": 53
+   },
+   {
+    "rule": "B310",
+    "sev": "MEDIUM",
+    "file": "tests/characterization/capture/supplement.py",
+    "line": 58
+   },
+   {
+    "rule": "B310",
+    "sev": "MEDIUM",
+    "file": "tests/characterization/capture/supplement.py",
+    "line": 68
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/characterization/run_characterization.py",
+    "line": 21
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/run_characterization.py",
+    "line": 95
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/run_characterization.py",
+    "line": 176
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/run_characterization.py",
+    "line": 220
+   },
+   {
+    "rule": "B607",
+    "sev": "LOW",
+    "file": "tests/characterization/run_characterization.py",
+    "line": 284
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/characterization/run_characterization.py",
+    "line": 284
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/_inc03.py",
+    "line": 10
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/_inc03.py",
+    "line": 37
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/_inc04.py",
+    "line": 12
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/_inc04.py",
+    "line": 91
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/_inc04.py",
+    "line": 118
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "tests/hub/_inc05.py",
+    "line": 65
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/_inc05.py",
+    "line": 144
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/_inc05.py",
+    "line": 147
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "tests/hub/_inc06.py",
+    "line": 47
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/_inc06.py",
+    "line": 77
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "tests/hub/_inc07.py",
+    "line": 54
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/_inc07.py",
+    "line": 97
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "tests/hub/_inc08.py",
+    "line": 55
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "tests/hub/_inc08.py",
+    "line": 138
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/_inc08.py",
+    "line": 170
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "tests/hub/_inc08.py",
+    "line": 192
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "tests/hub/_inc09.py",
+    "line": 78
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/_support.py",
+    "line": 12
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/_support.py",
+    "line": 56
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/run_hub_tests.py",
+    "line": 17
+   },
+   {
+    "rule": "B607",
+    "sev": "LOW",
+    "file": "tests/hub/run_hub_tests.py",
+    "line": 32
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/run_hub_tests.py",
+    "line": 32
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/run_hub_tests.py",
+    "line": 75
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc04_supplementary.py",
+    "line": 31
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc04_supplementary.py",
+    "line": 33
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc05_egress_guard.py",
+    "line": 9
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc05_egress_guard.py",
+    "line": 30
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc05_supplementary.py",
+    "line": 11
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc05_supplementary.py",
+    "line": 38
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_inc05_supplementary.py",
+    "line": 237
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc06_egress_guard.py",
+    "line": 9
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc06_egress_guard.py",
+    "line": 30
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc06_supplementary.py",
+    "line": 11
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc06_supplementary.py",
+    "line": 39
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc07_egress_guard.py",
+    "line": 9
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc07_egress_guard.py",
+    "line": 30
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc07_supplementary.py",
+    "line": 10
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc07_supplementary.py",
+    "line": 38
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc07_supplementary.py",
+    "line": 43
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc07_supplementary.py",
+    "line": 134
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_inc07_supplementary.py",
+    "line": 235
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_inc07_supplementary.py",
+    "line": 238
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc08_egress_guard.py",
+    "line": 14
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc08_egress_guard.py",
+    "line": 35
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc08_supplementary.py",
+    "line": 9
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc08_supplementary.py",
+    "line": 131
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc08_supplementary.py",
+    "line": 228
+   },
+   {
+    "rule": "B104",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_inc08_supplementary.py",
+    "line": 241
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc08_supplementary.py",
+    "line": 289
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc08_supplementary.py",
+    "line": 290
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc08_supplementary.py",
+    "line": 294
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc09_egress_guard.py",
+    "line": 9
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc09_egress_guard.py",
+    "line": 29
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_inc09_reports_planned.py",
+    "line": 30
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc09_supplementary.py",
+    "line": 10
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc09_supplementary.py",
+    "line": 182
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_inc09_supplementary.py",
+    "line": 294
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_co_04_readonly_adapters.py",
+    "line": 62
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_05_legacy_paths_unchanged.py",
+    "line": 5
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_05_legacy_paths_unchanged.py",
+    "line": 23
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_06_sandbox_guard.py",
+    "line": 6
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_06_sandbox_guard.py",
+    "line": 55
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_06_sandbox_guard.py",
+    "line": 59
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_07_backup_manifest.py",
+    "line": 5
+   },
+   {
+    "rule": "B607",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_07_backup_manifest.py",
+    "line": 22
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_07_backup_manifest.py",
+    "line": 22
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_12_egress_tripwire.py",
+    "line": 12
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_12_egress_tripwire.py",
+    "line": 98
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_14_runtime_floor.py",
+    "line": 13
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_co_14_runtime_floor.py",
+    "line": 71
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_gate_01_22_disposition_gate.py",
+    "line": 271
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_int_09_16_validation.py",
+    "line": 103
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_int_09_16_validation.py",
+    "line": 144
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_int_17_29_match_untrusted_sources.py",
+    "line": 112
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_int_17_29_match_untrusted_sources.py",
+    "line": 114
+   },
+   {
+    "rule": "B613",
+    "sev": "HIGH",
+    "file": "tests/hub/test_tst_int_17_29_match_untrusted_sources.py",
+    "line": 158
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_nfr_measurements.py",
+    "line": 13
+   },
+   {
+    "rule": "B101",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_nfr_measurements.py",
+    "line": 93
+   },
+   {
+    "rule": "B104",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_nfr_measurements.py",
+    "line": 300
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_nfr_measurements.py",
+    "line": 367
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_nfr_measurements.py",
+    "line": 433
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_nfr_measurements.py",
+    "line": 548
+   },
+   {
+    "rule": "B613",
+    "sev": "HIGH",
+    "file": "tests/hub/test_tst_nfr_measurements.py",
+    "line": 424
+   },
+   {
+    "rule": "B110",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_obs_01_09_observability.py",
+    "line": 128
+   },
+   {
+    "rule": "B110",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_obs_01_09_observability.py",
+    "line": 133
+   },
+   {
+    "rule": "B110",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_obs_01_09_observability.py",
+    "line": 141
+   },
+   {
+    "rule": "B404",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_pol_22_25_purity_inputs_immutability.py",
+    "line": 12
+   },
+   {
+    "rule": "B603",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_pol_22_25_purity_inputs_immutability.py",
+    "line": 81
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_pol_22_25_purity_inputs_immutability.py",
+    "line": 164
+   },
+   {
+    "rule": "B311",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_rev_reviewer_support.py",
+    "line": 73
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_sec_06_credential_store.py",
+    "line": 73
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_sec_11_tamper_detection.py",
+    "line": 32
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_sec_11_tamper_detection.py",
+    "line": 33
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_sec_11_tamper_detection.py",
+    "line": 35
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_sec_11_tamper_detection.py",
+    "line": 36
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_sec_13_insert_only_triggers.py",
+    "line": 52
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_sec_13_insert_only_triggers.py",
+    "line": 56
+   },
+   {
+    "rule": "B608",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_sec_14_audit_write_failure.py",
+    "line": 25
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_sec_15_no_secrets_in_audit_logs.py",
+    "line": 48
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_sec_15_no_secrets_in_audit_logs.py",
+    "line": 48
+   },
+   {
+    "rule": "B105",
+    "sev": "LOW",
+    "file": "tests/hub/test_tst_sec_15_no_secrets_in_audit_logs.py",
+    "line": 48
+   },
+   {
+    "rule": "B104",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_sec_16_exposure_guard.py",
+    "line": 34
+   },
+   {
+    "rule": "B104",
+    "sev": "MEDIUM",
+    "file": "tests/hub/test_tst_sec_16_exposure_guard.py",
+    "line": 44
+   }
+  ]
+ }
+}

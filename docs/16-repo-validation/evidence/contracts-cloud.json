@@ -1,0 +1,122 @@
+{
+ "jsonschema": "4.26.0",
+ "label": "synthetic, unvalidated - method validation only",
+ "results": [
+  {
+   "invalid": 0,
+   "invalid_examples_head": [],
+   "objects": 30,
+   "schema": "audit-record",
+   "top_errors": [],
+   "valid": 30
+  },
+  {
+   "invalid": 0,
+   "invalid_examples_head": [],
+   "objects": 168,
+   "schema": "crosswalk-link",
+   "top_errors": [],
+   "valid": 168
+  },
+  {
+   "invalid": 0,
+   "invalid_examples_head": [],
+   "objects": 250,
+   "schema": "decision-event",
+   "top_errors": [],
+   "valid": 250
+  },
+  {
+   "invalid": 10983,
+   "invalid_examples_head": [
+    {
+     "outcome": "EXCEPTION",
+     "outcome_seq": "1",
+     "primary_reason": "UNMATCHED_REF",
+     "raw_id": "RAW-0000000001"
+    },
+    {
+     "outcome": "EXCEPTION",
+     "outcome_seq": "1",
+     "primary_reason": "UNMATCHED_REF",
+     "raw_id": "RAW-0000000002"
+    },
+    {
+     "outcome": "EXCEPTION",
+     "outcome_seq": "1",
+     "primary_reason": "UNMATCHED_REF",
+     "raw_id": "RAW-0000000003"
+    }
+   ],
+   "objects": 10983,
+   "schema": "intake-outcome",
+   "top_errors": [
+    [
+     "(root): Additional properties are not allowed ('conflicts_with', 'contract_missing', 'reason_detail' were unexpected)",
+     10983
+    ]
+   ],
+   "valid": 0
+  },
+  {
+   "invalid": 0,
+   "invalid_examples_head": [],
+   "objects": 10983,
+   "schema": "raw-intake",
+   "top_errors": [],
+   "valid": 10983
+  },
+  {
+   "invalid": 0,
+   "invalid_examples_head": [],
+   "objects": 5,
+   "schema": "metric-definition",
+   "top_errors": [],
+   "valid": 5
+  },
+  {
+   "invalid": 0,
+   "invalid_examples_head": [],
+   "objects": 5,
+   "schema": "policy-object",
+   "top_errors": [],
+   "valid": 5
+  },
+  {
+   "invalid": 0,
+   "invalid_examples_head": [],
+   "objects": 3,
+   "schema": "rule-set",
+   "top_errors": [],
+   "valid": 3
+  },
+  {
+   "invalid": 0,
+   "invalid_examples_head": [],
+   "objects": 2,
+   "schema": "rule-result",
+   "top_errors": [],
+   "valid": 2
+  },
+  {
+   "invalid": 1,
+   "invalid_examples_head": [
+    {
+     "basis": "event_derived",
+     "code_version": "0.2.0-inc02+inc07",
+     "computed_at": "2026-10-20T14:11:45.259996Z",
+     "data_origin": "synthetic"
+    }
+   ],
+   "objects": 1,
+   "schema": "metric-value",
+   "top_errors": [
+    [
+     "(root): Additional properties are not allowed ('detail' was unexpected)",
+     1
+    ]
+   ],
+   "valid": 0
+  }
+ ]
+}

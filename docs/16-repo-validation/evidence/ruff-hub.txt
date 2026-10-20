@@ -1,0 +1,27 @@
+ruff 0.16.8
+hub/metrics/cli.py:20:22: F401 [*] `hub.runs.CODE_VERSION` imported but unused
+hub/metrics/service.py:10:8: F401 [*] `datetime` imported but unused
+hub/metrics/service.py:22:31: F401 [*] `hub.policy.errors.NotFound` imported but unused
+hub/metrics/service.py:25:47: F401 [*] `hub.security.canonical.fmt` imported but unused
+hub/policy/cli.py:22:39: F401 [*] `hub.core.errors.HubKilled` imported but unused
+hub/security/auth.py:170:103: F841 Local variable `ctx` is assigned to but never used
+hub/web/cli.py:17:21: F401 [*] `hub.web.CODE_VERSION` imported but unused
+hub/web/server.py:13:29: F401 [*] `hub.core.errors.HubError` imported but unused
+hub/web/ui.py:14:35: F401 [*] `hub.gate.dispositions.DispositionService` imported but unused
+hub/web/ui.py:15:32: F401 [*] `hub.review.service.ReviewService` imported but unused
+hub/web/ui.py:16:31: F401 [*] `hub.security.auth.LocalAuthenticator` imported but unused
+hub/web/ui.py:146:9: F841 Local variable `r` is assigned to but never used
+Found 12 errors.
+[*] 10 fixable with the `--fix` option (2 hidden fixes can be enabled with the `--unsafe-fixes` option).
+hub/admin/cli.py:146:5: C901 `_cmd` is too complex (21 > 15)
+hub/decision/service.py:282:9: C901 `transition` is too complex (25 > 15)
+hub/golden/run.py:16:5: C901 `run` is too complex (16 > 15)
+hub/intake/service.py:167:9: C901 `ingest` is too complex (19 > 15)
+hub/intake/untrusted_lint.py:43:5: C901 `check_source` is too complex (16 > 15)
+hub/intake/validate.py:67:5: C901 `validate` is too complex (20 > 15)
+hub/obs/collect.py:36:5: C901 `samples` is too complex (18 > 15)
+hub/policy/engine.py:108:5: C901 `evaluate` is too complex (21 > 15)
+hub/policy/rulesets.py:27:5: C901 `validate` is too complex (16 > 15)
+hub/runs/cli.py:101:5: C901 `_cmd` is too complex (20 > 15)
+hub/web/app.py:185:9: C901 `_dispatch` is too complex (22 > 15)
+Found 11 errors.

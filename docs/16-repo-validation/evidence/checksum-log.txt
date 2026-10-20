@@ -1,0 +1,6 @@
+# Stage 16 data checksum log (laptop, repo root: sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt)
+2026-10-20 ~14:07Z before the first Stage 16 execution: rc=0
+2026-10-20 ~14:21Z after mutation chunk 4 (runs 1-6 done): rc=0
+2026-10-20 ~14:24Z after s16_observe.py: rc=0
+2026-10-20T14:39:20Z final: rc=0
+python 3.10.12; HEAD 2c63b07, tree 0d2e5c7

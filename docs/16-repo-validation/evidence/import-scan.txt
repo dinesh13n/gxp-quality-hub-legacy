@@ -1,0 +1,11 @@
+# AST import scan, stdlib list = sys.stdlib_module_names of Python 3.13.16; 2026-10-20
+hub                      files=163  non-stdlib top-level imports: ['hub']
+tests/hub                files=72   non-stdlib top-level imports: ['_http8', '_inc03', '_inc04', '_inc05', '_inc06', '_inc07', '_inc08', '_inc09', '_probe8', '_support', 'harness', 'hub']
+tests/characterization   files=7    non-stdlib top-level imports: ['_common', 'app', 'harness']
+app                      files=18   non-stdlib top-level imports: []
+legacy_batch             files=2    non-stdlib top-level imports: []
+services                 files=3    non-stdlib top-level imports: []
+scripts                  files=4    non-stdlib top-level imports: []
+ops                      files=1    non-stdlib top-level imports: []
+integration              files=0    non-stdlib top-level imports: []
+# pyproject.toml dependencies: none; no requirements*.txt / package.json / pom.xml / lock files

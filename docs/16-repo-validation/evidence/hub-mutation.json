@@ -1,0 +1,143 @@
+{
+ "label": "synthetic, unvalidated - method validation only",
+ "results": [
+  {
+   "id": "H1",
+   "increment": "INC-08",
+   "file": "hub/gate/service.py",
+   "mutation": "Zone H: a non-holder dispositioner is accepted",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 80, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_GATE_21_no_switch_disables_the_gate"
+   ],
+   "seconds": 39.6,
+   "tail": ""
+  },
+  {
+   "id": "H2",
+   "increment": "INC-08",
+   "file": "hub/web/app.py",
+   "mutation": "CSRF check disabled",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 80, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_I8_SEC_17_writes_without_csrf_proof_are_refused"
+   ],
+   "seconds": 38.7,
+   "tail": ""
+  },
+  {
+   "id": "H3",
+   "increment": "INC-08",
+   "file": "hub/web/app.py",
+   "mutation": "security header weakened",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 81, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 44.7,
+   "tail": ""
+  },
+  {
+   "id": "H4",
+   "increment": "INC-08",
+   "file": "hub/web/server.py",
+   "mutation": "non-loopback peers accepted",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 80, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_INC08_S07_listener_binds_loopback_and_sets_headers_on_every_response"
+   ],
+   "seconds": 38.0,
+   "tail": ""
+  },
+  {
+   "id": "H5",
+   "increment": "INC-08",
+   "file": "hub/web/server.py",
+   "mutation": "non-loopback bind accepted",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 81, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 41.7,
+   "tail": ""
+  },
+  {
+   "id": "H6",
+   "increment": "INC-09",
+   "file": "hub/search/settings.py",
+   "mutation": "search ships enabled",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 31, 'FAIL': 2, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_INC09_S03_engine_selection_and_startup_log",
+    "test_TST_HUB_INC09_S10_shipped_defaults_are_off_and_holders_empty"
+   ],
+   "seconds": 18.8,
+   "tail": ""
+  },
+  {
+   "id": "H7",
+   "increment": "INC-09",
+   "file": "hub/search/engine.py",
+   "mutation": "C3 reason not required in search (OP-REV-03)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 32, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_I9_SEC_20_c3_read_needs_a_reason_and_is_audited"
+   ],
+   "seconds": 17.1,
+   "tail": ""
+  },
+  {
+   "id": "H8",
+   "increment": "INC-09",
+   "file": "hub/r2/protection.py",
+   "mutation": "C3 reason not required in the joined view / protection layer",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 32, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_I9_SEC_20_c3_read_needs_a_reason_and_is_audited"
+   ],
+   "seconds": 17.4,
+   "tail": ""
+  },
+  {
+   "id": "H9",
+   "increment": "INC-09",
+   "file": "hub/r2/divergence.py",
+   "mutation": "divergence counts null (not comparable) outputs",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 32, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_I9_POL_24_divergence_report_over_the_shipped_cases"
+   ],
+   "seconds": 16.5,
+   "tail": ""
+  },
+  {
+   "id": "H10",
+   "increment": "INC-09",
+   "file": "hub/search/settings.py",
+   "mutation": "template drafts ship enabled",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 31, 'FAIL': 2, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_I9_REV_18_template_drafts_are_never_prefilled",
+    "test_TST_HUB_INC09_S10_shipped_defaults_are_off_and_holders_empty"
+   ],
+   "seconds": 18.4,
+   "tail": ""
+  }
+ ]
+}

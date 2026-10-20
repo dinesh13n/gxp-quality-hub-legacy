@@ -1,0 +1,16 @@
+# Stage 16 cloud hub regression (OD-23) - main 2c63b07, Python 3.13.16, SQLite 3.45.1, 2026-10-20
+# EXTRA_GROUPS='run I9 -k I9_ -k INC09_S; run E9 -k E09EGRESS' bash full_regression.sh <clone>  (harness line NOT authoritative in the cloud, OD-23)
+pre-checksum rc=0
+A: counts={'ok': 45, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (27s)
+B: counts={'ok': 40, 'FAIL': 0, 'ERROR': 0, 'skipped': 1} (9s)
+C: counts={'ok': 5, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (39s)
+I45: counts={'ok': 88, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (23s)
+I6: counts={'ok': 43, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (55s)
+I7: counts={'ok': 59, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (37s)
+I8: counts={'ok': 78, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (40s)
+E8: counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (41s)
+I9: counts={'ok': 33, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (16s)
+E9: counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (15s)
+harness: OVERALL FAIL  (16s) (21s)
+post-checksum rc=0
+TST_CO_03 (not in script): counts={'ok': 3, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} (5s); post-run checksum rc=0

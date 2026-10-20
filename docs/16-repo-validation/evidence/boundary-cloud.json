@@ -1,0 +1,7 @@
+{
+ "label": "synthetic, unvalidated - method validation only",
+ "cases": 105,
+ "identical": 105,
+ "different": 0,
+ "diffs": []
+}

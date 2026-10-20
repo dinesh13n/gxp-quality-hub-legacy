@@ -1,0 +1,44 @@
+# hub/ package import graph (AST), main 6a4472d, 2026-10-20
+legacy imports from hub: none
+network-capable stdlib imports: {'urllib': ['hub/adapters/gateway_client.py', 'hub/adapters/legacy_sqlite.py', 'hub/web/routes.py', 'hub/web/server.py', 'hub/web/wire.py'], 'socket': ['hub/guards/egress.py'], 'http': ['hub/web/server.py']}
+files containing sqlite3.connect( : ['hub/adapters/legacy_sqlite.py', 'hub/runtime.py', 'hub/store/db.py']
+
+## module-level package edges
+  (root)       -> cli, core, runtime
+  adapters     -> core, guards, intake
+  admin        -> core, security
+  coexistence  -> core
+  crosswalk    -> core, decision, guards, security
+  decision     -> adapters, admin, core, gate, ops, policy, security, store
+  gate         -> core, decision, policy, review, runs, security, web
+  golden       -> adapters, coexistence, core, guards, store
+  guards       -> core, obs
+  intake       -> admin, core, crosswalk, decision, gate, ops, policy, security, store
+  metrics      -> admin, core, decision, policy, runs, security
+  obs          -> core, security
+  ops          -> guards, obs, security, store
+  policy       -> adapters, admin, core, ops, security, store
+  r2           -> adapters, admin, core, crosswalk, decision, intake, policy, review, search, security, web
+  review       -> core, decision, policy, security, web
+  runs         -> admin, core, decision, gate, intake, obs, ops, policy, security, store
+  search       -> admin, core, decision, guards, ops, r2, review, security, store, web
+  security     -> core, guards
+  store        -> core, guards, ops
+  web          -> admin, core, crosswalk, decision, gate, intake, metrics, obs, ops, policy, review, runs, security, store
+
+## function-level (lazy) package edges
+  (root)       -> coexistence, golden, guards, obs, store
+  admin        -> guards, obs, ops, security, store
+  decision     -> adapters, crosswalk, gate, guards, obs, security
+  intake       -> adapters, guards, obs, security
+  metrics      -> adapters, guards, obs
+  obs          -> core
+  policy       -> guards, obs, security
+  r2           -> guards, obs, policy, security, web
+  runs         -> adapters, guards, intake, metrics, obs, security
+  search       -> guards, obs, security
+  store        -> coexistence
+  web          -> decision, gate, guards, obs, review, security
+
+module-level 2-cycles (6): [('decision', 'gate'), ('gate', 'runs'), ('gate', 'web'), ('ops', 'store'), ('r2', 'search'), ('review', 'web')]
+module-level 3-cycles (10): [('adapters', 'decision', 'intake'), ('adapters', 'intake', 'policy'), ('decision', 'gate', 'review'), ('decision', 'gate', 'runs'), ('decision', 'gate', 'web'), ('gate', 'intake', 'runs'), ('gate', 'intake', 'web'), ('gate', 'review', 'web'), ('gate', 'runs', 'web'), ('guards', 'obs', 'security')]
