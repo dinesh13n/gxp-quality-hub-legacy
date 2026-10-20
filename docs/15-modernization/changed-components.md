@@ -111,6 +111,9 @@ All new (no legacy file changed): `hub/intake/*` (M004, schema applier, canon, r
 ## INC-07 additions
 All new (no legacy or earlier-increment file changed): `hub/runs/*` (M005, schema applier, errors, settings, catalogue, flag, ZH-09 schedule service, sources, jobs, run service, detector, reports, CLI), `hub/metrics/*` (errors, values, registry, sources, service, CLI), `hub/obs/log.py`, `hub/obs/collect.py`; `tests/hub/_inc07.py` and test modules (39 planned, 19 supplementary, 1 egress); `docs/15-modernization/inc07-design-notes.md`, `rollback-rehearsal-inc07.md`, `evidence/inc07/`. Verified Fact (`git diff --name-status main`: only `A` outside the doc edits in `docs/15-modernization/`).
 
+## INC-08 additions
+All new (no legacy or earlier-increment file changed): `hub/web/*` (M006, schema applier, errors, wire, routes, authz, csrf, tokens, obs_http, app, api, ui, server, cli, nfr, `ui_routes.json`), `hub/gate/{actions,dispositions,disposition_errors,flags,modes,pack,reauth}.py`, `hub/review/*`; `tests/hub/_inc08.py`, `_http8.py`, `_probe8.py` and seven test modules (64 planned, 14 supplementary, 1 egress); `docs/15-modernization/inc08-design-notes.md`, `rollback-rehearsal-inc08.md`, `evidence/inc08/`. Existing docs/15-modernization files are extended. No change under `app/`, `data/`, `.github/`, `pyproject.toml`; `git diff --name-status main` shows only `A` outside docs/15-modernization.
+
 ## Residual Risks
 - RR-CC-1 `tests/characterization/` is a new WB-04-class path approved via OD-11 E-2; future increments must keep it free of `__init__.py` or CI discovery changes.
 
@@ -124,3 +127,4 @@ All new (no legacy or earlier-increment file changed): `hub/runs/*` (M005, schem
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
+| v0.8 | 2026-10-19 | claude-fde-agent | INC-08 (branch `stage-15-inc08-http-reviewer`): sections added; earlier content unchanged. |

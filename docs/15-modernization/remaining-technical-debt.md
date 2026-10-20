@@ -123,6 +123,18 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | RTD-63 | Frozen `hub/security/scan.py` RETAINED_TABLES does not list `run_event`, `metric_value`, `metric_definition`, `obs_metric` (same gap as RTD-54); their BEFORE UPDATE / DELETE triggers are tested in S08. | Verified Fact |
 | RTD-64 | TST-RUN-04, TST-MET-02/12/21 (INC-08) and TST-MET-19/20 (INC-09) not run; the API-level audit-correlation (AC-OBS-01) is tested at service level only. | Verified Fact |
 | RTD-65 | Mutation gate for INC-07 not run; live legacy readers are tested with the sandbox snapshot and the tiny vendor CSV only (S19), not with the full 100,000-row CSV tiers. | Verified Fact |
+| RTD-66 | Stage 12 addendum needed: exit code 31 family (E-REQ-TOO-LARGE, E-REQ-NOT-IMPLEMENTED, E-REV-*, E-GATE-MODE-NONE/VALUES-UNSET/PACK-STALE/PAYLOAD-INVALID), E-SEC-CSRF with exit 19, config keys `disposition.*` and `search.*`, login response fields, `reauth_token` wire format, service-token lifecycle, OP-MET-01/03 shapes, OP-INT-01 field names. | Unknown |
+| RTD-67 | ZH-07 (accept an exception rule) is stored as an audited policy event only; the spec defines no semantics, so no rule evaluation consumes it. | Unknown |
+| RTD-68 | Search covers the deterministic fallback engine only (disabled by default); FTS5, the trigram engine and the corpus loader are INC-09; TST-REV-10/14/16/17 are R2 criteria tested against the fallback. | Verified Fact |
+| RTD-69 | No automatic producer of rule traces: a trace (and its flag) exists only after `python -m hub.web record-trace` or a test records one; a flag action on an intake-queue item without a matched case stores a `flag_action` row but no case event (OVERRIDE_RECORDED needs a case). | Verified Fact |
+| RTD-70 | Stage 24 security assumptions to confirm: A-INC08-1 service-token mechanism, A-INC08-2 reauth_token format, A-INC08-3 no `Secure` cookie flag over loopback HTTP, A-INC08-4 session token returned in the login body, A-INC08-5 no CSRF token on the login POST. | Assumption |
+| RTD-71 | `hub/intake/untrusted_lint.py` is built for hub/intake; on hub/web, hub/gate and hub/review it reports 12 findings (storage/output wrappers of typed free text, and parameters that only share a name with a decision parameter). They are pinned by name in TST-HUB-INC08-S09 so a new site is a review item; U1 (taint into a decision parameter) is 0. | Verified Fact |
+| RTD-72 | All NFR figures (availability, 06:00 timeliness, restore time, latency) are sandbox measurements on small synthetic stores; production values are unproven (targets A-09-04 and OPD-14 unvalidated). | Unknown |
+| RTD-73 | AC-NFR-13's "44 regex-hit strings" has no standalone fixture; the G9 planted-string gate is not recorded in a release checklist. | Unknown |
+| RTD-74 | Release gates G1, G4, G8, G9, G10 are still not run or failing (G1 by design, OD-S12-13); TST-NFR-19 shows the candidate stays blocked. Nothing in INC-08 claims "ready". | Verified Fact |
+| RTD-75 | PRD approval (OD-S12-14 / OPD-13) and the holder list, disposition mode and values are human decisions that block any real use of the disposition gate and INC-09. | Unknown |
+| RTD-76 | Mutation gate for INC-08 not run (as RTD-65). | Verified Fact |
+| RTD-77 | The stdlib `ThreadingHTTPServer` has no TLS, rate limiting or slow-request protection; acceptable only because it is loopback-only; Stage 24 decides any exposure. | Assumption |
 
 ## Residual Risks
 - RR-RTD-1 Until RTD-01/02 are closed, behaviour preservation depends on someone running the harness manually before each merge (OD-13 orchestrator check).
@@ -137,3 +149,4 @@ Debt that remains after INC-01 (legacy debt itself is untouched by design and st
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
+| v0.8 | 2026-10-19 | claude-fde-agent | INC-08 (branch `stage-15-inc08-http-reviewer`): sections added; earlier content unchanged. |

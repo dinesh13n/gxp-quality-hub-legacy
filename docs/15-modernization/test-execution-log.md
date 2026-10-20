@@ -209,6 +209,27 @@ Evidence labels: Verified Fact unless marked. Sandbox copies only (OD-03/03a); c
 - Baseline numbers (622826.44, backlog 89, `no_completed_cycles`): `evidence/inc07/baseline-results.md`.
 - Rollback rehearsal of M005: S18, `rollback-rehearsal-inc07.md`.
 
+## INC-08 (branch `stage-15-inc08-http-reviewer`)
+Verified Fact, device Python 3.10.12 / SQLite 3.37.2; every run in a sandbox copy under `~/fde_sbx/<label>` (OD-03a), deleted after the run; backup checksum rc 0 before and after every run. Final runs after the last code, test and document change:
+
+| Group | Selector | Result | Time |
+|---|---|---|---|
+| INC08 | `-k TST_GATE -k TST_REV -k TST_NFR -k TST_CO_08 -k I8_ -k INC08_S -k E08EGRESS` | 79 ok (22 TST-GATE, 13 TST-REV, 17 TST-NFR, 1 TST-CO-08, 11 I8_, 14 supplementary S01-S14, 1 E08EGRESS) | 124 s |
+| A | SEC, CO-10, CO-15, INC03 | 45 ok | 65 s |
+| B | CO-01/02/04/05/06/07/11/13/14, INC02 | 40 ok, 1 skipped (as before, no python3.9) | 80 s |
+| C | CO-12 | 5 ok | 105 s |
+| INC04+05 | `-k INC04 -k TST_POL -k TST_DEC -k TST_ID -k INC05 -k E05EGRESS` | 88 ok | 67 s |
+| INC06 | `-k TST_INT -k TST_CO_09 -k INC06 -k E06EGRESS` | 43 ok | 107 s |
+| INC07 | `-k TST_RUN -k TST_MET -k TST_OBS -k INC07 -k E07EGRESS` | 59 ok | 78 s |
+| Harness | run_characterization.py | OVERALL PASS (CT-17/18 NOT-RUN as before) | 39 s |
+
+- Planned INC-08 tests found in the increment map: **64** (A = 50, B = 10, C = 4): TST-GATE-01..22, TST-REV-01..08/10/14/16/17/19, TST-NFR (17 of 20; 03, 04, 12 are INC-09), TST-CO-08 and 11 HTTP-surface tests filed under earlier families (named `I8_`, DEV-77). All 64 pass. Plan: `evidence/inc08/planned-tests.md`; NFR figures: `evidence/inc08/nfr-measurements.md`.
+- First full runs: the GATE/REV/I8_ modules needed fixes in tests (assertions on role rows, the metric horizon, a banned `datetime` import) and in new code (payload passing in the disposition store, the OP-POL-08 clock events); the first group-B run found one real regression in a frozen test (TST-CO-04 d: `sqlite3.connect` in `hub/web/app.py`), fixed in new code by opening the store through `hub.store.db.open_hub` (DEV-86). No frozen module changed.
+- TST-CO-12 is frozen; INC-08 modules skip in its inner run (`HUB_EGRESS_INNER`) and run under the guard in E08EGRESS (DEV-78). The INC08 selector fits one device call (124 s of the 180 s limit) although E08EGRESS runs the 78 other INC-08 tests a second time under the egress guard; TST-NFR-17 starts three child processes.
+- The runner's `ids=` summary lists the `TST_<FAMILY>_<NN>` names only; the 11 `I8_` tests are counted by test (`-k I8_` = 11 ok).
+- Rollback rehearsal of M006: TST-NFR-05, `rollback-rehearsal-inc08.md`.
+- Not run: a mutation gate for INC-08 (RTD-76); the manual UI walkthroughs behind TST-REV-03/04/08 (automated stand-ins here, human walkthrough stays Stage 16).
+
 ## Residual Risks
 - RR-TE-1 Timings are from a 2-CPU device VM and will differ in CI.
 
@@ -222,3 +243,4 @@ Evidence labels: Verified Fact unless marked. Sandbox copies only (OD-03/03a); c
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
+| v0.8 | 2026-10-19 | claude-fde-agent | INC-08 (branch `stage-15-inc08-http-reviewer`): sections added; earlier content unchanged. |

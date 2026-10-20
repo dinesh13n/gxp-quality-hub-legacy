@@ -1,0 +1,19 @@
+"""INC-08 HTTP-layer error codes (docs/12-specs/error-handling-spec.md ER-1..ER-3). E-SEC-CSRF uses exit code 19 (the INC-03 authority family),
+the rest 31 (INC-08 family). Stage 12 addendum needed (RTD-66): E-REQ-TOO-LARGE and E-REQ-NOT-IMPLEMENTED are not in the Stage 12 registry."""
+from hub.core.errors import HubError
+
+
+class ReqInvalid(HubError):
+    code, exit_code, http, message = "E-REQ-INVALID", 31, 400, "malformed request"
+
+
+class ReqTooLarge(HubError):  # INC-08 addendum (NFR body limit)
+    code, exit_code, http, message = "E-REQ-TOO-LARGE", 31, 413, "request body above the limit"
+
+
+class Csrf(HubError):
+    code, exit_code, http, message = "E-SEC-CSRF", 19, 403, "missing or invalid CSRF token or custom header"
+
+
+class NotImplementedYet(HubError):  # INC-08 addendum: an R2 operation whose backing component is built in a later increment
+    code, exit_code, http, message = "E-REQ-NOT-IMPLEMENTED", 31, 501, "operation not available in this release"

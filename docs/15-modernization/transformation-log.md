@@ -204,6 +204,29 @@ Scheduled-run orchestration WITHOUT a scheduler (OD-19), run records, determinis
 
 Steps (in order): M005 schema + applier; run service, jobs, sources, schedule flag; observability log and collectors; metrics package and detector; CLIs and reports; test helpers; 39 planned tests; first full run had 13 failing tests (3 FAIL, 10 ERROR) from problems in new code or tests (session expiry after test-clock moves, unseeded KPI registry, one-batch-per-run semantics, a too-broad regex), all fixed; supplementary tests S01..S19; regression groups.
 
+## INC-08 (branch `stage-15-inc08-http-reviewer`)
+Loopback HTTP surface, reviewer queue and the disposition gate (mode `none` by default, human-only dispositions through Zone H). Only added files under `hub/`, `tests/hub/`, `docs/15-modernization/`; legacy code and `data/` byte-identical; `zone_h.holders` empty in the shipped configuration.
+
+| ID | Deviation / choice | Label |
+|---|---|---|
+| DEV-75 | Loopback only: a non-loopback bind is refused even with an approval in the config; non-loopback peers are dropped; no TLS claim. Exposure and TLS are Stage 24 decisions. | Verified Fact |
+| DEV-76 | M006 has its own table `web_schema_migrations` and four insert-only tables (`service_token`, `service_token_revocation`, `rule_trace`, `flag_action`); forward-only; rollback by backup restore. | Verified Fact |
+| DEV-77 | The 11 INC-08 tests filed under TST-DEC/INT/MET/RUN/SEC are named `test_I8_<FAMILY>_<NN>_...` so the frozen selectors keep their sizes; the runner `ids=` line omits them. | Verified Fact |
+| DEV-78 | INC-08 modules skip in TST-CO-12's inner run; `E08EGRESS` covers the guard; real loopback sockets are the documented exception (confined to 127.0.0.1, the guard already allows it). | Verified Fact |
+| DEV-79 | Metric GET values are computed with `store=False` on a clock pinned to the data horizon, so identical GETs are identical (AC-MET-21) and `computed_at` is a data instant. | Verified Fact |
+| DEV-80 | OP-MET-01 returns `{"items": [...]}` (one series per clock); OP-MET-03 takes `kind=exception_rate` and requires `as_of` (E-MET-DEFINITION-REQUIRED otherwise); OP-MET-08 supports sum/min/max/compare (ratio and difference are E-MET-NOT-AVAILABLE); OP-MET-02 takes `source` as a name looked up in the app's registered sources. | Verified Fact |
+| DEV-81 | Search (OP-REV-03) is the fallback engine only, disabled by default, with an injected document provider; FTS5 and the corpus loader are INC-09 (partial coverage of R2, RTD-68). | Verified Fact |
+| DEV-82 | OP-POL-07, OP-INT-04, OP-ID-04, OP-ID-05, OP-MET-06 answer 501 E-REQ-NOT-IMPLEMENTED; OP-REV-04 is E-REV-DRAFTS-DISABLED; OP-MET-05 is E-MET-NOT-AVAILABLE. They write nothing. | Verified Fact |
+| DEV-83 | OP-INT-01 envelope uses the hub's canonical delivery names (`source_key`, `partner`, `schema_rev`, `source_ts`, `ref_id`, `record_kind`, `payload_text`); source alias `source_messages` maps to `source_message`; an `idempotency_key` gives a deterministic run id (`HTTP-<hex>`), so a replay is not ingested twice. | Verified Fact |
+| DEV-84 | Login returns `token` and `csrf_token` in the body besides the HttpOnly SameSite=Strict cookie; no `Secure` flag over loopback HTTP; the login POST has no CSRF token (A-INC08-3/4/5). | Assumption |
+| DEV-85 | An anonymous Zone H call with an unknown action name is 422 from the choke point (no effect); with a well-formed action it is 401; an anonymous UI disposition post is a 401 page, not a redirect. | Verified Fact |
+| DEV-86 | The web app opens the store through `hub.store.db.open_hub`, not `sqlite3.connect` (TST-CO-04 d). | Verified Fact |
+| DEV-87 | `WebApp.last_exception` is a diagnostic hook for tests (never serialised); an unexpected 500 in a test fails with its traceback. | Verified Fact |
+| DEV-88 | Process notes (as DEV-53, DEV-74): `data/documents/source_documents.jsonl` and the legacy schema were inspected read-only (immutable mode) from the sandbox copy to build the search fixture; the pure `hub/intake/untrusted_lint.py` source was executed once from the working tree to list its findings (no data touched, no file written). All other syntax checks used `ast.parse`; all tests ran in sandbox copies. | Verified Fact |
+| DEV-89 | AC-NFR-13 names "44 regex-hit strings", for which no standalone fixture exists; the 86 shipped feed rows, the 22 injection documents and 10 injection variants are used (TST-NFR-13). | Verified Fact |
+
+Steps (in order): M006 + applier; web helpers and dispatcher; 48 API handlers and reviewer pages; loopback server and CLI; gate and review services; test helpers; TST-GATE, TST-REV, I8_ HTTP tests; NFR helpers and tests; supplementary and egress modules; documents.
+
 ## Residual Risks
 - RR-TL-1 INC-01 proves the harness on this device only; another runtime (3.12, other JDK/Node) is unverified.
 - RR-TL-3 INC-03 audit tamper evidence is limited by an unsigned same-host anchor file and undetectable tail truncation after the last anchor (R-SEC-1).
@@ -219,3 +242,4 @@ Steps (in order): M005 schema + applier; run service, jobs, sources, schedule fl
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
+| v0.8 | 2026-10-19 | claude-fde-agent | INC-08 (branch `stage-15-inc08-http-reviewer`): sections added; earlier content unchanged. |

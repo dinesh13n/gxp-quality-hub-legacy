@@ -1,0 +1,13 @@
+{"_comment": "Server-rendered page routes (ADR-014 option B). Separate from hub/security/route_registry.json, which TST-SEC-01 pins to the OpenAPI (48 ops) and which stays frozen. Same deny-by-default rule: a path/method pair that is not listed here or in the API registry is refused with 403 E-AUTH-FORBIDDEN. Synthetic, unvalidated.",
+ "routes": [
+  {"op_id": "UI-STATIC", "method": "GET", "path": "/ui/static/app.css", "roles": ["public"]},
+  {"op_id": "UI-LOGIN", "method": "GET", "path": "/ui/login", "roles": ["public"]},
+  {"op_id": "UI-LOGIN-POST", "method": "POST", "path": "/ui/login", "roles": ["public"]},
+  {"op_id": "UI-HOME", "method": "GET", "path": "/ui/", "roles": ["reviewer", "quality_lead", "compliance", "dispositioner"]},
+  {"op_id": "UI-LOGOUT", "method": "POST", "path": "/ui/logout", "roles": ["reviewer", "quality_lead", "compliance", "dispositioner"]},
+  {"op_id": "UI-QUEUE", "method": "GET", "path": "/ui/queue", "roles": ["reviewer", "quality_lead", "compliance"]},
+  {"op_id": "UI-TRACE", "method": "GET", "path": "/ui/cases/{case_id}/trace", "roles": ["reviewer", "quality_lead", "compliance", "dispositioner"]},
+  {"op_id": "UI-OVERRIDE", "method": "POST", "path": "/ui/flags/{flag_id}/override", "roles": ["reviewer", "quality_lead", "compliance"]},
+  {"op_id": "UI-PACK", "method": "GET", "path": "/ui/cases/{case_id}/pack", "roles": ["dispositioner"]},
+  {"op_id": "UI-DISPOSITION", "method": "POST", "path": "/ui/cases/{case_id}/disposition", "roles": ["dispositioner"]}
+ ]}
