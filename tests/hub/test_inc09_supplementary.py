@@ -1,5 +1,5 @@
-"""INC-09 supplementary tests (TST-HUB-INC09-S01..S12): engine parity, flag / fallback selection, derived-index rollback, M007, corpus pin and
-sandbox guard, operator CLIs, static guards (no time / random / network / AI imports), R2WebApp delegation, shipped defaults, archive parsing.
+"""INC-09 supplementary tests (TST-HUB-INC09-S01..S13): engine parity, flag / fallback selection, derived-index rollback, M007, corpus pin and
+sandbox guard, operator CLIs, static guards (no time / random / network / AI imports), R2WebApp delegation, shipped defaults, archive parsing, M007 rollback rehearsal.
 Not planned test ids (the plan has 20 INC-09 tests); they guard the INC-09 design decisions (inc09-design-notes). Synthetic, unvalidated.
 """
 import ast
@@ -280,6 +280,38 @@ class TST_HUB_INC09_Supplementary(_Base):
         w = [text.idf(4, 2)]
         for i, r in ((1, rows[0]), (3, rows[2])):
             self.assertAlmostEqual(got["DOC-9%07d" % i], text.bm25(w, [r.count("beta")], float(len(r)), avg), places=9)
+
+    def test_TST_HUB_INC09_S13_m007_rollback_rehearsal(self):
+        """S13 (rollback-rehearsal-inc09.md): an INC-08 store (M001..M006) -> `python -m hub.search migrate` takes a `pre-search-M007-` backup and
+        applies M007 -> corpus built, a draft written -> restore of that backup gives the M006 store back (M007 absent, audit chain verifies) ->
+        migrate again works. Level L1 (flag off / drop-index) needs no restore; this is L2."""
+        from hub.ops import backup
+        from hub.search import schema
+        from hub.security import audit
+        st8 = W.WStore(extra={"templates": {"enabled": True}})
+        st8.close()
+        bk_root = S.tmpdir("p9bk-")
+        p = subprocess.run([sys.executable, "-B", "-m", "hub.search", "--config", st8.cfg_path, "migrate", "--data-dir", st8.data, "--backup-root", bk_root],
+                           cwd=S.CODE_ROOT, env=S.child_env(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=120)
+        self.assertEqual(p.returncode, 0, p.stderr[-500:])
+        res = json.loads(p.stdout)
+        self.assertTrue(res["applied"] and res["backup"]["label"].startswith("pre-search-M007-"))
+        con = sqlite3.connect(os.path.join(st8.data, "hub.sqlite3"))
+        try:
+            self.assertEqual(schema.status(con)["state"], "applied")
+            corpus.build(con, st8.clock, st8.anchor, "host-operator", [N.doc(1, "rehearsal text")], (), {"fixture": "synthetic"}, "synthetic")
+        finally:
+            con.close()
+        backup.restore(res["backup"]["path"], st8.data, st8.anchor_path, st8.clock)
+        con = sqlite3.connect(os.path.join(st8.data, "hub.sqlite3"))
+        try:
+            self.assertEqual(schema.status(con)["state"], "absent")
+            self.assertEqual(audit.verify(con, st8.anchor_path)["status"], "ok")
+            self.assertIsNone(con.execute("SELECT 1 FROM sqlite_master WHERE name = 'search_doc'").fetchone())
+        finally:
+            con.close()
+        again = schema.apply(st8.data, S.tmpdir("p9bk2-"), st8.anchor_path, st8.clock)
+        self.assertTrue(again["applied"])
 
 
 if __name__ == "__main__":
