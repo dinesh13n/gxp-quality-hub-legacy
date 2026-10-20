@@ -246,5 +246,5 @@ class R2SearchService(rsearch.SearchService):
                 "access_label": h["access_level"], "hash_prefix": (h.get("hash") or "")[:12],
                 "snippet": html.escape(rsearch.SearchService._snippet(h.get("body") or "", first), quote=True), "trust": "untrusted",
                 "label": rsearch.UNTRUSTED_LABEL, "ocr_confidence": "unknown" if ocr is None else ocr, "ocr_low": ocr is not None and ocr < rsearch.OCR_LOW,
-                "linked_case": self._linked_case(con, h["doc_id"]), "score": round(-h["_score"], 6), "reference": h.get("reference")}
+                "linked_case": self._linked_case(con, h["doc_id"]), "score": round(-h["_score"], 6) + 0.0, "reference": h.get("reference")}
 

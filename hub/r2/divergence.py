@@ -118,5 +118,5 @@ def run(con, clock, anchor, sess, policy_service, inputs, correlation_id="diverg
 
 def legacy_case_inputs(handle):
     """The shipped cases as divergence inputs from an open READ-ONLY legacy snapshot handle (AD-01): id, amount, region, year, status, severity."""
-    rows = handle.execute("SELECT id, amount, region, created_at, status, severity FROM cases ORDER BY id").fetchall()
+    rows = handle.execute("SELECT id, amount, region, created_at, status, severity FROM cases ORDER BY id")
     return [{"case_id": r[0], "amount": r[1], "region": r[2], "year": (r[3] or "")[:4] or None, "status": r[4], "severity": r[5]} for r in rows]
