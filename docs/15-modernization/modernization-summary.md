@@ -4,7 +4,7 @@ artifact: "modernization-summary.md"
 version: "v0.4"
 date: "2026-10-18"
 author_agent: "claude-fde-agent"
-status: "DRAFT"
+status: "IN REVIEW"
 scope: "INC-01 (characterisation harness + hermetic fixtures + mutation gate) and INC-02 (hub/ skeleton, sandbox / No-AI / runtime guards, read-only adapters, deviation register, golden-compare). Later increments extend this file; INC-03 (hub DB migrations M001, C2 access & audit chain, backup/restore, first rollback rehearsal) added in v0.3. Stage 15 overall status: IN PROGRESS. INC-04 (policy & rule service: M002, as-found rule sets inactive, activation with a recorded human decision) added in v0.4."
 evidence_sources: ["tests/characterization/", "docs/15-modernization/evidence/inc01/", "docs/14-transformation/transformation-backlog.md", "docs/14-transformation/transformation-gates.md", "docs/07-repo-assessment/characterization-test-plan.md", "docs/07-repo-assessment/evidence/golden/", "docs/13-traceability/traceability-summary.md (C3)", ".fde/orchestrator-decisions.md (OD-03a, OD-08, OD-09, OD-11..OD-13)", "tests/hub/", "hub/", "docs/15-modernization/evidence/inc02/", "docs/12-specs/features/f10-coexistence-change-safety.md", "docs/10-architecture/adrs/ADR-002-no-ai-boundary-enforcement.md", "docs/14-transformation/evidence/increment-test-map.csv", ".fde/orchestrator-decisions.md (OD-12, OD-14)", "docs/15-modernization/evidence/inc03/", "docs/15-modernization/rollback-rehearsal-inc03.md", "hub/", "tests/hub/", ".fde/orchestrator-decisions.md (OD-15)"]
 supersedes: "v0.3 (INC-01 .. INC-03)"
@@ -91,6 +91,42 @@ Inbound records are now stored raw and immutably, deduplicated by the OD-18 natu
 ## INC-07 summary
 Runs now have complete, append-only records (single-flight, explicit cap, exact backlog, checkpoint/resume with no duplicate effects), metrics are computed deterministically with definition tags and reproduce from stored inputs, and logs / reports / zero-tripwires are in place. THE SCHEDULER IS OFF (OD-19): nothing starts a run by itself, and the schedule flag can only be switched by a Zone H holder, so with the shipped empty holder list it stays off. 39 planned tests plus 19 supplementary and 1 egress test pass in sandboxes; INC-02..06 groups and the characterization harness stay green; data checksums rc 0. Baseline: month-end total 622826.44 (n 125), backlog 89 of 125 under D-OPS, time to close null (`no_completed_cycles`). Open: RTD-58..65; scheduler vs HAR-10 and the Zone H holders are human decisions. No approvals fabricated; `zone_h.holders` is empty.
 
+## INC-08 summary
+(Recorded at the Stage 15 close-out; INC-08 was merged as PR #8, OD-21.) A loopback-only HTTP surface and server-rendered pages serve the 48 registry operations through one deny-by-default dispatcher (CSRF, security headers, audited refusals); the reviewer queue and template-generated rule-trace explanations exist; the disposition gate ships in mode `none` and every Zone H action goes through one choke point. 64 planned tests, 14 supplementary and 1 egress test passed; five R2 operations answered 501 (DEV-82). Details: `inc08-design-notes.md`, test-execution-log INC-08.
+
+## INC-09 summary
+R2 is built in shadow and switched off by default: keyword / field search on SQLite FTS5 behind `search.fts` (default `off`) with a runtime-detected fallback that returns identical pages, a derived corpus index of the 1,200 documents and 420 archive items (rebuildable; `drop-index` is the rollback), field-class data protection with audited, reason-bearing C3 reads, the rule divergence report (3 of 125 shipped cases differ, reported not resolved), intake delay / freshness reports, the joined crosswalk view, consistency findings (none without an adopted policy), per-source data quality, and deterministic template drafts (off by default). The five INC-08 501 operations now answer in `R2WebApp`; OP-MET-05 stays E-MET-NOT-AVAILABLE. 20 planned tests plus 13 supplementary and 1 egress test pass; every earlier group and the characterization harness stay green; checksums rc 0. No AI, no embeddings, no model call, no network egress; `zone_h.holders` empty. Open: RTD-78..RTD-90.
+
+## Stage 15 close-out (INC-01 .. INC-09)
+**Gate outcome recorded: CONDITIONAL PASS** - every planned increment is delivered, tested and behaviour-preserving; no blocking gap remains inside Stage 15's authority; the non-blocking gaps below are documented with owner, stage-relative due point and risk. Stage 15 cannot claim PASS because several gate conditions depend on human decisions and later stages (G1 golden-compare is red by design, CI does not run the suites, mutation gates were not run for INC-08/09, Stage 12 addenda are pending).
+
+| Increment | Scope | Planned tests | Status | Evidence |
+|---|---|---|---|---|
+| INC-01 | characterisation harness, FX-BASE125 fixture gate, mutation gate | CT-01..CT-16 (harness; not in the 241) | merged (PR #1) | evidence/inc01, BP-1..BP-7 |
+| INC-02 | hub skeleton, guards, RO adapters, deviation register, golden-compare | 10 | merged (PR #2) | evidence/inc02 |
+| INC-03 | M001, access & audit chain, backup/restore | 16 | merged (PR #3) | evidence/inc03 |
+| INC-04 | M002, policy & rule service (as-found sets inactive) | 25 | merged (PR #4) | evidence/inc04 |
+| INC-05 | M003, decision record, crosswalk, 125-case backfill | 39 | merged (PR #5) | evidence/inc05 |
+| INC-06 | M004, intake in shadow (OD-18 natural key) | 28 | merged (PR #6) | evidence/inc06 |
+| INC-07 | M005, runs and metrics, scheduler off | 39 | merged (PR #7) | evidence/inc07 |
+| INC-08 | M006, loopback HTTP, reviewer queue, disposition gate `none` | 64 | merged (PR #8) | evidence/inc08 |
+| INC-09 | M007, R2 search / corpus / reports / templates | 20 | this branch (PR pending, OD-13) | evidence/inc09 |
+
+- [Verified Fact] Totals: **241 of 241** planned Stage 13 tests (10 + 16 + 25 + 39 + 28 + 39 + 64 + 20) are implemented and green in sandbox runs; one method of group B is skipped on this device (no python3.9 interpreter), as in every increment. Plus the INC-01 harness (CT-01..CT-16; CT-17/18 NOT-RUN by design) and per-increment supplementary and egress tests. Final INC-09 session: 11 hub groups + harness green (test-execution-log INC-09).
+- [Verified Fact] Legacy code and `data/` byte-identical across Stage 15; forward-only hub migrations M000..M007 with backup-before-migrate (restore rehearsals recorded for INC-03, INC-06, INC-07, INC-08 and INC-09); no AI dependency or model call (TST-CO-11/12, E05..E09 egress groups); `zone_h.holders` empty; no rule set active, no policy adopted, scheduler off, disposition mode `none`, search / FTS / drafts off.
+- [Inference] Stage 15 completion-gate check: every change maps to a backlog item (TB-01..TB-21; CUT items are Stage 30) - met; behaviour-preservation evidence per increment - met (BP-* sections; INC-05/06/08 in their design notes and test logs); changes within Stage 0B boundaries (sandbox-only execution, additive paths, no pyproject / CI change) - met; required artifacts exist - met; critical gaps documented - met (below); evidence supports the conclusion - met for the shadow build, not for any cutover.
+
+**Open decisions handed on** (owner: Engagement lead, Dinesh Naik, unless stated):
+- Stage 16 (validation / behaviour comparison): run the TG-4 protocol at the merged HEAD; classify every difference; human walkthroughs behind TST-REV-03/04/08; mutation gates for INC-08/09 (RTD-76, RTD-89).
+- Stage 17 (PRD final): Stage 12/13 addenda (codes, exit codes, config keys, query parameters, audit actions: RTD-13/23/24/38/66/78); OPD-01..03 'closed / resolved / approved' and the 48 h clock, OPD-04..06, OPD-11 (scheduler vs HAR-10), retention (OD-S12-09), FR-REV-04 keep or reject (RTD-87), the 43/9 FR count correction (OD-10b), labelled search set (OPD-12, RTD-80).
+- Stage 24 (security): A-INC08-1..5, A-INC09-1/5, TLS and exposure (RTD-77), field classes and finance read surface (RTD-82/83), C3 reason transport (RTD-90), audit anchor strength (R-SEC-1).
+- Stage 27 (CI / delivery): CI fixture provisioning and running the hub suites in CI (RTD-01/14), runtime target 3.10 vs 3.12 and FTS5 on the target (OD-S12-12, RTD-79), one server entry point (RTD-81).
+- Stage 30 (cutover): DV-01..DV-09 preserve-or-fix (OD-S12-13) - golden-compare stays exit 6 until then; DEV-29/30 and the negative-quantity DV; Zone H holders, disposition mode and values (OD-S12-05/06); rule-set activation (OD-S12-04); CONSISTENCY policies; enabling `search.enabled` / `search.fts`; CUT-1..CUT-5.
+
+**Why not BLOCKED:** no condition inside Stage 15's authority is unmet; every open item above is either a human decision (recorded as 'accepted open' under OD-12/OD-22) or a later stage's deliverable. **Why not PASS:** release gates G1, G4, G8, G9, G10 are not run or failing (RTD-74), CI does not execute the suites, and the mutation gate was not run for INC-08/09.
+
+**Recommended next action:** orchestrator review and PR for INC-09 (OD-13), then Stage 16.
+
 ## Residual Risks
 - RR-MS-1 Harness evidence is device-specific until it runs in CI on the target runtime.
 - RR-MS-2 Goldens and fixture are only as trustworthy as the backup; the hash gate detects but cannot repair drift.
@@ -105,3 +141,5 @@ Runs now have complete, append-only records (single-flight, explicit cap, exact 
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-05 (branch `stage-15-inc05-decision-record`): sections added; earlier content unchanged. |
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
+| v0.8 | 2026-10-20 | claude-fde-agent | INC-08 summary recorded at close-out (not added in INC-08). |
+| v0.9 | 2026-10-20 | claude-fde-agent | INC-09 (branch `stage-15-inc09-search-corpus`) and the Stage 15 close-out (gate outcome CONDITIONAL PASS); status DRAFT -> IN REVIEW; earlier content unchanged. |
