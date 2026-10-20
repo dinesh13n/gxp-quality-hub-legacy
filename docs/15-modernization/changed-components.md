@@ -114,6 +114,9 @@ All new (no legacy or earlier-increment file changed): `hub/runs/*` (M005, schem
 ## INC-08 additions
 All new (no legacy or earlier-increment file changed): `hub/web/*` (M006, schema applier, errors, wire, routes, authz, csrf, tokens, obs_http, app, api, ui, server, cli, nfr, `ui_routes.json`), `hub/gate/{actions,dispositions,disposition_errors,flags,modes,pack,reauth}.py`, `hub/review/*`; `tests/hub/_inc08.py`, `_http8.py`, `_probe8.py` and seven test modules (64 planned, 14 supplementary, 1 egress); `docs/15-modernization/inc08-design-notes.md`, `rollback-rehearsal-inc08.md`, `evidence/inc08/`. Existing docs/15-modernization files are extended. No change under `app/`, `data/`, `.github/`, `pyproject.toml`; `git diff --name-status main` shows only `A` outside docs/15-modernization.
 
+## INC-09 additions
+All new (no legacy or earlier-increment file changed): `hub/search/*` (settings, fts, text, corpus, engine, schema, cli, `migrations/M007_search_r2.sql`), `hub/r2/*` (api, web, cli, consistency, divergence, drafts + `templates.json`, errors, facts, intake_reports, joined, protection, source_quality); `tests/hub/_inc09.py` and four test modules (20 planned, 13 supplementary, 1 egress). Extended earlier classes by subclassing only: `hub.review.search.SearchService` -> `hub.search.engine.R2SearchService`, `hub.web.app.WebApp` -> `hub.r2.web.R2WebApp`; `hub.web.api` is reused by delegation (`hub.r2.api.__getattr__`). Docs: `inc09-design-notes.md`, `rollback-rehearsal-inc09.md`, `evidence/inc09/`; non-add edits only to the docs/15-modernization logs and summaries.
+
 ## Residual Risks
 - RR-CC-1 `tests/characterization/` is a new WB-04-class path approved via OD-11 E-2; future increments must keep it free of `__init__.py` or CI discovery changes.
 
@@ -128,3 +131,4 @@ All new (no legacy or earlier-increment file changed): `hub/web/*` (M006, schema
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
 | v0.8 | 2026-10-19 | claude-fde-agent | INC-08 (branch `stage-15-inc08-http-reviewer`): sections added; earlier content unchanged. |
+| v0.9 | 2026-10-20 | claude-fde-agent | INC-09 (branch `stage-15-inc09-search-corpus`): sections added; earlier content unchanged. |

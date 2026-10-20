@@ -45,6 +45,11 @@ supersedes: "v0.3 (INC-01 .. INC-03)"
 ### ABC-INC07 INC-07
 [Verified Fact] No legacy behaviour changed and no approval was needed or recorded. The schedule flag ships OFF and can be switched only by a Zone H holder (none configured); no metric definition, clock duration or cut-off was adopted. The month-end total differs from the legacy report by design (single-table sum, BB-08), which is a defect correction pending the owner's acceptance, not an approved behaviour change.
 
+### ABC-INC09 INC-09
+- [Verified Fact] No legacy behaviour change: legacy code and `data/` are byte-identical; the INC-01 harness is OVERALL PASS.
+- [Verified Fact] New R2 behaviours are new hub capabilities in shadow, all OFF in the shipped configuration (`search.enabled` false, `search.fts` off, `templates.enabled` false); the R2 reports are read-only (audit records and consistency finding rows only). They are approved as scope by OD-22 (PRD baseline approved, refine at Stage 17); no deviation DV is approved or created by INC-09.
+- [Verified Fact] Visible R2 change against INC-08 inside the hub: the five operations that answered 501 (DEV-82) now answer in `R2WebApp`; `WebApp` (R1) is unchanged.
+
 ## Evidence References
 - INC-03 evidence: `docs/15-modernization/evidence/inc03/` (summary.txt, hub-final-{A,B,C} reports, char-regression-inc03_report.json, mutation-gate-inc03.txt, checksum-log.txt, rollback-rehearsal-1/); `docs/15-modernization/rollback-rehearsal-inc03.md`; commits `git log --oneline main..stage-15-inc03-hub-db-audit`.
 - `behavior-preservation-evidence.md` BP-2 (D3/D4 = 0, D5 = 0); `docs/14-transformation/transformation-gates.md` TG-4.
@@ -70,3 +75,4 @@ supersedes: "v0.3 (INC-01 .. INC-03)"
 | v0.3 | 2026-10-18 | claude-fde-agent | INC-03 (branch `stage-15-inc03-hub-db-audit`): sections added; earlier content unchanged. |
 | v0.4 | 2026-10-18 | claude-fde-agent | INC-04 (branch `stage-15-inc04-rule-service`): sections added; earlier content unchanged. |
 | v0.5 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
+| v0.9 | 2026-10-20 | claude-fde-agent | INC-09 (branch `stage-15-inc09-search-corpus`): sections added; earlier content unchanged. |

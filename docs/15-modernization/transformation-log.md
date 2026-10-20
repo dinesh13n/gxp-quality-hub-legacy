@@ -227,6 +227,32 @@ Loopback HTTP surface, reviewer queue and the disposition gate (mode `none` by d
 
 Steps (in order): M006 + applier; web helpers and dispatcher; 48 API handlers and reviewer pages; loopback server and CLI; gate and review services; test helpers; TST-GATE, TST-REV, I8_ HTTP tests; NFR helpers and tests; supplementary and egress modules; documents.
 
+## INC-09 (branch `stage-15-inc09-search-corpus`)
+R2 scope (TB-21 and the R2 parts of C2/C3/C4/C6/C7/C9): FTS5 search behind `search.fts` (default off) with a runtime-detected fallback, derived corpus index (drop = rollback), deterministic template drafts (default off), and the five operations that answered 501 in INC-08. Entry: OD-22. Only added files under `hub/`, `tests/hub/`, `docs/15-modernization/` (non-add edits only in docs/15-modernization); legacy code and `data/` byte-identical; `zone_h.holders` empty in the shipped configuration. Design: `inc09-design-notes.md`.
+
+| ID | Deviation / choice | Label |
+|---|---|---|
+| DEV-90 | The plan's optional "M006 FTS5 virtual table" is M007 (M006 is INC-08's) with its own table `search_schema_migrations`; M007 holds regular tables only; the FTS5 virtual tables are derived objects built by the corpus loader when the runtime offers FTS5 + trigram. | Verified Fact |
+| DEV-91 | AC-SEC-19 "read through the API": the finance_read masking of `account_id` is verified at the protection layer, because no registered route serves case fields to finance_read (frozen registry; OP-ID-04 roles exclude finance_read). Restricted / missing-level handling is verified through the API (search, joined view). | Verified Fact |
+| DEV-92 | AC-ID-13 counts 3 entities (batch, deviation, CAPA). The shipped data also links LAB00000000 to BT00000000 (LT-03): with LT-01/LT-02 the set is 3 from every member, with LT-03 it is 4 from every member; both are tested. | Verified Fact |
+| DEV-93 | Both engines rank with the bm25 formula (FTS5 bm25() and a Python reproduction, rounded to 1e-9) and use the same escaped excerpt instead of FTS5 snippet(); so the fallback order equals the FTS5 order in general, not only for the AC-REV-16 tie fixtures. | Verified Fact |
+| DEV-94 | C3 rule (BEH-SEC-10, MA-2) implemented for OP-REV-03 and OP-ID-04: a permitted result containing restricted rows needs a non-empty `reason` query parameter (E-SEC-REASON-REQUIRED) and is audited as C3_READ. The parameter is not in the OpenAPI (Stage 12 addendum). The INC-08 SearchService is unchanged; the rule applies in R2WebApp only. | Verified Fact |
+| DEV-95 | The 420 archive items carry no access level: indexed as `restricted` (MA-1), `doc_id` ARC-<stem>, effective date from the "Source date" text, locale / reference null. | Verified Fact |
+| DEV-96 | `latest_only` collapses versions per doc_id (INC-08 behaviour), not per `reference` (BEH-REV-04 wording); the shipped 1,200 doc ids are distinct, so there is no observable difference on the shipped corpus. | Verified Fact |
+| DEV-97 | Divergence: the batch set's `amount_over_limit` needs a threshold from region + policy_code; the cases carry no policy_code, so it is null (not comparable) for all 125; divergence is computed over non-null outputs: 3 of 125 cases (python vs js). Count recorded in the audit record RULE_DIVERGENCE_REPORTED. | Verified Fact |
+| DEV-98 | Freshness (PNFR-04) is served on the OP-INT-04 path with `?view=freshness&as_of=` (no separate registry operation); thresholds are config `intake_reports.*` with Assumption values 4 h / 24 h. | Verified Fact |
+| DEV-99 | The consistency check is an operator command / service call (the registry has only the GET OP-ID-05); OP-ID-05 lists findings plus the 'no consistency policy adopted' statement. | Verified Fact |
+| DEV-100 | OP-MET-06 returns one metric-value-shaped document (overall unmatched rate as `value`, per-source figures in `detail.per_source`), computed as of the data horizon and not stored (INC-08 D-10 pattern). | Verified Fact |
+| DEV-101 | R2WebApp is an additive subclass served by `python -m hub.r2 serve`; `python -m hub.web serve` still serves the R1 WebApp (frozen). One entry point must be chosen before any exposure (RTD-81). | Verified Fact |
+| DEV-102 | Template drafts: two deterministic templates in `hub/r2/templates.json` (field sets are an Assumption, A-INC09-4); `templates.enabled` default false. | Assumption |
+| DEV-103 | New codes / keys / audit actions (inc09-design-notes D-16): E-REV-INDEX-ABSENT 409, E-R2-INPUT-INVALID 422 (exit code 32, INC-09 family), E-SEC-REASON-REQUIRED (exit 19). | Verified Fact |
+| DEV-104 | TST-REV-15's labelled set (61 queries) is generated from corpus metadata, not by a human (OPD-12 proposal); recall@5 0.3776 on both engines is a baseline only, no threshold. | Verified Fact |
+| DEV-105 | The 20 planned tests are named `test_I9_<FAMILY>_<NN>_...` so the frozen selectors keep their sizes; INC-09 modules skip in TST-CO-12's inner run and run under the egress guard in E09EGRESS (no socket is opened). | Verified Fact |
+| DEV-106 | Joined view: a denied document is `{type, access}` without id; links touching it are hidden; `depth_capped` flags a branch cut by the depth cap (an addition to `truncated`). | Verified Fact |
+| DEV-107 | Process notes: corpus and legacy facts were inspected read-only from the Stage 0A BACKUP copy (`../_data-backup-2026-10-17/data`, sqlite `mode=ro` URI and plain file reads) to design fixtures - never the working-tree `data/`; checksum rc 0 afterwards. No hub code was imported from the working tree (syntax checks with `ast.parse`); every test ran in a sandbox copy that was deleted after the run. | Verified Fact |
+
+Steps (in order): M007 + applier, settings, FTS probe, text rules, corpus loader, R2 search service; R2 services (protection, divergence, intake reports, joined view, consistency, source quality, drafts, facts), R2 API handlers, R2WebApp, CLIs; test helpers; 20 planned tests; 13 supplementary tests and the E09EGRESS module; documents; final runs.
+
 ## Residual Risks
 - RR-TL-1 INC-01 proves the harness on this device only; another runtime (3.12, other JDK/Node) is unverified.
 - RR-TL-3 INC-03 audit tamper evidence is limited by an unsigned same-host anchor file and undetectable tail truncation after the last anchor (R-SEC-1).
@@ -243,3 +269,4 @@ Steps (in order): M006 + applier; web helpers and dispatcher; 48 API handlers an
 | v0.6 | 2026-10-19 | claude-fde-agent | INC-06 (branch `stage-15-inc06-intake`): sections added; earlier content unchanged. |
 | v0.7 | 2026-10-19 | claude-fde-agent | INC-07 (branch `stage-15-inc07-runs-metrics`): sections added; earlier content unchanged. |
 | v0.8 | 2026-10-19 | claude-fde-agent | INC-08 (branch `stage-15-inc08-http-reviewer`): sections added; earlier content unchanged. |
+| v0.9 | 2026-10-20 | claude-fde-agent | INC-09 (branch `stage-15-inc09-search-corpus`): sections added; earlier content unchanged. |
