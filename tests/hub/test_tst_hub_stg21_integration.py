@@ -10,6 +10,8 @@ them into private sandbox stores under the shipped default binding (record_only)
   S04  timeout: a loopback source that accepts and never answers -> bounded retries -> E-INT-SOURCE-UNREACHABLE, no item
   S05  DW-11 legacy-output consumer scan (LO-01..LO-13) = committed evidence (frozen legacy part)
   S06  DW-12 read-only re-proof: every FX-BASE125 file byte-identical after S01-S05; adapters open nothing for writing
+  S07  late / out-of-order delivery (RTD-61 characterised): a delivery that appears later with an order key before the job checkpoint is
+       not seen by a resumed job; the idempotent catch-up ingest stores exactly that item; shipped partner rows with source_ts > ingest_ts
 """
 import ast
 import inspect
@@ -263,6 +265,26 @@ class TST_HUB_STG21_Integration(unittest.TestCase):
                     connects.append(fn)
         self.assertEqual(bad_opens, [])
         self.assertEqual(connects, ["legacy_sqlite.py"])
+
+    def test_TST_HUB_STG21_S07_late_delivery_before_checkpoint(self):
+        """S07 (analysis 6, RTD-61 characterised, no behaviour change): OrderedSource orders by (source_ts, source_key, n); a delivery that
+        arrives after a checkpoint with an EARLIER source_ts is not returned by items_after(checkpoint) - a resumed job does not see it; the
+        idempotent catch-up path (ingest with idempotent_backfill, as `hub.intake ingest-legacy`) stores exactly that one item. 2,234 of the
+        8,567 shipped partner rows have source_ts later than ingest_ts (Stage 5 IL-05), so source order and delivery order differ."""
+        from hub.runs.sources import OrderedSource
+        a, b = I.feed(10), I.feed(20)
+        late = I.feed(5, source_key="FEED-LATE-000005")
+        ckpt = OrderedSource("partner_feed", [a, b]).items[-1][0]
+        later = OrderedSource("partner_feed", [a, b, late])
+        self.assertEqual(later.items_after(ckpt), [])
+        self.assertEqual([d["source_key"] for _, d in later.items_after(None)], ["FEED-LATE-000005", a["source_key"], b["source_key"]])
+        st = I.IStore()
+        first = st.isvc.ingest("partner_feed", [a, b], "s21-late-1", "s21")
+        rep = st.isvc.ingest("partner_feed", [a, b, late], "s21-late-catchup", "s21", idempotent_backfill=True)
+        self.assertEqual((first["stored"], rep["stored"], rep["skipped_existing"], rep["noop_duplicate"]), (2, 1, 2, 0))
+        self.assertEqual(st.isvc.counts()["raw"], 3)
+        by, _ = I.legacy_deliveries()
+        self.assertEqual(sum(1 for d in by["partner_feed"] if d["raw"]["source_ts"] > d["raw"]["ingest_ts"]), 2234)
 
 
 if __name__ == "__main__":

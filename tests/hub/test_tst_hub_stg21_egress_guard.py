@@ -32,7 +32,7 @@ class TST_HUB_E21EGRESS_Guard(unittest.TestCase):
             res = json.load(f)
         self.assertTrue(res["successful"], p.stdout[-3000:])
         ok = sum(1 for r in res["records"] if r["status"] == "ok")
-        self.assertEqual(ok, 6)
+        self.assertEqual(ok, 7)
         self.assertEqual([r for r in res["records"] if r["status"] == "skipped"], [])
         self.assertEqual(res["egress_attempts"], [])
         self.assertEqual(res["tripwires"], {"egress_attempts_total": 0, "model_calls_total": 0})
