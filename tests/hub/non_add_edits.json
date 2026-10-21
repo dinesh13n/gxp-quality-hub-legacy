@@ -1,19 +1,43 @@
 {
  "schema": "hub-non-add-edits/v1",
- "stage": "21",
- "note": "Stage 21 (Stage 18 DI-05, evidence only; DW-10, DW-11, DW-12): reset per OD-27 (S20-DEV-05). The Stage 15 add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason; each entry is recorded in docs/21-integration/integration-readiness.md (S21-DEV-nn). Stage 21 changes NO hub code; only the two test-infrastructure data files below are edited. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
+ "stage": "23",
+ "note": "Stage 23 (DW-13..DW-18): reset per OD-27 (S23-DEV-01). The Stage 15 add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason; each entry is recorded in docs/23-human-control/operating-contract-updates.md. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
  "edits": [
   {
+   "path": "hub/config.py",
+   "work_item": "DW-17",
+   "deviation": "S23-DEV-01",
+   "reason": "the capability_authority validation loop is replaced by hub.control.flags.check (one approval rule for every decision flag: non-default needs approval_refs[flag]); defaults unchanged, ships OFF"
+  },
+  {
+   "path": "hub/admin/cli.py",
+   "work_item": "DW-17",
+   "deviation": "S23-DEV-01",
+   "reason": "_Run.config_loaded also records a capability_authority change made in the config file as CONFIG_CHANGED (no-op on a default install)"
+  },
+  {
+   "path": "hub/web/app.py",
+   "work_item": "DW-17",
+   "deviation": "S23-DEV-01",
+   "reason": "WebApp.start records a capability_authority change made in the config file as CONFIG_CHANGED (no-op on a default install)"
+  },
+  {
+   "path": "tests/hub/_inc03.py",
+   "work_item": "DW-17",
+   "deviation": "S23-DEV-02",
+   "reason": "write_config adds a synthetic approval_refs entry for every non-default registered flag a test sets, so existing tests keep their configurations under the new approval rule; marker text says it is not a human approval"
+  },
+  {
    "path": "tests/hub/regression_groups.json",
-   "work_item": "DW-10 / DW-11 / DW-12",
-   "deviation": "S21-DEV-01",
-   "reason": "new groups S21 (STG21) and E21 (E21EGRESS) so the full hub regression runs the Stage 21 tests with executed = expected (OD-23)"
+   "work_item": "DW-13..DW-18",
+   "deviation": "S23-DEV-01",
+   "reason": "new groups S23 (STG23) and E23 (E23EGRESS) so the full hub regression runs the Stage 23 tests with executed = expected (OD-23)"
   },
   {
    "path": "tests/hub/non_add_edits.json",
-   "work_item": "DW-12 (OD-27 reset)",
-   "deviation": "S21-DEV-01",
-   "reason": "allow-list reset for Stage 21 (OD-27 / S20-DEV-05: each BUILD stage replaces the list)"
+   "work_item": "DW-13..DW-18 (OD-27 reset)",
+   "deviation": "S23-DEV-01",
+   "reason": "allow-list reset for Stage 23 (OD-27: each BUILD stage replaces the list)"
   }
  ]
 }
