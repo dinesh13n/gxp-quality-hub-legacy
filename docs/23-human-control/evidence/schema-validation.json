@@ -1,0 +1,192 @@
+{
+ "ingest_outcomes_in_scenario": [
+  "EXCEPTION",
+  "NOOP_DUPLICATE",
+  "QUARANTINED",
+  "VALIDATED",
+  "VALIDATED_WITH_FLAGS"
+ ],
+ "label": "synthetic, unvalidated",
+ "note": "partner-feed-envelope / -payload are INPUT-side schemas: validated on the 8,567 shipped legacy partner_feed rows",
+ "per_schema": [
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 29,
+   "schema": "audit-record",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 29
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 13,
+   "schema": "crosswalk-link",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 13
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 252,
+   "schema": "decision-event",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 252
+  },
+  {
+   "invalid_v0_1": 1,
+   "invalid_v0_2": 0,
+   "objects": 4,
+   "schema": "error-envelope",
+   "v0_1_top_errors": [
+    [
+     "details: type object expected, got NoneType",
+     1
+    ]
+   ],
+   "valid_v0_2": 4
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 1,
+   "schema": "evidence-record",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 1
+  },
+  {
+   "invalid_v0_1": 1,
+   "invalid_v0_2": 0,
+   "objects": 1,
+   "schema": "hub-config",
+   "v0_1_top_errors": [
+    [
+     "$: additional property hub is not allowed",
+     1
+    ],
+    [
+     "$: additional property runtime is not allowed",
+     1
+    ],
+    [
+     "$: additional property capability_authority is not allowed",
+     1
+    ]
+   ],
+   "valid_v0_2": 1
+  },
+  {
+   "invalid_v0_1": 21,
+   "invalid_v0_2": 0,
+   "objects": 21,
+   "schema": "intake-outcome",
+   "v0_1_top_errors": [
+    [
+     "$: additional property contract_missing is not allowed",
+     21
+    ],
+    [
+     "$: additional property conflicts_with is not allowed",
+     21
+    ],
+    [
+     "$: additional property reason_detail is not allowed",
+     21
+    ]
+   ],
+   "valid_v0_2": 21
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 5,
+   "schema": "metric-definition",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 5
+  },
+  {
+   "invalid_v0_1": 1,
+   "invalid_v0_2": 0,
+   "objects": 1,
+   "schema": "metric-value",
+   "v0_1_top_errors": [
+    [
+     "$: additional property params is not allowed",
+     1
+    ],
+    [
+     "$: additional property inputs is not allowed",
+     1
+    ],
+    [
+     "$: additional property detail is not allowed",
+     1
+    ]
+   ],
+   "valid_v0_2": 1
+  },
+  {
+   "invalid_v0_1": 8567,
+   "invalid_v0_2": 0,
+   "objects": 8567,
+   "schema": "partner-feed-envelope",
+   "v0_1_top_errors": [
+    [
+     "$: additional property ingest_ts is not allowed",
+     8567
+    ]
+   ],
+   "valid_v0_2": 8567
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 8567,
+   "schema": "partner-feed-payload",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 8567
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 5,
+   "schema": "policy-object",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 5
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 21,
+   "schema": "raw-intake",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 21
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 5,
+   "schema": "rule-result",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 5
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 3,
+   "schema": "rule-set",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 3
+  },
+  {
+   "invalid_v0_1": 0,
+   "invalid_v0_2": 0,
+   "objects": 1,
+   "schema": "run-record",
+   "v0_1_top_errors": [],
+   "valid_v0_2": 1
+  }
+ ],
+ "schemas_exercised": 16,
+ "validator": "tests/hub/_schema_lite.py (stdlib draft-07 subset; cross-checked with jsonschema 3.2.0 off-line)"
+}

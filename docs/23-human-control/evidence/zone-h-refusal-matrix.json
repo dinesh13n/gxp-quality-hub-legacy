@@ -1,0 +1,146 @@
+{
+ "holders": "synthetic test data (holder-1, holder-2)",
+ "label": "synthetic, unvalidated",
+ "results": {
+  "ZH-01": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ],
+  "ZH-02": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ],
+  "ZH-03": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ],
+  "ZH-04": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ],
+  "ZH-05": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ],
+  "ZH-06": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ],
+  "ZH-07": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ],
+  "ZH-08": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ],
+  "ZH-09": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ],
+  "ZH-10": [
+   [
+    422,
+    "E-POL-AUTHORITY-REQUIRED"
+   ],
+   [
+    401,
+    "E-GATE-REAUTH-REQUIRED"
+   ],
+   [
+    403,
+    "E-GATE-NOT-AUTHORISED"
+   ]
+  ]
+ }
+}

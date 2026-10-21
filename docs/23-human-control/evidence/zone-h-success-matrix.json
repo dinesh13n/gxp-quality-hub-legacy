@@ -1,0 +1,30 @@
+{
+ "holders": "synthetic test data (holder-1, holder-2)",
+ "label": "synthetic, unvalidated",
+ "results": {
+  "ZH-01": {
+   "event_ref": "EV-00000253",
+   "holder_check_ref": "audit:27"
+  },
+  "ZH-02": {
+   "event_ref": "EV-00000254",
+   "holder_check_ref": "audit:31"
+  },
+  "ZH-03": {
+   "event_ref": "EV-00000255",
+   "holder_check_ref": "audit:35"
+  },
+  "ZH-07": {
+   "event_ref": "PE-00000006",
+   "holder_check_ref": "audit:38"
+  },
+  "ZH-08": {
+   "event_ref": "PE-00000007",
+   "holder_check_ref": "audit:41"
+  },
+  "ZH-09": {
+   "event_ref": "PE-00000008",
+   "holder_check_ref": "audit:44"
+  }
+ }
+}

@@ -16,8 +16,8 @@ import time
 
 SEL = ["-k", "STG23"]
 MUTANTS = [
-    ("H1", "hub/gate/service.py", "elif p.principal_id not in holders:", "elif False and p.principal_id not in holders:",
-     "Zone H: a non-holder dispositioner is accepted (Stage 16 mutant; DW-18 matrix)"),
+    ("H1", "hub/security/zone_h.py", "    if principal.principal_id not in holders:", "    if False and principal.principal_id not in holders:",
+     "Zone H: a non-holder dispositioner is accepted (Stage 16 mutant H1, rule moved to hub/security/zone_h.py in Stage 20; DW-18 matrix)"),
     ("H3", "hub/web/app.py", '("X-Frame-Options", "DENY")', '("X-Frame-Options", "SAMEORIGIN")', "security header weakened (DW-14)"),
     ("H5", "hub/web/server.py", "    if not exposure.is_loopback(host):", "    if False:", "non-loopback bind accepted (DW-15)"),
     ("A1", "hub/control/flags.py", "        if not valid_ref(refs.get(path)):", "        if False:", "non-default decision flag accepted without approval_ref (DW-17)"),

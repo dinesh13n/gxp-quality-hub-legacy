@@ -1,0 +1,12 @@
+{
+ "cited_references": 29,
+ "cited_tests": 44,
+ "har_classes": {
+  "code-enforced": 5,
+  "partial": 5,
+  "process-only": 6
+ },
+ "label": "synthetic, unvalidated",
+ "zh_actions": 10,
+ "zh_ids_in_code": 10
+}

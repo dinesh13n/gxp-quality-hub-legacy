@@ -1,0 +1,34 @@
+{
+ "config_changed": [
+  {
+   "approval_ref": "SYNTHETIC-TEST-REF-S23 (a test marker, not a human approval)",
+   "command": "set-flag",
+   "config_hash_after": "a879c24049ea969158e1ecb0e5c3c947f7879fbcad6d6a5ba0ac2a3dc605a373",
+   "config_hash_before": "694412a3e89cfd565454e80b45e071e983dee80e1411dcd9649fa21afc3d27e2",
+   "direction": "to_non_default",
+   "flag": "capability_authority.C4",
+   "new": "authoritative",
+   "old": "shadow",
+   "source": "hub.control set-flag"
+  },
+  {
+   "approval_ref": null,
+   "command": "flip-to-shadow",
+   "config_hash_after": "8391e9fdc86d1be31b2a7c67ecd05afe14c5c7f831ab92845ddc093d2907a9ef",
+   "config_hash_before": "a879c24049ea969158e1ecb0e5c3c947f7879fbcad6d6a5ba0ac2a3dc605a373",
+   "direction": "to_default",
+   "flag": "capability_authority.C4",
+   "new": "shadow",
+   "old": "authoritative",
+   "reason": "synthetic rehearsal of the L3 rollback",
+   "rollback": "L3",
+   "source": "hub.control flip-to-shadow"
+  }
+ ],
+ "label": "synthetic, unvalidated",
+ "sequence": [
+  "set-flag authoritative with approval_ref",
+  "flip-to-shadow (reason, no approval)",
+  "flip again: no-op"
+ ]
+}

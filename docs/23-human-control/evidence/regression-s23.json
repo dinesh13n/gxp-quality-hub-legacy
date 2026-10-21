@@ -1,0 +1,215 @@
+{
+ "label": "synthetic, unvalidated",
+ "note": "sandbox runs on the laptop, python 3.10.12, run_hub_groups.py one group per call; group A was re-run after the TST-SEC-21 fixture edit; S23 and E23 first runs are in this list",
+ "groups": [
+  {
+   "group": "A",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 45,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "B",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 41,
+    "skipped": 1
+   },
+   "wall_s": null
+  },
+  {
+   "group": "C1",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 5,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "C2",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "C3",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "E20",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "E21",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "E23",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "E8",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "E9",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "I45",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 91,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "I6",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 43,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "I7",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 59,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "I8a",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 35,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "I8b",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 43,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "I9",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 33,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "S20",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 18,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "S21",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 7,
+    "skipped": 0
+   },
+   "wall_s": null
+  },
+  {
+   "group": "S23",
+   "rc": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 26,
+    "skipped": 0
+   },
+   "wall_s": null
+  }
+ ]
+}
