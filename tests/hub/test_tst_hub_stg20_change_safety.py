@@ -33,7 +33,7 @@ class TST_HUB_STG20_ChangeSafety(unittest.TestCase):
 
     def test_TST_HUB_STG20_S01_manifest_selects_every_test_once(self):
         """S01 (DW-02 / DW-03): every test method in tests/hub/test_*.py is selected by exactly one group; TST-CO-03 (3 methods) is
-        selected (S16-D10); group ids unique; group C is split into C1 / C2 (TST-CO-12 e1 / e2)."""
+        selected (S16-D10); group ids unique; group C is split into C1 / C2 / C3 (TST-CO-12 a-d + e1 / e2 / e3)."""
         groups = _groups.load()
         ids = _groups.static_ids()
         cov = _groups.coverage(groups, ids)
@@ -42,8 +42,9 @@ class TST_HUB_STG20_ChangeSafety(unittest.TestCase):
         co03 = [i for i in ids if "TST_CO_03" in i]
         self.assertEqual(len(co03), 3)
         self.assertEqual(set(g for i in co03 for g in cov[i]), {"I45"})
-        self.assertEqual(_groups.expected("C2", groups, ids), ["test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire."
-                                                              "test_TST_CO_12_e2_full_suite_under_egress_guard_shard2"])
+        for k in (2, 3):
+            self.assertEqual(_groups.expected("C%d" % k, groups, ids), ["test_tst_co_12_egress_tripwire.TST_CO_12_EgressAndTripwire."
+                                                                       "test_TST_CO_12_e%d_full_suite_under_egress_guard_shard%d" % (k, k)])
         self.assertEqual(len(_groups.expected("C1", groups, ids)), 5)
         self.assertGreaterEqual(len(ids), 397)
 

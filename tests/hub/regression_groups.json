@@ -6,6 +6,7 @@
   {"id": "B", "selectors": ["TST_CO_01", "TST_CO_02", "TST_CO_04", "TST_CO_05", "TST_CO_06", "TST_CO_07", "TST_CO_11", "TST_CO_13", "TST_CO_14", "INC02"]},
   {"id": "C1", "selectors": ["TST_CO_12_a", "TST_CO_12_b", "TST_CO_12_c", "TST_CO_12_d", "TST_CO_12_e1"]},
   {"id": "C2", "selectors": ["TST_CO_12_e2"]},
+  {"id": "C3", "selectors": ["TST_CO_12_e3"]},
   {"id": "I45", "selectors": ["INC04", "TST_POL", "TST_DEC", "TST_ID", "INC05", "E05EGRESS", "TST_CO_03"]},
   {"id": "I6", "selectors": ["TST_INT", "TST_CO_09", "INC06", "E06EGRESS"]},
   {"id": "I7", "selectors": ["TST_RUN", "TST_MET", "TST_OBS", "INC07", "E07EGRESS"]},

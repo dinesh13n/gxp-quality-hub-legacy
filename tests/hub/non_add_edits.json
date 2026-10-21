@@ -1,0 +1,17 @@
+{
+ "schema": "hub-non-add-edits/v1",
+ "stage": "20",
+ "note": "Stage 20 (OD-26 build; Stage 18 plan DW-02..DW-09): the Stage 15 add-only rule (TST-CO-05 c) is kept, but a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason; each entry is a deviation recorded in docs/20-application/application-readiness.md (S20-DEV-nn). Legacy paths stay unchangeable (TST-CO-05 a / b; an entry under a legacy path fails the test). Deletions and renames are never accepted. The next BUILD stage must replace this list with its own (a stale entry is reported, not failed, so that main stays green after the squash-merge). No entry is an approval of any behaviour deviation (HAR-06).",
+ "edits": [
+  {"path": "hub/cli.py", "work_item": "DW-04", "deviation": "S20-DEV-01", "reason": "golden-compare gains --observe / --observed and the golden-observe command (FAC-05)"},
+  {"path": "hub/golden/run.py", "work_item": "DW-04", "deviation": "S20-DEV-01", "reason": "default probe catalogue probes_s20.json; provider 'observed'; register legacy source for DV-11; run() split into helpers (McCabe 16 -> below 15)"},
+  {"path": "hub/coexistence/register.py", "work_item": "DW-05", "deviation": "S20-DEV-02", "reason": "seed v2 (DV-01..DV-11) and refresh of rows still byte-identical to the INC-02 seed (FAC-06)"},
+  {"path": "tests/hub/_driver.py", "work_item": "DW-03", "deviation": "S20-DEV-03", "reason": "--shard K/N so the TST-CO-12 inner run can be split across device calls (OD-21)"},
+  {"path": "tests/hub/test_tst_co_12_egress_tripwire.py", "work_item": "DW-03", "deviation": "S20-DEV-03", "reason": "test e split into e1/e2/e3 (module shards 1..3 of the same inner run; partition by construction)"},
+  {"path": "tests/hub/test_tst_co_01_golden_compare.py", "work_item": "DW-04 / DW-05", "deviation": "S20-DEV-04", "reason": "expectations follow the observed probes and DV-01..DV-11 (11 UNAPPROVED; approvals cover 11); new test f (no observation -> NOT-RUN)"},
+  {"path": "tests/hub/test_tst_co_02_unlisted_golden.py", "work_item": "DW-04", "deviation": "S20-DEV-04", "reason": "test e count: without an observation record the 9 module probes are NOT-RUN (UNAPPROVED 10 -> 3)"},
+  {"path": "tests/hub/test_inc02_supplementary.py", "work_item": "DW-05", "deviation": "S20-DEV-04", "reason": "S03 register row count 9 -> 11"},
+  {"path": "tests/hub/test_inc03_supplementary.py", "work_item": "DW-05", "deviation": "S20-DEV-04", "reason": "S03 register row count 9 -> 11"},
+  {"path": "tests/hub/test_tst_co_05_legacy_paths_unchanged.py", "work_item": "DW-02..DW-09", "deviation": "S20-DEV-05", "reason": "test c accepts the non-add edits listed in this file (and nothing else); legacy-path tests a / b unchanged"}
+ ]
+}
