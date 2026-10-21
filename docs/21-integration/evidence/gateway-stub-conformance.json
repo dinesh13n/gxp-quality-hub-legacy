@@ -1,0 +1,97 @@
+{
+ "checkpoint_after": {
+  "attempts": 1,
+  "next_offset": 125
+ },
+ "contract_source_contract_v1": {
+  "fail": 125,
+  "fail_signatures": {
+   "ref,status": 125
+  },
+  "pass": 0
+ },
+ "event_keys": [
+  "business_key",
+  "event_type",
+  "message_id",
+  "occurred_at",
+  "payload",
+  "published_at",
+  "schema_version",
+  "system"
+ ],
+ "event_types": [
+  "batch_created",
+  "deviation_review",
+  "lab_test",
+  "qa_disposition"
+ ],
+ "events": 125,
+ "failure_endpoints": {
+  "bad_pagination": {
+   "body": {
+    "error": "bad pagination"
+   },
+   "status": 400
+  },
+  "rate_limit": {
+   "body": {
+    "error": "source throttle",
+    "retryable": true
+   },
+   "status": 429
+  },
+  "schema": {
+   "body": {
+    "records": null,
+    "unexpected_schema": "v3"
+   },
+   "status": 200
+  },
+  "timeout": {
+   "body": {
+    "error": "upstream unavailable",
+    "retryable": true
+   },
+   "status": 503
+  }
+ },
+ "hub_outcomes_first_pull": {
+  "VALIDATED": 125
+ },
+ "label": "synthetic, unvalidated",
+ "limit_500": {
+  "items": 125,
+  "next_offset": 125
+ },
+ "occurred_after_published": 10,
+ "pages_limit_50": [
+  50,
+  50,
+  25,
+  0
+ ],
+ "reproduce": "python3 -B tests/hub/run_hub_tests.py --sandbox-root ~/fde_sbx/s21-stub --label stub -k TST_HUB_STG21_S02",
+ "schema": "s21-gateway-stub/v1",
+ "schema_version_counts": {
+  "0.9": 7,
+  "1.0": 118
+ },
+ "stage": "21",
+ "stale_repull": {
+  "outcomes": {
+   "NOOP_DUPLICATE": 125
+  },
+  "stored": 125
+ },
+ "stub": "services/source_gateway/server.py (unchanged, run from the sandbox copy on a free loopback port, LEGACY_DB = scratch copy)",
+ "systems": [
+  "lims",
+  "mes",
+  "qms"
+ ],
+ "work_items": [
+  "DW-10",
+  "DW-12"
+ ]
+}
