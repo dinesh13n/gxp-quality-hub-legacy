@@ -14,22 +14,22 @@
    "counts": {
     "ERROR": 0,
     "FAIL": 0,
-    "ok": 6,
+    "ok": 7,
     "skipped": 0
    },
-   "executed_methods": 6,
-   "expected_methods": 6,
+   "executed_methods": 7,
+   "expected_methods": 7,
    "group": "S21",
    "python": "3.10.12",
    "rc": 0,
-   "runner_seconds": 82.8,
+   "runner_seconds": 64.9,
    "selectors": [
     "STG21"
    ],
    "summary": [
-    "summary: unittest_rc=0 counts={'ok': 6, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=82.8 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21/S21/S21/report.json"
+    "summary: unittest_rc=0 counts={'ok': 7, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=64.9 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21/S21/S21/report.json"
    ],
-   "wall_seconds": 82.9
+   "wall_seconds": 65.0
   },
   {
    "checksum_rc_post": 0,
@@ -46,17 +46,18 @@
    "group": "E21",
    "python": "3.10.12",
    "rc": 0,
-   "runner_seconds": 80.6,
+   "runner_seconds": 68.7,
    "selectors": [
     "E21EGRESS"
    ],
    "summary": [
-    "summary: unittest_rc=0 counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=80.6 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21/E21/E21/report.json"
+    "summary: unittest_rc=0 counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=68.7 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21/E21/E21/report.json"
    ],
-   "wall_seconds": 80.6
+   "wall_seconds": 68.8
   }
  ],
  "label": "synthetic, unvalidated",
+ "note": "S21 / E21 group results are from the run after STG21 S07 was added (7 + 1 methods); DW-12 set re-run after the last code/doc commit; DW-10 TST-INT-09..16 run at commit b21e28f (no hub or intake change afterwards).",
  "schema": "s21-test-runs/v1",
  "stage": "21",
  "targeted": [
@@ -69,9 +70,9 @@
     "ok": 10,
     "skipped": 0
    },
-   "label": "DW-12: TST-CO-04 + TST-CO-05 (+ STG20 S01 manifest check after the S21/E21 group registration)",
+   "label": "DW-12: TST-CO-04 + TST-CO-05 (+ STG20 S01 manifest check) - final re-run on the finished branch",
    "python": "3.10.12",
-   "runner_seconds": 66.6,
+   "runner_seconds": 66.0,
    "tests": [
     {
      "status": "ok",
