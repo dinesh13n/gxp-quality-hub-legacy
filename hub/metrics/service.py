@@ -7,7 +7,6 @@ exactly the stored row ids. No adopted definition, clock duration or cut-off shi
 total has no default cut-off (E-MET-CUTOFF-REQUIRED); backlog by site implements the state-based D-OPS definition only (DEV-69).
 Money is Decimal(repr(float)) summed exactly and quantised to 2 decimals ROUND_HALF_EVEN at presentation only (assumed currency minor unit 2).
 """
-import datetime
 import decimal
 import json
 
@@ -19,10 +18,9 @@ from hub.metrics.errors import (MetCutoffRequired, MetDefinitionRequired, MetNot
 from hub.metrics.registry import BUILTIN, NEEDS_PARAMS, Registry
 from hub.metrics.sources import ALLOWED, parse_amount
 from hub.policy import clocks, withdrawal
-from hub.policy.errors import NotFound
 from hub.policy.service import PolicyService
 from hub.runs import CODE_VERSION, schema
-from hub.security.canonical import canonical, fmt, parse, sha256_hex
+from hub.security.canonical import canonical, parse, sha256_hex
 
 D = decimal.Decimal
 BUCKETS = ("<=90", "91-365", "366-730", ">730")

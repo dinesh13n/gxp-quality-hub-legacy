@@ -10,7 +10,6 @@ import socketserver
 import urllib.parse as _up
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-from hub.core.errors import HubError
 from hub.security import exposure
 from hub.security.errors import ExposureNotApproved
 from hub.web import wire

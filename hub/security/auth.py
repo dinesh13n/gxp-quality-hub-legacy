@@ -167,7 +167,7 @@ class LocalAuthenticator(object):
         lock = False
         with audit.change(self.con, self.clock, anchor=self.anchor, actor=actor, actor_kind="human",
                           action="LOGIN", outcome="denied", correlation_id=correlation_id,
-                          details={"result": "bad_credentials", "principal_known": p is not None}) as ctx:
+                          details={"result": "bad_credentials", "principal_known": p is not None}):
             self.con.execute("INSERT INTO login_attempt(principal_id, occurred_at, outcome) VALUES (?,?,'bad_credentials')",
                              (principal_id if p is not None else None, now))
             if known and self._recent_failures(principal_id, now_s) >= self.a["lockout_threshold"]:

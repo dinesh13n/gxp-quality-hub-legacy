@@ -89,21 +89,99 @@
   },
   {
    "path": "hub/metrics/service.py",
-   "work_item": "DW-07",
+   "work_item": "DW-07 / DW-06",
    "deviation": "S20-DEV-06",
-   "reason": "metric values show detail.policy_withdrawal when the withdrawal is in effect at computed_at (policy_status CHECK has no 'withdrawn')"
+   "reason": "metric values show detail.policy_withdrawal when the withdrawal is in effect at computed_at (policy_status CHECK has no 'withdrawn'); DW-06: unused imports removed (datetime, NotFound, fmt)"
   },
   {
    "path": "hub/gate/actions.py",
-   "work_item": "DW-07",
+   "work_item": "DW-07 / DW-06",
    "deviation": "S20-DEV-06",
-   "reason": "ZH-10 accepts op withdraw_policy at the single Zone H choke point"
+   "reason": "ZH-10 accepts op withdraw_policy at the single Zone H choke point; DW-06: ReqInvalid imported from hub.core.req_errors (no hub.web import)"
   },
   {
    "path": "hub/web/cli.py",
-   "work_item": "DW-08",
+   "work_item": "DW-08 / DW-06",
    "deviation": "S20-DEV-07",
-   "reason": "produce-traces operator command (automatic rule-trace producer)"
+   "reason": "produce-traces operator command (automatic rule-trace producer); DW-06: unused import CODE_VERSION removed"
+  },
+  {
+   "path": "hub/gate/service.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "holder rule delegated to hub.security.zone_h.refusal (one rule; error classes and audit fields unchanged)"
+  },
+  {
+   "path": "hub/policy/gate.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "holder rule delegated to hub.security.zone_h.refusal (INC-04 local gate keeps its error mapping)"
+  },
+  {
+   "path": "hub/security/authz.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "holder rule delegated to hub.security.zone_h.refusal (route authorizer keeps its reasons)"
+  },
+  {
+   "path": "hub/gate/dispositions.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "M006 check from hub.store.m006 instead of hub.web.schema (no domain -> HTTP-layer import)"
+  },
+  {
+   "path": "hub/review/service.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "M006 check from hub.store.m006 instead of hub.web.schema"
+  },
+  {
+   "path": "hub/search/schema.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "M006 check from hub.store.m006 instead of hub.web.schema"
+  },
+  {
+   "path": "hub/web/errors.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "ReqInvalid re-exported from hub.core.req_errors (same class)"
+  },
+  {
+   "path": "hub/web/schema.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "migration()/applied() delegate to hub.store.m006; require() unchanged in behaviour; unused hashlib import removed"
+  },
+  {
+   "path": "hub/metrics/cli.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "unused import CODE_VERSION removed (S16-D08 pyflakes)"
+  },
+  {
+   "path": "hub/policy/cli.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "unused import HubKilled removed (S16-D08 pyflakes)"
+  },
+  {
+   "path": "hub/security/auth.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "unused `as ctx` removed (S16-D08 pyflakes F841)"
+  },
+  {
+   "path": "hub/web/server.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "unused import HubError removed (S16-D08 pyflakes)"
+  },
+  {
+   "path": "hub/web/ui.py",
+   "work_item": "DW-06",
+   "deviation": "S20-DEV-08",
+   "reason": "unused imports and unused local `r` removed (S16-D08 pyflakes)"
   }
  ]
 }

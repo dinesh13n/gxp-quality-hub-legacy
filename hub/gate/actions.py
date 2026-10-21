@@ -25,7 +25,7 @@ from hub.gate.service import GateService
 from hub.policy.errors import AuthorityRequired
 from hub.runs.flag import schedule_state
 from hub.security import audit
-from hub.web.errors import ReqInvalid
+from hub.core.req_errors import ReqInvalid
 
 REQUEST_KEYS = ("action", "case_id", "payload", "pack_hash", "authority_ref", "reauth_token")
 OPS_05 = ("adopt", "accept_open")

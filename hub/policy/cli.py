@@ -19,7 +19,7 @@ import sqlite3
 import sys
 
 from hub.admin.cli import _Run, _dump
-from hub.core.errors import HubError, HubKilled, RuntimeUnsupported
+from hub.core.errors import HubError, RuntimeUnsupported
 
 
 def _parser():
