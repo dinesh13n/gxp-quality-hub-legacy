@@ -28,6 +28,12 @@
    "reason": "write_config adds a synthetic approval_refs entry for every non-default registered flag a test sets, so existing tests keep their configurations under the new approval rule; marker text says it is not a human approval"
   },
   {
+   "path": "tests/hub/test_tst_sec_21_config_loaded.py",
+   "work_item": "DW-17",
+   "deviation": "S23-DEV-02",
+   "reason": "the test hand-writes a config with synthetic holders; under the approval rule it needs an approval_refs entry (the test marker from _inc03, not a human approval); assertions unchanged"
+  },
+  {
    "path": "tests/hub/regression_groups.json",
    "work_item": "DW-13..DW-18",
    "deviation": "S23-DEV-01",
