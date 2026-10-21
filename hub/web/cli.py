@@ -5,6 +5,8 @@
   serve [--port N]             serve on the configured loopback address (default 127.0.0.1:8081) until interrupted; self-check first
   token issue PRINCIPAL --label TEXT [--expires-at ISO]   issue a service token (shown ONCE); token revoke TOKEN-OR-DIGEST-PREFIX
   record-trace                 store a rule evaluation for a case (reads the JSON request on stdin; operator command, audited)
+  produce-traces               evaluate one rule function for every case and store the traces (Stage 20 DW-08; active set, or a named
+                               --ruleset-ref as a what-if; case attributes from the read-only legacy snapshot of --legacy-root; idempotent)
 Logs are JSON lines on stderr (stdout carries the result). Same guards as hub.admin: egress guard, runtime floor, hub.kill, anchor at the end.
 No model call, no network beyond loopback. Shipped zone_h.holders is EMPTY: no Zone H action can be accepted until a holder is configured.
 """
@@ -39,6 +41,10 @@ def _parser():
     p.add_argument("--label", default=None)
     p.add_argument("--expires-at", default=None)
     store("record-trace")
+    p = store("produce-traces")
+    p.add_argument("--legacy-root", required=True)
+    p.add_argument("--function", required=True)
+    p.add_argument("--ruleset-ref", default=None)
     return ap
 
 
@@ -80,6 +86,19 @@ def _cmd(r, a):
         req = json.loads(sys.stdin.read())
         svc = ReviewService(con, r.s, r.clock, r.anchor)
         return svc.record_trace(r.operator, "human", req["case_id"], req["function"], req["ruleset_ref"], req["inputs"], req["result"], r.cid), 0
+    if a.cmd == "produce-traces":  # Stage 20 DW-08
+        import tempfile
+        from hub.guards import sandbox
+        from hub.policy.service import PolicyService
+        from hub.review import producer
+        base = os.path.join(data_dir, "trace-runs")
+        sandbox.assert_safe_path(base, "run directory")
+        os.makedirs(base, exist_ok=True)
+        cases = producer.load_case_inputs(sandbox.assert_safe_path(os.path.abspath(a.legacy_root), "legacy source root"),
+                                          tempfile.mkdtemp(prefix="tr-", dir=base))
+        rep = producer.produce(con, r.s, r.clock, r.anchor, PolicyService(con, r.s, r.clock, r.anchor), cases, a.function, a.ruleset_ref, r.cid)
+        rep["trace_ids"] = rep["trace_ids"][:5] + (["..."] if len(rep["trace_ids"]) > 5 else [])
+        return rep, 0
     raise SystemExit(2)
 
 

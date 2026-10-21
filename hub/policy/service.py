@@ -10,6 +10,7 @@ import re
 
 from hub.policy import asfound, clocks, engine, rulesets, schema
 from hub.policy import gate
+from hub.policy import withdrawal
 from hub.policy.errors import (AsFoundDrift, AuthorityRequired, DecisionRequired, NoActiveRuleset, NotFound, Overlap,
                                PolicyInvalid, ReadonlySet, UnknownFunction)
 from hub.security import audit
@@ -111,7 +112,8 @@ class PolicyService(object):
         if latest_only:
             w.append("version = (SELECT max(version) FROM policy_object p2 WHERE p2.policy_id = policy_object.policy_id)")
         rows = self.con.execute(q + (" WHERE " + " AND ".join(w) if w else "") + " ORDER BY policy_id, version", a).fetchall()
-        return [_policy(r) for r in rows]
+        now = self.clock()
+        return [withdrawal.overlay(self.con, _policy(r), now) for r in rows]  # Stage 20 DW-07: `withdrawal` key when in effect
 
     def get_policy(self, policy_id, version=None):
         if version is None:
@@ -122,7 +124,7 @@ class PolicyService(object):
                                    (policy_id, version)).fetchone()
         if row is None:
             raise NotFound({"policy_id": policy_id, "version": version})
-        return _policy(row)
+        return withdrawal.overlay(self.con, _policy(row), self.clock())  # Stage 20 DW-07
 
     def events(self, policy_ref=None, event_type=None):
         q, a, w = "SELECT event_id, policy_ref, event_type, actor, occurred_at, old_value, new_value, authority_ref, holder_check_ref FROM policy_events", [], []
@@ -186,7 +188,14 @@ class PolicyService(object):
         hi = "9999-12-31"
         rows = self.con.execute("SELECT policy_id, version, effective_from, effective_to FROM policy_object WHERE status = 'adopted'"
                                 " AND kind = ? AND COALESCE(definition_tag, policy_id) = ?", (kind, tag or policy_id)).fetchall()
-        return [(r[0], r[1]) for r in rows if (r[2] or "") <= (a_to or hi) and (a_from or "") <= (r[3] or hi)]
+        out = []
+        for r in rows:
+            w = withdrawal.recorded(self.con, "%s@%d" % (r[0], r[1]))  # Stage 20 DW-07: a withdrawn window ends at withdrawn_from
+            if w is not None and (a_from or "") >= w["withdrawn_from"]:
+                continue
+            if (r[2] or "") <= (a_to or hi) and (a_from or "") <= (r[3] or hi):
+                out.append((r[0], r[1]))
+        return out
 
     def adopt(self, sess, policy_id, from_version, effective_from, owner, authority_ref, effective_to=None, body_updates=None,
               correlation_id="policy"):
@@ -246,11 +255,49 @@ class PolicyService(object):
                                                                 _brief(src), dict(_brief(p), reason=reason, dated=now), authority_ref, hcr)
         return p
 
+    def withdraw(self, sess, policy_id, version, withdrawn_from, reason, authority_ref, correlation_id="policy"):
+        """ZH-10 (Stage 20 DW-07, BEH-POL-05, FAC-13 proposed). Withdraw an ADOPTED version from `withdrawn_from` (YYYY-MM-DD, inclusive):
+        one POLICY_WITHDRAWN policy event + its audit record in one transaction. Refused without a Zone H holder (E-GATE-*), without an
+        authority_ref (E-POL-AUTHORITY-REQUIRED) or reason, for a version that is not adopted, already withdrawn, or a date before its
+        effective_from. Nothing else changes: the stored version keeps status 'adopted' (history), its use stops from withdrawn_from."""
+        ref = "policy:%s@%s" % (policy_id, version)
+        hcr = "audit:%d" % self._zone_h(sess, "ZH-10", correlation_id, ref)
+        self._need_authority(authority_ref)
+        if not isinstance(reason, str) or not reason.strip():
+            raise PolicyInvalid({"reason": "a reason is required to withdraw a policy"})
+        if not isinstance(version, int) or isinstance(version, bool):
+            raise PolicyInvalid({"reason": "version must be an integer"})
+        row = self.con.execute("SELECT " + _POLICY_COLS + " FROM policy_object WHERE policy_id = ? AND version = ?", (policy_id, version)).fetchone()
+        if row is None:
+            raise NotFound({"policy_id": policy_id, "version": version})
+        src = _policy(row)
+        pref = "%s@%d" % (policy_id, version)
+        if src["status"] != "adopted":
+            raise PolicyInvalid({"reason": "only an adopted version can be withdrawn", "policy_ref": pref, "status": src["status"]})
+        if withdrawal.recorded(self.con, pref) is not None:
+            raise PolicyInvalid({"reason": "already withdrawn", "policy_ref": pref})
+        if not withdrawal.valid_date(withdrawn_from) or (src["effective_from"] and withdrawn_from < src["effective_from"]):
+            raise PolicyInvalid({"reason": "withdrawn_from must be YYYY-MM-DD and not before effective_from", "effective_from": src["effective_from"]})
+        actor, akind = self._actor(sess)
+        with audit.change(self.con, self.clock, anchor=self.anchor, actor=actor, actor_kind=akind, action=withdrawal.EVENT,
+                          outcome="success", correlation_id=correlation_id, object_ref="policy:" + pref,
+                          details={"policy_ref": pref, "withdrawn_from": withdrawn_from, "authority_ref": authority_ref}) as ctx:
+            ctx.fields["details"]["event_id"] = self._event_row(
+                pref, withdrawal.EVENT, actor, _brief(src),
+                {"policy_ref": pref, "withdrawn_from": withdrawn_from, "reason": reason, "prior_effective_to": src["effective_to"]},
+                authority_ref, hcr)
+        return withdrawal.recorded(self.con, pref)
+
     def status_report(self):
-        """Latest version of every policy, grouped by status: accepted-open is never shown as adopted (AC-POL-05)."""
-        out = {"adopted": [], "accepted-open": [], "candidate": []}
+        """Latest version of every policy, grouped by status: accepted-open is never shown as adopted (AC-POL-05); an adopted version
+        whose withdrawal is in effect is listed under 'withdrawn' (Stage 20 DW-07)."""
+        out = {"adopted": [], "accepted-open": [], "candidate": [], "withdrawn": []}
         for p in self.list_policies(latest_only=True):
-            out[p["status"]].append(dict(_brief(p), kind=p["kind"], definition_tag=p["definition_tag"]))
+            b = dict(_brief(p), kind=p["kind"], definition_tag=p["definition_tag"])
+            if p.get("withdrawal"):
+                out["withdrawn"].append(dict(b, withdrawn_from=p["withdrawal"]["withdrawn_from"]))
+            else:
+                out[p["status"]].append(b)
         return out
 
     def clock_report(self, cases):

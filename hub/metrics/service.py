@@ -18,7 +18,7 @@ from hub.metrics.errors import (MetCutoffRequired, MetDefinitionRequired, MetNot
                                 MetUnknownMetric, MetUnparsableInput)
 from hub.metrics.registry import BUILTIN, NEEDS_PARAMS, Registry
 from hub.metrics.sources import ALLOWED, parse_amount
-from hub.policy import clocks
+from hub.policy import clocks, withdrawal
 from hub.policy.errors import NotFound
 from hub.policy.service import PolicyService
 from hub.runs import CODE_VERSION, schema
@@ -66,6 +66,11 @@ class MetricsService(object):
         base = dict(metric_version=d["version"], definition_tag=d["definition_tag"], denominator=d["denominator"], exclusions=d["exclusions"],
                     basis=d["basis"], data_origin=self.data_origin, label=self._label(), code_version=CODE_VERSION)
         base.update(kw)
+        pref, at = base.get("policy_version"), base.get("computed_at")
+        if pref and at and base.get("policy_status") == "adopted":  # Stage 20 DW-07: the value shows a withdrawal in effect at computed_at
+            w = withdrawal.effective(self.con, pref, at)
+            if w:
+                base["detail"] = dict(base.get("detail") or {}, policy_withdrawal={"event_id": w["event_id"], "withdrawn_from": w["withdrawn_from"]})
         return V.MetricValue(metric_id, **base)
 
     def _store(self, mv):
