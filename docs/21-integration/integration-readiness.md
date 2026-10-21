@@ -26,6 +26,7 @@ Stage 21 delivered increment **DI-05 (evidence only)**: DW-10 (source-contract e
 | ID | Files | Work item | Reason | Tag |
 |---|---|---|---|---|
 | S21-DEV-01 | `tests/hub/regression_groups.json` (+ groups S21, E21), `tests/hub/non_add_edits.json` (reset for Stage 21, OD-27) | DW-10..DW-12 | full regression must run the Stage 21 tests with executed = expected (OD-23); each BUILD stage replaces the allow-list (S20-DEV-05) | [Verified Fact] |
+| S21-DEV-02 | `tests/hub/_stg21.py` (added file; fix commit 4cd3985) | DW-10..DW-12 | **Defect / process gap**: the helper imported `urllib.request` / `urllib.error`, which No-AI rule R2 deny-lists in `hub/` and `tests/hub/` (only `adapters/` exempt). The orchestrator's full regression caught it (TST-CO-11 d, TST-CO-15 a / gate G5, TST-CO-12 e1/e3, INC06 S12 + E06EGRESS, INC07 S14 + E07EGRESS, TST-NFR-18, E08EGRESS red in 8 groups). Root cause: the new helper was not run through the deny-list (TST-CO-11 / group B) before hand-off - the build agent ran only S21 / E21 and targeted sets. Fix: `get_json()` uses the raw-socket loopback client `tests/hub/_http8.raw` (as the INC-08 tests do); `no_ai.py` and its scope unchanged. Re-run per group: S21, B, A, C1, C3, I6, I7, I8b, E8, E21 all green, executed = expected (247 / 247), checksums rc 0 (`evidence/fix-regression-laptop.json`). Lesson: a BUILD stage that adds any helper under `tests/hub/` runs group B (TST-CO-11) itself before hand-off. | [Verified Fact] |
 No hub module, legacy path, `pyproject.toml` or CI file was changed. [Verified Fact] `git diff --stat main`.
 
 ### IR-3 Common increment gate (IN-5)
@@ -50,7 +51,7 @@ CG-1 sandbox-only: yes (every run in a sandbox copy; the legacy stub ran from th
 | DQ-S21-04 | Gateway `schema_version` 0.9: supported or should the gateway profile get a closed revision set (AF-03) | Engagement lead (Dinesh Naik) | Stage 23 (profile is data, reviewed edit) | Medium |
 | DQ-S21-05 | Real enterprise systems: none exist; record "accepted open" (no endpoints, credentials, agreements or SLAs to integrate) | Engagement lead (Dinesh Naik) | Stage 24 / 30 | Low |
 | DQ-S21-06 | Late deliveries before a job checkpoint (RTD-61): add a scheduled catch-up when the scheduler is ever enabled | Engagement lead (Dinesh Naik) | Stage 28 | Medium |
-| OI-01 | Full hub regression with groups S21 / E21 (426 methods, executed = expected) | Orchestrator | before merge | Medium |
+| OI-01 | Full hub regression with groups S21 / E21 (426 methods, executed = expected) - re-run after the S21-DEV-02 fix (the first run found the R2 defect) | Orchestrator | before merge | Medium |
 | OI-02 | Stage 12 v0.2 addenda: EV-RUN-02 checkpoint bodies (EF-03), stub API contract AC-S21-02 as a written contract | Stage 23 agent (DW-13) | Stage 23 | Low |
 
 ## Evidence References
@@ -74,3 +75,4 @@ All files in `docs/21-integration/` and `docs/21-integration/evidence/`; commits
 | Version | Date | Author/agent | Change |
 |---|---|---|---|
 | v0.1 | 2026-10-21 | claude-fde-agent | First issue. |
+| v0.1 (amended) | 2026-10-21 | claude-fde-agent | S21-DEV-02 recorded (No-AI R2 defect in `tests/hub/_stg21.py`, fixed in 4cd3985; affected groups re-run green). Gate outcome unchanged: CONDITIONAL PASS. |

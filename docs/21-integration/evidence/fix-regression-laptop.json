@@ -1,0 +1,281 @@
+{
+ "defect": "tests/hub/_stg21.py imported urllib.request / urllib.error (No-AI rule R2 deny-list, scope hub/ + tests/hub/, only adapters/ exempt); found by the orchestrator full regression (TST-CO-11 d, TST-CO-15 a / G5, TST-CO-12 e1/e3, INC06 S12 + E06EGRESS, INC07 S14 + E07EGRESS, TST-NFR-18, E08EGRESS failed)",
+ "deviation": "S21-DEV-02",
+ "device": "reference laptop VM, Python 3.10.12; one device call per group; sandboxes deleted (OD-16)",
+ "fix": "get_json() now uses the raw-socket loopback client tests/hub/_http8.raw (stdlib socket only); urllib.parse only; no change to hub/guards/no_ai.py or its scope",
+ "fix_commit": "4cd3985",
+ "label": "synthetic, unvalidated",
+ "note_B_skipped": "group B 1 skipped = same as Stage 20 (docs/20-application/evidence/regression-groups-laptop.json: ok 41, skipped 1)",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 7,
+    "skipped": 0
+   },
+   "executed_methods": 7,
+   "expected_methods": 7,
+   "group": "S21",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 61.3,
+   "selectors": [
+    "STG21"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 7, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=61.3 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/S21/S21/report.json"
+   ],
+   "wall_seconds": 61.4
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 41,
+    "skipped": 1
+   },
+   "executed_methods": 42,
+   "expected_methods": 42,
+   "group": "B",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 89.3,
+   "selectors": [
+    "TST_CO_01",
+    "TST_CO_02",
+    "TST_CO_04",
+    "TST_CO_05",
+    "TST_CO_06",
+    "TST_CO_07",
+    "TST_CO_11",
+    "TST_CO_13",
+    "TST_CO_14",
+    "INC02"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 41, 'FAIL': 0, 'ERROR': 0, 'skipped': 1} ids=TST-CO-01,TST-CO-02,TST-CO-04,TST-CO-05,TST-CO-06,TST-CO-07,TST-CO-11,TST-CO-13,TST-CO-14,TST-HUB-INC02-S01,TST-HUB-INC02-S02,TST-HUB-INC02-S03 seconds=89.3 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/B/B/report.json"
+   ],
+   "wall_seconds": 89.4
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 45,
+    "skipped": 0
+   },
+   "executed_methods": 45,
+   "expected_methods": 45,
+   "group": "A",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 70.2,
+   "selectors": [
+    "TST_SEC",
+    "TST_CO_10",
+    "TST_CO_15",
+    "INC03"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 45, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-10,TST-CO-15,TST-SEC-01,TST-SEC-04,TST-SEC-05,TST-SEC-06,TST-SEC-09,TST-SEC-10,TST-SEC-11,TST-SEC-12,TST-SEC-13,TST-SEC-14,TST-SEC-15,TST-SEC-16,TST-SEC-18,TST-SEC-21 seconds=70.2 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/A/A/report.json"
+   ],
+   "wall_seconds": 70.3
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 5,
+    "skipped": 0
+   },
+   "executed_methods": 5,
+   "expected_methods": 5,
+   "group": "C1",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 65.9,
+   "selectors": [
+    "TST_CO_12_a",
+    "TST_CO_12_b",
+    "TST_CO_12_c",
+    "TST_CO_12_d",
+    "TST_CO_12_e1"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 5, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-12 seconds=65.9 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/C1/C1/report.json"
+   ],
+   "wall_seconds": 66.0
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "executed_methods": 1,
+   "expected_methods": 1,
+   "group": "C3",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 68.9,
+   "selectors": [
+    "TST_CO_12_e3"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-12 seconds=68.9 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/C3/C3/report.json"
+   ],
+   "wall_seconds": 68.9
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 43,
+    "skipped": 0
+   },
+   "executed_methods": 43,
+   "expected_methods": 43,
+   "group": "I6",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 99.0,
+   "selectors": [
+    "TST_INT",
+    "TST_CO_09",
+    "INC06",
+    "E06EGRESS"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 43, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-09,TST-INT-01,TST-INT-03,TST-INT-04,TST-INT-05,TST-INT-06,TST-INT-07,TST-INT-08,TST-INT-09,TST-INT-10,TST-INT-11,TST-INT-12,TST-INT-13,TST-INT-14,TST-INT-15,TST-INT-16,TST-INT-17,TST-INT-18,TST-INT-19,TST-INT-20,TST-INT-21,TST-INT-22,TST-INT-23,TST-INT-24,TST-INT-25,TST-INT-26,TST-INT-27,TST-INT-29 seconds=99.0 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/I6/I6/report.json"
+   ],
+   "wall_seconds": 99.1
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 59,
+    "skipped": 0
+   },
+   "executed_methods": 59,
+   "expected_methods": 59,
+   "group": "I7",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 83.7,
+   "selectors": [
+    "TST_RUN",
+    "TST_MET",
+    "TST_OBS",
+    "INC07",
+    "E07EGRESS"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 59, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-MET-01,TST-MET-03,TST-MET-04,TST-MET-05,TST-MET-06,TST-MET-07,TST-MET-08,TST-MET-09,TST-MET-10,TST-MET-11,TST-MET-13,TST-MET-14,TST-MET-15,TST-MET-16,TST-MET-17,TST-MET-18,TST-OBS-01,TST-OBS-02,TST-OBS-03,TST-OBS-04,TST-OBS-05,TST-OBS-06,TST-OBS-07,TST-OBS-08,TST-OBS-09,TST-RUN-01,TST-RUN-02,TST-RUN-03,TST-RUN-05,TST-RUN-06,TST-RUN-07,TST-RUN-08,TST-RUN-09,TST-RUN-10,TST-RUN-11,TST-RUN-12,TST-RUN-13,TST-RUN-14,TST-RUN-15 seconds=83.7 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/I7/I7/report.json"
+   ],
+   "wall_seconds": 83.8
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 43,
+    "skipped": 0
+   },
+   "executed_methods": 43,
+   "expected_methods": 43,
+   "group": "I8b",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 70.7,
+   "selectors": [
+    "TST_CO_08",
+    "TST_NFR",
+    "I8_",
+    "INC08_S"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 43, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-08,TST-NFR-01,TST-NFR-02,TST-NFR-05,TST-NFR-06,TST-NFR-07,TST-NFR-08,TST-NFR-09,TST-NFR-10,TST-NFR-11,TST-NFR-13,TST-NFR-14,TST-NFR-15,TST-NFR-16,TST-NFR-17,TST-NFR-18,TST-NFR-19,TST-NFR-20 seconds=70.7 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/I8b/I8b/report.json"
+   ],
+   "wall_seconds": 70.8
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "executed_methods": 1,
+   "expected_methods": 1,
+   "group": "E8",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 88.7,
+   "selectors": [
+    "E08EGRESS"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=88.7 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/E8/E8/report.json"
+   ],
+   "wall_seconds": 88.8
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "executed_methods": 1,
+   "expected_methods": 1,
+   "group": "E21",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 62.1,
+   "selectors": [
+    "E21EGRESS"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=62.1 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21fix/E21/E21/report.json"
+   ],
+   "wall_seconds": 62.2
+  }
+ ],
+ "schema": "s21-fix-regression/v1",
+ "stage": "21",
+ "total_executed": 247,
+ "total_expected": 247
+}

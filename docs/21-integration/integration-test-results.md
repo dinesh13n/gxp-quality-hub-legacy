@@ -18,6 +18,7 @@ supersedes: "none"
 | DW-12 targeted | TST-CO-04 (6), TST-CO-05 (3), STG20 S01 (manifest after the S21 / E21 registration) | **10 / 10 ok** | ~67 s | 0 / 0 | [Verified Fact] |
 | DW-10 targeted | TST-INT-09..16 | **8 / 8 ok** | ~68 s | 0 / 0 | [Verified Fact] |
 | Legacy-path diff | `git diff --name-status baseline-as-found -- app legacy_batch legacy_java legacy_js sql data services integration contracts scripts ops` | empty | — | rc 0 | [Verified Fact] |
+| **S21-DEV-02 fix re-run** (after commit 4cd3985) | groups S21, B, A, C1, C3, I6, I7, I8b, E8, E21 (one device call each) | **all green**: 7, 41 + 1 skipped (as Stage 20), 45, 5, 1, 43, 59, 43, 1, 1; executed = expected 247 / 247 | 61-99 s per group | 0 / 0 each | [Verified Fact] `evidence/fix-regression-laptop.json` |
 Every device call stayed under the 180 s cap (largest 82.9 s for the first S21 run, 6 tests); sandbox build time dominates (~55-60 s of each run).
 
 ## Findings
@@ -60,6 +61,9 @@ Every device call stayed under the 180 s cap (largest 82.9 s for the first S21 r
 ## Unknowns
 - U-21-TR-1 Full-regression result with the S21 / E21 groups on the cloud workspace (Python 3.13) - pending (orchestrator).
 
+### TR-4 Defect found after hand-off (S21-DEV-02)
+- [Verified Fact] The orchestrator's first full regression failed 8 groups because `tests/hub/_stg21.py` imported `urllib.request` (No-AI R2; TST-CO-11 d, TST-CO-15 a, TST-CO-12 e1/e3, INC06 S12, INC07 S14, TST-NFR-18, E06/E07/E08EGRESS). Fixed in 4cd3985 (raw-socket loopback client); the affected groups were re-run green on the laptop (row above). The S21 group alone could not catch it: R2 is enforced by group B / C tests, which the build agent did not run (process gap, see integration-readiness.md S21-DEV-02).
+
 ## Unresolved Issues
 - None blocking.
 
@@ -70,3 +74,4 @@ Every device call stayed under the 180 s cap (largest 82.9 s for the first S21 r
 | Version | Date | Author/agent | Change |
 |---|---|---|---|
 | v0.1 | 2026-10-21 | claude-fde-agent | First issue. |
+| v0.1 (amended) | 2026-10-21 | claude-fde-agent | S21-DEV-02 fix re-run results added (TR-4). |
