@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:metric-definition:v0.2",
+  "title": "metric-definition",
+  "description": "Metric registry entry (FR-MET-01/06) (Stage 12 v0.2 addendum, derived from v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "metric_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "name": {
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "time",
+        "count",
+        "money",
+        "rate",
+        "age"
+      ]
+    },
+    "involves_definition": {
+      "type": "boolean"
+    },
+    "definition_tag": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "window": {
+      "type": "string"
+    },
+    "denominator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "exclusions": {
+      "type": "string"
+    },
+    "cutoff_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "basis": {
+      "enum": [
+        "event_derived",
+        "modelled"
+      ]
+    },
+    "documentation": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "metric_id",
+    "version",
+    "name",
+    "category",
+    "involves_definition",
+    "window",
+    "denominator",
+    "exclusions",
+    "basis",
+    "documentation"
+  ],
+  "additionalProperties": false,
+  "if": {
+    "properties": {
+      "involves_definition": {
+        "const": true
+      }
+    },
+    "required": [
+      "involves_definition"
+    ]
+  },
+  "then": {
+    "required": [
+      "definition_tag"
+    ],
+    "properties": {
+      "definition_tag": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

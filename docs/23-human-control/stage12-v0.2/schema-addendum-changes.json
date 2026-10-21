@@ -1,0 +1,60 @@
+{
+  "schema": "stage12-v0.2-schema-changes/v1",
+  "label": "synthetic, unvalidated",
+  "source": "docs/12-specs/contracts/schemas (v0.1, frozen)",
+  "schemas": [
+    "audit-record",
+    "crosswalk-link",
+    "decision-event",
+    "error-envelope",
+    "evidence-record",
+    "hub-config",
+    "intake-outcome",
+    "metric-definition",
+    "metric-value",
+    "partner-feed-envelope",
+    "partner-feed-payload",
+    "policy-object",
+    "raw-intake",
+    "rule-result",
+    "rule-set",
+    "run-record"
+  ],
+  "changes": [
+    {
+      "schema": "intake-outcome",
+      "ic": "IC-7",
+      "kind": "add optional properties",
+      "detail": "contract_missing (array of strings), conflicts_with (string|null), reason_detail (object)",
+      "evidence": "M004 addendum columns; Stage 16 DC-02: 10,983 of 10,983 shipped-data outcomes failed v0.1 only on these three fields; Stage 23 DW-16 scenario 21 of 21"
+    },
+    {
+      "schema": "metric-value",
+      "ic": "IC-7",
+      "kind": "add optional properties",
+      "detail": "detail (object), params (object), inputs (array)",
+      "evidence": "metric_value table / MetricsService output; Stage 16 DC-02 (detail); Stage 23 DW-16 scenario"
+    },
+    {
+      "schema": "partner-feed-envelope",
+      "ic": "IC-7",
+      "kind": "add optional property",
+      "detail": "ingest_ts (timestamp string) - a column of the legacy partner_feed row",
+      "evidence": "Stage 23 DW-16: 8,567 of 8,567 shipped partner_feed rows carry ingest_ts and failed v0.1 (additionalProperties false)"
+    },
+    {
+      "schema": "error-envelope",
+      "ic": "IC-7",
+      "kind": "widen",
+      "detail": "error.details may be null (the envelope of an error raised without details, e.g. E-HUB-INTERNAL)",
+      "evidence": "hub.web.wire.envelope(HubError()) emits details: null; Stage 23 DW-16"
+    },
+    {
+      "schema": "hub-config",
+      "ic": "IC-3",
+      "kind": "rewrite as the EFFECTIVE configuration",
+      "detail": "describes the configuration after every settings resolver applied its defaults: adds hub, runtime, capability_authority, approval_refs, auth, workflow, facts, case_creation, runs.*, site, search, templates, gateway, network.tls, audit.*; required keys unchanged (zone_h, disposition, closure, schedule, data_origin); the raw operator file need not carry the required keys because defaults fill them",
+      "evidence": "IC-3 key table (docs/17-implementation-prd/implementation-prd.md IP-5); Stage 23 DW-16 builds the effective configuration with the real resolvers"
+    }
+  ]
+}
