@@ -1,0 +1,230 @@
+{
+ "alternative_candidate": {
+  "partner_feed": {
+   "fail": 0,
+   "fail_fields": {},
+   "items": 8567,
+   "note": "Stage 12 v0.1 DRAFT schema; stdlib subset check (required, type, enum)",
+   "pass": 8567,
+   "schema": "docs/12-specs/contracts/schemas/partner-feed-payload.schema.json"
+  }
+ },
+ "contract": {
+  "bundled_sha256": "82a1a52cc865307e870a3278f19f1c5e167fea61d4c1bd637b779ddf480ec38c",
+  "byte_identical": true,
+  "integration_sha256": "82a1a52cc865307e870a3278f19f1c5e167fea61d4c1bd637b779ddf480ec38c",
+  "name": "source-contract-v1",
+  "required": [
+   "ref",
+   "status",
+   "schema_version"
+  ]
+ },
+ "decision_supported": "OD-S12-11 (per-source contract binding record_only | enforce); U-17-IP-2 / U-16-DC-1 (contract owner; contract or data wrong)",
+ "inputs": {
+  "legacy_db_sha256": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+  "vendor_csv_sha256": "d5f841003e666012a16a78b73e5d2fd28a4bf39a609fdf76650d0fa8154f6a85",
+  "vendor_csv_tier": "tiny"
+ },
+ "label": "synthetic, unvalidated",
+ "reproduce": "python3 -B tests/hub/run_hub_tests.py --sandbox-root ~/fde_sbx/s21-pack --label pack -k TST_HUB_STG21_S01 (writes <sandbox>/pack/scratch/s21-evidence/contract-pack.json)",
+ "schema": "s21-contract-pack/v1",
+ "stage": "21",
+ "static": {
+  "gateway": {
+   "absent": {
+    "ref": 1,
+    "schema_version": 1,
+    "status": 1
+   },
+   "fail": 1,
+   "fail_signatures": {
+    "ref,schema_version,status": 1
+   },
+   "items": 1,
+   "pass": 0,
+   "payload_keys": {
+    "business_key": 1,
+    "event_type": 1,
+    "message_id": 1,
+    "occurred_at": 1,
+    "system": 1
+   },
+   "payload_not_object": 0,
+   "wrong_type": {
+    "ref": 0,
+    "schema_version": 0,
+    "status": 0
+   }
+  },
+  "partner_feed": {
+   "absent": {
+    "ref": 8567,
+    "schema_version": 8567,
+    "status": 8567
+   },
+   "fail": 8567,
+   "fail_signatures": {
+    "ref,schema_version,status": 8567
+   },
+   "items": 8567,
+   "pass": 0,
+   "payload_keys": {
+    "business_key": 8357,
+    "currency": 8567,
+    "notes": 8567,
+    "object_type": 8567,
+    "policy_version": 8567,
+    "quality_flag": 8567,
+    "quantity": 8567,
+    "source_version": 8567,
+    "state": 8567,
+    "subtype": 8567,
+    "unit": 8567
+   },
+   "payload_not_object": 0,
+   "wrong_type": {
+    "ref": 0,
+    "schema_version": 0,
+    "status": 0
+   }
+  },
+  "source_message": {
+   "absent": {
+    "ref": 0,
+    "schema_version": 0,
+    "status": 0
+   },
+   "fail": 0,
+   "fail_signatures": {},
+   "items": 15,
+   "pass": 15,
+   "payload_keys": {
+    "ref": 15,
+    "schema_version": 15,
+    "status": 15
+   },
+   "payload_not_object": 0,
+   "wrong_type": {
+    "ref": 0,
+    "schema_version": 0,
+    "status": 0
+   }
+  },
+  "vendor_csv": {
+   "absent": {
+    "ref": 2400,
+    "schema_version": 0,
+    "status": 0
+   },
+   "fail": 2400,
+   "fail_signatures": {
+    "ref": 2400
+   },
+   "items": 2400,
+   "pass": 0,
+   "payload_keys": {
+    "amount": 2400,
+    "currency": 2400,
+    "external_id": 2400,
+    "kind": 2400,
+    "language": 2400,
+    "recorded_at": 2400,
+    "reference_id": 2400,
+    "region": 2400,
+    "schema_version": 2400,
+    "status": 2400,
+    "tenant": 2400
+   },
+   "payload_not_object": 0,
+   "wrong_type": {
+    "ref": 0,
+    "schema_version": 0,
+    "status": 0
+   }
+  }
+ },
+ "store": {
+  "gateway": {
+   "binding": "record_only",
+   "binding_origin": "default",
+   "contract_check": {
+    "fail": 1
+   },
+   "contract_fail_current_outcomes": {
+    "VALIDATED": 1
+   },
+   "enforce_would_keep_noop_duplicate": 0,
+   "enforce_would_newly_quarantine": 1,
+   "outcomes": {
+    "VALIDATED": 1
+   },
+   "outcomes_digest": "221e9a830f4c8b816544231d6f47ed6d2f2881775144865182ec164442f5b78b",
+   "received": 1,
+   "stored": 1
+  },
+  "partner_feed": {
+   "binding": "record_only",
+   "binding_origin": "default",
+   "contract_check": {
+    "fail": 8567
+   },
+   "contract_fail_current_outcomes": {
+    "EXCEPTION": 8109,
+    "NOOP_DUPLICATE": 67,
+    "QUARANTINED": 223,
+    "VALIDATED": 165,
+    "VALIDATED_WITH_FLAGS": 3
+   },
+   "enforce_would_keep_noop_duplicate": 67,
+   "enforce_would_newly_quarantine": 8277,
+   "outcomes": {
+    "EXCEPTION": 8109,
+    "NOOP_DUPLICATE": 67,
+    "QUARANTINED": 223,
+    "VALIDATED": 165,
+    "VALIDATED_WITH_FLAGS": 3
+   },
+   "outcomes_digest": "4a50d7151ced475024419ffe4e867e3da2fc1605f89e7c93f5a0c65604f0b98a",
+   "received": 8567,
+   "stored": 8567
+  },
+  "source_message": {
+   "binding": "record_only",
+   "binding_origin": "default",
+   "contract_check": {
+    "pass": 15
+   },
+   "contract_fail_current_outcomes": {},
+   "enforce_would_keep_noop_duplicate": 0,
+   "enforce_would_newly_quarantine": 0,
+   "outcomes": {
+    "VALIDATED": 15
+   },
+   "outcomes_digest": "1aa6d98762010efb17d4390033da23db9073212e38f8dc7675954d4347b2ad30",
+   "received": 15,
+   "stored": 15
+  },
+  "vendor_csv": {
+   "binding": "record_only",
+   "binding_origin": "default",
+   "contract_check": {
+    "fail": 2400
+   },
+   "contract_fail_current_outcomes": {
+    "QUARANTINED": 10,
+    "VALIDATED_WITH_FLAGS": 2390
+   },
+   "enforce_would_keep_noop_duplicate": 0,
+   "enforce_would_newly_quarantine": 2390,
+   "outcomes": {
+    "QUARANTINED": 10,
+    "VALIDATED_WITH_FLAGS": 2390
+   },
+   "outcomes_digest": "99be82fad88a5857982bc3059a72361118a8ecdfad1511b55c46028832d43233",
+   "received": 2400,
+   "stored": 2400
+  }
+ },
+ "work_item": "DW-10"
+}

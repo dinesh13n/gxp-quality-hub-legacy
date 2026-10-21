@@ -1,0 +1,8 @@
+# Stage 21 DW-12 legacy-path and checksum evidence (synthetic, unvalidated) - 2026-10-21T03:54:24Z
+HEAD 511e524 on stage-21-integration
+$ git diff --name-status baseline-as-found -- app legacy_batch legacy_java legacy_js sql data services integration contracts scripts ops
+(exit 0, empty output = no change)
+$ git ls-files --others --exclude-standard -- app legacy_batch legacy_java legacy_js sql data services integration contracts
+(empty = no untracked file)
+$ sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt
+rc=0

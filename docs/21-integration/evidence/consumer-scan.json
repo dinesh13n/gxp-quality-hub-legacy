@@ -1,0 +1,402 @@
+{
+ "decision_supported": "DQ-15 / U-14-01; CUT-2..CUT-4 step 4",
+ "label": "synthetic, unvalidated",
+ "outputs": [
+  {
+   "cut_step": "CUT-2",
+   "id": "LO-01",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [
+    "app/baseline.py",
+    "app/server.py"
+   ],
+   "output": "priority() / manual_review_required() rule results",
+   "patterns": [
+    "legacy_logic",
+    "manual_review_required",
+    "\\bpriority\\("
+   ],
+   "producers": [
+    "app/legacy_logic.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/batch.py",
+     "tests/characterization/catalogue.json",
+     "tests/characterization/golden/stage7/api_golden_run1.json",
+     "tests/characterization/mutants.json"
+    ],
+    "hub": [
+     "hub/policy/as_found_pins.json",
+     "hub/policy/asfound.py"
+    ],
+    "legacy_runtime": [
+     "app/baseline.py",
+     "app/server.py"
+    ],
+    "legacy_tests": [
+     "tests/test_workflow.py"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-2",
+   "id": "LO-02",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [],
+   "output": "legacy API /api/cases (priority, manual_review_required fields)",
+   "patterns": [
+    "/api/cases"
+   ],
+   "producers": [
+    "app/server.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/api.py",
+     "tests/characterization/capture/supplement.py",
+     "tests/characterization/catalogue.json",
+     "tests/characterization/golden/inc01/supplement_golden_v1.json",
+     "tests/characterization/golden/stage7/api_golden_run1.json"
+    ],
+    "legacy_docs": [
+     "README.md",
+     "docs/interface-notes.md"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-2",
+   "id": "LO-03",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [],
+   "output": "JS threshold() / legacyAllows() output",
+   "patterns": [
+    "legacy_policy",
+    "legacyAllows"
+   ],
+   "producers": [
+    "legacy_js/legacy_policy.js"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/batch.py",
+     "tests/characterization/catalogue.json",
+     "tests/characterization/golden/stage7/batch_golden_run1.json",
+     "tests/characterization/mutants.json"
+    ],
+    "hub": [
+     "hub/policy/as_found_pins.json",
+     "hub/policy/asfound.py"
+    ],
+    "legacy_docs": [
+     "docs/historical-fixtures.md"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-3",
+   "id": "LO-04",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [
+    "app/server.py"
+   ],
+   "output": "partner_feeds.processing_status after in-place reconcile",
+   "patterns": [
+    "processing_status",
+    "partner_feeds\\s+--reconcile",
+    "/api/partners"
+   ],
+   "producers": [
+    "app/partner_feeds.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/api.py",
+     "tests/characterization/capture/batch.py",
+     "tests/characterization/capture/supplement.py",
+     "tests/characterization/catalogue.json",
+     "tests/characterization/golden/inc01/supplement_golden_v1.json",
+     "tests/characterization/golden/stage7/api_golden_run1.json",
+     "tests/characterization/mutants.json"
+    ],
+    "hub": [
+     "hub/adapters/baseline_pins.json",
+     "hub/coexistence/seed_inc02.json",
+     "hub/coexistence/seed_s20.json"
+    ],
+    "legacy_docs": [
+     "README.md"
+    ],
+    "legacy_runtime": [
+     "app/server.py"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-3",
+   "id": "LO-05",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [
+    "app/operational_report.py"
+   ],
+   "output": "gateway_inbox / gateway_checkpoints rows",
+   "patterns": [
+    "gateway_inbox",
+    "gateway_checkpoints"
+   ],
+   "producers": [
+    "app/gateway_bridge.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/batch.py",
+     "tests/characterization/catalogue.json",
+     "tests/characterization/golden/inc01/supplement_golden_v1.json",
+     "tests/characterization/golden/stage7/R1_unittest_fresh.log",
+     "tests/characterization/golden/stage7/R7_readonly_scripts.log",
+     "tests/characterization/golden/stage7/batch_golden_run1.json"
+    ],
+    "hub": [
+     "hub/adapters/baseline_pins.json",
+     "hub/adapters/gateway_client.py",
+     "hub/adapters/intake_sources.py",
+     "hub/golden/observe.py",
+     "hub/intake/cli.py",
+     "hub/intake/profiles.py",
+     "hub/runs/sources.py"
+    ],
+    "legacy_docs": [
+     "docs/source-gateway.md"
+    ],
+    "legacy_runtime": [
+     "app/operational_report.py"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-3",
+   "id": "LO-06",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [
+    "sql/legacy_reports.sql"
+   ],
+   "output": "vendor_file_rows / vendor_file_imports rows",
+   "patterns": [
+    "vendor_file_rows",
+    "vendor_file_imports"
+   ],
+   "producers": [
+    "app/historical_estate.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/batch.py",
+     "tests/characterization/golden/inc01/supplement_golden_v1.json",
+     "tests/characterization/golden/stage7/R7_readonly_scripts.log"
+    ],
+    "hub": [
+     "hub/adapters/baseline_pins.json"
+    ],
+    "legacy_runtime": [
+     "sql/legacy_reports.sql"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-3",
+   "id": "LO-07",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [],
+   "output": "consume_source_messages() output",
+   "patterns": [
+    "consume_source_messages",
+    "app\\.integration\\b"
+   ],
+   "producers": [
+    "app/integration.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/lib.py"
+    ],
+    "legacy_docs": [
+     "operations/runbook.md"
+    ],
+    "legacy_tests": [
+     "tests/test_workflow.py"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-4",
+   "id": "LO-08",
+   "legacy_ci_readers": [
+    ".github/workflows/verify.yml"
+   ],
+   "legacy_runtime_readers": [],
+   "output": "app.baseline metrics JSON",
+   "patterns": [
+    "app\\.baseline",
+    "from \\.baseline",
+    "\\bbaseline\\(\\)"
+   ],
+   "producers": [
+    "app/baseline.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/batch.py",
+     "tests/characterization/catalogue.json",
+     "tests/characterization/golden/stage7/batch_golden_run1.json"
+    ],
+    "legacy_ci": [
+     ".github/workflows/verify.yml"
+    ],
+    "legacy_docs": [
+     "PRELOADED_DATA.md",
+     "README.md"
+    ],
+    "legacy_tests": [
+     "tests/test_workflow.py"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-4",
+   "id": "LO-09",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [],
+   "output": "Java month-end total (stdout)",
+   "patterns": [
+    "ReconcileLegacy"
+   ],
+   "producers": [
+    "legacy_java/ReconcileLegacy.java"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/batch.py",
+     "tests/characterization/catalogue.json",
+     "tests/characterization/golden/stage7/batch_golden_run1.json"
+    ],
+    "legacy_docs": [
+     "docs/historical-fixtures.md"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-4",
+   "id": "LO-10",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [],
+   "output": "SQL month-end report",
+   "patterns": [
+    "legacy_reports"
+   ],
+   "producers": [
+    "sql/legacy_reports.sql"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/README.md",
+     "tests/characterization/capture/supplement.py",
+     "tests/characterization/catalogue.json"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-4",
+   "id": "LO-11",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [],
+   "output": "night-shift reconciliation output",
+   "patterns": [
+    "shift_reconciliation",
+    "flagged_count"
+   ],
+   "producers": [
+    "legacy_batch/shift_reconciliation.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/batch.py",
+     "tests/characterization/catalogue.json",
+     "tests/characterization/golden/stage7/batch_golden_run1.json",
+     "tests/characterization/mutants.json"
+    ],
+    "hub": [
+     "hub/policy/asfound.py"
+    ],
+    "legacy_docs": [
+     "README.md"
+    ],
+    "legacy_tests": [
+     "tests/test_enterprise_legacy_v6.py"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-4",
+   "id": "LO-12",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [
+    "scripts/smoke.py"
+   ],
+   "output": "legacy API /api/metrics",
+   "patterns": [
+    "/api/metrics"
+   ],
+   "producers": [
+    "app/server.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/api.py",
+     "tests/characterization/capture/supplement.py",
+     "tests/characterization/golden/inc01/supplement_golden_v1.json",
+     "tests/characterization/golden/stage7/api_golden_run1.json"
+    ],
+    "legacy_docs": [
+     "PRELOADED_DATA.md",
+     "README.md",
+     "docs/interface-notes.md"
+    ],
+    "legacy_runtime": [
+     "scripts/smoke.py"
+    ]
+   }
+  },
+  {
+   "cut_step": "CUT-3/4",
+   "id": "LO-13",
+   "legacy_ci_readers": [],
+   "legacy_runtime_readers": [],
+   "output": "operational correlation report",
+   "patterns": [
+    "operational_report"
+   ],
+   "producers": [
+    "app/operational_report.py"
+   ],
+   "readers": {
+    "characterization_harness": [
+     "tests/characterization/capture/batch.py",
+     "tests/characterization/catalogue.json",
+     "tests/characterization/golden/stage7/batch_golden_run1.json"
+    ],
+    "legacy_docs": [
+     "docs/source-gateway.md"
+    ],
+    "legacy_tests": [
+     "tests/test_source_gateway.py"
+    ]
+   }
+  }
+ ],
+ "reproduce": "python3 -B tests/hub/run_hub_tests.py --sandbox-root ~/fde_sbx/s21-scan --label scan -k TST_HUB_STG21_S04 (writes <sandbox>/scan/scratch/s21-evidence/consumer-scan.json)",
+ "schema": "s21-consumer-scan/v1",
+ "scope": "every text file of the repository copy except .git, data/, .fde/, docs/NN-* stage documents and tests/hub/ (scanned: 285 files)",
+ "stage": "21",
+ "work_item": "DW-11"
+}

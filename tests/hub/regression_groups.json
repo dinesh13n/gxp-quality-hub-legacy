@@ -16,6 +16,8 @@
   {"id": "I9", "selectors": ["I9_", "INC09_S"]},
   {"id": "E9", "selectors": ["E09EGRESS"]},
   {"id": "S20", "selectors": ["STG20"]},
-  {"id": "E20", "selectors": ["E20EGRESS"]}
+  {"id": "E20", "selectors": ["E20EGRESS"]},
+  {"id": "S21", "selectors": ["STG21"]},
+  {"id": "E21", "selectors": ["E21EGRESS"]}
  ]
 }

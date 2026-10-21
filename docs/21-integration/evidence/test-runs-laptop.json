@@ -1,0 +1,169 @@
+{
+ "commands": [
+  "python3 -B tests/hub/run_hub_groups.py --sandbox-base ~/fde_sbx/s21 --group S21 --log <json>",
+  "python3 -B tests/hub/run_hub_groups.py --sandbox-base ~/fde_sbx/s21 --group E21 --log <json>",
+  "python3 -B tests/hub/run_hub_tests.py --sandbox-root ~/fde_sbx/s21-co --label co -k TST_CO_04 -k TST_CO_05 -k TST_HUB_STG20_S01",
+  "python3 -B tests/hub/run_hub_tests.py --sandbox-root ~/fde_sbx/s21-int --label int -k TST_INT_09 ... -k TST_INT_16"
+ ],
+ "device": "reference laptop VM (Python 3.10.12), sandbox copies only (OD-03a); sandboxes deleted after each run (OD-16)",
+ "groups": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 7,
+    "skipped": 0
+   },
+   "executed_methods": 7,
+   "expected_methods": 7,
+   "group": "S21",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 64.9,
+   "selectors": [
+    "STG21"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 7, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=64.9 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21/S21/S21/report.json"
+   ],
+   "wall_seconds": 65.0
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "executed_methods": 1,
+   "expected_methods": 1,
+   "group": "E21",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 68.7,
+   "selectors": [
+    "E21EGRESS"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=68.7 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s21/E21/E21/report.json"
+   ],
+   "wall_seconds": 68.8
+  }
+ ],
+ "label": "synthetic, unvalidated",
+ "note": "S21 / E21 group results are from the run after STG21 S07 was added (7 + 1 methods); DW-12 set re-run after the last code/doc commit; DW-10 TST-INT-09..16 run at commit b21e28f (no hub or intake change afterwards).",
+ "schema": "s21-test-runs/v1",
+ "stage": "21",
+ "targeted": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 10,
+    "skipped": 0
+   },
+   "label": "DW-12: TST-CO-04 + TST-CO-05 (+ STG20 S01 manifest check) - final re-run on the finished branch",
+   "python": "3.10.12",
+   "runner_seconds": 66.0,
+   "tests": [
+    {
+     "status": "ok",
+     "test": "test_TST_CO_04_a_each_legacy_db_opened_read_only"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_CO_04_b_every_write_attempt_refused"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_CO_04_c_legacy_files_byte_identical_after_attempts"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_CO_04_d_only_ro_uri_connections_to_legacy"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_CO_04_e_schema_drift_and_hash_mismatch_fail_closed"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_CO_04_f_working_tree_source_refused"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_CO_05_a_no_diff_vs_baseline_as_found"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_CO_05_b_no_untracked_files_in_legacy_paths"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_CO_05_c_branch_only_adds_files_outside_stage15_docs"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_HUB_STG20_S01_manifest_selects_every_test_once"
+    }
+   ],
+   "unittest_rc": 0
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 8,
+    "skipped": 0
+   },
+   "label": "DW-10: TST-INT-09..16 re-run",
+   "python": "3.10.12",
+   "runner_seconds": 68.3,
+   "tests": [
+    {
+     "status": "ok",
+     "test": "test_TST_INT_09_unsupported_revisions_are_quarantined"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_INT_10_each_defect_gets_its_reason_code"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_INT_11_rows_without_business_key"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_INT_12_record_only_is_the_default"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_INT_13_enforce_quarantines_everything_nothing_dropped"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_INT_14_source_messages_conform_to_the_contract"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_INT_15_negative_quantity_is_flagged_not_rejected"
+    },
+    {
+     "status": "ok",
+     "test": "test_TST_INT_16_unit_and_currency_vocabularies"
+    }
+   ],
+   "unittest_rc": 0
+  }
+ ]
+}
