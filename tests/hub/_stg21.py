@@ -22,7 +22,7 @@ import subprocess
 import sys
 import threading
 import unittest
-import urllib.request
+import urllib.parse
 
 import _support as S
 
@@ -291,14 +291,17 @@ def free_port():
 
 
 def get_json(url, timeout=5):
-    """Plain loopback GET without any proxy (the stub's own failure endpoints are read this way)."""
-    import urllib.error
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
-    try:
-        with opener.open(url, timeout=timeout) as r:
-            return r.status, r.read()
-    except urllib.error.HTTPError as e:
-        return e.code, e.read()
+    """Plain loopback GET (the stub's catalog / failure endpoints) through the raw-socket client of _http8.py: urllib.request / http.client
+    are deny-listed outside hub/adapters by No-AI rule R2, which also scans tests/hub (S21-DEV-02). Loopback hosts only. Returns
+    (status, body bytes)."""
+    import _http8
+    u = urllib.parse.urlsplit(url)
+    if u.hostname not in ("127.0.0.1", "localhost"):
+        raise ValueError("loopback only")
+    path = (u.path or "/") + ("?" + u.query if u.query else "")
+    head = "GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n" % (path, u.netloc)
+    r = _http8.raw(u.hostname, u.port, head.encode("latin-1"), timeout=timeout)
+    return r.status, r.body
 
 
 class GatewayStub(object):
