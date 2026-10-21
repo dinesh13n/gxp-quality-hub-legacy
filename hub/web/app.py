@@ -109,6 +109,8 @@ class WebApp(object):
                          correlation_id=correlation_id, object_ref="config",
                          details={"config_hash": self.config_hash, "command": "web-serve", "zone_h_holders": list(self.s["zone_h"]["holders"]),
                                   "anchor_every": self.s["audit"]["anchor_every"], "bind": rep["bind"]})
+            from hub.control import switch  # Stage 23 DW-17 (FF-2 rule 4)
+            switch.record_authority_changes(con, self.clock, self.anchor, self.cfg, correlation_id, "web-serve")
             audit.write_anchor(con, self.anchor_path)
         finally:
             con.close()

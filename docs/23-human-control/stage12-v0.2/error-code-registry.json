@@ -1,0 +1,1970 @@
+{
+ "added_beyond_stage12_spec": 30,
+ "codes": [
+  {
+   "area": "AUTH",
+   "classes": [
+    "AuthBadCredentials"
+   ],
+   "code": "E-AUTH-BAD-CREDENTIALS",
+   "exit_code": 19,
+   "http": 401,
+   "in_stage12_spec": true,
+   "messages": [
+    "login failed"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "AUTH",
+   "classes": [
+    "AuthForbidden"
+   ],
+   "code": "E-AUTH-FORBIDDEN",
+   "exit_code": 19,
+   "http": 403,
+   "in_stage12_spec": true,
+   "messages": [
+    "not permitted"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "AUTH",
+   "classes": [
+    "AuthLocked"
+   ],
+   "code": "E-AUTH-LOCKED",
+   "exit_code": 19,
+   "http": 423,
+   "in_stage12_spec": true,
+   "messages": [
+    "account temporarily locked"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "AUTH",
+   "classes": [
+    "PasswordPolicy"
+   ],
+   "code": "E-AUTH-PASSWORD-POLICY",
+   "exit_code": 2,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "password does not meet the configured policy"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "AUTH",
+   "classes": [
+    "AuthSessionExpired"
+   ],
+   "code": "E-AUTH-SESSION-EXPIRED",
+   "exit_code": 19,
+   "http": 401,
+   "in_stage12_spec": true,
+   "messages": [
+    "session expired"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "AUTH",
+   "classes": [
+    "AuthUnauthenticated"
+   ],
+   "code": "E-AUTH-UNAUTHENTICATED",
+   "exit_code": 19,
+   "http": 401,
+   "in_stage12_spec": true,
+   "messages": [
+    "authentication required"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "CFG",
+   "classes": [
+    "ConfigInvalid"
+   ],
+   "code": "E-CFG-INVALID",
+   "exit_code": 2,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "configuration value not allowed"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "CO",
+   "classes": [
+    "DenylistImport"
+   ],
+   "code": "E-CO-DENYLIST-IMPORT",
+   "exit_code": 9,
+   "http": null,
+   "in_stage12_spec": true,
+   "messages": [
+    "deny-listed dependency or import found"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "CO",
+   "classes": [
+    "EgressAttempt"
+   ],
+   "code": "E-CO-EGRESS-ATTEMPT",
+   "exit_code": 11,
+   "http": null,
+   "in_stage12_spec": true,
+   "messages": [
+    "outbound connection attempt detected"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "CO",
+   "classes": [
+    "LegacySchemaDrift"
+   ],
+   "code": "E-CO-LEGACY-SCHEMA-DRIFT",
+   "exit_code": 13,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "legacy schema differs from the pinned schema"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "CO",
+   "classes": [
+    "LegacyWriteRefused"
+   ],
+   "code": "E-CO-LEGACY-WRITE-REFUSED",
+   "exit_code": 10,
+   "http": null,
+   "in_stage12_spec": true,
+   "messages": [
+    "write to a legacy store refused"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "CO",
+   "classes": [
+    "NotSandbox"
+   ],
+   "code": "E-CO-NOT-SANDBOX",
+   "exit_code": 7,
+   "http": null,
+   "in_stage12_spec": true,
+   "messages": [
+    "refused: working data inside the original repository or backup"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "CO",
+   "classes": [
+    "ReleaseBlocked"
+   ],
+   "code": "E-CO-RELEASE-BLOCKED",
+   "exit_code": 20,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "release cannot be marked ready: a gate is not 'pass'"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "CO",
+   "classes": [
+    "RuntimeUnsupported"
+   ],
+   "code": "E-CO-RUNTIME-UNSUPPORTED",
+   "exit_code": 8,
+   "http": null,
+   "in_stage12_spec": true,
+   "messages": [
+    "Python/SQLite below the supported floor"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "CO",
+   "classes": [
+    "UnapprovedDeviation"
+   ],
+   "code": "E-CO-UNAPPROVED-DEVIATION",
+   "exit_code": 6,
+   "http": null,
+   "in_stage12_spec": true,
+   "messages": [
+    "golden-compare found an unapproved difference"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "BackfillMismatch"
+   ],
+   "code": "E-DEC-BACKFILL-MISMATCH",
+   "exit_code": 27,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "backfill count or projection check failed"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "CaseExists"
+   ],
+   "code": "E-DEC-CASE-EXISTS",
+   "exit_code": 25,
+   "http": 409,
+   "in_stage12_spec": false,
+   "messages": [
+    "the case already has events"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "CaseIdInvalid"
+   ],
+   "code": "E-DEC-CASE-ID-INVALID",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": false,
+   "messages": [
+    "case id does not match C + 8 digits"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "CaseNotFound"
+   ],
+   "code": "E-DEC-CASE-NOT-FOUND",
+   "exit_code": 25,
+   "http": 404,
+   "in_stage12_spec": true,
+   "messages": [
+    "unknown case id"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "ChainBroken"
+   ],
+   "code": "E-DEC-CHAIN-BROKEN",
+   "exit_code": 25,
+   "http": 409,
+   "in_stage12_spec": false,
+   "messages": [
+    "a per-case event hash chain does not verify"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "CreationDisabled"
+   ],
+   "code": "E-DEC-CREATION-DISABLED",
+   "exit_code": 25,
+   "http": 409,
+   "in_stage12_spec": false,
+   "messages": [
+    "case creation is disabled: R1 creates cases by legacy backfill only"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "EvidenceRequired"
+   ],
+   "code": "E-DEC-EVIDENCE-REQUIRED",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "closing transition has neither evidence nor an accepted exception"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "EvidenceUnresolved"
+   ],
+   "code": "E-DEC-EVIDENCE-UNRESOLVED",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "evidence reference does not exist"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "FactInvalid"
+   ],
+   "code": "E-DEC-FACT-INVALID",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": false,
+   "messages": [
+    "unknown or system-written fact type"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "FieldTooLong"
+   ],
+   "code": "E-DEC-FIELD-TOO-LONG",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "text field above its limit"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "IdempotencyMismatch"
+   ],
+   "code": "E-DEC-IDEMPOTENCY-MISMATCH",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "Idempotency-Key reused with a different request"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "Immutable"
+   ],
+   "code": "E-DEC-IMMUTABLE",
+   "exit_code": 25,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "attempt to modify or delete an immutable record"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "NoOp"
+   ],
+   "code": "E-DEC-NOOP",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "same-state transition"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "NotYetExists"
+   ],
+   "code": "E-DEC-NOT-YET-EXISTS",
+   "exit_code": 25,
+   "http": 404,
+   "in_stage12_spec": true,
+   "messages": [
+    "as_of is earlier than the first state event"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "ReopenExplicit"
+   ],
+   "code": "E-DEC-REOPEN-EXPLICIT",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "transition into REOPENED needs a REOPEN event with a basis"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "SeqConflict"
+   ],
+   "code": "E-DEC-SEQ-CONFLICT",
+   "exit_code": 25,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "expected_seq does not match the case"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "StateUnknown"
+   ],
+   "code": "E-DEC-STATE-UNKNOWN",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": false,
+   "messages": [
+    "state is not in the case_status vocabulary"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "TimeOrder"
+   ],
+   "code": "E-DEC-TIME-ORDER",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "occurred_at is in the future or before the previous event"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "DEC",
+   "classes": [
+    "TransitionNotAllowed"
+   ],
+   "code": "E-DEC-TRANSITION-NOT-ALLOWED",
+   "exit_code": 25,
+   "http": 422,
+   "in_stage12_spec": false,
+   "messages": [
+    "the strict transition table does not allow this change"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "FX",
+   "classes": [
+    "FixtureMismatch"
+   ],
+   "code": "E-FX-HASH",
+   "exit_code": 2,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "legacy baseline file does not match the pinned sha256"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GateExtrefInvalid"
+   ],
+   "code": "E-GATE-EXTREF-INVALID",
+   "exit_code": 31,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "external_ref payload incomplete (system and reference are required)"
+   ],
+   "module": "hub.gate.disposition_errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GateModeNone"
+   ],
+   "code": "E-GATE-MODE-NONE",
+   "exit_code": 31,
+   "http": 423,
+   "in_stage12_spec": true,
+   "messages": [
+    "disposition.mode is none: no disposition can be recorded"
+   ],
+   "module": "hub.gate.disposition_errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GateNoHolders"
+   ],
+   "code": "E-GATE-NO-HOLDERS",
+   "exit_code": 19,
+   "http": 423,
+   "in_stage12_spec": true,
+   "messages": [
+    "no Zone H holders are configured"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GateNotAuthorised"
+   ],
+   "code": "E-GATE-NOT-AUTHORISED",
+   "exit_code": 19,
+   "http": 403,
+   "in_stage12_spec": true,
+   "messages": [
+    "Zone H action not authorised for this actor"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GatePackStale"
+   ],
+   "code": "E-GATE-PACK-STALE",
+   "exit_code": 31,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "pack_hash is not current: re-read the evidence pack"
+   ],
+   "module": "hub.gate.disposition_errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GatePayloadInvalid"
+   ],
+   "code": "E-GATE-PAYLOAD-INVALID",
+   "exit_code": 31,
+   "http": 422,
+   "in_stage12_spec": false,
+   "messages": [
+    "Zone H action payload is invalid"
+   ],
+   "module": "hub.gate.disposition_errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GateReasonRequired"
+   ],
+   "code": "E-GATE-REASON-REQUIRED",
+   "exit_code": 31,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "an override, dismissal or refusal needs a non-empty reason"
+   ],
+   "module": "hub.gate.disposition_errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GateReauthRequired"
+   ],
+   "code": "E-GATE-REAUTH-REQUIRED",
+   "exit_code": 19,
+   "http": 401,
+   "in_stage12_spec": true,
+   "messages": [
+    "step-up re-authentication window elapsed"
+   ],
+   "module": "hub.gate.errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GateUnknownAction"
+   ],
+   "code": "E-GATE-UNKNOWN-ACTION",
+   "exit_code": 19,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "action is not in the closed Zone H list ZH-01..ZH-10"
+   ],
+   "module": "hub.gate.errors"
+  },
+  {
+   "area": "GATE",
+   "classes": [
+    "GateValuesUnset"
+   ],
+   "code": "E-GATE-VALUES-UNSET",
+   "exit_code": 31,
+   "http": 423,
+   "in_stage12_spec": true,
+   "messages": [
+    "disposition.values is empty: event mode cannot accept a decision"
+   ],
+   "module": "hub.gate.disposition_errors"
+  },
+  {
+   "area": "HUB",
+   "classes": [
+    "HubError"
+   ],
+   "code": "E-HUB-INTERNAL",
+   "exit_code": 1,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "internal error"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "HUB",
+   "classes": [
+    "HubKilled"
+   ],
+   "code": "E-HUB-KILLED",
+   "exit_code": 3,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "hub.kill is set; command refused"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "ID",
+   "classes": [
+    "AmbiguousType"
+   ],
+   "code": "E-ID-AMBIGUOUS-TYPE",
+   "exit_code": 26,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "identifier matches several id patterns: id_type is required"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "ID",
+   "classes": [
+    "LinkExists"
+   ],
+   "code": "E-ID-LINK-EXISTS",
+   "exit_code": 26,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "an active link already joins these two objects"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "ID",
+   "classes": [
+    "LinkNotFound"
+   ],
+   "code": "E-ID-LINK-NOT-FOUND",
+   "exit_code": 26,
+   "http": 404,
+   "in_stage12_spec": true,
+   "messages": [
+    "unknown link"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "ID",
+   "classes": [
+    "IdNotFound"
+   ],
+   "code": "E-ID-NOT-FOUND",
+   "exit_code": 26,
+   "http": 404,
+   "in_stage12_spec": true,
+   "messages": [
+    "unknown identifier"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "ID",
+   "classes": [
+    "PairNotRegistered"
+   ],
+   "code": "E-ID-PAIR-NOT-REGISTERED",
+   "exit_code": 26,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "the type pair is not in the crosswalk registry"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "ID",
+   "classes": [
+    "IdReasonRequired"
+   ],
+   "code": "E-ID-REASON-REQUIRED",
+   "exit_code": 26,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "a human link or retraction needs a non-empty reason"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "ID",
+   "classes": [
+    "SelfLink"
+   ],
+   "code": "E-ID-SELF-LINK",
+   "exit_code": 26,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "an object cannot be linked to itself"
+   ],
+   "module": "hub.decision.errors"
+  },
+  {
+   "area": "INT",
+   "classes": [
+    "ConflictAlreadyResolved"
+   ],
+   "code": "E-INT-CONFLICT-ALREADY-RESOLVED",
+   "exit_code": 28,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "the conflict already has a resolution"
+   ],
+   "module": "hub.intake.errors"
+  },
+  {
+   "area": "INT",
+   "classes": [
+    "EnvelopeInvalid"
+   ],
+   "code": "E-INT-ENVELOPE-INVALID",
+   "exit_code": 28,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "request envelope unusable"
+   ],
+   "module": "hub.intake.errors"
+  },
+  {
+   "area": "INT",
+   "classes": [
+    "ItemNotFound"
+   ],
+   "code": "E-INT-ITEM-NOT-FOUND",
+   "exit_code": 28,
+   "http": 404,
+   "in_stage12_spec": true,
+   "messages": [
+    "unknown raw_id or not a revision conflict"
+   ],
+   "module": "hub.intake.errors"
+  },
+  {
+   "area": "INT",
+   "classes": [
+    "RawImmutable"
+   ],
+   "code": "E-INT-RAW-IMMUTABLE",
+   "exit_code": 28,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "modification of a raw or outcome row refused"
+   ],
+   "module": "hub.intake.errors"
+  },
+  {
+   "area": "INT",
+   "classes": [
+    "ResolutionReasonRequired"
+   ],
+   "code": "E-INT-RESOLUTION-REASON-REQUIRED",
+   "exit_code": 28,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "a resolution needs a non-empty reason"
+   ],
+   "module": "hub.intake.errors"
+  },
+  {
+   "area": "INT",
+   "classes": [
+    "SourceUnreachable"
+   ],
+   "code": "E-INT-SOURCE-UNREACHABLE",
+   "exit_code": 28,
+   "http": 503,
+   "in_stage12_spec": true,
+   "messages": [
+    "source cannot be read"
+   ],
+   "module": "hub.intake.errors"
+  },
+  {
+   "area": "INT",
+   "classes": [
+    "UntrustedUse"
+   ],
+   "code": "E-INT-UNTRUSTED-USE",
+   "exit_code": 12,
+   "http": null,
+   "in_stage12_spec": true,
+   "messages": [
+    "Untrusted value reached a decision parameter"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "INT",
+   "classes": [
+    "UrlSchemeRefused"
+   ],
+   "code": "E-INT-URL-SCHEME-REFUSED",
+   "exit_code": 28,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "source URL is not http(s) on loopback"
+   ],
+   "module": "hub.intake.errors"
+  },
+  {
+   "area": "MET",
+   "classes": [
+    "MetCutoffRequired"
+   ],
+   "code": "E-MET-CUTOFF-REQUIRED",
+   "exit_code": 30,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "month-end total needs an explicit cut-off and denominator"
+   ],
+   "module": "hub.metrics.errors"
+  },
+  {
+   "area": "MET",
+   "classes": [
+    "MetDefinitionRequired"
+   ],
+   "code": "E-MET-DEFINITION-REQUIRED",
+   "exit_code": 30,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "a definition tag or clock is required"
+   ],
+   "module": "hub.metrics.errors"
+  },
+  {
+   "area": "MET",
+   "classes": [
+    "MetNotAvailable"
+   ],
+   "code": "E-MET-NOT-AVAILABLE",
+   "exit_code": 30,
+   "http": 501,
+   "in_stage12_spec": true,
+   "messages": [
+    "not available"
+   ],
+   "module": "hub.metrics.errors"
+  },
+  {
+   "area": "MET",
+   "classes": [
+    "MetNotReproducible"
+   ],
+   "code": "E-MET-NOT-REPRODUCIBLE",
+   "exit_code": 30,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "stored value does not recompute"
+   ],
+   "module": "hub.metrics.errors"
+  },
+  {
+   "area": "MET",
+   "classes": [
+    "MetSourceRefused"
+   ],
+   "code": "E-MET-SOURCE-REFUSED",
+   "exit_code": 30,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "source is not accepted for this meaning"
+   ],
+   "module": "hub.metrics.errors"
+  },
+  {
+   "area": "MET",
+   "classes": [
+    "MetTagMix"
+   ],
+   "code": "E-MET-TAG-MIX",
+   "exit_code": 30,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "arithmetic or comparison across different definition tags or policy versions"
+   ],
+   "module": "hub.metrics.errors"
+  },
+  {
+   "area": "MET",
+   "classes": [
+    "MetTagRequired"
+   ],
+   "code": "E-MET-TAG-REQUIRED",
+   "exit_code": 30,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "a metric involving closed / resolved / approved / cost / handling time needs a definition tag"
+   ],
+   "module": "hub.metrics.errors"
+  },
+  {
+   "area": "MET",
+   "classes": [
+    "MetUnknownMetric"
+   ],
+   "code": "E-MET-UNKNOWN-METRIC",
+   "exit_code": 30,
+   "http": 404,
+   "in_stage12_spec": true,
+   "messages": [
+    "unknown metric or value id"
+   ],
+   "module": "hub.metrics.errors"
+  },
+  {
+   "area": "MET",
+   "classes": [
+    "MetUnparsableInput"
+   ],
+   "code": "E-MET-UNPARSABLE-INPUT",
+   "exit_code": 30,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "unparsable amounts present"
+   ],
+   "module": "hub.metrics.errors"
+  },
+  {
+   "area": "OBS",
+   "classes": [
+    "TripwireTripped"
+   ],
+   "code": "E-OBS-TRIPWIRE",
+   "exit_code": 14,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "a zero-tripwire metric is non-zero"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "AsFoundDrift"
+   ],
+   "code": "E-POL-ASFOUND-DRIFT",
+   "exit_code": 24,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "legacy rule source differs from the pinned transcription"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "AuthorityRequired"
+   ],
+   "code": "E-POL-AUTHORITY-REQUIRED",
+   "exit_code": 23,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "authority_ref is required"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "ClockCalendarRequired"
+   ],
+   "code": "E-POL-CLOCK-CALENDAR-REQUIRED",
+   "exit_code": 23,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "business_calendar needs a calendar_ref"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "DecisionRequired"
+   ],
+   "code": "E-POL-DECISION-REQUIRED",
+   "exit_code": 23,
+   "http": 409,
+   "in_stage12_spec": false,
+   "messages": [
+    "no valid recorded human decision for this activation"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "InputInvalid"
+   ],
+   "code": "E-POL-INPUT-INVALID",
+   "exit_code": 23,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "a decimal input is missing, non-numeric, NaN or infinite"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "PolicyInvalid"
+   ],
+   "code": "E-POL-INVALID",
+   "exit_code": 23,
+   "http": 422,
+   "in_stage12_spec": false,
+   "messages": [
+    "policy object or rule set failed validation"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "NoActiveRuleset"
+   ],
+   "code": "E-POL-NO-ACTIVE-RULESET",
+   "exit_code": 23,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "no active rule set and no explicit ruleset_ref"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "NotFound"
+   ],
+   "code": "E-POL-NOT-FOUND",
+   "exit_code": 23,
+   "http": 404,
+   "in_stage12_spec": true,
+   "messages": [
+    "unknown policy, rule set or version"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "Overlap"
+   ],
+   "code": "E-POL-OVERLAP",
+   "exit_code": 23,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "overlapping effective windows for the same definition tag"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "ReadonlySet"
+   ],
+   "code": "E-POL-READONLY-SET",
+   "exit_code": 23,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "as-found rule sets are read-only"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "POL",
+   "classes": [
+    "UnknownFunction"
+   ],
+   "code": "E-POL-UNKNOWN-FUNCTION",
+   "exit_code": 23,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "function is not in the catalogue or not served by this rule set"
+   ],
+   "module": "hub.policy.errors"
+  },
+  {
+   "area": "R2",
+   "classes": [
+    "R2InputInvalid"
+   ],
+   "code": "E-R2-INPUT-INVALID",
+   "exit_code": 32,
+   "http": 422,
+   "in_stage12_spec": false,
+   "messages": [
+    "report parameter invalid"
+   ],
+   "module": "hub.r2.errors"
+  },
+  {
+   "area": "REQ",
+   "classes": [
+    "ReqInvalid"
+   ],
+   "code": "E-REQ-INVALID",
+   "exit_code": 31,
+   "http": 400,
+   "in_stage12_spec": true,
+   "messages": [
+    "malformed request"
+   ],
+   "module": "hub.core.req_errors"
+  },
+  {
+   "area": "REQ",
+   "classes": [
+    "NotImplementedYet"
+   ],
+   "code": "E-REQ-NOT-IMPLEMENTED",
+   "exit_code": 31,
+   "http": 501,
+   "in_stage12_spec": false,
+   "messages": [
+    "operation not available in this release"
+   ],
+   "module": "hub.web.errors"
+  },
+  {
+   "area": "REQ",
+   "classes": [
+    "ReqTooLarge"
+   ],
+   "code": "E-REQ-TOO-LARGE",
+   "exit_code": 31,
+   "http": 413,
+   "in_stage12_spec": false,
+   "messages": [
+    "request body above the limit"
+   ],
+   "module": "hub.web.errors"
+  },
+  {
+   "area": "REV",
+   "classes": [
+    "DraftsDisabled"
+   ],
+   "code": "E-REV-DRAFTS-DISABLED",
+   "exit_code": 31,
+   "http": 501,
+   "in_stage12_spec": false,
+   "messages": [
+    "template drafts are not enabled in this release"
+   ],
+   "module": "hub.review.errors"
+  },
+  {
+   "area": "REV",
+   "classes": [
+    "IndexAbsent"
+   ],
+   "code": "E-REV-INDEX-ABSENT",
+   "exit_code": 32,
+   "http": 409,
+   "in_stage12_spec": false,
+   "messages": [
+    "the derived search corpus has not been built (python -m hub.search build-index)"
+   ],
+   "module": "hub.r2.errors"
+  },
+  {
+   "area": "REV",
+   "classes": [
+    "ReviewNotFound"
+   ],
+   "code": "E-REV-NOT-FOUND",
+   "exit_code": 31,
+   "http": 404,
+   "in_stage12_spec": true,
+   "messages": [
+    "unknown flag, queue item or trace"
+   ],
+   "module": "hub.review.errors"
+  },
+  {
+   "area": "REV",
+   "classes": [
+    "QueryInvalid"
+   ],
+   "code": "E-REV-QUERY-INVALID",
+   "exit_code": 31,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "unknown search field or malformed filter"
+   ],
+   "module": "hub.review.errors"
+  },
+  {
+   "area": "REV",
+   "classes": [
+    "QueryTooLong"
+   ],
+   "code": "E-REV-QUERY-TOO-LONG",
+   "exit_code": 31,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "query over 200 characters or 12 terms"
+   ],
+   "module": "hub.review.errors"
+  },
+  {
+   "area": "REV",
+   "classes": [
+    "SearchDisabled"
+   ],
+   "code": "E-REV-SEARCH-DISABLED",
+   "exit_code": 31,
+   "http": 501,
+   "in_stage12_spec": true,
+   "messages": [
+    "search is not enabled in this release"
+   ],
+   "module": "hub.review.errors"
+  },
+  {
+   "area": "REV",
+   "classes": [
+    "TemplateInvalid"
+   ],
+   "code": "E-REV-TEMPLATE-INVALID",
+   "exit_code": 31,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "template fields invalid"
+   ],
+   "module": "hub.review.errors"
+  },
+  {
+   "area": "RUN",
+   "classes": [
+    "RunAlreadyRunning"
+   ],
+   "code": "E-RUN-ALREADY-RUNNING",
+   "exit_code": 29,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "another run of this job holds the lock"
+   ],
+   "module": "hub.runs.errors"
+  },
+  {
+   "area": "RUN",
+   "classes": [
+    "RunCheckpointInvalid"
+   ],
+   "code": "E-RUN-CHECKPOINT-INVALID",
+   "exit_code": 29,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "checkpoint is corrupt or unknown"
+   ],
+   "module": "hub.runs.errors"
+  },
+  {
+   "area": "RUN",
+   "classes": [
+    "RunScheduleDisabled"
+   ],
+   "code": "E-RUN-SCHEDULE-DISABLED",
+   "exit_code": 29,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "scheduled trigger refused: schedule.enabled is false"
+   ],
+   "module": "hub.runs.errors"
+  },
+  {
+   "area": "RUN",
+   "classes": [
+    "RunTotalsMismatch"
+   ],
+   "code": "E-RUN-TOTALS-MISMATCH",
+   "exit_code": 29,
+   "http": 500,
+   "in_stage12_spec": true,
+   "messages": [
+    "run totals do not reconcile with the outcome rows"
+   ],
+   "module": "hub.runs.errors"
+  },
+  {
+   "area": "RUN",
+   "classes": [
+    "RunNotFound",
+    "RunUnknownJob"
+   ],
+   "code": "E-RUN-UNKNOWN-JOB",
+   "exit_code": 29,
+   "http": 404,
+   "in_stage12_spec": true,
+   "messages": [
+    "unknown run id",
+    "job is not in the closed catalogue"
+   ],
+   "module": "hub.runs.errors"
+  },
+  {
+   "area": "SEC",
+   "classes": [
+    "AuditTamperDetected"
+   ],
+   "code": "E-SEC-AUDIT-TAMPER-DETECTED",
+   "exit_code": 17,
+   "http": 409,
+   "in_stage12_spec": true,
+   "messages": [
+    "verify-audit found a broken chain or anchor mismatch"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "SEC",
+   "classes": [
+    "AuditWriteFailed"
+   ],
+   "code": "E-SEC-AUDIT-WRITE-FAILED",
+   "exit_code": 18,
+   "http": 500,
+   "in_stage12_spec": true,
+   "messages": [
+    "audit append failed; the change was rolled back"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "SEC",
+   "classes": [
+    "Csrf"
+   ],
+   "code": "E-SEC-CSRF",
+   "exit_code": 19,
+   "http": 403,
+   "in_stage12_spec": true,
+   "messages": [
+    "missing or invalid CSRF token or custom header"
+   ],
+   "module": "hub.web.errors"
+  },
+  {
+   "area": "SEC",
+   "classes": [
+    "ExposureNotApproved"
+   ],
+   "code": "E-SEC-EXPOSURE-NOT-APPROVED",
+   "exit_code": 9,
+   "http": null,
+   "in_stage12_spec": true,
+   "messages": [
+    "start-up refused: non-loopback bind needs exposure approval and TLS settings"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "SEC",
+   "classes": [
+    "ReasonRequired"
+   ],
+   "code": "E-SEC-REASON-REQUIRED",
+   "exit_code": 19,
+   "http": 422,
+   "in_stage12_spec": true,
+   "messages": [
+    "a read of C3 data or an export needs a non-empty reason"
+   ],
+   "module": "hub.r2.errors"
+  },
+  {
+   "area": "SEC",
+   "classes": [
+    "ScanFindings"
+   ],
+   "code": "E-SEC-SCAN-FINDINGS",
+   "exit_code": 16,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "secret scan or deletion-path grep found something"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "SEC",
+   "classes": [
+    "SecretInAudit"
+   ],
+   "code": "E-SEC-SECRET-IN-AUDIT",
+   "exit_code": 18,
+   "http": 500,
+   "in_stage12_spec": false,
+   "messages": [
+    "credential-like key refused in audit details"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "STORE",
+   "classes": [
+    "BackupInvalid"
+   ],
+   "code": "E-STORE-BACKUP-INVALID",
+   "exit_code": 21,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "backup manifest missing or checksum mismatch"
+   ],
+   "module": "hub.security.errors"
+  },
+  {
+   "area": "STORE",
+   "classes": [
+    "MigrationDrift"
+   ],
+   "code": "E-STORE-MIGRATION-DRIFT",
+   "exit_code": 15,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "an applied migration file has changed"
+   ],
+   "module": "hub.core.errors"
+  },
+  {
+   "area": "STORE",
+   "classes": [
+    "StoreNotMigrated"
+   ],
+   "code": "E-STORE-NOT-MIGRATED",
+   "exit_code": 22,
+   "http": null,
+   "in_stage12_spec": false,
+   "messages": [
+    "hub store is below the schema version this command needs"
+   ],
+   "module": "hub.security.errors"
+  }
+ ],
+ "count": 109,
+ "exit_code_problems": [],
+ "exit_codes": [
+  {
+   "areas": [
+    "HUB"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-HUB-INTERNAL"
+   ],
+   "exit_code": 1,
+   "note": null
+  },
+  {
+   "areas": [
+    "AUTH",
+    "CFG",
+    "FX"
+   ],
+   "classification": "documented_clash",
+   "codes": [
+    "E-AUTH-PASSWORD-POLICY",
+    "E-CFG-INVALID",
+    "E-FX-HASH"
+   ],
+   "exit_code": 2,
+   "note": "usage / E-FX-HASH / E-CFG-INVALID / E-AUTH-PASSWORD-POLICY share exit 2 (INC-02 / INC-03 choices; RTD-21)"
+  },
+  {
+   "areas": [
+    "HUB"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-HUB-KILLED"
+   ],
+   "exit_code": 3,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-UNAPPROVED-DEVIATION"
+   ],
+   "exit_code": 6,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-NOT-SANDBOX"
+   ],
+   "exit_code": 7,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-RUNTIME-UNSUPPORTED"
+   ],
+   "exit_code": 8,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO",
+    "SEC"
+   ],
+   "classification": "documented_clash",
+   "codes": [
+    "E-CO-DENYLIST-IMPORT",
+    "E-SEC-EXPOSURE-NOT-APPROVED"
+   ],
+   "exit_code": 9,
+   "note": "E-CO-DENYLIST-IMPORT (INC-02) and E-SEC-EXPOSURE-NOT-APPROVED (as specified) share exit 9 (RTD-24, DEV-23)"
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-LEGACY-WRITE-REFUSED"
+   ],
+   "exit_code": 10,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-EGRESS-ATTEMPT"
+   ],
+   "exit_code": 11,
+   "note": null
+  },
+  {
+   "areas": [
+    "INT"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-INT-UNTRUSTED-USE"
+   ],
+   "exit_code": 12,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-LEGACY-SCHEMA-DRIFT"
+   ],
+   "exit_code": 13,
+   "note": null
+  },
+  {
+   "areas": [
+    "OBS"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-OBS-TRIPWIRE"
+   ],
+   "exit_code": 14,
+   "note": null
+  },
+  {
+   "areas": [
+    "STORE"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-STORE-MIGRATION-DRIFT"
+   ],
+   "exit_code": 15,
+   "note": null
+  },
+  {
+   "areas": [
+    "SEC"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-SEC-SCAN-FINDINGS"
+   ],
+   "exit_code": 16,
+   "note": null
+  },
+  {
+   "areas": [
+    "SEC"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-SEC-AUDIT-TAMPER-DETECTED"
+   ],
+   "exit_code": 17,
+   "note": null
+  },
+  {
+   "areas": [
+    "SEC"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-SEC-AUDIT-WRITE-FAILED",
+    "E-SEC-SECRET-IN-AUDIT"
+   ],
+   "exit_code": 18,
+   "note": null
+  },
+  {
+   "areas": [
+    "AUTH",
+    "GATE",
+    "SEC"
+   ],
+   "classification": "documented_family",
+   "codes": [
+    "E-AUTH-BAD-CREDENTIALS",
+    "E-AUTH-FORBIDDEN",
+    "E-AUTH-LOCKED",
+    "E-AUTH-SESSION-EXPIRED",
+    "E-AUTH-UNAUTHENTICATED",
+    "E-GATE-NO-HOLDERS",
+    "E-GATE-NOT-AUTHORISED",
+    "E-GATE-REAUTH-REQUIRED",
+    "E-GATE-UNKNOWN-ACTION",
+    "E-SEC-CSRF",
+    "E-SEC-REASON-REQUIRED"
+   ],
+   "exit_code": 19,
+   "note": "access-refusal family: E-AUTH-*, E-GATE-NO-HOLDERS / NOT-AUTHORISED / REAUTH-REQUIRED / UNKNOWN-ACTION, E-SEC-CSRF, E-SEC-REASON-REQUIRED (INC-03 / 04 / 08 / 09)"
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-RELEASE-BLOCKED"
+   ],
+   "exit_code": 20,
+   "note": null
+  },
+  {
+   "areas": [
+    "STORE"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-STORE-BACKUP-INVALID"
+   ],
+   "exit_code": 21,
+   "note": null
+  },
+  {
+   "areas": [
+    "STORE"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-STORE-NOT-MIGRATED"
+   ],
+   "exit_code": 22,
+   "note": null
+  },
+  {
+   "areas": [
+    "POL"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-POL-AUTHORITY-REQUIRED",
+    "E-POL-CLOCK-CALENDAR-REQUIRED",
+    "E-POL-DECISION-REQUIRED",
+    "E-POL-INPUT-INVALID",
+    "E-POL-INVALID",
+    "E-POL-NO-ACTIVE-RULESET",
+    "E-POL-NOT-FOUND",
+    "E-POL-OVERLAP",
+    "E-POL-READONLY-SET",
+    "E-POL-UNKNOWN-FUNCTION"
+   ],
+   "exit_code": 23,
+   "note": null
+  },
+  {
+   "areas": [
+    "POL"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-POL-ASFOUND-DRIFT"
+   ],
+   "exit_code": 24,
+   "note": null
+  },
+  {
+   "areas": [
+    "DEC"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-DEC-CASE-EXISTS",
+    "E-DEC-CASE-ID-INVALID",
+    "E-DEC-CASE-NOT-FOUND",
+    "E-DEC-CHAIN-BROKEN",
+    "E-DEC-CREATION-DISABLED",
+    "E-DEC-EVIDENCE-REQUIRED",
+    "E-DEC-EVIDENCE-UNRESOLVED",
+    "E-DEC-FACT-INVALID",
+    "E-DEC-FIELD-TOO-LONG",
+    "E-DEC-IDEMPOTENCY-MISMATCH",
+    "E-DEC-IMMUTABLE",
+    "E-DEC-NOOP",
+    "E-DEC-NOT-YET-EXISTS",
+    "E-DEC-REOPEN-EXPLICIT",
+    "E-DEC-SEQ-CONFLICT",
+    "E-DEC-STATE-UNKNOWN",
+    "E-DEC-TIME-ORDER",
+    "E-DEC-TRANSITION-NOT-ALLOWED"
+   ],
+   "exit_code": 25,
+   "note": null
+  },
+  {
+   "areas": [
+    "ID"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-ID-AMBIGUOUS-TYPE",
+    "E-ID-LINK-EXISTS",
+    "E-ID-LINK-NOT-FOUND",
+    "E-ID-NOT-FOUND",
+    "E-ID-PAIR-NOT-REGISTERED",
+    "E-ID-REASON-REQUIRED",
+    "E-ID-SELF-LINK"
+   ],
+   "exit_code": 26,
+   "note": null
+  },
+  {
+   "areas": [
+    "DEC"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-DEC-BACKFILL-MISMATCH"
+   ],
+   "exit_code": 27,
+   "note": null
+  },
+  {
+   "areas": [
+    "INT"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-INT-CONFLICT-ALREADY-RESOLVED",
+    "E-INT-ENVELOPE-INVALID",
+    "E-INT-ITEM-NOT-FOUND",
+    "E-INT-RAW-IMMUTABLE",
+    "E-INT-RESOLUTION-REASON-REQUIRED",
+    "E-INT-SOURCE-UNREACHABLE",
+    "E-INT-URL-SCHEME-REFUSED"
+   ],
+   "exit_code": 28,
+   "note": null
+  },
+  {
+   "areas": [
+    "RUN"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-RUN-ALREADY-RUNNING",
+    "E-RUN-CHECKPOINT-INVALID",
+    "E-RUN-SCHEDULE-DISABLED",
+    "E-RUN-TOTALS-MISMATCH",
+    "E-RUN-UNKNOWN-JOB"
+   ],
+   "exit_code": 29,
+   "note": null
+  },
+  {
+   "areas": [
+    "MET"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-MET-CUTOFF-REQUIRED",
+    "E-MET-DEFINITION-REQUIRED",
+    "E-MET-NOT-AVAILABLE",
+    "E-MET-NOT-REPRODUCIBLE",
+    "E-MET-SOURCE-REFUSED",
+    "E-MET-TAG-MIX",
+    "E-MET-TAG-REQUIRED",
+    "E-MET-UNKNOWN-METRIC",
+    "E-MET-UNPARSABLE-INPUT"
+   ],
+   "exit_code": 30,
+   "note": null
+  },
+  {
+   "areas": [
+    "GATE",
+    "REQ",
+    "REV"
+   ],
+   "classification": "documented_family",
+   "codes": [
+    "E-GATE-EXTREF-INVALID",
+    "E-GATE-MODE-NONE",
+    "E-GATE-PACK-STALE",
+    "E-GATE-PAYLOAD-INVALID",
+    "E-GATE-REASON-REQUIRED",
+    "E-GATE-VALUES-UNSET",
+    "E-REQ-INVALID",
+    "E-REQ-NOT-IMPLEMENTED",
+    "E-REQ-TOO-LARGE",
+    "E-REV-DRAFTS-DISABLED",
+    "E-REV-NOT-FOUND",
+    "E-REV-QUERY-INVALID",
+    "E-REV-QUERY-TOO-LONG",
+    "E-REV-SEARCH-DISABLED",
+    "E-REV-TEMPLATE-INVALID"
+   ],
+   "exit_code": 31,
+   "note": "request / gate / reviewer family: E-GATE-* payload and mode errors, E-REQ-*, E-REV-* (INC-08)"
+  },
+  {
+   "areas": [
+    "R2",
+    "REV"
+   ],
+   "classification": "documented_family",
+   "codes": [
+    "E-R2-INPUT-INVALID",
+    "E-REV-INDEX-ABSENT"
+   ],
+   "exit_code": 32,
+   "note": "R2 family: E-R2-INPUT-INVALID, E-REV-INDEX-ABSENT (INC-09)"
+  }
+ ],
+ "in_stage12_spec": 79,
+ "referenced_only": {
+  "E-RUN-ABANDONED": [
+   "hub/runs/service.py"
+  ],
+  "E-STORE-DB-BUSY": [
+   "hub/web/wire.py"
+  ]
+ },
+ "schema": "hub-error-registry/v1",
+ "source": "hub/**/*.py: HubError subclasses that define `code` (generated by python -m hub.control registry)",
+ "spec_codes_not_in_code": [
+  "E-RUN-ABANDONED",
+  "E-SYS-DB-BUSY",
+  "E-SYS-INTERNAL"
+ ]
+}

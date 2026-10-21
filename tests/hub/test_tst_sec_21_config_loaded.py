@@ -28,6 +28,7 @@ class TST_SEC_21_ConfigLoaded(unittest.TestCase):
         with open(cfg1) as f:
             c = json.load(f)
         c["zone_h"] = {"holders": ["synthetic-holder"], "reauth_window_seconds": 300}
+        c["approval_refs"] = {"zone_h.holders": H.TEST_APPROVAL_REF}  # Stage 23 DW-17: a non-default decision flag needs an approval_ref (a test marker, not an approval)
         cfg2 = os.path.join(base, "hub-config-2.json")
         with open(cfg2, "w") as f:
             json.dump(c, f)

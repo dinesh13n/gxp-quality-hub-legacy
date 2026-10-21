@@ -1,0 +1,76 @@
+{
+ "label": "synthetic, unvalidated - method validation only",
+ "selector": "-k STG23",
+ "base": "throw-away copy of the Stage 23 working tree after commit; each mutant applied to one copy, copy deleted after",
+ "results": [
+  {
+   "id": "H1",
+   "file": "hub/security/zone_h.py",
+   "mutation": "Zone H: a non-holder dispositioner is accepted (Stage 16 mutant H1, rule moved to hub/security/zone_h.py in Stage 20; DW-18 matrix)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 25, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG23_S41_refusal_matrix"
+   ],
+   "seconds": 28.1,
+   "tail": ""
+  },
+  {
+   "id": "H3",
+   "file": "hub/web/app.py",
+   "mutation": "security header weakened (DW-14)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 24, 'FAIL': 2, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG23_S01_security_header_values_exact_in_process",
+    "test_TST_HUB_STG23_S02_security_header_values_exact_over_the_wire"
+   ],
+   "seconds": 32.8,
+   "tail": ""
+  },
+  {
+   "id": "H5",
+   "file": "hub/web/server.py",
+   "mutation": "non-loopback bind accepted (DW-15)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 23, 'FAIL': 2, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG23_S03_start_up_guard_alone_accepts_approved_exposure_and_the_server_refuses",
+    "test_TST_HUB_STG23_S04_make_server_refuses_before_any_listener_exists",
+    "test_TST_HUB_STG23_S05_serve_command_exits_9_for_an_approved_non_loopback_bind"
+   ],
+   "seconds": 72.0,
+   "tail": ""
+  },
+  {
+   "id": "A1",
+   "file": "hub/control/flags.py",
+   "mutation": "non-default decision flag accepted without approval_ref (DW-17)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 24, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG23_S11_refused_without_approval_ref",
+    "test_TST_HUB_STG23_S14_out_of_band_config_edits_are_audited_or_refused"
+   ],
+   "seconds": 31.9,
+   "tail": ""
+  },
+  {
+   "id": "A2",
+   "file": "hub/admin/cli.py",
+   "mutation": "a config-file change of capability_authority is not audited (DW-17)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 25, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG23_S14_out_of_band_config_edits_are_audited_or_refused"
+   ],
+   "seconds": 32.0,
+   "tail": ""
+  }
+ ]
+}

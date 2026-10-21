@@ -1,0 +1,17 @@
+{
+ "approval_ref_note": "synthetic test marker, not a human approval",
+ "config_changed": [
+  {
+   "approval_ref": "SYNTHETIC-TEST-REF-S23 (a test marker, not a human approval)",
+   "command": "set-flag",
+   "config_hash_after": "fef04a9aa199c7dd68137e4d9f3b388188a810d7f0530f2948bb2c68c91c889e",
+   "config_hash_before": "a8eb6fa5a9ca8402898add1e137c677b8b6f846736b4b4857c569204feacf9e7",
+   "direction": "to_non_default",
+   "flag": "capability_authority.C4",
+   "new": "authoritative",
+   "old": "shadow",
+   "source": "hub.control set-flag"
+  }
+ ],
+ "label": "synthetic, unvalidated"
+}

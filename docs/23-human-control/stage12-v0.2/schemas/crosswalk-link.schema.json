@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:crosswalk-link:v0.2",
+  "title": "crosswalk-link",
+  "description": "Crosswalk link (FR-ID-01/02; DC-12) (Stage 12 v0.2 addendum, derived from v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "link_id": {
+      "type": "string"
+    },
+    "from_type": {
+      "type": "string"
+    },
+    "from_id": {
+      "type": "string"
+    },
+    "to_type": {
+      "type": "string"
+    },
+    "to_id": {
+      "type": "string"
+    },
+    "key_used": {
+      "type": "string"
+    },
+    "creator_kind": {
+      "enum": [
+        "rule",
+        "human"
+      ]
+    },
+    "creator": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|\\+00:00)$"
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "run_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "link_id",
+    "from_type",
+    "from_id",
+    "to_type",
+    "to_id",
+    "key_used",
+    "creator_kind",
+    "creator",
+    "created_at"
+  ],
+  "additionalProperties": false,
+  "if": {
+    "properties": {
+      "creator_kind": {
+        "const": "human"
+      }
+    },
+    "required": [
+      "creator_kind"
+    ]
+  },
+  "then": {
+    "required": [
+      "reason"
+    ],
+    "properties": {
+      "reason": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

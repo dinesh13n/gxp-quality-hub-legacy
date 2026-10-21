@@ -1,0 +1,174 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:metric-value:v0.2",
+  "title": "metric-value",
+  "description": "Metric value with definition tag, policy version and label (FR-MET-01/06, PNFR-20) (Stage 12 v0.2 addendum, derived from v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "value_id": {
+      "type": "string"
+    },
+    "metric_id": {
+      "type": "string"
+    },
+    "metric_version": {
+      "type": "integer"
+    },
+    "definition_tag": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "policy_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "policy_status": {
+      "enum": [
+        "candidate",
+        "adopted",
+        "accepted-open",
+        null
+      ]
+    },
+    "value": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "decimal string or null"
+    },
+    "null_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "n": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "partial": {
+      "type": "boolean"
+    },
+    "errors": {
+      "type": "array"
+    },
+    "window_start": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "window_end": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "denominator": {
+      "type": "string"
+    },
+    "exclusions": {
+      "type": "string"
+    },
+    "basis": {
+      "enum": [
+        "event_derived",
+        "modelled"
+      ]
+    },
+    "data_origin": {
+      "enum": [
+        "synthetic",
+        "production"
+      ]
+    },
+    "label": {
+      "type": "string"
+    },
+    "inputs_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "code_version": {
+      "type": "string"
+    },
+    "computed_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|\\+00:00)$"
+    },
+    "detail": {
+      "type": "object"
+    },
+    "params": {
+      "type": "object"
+    },
+    "inputs": {
+      "type": "array"
+    }
+  },
+  "required": [
+    "value_id",
+    "metric_id",
+    "metric_version",
+    "value",
+    "n",
+    "partial",
+    "denominator",
+    "exclusions",
+    "basis",
+    "data_origin",
+    "label",
+    "inputs_hash",
+    "code_version",
+    "computed_at"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "data_origin": {
+            "const": "synthetic"
+          }
+        },
+        "required": [
+          "data_origin"
+        ]
+      },
+      "then": {
+        "properties": {
+          "label": {
+            "const": "synthetic, unvalidated"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "value": {
+            "const": null
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "then": {
+        "required": [
+          "null_reason"
+        ],
+        "properties": {
+          "null_reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

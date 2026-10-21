@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:raw-intake:v0.2",
+  "title": "raw-intake",
+  "description": "Immutable raw intake record (FR-INT-01; DC-11) (Stage 12 v0.2 addendum, derived from v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "raw_id": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "source_key": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "partner": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "schema_rev": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receipt_time": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|\\+00:00)$"
+    },
+    "identity_key": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "duplicate_of": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "raw_bytes_b64": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "adapter_version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "raw_id",
+    "source",
+    "receipt_time",
+    "identity_key",
+    "content_hash",
+    "raw_bytes_b64",
+    "run_id",
+    "adapter_version"
+  ],
+  "additionalProperties": false
+}

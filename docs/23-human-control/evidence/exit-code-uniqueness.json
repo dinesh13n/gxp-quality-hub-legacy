@@ -1,0 +1,432 @@
+{
+ "documented_clashes": [
+  2,
+  9
+ ],
+ "documented_families": [
+  19,
+  31,
+  32
+ ],
+ "exit_codes": [
+  {
+   "areas": [
+    "HUB"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-HUB-INTERNAL"
+   ],
+   "exit_code": 1,
+   "note": null
+  },
+  {
+   "areas": [
+    "AUTH",
+    "CFG",
+    "FX"
+   ],
+   "classification": "documented_clash",
+   "codes": [
+    "E-AUTH-PASSWORD-POLICY",
+    "E-CFG-INVALID",
+    "E-FX-HASH"
+   ],
+   "exit_code": 2,
+   "note": "usage / E-FX-HASH / E-CFG-INVALID / E-AUTH-PASSWORD-POLICY share exit 2 (INC-02 / INC-03 choices; RTD-21)"
+  },
+  {
+   "areas": [
+    "HUB"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-HUB-KILLED"
+   ],
+   "exit_code": 3,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-UNAPPROVED-DEVIATION"
+   ],
+   "exit_code": 6,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-NOT-SANDBOX"
+   ],
+   "exit_code": 7,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-RUNTIME-UNSUPPORTED"
+   ],
+   "exit_code": 8,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO",
+    "SEC"
+   ],
+   "classification": "documented_clash",
+   "codes": [
+    "E-CO-DENYLIST-IMPORT",
+    "E-SEC-EXPOSURE-NOT-APPROVED"
+   ],
+   "exit_code": 9,
+   "note": "E-CO-DENYLIST-IMPORT (INC-02) and E-SEC-EXPOSURE-NOT-APPROVED (as specified) share exit 9 (RTD-24, DEV-23)"
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-LEGACY-WRITE-REFUSED"
+   ],
+   "exit_code": 10,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-EGRESS-ATTEMPT"
+   ],
+   "exit_code": 11,
+   "note": null
+  },
+  {
+   "areas": [
+    "INT"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-INT-UNTRUSTED-USE"
+   ],
+   "exit_code": 12,
+   "note": null
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-LEGACY-SCHEMA-DRIFT"
+   ],
+   "exit_code": 13,
+   "note": null
+  },
+  {
+   "areas": [
+    "OBS"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-OBS-TRIPWIRE"
+   ],
+   "exit_code": 14,
+   "note": null
+  },
+  {
+   "areas": [
+    "STORE"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-STORE-MIGRATION-DRIFT"
+   ],
+   "exit_code": 15,
+   "note": null
+  },
+  {
+   "areas": [
+    "SEC"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-SEC-SCAN-FINDINGS"
+   ],
+   "exit_code": 16,
+   "note": null
+  },
+  {
+   "areas": [
+    "SEC"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-SEC-AUDIT-TAMPER-DETECTED"
+   ],
+   "exit_code": 17,
+   "note": null
+  },
+  {
+   "areas": [
+    "SEC"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-SEC-AUDIT-WRITE-FAILED",
+    "E-SEC-SECRET-IN-AUDIT"
+   ],
+   "exit_code": 18,
+   "note": null
+  },
+  {
+   "areas": [
+    "AUTH",
+    "GATE",
+    "SEC"
+   ],
+   "classification": "documented_family",
+   "codes": [
+    "E-AUTH-BAD-CREDENTIALS",
+    "E-AUTH-FORBIDDEN",
+    "E-AUTH-LOCKED",
+    "E-AUTH-SESSION-EXPIRED",
+    "E-AUTH-UNAUTHENTICATED",
+    "E-GATE-NO-HOLDERS",
+    "E-GATE-NOT-AUTHORISED",
+    "E-GATE-REAUTH-REQUIRED",
+    "E-GATE-UNKNOWN-ACTION",
+    "E-SEC-CSRF",
+    "E-SEC-REASON-REQUIRED"
+   ],
+   "exit_code": 19,
+   "note": "access-refusal family: E-AUTH-*, E-GATE-NO-HOLDERS / NOT-AUTHORISED / REAUTH-REQUIRED / UNKNOWN-ACTION, E-SEC-CSRF, E-SEC-REASON-REQUIRED (INC-03 / 04 / 08 / 09)"
+  },
+  {
+   "areas": [
+    "CO"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-CO-RELEASE-BLOCKED"
+   ],
+   "exit_code": 20,
+   "note": null
+  },
+  {
+   "areas": [
+    "STORE"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-STORE-BACKUP-INVALID"
+   ],
+   "exit_code": 21,
+   "note": null
+  },
+  {
+   "areas": [
+    "STORE"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-STORE-NOT-MIGRATED"
+   ],
+   "exit_code": 22,
+   "note": null
+  },
+  {
+   "areas": [
+    "POL"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-POL-AUTHORITY-REQUIRED",
+    "E-POL-CLOCK-CALENDAR-REQUIRED",
+    "E-POL-DECISION-REQUIRED",
+    "E-POL-INPUT-INVALID",
+    "E-POL-INVALID",
+    "E-POL-NO-ACTIVE-RULESET",
+    "E-POL-NOT-FOUND",
+    "E-POL-OVERLAP",
+    "E-POL-READONLY-SET",
+    "E-POL-UNKNOWN-FUNCTION"
+   ],
+   "exit_code": 23,
+   "note": null
+  },
+  {
+   "areas": [
+    "POL"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-POL-ASFOUND-DRIFT"
+   ],
+   "exit_code": 24,
+   "note": null
+  },
+  {
+   "areas": [
+    "DEC"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-DEC-CASE-EXISTS",
+    "E-DEC-CASE-ID-INVALID",
+    "E-DEC-CASE-NOT-FOUND",
+    "E-DEC-CHAIN-BROKEN",
+    "E-DEC-CREATION-DISABLED",
+    "E-DEC-EVIDENCE-REQUIRED",
+    "E-DEC-EVIDENCE-UNRESOLVED",
+    "E-DEC-FACT-INVALID",
+    "E-DEC-FIELD-TOO-LONG",
+    "E-DEC-IDEMPOTENCY-MISMATCH",
+    "E-DEC-IMMUTABLE",
+    "E-DEC-NOOP",
+    "E-DEC-NOT-YET-EXISTS",
+    "E-DEC-REOPEN-EXPLICIT",
+    "E-DEC-SEQ-CONFLICT",
+    "E-DEC-STATE-UNKNOWN",
+    "E-DEC-TIME-ORDER",
+    "E-DEC-TRANSITION-NOT-ALLOWED"
+   ],
+   "exit_code": 25,
+   "note": null
+  },
+  {
+   "areas": [
+    "ID"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-ID-AMBIGUOUS-TYPE",
+    "E-ID-LINK-EXISTS",
+    "E-ID-LINK-NOT-FOUND",
+    "E-ID-NOT-FOUND",
+    "E-ID-PAIR-NOT-REGISTERED",
+    "E-ID-REASON-REQUIRED",
+    "E-ID-SELF-LINK"
+   ],
+   "exit_code": 26,
+   "note": null
+  },
+  {
+   "areas": [
+    "DEC"
+   ],
+   "classification": "unique",
+   "codes": [
+    "E-DEC-BACKFILL-MISMATCH"
+   ],
+   "exit_code": 27,
+   "note": null
+  },
+  {
+   "areas": [
+    "INT"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-INT-CONFLICT-ALREADY-RESOLVED",
+    "E-INT-ENVELOPE-INVALID",
+    "E-INT-ITEM-NOT-FOUND",
+    "E-INT-RAW-IMMUTABLE",
+    "E-INT-RESOLUTION-REASON-REQUIRED",
+    "E-INT-SOURCE-UNREACHABLE",
+    "E-INT-URL-SCHEME-REFUSED"
+   ],
+   "exit_code": 28,
+   "note": null
+  },
+  {
+   "areas": [
+    "RUN"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-RUN-ALREADY-RUNNING",
+    "E-RUN-CHECKPOINT-INVALID",
+    "E-RUN-SCHEDULE-DISABLED",
+    "E-RUN-TOTALS-MISMATCH",
+    "E-RUN-UNKNOWN-JOB"
+   ],
+   "exit_code": 29,
+   "note": null
+  },
+  {
+   "areas": [
+    "MET"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-MET-CUTOFF-REQUIRED",
+    "E-MET-DEFINITION-REQUIRED",
+    "E-MET-NOT-AVAILABLE",
+    "E-MET-NOT-REPRODUCIBLE",
+    "E-MET-SOURCE-REFUSED",
+    "E-MET-TAG-MIX",
+    "E-MET-TAG-REQUIRED",
+    "E-MET-UNKNOWN-METRIC",
+    "E-MET-UNPARSABLE-INPUT"
+   ],
+   "exit_code": 30,
+   "note": null
+  },
+  {
+   "areas": [
+    "GATE",
+    "REQ",
+    "REV"
+   ],
+   "classification": "documented_family",
+   "codes": [
+    "E-GATE-EXTREF-INVALID",
+    "E-GATE-MODE-NONE",
+    "E-GATE-PACK-STALE",
+    "E-GATE-PAYLOAD-INVALID",
+    "E-GATE-REASON-REQUIRED",
+    "E-GATE-VALUES-UNSET",
+    "E-REQ-INVALID",
+    "E-REQ-NOT-IMPLEMENTED",
+    "E-REQ-TOO-LARGE",
+    "E-REV-DRAFTS-DISABLED",
+    "E-REV-NOT-FOUND",
+    "E-REV-QUERY-INVALID",
+    "E-REV-QUERY-TOO-LONG",
+    "E-REV-SEARCH-DISABLED",
+    "E-REV-TEMPLATE-INVALID"
+   ],
+   "exit_code": 31,
+   "note": "request / gate / reviewer family: E-GATE-* payload and mode errors, E-REQ-*, E-REV-* (INC-08)"
+  },
+  {
+   "areas": [
+    "R2",
+    "REV"
+   ],
+   "classification": "documented_family",
+   "codes": [
+    "E-R2-INPUT-INVALID",
+    "E-REV-INDEX-ABSENT"
+   ],
+   "exit_code": 32,
+   "note": "R2 family: E-R2-INPUT-INVALID, E-REV-INDEX-ABSENT (INC-09)"
+  }
+ ],
+ "label": "synthetic, unvalidated",
+ "undocumented": []
+}

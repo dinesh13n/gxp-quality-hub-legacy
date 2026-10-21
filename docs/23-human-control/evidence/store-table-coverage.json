@@ -1,0 +1,52 @@
+{
+ "label": "synthetic, unvalidated",
+ "row_counts_mapped": {
+  "audit_log": 29,
+  "crosswalk_link": 13,
+  "decision_events": 252,
+  "evidence_record": 1,
+  "intake_outcome": 21,
+  "metric_definition": 5,
+  "metric_value": 1,
+  "policy_object": 5,
+  "raw_intake": 21,
+  "rule_set": 3
+ },
+ "tables_with_schema": {
+  "audit_log": "audit-record",
+  "crosswalk_link": "crosswalk-link",
+  "decision_events": "decision-event",
+  "evidence_record": "evidence-record",
+  "intake_outcome": "intake-outcome",
+  "metric_definition": "metric-definition",
+  "metric_value": "metric-value",
+  "policy_object": "policy-object",
+  "raw_intake": "raw-intake",
+  "rule_set": "rule-set"
+ },
+ "tables_without_schema": [
+  "active_ruleset",
+  "case_state",
+  "coexistence_inventory",
+  "crosswalk_link_event",
+  "decision_idempotency",
+  "deviation_register",
+  "flag_action",
+  "intake_item_attr",
+  "intake_run_event",
+  "login_attempt",
+  "obs_metric",
+  "policy_events",
+  "principal",
+  "principal_role",
+  "release_gate_result",
+  "release_record",
+  "rule_row",
+  "rule_trace",
+  "run_event",
+  "run_lock",
+  "service_token",
+  "service_token_revocation",
+  "session"
+ ]
+}

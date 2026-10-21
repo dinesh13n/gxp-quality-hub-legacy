@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:rule-set:v0.2",
+  "title": "rule-set",
+  "description": "Rule set as data (FR-POL-04); as-found sets are read_only (Stage 12 v0.2 addendum, derived from v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "ruleset_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "name": {
+      "type": "string"
+    },
+    "origin": {
+      "enum": [
+        "as-found",
+        "custom"
+      ]
+    },
+    "read_only": {
+      "type": "boolean"
+    },
+    "functions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "PRIORITY",
+          "MANUAL_REVIEW",
+          "AMOUNT_LIMIT",
+          "SHIFT_FLAG"
+        ]
+      },
+      "minItems": 1
+    },
+    "domains": {
+      "type": "object"
+    },
+    "rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "row_id",
+          "ordinal",
+          "conditions",
+          "outcome"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "row_id": {
+            "type": "string"
+          },
+          "ordinal": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "field",
+                "op",
+                "value"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "op": {
+                  "enum": [
+                    "eq",
+                    "in",
+                    "gt",
+                    "gte",
+                    "lt",
+                    "lte",
+                    "starts_with",
+                    "is_null",
+                    "not_null"
+                  ]
+                },
+                "value": {}
+              }
+            }
+          },
+          "outcome": {},
+          "effective_from": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "effective_to": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "owner": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "is_default": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "ruleset_id",
+    "version",
+    "name",
+    "origin",
+    "read_only",
+    "functions",
+    "rows"
+  ],
+  "additionalProperties": false,
+  "if": {
+    "properties": {
+      "origin": {
+        "const": "as-found"
+      }
+    },
+    "required": [
+      "origin"
+    ]
+  },
+  "then": {
+    "properties": {
+      "read_only": {
+        "const": true
+      }
+    }
+  }
+}

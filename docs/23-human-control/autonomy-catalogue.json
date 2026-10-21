@@ -1,0 +1,52 @@
+{
+ "schema": "hub-autonomy-catalogue/v1",
+ "label": "synthetic, unvalidated",
+ "work_item": "DW-18",
+ "note": "Machine-checked by tests/hub/test_tst_hub_stg23_catalogue.py: every path, needle and test named here must exist. 'class' is code-enforced (the code refuses without a human decision), partial (code enforces part, the rest is process) or process-only (no code can enforce it; a human or the orchestrator holds it).",
+ "zone_h": [
+  {"id": "ZH-01", "action": "BATCH_DISPOSITION", "code": [["hub/gate/actions.py", "def _zh_01"], ["hub/gate/dispositions.py", "mode_at_write"]],
+   "tests": [["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_05"], ["test_tst_hub_stg23_catalogue.py", "S41"], ["test_tst_hub_stg23_catalogue.py", "S42"]]},
+  {"id": "ZH-02", "action": "QA_RELEASE", "code": [["hub/gate/actions.py", "def _zh_02"]],
+   "tests": [["test_tst_hub_stg23_catalogue.py", "S41"], ["test_tst_hub_stg23_catalogue.py", "S42"]]},
+  {"id": "ZH-03", "action": "ESIGNATURE_RECORD", "code": [["hub/gate/actions.py", "def _zh_03"]],
+   "tests": [["test_tst_hub_stg23_catalogue.py", "S41"], ["test_tst_hub_stg23_catalogue.py", "S42"]]},
+  {"id": "ZH-04", "action": "CLOSE_EXCEPTION", "code": [["hub/gate/actions.py", "def _zh_04"]],
+   "tests": [["test_tst_dec_15_28_closure_facts.py", "TST_DEC_"], ["test_tst_hub_stg23_catalogue.py", "S41"]]},
+  {"id": "ZH-05", "action": "POLICY_ADOPT", "code": [["hub/gate/actions.py", "def _zh_05"]],
+   "tests": [["test_tst_pol_01_10_policy_objects.py", "TST_POL_"], ["test_tst_hub_stg23_catalogue.py", "S41"]]},
+  {"id": "ZH-06", "action": "RULESET_ACTIVATE", "code": [["hub/gate/actions.py", "def _zh_06"]],
+   "tests": [["test_tst_run_01_15_runs.py", "TST_RUN_"], ["test_tst_hub_stg23_catalogue.py", "S41"]]},
+  {"id": "ZH-07", "action": "EXCEPTION_RULE_ACCEPT", "code": [["hub/gate/actions.py", "def _zh_07"]],
+   "tests": [["test_tst_hub_stg23_catalogue.py", "S41"], ["test_tst_hub_stg23_catalogue.py", "S42"]]},
+  {"id": "ZH-08", "action": "DISPOSITION_MODE_CHANGE", "code": [["hub/gate/actions.py", "def _zh_08"]],
+   "tests": [["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_08"], ["test_tst_hub_stg23_catalogue.py", "S42"]]},
+  {"id": "ZH-09", "action": "SCHEDULE_ENABLE_DISABLE", "code": [["hub/gate/actions.py", "def _zh_09"]],
+   "tests": [["test_tst_run_01_15_runs.py", "TST_RUN_"], ["test_tst_hub_stg23_catalogue.py", "S42"]]},
+  {"id": "ZH-10", "action": "POLICY_CHANGE", "code": [["hub/gate/actions.py", "def _zh_10"]],
+   "tests": [["test_tst_hub_stg20_r1_gaps.py", "S"], ["test_tst_hub_stg23_catalogue.py", "S41"]]}
+ ],
+ "zone_h_common": {
+  "choke_point": ["hub/gate/actions.py", "def execute"],
+  "holder_check": ["hub/gate/service.py", "def require_holder"],
+  "db_trigger": ["hub/decision/migrations/M003_decision_crosswalk.sql", "holder_check_ref"],
+  "tests": [["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_02"], ["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_09"], ["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_10"], ["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_11"], ["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_12"], ["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_21"]]
+ },
+ "har": [
+  {"id": "HAR-01", "class": "partial", "trigger": "write, restore or regenerate working-tree data/", "code": [["hub/guards/sandbox.py", "def assert_safe_path"], ["hub/guards/sandbox.py", "def verify_backup_manifest"]], "tests": [["test_tst_co_06_sandbox_guard.py", "TST_CO_06"]], "note": "the hub refuses a data directory inside the worktree or a protected root; restore of data/ itself is a human act (sha256 manifest)"},
+  {"id": "HAR-02", "class": "process-only", "trigger": "choose or override the authoritative baseline dataset", "code": [], "tests": [], "note": "no code path chooses a baseline; recorded in the OD log"},
+  {"id": "HAR-03", "class": "process-only", "trigger": "delete any file in the repo or backup", "code": [], "tests": [], "note": "tests scan hub/ for deletion of the data tree (scan G6) but deleting files in the repo is a tool permission, not a hub control"},
+  {"id": "HAR-04", "class": "process-only", "trigger": "merge a BUILD branch into main", "code": [], "tests": [], "note": "git workflow; no hub code"},
+  {"id": "HAR-05", "class": "code-enforced", "trigger": "run a service bound beyond 127.0.0.1", "code": [["hub/web/server.py", "exposure.is_loopback"], ["hub/security/exposure.py", "def is_loopback"]], "tests": [["test_tst_hub_stg23_controls.py", "S03"], ["test_tst_hub_stg23_controls.py", "S04"], ["test_tst_hub_stg23_controls.py", "S05"]], "note": "Stage 23 DW-15: a non-loopback bind is refused even with exposure approval and TLS keys; Docker/Compose is not shipped"},
+  {"id": "HAR-06", "class": "partial", "trigger": "change approval/priority thresholds or decision logic", "code": [["hub/gate/actions.py", "def _zh_10"], ["hub/control/flags.py", "DECISION_FLAGS"]], "tests": [["test_tst_hub_stg23_controls.py", "S10"], ["test_tst_hub_stg23_catalogue.py", "S41"]], "note": "hub policy changes need ZH-05/06/10 and a holder; decision flags need approval_ref. Editing the legacy source is process (legacy tree is byte-identical, checked by the characterization harness)"},
+  {"id": "HAR-07", "class": "process-only", "trigger": "change CI, Dockerfile, Compose, env profiles, pyproject", "code": [], "tests": [], "note": "no hub code; Stage 23 changed none"},
+  {"id": "HAR-08", "class": "code-enforced", "trigger": "install dependencies / third-party packages", "code": [["hub/guards/no_ai.py", "E-CO-DENYLIST-IMPORT"]], "tests": [["test_tst_co_11_no_ai_denylist.py", "TST_CO_11"]], "note": "deny-list covers AI/ML/network clients; a general new dependency is caught only by review (heuristic)"},
+  {"id": "HAR-09", "class": "code-enforced", "trigger": "send data outside the device", "code": [["hub/guards/egress.py", "def install"]], "tests": [["test_tst_hub_stg21_egress_guard.py", "S"], ["test_tst_hub_stg23_egress_guard.py", "E23"]], "note": "egress guard refuses non-loopback connects in tests; git remotes are process"},
+  {"id": "HAR-10", "class": "code-enforced", "trigger": "introduce any AI/LLM call or automated action into the product", "code": [["hub/guards/no_ai.py", "E-CO-DENYLIST-IMPORT"], ["hub/obs", "model_calls_total"]], "tests": [["test_tst_co_12_egress_tripwire.py", "TST_CO_12"]], "note": "structural (deny-list, tripwire = 0); an automated action that is not AI is held back by Zone H and by the decision-flag approval rule"},
+  {"id": "HAR-11", "class": "partial", "trigger": "record a decision, owner, KPI target or stakeholder statement as approved/final", "code": [["hub/control/flags.py", "def check"]], "tests": [["test_tst_hub_stg23_controls.py", "S10"]], "note": "the hub refuses a non-default decision flag without approval_ref; it cannot verify the reference is a real approval (Unknown). Recording OD entries is process"},
+  {"id": "HAR-12", "class": "code-enforced", "trigger": "make, simulate or automate batch disposition / QA release / e-signature", "code": [["hub/gate/actions.py", "def execute"], ["hub/gate/service.py", "def require_holder"]], "tests": [["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_09"], ["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_11"], ["test_tst_gate_01_22_disposition_gate.py", "TST_GATE_12"], ["test_tst_hub_stg23_catalogue.py", "S41"]], "note": "ZH-01..03 only by a human holder; shipped holders list is EMPTY so every action is refused"},
+  {"id": "HAR-13", "class": "partial", "trigger": "modify prior-stage artifacts or .fde/ control files", "code": [["tests/hub/non_add_edits.json", "work_item"]], "tests": [["test_tst_co_05_legacy_paths_unchanged.py", "TST_CO_05"]], "note": "the non-add edit register makes every change to an existing hub file visible and tested; .fde/ edits are process"},
+  {"id": "HAR-14", "class": "process-only", "trigger": "proceed past a BLOCKED gate or waive a stop condition", "code": [], "tests": [], "note": "orchestrator and Dinesh; no hub code"},
+  {"id": "HAR-15", "class": "process-only", "trigger": "access E3/E4 environments or real external systems", "code": [], "tests": [], "note": "none exist; the egress guard (HAR-09) keeps tests on loopback"},
+  {"id": "HAR-16", "class": "partial", "trigger": "execute code in the working tree (E0)", "code": [["hub/guards/sandbox.py", "def assert_running_in_sandbox"]], "tests": [["test_tst_co_06_sandbox_guard.py", "TST_CO_06"]], "note": "the hub refuses to run mutating commands from the working tree; running tests there is process (this stage ran every test in sandbox copies)"}
+ ]
+}

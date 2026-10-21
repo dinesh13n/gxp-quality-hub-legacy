@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:gxp-hub:schema:rule-result:v0.2",
+  "title": "rule-result",
+  "description": "Rule evaluation result with trace and defaulted marker (FR-POL-06, FR-REV-01) (Stage 12 v0.2 addendum, derived from v0.1 DRAFT; synthetic, unvalidated)",
+  "type": "object",
+  "properties": {
+    "outcome": {},
+    "trace": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "row_id",
+          "ordinal",
+          "matched",
+          "inputs_used"
+        ],
+        "properties": {
+          "row_id": {
+            "type": "string"
+          },
+          "ordinal": {
+            "type": "integer"
+          },
+          "matched": {
+            "type": "boolean"
+          },
+          "inputs_used": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "defaulted": {
+      "type": "boolean"
+    },
+    "defaulted_reason": {
+      "enum": [
+        "NO_MATCH_REGION_YEAR",
+        "UNKNOWN_INPUT_VALUE",
+        "NULL_INPUT",
+        null
+      ]
+    },
+    "ruleset_ref": {
+      "type": "string"
+    },
+    "authoritative": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "outcome",
+    "trace",
+    "defaulted",
+    "ruleset_ref",
+    "authoritative"
+  ],
+  "additionalProperties": false,
+  "if": {
+    "properties": {
+      "defaulted": {
+        "const": true
+      }
+    },
+    "required": [
+      "defaulted"
+    ]
+  },
+  "then": {
+    "required": [
+      "defaulted_reason"
+    ],
+    "properties": {
+      "defaulted_reason": {
+        "type": "string"
+      }
+    }
+  }
+}
