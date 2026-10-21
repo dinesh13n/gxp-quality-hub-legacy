@@ -1,0 +1,51 @@
+{
+ "label": "synthetic, unvalidated - method validation only",
+ "results": [
+  {
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 1,
+    "ok": 21,
+    "skipped": 0
+   },
+   "file": "hub/security/zone_h.py",
+   "id": "H1S20",
+   "killed_by": [
+    "test_TST_GATE_21_no_switch_disables_the_gate"
+   ],
+   "label": "synthetic, unvalidated - method validation only",
+   "mutation": "Zone H: a non-holder is accepted (all three callers)",
+   "rc": 1,
+   "seconds": 47.4,
+   "selectors": [
+    "TST_GATE"
+   ],
+   "status": "KILLED"
+  },
+  {
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 4,
+    "ok": 3,
+    "skipped": 0
+   },
+   "file": "hub/intake/validate.py",
+   "id": "G1S20",
+   "killed_by": [
+    "test_TST_CO_01_b_register_describes_the_actual_goldens",
+    "test_TST_CO_01_c_matching_approved_rows_exit0",
+    "test_TST_CO_01_d_approval_must_match_observed_values",
+    "test_TST_HUB_STG20_S04_observed_values_equal_stage16_observation"
+   ],
+   "label": "synthetic, unvalidated - method validation only",
+   "mutation": "intake stops flagging negative quantities (DV-03 behaviour)",
+   "rc": 1,
+   "seconds": 37.9,
+   "selectors": [
+    "TST_CO_01",
+    "STG20_S04"
+   ],
+   "status": "KILLED"
+  }
+ ]
+}

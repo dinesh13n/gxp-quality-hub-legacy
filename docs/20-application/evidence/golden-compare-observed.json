@@ -1,0 +1,365 @@
+{
+ "baseline": {
+  "enterprise_legacy.sqlite3": {
+   "access": "mode=ro&immutable=1",
+   "adapter": "AD-02",
+   "source": "enterprise_legacy.sqlite3",
+   "source_sha256": "210f4bafd858155f79dd4654fd3c9f4817c6e3d9325bc320bea4a8945fdb4c0b"
+  },
+  "legacy.sqlite3": {
+   "access": "mode=ro&immutable=1",
+   "adapter": "AD-01",
+   "source": "legacy.sqlite3",
+   "source_sha256": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa"
+  }
+ },
+ "entries": [
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-07:lib.missing_field",
+   "legacy": {
+    "accepted": 0,
+    "duplicates": 0,
+    "invalid": 1,
+    "received": 1
+   },
+   "new": {
+    "quarantined": 1,
+    "reason": "MISSING_ENVELOPE_FIELD",
+    "received": 1
+   },
+   "new_source": "observed:intake.missing_envelope_field (built module; code ef76c6f2226a)",
+   "register": [
+    {
+     "dev_id": "DV-09",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-08:batch.partner_error_reasons[quantity out of range]",
+   "legacy": 154,
+   "new": {
+    "NEGATIVE_VALUE_items": 161,
+    "flagged_value_queue": 3
+   },
+   "new_source": "observed:intake.partner_negative_quantity (built module; code ef76c6f2226a)",
+   "register": [
+    {
+     "dev_id": "DV-03",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-08:batch.partner_error_reasons[replayed source message]",
+   "legacy": 64,
+   "new": {
+    "NOOP_DUPLICATE": 67,
+    "REVISED_CONFLICT": 0
+   },
+   "new_source": "observed:intake.partner_replay (built module; code ef76c6f2226a)",
+   "register": [
+    {
+     "dev_id": "DV-02",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-08:batch.partner_status_after_all",
+   "legacy": [
+    [
+     "ACCEPTED",
+     7917
+    ],
+    [
+     "DUPLICATE",
+     64
+    ],
+    [
+     "REJECTED",
+     586
+    ]
+   ],
+   "new": {
+    "legacy_table": "untouched",
+    "outcome_store": "append-only",
+    "outcomes": {
+     "EXCEPTION": 8109,
+     "NOOP_DUPLICATE": 67,
+     "QUARANTINED": 223,
+     "VALIDATED": 165,
+     "VALIDATED_WITH_FLAGS": 3
+    }
+   },
+   "new_source": "observed:intake.partner_outcomes (built module; code ef76c6f2226a)",
+   "register": [
+    {
+     "dev_id": "DV-07",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-08:batch.partner_status_after_all[ref_id match]",
+   "legacy": [
+    [
+     "ACCEPTED",
+     7917
+    ],
+    [
+     "DUPLICATE",
+     64
+    ],
+    [
+     "REJECTED",
+     586
+    ]
+   ],
+   "new": {
+    "linked": 168,
+    "no_business_key": 206,
+    "unmatched_ref": 7903
+   },
+   "new_source": "observed:intake.partner_ref_match (built module; code ef76c6f2226a)",
+   "register": [
+    {
+     "dev_id": "DV-10",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "identical",
+   "golden_ref": "CT-10:batch.shift_active_policies_per_region",
+   "legacy": [
+    [
+     "AU",
+     4
+    ],
+    [
+     "BR",
+     4
+    ],
+    [
+     "DE",
+     5
+    ],
+    [
+     "GB",
+     4
+    ],
+    [
+     "IN",
+     4
+    ],
+    [
+     "JP",
+     4
+    ],
+    [
+     "US",
+     5
+    ],
+    [
+     "ZA",
+     4
+    ]
+   ],
+   "new": [
+    [
+     "AU",
+     4
+    ],
+    [
+     "BR",
+     4
+    ],
+    [
+     "DE",
+     5
+    ],
+    [
+     "GB",
+     4
+    ],
+    [
+     "IN",
+     4
+    ],
+    [
+     "JP",
+     4
+    ],
+    [
+     "US",
+     5
+    ],
+    [
+     "ZA",
+     4
+    ]
+   ],
+   "new_source": "baseline_ro:active_policies_per_region (read-only snapshot)"
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-10:batch.shift_distinct_objects_in_first_500_joined_rows",
+   "legacy": 118,
+   "new": 500,
+   "new_source": "baseline_ro:distinct_entities_first_500 (read-only snapshot)",
+   "register": [
+    {
+     "dev_id": "DV-08",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-11:batch.java_tiny.stdout#count",
+   "legacy": "2390",
+   "new": {
+    "UNPARSABLE_AMOUNT": 10,
+    "kept_rows": 2390
+   },
+   "new_source": "observed:intake.vendor_tiny (built module; code ef76c6f2226a)",
+   "register": [
+    {
+     "dev_id": "DV-04",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-12:batch.sql_report_1_total_gross",
+   "legacy": 742956.61,
+   "new": 622826.44,
+   "new_source": "baseline_ro:month_end_total (read-only snapshot)",
+   "register": [
+    {
+     "dev_id": "DV-01",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "identical",
+   "golden_ref": "CT-12:batch.true_total_amount",
+   "legacy": 622826.44,
+   "new": 622826.44,
+   "new_source": "baseline_ro:month_end_total (read-only snapshot)"
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-13:batch.js_policy_table.allows[7:9]",
+   "legacy": [
+    [
+     "abc",
+     "APAC",
+     2026,
+     false
+    ],
+    [
+     null,
+     "APAC",
+     2026,
+     true
+    ]
+   ],
+   "new": {
+    "abc": "E-POL-INPUT-INVALID",
+    "null": "E-POL-INPUT-INVALID"
+   },
+   "new_source": "observed:policy.js_invalid_amount (built module; code ef76c6f2226a)",
+   "register": [
+    {
+     "dev_id": "DV-05",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "CT-13:batch.js_policy_table.table[0]",
+   "legacy": [
+    "APAC",
+    2019,
+    999999
+   ],
+   "new": {
+    "defaulted": true,
+    "region": "APAC",
+    "threshold": 999999,
+    "year": 2019
+   },
+   "new_source": "observed:policy.js_unknown_year (built module; code ef76c6f2226a)",
+   "register": [
+    {
+     "dev_id": "DV-06",
+     "status": "proposed"
+    }
+   ]
+  },
+  {
+   "disposition": "UNAPPROVED",
+   "golden_ref": "DEV-29:js.threshold(APAC, partial year)",
+   "legacy": {
+    "": 15000,
+    "2": 15000,
+    "202": 15000
+   },
+   "legacy_source": "register:DV-11 (no golden; documented legacy value)",
+   "new": {
+    "": {
+     "defaulted": true,
+     "threshold": 999999
+    },
+    "2": {
+     "defaulted": true,
+     "threshold": 999999
+    },
+    "202": {
+     "defaulted": true,
+     "threshold": 999999
+    }
+   },
+   "new_source": "observed:policy.js_partial_year (built module; code ef76c6f2226a)",
+   "register": [
+    {
+     "dev_id": "DV-11",
+     "status": "proposed"
+    }
+   ]
+  }
+ ],
+ "error": "E-CO-UNAPPROVED-DEVIATION",
+ "exit_code": 6,
+ "observation": {
+  "baseline": {
+   "legacy.sqlite3": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+   "partner_export.csv(tiny)": "d5f841003e666012a16a78b73e5d2fd28a4bf39a609fdf76650d0fa8154f6a85"
+  },
+  "code_digest": "ef76c6f2226a23670490a3ade85a8365b615c38fb68b47a111f6db98713257be",
+  "status": "used",
+  "taken": "record"
+ },
+ "schema": "golden-compare/v1",
+ "summary": {
+  "NOT-RUN": 0,
+  "UNAPPROVED": 11,
+  "approved_deviation": 0,
+  "identical": 2,
+  "probes": 13
+ },
+ "tripwires": {
+  "egress_attempts_total": 0,
+  "model_calls_total": 0
+ }
+}

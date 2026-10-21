@@ -1,0 +1,562 @@
+{
+ "complexity_over_15": [
+  {
+   "complexity": 21,
+   "file": "hub/admin/cli.py",
+   "function": "_cmd",
+   "line": 146
+  },
+  {
+   "complexity": 25,
+   "file": "hub/decision/service.py",
+   "function": "transition",
+   "line": 282
+  },
+  {
+   "complexity": 16,
+   "file": "hub/golden/run.py",
+   "function": "run",
+   "line": 16
+  },
+  {
+   "complexity": 19,
+   "file": "hub/intake/service.py",
+   "function": "ingest",
+   "line": 167
+  },
+  {
+   "complexity": 16,
+   "file": "hub/intake/untrusted_lint.py",
+   "function": "check_source",
+   "line": 43
+  },
+  {
+   "complexity": 20,
+   "file": "hub/intake/validate.py",
+   "function": "validate",
+   "line": 67
+  },
+  {
+   "complexity": 18,
+   "file": "hub/obs/collect.py",
+   "function": "samples",
+   "line": 36
+  },
+  {
+   "complexity": 21,
+   "file": "hub/policy/engine.py",
+   "function": "evaluate",
+   "line": 108
+  },
+  {
+   "complexity": 16,
+   "file": "hub/policy/rulesets.py",
+   "function": "validate",
+   "line": 27
+  },
+  {
+   "complexity": 20,
+   "file": "hub/runs/cli.py",
+   "function": "_cmd",
+   "line": 101
+  },
+  {
+   "complexity": 22,
+   "file": "hub/web/app.py",
+   "function": "_dispatch",
+   "line": 185
+  }
+ ],
+ "counts": {
+  "complexity_over_15": 11,
+  "domain_to_web_files": 4,
+  "holder_rule_copies": 3,
+  "three_cycles": 10,
+  "two_cycles": 6,
+  "unused": 22
+ },
+ "graph": {
+  "domain_to_web_imports": {
+   "hub/gate/actions.py": [
+    "hub.web.errors",
+    "hub.web.errors.ReqInvalid"
+   ],
+   "hub/gate/dispositions.py": [
+    "hub.web",
+    "hub.web.schema"
+   ],
+   "hub/review/service.py": [
+    "hub.web",
+    "hub.web.schema"
+   ],
+   "hub/search/schema.py": [
+    "hub.web",
+    "hub.web.schema"
+   ]
+  },
+  "function_level_edges": {
+   "(root)": [
+    "coexistence",
+    "golden",
+    "guards",
+    "obs",
+    "store"
+   ],
+   "admin": [
+    "(root)",
+    "guards",
+    "obs",
+    "ops",
+    "store"
+   ],
+   "decision": [
+    "crosswalk",
+    "guards",
+    "obs"
+   ],
+   "intake": [
+    "adapters",
+    "guards",
+    "obs"
+   ],
+   "metrics": [
+    "adapters",
+    "guards",
+    "obs"
+   ],
+   "obs": [],
+   "policy": [
+    "guards",
+    "obs"
+   ],
+   "r2": [
+    "guards",
+    "obs"
+   ],
+   "runs": [
+    "adapters",
+    "guards",
+    "metrics"
+   ],
+   "search": [
+    "obs"
+   ],
+   "store": [
+    "coexistence"
+   ],
+   "web": [
+    "guards"
+   ]
+  },
+  "module_level_edges": {
+   "(root)": [
+    "(root)",
+    "core"
+   ],
+   "adapters": [
+    "core",
+    "guards",
+    "intake"
+   ],
+   "admin": [
+    "core",
+    "security"
+   ],
+   "coexistence": [
+    "core"
+   ],
+   "crosswalk": [
+    "core",
+    "decision",
+    "guards",
+    "security"
+   ],
+   "decision": [
+    "adapters",
+    "admin",
+    "core",
+    "gate",
+    "ops",
+    "policy",
+    "security",
+    "store"
+   ],
+   "gate": [
+    "core",
+    "decision",
+    "policy",
+    "review",
+    "runs",
+    "security",
+    "web"
+   ],
+   "golden": [
+    "adapters",
+    "coexistence",
+    "core",
+    "guards",
+    "store"
+   ],
+   "guards": [
+    "core",
+    "obs"
+   ],
+   "intake": [
+    "admin",
+    "core",
+    "crosswalk",
+    "decision",
+    "gate",
+    "ops",
+    "policy",
+    "security",
+    "store"
+   ],
+   "metrics": [
+    "admin",
+    "core",
+    "decision",
+    "policy",
+    "runs",
+    "security"
+   ],
+   "obs": [
+    "(root)",
+    "core",
+    "security"
+   ],
+   "ops": [
+    "guards",
+    "obs",
+    "security",
+    "store"
+   ],
+   "policy": [
+    "adapters",
+    "admin",
+    "core",
+    "ops",
+    "security",
+    "store"
+   ],
+   "r2": [
+    "(root)",
+    "adapters",
+    "admin",
+    "core",
+    "crosswalk",
+    "decision",
+    "intake",
+    "policy",
+    "review",
+    "search",
+    "security",
+    "web"
+   ],
+   "review": [
+    "core",
+    "decision",
+    "policy",
+    "security",
+    "web"
+   ],
+   "runs": [
+    "(root)",
+    "admin",
+    "core",
+    "decision",
+    "gate",
+    "intake",
+    "obs",
+    "ops",
+    "policy",
+    "security",
+    "store"
+   ],
+   "search": [
+    "admin",
+    "core",
+    "decision",
+    "guards",
+    "ops",
+    "r2",
+    "review",
+    "security",
+    "store",
+    "web"
+   ],
+   "security": [
+    "core",
+    "guards"
+   ],
+   "store": [
+    "core",
+    "guards",
+    "ops"
+   ],
+   "web": [
+    "(root)",
+    "admin",
+    "core",
+    "crosswalk",
+    "decision",
+    "gate",
+    "intake",
+    "metrics",
+    "obs",
+    "ops",
+    "policy",
+    "review",
+    "runs",
+    "security",
+    "store"
+   ]
+  },
+  "three_cycles": [
+   [
+    "adapters",
+    "decision",
+    "intake"
+   ],
+   [
+    "adapters",
+    "intake",
+    "policy"
+   ],
+   [
+    "decision",
+    "gate",
+    "review"
+   ],
+   [
+    "decision",
+    "gate",
+    "runs"
+   ],
+   [
+    "decision",
+    "gate",
+    "web"
+   ],
+   [
+    "gate",
+    "intake",
+    "runs"
+   ],
+   [
+    "gate",
+    "intake",
+    "web"
+   ],
+   [
+    "gate",
+    "review",
+    "web"
+   ],
+   [
+    "gate",
+    "runs",
+    "web"
+   ],
+   [
+    "guards",
+    "obs",
+    "security"
+   ]
+  ],
+  "two_cycles": [
+   [
+    "decision",
+    "gate"
+   ],
+   [
+    "gate",
+    "runs"
+   ],
+   [
+    "gate",
+    "web"
+   ],
+   [
+    "ops",
+    "store"
+   ],
+   [
+    "r2",
+    "search"
+   ],
+   [
+    "review",
+    "web"
+   ]
+  ]
+ },
+ "holder_rule_copies": [
+  {
+   "expr": "p.principal_id not in holders",
+   "file": "hub/gate/service.py",
+   "function": "require_holder",
+   "line": 57
+  },
+  {
+   "expr": "p.principal_id not in holders",
+   "file": "hub/policy/gate.py",
+   "function": "require_holder",
+   "line": 26
+  },
+  {
+   "expr": "p.principal_id not in holders",
+   "file": "hub/security/authz.py",
+   "function": "_zone_h",
+   "line": 67
+  }
+ ],
+ "python": "3.10.12",
+ "root_label": "s20-main",
+ "unused": [
+  {
+   "file": "hub/metrics/cli.py",
+   "kind": "F401-like",
+   "line": 20,
+   "name": "CODE_VERSION"
+  },
+  {
+   "file": "hub/metrics/service.py",
+   "kind": "F401-like",
+   "line": 10,
+   "name": "datetime"
+  },
+  {
+   "file": "hub/metrics/service.py",
+   "kind": "F401-like",
+   "line": 22,
+   "name": "NotFound"
+  },
+  {
+   "file": "hub/metrics/service.py",
+   "kind": "F401-like",
+   "line": 25,
+   "name": "fmt"
+  },
+  {
+   "file": "hub/policy/cli.py",
+   "kind": "F401-like",
+   "line": 22,
+   "name": "HubKilled"
+  },
+  {
+   "file": "hub/security/auth.py",
+   "function": "login",
+   "kind": "F841-like",
+   "line": 170,
+   "name": "ctx"
+  },
+  {
+   "file": "hub/web/cli.py",
+   "kind": "F401-like",
+   "line": 17,
+   "name": "CODE_VERSION"
+  },
+  {
+   "file": "hub/web/server.py",
+   "kind": "F401-like",
+   "line": 13,
+   "name": "HubError"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 38,
+   "name": "protocol_version"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 39,
+   "name": "server_version"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 40,
+   "name": "sys_version"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 76,
+   "name": "do_GET"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 76,
+   "name": "do_POST"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 76,
+   "name": "do_PUT"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 76,
+   "name": "do_DELETE"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 76,
+   "name": "do_PATCH"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 76,
+   "name": "do_HEAD"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 76,
+   "name": "do_OPTIONS"
+  },
+  {
+   "file": "hub/web/ui.py",
+   "kind": "F401-like",
+   "line": 14,
+   "name": "DispositionService"
+  },
+  {
+   "file": "hub/web/ui.py",
+   "kind": "F401-like",
+   "line": 15,
+   "name": "ReviewService"
+  },
+  {
+   "file": "hub/web/ui.py",
+   "kind": "F401-like",
+   "line": 16,
+   "name": "LocalAuthenticator"
+  },
+  {
+   "file": "hub/web/ui.py",
+   "function": "op_UI_OVERRIDE",
+   "kind": "F841-like",
+   "line": 146,
+   "name": "r"
+  }
+ ]
+}

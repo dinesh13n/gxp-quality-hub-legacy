@@ -1,0 +1,165 @@
+{
+ "label": "synthetic, unvalidated",
+ "note": "Stage 20 build-agent runs of the groups it changed or added (OD-23 test-once); wall time includes the sandbox build from the mounted folder (45-90 s, variable). Other groups: orchestrator full regression.",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 41,
+    "skipped": 1
+   },
+   "executed_methods": 42,
+   "expected_methods": 42,
+   "group": "B",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 102.7,
+   "selectors": [
+    "TST_CO_01",
+    "TST_CO_02",
+    "TST_CO_04",
+    "TST_CO_05",
+    "TST_CO_06",
+    "TST_CO_07",
+    "TST_CO_11",
+    "TST_CO_13",
+    "TST_CO_14",
+    "INC02"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 41, 'FAIL': 0, 'ERROR': 0, 'skipped': 1} ids=TST-CO-01,TST-CO-02,TST-CO-04,TST-CO-05,TST-CO-06,TST-CO-07,TST-CO-11,TST-CO-13,TST-CO-14,TST-HUB-INC02-S01,TST-HUB-INC02-S02,TST-HUB-INC02-S03 seconds=102.7 report=~/fde_sbx/s20-g/B/B/report.json"
+   ],
+   "wall_seconds": 102.8
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 5,
+    "skipped": 0
+   },
+   "executed_methods": 5,
+   "expected_methods": 5,
+   "group": "C1",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 82.5,
+   "selectors": [
+    "TST_CO_12_a",
+    "TST_CO_12_b",
+    "TST_CO_12_c",
+    "TST_CO_12_d",
+    "TST_CO_12_e1"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 5, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-12 seconds=82.5 report=~/fde_sbx/s20-g/C1/C1/report.json"
+   ],
+   "wall_seconds": 82.6
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "executed_methods": 1,
+   "expected_methods": 1,
+   "group": "C2",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 106.4,
+   "selectors": [
+    "TST_CO_12_e2"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-12 seconds=106.4 report=~/fde_sbx/s20-g/C2/C2/report.json"
+   ],
+   "wall_seconds": 106.4
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "executed_methods": 1,
+   "expected_methods": 1,
+   "group": "C3",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 77.2,
+   "selectors": [
+    "TST_CO_12_e3"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-12 seconds=77.2 report=~/fde_sbx/s20-g/C3/C3/report.json"
+   ],
+   "wall_seconds": 77.2
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 18,
+    "skipped": 0
+   },
+   "executed_methods": 18,
+   "expected_methods": 18,
+   "group": "S20",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 99.5,
+   "selectors": [
+    "STG20"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 18, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=99.5 report=~/fde_sbx/s20-g/S20/S20/report.json"
+   ],
+   "wall_seconds": 99.6
+  },
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "executed_methods": 1,
+   "expected_methods": 1,
+   "group": "E20",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 79.5,
+   "selectors": [
+    "E20EGRESS"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 1, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=79.5 report=~/fde_sbx/s20-g/E20/E20/report.json"
+   ],
+   "wall_seconds": 79.6
+  }
+ ],
+ "runtime": "reference laptop Python 3.10.12 (device call cap 180 s, OD-21)",
+ "schema": "hub-regression-log/v1"
+}

@@ -1,0 +1,15 @@
+{
+ "capture_digests": {
+  "api": "c6db0a43e695aa024c9cb4f2dbb64b37c0bdb0d7e7048a9b2beabda71b78cd13",
+  "batch": "40237661b2d84e1a3a1d5b76bdaf6dd34dbccbe93217f627748539963342136f",
+  "lib": "c5797c3be83d59b80f236498b44bd76719df2b8cd17440ce311a21784171389d",
+  "supplement": "c3cbab2cc8e4bea6672171804fddb011f894992997f1a3d2e0504d55e3086d25"
+ },
+ "checks_passed": 134,
+ "checks_total": 134,
+ "ct_all_pass": true,
+ "overall": "PASS",
+ "seconds": 52.8,
+ "started": "2026-10-21T03:01:30",
+ "worktree_head": "20f96735e2509cc4a09d6c173ce90ab6f9299a37"
+}
