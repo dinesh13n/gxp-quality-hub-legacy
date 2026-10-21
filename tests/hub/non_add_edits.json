@@ -1,187 +1,19 @@
 {
  "schema": "hub-non-add-edits/v1",
- "stage": "20",
- "note": "Stage 20 (OD-26 build; Stage 18 plan DW-02..DW-09): the Stage 15 add-only rule (TST-CO-05 c) is kept, but a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason; each entry is a deviation recorded in docs/20-application/application-readiness.md (S20-DEV-nn). Legacy paths stay unchangeable (TST-CO-05 a / b; an entry under a legacy path fails the test). Deletions and renames are never accepted. The next BUILD stage must replace this list with its own (a stale entry is reported, not failed, so that main stays green after the squash-merge). No entry is an approval of any behaviour deviation (HAR-06).",
+ "stage": "21",
+ "note": "Stage 21 (Stage 18 DI-05, evidence only; DW-10, DW-11, DW-12): reset per OD-27 (S20-DEV-05). The Stage 15 add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason; each entry is recorded in docs/21-integration/integration-readiness.md (S21-DEV-nn). Stage 21 changes NO hub code; only the two test-infrastructure data files below are edited. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
  "edits": [
   {
-   "path": "hub/cli.py",
-   "work_item": "DW-04",
-   "deviation": "S20-DEV-01",
-   "reason": "golden-compare gains --observe / --observed and the golden-observe command (FAC-05)"
+   "path": "tests/hub/regression_groups.json",
+   "work_item": "DW-10 / DW-11 / DW-12",
+   "deviation": "S21-DEV-01",
+   "reason": "new groups S21 (STG21) and E21 (E21EGRESS) so the full hub regression runs the Stage 21 tests with executed = expected (OD-23)"
   },
   {
-   "path": "hub/golden/run.py",
-   "work_item": "DW-04",
-   "deviation": "S20-DEV-01",
-   "reason": "default probe catalogue probes_s20.json; provider 'observed'; register legacy source for DV-11; run() split into helpers (McCabe 16 -> below 15)"
-  },
-  {
-   "path": "hub/coexistence/register.py",
-   "work_item": "DW-05",
-   "deviation": "S20-DEV-02",
-   "reason": "seed v2 (DV-01..DV-11) and refresh of rows still byte-identical to the INC-02 seed (FAC-06)"
-  },
-  {
-   "path": "tests/hub/_driver.py",
-   "work_item": "DW-03",
-   "deviation": "S20-DEV-03",
-   "reason": "--shard K/N so the TST-CO-12 inner run can be split across device calls (OD-21)"
-  },
-  {
-   "path": "tests/hub/test_tst_co_12_egress_tripwire.py",
-   "work_item": "DW-03",
-   "deviation": "S20-DEV-03",
-   "reason": "test e split into e1/e2/e3 (module shards 1..3 of the same inner run; partition by construction)"
-  },
-  {
-   "path": "tests/hub/test_tst_co_01_golden_compare.py",
-   "work_item": "DW-04 / DW-05",
-   "deviation": "S20-DEV-04",
-   "reason": "expectations follow the observed probes and DV-01..DV-11 (11 UNAPPROVED; approvals cover 11); new test f (no observation -> NOT-RUN)"
-  },
-  {
-   "path": "tests/hub/test_tst_co_02_unlisted_golden.py",
-   "work_item": "DW-04",
-   "deviation": "S20-DEV-04",
-   "reason": "test e count: without an observation record the 9 module probes are NOT-RUN (UNAPPROVED 10 -> 3)"
-  },
-  {
-   "path": "tests/hub/test_inc02_supplementary.py",
-   "work_item": "DW-05",
-   "deviation": "S20-DEV-04",
-   "reason": "S03 register row count 9 -> 11"
-  },
-  {
-   "path": "tests/hub/test_inc03_supplementary.py",
-   "work_item": "DW-05",
-   "deviation": "S20-DEV-04",
-   "reason": "S03 register row count 9 -> 11"
-  },
-  {
-   "path": "tests/hub/test_tst_co_05_legacy_paths_unchanged.py",
-   "work_item": "DW-02..DW-09",
-   "deviation": "S20-DEV-05",
-   "reason": "test c accepts the non-add edits listed in this file (and nothing else); legacy-path tests a / b unchanged"
-  },
-  {
-   "path": "hub/policy/service.py",
-   "work_item": "DW-07",
-   "deviation": "S20-DEV-06",
-   "reason": "withdraw() (ZH-10, POLICY_WITHDRAWN); list/get add the `withdrawal` object when in effect; overlap window ends at withdrawn_from; status_report 'withdrawn' bucket"
-  },
-  {
-   "path": "hub/policy/clocks.py",
-   "work_item": "DW-07",
-   "deviation": "S20-DEV-06",
-   "reason": "no verdict for a clock whose withdrawal is in effect"
-  },
-  {
-   "path": "hub/decision/service.py",
-   "work_item": "DW-07",
-   "deviation": "S20-DEV-06",
-   "reason": "closing_set skips a withdrawn CLOSURE version"
-  },
-  {
-   "path": "hub/r2/consistency.py",
-   "work_item": "DW-07",
-   "deviation": "S20-DEV-06",
-   "reason": "adopted_rules(as_of) skips a withdrawn CONSISTENCY version in a run"
-  },
-  {
-   "path": "hub/metrics/service.py",
-   "work_item": "DW-07 / DW-06",
-   "deviation": "S20-DEV-06",
-   "reason": "metric values show detail.policy_withdrawal when the withdrawal is in effect at computed_at (policy_status CHECK has no 'withdrawn'); DW-06: unused imports removed (datetime, NotFound, fmt)"
-  },
-  {
-   "path": "hub/gate/actions.py",
-   "work_item": "DW-07 / DW-06",
-   "deviation": "S20-DEV-06",
-   "reason": "ZH-10 accepts op withdraw_policy at the single Zone H choke point; DW-06: ReqInvalid imported from hub.core.req_errors (no hub.web import)"
-  },
-  {
-   "path": "hub/web/cli.py",
-   "work_item": "DW-08 / DW-06",
-   "deviation": "S20-DEV-07",
-   "reason": "produce-traces operator command (automatic rule-trace producer); DW-06: unused import CODE_VERSION removed"
-  },
-  {
-   "path": "hub/gate/service.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "holder rule delegated to hub.security.zone_h.refusal (one rule; error classes and audit fields unchanged)"
-  },
-  {
-   "path": "hub/policy/gate.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "holder rule delegated to hub.security.zone_h.refusal (INC-04 local gate keeps its error mapping)"
-  },
-  {
-   "path": "hub/security/authz.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "holder rule delegated to hub.security.zone_h.refusal (route authorizer keeps its reasons)"
-  },
-  {
-   "path": "hub/gate/dispositions.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "M006 check from hub.store.m006 instead of hub.web.schema (no domain -> HTTP-layer import)"
-  },
-  {
-   "path": "hub/review/service.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "M006 check from hub.store.m006 instead of hub.web.schema"
-  },
-  {
-   "path": "hub/search/schema.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "M006 check from hub.store.m006 instead of hub.web.schema"
-  },
-  {
-   "path": "hub/web/errors.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "ReqInvalid re-exported from hub.core.req_errors (same class)"
-  },
-  {
-   "path": "hub/web/schema.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "migration()/applied() delegate to hub.store.m006; require() unchanged in behaviour; unused hashlib import removed"
-  },
-  {
-   "path": "hub/metrics/cli.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "unused import CODE_VERSION removed (S16-D08 pyflakes)"
-  },
-  {
-   "path": "hub/policy/cli.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "unused import HubKilled removed (S16-D08 pyflakes)"
-  },
-  {
-   "path": "hub/security/auth.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "unused `as ctx` removed (S16-D08 pyflakes F841)"
-  },
-  {
-   "path": "hub/web/server.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "unused import HubError removed (S16-D08 pyflakes)"
-  },
-  {
-   "path": "hub/web/ui.py",
-   "work_item": "DW-06",
-   "deviation": "S20-DEV-08",
-   "reason": "unused imports and unused local `r` removed (S16-D08 pyflakes)"
+   "path": "tests/hub/non_add_edits.json",
+   "work_item": "DW-12 (OD-27 reset)",
+   "deviation": "S21-DEV-01",
+   "reason": "allow-list reset for Stage 21 (OD-27 / S20-DEV-05: each BUILD stage replaces the list)"
   }
  ]
 }
