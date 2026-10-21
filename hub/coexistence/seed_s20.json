@@ -1,0 +1,92 @@
+{
+ "coexistence_inventory": [
+  {
+   "description": "Protected parallel workflow for older customers (FR-CO-02, OPD-15). Exposed read-only; the product cannot alter, disable or retire it.",
+   "item_id": "CO-WF-01",
+   "owner": "Unknown",
+   "status": "protected"
+  }
+ ],
+ "deviations": [
+  {
+   "dev_id": "DV-01",
+   "golden_ref": "CT-12:batch.sql_report_1_total_gross",
+   "justification": "SQL report 1 total inflated by LEFT JOIN events fan-out (BB-08); new month_end_total sums cases once. F10-2 DV-01 (fix).",
+   "legacy_value": "742956.61",
+   "new_value": "622826.44"
+  },
+  {
+   "dev_id": "DV-02",
+   "golden_ref": "CT-08:batch.partner_error_reasons[replayed source message]",
+   "justification": "Legacy marks every REPLAY as DUPLICATE (BB-05); new distinguishes identical vs changed content. F10-2 DV-02 (fix). New value restated in Stage 20 as the OBSERVED output of the built module on FX-BASE125 (DW-04, golden-compare provider 'observed'); the behaviour described is unchanged. Observed on the shipped feed: 67 REPLAY rows -> NOOP_DUPLICATE, 0 REVISED_CONFLICT (no changed-content replay exists in FX-BASE125; the changed-content path is covered by TST-INT-01..08). Legacy 64 vs 67: 3 REPLAY rows fail legacy key/schema checks first (BD-02).",
+   "legacy_value": "64",
+   "new_value": "{\"NOOP_DUPLICATE\":67,\"REVISED_CONFLICT\":0}"
+  },
+  {
+   "dev_id": "DV-03",
+   "golden_ref": "CT-08:batch.partner_error_reasons[quantity out of range]",
+   "justification": "Legacy rejects negative quantity; new keeps it flagged for review. F10-2 DV-03 (change of class). New value restated in Stage 20 as the OBSERVED output of the built module on FX-BASE125 (DW-04, golden-compare provider 'observed'); the behaviour described is unchanged. 161 partner items carry NEGATIVE_VALUE and are kept (3 in queue flagged_value; the rest carry a higher-precedence reason), none rejected (BD-03).",
+   "legacy_value": "154",
+   "new_value": "{\"NEGATIVE_VALUE_items\":161,\"flagged_value_queue\":3}"
+  },
+  {
+   "dev_id": "DV-04",
+   "golden_ref": "CT-11:batch.java_tiny.stdout#count",
+   "justification": "Legacy Java silently skips blank amounts; new reports UNPARSABLE_AMOUNT (quarantine). F10-2 DV-04 (fix). New value restated in Stage 20 as the OBSERVED output of the built module on FX-BASE125 (DW-04, golden-compare provider 'observed'); the behaviour described is unchanged. Vendor tiny CSV: 10 rows QUARANTINED UNPARSABLE_AMOUNT, 2,390 rows kept (BD-04).",
+   "legacy_value": "\"2390\"",
+   "new_value": "{\"UNPARSABLE_AMOUNT\":10,\"kept_rows\":2390}"
+  },
+  {
+   "dev_id": "DV-05",
+   "golden_ref": "CT-13:batch.js_policy_table.allows[7:9]",
+   "justification": "Legacy JS tolerance with 'abc'/null is undefined behaviour; new rejects invalid input. F10-2 DV-05 (fix).",
+   "legacy_value": "[[\"abc\",\"APAC\",2026,false],[null,\"APAC\",2026,true]]",
+   "new_value": "{\"abc\":\"E-POL-INPUT-INVALID\",\"null\":\"E-POL-INPUT-INVALID\"}"
+  },
+  {
+   "dev_id": "DV-06",
+   "golden_ref": "CT-13:batch.js_policy_table.table[0]",
+   "justification": "Unknown region/year default 999999 kept but marked defaulted. F10-2 DV-06 (additive).",
+   "legacy_value": "[\"APAC\",2019,999999]",
+   "new_value": "{\"defaulted\":true,\"region\":\"APAC\",\"threshold\":999999,\"year\":2019}"
+  },
+  {
+   "dev_id": "DV-07",
+   "golden_ref": "CT-08:batch.partner_status_after_all",
+   "justification": "Legacy reconcile overwrites processing_status in place; new appends outcomes and leaves the legacy table untouched. F10-2 DV-07 (fix). New value restated in Stage 20 as the OBSERVED output of the built module on FX-BASE125 (DW-04, golden-compare provider 'observed'); the behaviour described is unchanged. DV-07a (Stage 17 PCH-35 text extension): the new value also includes the outcome classification: EXCEPTION 8,109 (UNMATCHED_REF 7,903, NO_BUSINESS_KEY 206 - see DV-10), QUARANTINED 223, VALIDATED 165, VALIDATED_WITH_FLAGS 3, NOOP_DUPLICATE 67 (BD-07).",
+   "legacy_value": "[[\"ACCEPTED\",7917],[\"DUPLICATE\",64],[\"REJECTED\",586]]",
+   "new_value": "{\"legacy_table\":\"untouched\",\"outcome_store\":\"append-only\",\"outcomes\":{\"EXCEPTION\":8109,\"NOOP_DUPLICATE\":67,\"QUARANTINED\":223,\"VALIDATED\":165,\"VALIDATED_WITH_FLAGS\":3}}"
+  },
+  {
+   "dev_id": "DV-08",
+   "golden_ref": "CT-10:batch.shift_distinct_objects_in_first_500_joined_rows",
+   "justification": "Night-shift join multiplies rows (118 distinct objects in first 500); new evaluates per entity (500 distinct in first 500). F10-2 DV-08 (fix).",
+   "legacy_value": "118",
+   "new_value": "500"
+  },
+  {
+   "dev_id": "DV-09",
+   "golden_ref": "CT-07:lib.missing_field",
+   "justification": "Legacy counts invalid gateway events but does not store them; new stores them in quarantine. F10-2 DV-09 (fix). Stage 20 label correction (Stage 17 PCH-35, OD-24): the built intake uses the Stage 12 code MISSING_ENVELOPE_FIELD, not 'envelope_invalid' (BD-09). New value restated in Stage 20 as the OBSERVED output of the built module on FX-BASE125 (DW-04, golden-compare provider 'observed'); the behaviour described is unchanged.",
+   "legacy_value": "{\"accepted\":0,\"duplicates\":0,\"invalid\":1,\"received\":1}",
+   "new_value": "{\"quarantined\":1,\"reason\":\"MISSING_ENVELOPE_FIELD\",\"received\":1}"
+  },
+  {
+   "dev_id": "DV-10",
+   "golden_ref": "CT-08:batch.partner_status_after_all[ref_id match]",
+   "justification": "Legacy reconcile never checks ref_id, so most partner rows end ACCEPTED; the hub links ref_id to the 125 baseline cases by exact key (BEH-INT-08, AC-INT-18): 168 linked, 7,903 EXCEPTION/UNMATCHED_REF, 206 EXCEPTION/NO_BUSINESS_KEY. Specified behaviour (PRD baseline OD-22) registered by Stage 17 PCH-35 / OD-24 as proposed DV-10 (BD-07). Registration only, not approval. New value restated in Stage 20 as the OBSERVED output of the built module on FX-BASE125 (DW-04, golden-compare provider 'observed'); the behaviour described is unchanged.",
+   "legacy_value": "[[\"ACCEPTED\",7917],[\"DUPLICATE\",64],[\"REJECTED\",586]]",
+   "new_value": "{\"linked\":168,\"no_business_key\":206,\"unmatched_ref\":7903}"
+  },
+  {
+   "dev_id": "DV-11",
+   "golden_ref": "DEV-29:js.threshold(APAC, partial year)",
+   "justification": "Legacy JS threshold lookup matches partial years by startsWith (threshold('APAC', 202 / 2 / '') -> 15000, the 2022 row); the rule service requires the 4-digit year and returns 999999 with defaulted = true (DEV-29, RTD-41). No Stage 7 golden captures it: the legacy value is the documented INC-04 S05 live node run (docs/15-modernization/transformation-log.md DEV-29). Registered by Stage 17 PCH-35 / OD-24 as proposed DV-11 (BD-10). Registration only, not approval. New value restated in Stage 20 as the OBSERVED output of the built module on FX-BASE125 (DW-04, golden-compare provider 'observed'); the behaviour described is unchanged.",
+   "legacy_value": "{\"\":15000,\"2\":15000,\"202\":15000}",
+   "new_value": "{\"\":{\"defaulted\":true,\"threshold\":999999},\"2\":{\"defaulted\":true,\"threshold\":999999},\"202\":{\"defaulted\":true,\"threshold\":999999}}"
+  }
+ ],
+ "note": "Stage 20 register (DW-05 / FAC-06): DV-01..DV-11, every row 'proposed' with an empty approval_ref (registration, not approval; OD-S12-13 open; HAR-06). Supersedes seed_inc02.json for new stores; rows of an existing store that are still byte-identical to the INC-02 seed and still proposed are refreshed to this text (hub.coexistence.register.seed). legacy_value/new_value are canonical JSON (sorted keys, compact). Synthetic, unvalidated.",
+ "schema": "hub-coexistence-seed/v2",
+ "supersedes": "seed_inc02.json"
+}

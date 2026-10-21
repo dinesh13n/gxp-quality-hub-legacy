@@ -1,0 +1,207 @@
+{
+ "increment": "Stage 20 (DW-04 / DW-05)",
+ "note": "Probe catalogue for hub golden-compare. legacy = value read by AD-08 from the active INC-01 goldens, or (source 'register', DV-11 only) the documented legacy value of a register row that has no golden. new = baseline_ro (computed over read-only snapshots) or observed (output of the BUILT module, hub.golden.observe; FAC-05: no declared value remains). Synthetic, unvalidated.",
+ "probes": [
+  {
+   "golden_ref": "CT-07:lib.missing_field",
+   "legacy": {
+    "path": [
+     "missing_field"
+    ],
+    "source": "lib"
+   },
+   "new": {
+    "basis": "DV-09 (built module, Stage 20 DW-04)",
+    "observation": "intake.missing_envelope_field",
+    "provider": "observed"
+   }
+  },
+  {
+   "golden_ref": "CT-08:batch.partner_error_reasons[quantity out of range]",
+   "legacy": {
+    "path": [
+     "partner_error_reasons",
+     {
+      "as_map": true
+     },
+     "quantity out of range"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "DV-03 (built module, Stage 20 DW-04)",
+    "observation": "intake.partner_negative_quantity",
+    "provider": "observed"
+   }
+  },
+  {
+   "golden_ref": "CT-08:batch.partner_error_reasons[replayed source message]",
+   "legacy": {
+    "path": [
+     "partner_error_reasons",
+     {
+      "as_map": true
+     },
+     "replayed source message"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "DV-02 (built module, Stage 20 DW-04)",
+    "observation": "intake.partner_replay",
+    "provider": "observed"
+   }
+  },
+  {
+   "golden_ref": "CT-08:batch.partner_status_after_all",
+   "legacy": {
+    "path": [
+     "partner_status_after_all"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "DV-07 (built module, Stage 20 DW-04)",
+    "observation": "intake.partner_outcomes",
+    "provider": "observed"
+   }
+  },
+  {
+   "golden_ref": "CT-08:batch.partner_status_after_all[ref_id match]",
+   "legacy": {
+    "path": [
+     "partner_status_after_all"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "DV-10 (built module, Stage 20 DW-04/DW-05)",
+    "observation": "intake.partner_ref_match",
+    "provider": "observed"
+   }
+  },
+  {
+   "golden_ref": "CT-10:batch.shift_active_policies_per_region",
+   "legacy": {
+    "path": [
+     "shift_active_policies_per_region"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "provider": "baseline_ro",
+    "query": "active_policies_per_region"
+   }
+  },
+  {
+   "golden_ref": "CT-10:batch.shift_distinct_objects_in_first_500_joined_rows",
+   "legacy": {
+    "path": [
+     "shift_distinct_objects_in_first_500_joined_rows"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "provider": "baseline_ro",
+    "query": "distinct_entities_first_500"
+   }
+  },
+  {
+   "golden_ref": "CT-11:batch.java_tiny.stdout#count",
+   "legacy": {
+    "path": [
+     "java_tiny",
+     "stdout",
+     {
+      "regex": "count=(\\d+)"
+     }
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "DV-04 (built module, Stage 20 DW-04)",
+    "observation": "intake.vendor_tiny",
+    "provider": "observed"
+   }
+  },
+  {
+   "golden_ref": "CT-12:batch.sql_report_1_total_gross",
+   "legacy": {
+    "path": [
+     "sql_report_1_total_gross"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "provider": "baseline_ro",
+    "query": "month_end_total"
+   }
+  },
+  {
+   "golden_ref": "CT-12:batch.true_total_amount",
+   "legacy": {
+    "path": [
+     "true_total_amount"
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "provider": "baseline_ro",
+    "query": "month_end_total"
+   }
+  },
+  {
+   "golden_ref": "CT-13:batch.js_policy_table.allows[7:9]",
+   "legacy": {
+    "path": [
+     "js_policy_table",
+     "allows",
+     {
+      "slice": [
+       7,
+       9
+      ]
+     }
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "DV-05 (built module, Stage 20 DW-04)",
+    "observation": "policy.js_invalid_amount",
+    "provider": "observed"
+   }
+  },
+  {
+   "golden_ref": "CT-13:batch.js_policy_table.table[0]",
+   "legacy": {
+    "path": [
+     "js_policy_table",
+     "table",
+     0
+    ],
+    "source": "batch"
+   },
+   "new": {
+    "basis": "DV-06 (built module, Stage 20 DW-04)",
+    "observation": "policy.js_unknown_year",
+    "provider": "observed"
+   }
+  },
+  {
+   "golden_ref": "DEV-29:js.threshold(APAC, partial year)",
+   "legacy": {
+    "path": [
+     "DV-11"
+    ],
+    "source": "register"
+   },
+   "new": {
+    "basis": "DV-11 (built module, Stage 20 DW-04/DW-05)",
+    "observation": "policy.js_partial_year",
+    "provider": "observed"
+   }
+  }
+ ],
+ "schema": "golden-probes/v1",
+ "supersedes": "probes_inc02.json"
+}

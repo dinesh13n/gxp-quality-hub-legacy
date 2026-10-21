@@ -100,7 +100,7 @@ class TST_HUB_INC03_Supplementary(unittest.TestCase):
         self.assertEqual(S.run_hub(["init", "--data-dir", d]).returncode, 0)
         p = S.run_hub(["deviations", "--data-dir", d])
         self.assertEqual(p.returncode, 0, p.stderr)
-        self.assertEqual(len(json.loads(p.stdout)["deviation_register"]), 9)
+        self.assertEqual(len(json.loads(p.stdout)["deviation_register"]), 11)  # Stage 20 DW-05: DV-10, DV-11 registered
 
     def test_TST_HUB_INC03_S04_anchor_path_configuration(self):
         """S04: audit.anchor_path must be set (E-CFG-INVALID), absolute, outside the DB dir, and sandbox-safe (E-CO-NOT-SANDBOX)."""

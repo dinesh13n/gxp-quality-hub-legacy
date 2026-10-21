@@ -86,7 +86,8 @@ class TST_CO_02_UnlistedGolden(unittest.TestCase):
         self.assertEqual(rep["exit_code"], 6)
 
     def test_TST_CO_02_e_real_goldens_unlisted_change_fails(self):
-        """TST-CO-02 on the real goldens: CT-12 true_total_amount (no DV row) altered by 0.01 -> UNAPPROVED."""
+        """TST-CO-02 on the real goldens: CT-12 true_total_amount (no DV row) altered by 0.01 -> UNAPPROVED.
+        Stage 20 (DW-04): without an observation record the 9 module probes are NOT-RUN, so UNAPPROVED = DV-01 + DV-08 + this one."""
         d = S.tmpdir("co02e-")
         obs = os.path.join(d, "obs.json")
         with open(obs, "w") as f:
@@ -97,7 +98,7 @@ class TST_CO_02_UnlistedGolden(unittest.TestCase):
         e = [x for x in rep["entries"] if x["golden_ref"] == "CT-12:batch.true_total_amount"][0]
         self.assertEqual(e["disposition"], "UNAPPROVED")
         self.assertNotIn("register", e)
-        self.assertEqual(rep["summary"]["UNAPPROVED"], 10)
+        self.assertEqual((rep["summary"]["UNAPPROVED"], rep["summary"]["NOT-RUN"]), (3, 9))
 
     def test_TST_CO_02_f_tampered_golden_refused(self):
         """TST-CO-02 / AD-08 integrity: a golden changed outside the reviewed path is refused (E-FX-HASH)."""
