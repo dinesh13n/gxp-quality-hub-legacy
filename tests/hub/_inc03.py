@@ -12,11 +12,13 @@ import sys
 
 import _support as S
 from hub import config
+from hub.control import flags as control_flags
 from hub.security import audit, auth, settings
 from hub.security.canonical import FixedClock
 from hub.store import db, migrate
 
 ANCHOR = "audit-anchor.jsonl"
+TEST_APPROVAL_REF = "TEST-SYNTHETIC-REF (a test marker, not a human approval)"  # Stage 23 DW-17: test configs that set a non-default flag carry it
 
 
 def password():
@@ -27,6 +29,9 @@ def write_config(base, extra=None, anchor_every=100):
     cfg = {"audit": {"anchor_path": os.path.join(base, "anchor", ANCHOR), "anchor_every": anchor_every}}
     for k, v in (extra or {}).items():
         cfg.setdefault(k, {}).update(v) if isinstance(v, dict) else cfg.__setitem__(k, v)
+    refs = dict((p, TEST_APPROVAL_REF) for p, _, _ in control_flags.nondefault(cfg))  # Stage 23 DW-17 (S23-DEV-02): the approval rule is enforced by config.load
+    if refs:
+        cfg[control_flags.APPROVALS_KEY] = refs
     path = os.path.join(base, "hub-config.json")
     with open(path, "w", encoding="utf-8") as f:
         json.dump(cfg, f, sort_keys=True)

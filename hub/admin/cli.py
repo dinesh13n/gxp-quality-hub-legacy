@@ -110,6 +110,8 @@ class _Run(object):
                      details={"config_hash": settings.config_hash(self.cfg), "command": self.args.cmd,
                               "zone_h_holders": list(self.s["zone_h"]["holders"]),
                               "anchor_every": self.s["audit"]["anchor_every"]})
+        from hub.control import switch  # Stage 23 DW-17 (FF-2 rule 4): an authority value changed in the config file is audited CONFIG_CHANGED
+        switch.record_authority_changes(self.con, self.clock, self.anchor, self.cfg, self.cid, self.args.cmd)
 
     def close(self):
         if self.con is not None:
