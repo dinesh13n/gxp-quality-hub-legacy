@@ -54,7 +54,7 @@ def clock_entry(policy, events):
     start, stop = events.get(body["clock_start_event"]), events.get(body["clock_stop_event"])
     elapsed = None if start is None or stop is None else elapsed_hours(start, stop)
     dur = body.get("duration_hours")
-    if policy["status"] == "adopted" and dur is not None:
+    if policy["status"] == "adopted" and not policy.get("withdrawal") and dur is not None:  # Stage 20 DW-07: no verdict once withdrawn
         verdict = "not_available_event_missing" if elapsed is None else (
             "within" if elapsed <= _in.to_decimal(dur, "duration_hours") else "not_within")
         rule = BOUNDARY_RULE

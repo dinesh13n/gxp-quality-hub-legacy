@@ -5,7 +5,6 @@ Recorded with its sha256 in the insert-only table `web_schema_migrations`. Refus
 -> E-STORE-NOT-MIGRATED; applied M006 whose file changed -> E-STORE-MIGRATION-DRIFT. Backup-before-migrate with the same backup routine as
 M001..M005 (rollback L2).
 """
-import hashlib
 import os
 
 from hub.core.errors import MigrationDrift
@@ -16,7 +15,7 @@ from hub.policy import schema as policy_schema
 from hub.runs import schema as runs_schema
 from hub.security import audit
 from hub.security.errors import StoreNotMigrated
-from hub.store import db, migrate
+from hub.store import db, m006, migrate
 
 MIGRATIONS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "migrations")
 VERSION = "M006"
@@ -32,21 +31,16 @@ _NEEDS = (("M002", policy_schema, "python -m hub.policy migrate"), ("M003", deci
 
 
 def migration():
-    fn = [f for f in sorted(os.listdir(MIGRATIONS_DIR)) if f.startswith(VERSION + "_") and f.endswith(".sql")][0]
-    with open(os.path.join(MIGRATIONS_DIR, fn), "rb") as f:
-        body = f.read()
-    return hashlib.sha256(body).hexdigest(), body.decode("utf-8")
+    return m006.migration()  # Stage 20 DW-06: one implementation in hub.store.m006 (domain services import that, not hub.web)
 
 
 def applied(con):
-    if con.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (TABLE,)).fetchone() is None:
-        return None
-    row = con.execute("SELECT sha256 FROM web_schema_migrations WHERE version = ?", (VERSION,)).fetchone()
-    return row[0] if row else None
+    return m006.applied(con)
 
 
 def require(con):
-    """Return normally when M006 is applied and unchanged; else raise (used by every INC-08 service entry)."""
+    """Return normally when M006 is applied and unchanged; else raise (used by every INC-08 service entry). Same logic as hub.store.m006.require,
+    kept on this module's own migration() / applied() so the HTTP layer's start-up check behaves exactly as before (and stays patchable)."""
     digest, _ = migration()
     have = applied(con)
     if have is None:

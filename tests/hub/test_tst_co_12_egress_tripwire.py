@@ -4,6 +4,11 @@ model_calls_total = 0. Plus unit checks of the egress guard and the zero-tripwir
 
 Recursion guard: the inner (egress-guarded) suite run sets HUB_EGRESS_INNER=1 and this module is skipped
 there, because its unit tests deliberately provoke (blocked) egress attempts.
+
+Stage 20 (DW-03, OD-21: group C was ~145 s of the 180 s device-call cap): the inner run is split into two module shards
+(`_driver.py --shard K/3`, a partition by construction) run by tests e1, e2 and e3, so the regression manifest can put them
+in separate device calls (groups C1 / C2 / C3 in tests/hub/regression_groups.json). Assertions per shard are unchanged except the
+minimum ok count, which is split (25 -> >= 8 per shard).
 """
 import ast
 import json
@@ -90,20 +95,31 @@ class TST_CO_12_EgressAndTripwire(unittest.TestCase):
                             calls.append(p)
         self.assertEqual(calls, [])
 
-    def test_TST_CO_12_e_full_suite_under_egress_guard(self):
-        """TST-CO-12 / AC-CO-12: full INC-02 suite (all other tests) with the egress guard installed ->
-        suite green, zero non-loopback attempts, model_calls_total = 0 (CLI children also install the guard)."""
-        out = os.path.join(S.tmpdir("co12e-"), "inner.json")
+    def _inner_shard(self, k):
+        out = os.path.join(S.tmpdir("co12e%d-" % k), "inner.json")
         env = S.child_env({"HUB_EGRESS_INNER": "1"})
         p = subprocess.run([sys.executable, "-B", os.path.join(S.CODE_ROOT, "tests", "hub", "_driver.py"),
-                            "--out", out, "--egress-guard"], cwd=S.CODE_ROOT, env=env, stdout=subprocess.PIPE,
+                            "--out", out, "--egress-guard", "--shard", "%d/3" % k], cwd=S.CODE_ROOT, env=env, stdout=subprocess.PIPE,
                            stderr=subprocess.STDOUT, universal_newlines=True, timeout=600)
         with open(out, encoding="utf-8") as f:
             res = json.load(f)
         self.assertTrue(res["successful"], p.stdout[-3000:])
-        self.assertGreaterEqual(sum(1 for r in res["records"] if r["status"] == "ok"), 25)
+        self.assertGreaterEqual(sum(1 for r in res["records"] if r["status"] == "ok"), 8)
         self.assertEqual(res["egress_attempts"], [])
         self.assertEqual(res["tripwires"], {"egress_attempts_total": 0, "model_calls_total": 0})
+
+    def test_TST_CO_12_e1_full_suite_under_egress_guard_shard1(self):
+        """TST-CO-12 / AC-CO-12 (shard 1/3): full INC-02 suite (all other tests) with the egress guard installed ->
+        suite green, zero non-loopback attempts, model_calls_total = 0 (CLI children also install the guard)."""
+        self._inner_shard(1)
+
+    def test_TST_CO_12_e2_full_suite_under_egress_guard_shard2(self):
+        """TST-CO-12 / AC-CO-12 (shard 2/3): as e1 for the second module shard (Stage 20 DW-03 split of group C)."""
+        self._inner_shard(2)
+
+    def test_TST_CO_12_e3_full_suite_under_egress_guard_shard3(self):
+        """TST-CO-12 / AC-CO-12 (shard 3/3): as e1 for the third module shard (Stage 20 DW-03 split of group C)."""
+        self._inner_shard(3)
 
 
 if __name__ == "__main__":

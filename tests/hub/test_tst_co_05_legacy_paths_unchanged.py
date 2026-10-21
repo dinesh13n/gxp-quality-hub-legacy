@@ -2,6 +2,8 @@
 is empty. Read-only git queries against the original working tree (HUB_WORKTREE_ROOT) with
 --no-optional-locks; compared with the tag `baseline-as-found` (OD-06) and with the current HEAD/worktree.
 """
+import json
+import os
 import subprocess
 import unittest
 
@@ -39,12 +41,26 @@ class TST_CO_05_LegacyPathsUnchanged(unittest.TestCase):
         self.assertEqual(p.stdout.strip(), "")
 
     def test_TST_CO_05_c_branch_only_adds_files_outside_stage15_docs(self):
-        """TST-CO-05: on this branch every change vs main is an added file, except Stage 15's own docs."""
+        """TST-CO-05: on this branch every change vs main is an added file, except Stage 15's own docs and (Stage 20, OD-26) a
+        modification listed in tests/hub/non_add_edits.json with its work item and reason. Deletions / renames are never accepted;
+        an allow-list entry may not name a legacy path."""
+        with open(os.path.join(S.CODE_ROOT, "tests", "hub", "non_add_edits.json"), encoding="utf-8") as f:
+            edits = json.load(f)["edits"]
+        allowed = set()
+        for e in edits:
+            self.assertTrue(str(e.get("work_item", "")).strip() and str(e.get("reason", "")).strip(), e)
+            self.assertTrue(e["path"].startswith(("hub/", "tests/hub/")), e["path"])
+            allowed.add(e["path"])
         p = git("diff", "--name-status", "main", "--")
         self.assertEqual(p.returncode, 0, p.stderr)
         offending = [l for l in p.stdout.splitlines()
-                     if l and not l.startswith("A\t") and not l.split("\t")[-1].startswith("docs/15-modernization/")]
+                     if l and not l.startswith("A\t") and not l.split("\t")[-1].startswith("docs/15-modernization/")
+                     and not (l.startswith("M\t") and l.split("\t")[-1] in allowed)]
         self.assertEqual(offending, [])
+        if allowed:
+            lp = git("diff", "--name-status", "baseline-as-found", "--", *sorted(allowed))
+            self.assertEqual(lp.returncode, 0, lp.stderr)
+            self.assertFalse(any(l.startswith(("D\t", "R")) for l in lp.stdout.splitlines()), lp.stdout)
 
 
 if __name__ == "__main__":

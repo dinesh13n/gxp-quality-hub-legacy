@@ -13,8 +13,7 @@ as DATA. `authorize()` is the single decision point the future HTTP layer (INC-0
 import json
 import os
 
-from hub.security import audit
-from hub.security.canonical import parse
+from hub.security import audit, zone_h
 from hub.security.errors import AuthForbidden, AuthUnauthenticated
 
 REGISTRY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "route_registry.json")
@@ -61,15 +60,8 @@ class Authorizer(object):
     def _zone_h(self, sess, r, correlation_id):
         p = sess.principal
         holders = self.s["zone_h"]["holders"]
-        reason = None
-        if p.kind != "human":
-            reason = "non_human"
-        elif p.principal_id not in holders:
-            reason = "not_a_holder"
-        else:
-            age = parse(self.clock()).timestamp() - parse(sess.reauth_at).timestamp()
-            if age > self.s["zone_h"]["reauth_window_seconds"]:
-                reason = "reauth_required"
+        reason = zone_h.refusal(p, sess.reauth_at, self.clock, self.s["zone_h"], require_dispositioner=False,
+                                distinguish_empty=False)  # Stage 20 DW-06: the one rule (role already checked by the route)
         audit.append(self.con, self.clock, anchor=self.anchor, actor=p.principal_id, actor_kind=p.actor_kind,
                      action="ZONE_H_ATTEMPT", outcome="denied" if reason else "success",
                      correlation_id=correlation_id, object_ref=r["op_id"],

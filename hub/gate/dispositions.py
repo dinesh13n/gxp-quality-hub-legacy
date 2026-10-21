@@ -24,7 +24,7 @@ from hub.gate.disposition_errors import (GateExtrefInvalid, GateModeNone, GatePa
 from hub.security import audit
 from hub.security.canonical import canonical
 from hub.security.errors import AuthUnauthenticated
-from hub.web import schema as web_schema
+from hub.store import m006 as web_schema  # Stage 20 DW-06: no hub.web import
 
 TEXT_MAX = 2000
 EVENT_TYPE = {"ZH-01": "DISPOSITION_RECORDED", "ZH-02": "QA_RELEASE_RECORDED", "ZH-03": "ESIGNATURE_RECORDED"}

@@ -17,7 +17,6 @@ import sys
 
 from hub.admin.cli import _Run, _dump
 from hub.core.errors import HubError, RuntimeUnsupported
-from hub.runs import CODE_VERSION
 
 
 def _parser():

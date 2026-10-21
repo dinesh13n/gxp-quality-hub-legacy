@@ -13,7 +13,7 @@ from hub.ops import backup as backup_mod
 from hub.security import audit
 from hub.security.errors import StoreNotMigrated
 from hub.store import db, migrate
-from hub.web import schema as web_schema
+from hub.store import m006 as web_schema  # Stage 20 DW-06: no hub.web import
 
 MIGRATIONS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "migrations")
 VERSION = "M007"

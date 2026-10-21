@@ -1,0 +1,68 @@
+{
+ "baseline": {
+  "legacy.sqlite3": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+  "partner_export.csv(tiny)": "d5f841003e666012a16a78b73e5d2fd28a4bf39a609fdf76650d0fa8154f6a85"
+ },
+ "code_digest": "ef76c6f2226a23670490a3ade85a8365b615c38fb68b47a111f6db98713257be",
+ "label": "synthetic, unvalidated",
+ "observations": {
+  "intake.missing_envelope_field": {
+   "quarantined": 1,
+   "reason": "MISSING_ENVELOPE_FIELD",
+   "received": 1
+  },
+  "intake.partner_negative_quantity": {
+   "NEGATIVE_VALUE_items": 161,
+   "flagged_value_queue": 3
+  },
+  "intake.partner_outcomes": {
+   "legacy_table": "untouched",
+   "outcome_store": "append-only",
+   "outcomes": {
+    "EXCEPTION": 8109,
+    "NOOP_DUPLICATE": 67,
+    "QUARANTINED": 223,
+    "VALIDATED": 165,
+    "VALIDATED_WITH_FLAGS": 3
+   }
+  },
+  "intake.partner_ref_match": {
+   "linked": 168,
+   "no_business_key": 206,
+   "unmatched_ref": 7903
+  },
+  "intake.partner_replay": {
+   "NOOP_DUPLICATE": 67,
+   "REVISED_CONFLICT": 0
+  },
+  "intake.vendor_tiny": {
+   "UNPARSABLE_AMOUNT": 10,
+   "kept_rows": 2390
+  },
+  "policy.js_invalid_amount": {
+   "abc": "E-POL-INPUT-INVALID",
+   "null": "E-POL-INPUT-INVALID"
+  },
+  "policy.js_partial_year": {
+   "": {
+    "defaulted": true,
+    "threshold": 999999
+   },
+   "2": {
+    "defaulted": true,
+    "threshold": 999999
+   },
+   "202": {
+    "defaulted": true,
+    "threshold": 999999
+   }
+  },
+  "policy.js_unknown_year": {
+   "defaulted": true,
+   "region": "APAC",
+   "threshold": 999999,
+   "year": 2019
+  }
+ },
+ "schema": "golden-observation/v1"
+}

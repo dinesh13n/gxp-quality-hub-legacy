@@ -21,6 +21,7 @@ from hub.decision.errors import (CaseExists, CaseIdInvalid, CaseNotFound, ChainB
                                  NotYetExists, ReopenExplicit, SeqConflict, StateUnknown, TimeOrder, TransitionNotAllowed)
 from hub.gate.errors import GateNotAuthorised
 from hub.gate.service import GateService
+from hub.policy import withdrawal
 from hub.security import audit
 from hub.security.canonical import GENESIS, canonical, fmt, parse, sha256_hex
 from hub.security.errors import AuthForbidden, AuthUnauthenticated
@@ -237,6 +238,8 @@ class DecisionService(object):
             " AND status IN ('adopted','accepted-open') ORDER BY created_at DESC, version DESC").fetchall()
         for pid, ver, body, ef, et in rows:
             if (ef is not None and ef > today) or (et is not None and et < today):
+                continue
+            if withdrawal.effective(self.con, "%s@%d" % (pid, ver), self.clock()):  # Stage 20 DW-07
                 continue
             cs = json.loads(body).get("closing_states")
             if isinstance(cs, list) and cs and all(x in dsettings.VOCAB for x in cs):

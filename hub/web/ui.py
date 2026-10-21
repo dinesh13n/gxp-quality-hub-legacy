@@ -11,9 +11,6 @@ from hub.core.errors import HubError
 from hub.gate import pack as gpack
 from hub.gate import reauth
 from hub.gate.actions import ZoneHActions
-from hub.gate.dispositions import DispositionService
-from hub.review.service import ReviewService
-from hub.security.auth import LocalAuthenticator
 from hub.web import csrf
 from hub.web.api import authn, cookie, dec, disp, rev
 from hub.web.app import Response
@@ -143,7 +140,7 @@ def op_UI_TRACE(ctx):
 def op_UI_OVERRIDE(ctx):
     fid = ctx.params["flag_id"]
     try:
-        r = disp(ctx).act_on_flag(ctx.sess, fid, ctx.body.get("action", ""), ctx.body.get("reason", ""), ctx.body.get("replacement") or None, ctx.cid)
+        disp(ctx).act_on_flag(ctx.sess, fid, ctx.body.get("action", ""), ctx.body.get("reason", ""), ctx.body.get("replacement") or None, ctx.cid)
     except HubError as err:
         return _err_page(ctx, err)
     from hub.gate import flags

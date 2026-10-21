@@ -1,0 +1,435 @@
+{
+ "complexity_over_15": [
+  {
+   "complexity": 21,
+   "file": "hub/admin/cli.py",
+   "function": "_cmd",
+   "line": 146
+  },
+  {
+   "complexity": 25,
+   "file": "hub/decision/service.py",
+   "function": "transition",
+   "line": 285
+  },
+  {
+   "complexity": 19,
+   "file": "hub/intake/service.py",
+   "function": "ingest",
+   "line": 167
+  },
+  {
+   "complexity": 16,
+   "file": "hub/intake/untrusted_lint.py",
+   "function": "check_source",
+   "line": 43
+  },
+  {
+   "complexity": 20,
+   "file": "hub/intake/validate.py",
+   "function": "validate",
+   "line": 67
+  },
+  {
+   "complexity": 18,
+   "file": "hub/obs/collect.py",
+   "function": "samples",
+   "line": 36
+  },
+  {
+   "complexity": 21,
+   "file": "hub/policy/engine.py",
+   "function": "evaluate",
+   "line": 108
+  },
+  {
+   "complexity": 16,
+   "file": "hub/policy/rulesets.py",
+   "function": "validate",
+   "line": 27
+  },
+  {
+   "complexity": 20,
+   "file": "hub/runs/cli.py",
+   "function": "_cmd",
+   "line": 101
+  },
+  {
+   "complexity": 22,
+   "file": "hub/web/app.py",
+   "function": "_dispatch",
+   "line": 185
+  }
+ ],
+ "counts": {
+  "complexity_over_15": 10,
+  "domain_to_web_files": 0,
+  "holder_rule_copies": 1,
+  "three_cycles": 6,
+  "two_cycles": 4,
+  "unused": 10
+ },
+ "graph": {
+  "domain_to_web_imports": {},
+  "function_level_edges": {
+   "(root)": [
+    "coexistence",
+    "golden",
+    "guards",
+    "obs",
+    "store"
+   ],
+   "admin": [
+    "(root)",
+    "guards",
+    "obs",
+    "ops",
+    "store"
+   ],
+   "decision": [
+    "crosswalk",
+    "guards",
+    "obs"
+   ],
+   "golden": [
+    "(root)",
+    "decision",
+    "intake",
+    "policy",
+    "security"
+   ],
+   "intake": [
+    "adapters",
+    "guards",
+    "obs"
+   ],
+   "metrics": [
+    "adapters",
+    "guards",
+    "obs"
+   ],
+   "obs": [],
+   "policy": [
+    "guards",
+    "obs"
+   ],
+   "r2": [
+    "guards",
+    "obs"
+   ],
+   "review": [
+    "adapters"
+   ],
+   "runs": [
+    "adapters",
+    "guards",
+    "metrics"
+   ],
+   "search": [
+    "obs"
+   ],
+   "store": [
+    "coexistence"
+   ],
+   "web": [
+    "guards"
+   ]
+  },
+  "module_level_edges": {
+   "(root)": [
+    "(root)",
+    "core"
+   ],
+   "adapters": [
+    "core",
+    "guards",
+    "intake"
+   ],
+   "admin": [
+    "core",
+    "security"
+   ],
+   "coexistence": [
+    "core"
+   ],
+   "crosswalk": [
+    "core",
+    "decision",
+    "guards",
+    "security"
+   ],
+   "decision": [
+    "adapters",
+    "admin",
+    "core",
+    "gate",
+    "ops",
+    "policy",
+    "security",
+    "store"
+   ],
+   "gate": [
+    "core",
+    "decision",
+    "policy",
+    "review",
+    "runs",
+    "security",
+    "store"
+   ],
+   "golden": [
+    "adapters",
+    "coexistence",
+    "core",
+    "guards",
+    "store"
+   ],
+   "guards": [
+    "core",
+    "obs"
+   ],
+   "intake": [
+    "admin",
+    "core",
+    "crosswalk",
+    "decision",
+    "gate",
+    "ops",
+    "policy",
+    "security",
+    "store"
+   ],
+   "metrics": [
+    "admin",
+    "core",
+    "decision",
+    "policy",
+    "runs",
+    "security"
+   ],
+   "obs": [
+    "(root)",
+    "core",
+    "security"
+   ],
+   "ops": [
+    "guards",
+    "obs",
+    "security",
+    "store"
+   ],
+   "policy": [
+    "adapters",
+    "admin",
+    "core",
+    "ops",
+    "security",
+    "store"
+   ],
+   "r2": [
+    "(root)",
+    "adapters",
+    "admin",
+    "core",
+    "crosswalk",
+    "decision",
+    "intake",
+    "policy",
+    "review",
+    "search",
+    "security",
+    "web"
+   ],
+   "review": [
+    "core",
+    "decision",
+    "policy",
+    "security",
+    "store"
+   ],
+   "runs": [
+    "(root)",
+    "admin",
+    "core",
+    "decision",
+    "gate",
+    "intake",
+    "obs",
+    "ops",
+    "policy",
+    "security",
+    "store"
+   ],
+   "search": [
+    "admin",
+    "core",
+    "decision",
+    "guards",
+    "ops",
+    "r2",
+    "review",
+    "security",
+    "store"
+   ],
+   "security": [
+    "core",
+    "guards"
+   ],
+   "store": [
+    "core",
+    "guards",
+    "ops",
+    "security"
+   ],
+   "web": [
+    "(root)",
+    "admin",
+    "core",
+    "crosswalk",
+    "decision",
+    "gate",
+    "intake",
+    "metrics",
+    "obs",
+    "ops",
+    "policy",
+    "review",
+    "runs",
+    "security",
+    "store"
+   ]
+  },
+  "three_cycles": [
+   [
+    "adapters",
+    "decision",
+    "intake"
+   ],
+   [
+    "adapters",
+    "intake",
+    "policy"
+   ],
+   [
+    "decision",
+    "gate",
+    "review"
+   ],
+   [
+    "decision",
+    "gate",
+    "runs"
+   ],
+   [
+    "gate",
+    "intake",
+    "runs"
+   ],
+   [
+    "guards",
+    "obs",
+    "security"
+   ]
+  ],
+  "two_cycles": [
+   [
+    "decision",
+    "gate"
+   ],
+   [
+    "gate",
+    "runs"
+   ],
+   [
+    "ops",
+    "store"
+   ],
+   [
+    "r2",
+    "search"
+   ]
+  ]
+ },
+ "holder_rule_copies": [
+  {
+   "expr": "principal.principal_id not in holders",
+   "file": "hub/security/zone_h.py",
+   "function": "refusal",
+   "line": 33
+  }
+ ],
+ "python": "3.10.12",
+ "root_label": "gxp-quality-hub-legacy",
+ "unused": [
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 37,
+   "name": "protocol_version"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 38,
+   "name": "server_version"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 39,
+   "name": "sys_version"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 75,
+   "name": "do_GET"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 75,
+   "name": "do_POST"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 75,
+   "name": "do_PUT"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 75,
+   "name": "do_DELETE"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 75,
+   "name": "do_PATCH"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 75,
+   "name": "do_HEAD"
+  },
+  {
+   "file": "hub/web/server.py",
+   "function": "make_handler",
+   "kind": "F841-like",
+   "line": 75,
+   "name": "do_OPTIONS"
+  }
+ ]
+}

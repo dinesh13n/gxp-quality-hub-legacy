@@ -52,14 +52,14 @@ class TST_HUB_INC02_Supplementary(unittest.TestCase):
         self.assertEqual(S.run_hub(["--config", path, "selfcheck"]).returncode, 0)
 
     def test_TST_HUB_INC02_S03_m000_migration(self):
-        """S03: M000 applies once (checksummed), seeds DV-01..09 proposed and CO-WF-01 (owner Unknown, protected)."""
+        """S03: M000 applies once (checksummed), seeds DV-01..11 proposed (Stage 20 DW-05: DV-10, DV-11) and CO-WF-01 (owner Unknown, protected)."""
         d = os.path.join(S.tmpdir("s03-"), "hubdata")
         for _ in range(2):
             self.assertEqual(S.run_hub(["init", "--data-dir", d]).returncode, 0)
         con = sqlite3.connect(os.path.join(d, "hub.sqlite3"))
         self.assertEqual([r[0] for r in con.execute("SELECT version FROM schema_migrations")], ["M000"])
         self.assertEqual(con.execute("SELECT count(*), min(status), max(status) FROM deviation_register").fetchone(),
-                         (9, "proposed", "proposed"))
+                         (11, "proposed", "proposed"))
         self.assertEqual(con.execute("SELECT owner, status FROM coexistence_inventory WHERE item_id='CO-WF-01'").fetchone(),
                          ("Unknown", "protected"))
         for sql in ("UPDATE coexistence_inventory SET status='retired'", "DELETE FROM coexistence_inventory"):

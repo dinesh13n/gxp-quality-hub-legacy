@@ -1,0 +1,21 @@
+{
+ "schema": "hub-regression-groups/v1",
+ "note": "Stage 20 DW-02 / DW-03: the hub regression as DATA (replaces the orchestrator scratchpad script full_regression.sh, whose groups omitted TST-CO-03, S16-D10 / RG-03). Each group is one `run_hub_tests.py -k ...` call (one device call, OD-21 cap 180 s; headroom target < 120 s per group on the reference laptop, A-18-DB-4 Assumption). test_tst_hub_stg20_change_safety.py checks statically that the groups select every test method in tests/hub/test_*.py exactly once. Run with tests/hub/run_hub_groups.py.",
+ "groups": [
+  {"id": "A", "selectors": ["TST_SEC", "TST_CO_10", "TST_CO_15", "INC03"]},
+  {"id": "B", "selectors": ["TST_CO_01", "TST_CO_02", "TST_CO_04", "TST_CO_05", "TST_CO_06", "TST_CO_07", "TST_CO_11", "TST_CO_13", "TST_CO_14", "INC02"]},
+  {"id": "C1", "selectors": ["TST_CO_12_a", "TST_CO_12_b", "TST_CO_12_c", "TST_CO_12_d", "TST_CO_12_e1"]},
+  {"id": "C2", "selectors": ["TST_CO_12_e2"]},
+  {"id": "C3", "selectors": ["TST_CO_12_e3"]},
+  {"id": "I45", "selectors": ["INC04", "TST_POL", "TST_DEC", "TST_ID", "INC05", "E05EGRESS", "TST_CO_03"]},
+  {"id": "I6", "selectors": ["TST_INT", "TST_CO_09", "INC06", "E06EGRESS"]},
+  {"id": "I7", "selectors": ["TST_RUN", "TST_MET", "TST_OBS", "INC07", "E07EGRESS"]},
+  {"id": "I8a", "selectors": ["TST_GATE", "TST_REV"]},
+  {"id": "I8b", "selectors": ["TST_CO_08", "TST_NFR", "I8_", "INC08_S"]},
+  {"id": "E8", "selectors": ["E08EGRESS"]},
+  {"id": "I9", "selectors": ["I9_", "INC09_S"]},
+  {"id": "E9", "selectors": ["E09EGRESS"]},
+  {"id": "S20", "selectors": ["STG20"]},
+  {"id": "E20", "selectors": ["E20EGRESS"]}
+ ]
+}

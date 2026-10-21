@@ -12,6 +12,7 @@ open finding), changes no other state, never auto-corrects, and is audited once 
 """
 import json
 
+from hub.policy import withdrawal
 from hub.r2.errors import R2InputInvalid
 from hub.search import schema
 from hub.security import audit
@@ -22,9 +23,11 @@ NONE_ADOPTED = "no consistency policy adopted"
 COLS = ("finding_id", "rule_ref", "object_refs", "policy_version", "detected_at", "status", "run_id", "detail")
 
 
-def adopted_rules(con):
+def adopted_rules(con, as_of=None):
+    """Adopted CONSISTENCY rules; with `as_of` (ISO timestamp) a version whose withdrawal is in effect is skipped (Stage 20 DW-07)."""
     rows = con.execute("SELECT policy_id, version, body FROM policy_object WHERE kind = 'CONSISTENCY' AND status = 'adopted' ORDER BY policy_id, version")
-    return [{"policy_id": r[0], "version": r[1], "body": json.loads(r[2])} for r in rows]
+    return [{"policy_id": r[0], "version": r[1], "body": json.loads(r[2])} for r in rows
+            if as_of is None or not withdrawal.effective(con, "%s@%d" % (r[0], r[1]), as_of)]
 
 
 def _side(body, name):
@@ -55,7 +58,7 @@ def _pairs(con, lt, rt):
 def run(con, clock, anchor, actor, facts=None, run_id="consistency", correlation_id="consistency"):
     """Operator / job entry (host operator, like the INC-07 jobs). Returns {rules, findings_new, findings_open, statement?}."""
     schema.require(con)
-    rules = adopted_rules(con)
+    rules = adopted_rules(con, clock())
     if not rules:
         audit.append(con, clock, anchor=anchor, actor=actor, actor_kind="system" if actor == "hub" else "human", action="CONSISTENCY_CHECK_RUN",
                      outcome="success", correlation_id=correlation_id, object_ref="OP-ID-05", details={"rules": 0, "new": 0, "statement": NONE_ADOPTED})

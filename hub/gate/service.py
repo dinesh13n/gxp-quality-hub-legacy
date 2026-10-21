@@ -13,8 +13,7 @@ correlation id) in its own transaction, so a refusal leaves a trace. The accepte
 This module never reads free text and imports nothing from intake, runs, metrics, reviewer support or rules (BEH-GATE-02).
 """
 from hub.gate.errors import GateNoHolders, GateNotAuthorised, GateReauthRequired, GateUnknownAction
-from hub.security import audit
-from hub.security.canonical import parse
+from hub.security import audit, zone_h
 from hub.security.errors import AuthUnauthenticated
 
 ZONE_H_ACTIONS = {
@@ -49,17 +48,8 @@ class GateService(object):
                                                             "reason": "unauthenticated", "holders_configured": len(holders)})
             raise AuthUnauthenticated()
         p = sess.principal
-        err, reason = None, None
-        if p.kind != "human" or "dispositioner" not in p.roles or "integration" in p.roles:
-            err, reason = GateNotAuthorised, "not_a_human_dispositioner"
-        elif not holders:
-            err, reason = GateNoHolders, "no_holders_configured"
-        elif p.principal_id not in holders:
-            err, reason = GateNotAuthorised, "not_a_holder"
-        else:
-            age = parse(self.clock()).timestamp() - parse(sess.reauth_at).timestamp()
-            if age > self.s["zone_h"]["reauth_window_seconds"]:
-                err, reason = GateReauthRequired, "reauth_required"
+        reason = zone_h.refusal(p, sess.reauth_at, self.clock, self.s["zone_h"], reject_integration=True)  # Stage 20 DW-06: the one rule
+        err = {None: None, zone_h.NO_HOLDERS: GateNoHolders, zone_h.REAUTH: GateReauthRequired}.get(reason, GateNotAuthorised)
         rec = audit.append(self.con, self.clock, anchor=self.anchor, actor=p.principal_id, actor_kind=p.actor_kind,
                            action="ZONE_H_ATTEMPT", outcome="denied" if err else "success", correlation_id=correlation_id,
                            object_ref=object_ref, reason=reason,

@@ -12,7 +12,7 @@ service that stores the result (`_Preapproved`, fail-closed, one-shot) so the de
   ZH-07        EXCEPTION_RULE_ACCEPTED policy event (record only; semantics undefined in the spec: Stage 12 gap, RTD-67)
   ZH-08        DISPOSITION_MODE_CHANGED policy event (latest wins; modes.current)
   ZH-09        schedule flag (SCHEDULE_CHANGED), same event as hub.runs.schedule
-  ZH-10        GatedPolicyService.edit_rule_row
+  ZH-10        GatedPolicyService.edit_rule_row; op withdraw_policy -> PolicyService.withdraw (Stage 20 DW-07, POLICY_WITHDRAWN)
 Nothing in this module reads free text to choose an action, and no automated caller (intake, runs, metrics, reviewer support, rules) imports it.
 """
 from hub.core.errors import ConfigInvalid
@@ -25,7 +25,7 @@ from hub.gate.service import GateService
 from hub.policy.errors import AuthorityRequired
 from hub.runs.flag import schedule_state
 from hub.security import audit
-from hub.web.errors import ReqInvalid
+from hub.core.req_errors import ReqInvalid
 
 REQUEST_KEYS = ("action", "case_id", "payload", "pack_hash", "authority_ref", "reauth_token")
 OPS_05 = ("adopt", "accept_open")
@@ -223,9 +223,13 @@ class ZoneHActions(object):
 
     # ---- ZH-10
     def _zh_10(self, sess, case_id, payload, pack_hash, authority_ref, hseq, cid):
-        if payload.get("op") != "edit_rule_row":
-            raise GatePayloadInvalid({"field": "payload.op", "allowed": ["edit_rule_row"]})
+        if payload.get("op") not in ("edit_rule_row", "withdraw_policy"):
+            raise GatePayloadInvalid({"field": "payload.op", "allowed": ["edit_rule_row", "withdraw_policy"]})
         pol = self.pol.bind(_Preapproved(hseq, "ZH-10"))
+        if payload["op"] == "withdraw_policy":  # Stage 20 DW-07
+            w = pol.withdraw(sess, _need(payload, "policy_id"), _need(payload, "version", int), payload.get("withdrawn_from"),
+                             payload.get("reason"), authority_ref, cid)
+            return {"event_ref": w["event_id"]}
         nref = pol.edit_rule_row(sess, _need(payload, "ruleset_ref"), _need(payload, "row_id"), authority_ref, payload.get("outcome_updates"),
                                  payload.get("conditions"), cid)
         evs = pol.events(policy_ref=nref, event_type="RULE_ROW_CHANGED")

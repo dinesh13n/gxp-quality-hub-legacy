@@ -4,7 +4,9 @@ the runtime floor, honours the kill switch and exports the zero-tripwires at the
   selfcheck       print Python / SQLite / FTS5 versions and the floor (AC-CO-14)
   init            create/migrate <data-dir>/hub.sqlite3 (M000) and seed the deviation register
   deviations      list the deviation register and the coexistence inventory (read-only)
-  golden-compare  compare legacy goldens with new-side observations (exit 6 on UNAPPROVED / NOT-RUN)
+  golden-compare  compare legacy goldens with new-side observations (exit 6 on UNAPPROVED / NOT-RUN); module probes need
+                  --observe (observe the built modules inline) or --observed <record> (Stage 20 DW-04)
+  golden-observe  run the built modules on the read-only baseline and write the observation record (Stage 20 DW-04)
   no-ai-check     dependency / import deny-list scan (exit 9 on findings)
 """
 import argparse
@@ -37,7 +39,13 @@ def _parser():
     p.add_argument("--probes", default=None)
     p.add_argument("--golden-dir", default=None)
     p.add_argument("--observations", default=None, help=argparse.SUPPRESS)  # test seam (AC-CO-02)
+    p.add_argument("--observe", action="store_true", help="observe the built modules inline (Stage 20 DW-04)")
+    p.add_argument("--observed", default=None, help="observation record written by golden-observe (checked: code digest + baseline)")
     p.add_argument("--json", action="store_true")
+    p = sub.add_parser("golden-observe")
+    p.add_argument("--data-dir", required=True)
+    p.add_argument("--legacy-root", required=True, help="sandbox copy whose data/ holds the FX-BASE125 baseline")
+    p.add_argument("--out", default=None, help="record path (default <data-dir>/runs/golden-observe/observation.json)")
     p = sub.add_parser("no-ai-check")
     p.add_argument("paths", nargs="*")
     return ap
@@ -81,11 +89,25 @@ def main(argv=None):
             print(_dump({"deviation_register": rows, "coexistence_inventory": inv}))
         elif args.cmd == "golden-compare":
             from hub.golden import compare, run
-            report = run.run(args.data_dir, args.legacy_root, args.probes, args.golden_dir, args.observations)
+            report = run.run(args.data_dir, args.legacy_root, args.probes, args.golden_dir, args.observations,
+                             observe=args.observe, observed_path=args.observed)
             metrics.check_tripwires()
             report["tripwires"] = metrics.tripwires()
             print(_dump(report) if args.json else compare.render_text(report))
             rc = report["exit_code"]
+        elif args.cmd == "golden-observe":
+            import os
+            from hub.golden import observe
+            from hub.guards import sandbox
+            rec = observe.observe(args.data_dir, args.legacy_root)
+            out = args.out or os.path.join(sandbox.assert_safe_path(args.data_dir, "hub data directory"), "runs", "golden-observe",
+                                           "observation.json")
+            out = sandbox.assert_safe_path(out, "observation record")
+            os.makedirs(os.path.dirname(out), exist_ok=True)
+            with open(out, "w", encoding="utf-8") as f:
+                f.write(_dump(rec) + "\n")
+            metrics.check_tripwires()
+            print(_dump(dict(rec, record=os.path.basename(out))))
         elif args.cmd == "no-ai-check":
             import os
             from hub.guards import no_ai, sandbox

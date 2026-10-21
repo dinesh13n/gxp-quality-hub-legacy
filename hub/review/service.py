@@ -17,7 +17,7 @@ from hub.review.errors import QueryInvalid, ReviewNotFound
 from hub.security import audit
 from hub.security.canonical import canonical, fmt, parse
 from hub.security.errors import AuthForbidden, AuthUnauthenticated
-from hub.web import schema as web_schema
+from hub.store import m006 as web_schema  # Stage 20 DW-06: no hub.web import
 
 QUEUE_ROLES = ("reviewer", "quality_lead", "compliance", "integration")
 TRACE_ROLES = ("reviewer", "quality_lead", "compliance", "dispositioner")
