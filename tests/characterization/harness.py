@@ -186,6 +186,7 @@ def norm_str(s):
     s = _SBX_RE.sub('<SBX>', s)
     s = _JTO_RE.sub('', s)
     s = _PY_RE.sub('<PY>', s)
+    s = re.sub(r'Node\.js v\d+\.\d+\.\d+', 'Node.js v<NODE>', s)  # S24-DEV-04: Node patch drift is environment-only
     return s
 
 
