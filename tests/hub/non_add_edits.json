@@ -1,49 +1,37 @@
 {
  "schema": "hub-non-add-edits/v1",
- "stage": "23",
- "note": "Stage 23 (DW-13..DW-18): reset per OD-27 (S23-DEV-01). The Stage 15 add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason; each entry is recorded in docs/23-human-control/operating-contract-updates.md. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
+ "stage": "24",
+ "note": "Stage 24 (DW-19): reset per OD-27 (S24-DEV-01). The Stage 15 add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason; each entry is recorded in docs/24-security-privacy/security-control-matrix.md. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
  "edits": [
   {
-   "path": "hub/config.py",
-   "work_item": "DW-17",
-   "deviation": "S23-DEV-01",
-   "reason": "the capability_authority validation loop is replaced by hub.control.flags.check (one approval rule for every decision flag: non-default needs approval_refs[flag]); defaults unchanged, ships OFF"
-  },
-  {
-   "path": "hub/admin/cli.py",
-   "work_item": "DW-17",
-   "deviation": "S23-DEV-01",
-   "reason": "_Run.config_loaded also records a capability_authority change made in the config file as CONFIG_CHANGED (no-op on a default install)"
+   "path": "hub/security/scan.py",
+   "work_item": "DW-19",
+   "deviation": "S24-DEV-02",
+   "reason": "RETAINED_TABLES is now derived from the table disposition register hub/security/tables.py (39 tables, a superset of the 18 before; RF-02); no scan logic changes"
   },
   {
    "path": "hub/web/app.py",
-   "work_item": "DW-17",
-   "deviation": "S23-DEV-01",
-   "reason": "WebApp.start records a capability_authority change made in the config file as CONFIG_CHANGED (no-op on a default install)"
-  },
-  {
-   "path": "tests/hub/_inc03.py",
-   "work_item": "DW-17",
-   "deviation": "S23-DEV-02",
-   "reason": "write_config adds a synthetic approval_refs entry for every non-default registered flag a test sets, so existing tests keep their configurations under the new approval rule; marker text says it is not a human approval"
-  },
-  {
-   "path": "tests/hub/test_tst_sec_21_config_loaded.py",
-   "work_item": "DW-17",
-   "deviation": "S23-DEV-02",
-   "reason": "the test hand-writes a config with synthetic holders; under the approval rule it needs an approval_refs entry (the test marker from _inc03, not a human approval); assertions unchanged"
+   "work_item": "DW-19",
+   "deviation": "S24-DEV-03",
+   "reason": "WebApp.handle copies an X-Hub-Reason header into the reason parameter (RTD-90) and appends Secure to Set-Cookie only when TLS settings are configured (A-INC08-3); both are no-ops on a default install"
   },
   {
    "path": "tests/hub/regression_groups.json",
-   "work_item": "DW-13..DW-18",
-   "deviation": "S23-DEV-01",
-   "reason": "new groups S23 (STG23) and E23 (E23EGRESS) so the full hub regression runs the Stage 23 tests with executed = expected (OD-23)"
+   "work_item": "DW-19",
+   "deviation": "S24-DEV-01",
+   "reason": "new groups S24 (STG24) and E24 (E24EGRESS) so the full hub regression runs the Stage 24 tests with executed = expected (OD-23)"
   },
   {
    "path": "tests/hub/non_add_edits.json",
-   "work_item": "DW-13..DW-18 (OD-27 reset)",
-   "deviation": "S23-DEV-01",
-   "reason": "allow-list reset for Stage 23 (OD-27: each BUILD stage replaces the list)"
+   "work_item": "DW-19 (OD-27 reset)",
+   "deviation": "S24-DEV-01",
+   "reason": "allow-list reset for Stage 24 (OD-27: each BUILD stage replaces the list)"
+  },
+  {
+   "path": "tests/hub/test_inc06_supplementary.py",
+   "work_item": "DW-19",
+   "deviation": "S24-DEV-05",
+   "reason": "S13 asserted the frozen RETAINED_TABLES excluded intake_item_attr (RTD-52); Stage 24 derives the list from the 39-table register (S24-DEV-02), so the assertion now expects it to be included"
   }
  ]
 }

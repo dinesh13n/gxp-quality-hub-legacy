@@ -461,7 +461,7 @@ class TST_HUB_INC06_Supplementary(unittest.TestCase):
             sqls = [r[0] for r in st.con.execute("SELECT sql FROM sqlite_master WHERE type = 'trigger' AND tbl_name = ?", (t,))]
             self.assertTrue(any("BEFORE DELETE" in s and "RAISE(ABORT" in s for s in sqls), t)
         self.assertIn("raw_intake", scan.RETAINED_TABLES)
-        self.assertNotIn("intake_item_attr", scan.RETAINED_TABLES)                          # RTD-52: the frozen list does not know the two addendum tables
+        self.assertIn("intake_item_attr", scan.RETAINED_TABLES)                             # S24-DEV-05: since Stage 24 the list derives from the table disposition register (39 tables incl. the INC-06 addendum tables; was RTD-52)
 
     def test_TST_HUB_INC06_S14_queue_snapshot_ages_and_run_records(self):
         """S14: queue ages are relative to the as_of argument (deterministic); run records are STARTED/FINISHED with counts; the intake run adds

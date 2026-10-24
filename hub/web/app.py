@@ -16,7 +16,7 @@ from hub.core.errors import HubError
 from hub.decision import settings as dsettings
 from hub.gate import modes
 from hub.obs.log import Logger
-from hub.security import audit, exposure, settings as sec_settings
+from hub.security import audit, exposure, settings as sec_settings, transport
 from hub.security.auth import LocalAuthenticator
 from hub.security.canonical import parse, sha256_hex
 from hub.security.errors import AuthForbidden, AuthSessionExpired, AuthUnauthenticated
@@ -143,6 +143,7 @@ class WebApp(object):
         return None
 
     def handle(self, req):
+        req = transport.with_reason_header(req)  # Stage 24 DW-19 (RTD-90): X-Hub-Reason header
         cid = self._cid(req)
         t0 = parse(self.clock()).timestamp()
         info = {"op_id": "UNROUTED", "actor": None, "actor_kind": None}
@@ -172,7 +173,7 @@ class WebApp(object):
         self.log.emit("http_request", "INFO" if resp.status < 400 else ("WARN" if resp.status < 500 else "ERROR"), cid, None, info["actor"],
                       info["actor_kind"], info["op_id"], "success" if resp.status < 400 else ("denied" if resp.status in (401, 403, 423) else "error"),
                       code, ms, None)
-        resp.headers = [("X-Correlation-Id", cid)] + list(SECURITY_HEADERS) + resp.headers
+        resp.headers = [("X-Correlation-Id", cid)] + list(SECURITY_HEADERS) + transport.harden_cookies(self.s, resp.headers)  # Stage 24 DW-19 (A-INC08-3)
         return resp
 
     def _error(self, e, cid):

@@ -1,0 +1,2258 @@
+{
+ "class_counts": {
+  "C1": 125,
+  "C2": 161,
+  "C3": 59
+ },
+ "columns": 345,
+ "free_text_columns": [
+  "audit_log.details",
+  "audit_log.reason",
+  "coexistence_inventory.description",
+  "consistency_finding.detail",
+  "crosswalk_link.reason",
+  "crosswalk_link_event.reason",
+  "decision_events.payload",
+  "deviation_register.justification",
+  "deviation_register.legacy_value",
+  "deviation_register.new_value",
+  "flag_action.reason",
+  "flag_action.replacement",
+  "intake_item_attr.notes",
+  "intake_outcome.reason_detail",
+  "intake_outcome.resolution_reason",
+  "intake_run_event.body",
+  "metric_definition.documentation",
+  "metric_value.detail",
+  "metric_value.inputs",
+  "policy_events.new_value",
+  "policy_events.old_value",
+  "policy_object.body",
+  "release_gate_result.note",
+  "review_draft.fields",
+  "rule_trace.inputs",
+  "run_event.body",
+  "search_corpus_load.inputs",
+  "search_doc.body",
+  "service_token.label"
+ ],
+ "label": "synthetic, unvalidated",
+ "map": [
+  {
+   "class": "C1",
+   "column": "function",
+   "table": "active_ruleset",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "ruleset_id",
+   "table": "active_ruleset",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "active_ruleset",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "activated_event",
+   "table": "active_ruleset",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "audit_seq",
+   "table": "audit_log",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "occurred_at",
+   "table": "audit_log",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "actor",
+   "table": "audit_log",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "actor_kind",
+   "table": "audit_log",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "action",
+   "table": "audit_log",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "object_ref",
+   "table": "audit_log",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "outcome",
+   "table": "audit_log",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "reason",
+   "table": "audit_log",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "correlation_id",
+   "table": "audit_log",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "details",
+   "table": "audit_log",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "prev_hash",
+   "table": "audit_log",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "hash",
+   "table": "audit_log",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "case_id",
+   "table": "case_state",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "state",
+   "table": "case_state",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "cycle",
+   "table": "case_state",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "last_seq",
+   "table": "case_state",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "updated_from_event",
+   "table": "case_state",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "item_id",
+   "table": "coexistence_inventory",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "description",
+   "table": "coexistence_inventory",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "owner",
+   "table": "coexistence_inventory",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "status",
+   "table": "coexistence_inventory",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "finding_id",
+   "table": "consistency_finding",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "rule_ref",
+   "table": "consistency_finding",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "object_refs",
+   "table": "consistency_finding",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "policy_version",
+   "table": "consistency_finding",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "detected_at",
+   "table": "consistency_finding",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "status",
+   "table": "consistency_finding",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "run_id",
+   "table": "consistency_finding",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "detail",
+   "table": "consistency_finding",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "link_id",
+   "table": "crosswalk_link",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "from_type",
+   "table": "crosswalk_link",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "from_id",
+   "table": "crosswalk_link",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "to_type",
+   "table": "crosswalk_link",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "to_id",
+   "table": "crosswalk_link",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "key_used",
+   "table": "crosswalk_link",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "creator_kind",
+   "table": "crosswalk_link",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "creator",
+   "table": "crosswalk_link",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "created_at",
+   "table": "crosswalk_link",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "reason",
+   "table": "crosswalk_link",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "run_id",
+   "table": "crosswalk_link",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "event_id",
+   "table": "crosswalk_link_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "link_id",
+   "table": "crosswalk_link_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "event_type",
+   "table": "crosswalk_link_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "actor",
+   "table": "crosswalk_link_event",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "occurred_at",
+   "table": "crosswalk_link_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "reason",
+   "table": "crosswalk_link_event",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "event_id",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "case_id",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "seq",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "event_type",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "from_state",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "to_state",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "affects_state",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "actor",
+   "table": "decision_events",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "actor_kind",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "occurred_at",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "recorded_at",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "basis",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "evidence_refs",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "cycle",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "exception",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "closure_check",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "mode_at_write",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "policy_version",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "holder_check_ref",
+   "table": "decision_events",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "payload",
+   "table": "decision_events",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "prev_hash",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "hash",
+   "table": "decision_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "idem_key",
+   "table": "decision_idempotency",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "body_hash",
+   "table": "decision_idempotency",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "event_id",
+   "table": "decision_idempotency",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "created_at",
+   "table": "decision_idempotency",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "decision_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "sha256",
+   "table": "decision_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "applied_at",
+   "table": "decision_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "dev_id",
+   "table": "deviation_register",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "golden_ref",
+   "table": "deviation_register",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "legacy_value",
+   "table": "deviation_register",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "new_value",
+   "table": "deviation_register",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "justification",
+   "table": "deviation_register",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "approval_ref",
+   "table": "deviation_register",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "status",
+   "table": "deviation_register",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "ev_id",
+   "table": "evidence_record",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "kind",
+   "table": "evidence_record",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source",
+   "table": "evidence_record",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source_ref",
+   "table": "evidence_record",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source_hash",
+   "table": "evidence_record",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "access_level",
+   "table": "evidence_record",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "attached_by",
+   "table": "evidence_record",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "attached_at",
+   "table": "evidence_record",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "action_id",
+   "table": "flag_action",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "flag_id",
+   "table": "flag_action",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "flag_kind",
+   "table": "flag_action",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "action",
+   "table": "flag_action",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "reason",
+   "table": "flag_action",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "replacement",
+   "table": "flag_action",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "actor",
+   "table": "flag_action",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "actor_kind",
+   "table": "flag_action",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "acted_at",
+   "table": "flag_action",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "case_id",
+   "table": "flag_action",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "event_id",
+   "table": "flag_action",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "raw_id",
+   "table": "intake_item_attr",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "record_kind",
+   "table": "intake_item_attr",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "ref_id",
+   "table": "intake_item_attr",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source_ts",
+   "table": "intake_item_attr",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source_state",
+   "table": "intake_item_attr",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source_quality_flag",
+   "table": "intake_item_attr",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source_subtype",
+   "table": "intake_item_attr",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "amount_text",
+   "table": "intake_item_attr",
+   "tags": [
+    "finance"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "notes",
+   "table": "intake_item_attr",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "notes_trust",
+   "table": "intake_item_attr",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "raw_id",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "outcome_seq",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "outcome",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "primary_reason",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "all_reasons",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "queue",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "contract_check",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "counts_toward_totals",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "matched_link",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "resolution",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "resolution_reason",
+   "table": "intake_outcome",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "resolved_by",
+   "table": "intake_outcome",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "run_id",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "decided_at",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "contract_missing",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "conflicts_with",
+   "table": "intake_outcome",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "reason_detail",
+   "table": "intake_outcome",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "run_id",
+   "table": "intake_run_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "run_seq",
+   "table": "intake_run_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "event_type",
+   "table": "intake_run_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source",
+   "table": "intake_run_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "occurred_at",
+   "table": "intake_run_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "body",
+   "table": "intake_run_event",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "intake_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "sha256",
+   "table": "intake_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "applied_at",
+   "table": "intake_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "attempt_seq",
+   "table": "login_attempt",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "principal_id",
+   "table": "login_attempt",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "occurred_at",
+   "table": "login_attempt",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "outcome",
+   "table": "login_attempt",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "metric_id",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "name",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "category",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "definition_tag",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "involves_definition",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "window",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "denominator",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "exclusions",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "cutoff_ref",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "basis",
+   "table": "metric_definition",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "documentation",
+   "table": "metric_definition",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "value_id",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "metric_id",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "metric_version",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "definition_tag",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "policy_version",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "value",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "n",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "partial",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "window_start",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "window_end",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "denominator",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "exclusions",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "basis",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "data_origin",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "label",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "inputs_hash",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "code_version",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "computed_at",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "null_reason",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "policy_status",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "errors",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "params",
+   "table": "metric_value",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "inputs",
+   "table": "metric_value",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "detail",
+   "table": "metric_value",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "sample_id",
+   "table": "obs_metric",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "collected_at",
+   "table": "obs_metric",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "name",
+   "table": "obs_metric",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "kind",
+   "table": "obs_metric",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "labels",
+   "table": "obs_metric",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "value",
+   "table": "obs_metric",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "run_id",
+   "table": "obs_metric",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "event_id",
+   "table": "policy_events",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "policy_ref",
+   "table": "policy_events",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "event_type",
+   "table": "policy_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "actor",
+   "table": "policy_events",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "occurred_at",
+   "table": "policy_events",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "old_value",
+   "table": "policy_events",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "new_value",
+   "table": "policy_events",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "authority_ref",
+   "table": "policy_events",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "holder_check_ref",
+   "table": "policy_events",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "policy_id",
+   "table": "policy_object",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "policy_object",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "kind",
+   "table": "policy_object",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "name",
+   "table": "policy_object",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "definition_tag",
+   "table": "policy_object",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "body",
+   "table": "policy_object",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "owner",
+   "table": "policy_object",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "effective_from",
+   "table": "policy_object",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "effective_to",
+   "table": "policy_object",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "status",
+   "table": "policy_object",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "created_by",
+   "table": "policy_object",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "created_at",
+   "table": "policy_object",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "policy_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "sha256",
+   "table": "policy_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "applied_at",
+   "table": "policy_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "principal_id",
+   "table": "principal",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "principal_kind",
+   "table": "principal",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "pw_algo",
+   "table": "principal",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "pw_iterations",
+   "table": "principal",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "pw_salt",
+   "table": "principal",
+   "tags": [
+    "secret"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "pw_hash",
+   "table": "principal",
+   "tags": [
+    "secret"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "status",
+   "table": "principal",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "created_at",
+   "table": "principal",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "created_by",
+   "table": "principal",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "principal_id",
+   "table": "principal_role",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "role",
+   "table": "principal_role",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "granted_at",
+   "table": "principal_role",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "granted_by",
+   "table": "principal_role",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "raw_id",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "source_key",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "partner",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "schema_rev",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "receipt_time",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "identity_key",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "content_hash",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "duplicate_of",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "raw_bytes",
+   "table": "raw_intake",
+   "tags": [
+    "content"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "run_id",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "adapter_version",
+   "table": "raw_intake",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "release_id",
+   "table": "release_gate_result",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "gate",
+   "table": "release_gate_result",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "result",
+   "table": "release_gate_result",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "evidence_path",
+   "table": "release_gate_result",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "note",
+   "table": "release_gate_result",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "recorded_at",
+   "table": "release_gate_result",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "release_id",
+   "table": "release_record",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "created_at",
+   "table": "release_record",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "status",
+   "table": "release_record",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "draft_id",
+   "table": "review_draft",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "template_id",
+   "table": "review_draft",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "template_version",
+   "table": "review_draft",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "fields",
+   "table": "review_draft",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "owner",
+   "table": "review_draft",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "created_at",
+   "table": "review_draft",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "label",
+   "table": "review_draft",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "ruleset_id",
+   "table": "rule_row",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "rule_row",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "row_id",
+   "table": "rule_row",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "ordinal",
+   "table": "rule_row",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "conditions",
+   "table": "rule_row",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "outcome",
+   "table": "rule_row",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "effective_from",
+   "table": "rule_row",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "effective_to",
+   "table": "rule_row",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "owner",
+   "table": "rule_row",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "is_default",
+   "table": "rule_row",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "ruleset_id",
+   "table": "rule_set",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "rule_set",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "name",
+   "table": "rule_set",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "origin",
+   "table": "rule_set",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "read_only",
+   "table": "rule_set",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "functions",
+   "table": "rule_set",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "trace_id",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "flag_id",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "case_id",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "function",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "ruleset_ref",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "authoritative",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "inputs",
+   "table": "rule_trace",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "result",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "template_version",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "recorded_at",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "recorded_by",
+   "table": "rule_trace",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C2",
+   "column": "data_origin",
+   "table": "rule_trace",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "run_id",
+   "table": "run_event",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "run_seq",
+   "table": "run_event",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "event_type",
+   "table": "run_event",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "job",
+   "table": "run_event",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "trigger",
+   "table": "run_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "triggered_by",
+   "table": "run_event",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "occurred_at",
+   "table": "run_event",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "body",
+   "table": "run_event",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "job",
+   "table": "run_lock",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "run_id",
+   "table": "run_lock",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "started_at",
+   "table": "run_lock",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "heartbeat_at",
+   "table": "run_lock",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "runs_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "sha256",
+   "table": "runs_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "applied_at",
+   "table": "runs_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "sha256",
+   "table": "schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "applied_at",
+   "table": "schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "load_id",
+   "table": "search_corpus_load",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "event",
+   "table": "search_corpus_load",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "occurred_at",
+   "table": "search_corpus_load",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "actor",
+   "table": "search_corpus_load",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "origin",
+   "table": "search_corpus_load",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "documents",
+   "table": "search_corpus_load",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "archive_items",
+   "table": "search_corpus_load",
+   "tags": []
+  },
+  {
+   "class": "C2",
+   "column": "inputs",
+   "table": "search_corpus_load",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C1",
+   "column": "fts",
+   "table": "search_corpus_load",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "label",
+   "table": "search_corpus_load",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "rowid",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "doc_id",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "version",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "effective_at",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "source",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "locale",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "access_level",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "access_level_given",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "reference",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "hash",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "body",
+   "table": "search_doc",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "folded",
+   "table": "search_doc",
+   "tags": [
+    "content"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "ocr_confidence",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "origin",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "load_id",
+   "table": "search_doc",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "search_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "sha256",
+   "table": "search_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "applied_at",
+   "table": "search_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "token_sha256",
+   "table": "service_token",
+   "tags": [
+    "secret"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "principal_id",
+   "table": "service_token",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "label",
+   "table": "service_token",
+   "tags": [
+    "free_text"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "created_at",
+   "table": "service_token",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "created_by",
+   "table": "service_token",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "expires_at",
+   "table": "service_token",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "token_sha256",
+   "table": "service_token_revocation",
+   "tags": [
+    "secret"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "revoked_at",
+   "table": "service_token_revocation",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "revoked_by",
+   "table": "service_token_revocation",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "token_sha256",
+   "table": "session",
+   "tags": [
+    "secret"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "principal_id",
+   "table": "session",
+   "tags": [
+    "staff_id"
+   ]
+  },
+  {
+   "class": "C3",
+   "column": "created_at",
+   "table": "session",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "last_seen_at",
+   "table": "session",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "reauth_at",
+   "table": "session",
+   "tags": []
+  },
+  {
+   "class": "C3",
+   "column": "revoked_at",
+   "table": "session",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "version",
+   "table": "web_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "sha256",
+   "table": "web_schema_migrations",
+   "tags": []
+  },
+  {
+   "class": "C1",
+   "column": "applied_at",
+   "table": "web_schema_migrations",
+   "tags": []
+  }
+ ],
+ "staff_id_columns": [
+  "actor",
+  "attached_by",
+  "authority_ref",
+  "created_by",
+  "creator",
+  "granted_by",
+  "holder_check_ref",
+  "owner",
+  "principal_id",
+  "recorded_by",
+  "resolved_by",
+  "revoked_by",
+  "triggered_by"
+ ],
+ "status": "PROPOSED (A-11-02 open)"
+}

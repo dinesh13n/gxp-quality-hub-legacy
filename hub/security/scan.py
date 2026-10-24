@@ -10,6 +10,8 @@ Patterns are assembled from fragments so this file does not match itself.
 import os
 import re
 
+from hub.security import tables
+
 _BEGIN = "-----" + "BEGIN"
 SECRET_PATTERNS = (
     ("private_key_block", re.compile(_BEGIN + r" (?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?PRIVATE KEY-----")),
@@ -20,13 +22,9 @@ SECRET_PATTERNS = (
     ("credential_assignment", re.compile(
         r"(?i)\b(?:pass" + r"word|passwd|pwd|secret|api_?key|access_?token|auth_?token)\b\s*[:=]\s*[\"'][^\"'\s]{6,}[\"']")),
 )
-RETAINED_TABLES = (
-    "audit_log", "principal", "principal_role", "session", "login_attempt", "release_record", "release_gate_result",
-    "deviation_register", "coexistence_inventory",
-    # DDL v0.1 retained tables (later increments)
-    "decision_events", "policy_object", "policy_events", "raw_intake", "intake_outcome", "crosswalk_link",
-    "crosswalk_link_event", "run_event", "evidence_record",
-)
+# Stage 24 (DW-19, RF-02): the register of table dispositions is hub/security/tables.py; every table with an aborting BEFORE DELETE trigger is listed
+# there (39 tables; the Stage 15 list of 18 is a subset), and tests/hub/test_tst_hub_stg24_tables.py proves it equals the live store.
+RETAINED_TABLES = tables.RETAINED_TABLES
 _DELETE = re.compile(r"(?i)\b" + "DEL" + r"ETE\s+FROM\s+[\"`\[]?([A-Za-z_][A-Za-z0-9_]*)")
 _DROP = re.compile(r"(?i)\b" + "DR" + r"OP\s+TABLE\s+(?:IF\s+EXISTS\s+)?[\"`\[]?([A-Za-z_][A-Za-z0-9_]*)")
 TEXT_EXT = (".py", ".sql", ".json", ".md", ".txt", ".toml", ".yaml", ".yml", ".cfg", ".ini", ".sh", ".env")

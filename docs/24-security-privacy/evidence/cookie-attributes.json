@@ -1,0 +1,5 @@
+{
+ "default": "hub_session=<token>; HttpOnly; SameSite=Strict; Path=/; Max-Age=28800",
+ "label": "synthetic, unvalidated",
+ "with_tls": "hub_session=<token>; HttpOnly; SameSite=Strict; Path=/; Max-Age=28800; Secure"
+}
