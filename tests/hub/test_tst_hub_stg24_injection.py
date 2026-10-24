@@ -34,6 +34,14 @@ class TST_HUB_STG24_Injection(unittest.TestCase):
     def tearDown(self):
         self.st.close()
 
+    def markup_is_data(self, r, path):
+        """HTML pages carry no tag from data; any other answer is JSON data served nosniff (a JSON string may hold the text, it is not markup)."""
+        if r.content_type.startswith("text/html"):
+            self.assertEqual(TAG.findall(r.text), [], path)
+        else:
+            self.assertTrue(r.content_type.startswith("application/json") or r.content_type.startswith("text/plain"), (path, r.content_type))
+            self.assertEqual(r.headers.get("x-content-type-options"), "nosniff", path)
+
     def test_TST_HUB_STG24_S40_hostile_strings_are_data_everywhere(self):
         """S40 (DW-19, ABU-01/06/09): see module docstring."""
         st = self.st
@@ -46,7 +54,7 @@ class TST_HUB_STG24_Injection(unittest.TestCase):
         for path in ("/ui/queue", "/ui/", "/api/v2/queues/exceptions", "/api/v2/runs", "/api/v2/policies"):
             r = st.call("GET", path, cookie=cookie)
             self.assertEqual(r.status, 200, path)
-            self.assertEqual(TAG.findall(r.text), [], path)
+            self.markup_is_data(r, path)
             self.assertNotIn("X-Injected", "".join(k + v for k, v in r.headers.items()), path)
             self.assertNotIn("x-injected", r.headers)
             shown += 1
@@ -55,7 +63,7 @@ class TST_HUB_STG24_Injection(unittest.TestCase):
                          "/ui/cases/%s/trace" % up.quote(evil, safe=""), "/api/v2/%s" % up.quote(evil, safe="")):
                 r = st.call("GET", path, cookie=cookie)
                 self.assertNotEqual(r.status, 500, (path, r.text[:200]))
-                self.assertEqual(TAG.findall(r.text), [], path)
+                self.markup_is_data(r, path)
                 self.assertNotIn("x-injected", r.headers, path)
         after = (st.counts(), st.zh_counts())
         self.assertEqual(before[0]["decision_events"], after[0]["decision_events"])

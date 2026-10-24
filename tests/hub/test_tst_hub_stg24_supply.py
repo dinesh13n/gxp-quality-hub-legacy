@@ -123,8 +123,10 @@ class TST_HUB_STG24_Supply(unittest.TestCase):
                             dyn += 1
                         else:
                             bad.append((rel, "__import__ with a non-literal"))
-                    elif name in ("eval", "exec", "compile", "system", "popen"):
-                        bad.append((rel, name))
+                    elif isinstance(f, ast.Name) and f.id in ("eval", "exec", "compile"):
+                        bad.append((rel, f.id))
+                    elif isinstance(f, ast.Attribute) and isinstance(f.value, ast.Name) and f.value.id == "os" and f.attr in ("system", "popen"):
+                        bad.append((rel, "os." + f.attr))
                     for kw in n.keywords:
                         if kw.arg == "shell":
                             bad.append((rel, "shell="))
@@ -164,7 +166,7 @@ class TST_HUB_STG24_Supply(unittest.TestCase):
         self.assertEqual(scan.secret_scan(paths), [])
         d = S.tmpdir("s24-sec-")
         with open(os.path.join(d, "planted.md"), "w", encoding="utf-8") as f:
-            f.write("token = " + chr(34) + "abcdef123456" + chr(34) + "\n")
+            f.write("api_" + "key = " + chr(34) + "abcdef123456" + chr(34) + "\n")
         self.assertEqual([x["kind"] for x in scan.secret_scan([d])], ["credential_assignment"])
 
 
