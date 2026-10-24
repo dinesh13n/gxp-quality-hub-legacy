@@ -1,0 +1,52 @@
+{
+ "allowed_cells": 138,
+ "allowed_mismatches": 0,
+ "allowed_status_distribution": {
+  "200": 46,
+  "201": 2,
+  "400": 48,
+  "403": 1,
+  "404": 19,
+  "409": 4,
+  "422": 3,
+  "501": 15
+ },
+ "api_routes_in_registry": 48,
+ "api_routes_swept": 45,
+ "audit_chain": "ok",
+ "audit_rows_added_by_refused_cells": 222,
+ "label": "synthetic, unvalidated",
+ "principals": [
+  "none",
+  "bogus",
+  "rev",
+  "ql",
+  "comp",
+  "nonholder",
+  "fin",
+  "svc"
+ ],
+ "refused_cells": 222,
+ "refused_mismatches": 2,
+ "registered_deviations": [
+  [
+   "OP-GATE-02",
+   "none",
+   422,
+   "E-GATE-UNKNOWN-ACTION",
+   "S26-F-01"
+  ],
+  [
+   "OP-GATE-02",
+   "bogus",
+   422,
+   "E-GATE-UNKNOWN-ACTION",
+   "S26-F-01"
+  ]
+ ],
+ "state_changed_tables": [],
+ "ui_cells": 32,
+ "ui_get_routes": 4,
+ "ui_mismatches": 0,
+ "unregistered_mismatches": 0
+}

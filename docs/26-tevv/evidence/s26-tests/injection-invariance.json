@@ -1,0 +1,22 @@
+{
+ "cases": 12,
+ "compared_sections": [
+  "active_ruleset",
+  "case_state",
+  "crosswalk_link",
+  "decision_events",
+  "evidence_record",
+  "flag_action",
+  "gate_status",
+  "intake_outcome",
+  "metric",
+  "policy_events",
+  "queue_codes",
+  "row_counts",
+  "rule_results"
+ ],
+ "differing_sections": [],
+ "label": "synthetic, unvalidated",
+ "rows_compared": 350,
+ "strings": 20
+}

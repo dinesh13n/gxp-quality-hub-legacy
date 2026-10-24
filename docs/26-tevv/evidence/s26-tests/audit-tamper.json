@@ -1,0 +1,31 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": {
+  "altered_row": [
+   "altered_record",
+   5
+  ],
+  "anchor_deleted": [
+   "ok",
+   null
+  ],
+  "anchor_hash_edited": [
+   "head_mismatch",
+   1
+  ],
+  "anchor_not_json": [
+   "anchor_unreadable",
+   null
+  ],
+  "full_rewrite_by_host_attacker": "verifies ok (R-SEC-1 / RS-03 limitation, seal opt-in)",
+  "missing_row": [
+   "missing_record",
+   7
+  ],
+  "trigger_refusal": "refused",
+  "truncated_tail_anchored": [
+   "head_mismatch",
+   18
+  ]
+ }
+}

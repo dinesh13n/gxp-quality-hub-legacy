@@ -1,0 +1,41 @@
+{
+ "http_500": 0,
+ "label": "synthetic, unvalidated",
+ "requests": 515,
+ "segment_200_201": [
+  404,
+  403
+ ],
+ "state_changed_tables": [],
+ "trick_status": {
+  "/%c0%ae%c0%ae/etc/passwd": 403,
+  "/../../etc/passwd": 403,
+  "//api/v2/policies": 403,
+  "/API/V2/POLICIES": 403,
+  "/api/v2/%252e%252e/healthz": 403,
+  "/api/v2/%2e%2e/healthz": 403,
+  "/api/v2/%41%41%41%41%41%41%41%41%41%41%41%41%41%41%41%41%41%41%41%41%4": 403,
+  "/api/v2/../v2/policies": 403,
+  "/api/v2/cases/%2e%2e%2fpolicies/state": 403,
+  "/api/v2/cases/..%2fpolicies/state": 403,
+  "/api/v2/cases/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": 403,
+  "/api/v2/cases/C91000001/state%20": 403,
+  "/api/v2/cases/C91000001/state/../events": 403,
+  "/api/v2/cases/\u00c3\u00a9/state": 403,
+  "/api/v2/policies%00": 403,
+  "/api/v2/policies%2f": 403,
+  "/api/v2/policies/": 403,
+  "/api/v2/policies;x=1": 403,
+  "/api/v2/policies?a=1&a=1&a=1&a=1&a=1&a=1&a=1&a=1&a=1&a=1&a=1&a=1&a=1&a": 401,
+  "/healthz%0d%0aX-Injected:%201": 403,
+  "/healthz/..": 403,
+  "/ui/cases/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA": 403,
+  "/ui/static/%2e%2e/%2e%2e/hub/config.py": 403,
+  "/ui/static/../../hub/config.py": 403,
+  "/ui/static/app.css%00.py": 403,
+  "/ui/static/app.css/": 403,
+  "/ui/static/app.css/../../hub/config.py": 403,
+  "/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx": 403
+ },
+ "unregistered_verbs_refused": true
+}

@@ -29,9 +29,9 @@ MUTANTS = [
     ("M8", "INC-05", "hub/policy/engine.py", '    if function not in FUNCTIONS or function not in ruleset["functions"]:', "    if False:",
      "unknown rule function not refused", ["STG26_Input"]),
     ("M9", "INC-07", "hub/obs/collect.py", "AND outcome = 'success' AND actor_kind <> 'human'", "AND outcome = 'success' AND actor_kind = 'human'",
-     "Zone H service-actor tripwire counts the wrong actor kind", ["STG26"]),
+     "Zone H service-actor tripwire counts the wrong actor kind", ["STG26_Control", "STG26_NoAI"]),
     ("M10", "INC-07", "hub/runs/schedule.py", "        if not isinstance(authority_ref, str) or not authority_ref.strip():", "        if False:",
-     "schedule enable without authority_ref accepted", ["STG26"]),
+     "schedule enable without authority_ref accepted", ["STG26_Control", "STG26_NoAI"]),
     ("H3", "INC-08 (Stage 16 survivor)", "hub/web/app.py", '("X-Frame-Options", "DENY")', '("X-Frame-Options", "SAMEORIGIN")', "security header weakened",
      ["STG23_S01", "STG23_S02"]),
     ("H5", "INC-08 (Stage 16 survivor)", "hub/web/server.py", "    if not exposure.is_loopback(host):", "    if False:", "non-loopback bind accepted",
@@ -46,11 +46,15 @@ def main():
     ap.add_argument("--work", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--only", default=None)
+    ap.add_argument("--sel", default=None, help="second look: comma-separated selectors of EARLIER groups replace the per-mutant selectors")
     a = ap.parse_args()
     results = []
     for mid, inc, path, old, new, what, sel in MUTANTS:
         if a.only and mid not in a.only.split(","):
             continue
+        if a.sel:
+            sel = a.sel.split(",")
+            mid = mid + "+earlier"
         t0 = time.time()
         base = os.path.join(a.work, "mut-" + mid)
         shutil.rmtree(base, ignore_errors=True)

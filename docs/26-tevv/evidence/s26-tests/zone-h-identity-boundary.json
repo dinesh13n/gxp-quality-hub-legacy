@@ -1,0 +1,41 @@
+{
+ "boundary_outcomes": {
+  "pure +1us": "reauth_required",
+  "pure -1us": null,
+  "pure exact": null,
+  "window+1ms": [
+   401,
+   "E-GATE-REAUTH-REQUIRED"
+  ],
+  "window+1s": [
+   401,
+   "E-GATE-REAUTH-REQUIRED"
+  ],
+  "window-1ms": [
+   201,
+   null
+  ],
+  "window-1s": [
+   201,
+   null
+  ]
+ },
+ "label": "synthetic, unvalidated",
+ "lookalikes": {
+  " holder-2": "not_a_holder",
+  "HOLDER-2": "not_a_holder",
+  "Holder-1": "not_a_holder",
+  "holder-1\u0000": "not_a_holder",
+  "holder-1 ": "not_a_holder",
+  "holder-1.": "not_a_holder",
+  "holder-10": "not_a_holder",
+  "holder-1\u200b": "not_a_holder",
+  "h\u043elder-1": "not_a_holder"
+ },
+ "state_change_by_lookalikes": 0,
+ "test_only_holders": [
+  "holder-1",
+  "holder-2"
+ ],
+ "window_seconds": 300
+}

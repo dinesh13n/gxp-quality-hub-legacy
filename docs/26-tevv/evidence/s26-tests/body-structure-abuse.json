@@ -1,0 +1,263 @@
+{
+ "http_500": 0,
+ "label": "synthetic, unvalidated",
+ "numeric_edge_statuses": {
+  "-0": [
+   201
+  ],
+  "-9223372036854775809": [
+   201
+  ],
+  "0.1e-999": [
+   201
+  ],
+  "0x10": [
+   422
+  ],
+  "1_000": [
+   422
+  ],
+  "1e999": [
+   201,
+   422
+  ],
+  "9223372036854775808": [
+   201
+  ],
+  "Infinity": [
+   422
+  ],
+  "NaN": [
+   422
+  ],
+  "\u0661\u0662\u0663": [
+   400,
+   422
+  ]
+ },
+ "outcomes": {
+  "amount=\"-0\"": [
+   201,
+   null
+  ],
+  "amount=\"-9223372036854775809\"": [
+   201,
+   null
+  ],
+  "amount=\"0.1e-999\"": [
+   201,
+   null
+  ],
+  "amount=\"0x10\"": [
+   422,
+   "E-POL-INPUT-INVALID"
+  ],
+  "amount=\"1_000\"": [
+   422,
+   "E-POL-INPUT-INVALID"
+  ],
+  "amount=\"1e999\"": [
+   201,
+   null
+  ],
+  "amount=\"9223372036854775808\"": [
+   201,
+   null
+  ],
+  "amount=\"Infinity\"": [
+   422,
+   "E-POL-INPUT-INVALID"
+  ],
+  "amount=\"NaN\"": [
+   422,
+   "E-POL-INPUT-INVALID"
+  ],
+  "amount=\"\\u0661\\u0662\\u0663\"": [
+   422,
+   "E-POL-INPUT-INVALID"
+  ],
+  "amount=-0": [
+   201,
+   null
+  ],
+  "amount=-9223372036854775809": [
+   201,
+   null
+  ],
+  "amount=0.1e-999": [
+   201,
+   null
+  ],
+  "amount=1e999": [
+   422,
+   "E-POL-INPUT-INVALID"
+  ],
+  "amount=9223372036854775808": [
+   201,
+   null
+  ],
+  "amount=Infinity": [
+   422,
+   "E-POL-INPUT-INVALID"
+  ],
+  "amount=NaN": [
+   422,
+   "E-POL-INPUT-INVALID"
+  ],
+  "amount=\u0661\u0662\u0663": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "bad-utf8": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "bad-utf8-overlong": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "body=limit": [
+   422,
+   "E-DEC-FIELD-TOO-LONG"
+  ],
+  "body=limit+1": [
+   413,
+   "E-REQ-TOO-LARGE"
+  ],
+  "bom-prefix": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "ctype=''": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "ctype='APPLICATION/JSON'": [
+   201,
+   null
+  ],
+  "ctype='application/json, text/plain'": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "ctype='application/json; charset=latin-1'": [
+   201,
+   null
+  ],
+  "ctype='application/jsonx'": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "ctype='application/x-www-form-urlencoded'": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "ctype='multipart/form-data; boundary=x'": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "ctype='text/html'": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "ctype='text/plain'": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "dup-keys": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "empty-body": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "huge-int": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "infinity-literal": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "nan-literal": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "nest-object=1000": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "nest-object=20000": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "nest-object=64": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "nest=1000": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "nest=20000": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "nest=64": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "non-object-array": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "non-object-empty-object": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "non-object-null": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "non-object-number": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "non-object-string": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "non-object-true": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "note-len=1000": [
+   201,
+   null
+  ],
+  "note-len=1048577": [
+   413,
+   "E-REQ-TOO-LARGE"
+  ],
+  "note-len=65536": [
+   422,
+   "E-DEC-FIELD-TOO-LONG"
+  ],
+  "truncated": [
+   400,
+   "E-REQ-INVALID"
+  ],
+  "whitespace": [
+   400,
+   "E-REQ-INVALID"
+  ]
+ },
+ "requests": 56,
+ "size_limit_bytes": 1048576,
+ "state_changed_tables": [
+  "case_state",
+  "decision_events",
+  "evidence_record"
+ ]
+}

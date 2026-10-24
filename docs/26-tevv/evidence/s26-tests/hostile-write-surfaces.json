@@ -1,0 +1,43 @@
+{
+ "audit_chain": "ok",
+ "by_surface": {
+  "crosswalk.link": 114,
+  "evidence": 113,
+  "fact": 114,
+  "flag.override": 113,
+  "intake(svc)": 113,
+  "login": 113,
+  "policy": 113,
+  "rules.evaluate": 114,
+  "transition": 114,
+  "ui.override": 114
+ },
+ "corpus_sha256": "1806bd77cb2c69619bd074515bf497049c1288dd0c957dac6a84d90b9a556f7b",
+ "http_500": 5,
+ "http_500_registered": [
+  [
+   "UN #10 S26-F-03"
+  ],
+  [
+   "evidence",
+   "flag.override",
+   "intake(svc)",
+   "login",
+   "policy"
+  ]
+ ],
+ "http_500_unregistered": 0,
+ "label": "synthetic, unvalidated",
+ "pages_read_back": 41,
+ "requests_sent": 1135,
+ "status_distribution": {
+  "200": 114,
+  "201": 678,
+  "401": 113,
+  "404": 114,
+  "409": 115,
+  "422": 1
+ },
+ "strings": 114,
+ "zone_h_footprint": 0
+}

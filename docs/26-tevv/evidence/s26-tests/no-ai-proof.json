@@ -1,0 +1,11 @@
+{
+ "client_imports_in_hub": "1 (loopback-only gateway adapter, URL guard probed: 13 hostile URLs refused)",
+ "connect_attempts": 0,
+ "dns_lookups": 0,
+ "egress_attempts_total": 0,
+ "hostile_strings_sent": 5,
+ "label": "synthetic, unvalidated",
+ "model_calls_total": 0,
+ "no_ai_check_rc": 0,
+ "scope": "deterministic product only; the sandbox harness tripwires are exercised again by E26"
+}

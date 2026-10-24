@@ -1,0 +1,15 @@
+{
+ "audit_chain": "ok",
+ "integrity_check": "ok",
+ "label": "synthetic, unvalidated",
+ "missing_store_start": "E-STORE-NOT-MIGRATED",
+ "observation": "S26-F-07: a fault surfaces as the generic E-HUB-INTERNAL 500 (by design: fail closed), also on /healthz; no E-STORE-* code is mapped over HTTP",
+ "outcomes": {
+  "corrupt /api/v2/policies": 500,
+  "corrupt /healthz": 500,
+  "readonly get": 500,
+  "readonly healthz": 500,
+  "readonly post": 500
+ },
+ "recovery_request": 201
+}

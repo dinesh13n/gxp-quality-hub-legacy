@@ -1,0 +1,23 @@
+{
+ "handler_timeout": null,
+ "http_5xx": 0,
+ "label": "synthetic, unvalidated",
+ "registered": "the listener has no per-connection read timeout: a client that declares a longer body than it sends holds a handler thread until it closes",
+ "short_body_client_still_waiting_after_1.5s": true,
+ "statuses": {
+  "absolute-uri": "200",
+  "bare-lf": "200",
+  "chunked": "400",
+  "cl-duplicate": "closed-or-unparsable",
+  "cl-huge": "closed-or-unparsable",
+  "cl-negative": "400",
+  "cl-text": "400",
+  "garbage": "closed-or-unparsable",
+  "header-line-70k": "431",
+  "headers-200": "431",
+  "http09": "closed-or-unparsable",
+  "http10": "200",
+  "long-uri": "414",
+  "pipelined": "200"
+ }
+}

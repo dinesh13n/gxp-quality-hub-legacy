@@ -1,0 +1,306 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 43,
+  "skipped": 0
+ },
+ "label": "I6",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 96.9,
+ "tail": "payload_state_is_only_a_source_attribute (test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources)\nTST-INT-24 / AC-INT-24: payload state = 'DISPOSITIONED' -> stored as source_state; case state unchanged; no decision, no gate event. ... ok\ntest_TST_INT_25_gateway_url_scheme_refused_before_any_read (test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources)\nTST-INT-25 / AC-INT-25 / PNFR-08: file:///etc/passwd, ftp://x and non-loopback http(s) URLs -> E-INT-URL-SCHEME-REFUSED, no connection. ... ok\ntest_TST_INT_26_unreachable_gateway_is_a_failed_run_not_data (test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources)\nTST-INT-26 / AC-INT-26: an unreachable gateway -> retried gateway.retries times with exponential back-off, then SOURCE_UNREACHABLE ... ok\ntest_TST_INT_27_vendor_csv_blank_and_negative_amounts (test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources)\nTST-INT-27 / AC-INT-27 / FR-MET-04: a vendor CSV with a blank and a negative amount -> blank = UNPARSABLE_AMOUNT quarantined (not skipped), ... ok\ntest_TST_INT_29_backfill_twice_is_idempotent (test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources)\nTST-INT-29 / AC-INT-29 / BEH-INT-10: the backfill of the 8,567 legacy rows run twice -> raw_intake 8,567 after run 1, run 2 adds 0 new ... ok\n\n----------------------------------------------------------------------\nRan 43 tests in 47.693s\n\nOK\n",
+ "test_ids": [
+  "TST-CO-09",
+  "TST-INT-01",
+  "TST-INT-03",
+  "TST-INT-04",
+  "TST-INT-05",
+  "TST-INT-06",
+  "TST-INT-07",
+  "TST-INT-08",
+  "TST-INT-09",
+  "TST-INT-10",
+  "TST-INT-11",
+  "TST-INT-12",
+  "TST-INT-13",
+  "TST-INT-14",
+  "TST-INT-15",
+  "TST-INT-16",
+  "TST-INT-17",
+  "TST-INT-18",
+  "TST-INT-19",
+  "TST-INT-20",
+  "TST-INT-21",
+  "TST-INT-22",
+  "TST-INT-23",
+  "TST-INT-24",
+  "TST-INT-25",
+  "TST-INT-26",
+  "TST-INT-27",
+  "TST-INT-29"
+ ],
+ "tests": [
+  {
+   "case": "test_inc06_egress_guard.TST_HUB_E06EGRESS_Guard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_E06EGRESS_S90_inc06_suite_under_egress_guard"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S01_m004_applier_and_cli"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S02_cli_shadow_intake_over_the_sandbox_copy"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S03_bundled_contract_is_byte_identical"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S04_binding_changes_go_through_the_zone_h_gate"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S05_insert_only_triggers"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S06_audit_chain_and_atomic_runs"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S07_request_level_errors_write_nothing"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S08_identity_and_hash_edge_cases"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S09_gateway_client_against_a_loopback_server"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S10_untrusted_storage_and_wire_form"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S11_shipped_source_profile"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S12_deny_list_and_import_graph"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S13_retention_triggers_and_scans"
+  },
+  {
+   "case": "test_inc06_supplementary.TST_HUB_INC06_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC06_S14_queue_snapshot_ages_and_run_records"
+  },
+  {
+   "case": "test_tst_co_09_rollback_rehearsal2.TST_CO_09_RollbackRehearsal2",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_09_rollback_rehearsal_m004"
+  },
+  {
+   "case": "test_tst_int_01_08_core.TST_INT_01_08_Core",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_01_every_delivery_stored_raw_rows_unchanged"
+  },
+  {
+   "case": "test_tst_int_01_08_core.TST_INT_01_08_Core",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_03_no_status_update_and_legacy_read_only"
+  },
+  {
+   "case": "test_tst_int_01_08_core.TST_INT_01_08_Core",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_04_redelivery_changes_nothing"
+  },
+  {
+   "case": "test_tst_int_01_08_core.TST_INT_01_08_Core",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_05_67_replay_pairs_are_noop_duplicates"
+  },
+  {
+   "case": "test_tst_int_01_08_core.TST_INT_01_08_Core",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_06_business_key_is_not_an_identity"
+  },
+  {
+   "case": "test_tst_int_01_08_core.TST_INT_01_08_Core",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_07_corrected_replay_is_quarantined_not_duplicate"
+  },
+  {
+   "case": "test_tst_int_01_08_core.TST_INT_01_08_Core",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_08_human_resolution_needs_reason_and_changes_no_case"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_09_unsupported_revisions_are_quarantined"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_10_each_defect_gets_its_reason_code"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_11_rows_without_business_key"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_12_record_only_is_the_default"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_13_enforce_quarantines_everything_nothing_dropped"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_14_source_messages_conform_to_the_contract"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_15_negative_quantity_is_flagged_not_rejected"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_16_unit_and_currency_vocabularies"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_17_exact_case_id_creates_one_rule_link"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_18_unknown_ref_is_unmatched_no_link"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_19_ambiguous_ref_is_never_guessed"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_20_classification_is_deterministic_and_order_independent"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_21_three_defects_one_primary_reason_one_queue"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_22_instruction_like_text_has_no_effect"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_23_untrusted_cannot_reach_a_decision_parameter"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_24_payload_state_is_only_a_source_attribute"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_25_gateway_url_scheme_refused_before_any_read"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_26_unreachable_gateway_is_a_failed_run_not_data"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_27_vendor_csv_blank_and_negative_amounts"
+  },
+  {
+   "case": "test_tst_int_17_29_match_untrusted_sources.TST_INT_17_29_Matching_Untrusted_Sources",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_29_backfill_twice_is_idempotent"
+  }
+ ],
+ "unittest_rc": 0
+}

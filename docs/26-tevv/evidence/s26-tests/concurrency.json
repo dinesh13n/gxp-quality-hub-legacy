@@ -1,0 +1,11 @@
+{
+ "audit_chain": "ok",
+ "audit_rows_added": 33,
+ "integrity_check": "ok",
+ "label": "synthetic, unvalidated",
+ "note": "sandbox proxy only; no throughput or latency claim (class C)",
+ "requests": 64,
+ "threads": 8,
+ "unexpected": 0,
+ "wall_seconds": 0.8
+}

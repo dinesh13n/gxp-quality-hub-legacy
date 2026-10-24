@@ -1,0 +1,16 @@
+{
+ "attempts": 80,
+ "bypasses": 0,
+ "holders": [],
+ "label": "synthetic, unvalidated",
+ "outcomes": {
+  "bogus 401 E-AUTH-UNAUTHENTICATED": 10,
+  "comp 403 E-GATE-NOT-AUTHORISED": 10,
+  "fin 403 E-GATE-NOT-AUTHORISED": 10,
+  "none 401 E-AUTH-UNAUTHENTICATED": 10,
+  "nonholder 423 E-GATE-NO-HOLDERS": 10,
+  "ql 403 E-GATE-NOT-AUTHORISED": 10,
+  "rev 403 E-GATE-NOT-AUTHORISED": 10,
+  "svc 403 E-GATE-NOT-AUTHORISED": 10
+ }
+}

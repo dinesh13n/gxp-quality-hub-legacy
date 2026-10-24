@@ -1,0 +1,7 @@
+{
+ "cors_headers_seen": 0,
+ "label": "synthetic, unvalidated",
+ "post_operations": 16,
+ "refused_requests": 96,
+ "ui_form_cases": 6
+}

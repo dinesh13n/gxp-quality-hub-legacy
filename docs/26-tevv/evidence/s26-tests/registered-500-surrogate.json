@@ -1,0 +1,16 @@
+{
+ "audit_chain": "ok",
+ "finding": "S26-F-03",
+ "integrity_check": "ok",
+ "label": "synthetic, unvalidated",
+ "next_valid_request": 201,
+ "outcomes": {
+  "evidence.note": 500,
+  "evidence.source_ref": 500,
+  "intake": 500,
+  "login.password": 500,
+  "login.username": 500,
+  "policy.name": 500
+ },
+ "state_changed_tables": []
+}

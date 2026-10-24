@@ -1,0 +1,6 @@
+{
+ "absolute_probe_steps": 20,
+ "absolute_seconds": 28800,
+ "idle_seconds": 1800,
+ "label": "synthetic, unvalidated"
+}
