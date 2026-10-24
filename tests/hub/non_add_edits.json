@@ -28,12 +28,6 @@
    "reason": "allow-list reset for Stage 24 (OD-27: each BUILD stage replaces the list)"
   },
   {
-   "path": "tests/characterization/harness.py",
-   "work_item": "DW-19",
-   "deviation": "S24-DEV-04",
-   "reason": "norm_str ignores the Node.js patch version in stderr tails (CT-13 failed only because the laptop Node moved v22.23.2 -> v22.23.4); no oracle value changes"
-  },
-  {
    "path": "tests/hub/test_inc06_supplementary.py",
    "work_item": "DW-19",
    "deviation": "S24-DEV-05",
