@@ -1,37 +1,19 @@
 {
  "schema": "hub-non-add-edits/v1",
- "stage": "24",
- "note": "Stage 24 (DW-19): reset per OD-27 (S24-DEV-01). The Stage 15 add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason; each entry is recorded in docs/24-security-privacy/security-control-matrix.md. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
+ "stage": "26",
+ "note": "Stage 26 (DW-21): reset per OD-27 (S26-DEV-01). The Stage 15 add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD or VALIDATE stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06). Stage 26 is VALIDATE: no hub/ file is edited.",
  "edits": [
   {
-   "path": "hub/security/scan.py",
-   "work_item": "DW-19",
-   "deviation": "S24-DEV-02",
-   "reason": "RETAINED_TABLES is now derived from the table disposition register hub/security/tables.py (39 tables, a superset of the 18 before; RF-02); no scan logic changes"
-  },
-  {
-   "path": "hub/web/app.py",
-   "work_item": "DW-19",
-   "deviation": "S24-DEV-03",
-   "reason": "WebApp.handle copies an X-Hub-Reason header into the reason parameter (RTD-90) and appends Secure to Set-Cookie only when TLS settings are configured (A-INC08-3); both are no-ops on a default install"
-  },
-  {
    "path": "tests/hub/regression_groups.json",
-   "work_item": "DW-19",
-   "deviation": "S24-DEV-01",
-   "reason": "new groups S24 (STG24) and E24 (E24EGRESS) so the full hub regression runs the Stage 24 tests with executed = expected (OD-23)"
+   "work_item": "DW-21",
+   "deviation": "S26-DEV-01",
+   "reason": "new groups S26 (STG26) and E26 (E26EGRESS) so the full hub regression runs the Stage 26 tests with executed = expected (OD-23)"
   },
   {
    "path": "tests/hub/non_add_edits.json",
-   "work_item": "DW-19 (OD-27 reset)",
-   "deviation": "S24-DEV-01",
-   "reason": "allow-list reset for Stage 24 (OD-27: each BUILD stage replaces the list)"
-  },
-  {
-   "path": "tests/hub/test_inc06_supplementary.py",
-   "work_item": "DW-19",
-   "deviation": "S24-DEV-05",
-   "reason": "S13 asserted the frozen RETAINED_TABLES excluded intake_item_attr (RTD-52); Stage 24 derives the list from the 39-table register (S24-DEV-02), so the assertion now expects it to be included"
+   "work_item": "DW-21 (OD-27 reset)",
+   "deviation": "S26-DEV-01",
+   "reason": "allow-list reset for Stage 26 (OD-27: each stage replaces the list)"
   }
  ]
 }
