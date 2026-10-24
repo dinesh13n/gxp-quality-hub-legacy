@@ -1,0 +1,9 @@
+{
+ "audit_rows_added": 201,
+ "bytes_per_request": 81.0,
+ "detail_bytes_added": 16281,
+ "label": "synthetic, unvalidated",
+ "raw_path_stored": false,
+ "severity_if_loopback": "Low (RS-04)",
+ "unauthenticated_requests": 201
+}

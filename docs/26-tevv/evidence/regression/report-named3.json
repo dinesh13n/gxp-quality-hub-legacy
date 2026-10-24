@@ -1,0 +1,49 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 5,
+  "skipped": 0
+ },
+ "label": "named3",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 53.7,
+ "tail": " within 4 h: 66.7% (2 of 3; 1 future excluded) - against an unvalidated working target. synthetic, unvalidated\nok\ntest_I9_NFR_04_source_older_than_24_hours_is_listed (test_inc09_reports_planned.R2IntakePlanned)\nAC-NFR-04 (TST-NFR-04, class C): a source whose newest ACCEPTED item is 25 h old -> the freshness report lists it as older than 24 h with ... \n[TST-NFR-04] partner_feed newest accepted item age 25.000 h > 24 h -> listed (PNFR-04 'risk signal' undefined: age of the newest accepted item measured). synthetic, unvalidated\nok\ntest_I9_NFR_12_every_field_class_has_an_access_fixture (test_inc09_search_planned.R2ProtectionPlanned)\nAC-NFR-12 (TST-NFR-12): one fixture per field class -> the access tests cover 100% of the field classes present in the estate (C1, C2, C3; ... \n[TST-NFR-12] field classes covered: ['C1', 'C2', 'C3'] of ['C1', 'C2', 'C3'] (100%); C0 has no data in the estate. synthetic, unvalidated\nok\ntest_I9_SEC_19_field_class_handling_by_role (test_inc09_search_planned.R2ProtectionPlanned)\nAC-SEC-19 (TST-SEC-19): one fixture record per field class and each role -> handling matches metadata-model M3/M4 (finance_read masked ... ok\ntest_I9_SEC_20_c3_read_needs_a_reason_and_is_audited (test_inc09_search_planned.R2ProtectionPlanned)\nAC-SEC-20 (TST-SEC-20): a C3 read without reason -> E-SEC-REASON-REQUIRED (nothing returned); with a reason it succeeds and the reason is ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 3.857s\n\nOK\n",
+ "test_ids": [],
+ "tests": [
+  {
+   "case": "test_inc09_reports_planned.R2IntakePlanned",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I9_NFR_03_share_within_four_hours"
+  },
+  {
+   "case": "test_inc09_reports_planned.R2IntakePlanned",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I9_NFR_04_source_older_than_24_hours_is_listed"
+  },
+  {
+   "case": "test_inc09_search_planned.R2ProtectionPlanned",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I9_NFR_12_every_field_class_has_an_access_fixture"
+  },
+  {
+   "case": "test_inc09_search_planned.R2ProtectionPlanned",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I9_SEC_19_field_class_handling_by_role"
+  },
+  {
+   "case": "test_inc09_search_planned.R2ProtectionPlanned",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I9_SEC_20_c3_read_needs_a_reason_and_is_audited"
+  }
+ ],
+ "unittest_rc": 0
+}

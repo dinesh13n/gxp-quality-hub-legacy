@@ -1,0 +1,157 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 23,
+  "skipped": 0
+ },
+ "label": "S26",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 145.4,
+ "tail": "0)\nTraceback (most recent call last):\n  File \"/usr/lib/python3.10/socketserver.py\", line 683, in process_request_thread\n    self.finish_request(request, client_address)\n  File \"/usr/lib/python3.10/socketserver.py\", line 360, in finish_request\n    self.RequestHandlerClass(request, client_address, self)\n  File \"/usr/lib/python3.10/socketserver.py\", line 747, in __init__\n    self.handle()\n  File \"/usr/lib/python3.10/http/server.py\", line 433, in handle\n    self.handle_one_request()\n  File \"/usr/lib/python3.10/http/server.py\", line 421, in handle_one_request\n    method()\n  File \"/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s26-reg/S26/S26/c_pristine/hub/web/server.py\", line 72, in _serve\n    self.wfile.write(resp.body)\n  File \"/usr/lib/python3.10/socketserver.py\", line 826, in write\n    self._sock.sendall(b)\nBrokenPipeError: [Errno 32] Broken pipe\n----------------------------------------\nok\ntest_TST_HUB_STG26_B05_body_structure_abuse (test_tst_hub_stg26_wire.TST_HUB_STG26_Wire)\nB05 (RT-07, ED-02 / ED-09 / ED-10 / ED-12, T-19): no 500 and no state change for any malformed or extreme body; 1 MiB passes the transport check and ... ok\ntest_TST_HUB_STG26_B06_url_and_verb_abuse (test_tst_hub_stg26_wire.TST_HUB_STG26_Wire)\nB06 (RT-07 / RT-09, ED-08, T-09 / T-13): every verb that is not registered for a path is refused 403 (deny by default) and writes only an audit row; traversal ... ok\n\n----------------------------------------------------------------------\nRan 23 tests in 95.826s\n\nOK\n",
+ "test_ids": [],
+ "tests": [
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A01_route_by_principal_matrix_matches_the_registries"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A02_zone_h_with_the_shipped_empty_holder_list_refuses_every_actor"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A03_identity_confusion_and_reauthentication_boundary"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A04_mass_assignment_and_spoofed_identity_have_no_effect"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A05_csrf_and_cors"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A06_session_abuse_and_expiry_boundaries"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A07_unauthenticated_flood_audit_amplification"
+  },
+  {
+   "case": "test_tst_hub_stg26_input.TST_HUB_STG26_Input",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B01_corpus_is_the_declared_dataset"
+  },
+  {
+   "case": "test_tst_hub_stg26_input.TST_HUB_STG26_Input",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B02_corpus_through_every_write_surface"
+  },
+  {
+   "case": "test_tst_hub_stg26_input.TST_HUB_STG26_Input",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B03_corpus_through_every_read_surface_and_header_carrier"
+  },
+  {
+   "case": "test_tst_hub_stg26_input.TST_HUB_STG26_Input",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B04_injection_invariance_decision_data_do_not_depend_on_free_text"
+  },
+  {
+   "case": "test_tst_hub_stg26_input.TST_HUB_STG26_Input",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B07_leakage_sweep_and_restricted_evidence"
+  },
+  {
+   "case": "test_tst_hub_stg26_input.TST_HUB_STG26_Input",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B08_registered_500_changes_no_state"
+  },
+  {
+   "case": "test_tst_hub_stg26_noai_walkthrough.TST_HUB_STG26_NoAI",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_D01_no_model_or_network_client"
+  },
+  {
+   "case": "test_tst_hub_stg26_noai_walkthrough.TST_HUB_STG26_NoAI",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_D02_agent_rehearsal_of_walkthroughs_REV_03_04_08"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C01_store_faults_fail_closed"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C02_configuration_faults"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C03_audit_tamper_is_detected_and_the_known_limit_is_shown"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C04_concurrent_clients_on_the_loopback_listener"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C05_clock_rollback_does_not_revive_sessions_or_proofs"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C06_transport_anomalies_on_the_listener"
+  },
+  {
+   "case": "test_tst_hub_stg26_wire.TST_HUB_STG26_Wire",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B05_body_structure_abuse"
+  },
+  {
+   "case": "test_tst_hub_stg26_wire.TST_HUB_STG26_Wire",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B06_url_and_verb_abuse"
+  }
+ ],
+ "unittest_rc": 0
+}

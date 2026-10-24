@@ -1,0 +1,495 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 74,
+  "skipped": 0
+ },
+ "label": "named2",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 84.3,
+ "tail": "me without approval -> exit 9 E-SEC-EXPOSURE-NOT-APPROVED. ... ok\ntest_TST_SEC_16_c_approved_without_tls_refused_with_tls_allowed (test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard)\nTST-SEC-16 / AC-SEC-16: approval + reference but no TLS -> refused; with TLS cert/key settings -> starts. ... ok\ntest_TST_SEC_18_a_code_base_clean (test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep)\nTST-SEC-18 / AC-SEC-18: hub/ + tests/hub secret scan 0; hub/ deletion grep 0; store retention triggers complete. ... ok\ntest_TST_SEC_18_b_positive_controls (test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep)\nTST-SEC-18: planted key block / token / credential assignment and a retained-table delete are each detected. ... ok\ntest_TST_SEC_18_c_cli_scan (test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep)\nTST-SEC-18: `python -m hub.admin scan --data-dir` -> exit 0, clean. ... ok\ntest_TST_SEC_21_a_restart_with_changed_holders (test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded)\nTST-SEC-21 / AC-SEC-21: run 1 (holders []), run 2 (holders ['synthetic-holder']) -> two CONFIG_LOADED with each config hash. ... ok\ntest_TST_SEC_21_b_default_holders_empty (test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded)\nTST-SEC-21: default config ships zone_h.holders = [] and reauth window 300 s (Stage 12 proposal, Stage 24 to confirm). ... ok\n\n----------------------------------------------------------------------\nRan 74 tests in 34.583s\n\nOK\n",
+ "test_ids": [
+  "TST-NFR-01",
+  "TST-NFR-02",
+  "TST-NFR-05",
+  "TST-NFR-06",
+  "TST-NFR-07",
+  "TST-NFR-08",
+  "TST-NFR-09",
+  "TST-NFR-10",
+  "TST-NFR-11",
+  "TST-NFR-13",
+  "TST-NFR-14",
+  "TST-NFR-15",
+  "TST-NFR-16",
+  "TST-NFR-17",
+  "TST-NFR-18",
+  "TST-NFR-19",
+  "TST-NFR-20",
+  "TST-SEC-01",
+  "TST-SEC-04",
+  "TST-SEC-05",
+  "TST-SEC-06",
+  "TST-SEC-09",
+  "TST-SEC-10",
+  "TST-SEC-11",
+  "TST-SEC-12",
+  "TST-SEC-13",
+  "TST-SEC-14",
+  "TST-SEC-15",
+  "TST-SEC-16",
+  "TST-SEC-18",
+  "TST-SEC-21"
+ ],
+ "tests": [
+  {
+   "case": "test_i8_http_surface.I8_Http",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I8_SEC_02_unregistered_or_undeclared_routes_are_denied"
+  },
+  {
+   "case": "test_i8_http_surface.I8_Http",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I8_SEC_03_roles_outside_their_matrix_row_are_forbidden_and_audited"
+  },
+  {
+   "case": "test_i8_http_surface.I8_Http",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I8_SEC_07_idle_and_absolute_session_limits"
+  },
+  {
+   "case": "test_i8_http_surface.I8_Http",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I8_SEC_08_service_token_cannot_log_in_or_act_for_a_human"
+  },
+  {
+   "case": "test_i8_http_surface.I8_Http",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I8_SEC_17_writes_without_csrf_proof_are_refused"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S01_m006_applies_once_and_is_checked_at_start"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S02_service_tokens_are_digest_only_revocable_and_integration_only"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S03_csrf_proofs"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S04_http_metrics_use_closed_label_sets"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S05_request_bodies_are_parsed_strictly"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S06_body_limit_is_413_in_process_and_on_the_wire"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S07_listener_binds_loopback_and_sets_headers_on_every_response"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S08_cli_status_migrate_token"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S09_untrusted_text_lint_is_clean_on_the_new_modules"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S10_untrusted_text_is_escaped_on_every_page"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S11_login_is_generic_logout_ends_the_session"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S12_startup_selfcheck_is_audited_and_logged"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S13_deferred_operations_say_so_and_change_nothing"
+  },
+  {
+   "case": "test_inc08_supplementary.TST_HUB_INC08_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC08_S14_shipped_config_has_no_holder_and_the_gate_stays_shut"
+  },
+  {
+   "case": "test_inc09_search_planned.R2ProtectionPlanned",
+   "detail": null,
+   "status": "ok",
+   "test": "test_I9_NFR_12_every_field_class_has_an_access_fixture"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_01_availability_computed_from_a_probe_log"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_02_scheduled_runs_finish_before_0600_report"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_05_restore_rehearsal_from_the_written_procedure"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_06_latency_p50_p95_on_the_125_case_baseline"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_07_every_route_is_authenticated_and_authorised"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_08_no_secrets_and_no_non_loopback_start"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_09_every_decision_event_is_audited_chained_and_tamper_evident"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_10_a_full_flow_deletes_nothing"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_11_replays_have_no_duplicate_effect_and_no_silent_overwrite"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_13_planted_strings_have_no_effect_on_a_decision_field"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_14_every_run_has_a_record_and_every_kpi_a_value_or_a_reason"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_15_every_rule_output_shows_its_trace_and_offers_an_override_with_reason"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_16_every_kpi_is_documented_and_reproduces"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_17_core_paths_are_bit_identical_across_seeds_zones_and_locales"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_18_no_model_calls_no_egress_deny_list_clean"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_19_release_stays_blocked_unless_rehearsal_and_replay_gate_pass"
+  },
+  {
+   "case": "test_tst_nfr_measurements.TST_NFR_Measurements",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_NFR_20_every_figure_and_report_carries_the_synthetic_label"
+  },
+  {
+   "case": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_01_a_registry_matches_contract_and_declares_permissions"
+  },
+  {
+   "case": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_01_b_unauthenticated_401_except_public"
+  },
+  {
+   "case": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_01_c_unregistered_route_denied_by_default"
+  },
+  {
+   "case": "test_tst_sec_01_route_registry.TST_SEC_01_RouteRegistry",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_01_d_healthz_contract_has_no_case_data"
+  },
+  {
+   "case": "test_tst_sec_04_fresh_install.TST_SEC_04_FreshInstall",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_04_a_zero_users_after_fresh_migrate"
+  },
+  {
+   "case": "test_tst_sec_04_fresh_install.TST_SEC_04_FreshInstall",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_04_b_any_login_fails_generically"
+  },
+  {
+   "case": "test_tst_sec_04_fresh_install.TST_SEC_04_FreshInstall",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_04_c_cli_fresh_install_lists_no_users"
+  },
+  {
+   "case": "test_tst_sec_05_lockout.TST_SEC_05_Lockout",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_05_a_default_5_15_15"
+  },
+  {
+   "case": "test_tst_sec_05_lockout.TST_SEC_05_Lockout",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_05_b_configurable"
+  },
+  {
+   "case": "test_tst_sec_05_lockout.TST_SEC_05_Lockout",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_05_c_failures_outside_window_do_not_lock"
+  },
+  {
+   "case": "test_tst_sec_06_credential_store.TST_SEC_06_CredentialStore",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_06_a_pbkdf2_per_user_salt"
+  },
+  {
+   "case": "test_tst_sec_06_credential_store.TST_SEC_06_CredentialStore",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_06_b_tokens_only_as_sha256_and_no_plaintext_anywhere"
+  },
+  {
+   "case": "test_tst_sec_06_credential_store.TST_SEC_06_CredentialStore",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_06_c_iteration_and_length_floors"
+  },
+  {
+   "case": "test_tst_sec_09_audit_events.TST_SEC_09_AuditEvents",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_09_a_one_record_per_action_chain_linked"
+  },
+  {
+   "case": "test_tst_sec_10_verify_audit_ok.TST_SEC_10_VerifyAuditOk",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_10_a_library_verify_ok"
+  },
+  {
+   "case": "test_tst_sec_10_verify_audit_ok.TST_SEC_10_VerifyAuditOk",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_10_b_cli_verify_audit_ok"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_a_details_edited"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_b_record_deleted"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_c_two_records_swapped"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_d_tail_deleted_after_anchor"
+  },
+  {
+   "case": "test_tst_sec_11_tamper_detection.TST_SEC_11_TamperDetection",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_11_e_cli_exit_17"
+  },
+  {
+   "case": "test_tst_sec_12_truncation_limit.TST_SEC_12_TruncationAfterLastAnchor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_12_a_tail_after_last_anchor_undetected"
+  },
+  {
+   "case": "test_tst_sec_12_truncation_limit.TST_SEC_12_TruncationAfterLastAnchor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_12_b_deleting_into_the_anchored_range_is_detected"
+  },
+  {
+   "case": "test_tst_sec_13_insert_only_triggers.TST_SEC_13_InsertOnlyTriggers",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_13_a_audit_update_delete_rejected"
+  },
+  {
+   "case": "test_tst_sec_13_insert_only_triggers.TST_SEC_13_InsertOnlyTriggers",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_13_b_other_retained_tables_reject_delete"
+  },
+  {
+   "case": "test_tst_sec_14_audit_write_failure.TST_SEC_14_AuditWriteFailure",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_14_a_changes_rolled_back"
+  },
+  {
+   "case": "test_tst_sec_15_no_secrets_in_audit_logs.TST_SEC_15_NoSecretsInAuditOrLogs",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_15_a_login_failure_audit_and_logs_clean"
+  },
+  {
+   "case": "test_tst_sec_15_no_secrets_in_audit_logs.TST_SEC_15_NoSecretsInAuditOrLogs",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_15_b_credential_keys_refused_in_details"
+  },
+  {
+   "case": "test_tst_sec_15_no_secrets_in_audit_logs.TST_SEC_15_NoSecretsInAuditOrLogs",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_15_c_cli_user_create_never_echoes_password"
+  },
+  {
+   "case": "test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_16_a_default_loopback_starts"
+  },
+  {
+   "case": "test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_16_b_non_loopback_without_approval_refused"
+  },
+  {
+   "case": "test_tst_sec_16_exposure_guard.TST_SEC_16_ExposureGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_16_c_approved_without_tls_refused_with_tls_allowed"
+  },
+  {
+   "case": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_18_a_code_base_clean"
+  },
+  {
+   "case": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_18_b_positive_controls"
+  },
+  {
+   "case": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_18_c_cli_scan"
+  },
+  {
+   "case": "test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_21_a_restart_with_changed_holders"
+  },
+  {
+   "case": "test_tst_sec_21_config_loaded.TST_SEC_21_ConfigLoaded",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_21_b_default_holders_empty"
+  }
+ ],
+ "unittest_rc": 0
+}

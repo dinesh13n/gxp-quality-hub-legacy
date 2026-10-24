@@ -1,0 +1,301 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 40,
+  "skipped": 1
+ },
+ "label": "classB",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 66.1,
+ "tail": "test_TST_RUN_01_scheduled_trigger_runs_when_flag_is_on (test_tst_run_01_15_runs.TST_RUN_Runs)\nAC-RUN-01 (class B, OD-S12-10): flag switched on through Zone H ZH-09 by a (synthetic) holder; at the configured test-clock time the scheduled ... ok\ntest_TST_RUN_02_scheduled_trigger_refused_on_fresh_install (test_tst_run_01_15_runs.TST_RUN_Runs)\nAC-RUN-02: fresh install (flag off): a scheduled trigger gets E-RUN-SCHEDULE-DISABLED and a run record with outcome refused; no lock, no data change. ... ok\ntest_TST_RUN_03_service_actor_cannot_enable_the_schedule (test_tst_run_01_15_runs.TST_RUN_Runs)\nAC-RUN-03: a service actor attempting ZH-09 is rejected (E-GATE-NOT-AUTHORISED) and the schedule stays disabled; a human non-holder is rejected ... ok\ntest_TST_SEC_18_a_code_base_clean (test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep)\nTST-SEC-18 / AC-SEC-18: hub/ + tests/hub secret scan 0; hub/ deletion grep 0; store retention triggers complete. ... ok\ntest_TST_SEC_18_b_positive_controls (test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep)\nTST-SEC-18: planted key block / token / credential assignment and a retained-table delete are each detected. ... ok\ntest_TST_SEC_18_c_cli_scan (test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep)\nTST-SEC-18: `python -m hub.admin scan --data-dir` -> exit 0, clean. ... ok\n\n----------------------------------------------------------------------\nRan 41 tests in 15.689s\n\nOK (skipped=1)\n",
+ "test_ids": [
+  "TST-CO-14",
+  "TST-DEC-15",
+  "TST-DEC-16",
+  "TST-DEC-17",
+  "TST-DEC-18",
+  "TST-DEC-19",
+  "TST-DEC-20",
+  "TST-DEC-21",
+  "TST-DEC-26",
+  "TST-DEC-27",
+  "TST-DEC-28",
+  "TST-GATE-01",
+  "TST-GATE-02",
+  "TST-GATE-03",
+  "TST-GATE-04",
+  "TST-GATE-05",
+  "TST-GATE-06",
+  "TST-GATE-07",
+  "TST-GATE-08",
+  "TST-GATE-22",
+  "TST-INT-06",
+  "TST-INT-12",
+  "TST-INT-13",
+  "TST-INT-14",
+  "TST-INT-15",
+  "TST-OBS-07",
+  "TST-POL-19",
+  "TST-POL-20",
+  "TST-POL-21",
+  "TST-POL-23",
+  "TST-REV-16",
+  "TST-RUN-01",
+  "TST-RUN-02",
+  "TST-RUN-03",
+  "TST-SEC-18"
+ ],
+ "tests": [
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_14_a_floor_310_starts_and_prints_versions"
+  },
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_14_b_python39_refused"
+  },
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_14_c_sqlite_below_floor_refused"
+  },
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_14_d_floor_312_mode"
+  },
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": "python3.9 not installed on this device (simulated in TST-CO-14 b)",
+   "status": "skipped",
+   "test": "test_TST_CO_14_e_real_old_interpreter_if_present"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_15_closing_without_evidence_refused_policy_mode"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_16_one_resolvable_ref_accepted_no_sufficiency_judgement"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_17_exception_by_service_or_non_holder_refused_and_audited"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_18_exception_by_holder_accepted_and_reported"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_19_unresolvable_evidence_refused"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_20_three_facts_distinct_state_unchanged"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_21_no_closed_label_from_a_fact"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_26_same_state_refused_structural_and_strict"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_27_unconfigured_closure_fails_closed"
+  },
+  {
+   "case": "test_tst_dec_15_28_closure_facts.TST_DEC_15_28_ClosureAndFacts",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_DEC_28_unconfigured_none_flags_not_configured"
+  },
+  {
+   "case": "test_tst_gate_01_22_disposition_gate.TST_GATE_Gate",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_GATE_01_fresh_install_gate_status"
+  },
+  {
+   "case": "test_tst_gate_01_22_disposition_gate.TST_GATE_Gate",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_GATE_02_no_holders_every_action_refused"
+  },
+  {
+   "case": "test_tst_gate_01_22_disposition_gate.TST_GATE_Gate",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_GATE_03_mode_none_refuses_disposition"
+  },
+  {
+   "case": "test_tst_gate_01_22_disposition_gate.TST_GATE_Gate",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_GATE_04_event_mode_without_values"
+  },
+  {
+   "case": "test_tst_gate_01_22_disposition_gate.TST_GATE_Gate",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_GATE_05_event_mode_records_disposition"
+  },
+  {
+   "case": "test_tst_gate_01_22_disposition_gate.TST_GATE_Gate",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_GATE_06_external_ref_records_reference_only"
+  },
+  {
+   "case": "test_tst_gate_01_22_disposition_gate.TST_GATE_Gate",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_GATE_07_external_ref_requires_reference"
+  },
+  {
+   "case": "test_tst_gate_01_22_disposition_gate.TST_GATE_Gate",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_GATE_08_mode_change_does_not_rewrite_history"
+  },
+  {
+   "case": "test_tst_gate_01_22_disposition_gate.TST_GATE_Gate",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_GATE_22_holder_change_is_audited_at_start"
+  },
+  {
+   "case": "test_tst_int_01_08_core.TST_INT_01_08_Core",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_06_business_key_is_not_an_identity"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_12_record_only_is_the_default"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_13_enforce_quarantines_everything_nothing_dropped"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_14_source_messages_conform_to_the_contract"
+  },
+  {
+   "case": "test_tst_int_09_16_validation.TST_INT_09_16_Validation",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_INT_15_negative_quantity_is_flagged_not_rejected"
+  },
+  {
+   "case": "test_tst_obs_01_09_observability.TST_OBS_Observability",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_OBS_07_selfcheck_prints_versions_fts5_config_hash_gate"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_19_unmatched_region_year_returns_999999_marked"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_20_unknown_status_falls_through_marked"
+  },
+  {
+   "case": "test_tst_pol_11_21_rule_sets.TST_POL_RuleSets",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_21_known_inputs_reaching_the_last_row_are_not_defaulted"
+  },
+  {
+   "case": "test_tst_pol_22_25_purity_inputs_immutability.TST_POL_PurityInputsImmutability",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_POL_23_non_decimal_amounts_are_rejected"
+  },
+  {
+   "case": "test_tst_rev_reviewer_support.TST_REV_Reviewer",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_REV_16_fallback_engine_is_selected_and_order_is_identical"
+  },
+  {
+   "case": "test_tst_run_01_15_runs.TST_RUN_Runs",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_RUN_01_scheduled_trigger_runs_when_flag_is_on"
+  },
+  {
+   "case": "test_tst_run_01_15_runs.TST_RUN_Runs",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_RUN_02_scheduled_trigger_refused_on_fresh_install"
+  },
+  {
+   "case": "test_tst_run_01_15_runs.TST_RUN_Runs",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_RUN_03_service_actor_cannot_enable_the_schedule"
+  },
+  {
+   "case": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_18_a_code_base_clean"
+  },
+  {
+   "case": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_18_b_positive_controls"
+  },
+  {
+   "case": "test_tst_sec_18_secret_scan_deletion_grep.TST_SEC_18_SecretScanDeletionGrep",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_SEC_18_c_cli_scan"
+  }
+ ],
+ "unittest_rc": 0
+}

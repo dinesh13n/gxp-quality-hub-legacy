@@ -1,0 +1,19 @@
+{
+ "error_patterns": 8,
+ "hits": 0,
+ "label": "synthetic, unvalidated",
+ "path_markers": 7,
+ "responses_scanned": 469,
+ "restricted_marker_leaks_registered": [
+  "rev /api/v2/cases/C91000001/events S26-F-02",
+  "rev /api/v2/events/EV-00000002 S26-F-02"
+ ],
+ "restricted_marker_leaks_unregistered": 0,
+ "secret_kinds": [
+  "digest",
+  "pw_hash",
+  "pw_password",
+  "pw_salt",
+  "token"
+ ]
+}

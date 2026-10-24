@@ -1,0 +1,29 @@
+INC-01 characterisation harness  label=run-20261024T201458  sandbox=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s26-verify/run-20261024T201458
+  protected worktree (never executed in) = /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/mnt/Case-Execution/gxp-quality-hub-legacy
+  FX-BASE125 hash gate: 1512 files verified, legacy.sqlite3=c254649f57e2..
+  capture api        rc=0    1.3s
+  capture batch      rc=0   13.0s
+  capture lib        rc=0    1.0s
+  capture supplement rc=0    2.4s
+  CT checks: 133/134 passed
+  CT-01  PASS   1 checks
+  CT-02  PASS   3 checks
+  CT-03  PASS   7 checks
+  CT-04  PASS  35 checks
+  CT-05  PASS   5 checks
+  CT-06  PASS  16 checks
+  CT-07  PASS   8 checks
+  CT-08  PASS   4 checks
+  CT-09  PASS   4 checks
+  CT-10  PASS   3 checks
+  CT-11  PASS   5 checks
+  CT-12  PASS   8 checks
+  CT-13  FAIL   3 checks  first: batch:node_cwd_other :: $.stderr tail differs: golden=":internal/main/run_main_module:36:49 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: 'contracts/decision-policies-archive.json'\n}\n\nNode.js v22.23.2\n" actual=":internal/main/run_main_module:36:49 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',
+  CT-14  PASS  18 checks
+  CT-15  PASS   5 checks
+  CT-16  PASS   9 checks
+  CT-17  NOT-RUN: no golden exists (U-07-05); Stage 14 GF-4
+  CT-18  NOT-RUN: Docker unavailable, HAR-05; Stage 14 GF-4
+  shipped tests/test_*.py: ran=15 result=OK post_db=750336f3ff3e.. equals Stage 7 R1=True
+OVERALL FAIL  (42s)
+report: /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s26-verify/run-20261024T201458/report.json

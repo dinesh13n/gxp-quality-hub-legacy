@@ -1,0 +1,284 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 41,
+  "skipped": 1
+ },
+ "label": "B",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 86.9,
+ "tail": "rminism)\nTST-CO-13 / AC-CO-13: golden-compare --json and deviations output hash-equal across 3x3x2 = 18 environments. ... ok\ntest_TST_CO_13_b_no_random_or_wallclock_in_core (test_tst_co_13_determinism.TST_CO_13_Determinism)\nTST-CO-13: no `random`/`secrets` import anywhere in hub/; no time/datetime import in the pure core ... ok\ntest_TST_CO_14_a_floor_310_starts_and_prints_versions (test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor)\nTST-CO-14 mode 3.10: selfcheck exit 0 and prints Python, SQLite and FTS5. ... ok\ntest_TST_CO_14_b_python39_refused (test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor)\nTST-CO-14 / AC-CO-14 edge: Python 3.9 -> E-CO-RUNTIME-UNSUPPORTED exit 8, for selfcheck and golden-compare, nothing created. ... ok\ntest_TST_CO_14_c_sqlite_below_floor_refused (test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor)\nTST-CO-14: SQLite 3.36 -> exit 8; SQLite 3.37.2 accepted. ... ok\ntest_TST_CO_14_d_floor_312_mode (test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor)\nTST-CO-14 mode 3.12 (ADR-018): the 3.10.12 dev runtime is refused; 3.12 accepted (flag and config). ... ok\ntest_TST_CO_14_e_real_old_interpreter_if_present (test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor)\nTST-CO-14: if a real python3.9 exists, `python3.9 -m hub selfcheck` exits 8 (else recorded as not available). ... skipped 'python3.9 not installed on this device (simulated in TST-CO-14 b)'\n\n----------------------------------------------------------------------\nRan 42 tests in 37.428s\n\nOK (skipped=1)\n",
+ "test_ids": [
+  "TST-CO-01",
+  "TST-CO-02",
+  "TST-CO-04",
+  "TST-CO-05",
+  "TST-CO-06",
+  "TST-CO-07",
+  "TST-CO-11",
+  "TST-CO-13",
+  "TST-CO-14",
+  "TST-HUB-INC02-S01",
+  "TST-HUB-INC02-S02",
+  "TST-HUB-INC02-S03"
+ ],
+ "tests": [
+  {
+   "case": "test_inc02_supplementary.TST_HUB_INC02_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC02_S01_untrusted_never_reaches_decision_params"
+  },
+  {
+   "case": "test_inc02_supplementary.TST_HUB_INC02_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC02_S02_flags_defaults_and_kill_switch"
+  },
+  {
+   "case": "test_inc02_supplementary.TST_HUB_INC02_Supplementary",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_INC02_S03_m000_migration"
+  },
+  {
+   "case": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_01_a_all_proposed_dv01_dv11_unapproved_exit6"
+  },
+  {
+   "case": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_01_b_register_describes_the_actual_goldens"
+  },
+  {
+   "case": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_01_c_matching_approved_rows_exit0"
+  },
+  {
+   "case": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_01_d_approval_must_match_observed_values"
+  },
+  {
+   "case": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_01_e_approved_requires_approval_ref"
+  },
+  {
+   "case": "test_tst_co_01_golden_compare.TST_CO_01_GoldenCompareBaseline",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_01_f_without_observation_module_probes_not_run"
+  },
+  {
+   "case": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_02_a_unchanged_priority_is_identical"
+  },
+  {
+   "case": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_02_b_changed_priority_of_one_case_unapproved_exit6"
+  },
+  {
+   "case": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_02_c_approval_for_another_golden_does_not_leak"
+  },
+  {
+   "case": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_02_d_missing_capture_is_not_run_and_fails"
+  },
+  {
+   "case": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_02_e_real_goldens_unlisted_change_fails"
+  },
+  {
+   "case": "test_tst_co_02_unlisted_golden.TST_CO_02_UnlistedGolden",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_02_f_tampered_golden_refused"
+  },
+  {
+   "case": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_04_a_each_legacy_db_opened_read_only"
+  },
+  {
+   "case": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_04_b_every_write_attempt_refused"
+  },
+  {
+   "case": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_04_c_legacy_files_byte_identical_after_attempts"
+  },
+  {
+   "case": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_04_d_only_ro_uri_connections_to_legacy"
+  },
+  {
+   "case": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_04_e_schema_drift_and_hash_mismatch_fail_closed"
+  },
+  {
+   "case": "test_tst_co_04_readonly_adapters.TST_CO_04_ReadOnlyAdapters",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_04_f_working_tree_source_refused"
+  },
+  {
+   "case": "test_tst_co_05_legacy_paths_unchanged.TST_CO_05_LegacyPathsUnchanged",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_05_a_no_diff_vs_baseline_as_found"
+  },
+  {
+   "case": "test_tst_co_05_legacy_paths_unchanged.TST_CO_05_LegacyPathsUnchanged",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_05_b_no_untracked_files_in_legacy_paths"
+  },
+  {
+   "case": "test_tst_co_05_legacy_paths_unchanged.TST_CO_05_LegacyPathsUnchanged",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_05_c_branch_only_adds_files_outside_stage15_docs"
+  },
+  {
+   "case": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_06_a_data_dir_inside_repo_refused"
+  },
+  {
+   "case": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_06_b_backup_ancestor_home_root_refused"
+  },
+  {
+   "case": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_06_c_legacy_root_in_worktree_refused"
+  },
+  {
+   "case": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_06_d_any_git_worktree_refused"
+  },
+  {
+   "case": "test_tst_co_06_sandbox_guard.TST_CO_06_SandboxGuard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_06_e_sandbox_data_dir_accepted"
+  },
+  {
+   "case": "test_tst_co_07_backup_manifest.TST_CO_07_BackupManifestAfterRun",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_07_a_sha256sum_rc0_after_sandbox_run"
+  },
+  {
+   "case": "test_tst_co_07_backup_manifest.TST_CO_07_BackupManifestAfterRun",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_07_b_python_verifier_agrees"
+  },
+  {
+   "case": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_11_a_openai_dependency_fails_build"
+  },
+  {
+   "case": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_11_b_import_rules"
+  },
+  {
+   "case": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_11_c_requirements_manifest"
+  },
+  {
+   "case": "test_tst_co_11_no_ai_denylist.TST_CO_11_NoAiDenylist",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_11_d_real_tree_is_clean"
+  },
+  {
+   "case": "test_tst_co_13_determinism.TST_CO_13_Determinism",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_13_a_bit_identical_across_hashseed_tz_locale"
+  },
+  {
+   "case": "test_tst_co_13_determinism.TST_CO_13_Determinism",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_13_b_no_random_or_wallclock_in_core"
+  },
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_14_a_floor_310_starts_and_prints_versions"
+  },
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_14_b_python39_refused"
+  },
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_14_c_sqlite_below_floor_refused"
+  },
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_CO_14_d_floor_312_mode"
+  },
+  {
+   "case": "test_tst_co_14_runtime_floor.TST_CO_14_RuntimeFloor",
+   "detail": "python3.9 not installed on this device (simulated in TST-CO-14 b)",
+   "status": "skipped",
+   "test": "test_TST_CO_14_e_real_old_interpreter_if_present"
+  }
+ ],
+ "unittest_rc": 0
+}

@@ -1,0 +1,25 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 1,
+  "skipped": 0
+ },
+ "label": "E26",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 173.8,
+ "tail": "test_TST_HUB_E26EGRESS_S90_stage26_suite_under_egress_guard (test_tst_hub_stg26_egress_guard.TST_HUB_E26EGRESS_Guard)\nS90: Stage 26 modules under the egress guard -> green, 0 egress attempts, model_calls_total = 0, nothing skipped. ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 124.758s\n\nOK\n",
+ "test_ids": [],
+ "tests": [
+  {
+   "case": "test_tst_hub_stg26_egress_guard.TST_HUB_E26EGRESS_Guard",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_E26EGRESS_S90_stage26_suite_under_egress_guard"
+  }
+ ],
+ "unittest_rc": 0
+}

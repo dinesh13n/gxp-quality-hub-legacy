@@ -1,0 +1,305 @@
+{
+ "label": "synthetic, unvalidated - method validation only",
+ "group": "per-mutant S26 selectors (see selectors); '+earlier' = second look with an earlier group's tests",
+ "results": [
+  {
+   "id": "M1",
+   "increment": "INC-08",
+   "selectors": [
+    "STG26_Control"
+   ],
+   "file": "hub/security/zone_h.py",
+   "mutation": "re-authentication window never enforced",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 6, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG26_A03_identity_confusion_and_reauthentication_boundary"
+   ],
+   "seconds": 36.2,
+   "tail": ""
+  },
+  {
+   "id": "M2",
+   "increment": "INC-08",
+   "selectors": [
+    "STG26_Control"
+   ],
+   "file": "hub/security/zone_h.py",
+   "mutation": "holder membership never checked",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 6, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG26_A03_identity_confusion_and_reauthentication_boundary"
+   ],
+   "seconds": 34.2,
+   "tail": ""
+  },
+  {
+   "id": "H3",
+   "increment": "INC-08 (Stage 16 survivor)",
+   "selectors": [
+    "STG23_S01",
+    "STG23_S02"
+   ],
+   "file": "hub/web/app.py",
+   "mutation": "security header weakened",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 2, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG23_S01_security_header_values_exact_in_process",
+    "test_TST_HUB_STG23_S02_security_header_values_exact_over_the_wire"
+   ],
+   "seconds": 20.3,
+   "tail": ""
+  },
+  {
+   "id": "M3",
+   "increment": "INC-08",
+   "selectors": [
+    "STG26_Control"
+   ],
+   "file": "hub/web/csrf.py",
+   "mutation": "CSRF header never required",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 5, 'FAIL': 2, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG26_A04_mass_assignment_and_spoofed_identity_have_no_effect",
+    "test_TST_HUB_STG26_A05_csrf_and_cors"
+   ],
+   "seconds": 36.9,
+   "tail": ""
+  },
+  {
+   "id": "M4",
+   "increment": "INC-08",
+   "selectors": [
+    "STG26_Wire"
+   ],
+   "file": "hub/web/app.py",
+   "mutation": "request body limit never enforced",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 1, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG26_B05_body_structure_abuse"
+   ],
+   "seconds": 23.6,
+   "tail": ""
+  },
+  {
+   "id": "H5",
+   "increment": "INC-08 (Stage 16 survivor)",
+   "selectors": [
+    "STG23_S03",
+    "STG23_S04",
+    "STG23_S05"
+   ],
+   "file": "hub/web/server.py",
+   "mutation": "non-loopback bind accepted",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 2, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG23_S03_start_up_guard_alone_accepts_approved_exposure_and_the_server_refuses",
+    "test_TST_HUB_STG23_S04_make_server_refuses_before_any_listener_exists",
+    "test_TST_HUB_STG23_S05_serve_command_exits_9_for_an_approved_non_loopback_bind"
+   ],
+   "seconds": 60.7,
+   "tail": ""
+  },
+  {
+   "id": "M5",
+   "increment": "INC-08",
+   "selectors": [
+    "STG26_Control",
+    "STG26_Wire"
+   ],
+   "file": "hub/web/authz.py",
+   "mutation": "unregistered route allowed (deny-by-default removed)",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 9, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 40.8,
+   "tail": ""
+  },
+  {
+   "id": "M5+earlier",
+   "increment": "INC-08",
+   "selectors": [
+    "TST_SEC"
+   ],
+   "file": "hub/web/authz.py",
+   "mutation": "unregistered route allowed (deny-by-default removed)",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 37, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 33.6,
+   "tail": ""
+  },
+  {
+   "id": "M6",
+   "increment": "INC-05",
+   "selectors": [
+    "STG26_Input"
+   ],
+   "file": "hub/decision/access.py",
+   "mutation": "reviewer may read restricted evidence",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 6, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 74.5,
+   "tail": ""
+  },
+  {
+   "id": "M6+earlier",
+   "increment": "INC-05",
+   "selectors": [
+    "TST_DEC"
+   ],
+   "file": "hub/decision/access.py",
+   "mutation": "reviewer may read restricted evidence",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 26, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_DEC_13_restricted_evidence_redacted"
+   ],
+   "seconds": 21.7,
+   "tail": ""
+  },
+  {
+   "id": "M7",
+   "increment": "INC-05",
+   "selectors": [
+    "STG26_Input",
+    "STG26_Resilience"
+   ],
+   "file": "hub/decision/service.py",
+   "mutation": "idempotency key reuse with a different body accepted",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 12, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 90.7,
+   "tail": ""
+  },
+  {
+   "id": "M7+earlier",
+   "increment": "INC-05",
+   "selectors": [
+    "TST_DEC"
+   ],
+   "file": "hub/decision/service.py",
+   "mutation": "idempotency key reuse with a different body accepted",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 26, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_DEC_23_idempotency_key_reuse"
+   ],
+   "seconds": 21.5,
+   "tail": ""
+  },
+  {
+   "id": "M8",
+   "increment": "INC-05",
+   "selectors": [
+    "STG26_Input"
+   ],
+   "file": "hub/policy/engine.py",
+   "mutation": "unknown rule function not refused",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 6, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 71.5,
+   "tail": ""
+  },
+  {
+   "id": "M8+earlier",
+   "increment": "INC-05",
+   "selectors": [
+    "TST_POL"
+   ],
+   "file": "hub/policy/engine.py",
+   "mutation": "unknown rule function not refused",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 25, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_POL_17_explicit_ref_is_a_what_if"
+   ],
+   "seconds": 20.9,
+   "tail": ""
+  },
+  {
+   "id": "M9",
+   "increment": "INC-07",
+   "selectors": [
+    "STG26_Control",
+    "STG26_NoAI"
+   ],
+   "file": "hub/obs/collect.py",
+   "mutation": "Zone H service-actor tripwire counts the wrong actor kind",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 9, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 54.5,
+   "tail": ""
+  },
+  {
+   "id": "M9+earlier",
+   "increment": "INC-07",
+   "selectors": [
+    "TST_OBS"
+   ],
+   "file": "hub/obs/collect.py",
+   "mutation": "Zone H service-actor tripwire counts the wrong actor kind",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 9, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 22.5,
+   "tail": ""
+  },
+  {
+   "id": "M10",
+   "increment": "INC-07",
+   "selectors": [
+    "STG26_Control",
+    "STG26_NoAI"
+   ],
+   "file": "hub/runs/schedule.py",
+   "mutation": "schedule enable without authority_ref accepted",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 9, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 41.4,
+   "tail": ""
+  },
+  {
+   "id": "M10+earlier",
+   "increment": "INC-07",
+   "selectors": [
+    "TST_RUN"
+   ],
+   "file": "hub/runs/schedule.py",
+   "mutation": "schedule enable without authority_ref accepted",
+   "status": "SURVIVED",
+   "rc": 0,
+   "counts": "{'ok': 14, 'FAIL': 0, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [],
+   "seconds": 24.2,
+   "tail": ""
+  }
+ ]
+}

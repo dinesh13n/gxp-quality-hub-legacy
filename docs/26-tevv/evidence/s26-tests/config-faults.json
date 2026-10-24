@@ -1,0 +1,107 @@
+{
+ "label": "synthetic, unvalidated",
+ "refused_as_designed": {
+  "authoritative without approval_ref": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "data_origin production": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "holders duplicate": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "holders integers": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "holders string": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "kill string": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "kill true": [
+   3,
+   "E-HUB-KILLED",
+   false
+  ],
+  "pbkdf2 1": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "reauth window -1": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "reauth window 1e9": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "runtime floor 3.99": [
+   2,
+   "E-CFG-INVALID",
+   false
+  ],
+  "valid": [
+   0,
+   null,
+   false
+  ]
+ },
+ "registered": {
+  "JSON array": [
+   1,
+   null,
+   true
+  ],
+  "file missing": [
+   1,
+   null,
+   true
+  ],
+  "mistyped kill key": [
+   0,
+   null,
+   false
+  ],
+  "not JSON": [
+   1,
+   null,
+   true
+  ],
+  "truncated JSON": [
+   1,
+   null,
+   true
+  ],
+  "unknown top-level key": [
+   0,
+   null,
+   false
+  ],
+  "unknown zone_h key": [
+   0,
+   null,
+   false
+  ]
+ },
+ "registered_findings": {
+  "S26-F-04": "config file unreadable / not JSON / not an object: Python traceback and exit 1 instead of an E-CFG-* code (operator CLI, host trusted)",
+  "S26-F-05": "unknown configuration keys (top level and nested) are accepted silently: a mistyped safety key is inert",
+  "S26-F-06": "the listener has no per-connection read timeout: a client that declares a longer body than it sends holds a handler thread until it closes"
+ }
+}

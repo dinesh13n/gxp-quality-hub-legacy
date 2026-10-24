@@ -1,0 +1,41 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 41,
+    "skipped": 1
+   },
+   "executed_methods": 42,
+   "expected_methods": 42,
+   "group": "B",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 86.9,
+   "selectors": [
+    "TST_CO_01",
+    "TST_CO_02",
+    "TST_CO_04",
+    "TST_CO_05",
+    "TST_CO_06",
+    "TST_CO_07",
+    "TST_CO_11",
+    "TST_CO_13",
+    "TST_CO_14",
+    "INC02"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 41, 'FAIL': 0, 'ERROR': 0, 'skipped': 1} ids=TST-CO-01,TST-CO-02,TST-CO-04,TST-CO-05,TST-CO-06,TST-CO-07,TST-CO-11,TST-CO-13,TST-CO-14,TST-HUB-INC02-S01,TST-HUB-INC02-S02,TST-HUB-INC02-S03 seconds=86.9 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s26-reg/B/B/report.json"
+   ],
+   "wall_seconds": 87.0
+  }
+ ],
+ "schema": "hub-regression-log/v1",
+ "total_executed": 42,
+ "total_expected": 42
+}

@@ -1,0 +1,44 @@
+{
+ "human_checks_not_covered": [
+  "layout and readability on the reviewer's screen",
+  "whether the escaped text is understandable to a reviewer",
+  "whether the control labels are clear",
+  "any visual defect or truncation",
+  "the reviewer's own judgement of the wording"
+ ],
+ "kind": "AGENT REHEARSAL - NOT a human walkthrough - NOT observed or signed by Dinesh or any reviewer",
+ "label": "synthetic, unvalidated",
+ "rt_13": "OPEN",
+ "steps": {
+  "TST-REV-03": {
+   "expected": "limit 500 is clamped to 100; next link; total shown",
+   "observed": {
+    "has_next": true,
+    "items": 100,
+    "limit": 100,
+    "queue_page_status": 200,
+    "total": 8335
+   }
+  },
+  "TST-REV-04": {
+   "expected": "script text shown escaped, untrusted marker, no live script, CSP default-src 'self'",
+   "observed": {
+    "csp": "default-src 'self'",
+    "escaped": true,
+    "live_script": false,
+    "untrusted_marker": true
+   }
+  },
+  "TST-REV-08": {
+   "expected": "override / dismiss / refuse offered for every open flag",
+   "observed": {
+    "controls_per_flag": [
+     3,
+     3,
+     3
+    ],
+    "flags": 3
+   }
+  }
+ }
+}
