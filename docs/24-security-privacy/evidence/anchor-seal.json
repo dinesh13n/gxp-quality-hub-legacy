@@ -1,0 +1,7 @@
+{
+ "anchor_lines": 5,
+ "forged_line": "seal_mismatch at line 2",
+ "label": "synthetic, unvalidated",
+ "limit": "key holder with host access can re-seal; anchor + seal deleted together undetected (RS-03)",
+ "truncation": "anchor_truncated"
+}

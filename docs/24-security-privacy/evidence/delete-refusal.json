@@ -1,0 +1,42 @@
+{
+ "label": "synthetic, unvalidated",
+ "refused": [
+  "audit_log",
+  "coexistence_inventory",
+  "crosswalk_link",
+  "crosswalk_link_event",
+  "decision_events",
+  "decision_schema_migrations",
+  "deviation_register",
+  "evidence_record",
+  "intake_item_attr",
+  "intake_outcome",
+  "intake_run_event",
+  "intake_schema_migrations",
+  "login_attempt",
+  "metric_definition",
+  "metric_value",
+  "obs_metric",
+  "policy_events",
+  "policy_object",
+  "policy_schema_migrations",
+  "principal",
+  "principal_role",
+  "raw_intake",
+  "rule_row",
+  "rule_set",
+  "run_event",
+  "runs_schema_migrations",
+  "session",
+  "web_schema_migrations"
+ ],
+ "retained_but_empty_in_this_scenario": [
+  "decision_idempotency",
+  "flag_action",
+  "release_gate_result",
+  "release_record",
+  "rule_trace",
+  "service_token",
+  "service_token_revocation"
+ ]
+}

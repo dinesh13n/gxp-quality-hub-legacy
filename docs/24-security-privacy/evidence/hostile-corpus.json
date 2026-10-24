@@ -1,0 +1,8 @@
+{
+ "case": "C90000001",
+ "decision_events_unchanged": true,
+ "label": "synthetic, unvalidated",
+ "pages_checked": 5,
+ "strings": 17,
+ "zone_h_footprint_unchanged": true
+}

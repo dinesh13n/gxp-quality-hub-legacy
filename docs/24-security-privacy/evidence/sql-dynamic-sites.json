@@ -1,0 +1,107 @@
+{
+ "by_file": {
+  "adapters/legacy_sqlite.py": {
+   "dynamic": 1,
+   "indirect": 1
+  },
+  "crosswalk/service.py": {
+   "dynamic": 4,
+   "indirect": 2
+  },
+  "decision/schema.py": {
+   "indirect": 1
+  },
+  "decision/service.py": {
+   "dynamic": 7,
+   "indirect": 1
+  },
+  "gate/pack.py": {
+   "dynamic": 1
+  },
+  "golden/baseline_probes.py": {
+   "indirect": 1
+  },
+  "intake/schema.py": {
+   "indirect": 1
+  },
+  "intake/service.py": {
+   "dynamic": 2
+  },
+  "metrics/registry.py": {
+   "dynamic": 2,
+   "indirect": 1
+  },
+  "metrics/sources.py": {
+   "dynamic": 1,
+   "indirect": 1
+  },
+  "policy/schema.py": {
+   "indirect": 1
+  },
+  "policy/service.py": {
+   "dynamic": 7
+  },
+  "r2/consistency.py": {
+   "dynamic": 2,
+   "indirect": 1
+  },
+  "r2/facts.py": {
+   "indirect": 1
+  },
+  "r2/intake_reports.py": {
+   "indirect": 1
+  },
+  "r2/joined.py": {
+   "indirect": 1
+  },
+  "r2/source_quality.py": {
+   "dynamic": 1
+  },
+  "review/service.py": {
+   "dynamic": 2
+  },
+  "runs/schema.py": {
+   "indirect": 1
+  },
+  "runs/service.py": {
+   "dynamic": 1
+  },
+  "search/corpus.py": {
+   "dynamic": 1
+  },
+  "search/engine.py": {
+   "dynamic": 1,
+   "indirect": 1
+  },
+  "search/fts.py": {
+   "dynamic": 1,
+   "indirect": 1
+  },
+  "search/schema.py": {
+   "indirect": 1
+  },
+  "security/audit.py": {
+   "dynamic": 1
+  },
+  "store/db.py": {
+   "indirect": 1
+  },
+  "store/migrate.py": {
+   "indirect": 1
+  },
+  "web/api.py": {
+   "dynamic": 1,
+   "indirect": 1
+  },
+  "web/schema.py": {
+   "indirect": 1
+  },
+  "web/ui.py": {
+   "indirect": 1
+  }
+ },
+ "dynamic": 36,
+ "files": 30,
+ "indirect": 23,
+ "label": "synthetic, unvalidated"
+}

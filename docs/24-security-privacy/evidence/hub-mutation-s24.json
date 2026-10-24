@@ -1,0 +1,107 @@
+{
+ "label": "synthetic, unvalidated - method validation only",
+ "group": "-k STG24 (21 tests)",
+ "killed": 8,
+ "mutants": 8,
+ "results": [
+  {
+   "id": "M1",
+   "file": "hub/security/transport.py",
+   "mutation": "session cookie never gets Secure, even with TLS settings (A-INC08-3)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 20, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG24_S24_cookie_attributes_and_secure_with_tls"
+   ],
+   "seconds": 30.1
+  },
+  {
+   "id": "M2",
+   "file": "hub/security/transport.py",
+   "mutation": "X-Hub-Reason header ignored (RTD-90)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 20, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG24_S25_c3_reason_by_header_or_query"
+   ],
+   "seconds": 29.7
+  },
+  {
+   "id": "M3",
+   "file": "hub/security/tables.py",
+   "mutation": "register disagrees with the store: a retained table called mutable (RF-02)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 19, 'FAIL': 2, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG24_S01_register_equals_the_live_store",
+    "test_TST_HUB_STG24_S02_scan_list_is_the_register_and_the_grep_catches_every_new_table"
+   ],
+   "seconds": 37.6
+  },
+  {
+   "id": "M4",
+   "file": "hub/security/anchor_seal.py",
+   "mutation": "seal check ignores the MAC (RTD-29)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 20, 'FAIL': 0, 'ERROR': 1, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG24_S26_anchor_seal_round_trip_tamper_and_key_rules"
+   ],
+   "seconds": 51.9
+  },
+  {
+   "id": "M5",
+   "file": "hub/security/settings.py",
+   "mutation": "lockout threshold drifts from the register (RTD-26)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 19, 'FAIL': 2, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG24_S20_register_equals_defaults_and_nothing_is_approved",
+    "test_TST_HUB_STG24_S22_proposed_values_at_the_boundary"
+   ],
+   "seconds": 38.3
+  },
+  {
+   "id": "M6",
+   "file": "hub/security/auth.py",
+   "mutation": "logout does not revoke the session (ABU-10)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 20, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG24_S23_abu10_logout_fixation_and_disabled_principal"
+   ],
+   "seconds": 38.8
+  },
+  {
+   "id": "M7",
+   "file": "hub/security/datamap.py",
+   "mutation": "a credential column loses its secret tag (field map)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 19, 'FAIL': 0, 'ERROR': 2, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG24_S10_every_column_is_classified",
+    "test_TST_HUB_STG24_S12_secrets_are_the_tagged_columns_and_stay_out_of_audit_and_log"
+   ],
+   "seconds": 29.7
+  },
+  {
+   "id": "M8",
+   "file": "hub/security/scan.py",
+   "mutation": "scan list shrinks back (DW-19 gap reopened)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 20, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG24_S02_scan_list_is_the_register_and_the_grep_catches_every_new_table"
+   ],
+   "seconds": 29.5
+  }
+ ]
+}

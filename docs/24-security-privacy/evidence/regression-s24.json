@@ -1,0 +1,130 @@
+{
+ "label": "synthetic, unvalidated",
+ "python": "3.10.12 (laptop)",
+ "note": "Stage 24 build-agent runs only (own tests + group B + groups touching hub/security and WebApp.handle). The full hub regression is the orchestrator's (OD-23).",
+ "groups": [
+  {
+   "group": "S24",
+   "rc": 0,
+   "wall_seconds": 66.1,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 21,
+    "skipped": 0
+   },
+   "expected_methods": 21,
+   "executed_methods": 21,
+   "complete": true,
+   "checksum_rc_pre": 0,
+   "checksum_rc_post": 0
+  },
+  {
+   "group": "E24",
+   "rc": 0,
+   "wall_seconds": 73.2,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "expected_methods": 1,
+   "executed_methods": 1,
+   "complete": true,
+   "checksum_rc_pre": 0,
+   "checksum_rc_post": 0
+  },
+  {
+   "group": "B",
+   "rc": 0,
+   "wall_seconds": 89.7,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 41,
+    "skipped": 1
+   },
+   "expected_methods": 42,
+   "executed_methods": 42,
+   "complete": true,
+   "checksum_rc_pre": 0,
+   "checksum_rc_post": 0
+  },
+  {
+   "group": "A",
+   "rc": 0,
+   "wall_seconds": 91.6,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 45,
+    "skipped": 0
+   },
+   "expected_methods": 45,
+   "executed_methods": 45,
+   "complete": true,
+   "checksum_rc_pre": 0,
+   "checksum_rc_post": 0
+  },
+  {
+   "group": "I8a",
+   "rc": 0,
+   "wall_seconds": 96.9,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 35,
+    "skipped": 0
+   },
+   "expected_methods": 35,
+   "executed_methods": 35,
+   "complete": true,
+   "checksum_rc_pre": 0,
+   "checksum_rc_post": 0
+  },
+  {
+   "group": "I8b",
+   "rc": 0,
+   "wall_seconds": 83.0,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 43,
+    "skipped": 0
+   },
+   "expected_methods": 43,
+   "executed_methods": 43,
+   "complete": true,
+   "checksum_rc_pre": 0,
+   "checksum_rc_post": 0
+  },
+  {
+   "group": "I9",
+   "rc": 0,
+   "wall_seconds": 77.5,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 33,
+    "skipped": 0
+   },
+   "expected_methods": 33,
+   "executed_methods": 33,
+   "complete": true,
+   "checksum_rc_pre": 0,
+   "checksum_rc_post": 0
+  }
+ ],
+ "characterization": {
+  "command": "python3 -B tests/characterization/run_characterization.py --sandbox-root $HOME/fde_sbx/s24-verify",
+  "result": "OVERALL FAIL",
+  "checks": "133/134",
+  "failed": "CT-13 batch:node_cwd_other",
+  "cause": "only the Node.js patch version in a stderr tail: golden v22.23.2, laptop now v22.23.4 (environment drift); legacy paths byte-identical (git diff baseline-as-found empty); data checksums rc 0",
+  "not_run": [
+   "CT-17",
+   "CT-18"
+  ]
+ }
+}

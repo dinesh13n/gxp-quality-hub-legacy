@@ -1,0 +1,172 @@
+{
+ "controls": [
+  {
+   "evidence": "PBKDF2-HMAC-SHA256, 16-byte salt (hub/security/auth.py); public password-storage guidance names 600,000 for this KDF [Assumption: recalled guidance, re-check at adoption]",
+   "floor": 600000,
+   "id": "SC-01",
+   "open_decision": "keep 600,000 or raise; a KDF other than PBKDF2 (scrypt / Argon2) is not in the Python 3.10 stdlib guarantee (hashlib.scrypt depends on OpenSSL)",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "auth.pbkdf2_iterations",
+   "shipped": 600000,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "hub/security/auth.py create_user; no composition rules, no expiry",
+   "floor": 12,
+   "id": "SC-02",
+   "open_decision": "keep 12, or move toward 15 (current NIST SP 800-63B-4 guidance for a password used as the only authenticator [Assumption: recalled, re-check]); no MFA exists",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "auth.password_min_length",
+   "shipped": 12,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "TST-SEC-05; lockout is per principal (RTD-34)",
+   "floor": null,
+   "id": "SC-03",
+   "open_decision": "5 failures; per-source limiting needs a source identity that loopback does not have",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "auth.lockout_threshold",
+   "shipped": 5,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "TST-SEC-05",
+   "floor": null,
+   "id": "SC-04",
+   "open_decision": "15 minutes counting window",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "auth.lockout_window_seconds",
+   "shipped": 900,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "TST-SEC-05",
+   "floor": null,
+   "id": "SC-05",
+   "open_decision": "15 minutes lock; a permanent lock needs an unlock procedure that does not exist",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "auth.lockout_duration_seconds",
+   "shipped": 900,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "hub/security/auth.py authenticate",
+   "floor": null,
+   "id": "SC-06",
+   "open_decision": "30 minutes idle timeout",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "auth.session_idle_seconds",
+   "shipped": 1800,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "hub/security/auth.py authenticate",
+   "floor": null,
+   "id": "SC-07",
+   "open_decision": "8 hours absolute lifetime",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "auth.session_absolute_seconds",
+   "shipped": 28800,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "hub/gate/reauth.py; TST-GATE",
+   "floor": null,
+   "id": "SC-08",
+   "open_decision": "5 minutes step-up window for Zone H",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "zone_h.reauth_window_seconds",
+   "shipped": 300,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "hub/security/settings.py DEFAULTS; OD-17, OD-31",
+   "floor": null,
+   "id": "SC-09",
+   "open_decision": "WHO the holders are: Dinesh only (OD-31 left them empty)",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "zone_h.holders",
+   "shipped": [],
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "hub/security/audit.py",
+   "floor": null,
+   "id": "SC-10",
+   "open_decision": "anchor every 100 audit records and at the end of every run; anchor path required, outside the database directory",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "audit.anchor_every",
+   "shipped": 100,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "hub/security/exposure.py; hub/web/server.py bind_address",
+   "floor": null,
+   "id": "SC-11",
+   "open_decision": "loopback only; any exposure is HAR-05 plus an unbuilt TLS story (RTD-77)",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "network.bind",
+   "shipped": "127.0.0.1",
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  },
+  {
+   "evidence": "hub/security/exposure.py",
+   "floor": null,
+   "id": "SC-12",
+   "open_decision": "refused without approval reference and TLS keys; the server refuses non-loopback even with them (S23)",
+   "owner": "Engagement lead (Dinesh Naik)",
+   "path": "network.exposure_approved",
+   "shipped": false,
+   "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+  }
+ ],
+ "drift": [],
+ "fixed": [
+  {
+   "assumption": "A-INC08-3",
+   "id": "SC-20",
+   "name": "session cookie attributes",
+   "value": "HttpOnly; SameSite=Strict; Path=/; Secure only when TLS settings are present (hub/security/transport.py)"
+  },
+  {
+   "assumption": "A-INC08-5",
+   "id": "SC-21",
+   "name": "CSRF",
+   "value": "X-Hub-Request: 1 on JSON writes; derived csrf_token on form posts; none on the login POST"
+  },
+  {
+   "assumption": "A-INC08-1",
+   "id": "SC-22",
+   "name": "service token",
+   "value": "svc_ + 48 hex (os.urandom(24)); sha256 stored; optional expiry; rotation = issue + revoke"
+  },
+  {
+   "assumption": "A-INC08-2",
+   "id": "SC-23",
+   "name": "reauth_token",
+   "value": "sha256 of 'reauth:' + session digest + ':' + reauth_at"
+  },
+  {
+   "assumption": "A-INC08-4",
+   "id": "SC-24",
+   "name": "login response body",
+   "value": "returns token and csrf_token besides the cookie"
+  },
+  {
+   "assumption": "RTD-90 / A-INC09-5",
+   "id": "SC-25",
+   "name": "C3 reason transport",
+   "value": "X-Hub-Reason header or ?reason= (header wins)"
+  },
+  {
+   "assumption": "hub/web/app.py BODY_LIMIT",
+   "id": "SC-26",
+   "name": "request body limit",
+   "value": "1 MiB; Transfer-Encoding refused"
+  }
+ ],
+ "label": "synthetic, unvalidated",
+ "note": "values are PROPOSALS; no decision on DQ-09 is recorded",
+ "status": "PROPOSED - not approved; accepted open until the Engagement lead decides (DQ-09)"
+}
