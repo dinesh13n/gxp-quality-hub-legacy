@@ -120,6 +120,11 @@ class _Run(object):
             try:
                 if migrate.has_audit(self.con):
                     audit.write_anchor(self.con, self.anchor_path)  # end of every run (BEH-SEC-06)
+            except (KeyError, ValueError, TypeError, AttributeError):
+                # S30-DEV-01 (F-29-01): verify-audit on a malformed anchor line must still end with its tamper exit code (17), not a traceback (exit 1).
+                # The anchor is NOT appended to (fail closed); every other command keeps the old behaviour (the error propagates).
+                if getattr(self.args, "cmd", None) != "verify-audit":
+                    raise
             finally:
                 self.con.close()
                 self.con = None

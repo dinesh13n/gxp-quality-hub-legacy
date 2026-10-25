@@ -1,0 +1,32 @@
+[rehearsal-l1 a40d1d6] Revert "stage-31: Observability and SLO/SLA Engineering v0.1 (CONDITIONAL PASS) (#23)"
+ Date: Sun Oct 25 08:28:37 2026 +0000
+ 31 files changed, 21 insertions(+), 2242 deletions(-)
+ delete mode 100644 docs/31-observability/agent-telemetry-spec.md
+ delete mode 100644 docs/31-observability/ai-telemetry-spec.md
+ delete mode 100644 docs/31-observability/alert-catalog.md
+ delete mode 100644 docs/31-observability/dashboard-catalog.md
+ delete mode 100644 docs/31-observability/error-budget-policy.md
+ delete mode 100644 docs/31-observability/evidence/results.json
+ delete mode 100644 docs/31-observability/logging-spec.md
+ delete mode 100644 docs/31-observability/metrics-spec.md
+ delete mode 100644 docs/31-observability/observability-architecture.md
+ delete mode 100644 docs/31-observability/observability-validation.md
+ delete mode 100644 docs/31-observability/operational-runbook.md
+ delete mode 100644 docs/31-observability/slo-sla-definitions.md
+ delete mode 100644 docs/31-observability/tracing-spec.md
+ delete mode 100644 hub/obs/__main__.py
+ delete mode 100644 hub/obs/alerts.py
+ delete mode 100644 hub/obs/catalog.py
+ delete mode 100644 hub/obs/cli.py
+ delete mode 100644 hub/obs/expo.py
+ delete mode 100644 hub/obs/report.py
+ delete mode 100644 hub/obs/resilience_samples.py
+ delete mode 100644 hub/obs/slo.py
+ delete mode 100644 hub/obs/trace.py
+ delete mode 100644 tests/hub/_stg31.py
+ rewrite tests/hub/non_add_edits.json (80%)
+ delete mode 100644 tests/hub/test_tst_hub_stg31_catalog.py
+ delete mode 100644 tests/hub/test_tst_hub_stg31_egress_guard.py
+ delete mode 100644 tests/hub/test_tst_hub_stg31_slo_alerts.py
+ delete mode 100644 tests/hub/test_tst_hub_stg31_static_docs.py
+ delete mode 100644 tests/hub/test_tst_hub_stg31_trace_cli.py

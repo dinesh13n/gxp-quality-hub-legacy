@@ -1,0 +1,2 @@
+14 flag:capability_authority.CUT-2 shadow -> authoritative approval_ref=REHEARSAL-SANDBOX-NOT-AN-APPROVAL to_non_default 
+17 flag:capability_authority.CUT-2 authoritative -> shadow approval_ref=None to_default L3

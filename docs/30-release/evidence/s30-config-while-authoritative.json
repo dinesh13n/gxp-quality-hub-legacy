@@ -1,0 +1,11 @@
+{
+ "approval_refs": {
+  "capability_authority.CUT-2": "REHEARSAL-SANDBOX-NOT-AN-APPROVAL"
+ },
+ "audit": {
+  "anchor_path": "~/fde_sbx/s30-reh/scratch/anchor/audit-anchor.jsonl"
+ },
+ "capability_authority": {
+  "CUT-2": "authoritative"
+ }
+}

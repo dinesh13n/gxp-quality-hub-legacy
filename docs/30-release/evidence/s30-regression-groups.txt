@@ -1,0 +1,19 @@
+Stage 30 regression runs on the reference laptop (Python 3.10.12), one group per call via tests/hub/run_hub_groups.py (sandbox copy, checksum gate before and after, executed = expected).
+Branch stage-30-release based on ef72e4e (hub/ unchanged between 7ea5780 and the final commit except where the deviations say so); the local 'main' ref had moved to 549512a (Stages 39, 40).
+B    rc=1 wall=108.1s ok=40 FAIL=1 skipped=1 expected=42 executed=42  -- the one FAIL is TST_CO_05_c: `git diff main` lists the docs/39 and docs/40 files as D because main moved (S30-DEV-03); against ef72e4e the only non-add entries are those listed in non_add_edits.json
+I6   rc=0 wall=120.5s ok=43 FAIL=0 expected=43 executed=43
+I45  rc=0 wall= 82.5s ok=91 FAIL=0 expected=91 executed=91
+I8a  rc=0 wall=102.6s ok=35 FAIL=0 expected=35 executed=35
+S20  rc=0 wall= 89.9s ok=18 FAIL=0 expected=18 executed=18
+S24  rc=0 wall= 79.5s ok=21 FAIL=0 expected=21 executed=21
+S27  rc=0 wall= 75.2s ok=25 FAIL=0 expected=25 executed=25
+S28  rc=0 wall= 76.2s ok=19 FAIL=0 expected=19 executed=19
+S31  rc=1 wall= 69.4s ok=18 FAIL=1 expected=19 executed=19  -- STG31_D01 pinned the non-add list to stage 31; fixed by S30-DEV-04; rerun result is in the final section below
+Groups not run by this stage: A, C1, C2, C3, I7, I8b, E8, I9, E9, S21, S23, S26, E20, E21, E23, E24, E26, E27, E28, E31 (the orchestrator's full regression, OD-23, covers them).
+
+Final section (after the S30-DEV-04 fix and the documents; same runner):
+S31  rc=0 wall= 58.1s ok=19 FAIL=0 expected=19 executed=19
+S30  rc=0 wall= 67.2s ok=19 FAIL=0 expected=19 executed=19
+E30  rc=0 wall= 77.5s ok=1 FAIL=0 expected=1 executed=1
+S20  rc=0 wall= 94.8s ok=18 FAIL=0 expected=18 executed=18  (rerun with all Stage 30 files present; change-safety check selects every method once)
+Characterization (tests/characterization/run_characterization.py): OVERALL FAIL only because CT-13 fails (Node patch drift, S24-DEV-04); see s30-characterization.txt.

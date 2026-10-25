@@ -1,0 +1,47 @@
+stage 30 rehearsal; HEAD=3024200; python=Python 3.10.12
+pre working-tree data checksum rc=0
+sandbox copy of data checksum rc=0
+--- R1 rollout (fresh store, shadow)
+01-migrate rc=0 elapsed_s=0.83
+02-status rc=0 elapsed_s=0.08
+03-startup-check rc=0 elapsed_s=0.15
+04-verify-audit rc=0 elapsed_s=0.12
+05-posture rc=0 elapsed_s=0.13
+06-golden-compare rc=6 elapsed_s=4.50
+--- R2 pre-cutover backup
+07-backup rc=0 elapsed_s=0.11
+08-verify-backup-manifest rc=0 elapsed_s=0.01
+--- R3 release record refuses 'ready' without evidence (mark-ready attempted with every unevaluated gate not_run)
+09-release-checklist-mark-ready rc=20 elapsed_s=1.30
+09b-release-checklist-no-mark rc=0 elapsed_s=1.31
+10-verify-audit-after-refusal rc=0 elapsed_s=0.08
+--- R4 cutover dry-run on the sandbox (the shipped config is NOT touched; the reference below is a rehearsal marker, not an approval)
+11-flags-before rc=0 elapsed_s=0.08
+12-set-authoritative-without-approval rc=2 elapsed_s=0.12
+13-posture-after-refusal rc=0 elapsed_s=0.06
+14-set-authoritative-sandbox-ref rc=0 elapsed_s=0.12
+15-posture-while-authoritative rc=1 elapsed_s=0.06
+16-verify-audit-while-authoritative rc=0 elapsed_s=0.12
+17-flip-to-shadow-L3 rc=0 elapsed_s=0.14
+18-posture-after-L3 rc=0 elapsed_s=0.07
+19-verify-audit-after-L3 rc=0 elapsed_s=0.12
+--- R5 L2 restore from the pre-cutover backup (records written after the backup are set aside, F-29-06)
+20-head-before-restore rc=0 elapsed_s=0.03
+21-restore rc=0 elapsed_s=0.13
+22-verify-audit-after-restore rc=0 elapsed_s=0.10
+23-posture-after-restore rc=0 elapsed_s=0.07
+--- R6 corrupt backup is refused
+24-restore-corrupt-backup rc=21 elapsed_s=0.08
+25-verify-audit-after-refused-restore rc=0 elapsed_s=0.12
+--- R7 L1 code revert in a clone (the working repository is only read)
+26-l1-checkout rc=0 elapsed_s=0.45
+27-l1-revert-stage-31 rc=0 elapsed_s=0.44
+28-l1-tree-vs-pre-stage-31 rc=0 elapsed_s=0.53
+29-l1-hub-release-gone rc=0 elapsed_s=0.03
+30-l1-revert-the-revert rc=0 elapsed_s=0.53
+31-l1-tree-restored rc=0 elapsed_s=0.27
+--- R8 regeneration check F-29-12 (sandbox copy; shipped baseline is 125 cases, seed 4100)
+32-regenerate-125 rc=0 elapsed_s=0.25
+33-kill-switch-reads rc=0 elapsed_s=0.02
+post working-tree data checksum rc=0
+done

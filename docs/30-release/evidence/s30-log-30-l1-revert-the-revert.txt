@@ -1,0 +1,32 @@
+[rehearsal-l1 93aff97] Revert "Revert "stage-31: Observability and SLO/SLA Engineering v0.1 (CONDITIONAL PASS) (#23)""
+ Date: Sun Oct 25 08:28:38 2026 +0000
+ 31 files changed, 2242 insertions(+), 21 deletions(-)
+ create mode 100644 docs/31-observability/agent-telemetry-spec.md
+ create mode 100644 docs/31-observability/ai-telemetry-spec.md
+ create mode 100644 docs/31-observability/alert-catalog.md
+ create mode 100644 docs/31-observability/dashboard-catalog.md
+ create mode 100644 docs/31-observability/error-budget-policy.md
+ create mode 100644 docs/31-observability/evidence/results.json
+ create mode 100644 docs/31-observability/logging-spec.md
+ create mode 100644 docs/31-observability/metrics-spec.md
+ create mode 100644 docs/31-observability/observability-architecture.md
+ create mode 100644 docs/31-observability/observability-validation.md
+ create mode 100644 docs/31-observability/operational-runbook.md
+ create mode 100644 docs/31-observability/slo-sla-definitions.md
+ create mode 100644 docs/31-observability/tracing-spec.md
+ create mode 100644 hub/obs/__main__.py
+ create mode 100644 hub/obs/alerts.py
+ create mode 100644 hub/obs/catalog.py
+ create mode 100644 hub/obs/cli.py
+ create mode 100644 hub/obs/expo.py
+ create mode 100644 hub/obs/report.py
+ create mode 100644 hub/obs/resilience_samples.py
+ create mode 100644 hub/obs/slo.py
+ create mode 100644 hub/obs/trace.py
+ create mode 100644 tests/hub/_stg31.py
+ rewrite tests/hub/non_add_edits.json (74%)
+ create mode 100644 tests/hub/test_tst_hub_stg31_catalog.py
+ create mode 100644 tests/hub/test_tst_hub_stg31_egress_guard.py
+ create mode 100644 tests/hub/test_tst_hub_stg31_slo_alerts.py
+ create mode 100644 tests/hub/test_tst_hub_stg31_static_docs.py
+ create mode 100644 tests/hub/test_tst_hub_stg31_trace_cli.py

@@ -1,0 +1,10 @@
+{
+ "code": "E-CFG-INVALID",
+ "correlation_id": "cli-8dc2703d33258698",
+ "details": {
+  "flag": "capability_authority.CUT-2",
+  "reason": "--approval-ref is required for a non-default value (FF-2 rule 3, HAR-11)",
+  "value": "authoritative"
+ },
+ "message": "configuration value not allowed"
+}

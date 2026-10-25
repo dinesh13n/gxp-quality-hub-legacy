@@ -1,0 +1,16 @@
+{
+ "code": "E-CO-RELEASE-BLOCKED",
+ "details": {
+  "blocking": [
+   "G1",
+   "G2",
+   "G4",
+   "G8",
+   "G9",
+   "G10"
+  ],
+  "missing": [],
+  "release_id": "R-S30-REHEARSAL-1"
+ },
+ "message": "release cannot be marked ready: a gate is not 'pass'"
+}

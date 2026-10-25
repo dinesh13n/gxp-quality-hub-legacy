@@ -1,0 +1,6 @@
+{
+ "violations": [
+  "non-default decision flag: capability_authority.CUT-2",
+  "approval_refs present"
+ ]
+}

@@ -1,0 +1,3 @@
+{"enterprise": {"deviations": 42, "lab_results": 125, "capa_actions": 21, "sop_versions": 45}, "cases": 125, "events": 145, "messages": 15, "seed": 4100, "domain": {"entity": "materials", "entity_count": 30, "detail": "batch_records", "detail_count": 125}}
+5068c2b48f625e4d57e46490b8c6134847043b05f24d3e27554f8211c5ca8467  data/legacy.sqlite3
+c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa  ~/fde_sbx/s30-reh/legacy.shipped.sqlite3

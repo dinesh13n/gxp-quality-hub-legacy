@@ -1,0 +1,17 @@
+{
+ "applied": [
+  "M001"
+ ],
+ "backup": {
+  "files": {
+   "hub.sqlite3": "1faa8d9a3a3753969b7bbc3bc46d3f1b5ccfebca6ace58054e342971bc03fd0d"
+  },
+  "label": "pre-migrate-M000-to-M001-20261025T082815565039Z",
+  "path": "~/fde_sbx/s30-reh/scratch/premig/pre-migrate-M000-to-M001-20261025T082815565039Z",
+  "schema_versions": [
+   "M000"
+  ]
+ },
+ "from": "M000",
+ "to": "M001"
+}

@@ -1,0 +1,19 @@
+hub/intake/cli.py:13:runtime floor, hub.kill, CONFIG_LOADED audit record, anchor at the end. No model call, no network beyond loopback.
+hub/admin/cli.py:15:Every command installs the egress guard, checks the runtime floor and honours hub.kill. Every command that opens
+hub/admin/cli.py:83:        if self.cfg["hub"]["kill"]:
+hub/release/gonogo.py:130:        (flags.get(cfg, "hub.kill", False) is not False, "kill switch set"),
+hub/policy/cli.py:13:Same guards as hub.admin: egress guard, runtime floor, hub.kill, CONFIG_LOADED audit record, anchor at the end.
+hub/control/flags.py:41:    ("hub.kill", "true only stops the hub; no approval is needed to stop it (FF-2 rule 6)"),
+hub/control/cli.py:11:Same guards as hub.admin (egress guard, runtime floor, hub.kill, CONFIG_LOADED audit, anchor at the end). No model call, no network.
+hub/search/cli.py:7:Same guards as hub.admin (egress guard, runtime floor, hub.kill, CONFIG_LOADED audit, anchor at the end). No model call, no network.
+hub/web/cli.py:10:Logs are JSON lines on stderr (stdout carries the result). Same guards as hub.admin: egress guard, runtime floor, hub.kill, anchor at the end.
+hub/decision/cli.py:13:hub.crosswalk.service); this CLI records no decision. Same guards as hub.admin: egress guard, runtime floor, hub.kill,
+hub/config.py:5:  hub.kill                       false     (kill switch; true refuses every command except selfcheck)
+hub/config.py:21:    "hub": {"kill": False},
+hub/config.py:42:    "data_origin": _FREE, "hub": {"kill": _FREE}, "runtime": {"floor": _FREE}, "capability_authority": _FREE, "approval_refs": _FREE,
+hub/config.py:90:    if not isinstance(cfg.get("hub", {}).get("kill"), bool):
+hub/config.py:91:        raise ConfigInvalid({"hub.kill": "must be boolean"})
+hub/runs/cli.py:16:egress guard, runtime floor, hub.kill, CONFIG_LOADED audit record, anchor at the end. No model call, no network beyond loopback.
+hub/cli.py:69:        if args.cmd != "selfcheck" and cfg["hub"]["kill"]:
+hub/core/errors.py:71:class HubKilled(HubError):  # INC-02 addendum (feature-flag-plan `hub.kill`)
+hub/core/errors.py:72:    code, exit_code, message = "E-HUB-KILLED", 3, "hub.kill is set; command refused"

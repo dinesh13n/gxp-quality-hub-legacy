@@ -1,0 +1,10 @@
+{
+ "code": "E-STORE-BACKUP-INVALID",
+ "details": {
+  "files": [
+   "hub.sqlite3"
+  ],
+  "reason": "checksum mismatch"
+ },
+ "message": "backup manifest missing or checksum mismatch"
+}

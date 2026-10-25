@@ -1,0 +1,106 @@
+{
+ "schema": "hub-release-results/v1",
+ "note": "Results are pass / fail / not_run on evidence only. A pass is not an approval; every human approval is a separate OPEN record in approvals-register.json.",
+ "results": {
+  "G1": {
+   "result": "fail",
+   "evidence_path": "docs/30-release/evidence/s30-log-06-golden-compare.txt",
+   "note": "golden-compare exit 6: every entry UNAPPROVED because DV-01..DV-11 are proposed (OD-S12-13 open); cannot pass before Dinesh decides"
+  },
+  "G2": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-regression-groups.txt",
+   "note": "group I6 43/43 (TST_INT, replay safety)"
+  },
+  "G3": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-log-04-verify-audit.txt",
+   "note": "verify-audit ok on the sandbox store; also ok after refusal, authority flip, L3, restore (logs 10, 16, 19, 22, 25)"
+  },
+  "G4": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-regression-groups.txt",
+   "note": "group I45 91/91 (projection tests); no stand-alone verify-projection on a production store (none exists)"
+  },
+  "G5": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-regression-groups.txt",
+   "note": "tripwires zero in the groups run; hub.admin release-checklist evaluates G5 (log 09b)"
+  },
+  "G6": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-log-09b-release-checklist-no-mark.txt",
+   "note": "scan evaluated by hub.admin release-checklist"
+  },
+  "G7": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-log-09b-release-checklist-no-mark.txt",
+   "note": "backup/restore rehearsal evaluated by hub.admin; also logs 07, 08, 21, 22"
+  },
+  "G8": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-regression-groups.txt",
+   "note": "group I8a 35/35 (TST_GATE, TST_REV)"
+  },
+  "G9": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-regression-groups.txt",
+   "note": "group I6 (planted-string and untrusted-source tests)"
+  },
+  "G10": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-regression-groups.txt",
+   "note": "TST_CO_13 inside group B (41 of 42 executed ok-or-skipped; the 1 failure is TST_CO_05_c, S30-DEV-03)"
+  },
+  "T-01": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-rehearsal-summary.txt",
+   "note": "manifest rc 0 before and after the rehearsal; rc 0 before and after every group"
+  },
+  "T-02": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-log-31-l1-tree-restored.txt",
+   "note": "revert of the Stage 31 squash commit in a clone gives exactly the pre-Stage-31 hub/ and tests/hub (log 28); revert-of-revert restores main (log 31)"
+  },
+  "T-03": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-log-22-verify-audit-after-restore.txt",
+   "note": "backup, restore, corrupt-backup refusal exit 21 (log 24)"
+  },
+  "T-04": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-audit-config-changed.txt",
+   "note": "flip refused without reference (exit 2); held with a sandbox marker; flip-to-shadow; two CONFIG_CHANGED records; chain ok"
+  },
+  "T-05": {
+   "result": "not_run",
+   "evidence_path": "docs/30-release/evidence/s30-regression-groups.txt",
+   "note": "11 of 31 groups run here; the full regression at the final HEAD is the orchestrator's (OD-23)"
+  },
+  "T-06": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-characterization.txt",
+   "note": "only CT-13 fails (Node patch drift, S24-DEV-04, registered)"
+  },
+  "T-07": {
+   "result": "pass",
+   "evidence_path": "docs/30-release/evidence/s30-log-23-posture-after-restore.txt",
+   "note": "hub.release posture clean on shipped defaults; hub-hardening workflow not installed (only the legacy verify.yml exists); no config sets an authority switch"
+  },
+  "T-08": {
+   "result": "pass",
+   "evidence_path": "tests/hub/test_tst_hub_stg30_f2901.py",
+   "note": "F01..F03 green; exit 17 and no traceback"
+  },
+  "T-09": {
+   "result": "fail",
+   "evidence_path": "docs/31-observability/alert-catalog.md",
+   "note": "no persisted metrics, no alert delivery, no on-call (F-29-03, D-31-01, D-31-08)"
+  },
+  "T-10": {
+   "result": "fail",
+   "evidence_path": "docs/27-hardening/vulnerability-disposition.md",
+   "note": "VR-02, VR-03, VR-04 High items have no accepted disposition; F-11 and risk registers open"
+  }
+ }
+}
