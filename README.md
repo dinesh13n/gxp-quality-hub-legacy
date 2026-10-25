@@ -64,13 +64,27 @@ A read-only graph projection of the legacy estate for browsing relationships. It
 - **Enterprise graph** (`data/enterprise_legacy.sqlite3`): 12,500 OperationalObject nodes, 96 Organization nodes, 4,166 `RELATES_TO` links and `BELONGS_TO`. Skip it with `--no-enterprise`.
 - Free text (case notes, payloads) is not projected. The source databases are opened read-only. Each load drops and rebuilds the graph.
 
-Requires Docker Desktop and Python 3.10+:
+Requires Docker Desktop (running) and Python 3.10+. Run each line on its own, from the repository root.
+
+Windows Command Prompt or PowerShell:
+
+```bat
+docker compose --profile graph up -d falkordb
+py -3.12 -m venv .venv-graph
+.venv-graph\Scripts\python -m pip install -r graph\requirements.txt
+.venv-graph\Scripts\python -m graph.load_falkordb
+```
+
+Git Bash, Linux or macOS (on Linux/macOS use `python3 -m venv` and `.venv-graph/bin/python`):
 
 ```bash
-docker compose --profile graph up -d falkordb      # FalkorDB v4.22.0 on 127.0.0.1:6379, browser on 127.0.0.1:3000
-py -3.12 -m venv .venv-graph && .venv-graph/Scripts/python -m pip install -r graph/requirements.txt
-.venv-graph/Scripts/python -m graph.load_falkordb  # add --dry-run to print counts without connecting
+docker compose --profile graph up -d falkordb
+py -3.12 -m venv .venv-graph
+.venv-graph/Scripts/python -m pip install -r graph/requirements.txt
+.venv-graph/Scripts/python -m graph.load_falkordb
 ```
+
+FalkorDB v4.22.0 listens on `127.0.0.1:6379`, with the browser on `127.0.0.1:3000`. Add `--dry-run` to the loader to print counts without connecting.
 
 Open `http://localhost:3000`, connect to `localhost:6379` and select the graph `gxp_quality`. Then paste a query from `graph/queries.cypher`. Both ports are bound to loopback because no password is configured.
 
