@@ -10,6 +10,7 @@ from the in-process metrics counters). Every response carries X-Correlation-Id (
 """
 import os
 import re
+import sqlite3
 
 from hub import web as hubweb
 from hub.core.errors import HubError
@@ -21,9 +22,9 @@ from hub.security.auth import LocalAuthenticator
 from hub.security.canonical import parse, sha256_hex
 from hub.security.errors import AuthForbidden, AuthSessionExpired, AuthUnauthenticated
 from hub.store import db
-from hub.web import csrf, schema as web_schema, wire
+from hub.web import csrf, ratelimit, schema as web_schema, wire
 from hub.web.authz import CHOKE_OPS, WebAuthorizer
-from hub.web.errors import Csrf, ReqInvalid, ReqTooLarge
+from hub.web.errors import Csrf, RateLimited, ReqInvalid, ReqTooLarge, StoreUnavailable
 from hub.web.obs_http import HttpMetrics
 from hub.web.routes import Table
 from hub.web.tokens import CompositeAuthenticator
@@ -34,6 +35,15 @@ _CID = re.compile(r"^[A-Za-z0-9._:-]{8,64}$")
 _COOKIE_TOKEN = re.compile(r"^[A-Za-z0-9_]{16,200}$")
 SECURITY_HEADERS = (("X-Content-Type-Options", "nosniff"), ("Content-Security-Policy", "default-src 'self'"), ("Cache-Control", "no-store"),
                     ("Referrer-Policy", "no-referrer"), ("X-Frame-Options", "DENY"))
+
+
+REJECT_CODES = ("E-AUTH-UNAUTHENTICATED", "E-AUTH-BAD-CREDENTIALS", "E-AUTH-FORBIDDEN")  # what the limiter counts (403 only for an unregistered route)
+
+
+def _is_store_fault(exc):
+    """True for a failure of the SQLite file itself (cannot open, read-only, corrupt, disk full); a constraint / programming error stays a 500."""
+    return isinstance(exc, (sqlite3.OperationalError, sqlite3.DatabaseError)) and not isinstance(
+        exc, (sqlite3.IntegrityError, sqlite3.ProgrammingError, sqlite3.DataError, sqlite3.NotSupportedError, sqlite3.InterfaceError))
 
 
 class Request(object):
@@ -85,6 +95,7 @@ class WebApp(object):
         self.last_exception = None
         self.table = Table()
         self.metrics = HttpMetrics()
+        self.limiter = ratelimit.RejectLimiter(ratelimit.resolve(cfg))  # Stage 27 (RS-04)
         self.config_hash = sec_settings.config_hash(cfg)
         self.log = Logger(clock, log_sink, hubweb.CODE_VERSION, self.config_hash[:16])
         from hub.review.search import SearchService
@@ -148,13 +159,24 @@ class WebApp(object):
         t0 = parse(self.clock()).timestamp()
         info = {"op_id": "UNROUTED", "actor": None, "actor_kind": None}
         con = None
+        wait = self.limiter.blocked(req.peer, t0)
+        rejected = False
         try:
+            if wait:
+                self.metrics.auth_failure("rate_limited")
+                raise RateLimited({"retry_after_seconds": wait})  # before the store is opened and without an audit row (RS-04)
             con = self._connect()
             resp = self._dispatch(con, req, cid, info)
         except HubError as e:
             resp = self._error(e, cid)
+            rejected = e.code in REJECT_CODES and (e.code != "E-AUTH-FORBIDDEN" or info["op_id"] == "UNROUTED")
+            if wait:
+                resp.headers.append(("Retry-After", str(wait)))
             if info.get("kind") == "ui" and e.code in ("E-AUTH-UNAUTHENTICATED", "E-AUTH-SESSION-EXPIRED"):
                 resp = Response(303, b"", "text/plain", [("Location", "/ui/login")])
+        except sqlite3.Error as exc:  # Stage 27 S26-F-07: a store fault is its own, content-free 503 (also for /healthz), not the generic 500
+            self.last_exception = exc  # diagnostic hook for tests; never serialised
+            resp = self._error(StoreUnavailable() if _is_store_fault(exc) else HubError(), cid)
         except Exception as exc:  # noqa: BLE001 - fail closed: generic 500, no detail on the wire
             self.last_exception = exc  # diagnostic hook for tests; never serialised
             resp = self._error(HubError(), cid)
@@ -162,6 +184,8 @@ class WebApp(object):
         finally:
             if con is not None:
                 con.close()
+        if rejected:
+            self.limiter.record(req.peer, t0)
         ms = (parse(self.clock()).timestamp() - t0) * 1000.0
         code = None
         if resp.status >= 400:
@@ -185,6 +209,48 @@ class WebApp(object):
                      correlation_id=cid, object_ref=op, reason=reason,
                      details={"method": req.method, "reason": reason, "path_sha256": sha256_hex(req.path)[:16]})
 
+    @staticmethod
+    def _read_body(req, route, kind):
+        """Step 1 of ER-1: the request body, parsed (JSON for the API, urlencoded for the pages); None for a body-less POST of OP-SEC-02 / OP-SEC-04."""
+        if req.method != "POST":
+            return None
+        ctype = req.headers.get("content-type", "").split(";")[0].strip().lower()
+        optional = route["op_id"] in ("OP-SEC-02", "OP-SEC-04")
+        if kind == "ui" and route["op_id"] != "UI-STATIC":
+            body = wire.parse_form(req.body) if ctype in ("application/x-www-form-urlencoded", "") else None
+            if body is None:
+                raise ReqInvalid({"pointer": "", "reason": "form posts use application/x-www-form-urlencoded"})
+            return body
+        if ctype == "application/json":
+            return wire.parse_json(req.body) if (req.body or not optional) else None
+        if req.body or not optional:
+            raise ReqInvalid({"pointer": "", "reason": "Content-Type must be application/json"})
+        return None
+
+    def _session(self, con, cid, req, route, token):
+        """Step 2 of ER-1: the authenticated session, or None for a public route / the Zone H choke point without a usable token (the choke point then
+        refuses with 401 itself, Stage 27 S26-F-01)."""
+        if "public" in route["roles"]:
+            return None
+        choke = route["op_id"] in CHOKE_OPS
+        if not token or token == "invalid":
+            self.metrics.auth_failure("unauthenticated")
+            if not choke:
+                self._deny(con, cid, "anonymous", "system", "unauthenticated", route["op_id"], req)
+                raise AuthUnauthenticated()
+            return None
+        try:
+            return CompositeAuthenticator(LocalAuthenticator(con, self.s, self.clock, self.anchor), con, self.clock).authenticate(token, cid, touch=False)
+        except AuthSessionExpired:
+            self.metrics.auth_failure("session_expired")
+            raise
+        except AuthUnauthenticated:
+            self.metrics.auth_failure("unauthenticated")
+            if not choke:
+                self._deny(con, cid, "anonymous", "system", "unauthenticated", route["op_id"], req)
+                raise
+            return None
+
     def _dispatch(self, con, req, cid, info):
         if len(req.body) > self.body_limit:
             raise ReqTooLarge({"limit_bytes": self.body_limit})
@@ -194,47 +260,17 @@ class WebApp(object):
             self._deny(con, cid, "anonymous", "system", "route_not_registered", "route", req)
             raise AuthForbidden({"reason": "route not registered (deny by default)"})
         info["op_id"], info["kind"] = route["op_id"], kind
-        body = None
-        if req.method == "POST":
-            ctype = req.headers.get("content-type", "").split(";")[0].strip().lower()
-            if kind == "ui" and route["op_id"] != "UI-STATIC":
-                body = wire.parse_form(req.body) if ctype in ("application/x-www-form-urlencoded", "") else None
-                if body is None:
-                    raise ReqInvalid({"pointer": "", "reason": "form posts use application/x-www-form-urlencoded"})
-            elif ctype == "application/json":
-                if req.body or route["op_id"] not in ("OP-SEC-02", "OP-SEC-04"):
-                    body = wire.parse_json(req.body)
-            elif req.body or route["op_id"] not in ("OP-SEC-02", "OP-SEC-04"):
-                raise ReqInvalid({"pointer": "", "reason": "Content-Type must be application/json"})
+        body = self._read_body(req, route, kind)
         token = self._token(req)
         public = "public" in route["roles"]
-        choke = route["op_id"] in CHOKE_OPS
-        sess = None
-        if not public:
-            if not token or token == "invalid":
-                self.metrics.auth_failure("unauthenticated")
-                if not choke:
-                    self._deny(con, cid, "anonymous", "system", "unauthenticated", route["op_id"], req)
-                    raise AuthUnauthenticated()
-            else:
-                try:
-                    sess = CompositeAuthenticator(LocalAuthenticator(con, self.s, self.clock, self.anchor), con, self.clock) \
-                        .authenticate(token, cid, touch=False)
-                except AuthSessionExpired:
-                    self.metrics.auth_failure("session_expired")
-                    raise
-                except AuthUnauthenticated:
-                    self.metrics.auth_failure("unauthenticated")
-                    if not choke:
-                        self._deny(con, cid, "anonymous", "system", "unauthenticated", route["op_id"], req)
-                        raise
+        sess = self._session(con, cid, req, route, token)
         if sess is not None:
             info["actor"], info["actor_kind"] = sess.principal.principal_id, sess.principal.actor_kind
-        if req.method not in ("GET", "HEAD") and sess is not None:
-            self._csrf(con, cid, req, route, kind, sess, body)
+            if req.method not in ("GET", "HEAD"):
+                self._csrf(con, cid, req, route, kind, sess, body)
         authn = CompositeAuthenticator(LocalAuthenticator(con, self.s, self.clock, self.anchor), con, self.clock)
         authz = WebAuthorizer(con, self.s, self.clock, authn, self.anchor, registry=self.table.api + self.table.ui)
-        if not public and (sess is not None or not choke):
+        if not public and (sess is not None or route["op_id"] not in CHOKE_OPS):
             try:
                 sess = authz.authorize(route["method"], route["path"], token, cid)
             except AuthForbidden:

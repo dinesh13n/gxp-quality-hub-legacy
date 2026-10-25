@@ -17,8 +17,9 @@ RETAINED, MUTABLE, DERIVED = "retained", "mutable", "derived"
 
 TABLES = {
     # M000 / M001 (hub.store)
-    "schema_migrations": (MUTABLE, "core migration ledger: no trigger (M000 predates the ledger triggers); drift is detected by sha256 comparison "
-                                   "(hub.store.migrate.check); residual risk RS-12, a trigger needs a new migration (Stage 27)"),
+    "schema_migrations": (RETAINED, "core migration ledger: insert-only since the Stage 27 hardening migration H001 (hub/store/hardening/); drift is also "
+                                    "detected by sha256 comparison (hub.store.migrate.check); closes RS-12 for this table"),
+    "hardening_schema_migrations": (RETAINED, "H001 ledger (hub/store/hardening.py)"),
     "coexistence_inventory": (RETAINED, "inventory of legacy items (M000), update and delete aborted"),
     "deviation_register": (RETAINED, "DV register (M000/M001), delete aborted; status may move forward by a recorded decision"),
     "audit_log": (RETAINED, "hash-chained audit trail"),

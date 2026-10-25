@@ -14,7 +14,7 @@ import threading
 from hub.obs import collect
 from hub.security.canonical import canonical
 
-REASONS = ("unauthenticated", "session_expired", "bad_credentials", "locked", "forbidden", "csrf", "unknown_route", "zone_h_denied")
+REASONS = ("unauthenticated", "session_expired", "bad_credentials", "locked", "forbidden", "csrf", "unknown_route", "zone_h_denied", "rate_limited")
 
 
 class HttpMetrics(object):

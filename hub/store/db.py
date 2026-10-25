@@ -43,6 +43,8 @@ def open_hub(data_dir, clock=_utc_now):
             con.executescript(sql)
             con.execute("INSERT INTO schema_migrations(version, sha256, applied_at) VALUES (?,?,?)",
                         (version, digest, clock()))
+    from hub.store import hardening  # Stage 27 H001: insert-only triggers on schema_migrations
+    hardening.apply(con, clock)
     from hub.coexistence import register
     register.seed(con)
     return con

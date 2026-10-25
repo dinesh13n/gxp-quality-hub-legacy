@@ -3,10 +3,11 @@ import decimal
 import json
 import urllib.parse as _up
 
+from hub.core.unitext import has_lone_surrogate
 from hub.web.errors import ReqInvalid
 
 RETRYABLE = frozenset(["E-DEC-SEQ-CONFLICT", "E-GATE-PACK-STALE", "E-GATE-REAUTH-REQUIRED", "E-AUTH-LOCKED", "E-RUN-ALREADY-RUNNING",
-                       "E-STORE-DB-BUSY"])
+                       "E-STORE-DB-BUSY", "E-REQ-RATE-LIMITED", "E-STORE-UNAVAILABLE"])
 
 
 def _default(o):
@@ -43,6 +44,8 @@ def parse_json(body):
         raise ReqInvalid({"pointer": "", "reason": "body is not valid UTF-8 JSON"})
     if not isinstance(doc, dict):
         raise ReqInvalid({"pointer": "", "reason": "the body must be a JSON object"})
+    if has_lone_surrogate(doc):  # Stage 27 S26-F-03: json.loads accepts \\ud800, SQLite can not store it (was HTTP 500)
+        raise ReqInvalid({"pointer": "", "reason": "a string holds a lone UTF-16 surrogate (not valid Unicode text)"})
     return doc
 
 

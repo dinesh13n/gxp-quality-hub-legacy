@@ -14,3 +14,15 @@ class Csrf(HubError):
 
 class NotImplementedYet(HubError):  # INC-08 addendum: an R2 operation whose backing component is built in a later increment
     code, exit_code, http, message = "E-REQ-NOT-IMPLEMENTED", 31, 501, "operation not available in this release"
+
+
+class RateLimited(HubError):  # Stage 27 addendum (RS-04): too many refused requests from one peer in the window
+    code, exit_code, http, message = "E-REQ-RATE-LIMITED", 31, 429, "too many refused requests from this peer; try again later"
+
+
+class StoreUnavailable(HubError):  # Stage 27 addendum (S26-F-07): the store file can not be opened / read / written
+    code, exit_code, http, message = "E-STORE-UNAVAILABLE", 31, 503, "the hub store is unavailable"
+
+
+class ReqTimeout(HubError):  # Stage 27 addendum (S26-F-06): the client did not deliver the declared body before the read timeout
+    code, exit_code, http, message = "E-REQ-TIMEOUT", 31, 408, "the request was not received in time"
