@@ -1,0 +1,86 @@
+{
+ "flags": [
+  {
+   "approval": "OD-S12-05 + HAR-12",
+   "approval_ref_present": false,
+   "default": "none",
+   "flag": "disposition.mode",
+   "value": "none"
+  },
+  {
+   "approval": "OD-S12-03",
+   "approval_ref_present": false,
+   "default": "treat_label_CLOSED_as_closing",
+   "flag": "closure.unconfigured_behaviour",
+   "value": "treat_label_CLOSED_as_closing"
+  },
+  {
+   "approval": "OD-S12-16",
+   "approval_ref_present": false,
+   "default": "structural",
+   "flag": "workflow.transition_table",
+   "value": "structural"
+  },
+  {
+   "approval": "OD-S12-15",
+   "approval_ref_present": false,
+   "default": "human_only",
+   "flag": "facts.derivation",
+   "value": "human_only"
+  },
+  {
+   "approval": "OD-S12-19",
+   "approval_ref_present": false,
+   "default": false,
+   "flag": "case_creation.enabled",
+   "value": false
+  },
+  {
+   "approval": "OD-S12-14",
+   "approval_ref_present": false,
+   "default": false,
+   "flag": "search.enabled",
+   "value": false
+  },
+  {
+   "approval": "OD-S12-12 / OD-S12-14",
+   "approval_ref_present": false,
+   "default": "off",
+   "flag": "search.fts",
+   "value": "off"
+  },
+  {
+   "approval": "PCH-22",
+   "approval_ref_present": false,
+   "default": false,
+   "flag": "templates.enabled",
+   "value": false
+  },
+  {
+   "approval": "OD-S12-06 + HAR-11",
+   "approval_ref_present": false,
+   "default": [],
+   "flag": "zone_h.holders",
+   "value": []
+  }
+ ],
+ "non_default": [],
+ "other_controls": [
+  {
+   "control": "hub.security.exposure.check_startup: approval + exposure_approval_ref + TLS, and hub.web.server refuses non-loopback anyway",
+   "flag": "network.exposure_approved"
+  },
+  {
+   "control": "refused in config by hub.runs.settings; the flag is a policy event written by a Zone H holder (ZH-09)",
+   "flag": "schedule.enabled"
+  },
+  {
+   "control": "only 'synthetic' is accepted before HAR-15 (hub.config.validate)",
+   "flag": "data_origin"
+  },
+  {
+   "control": "true only stops the hub; no approval is needed to stop it (FF-2 rule 6)",
+   "flag": "hub.kill"
+  }
+ ]
+}

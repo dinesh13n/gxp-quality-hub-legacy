@@ -1,0 +1,65 @@
+{
+ "schema": "hub-release-results/v1",
+ "results": {
+  "G1": {
+   "result": "not_run"
+  },
+  "G2": {
+   "result": "not_run"
+  },
+  "G3": {
+   "result": "not_run"
+  },
+  "G4": {
+   "result": "not_run"
+  },
+  "G5": {
+   "result": "not_run"
+  },
+  "G6": {
+   "result": "not_run"
+  },
+  "G7": {
+   "result": "not_run"
+  },
+  "G8": {
+   "result": "not_run"
+  },
+  "G9": {
+   "result": "not_run"
+  },
+  "G10": {
+   "result": "not_run"
+  },
+  "T-01": {
+   "result": "not_run"
+  },
+  "T-02": {
+   "result": "not_run"
+  },
+  "T-03": {
+   "result": "not_run"
+  },
+  "T-04": {
+   "result": "not_run"
+  },
+  "T-05": {
+   "result": "not_run"
+  },
+  "T-06": {
+   "result": "not_run"
+  },
+  "T-07": {
+   "result": "not_run"
+  },
+  "T-08": {
+   "result": "not_run"
+  },
+  "T-09": {
+   "result": "not_run"
+  },
+  "T-10": {
+   "result": "not_run"
+  }
+ }
+}
