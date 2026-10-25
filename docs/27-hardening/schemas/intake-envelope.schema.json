@@ -1,0 +1,62 @@
+{
+ "$id": "urn:gxp-hub:schema:intake-envelope:v0.1",
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09, the 17th contract schema): request body of OP-INT-01 (POST /api/v2/intake/items, role integration); derived from hub/web/api.py op_OP_INT_01 and its _ENV table. Structure only: the vocabulary of record_kind, the timestamp format and schema_rev support are decided by the intake rules (hub.intake.validate), not here. Synthetic, unvalidated.",
+ "properties": {
+  "envelope": {
+   "additionalProperties": false,
+   "description": "hub.web.api._ENV: six required strings and an optional schema_rev; unknown fields are refused with E-REQ-INVALID",
+   "properties": {
+    "partner": {
+     "type": "string"
+    },
+    "payload_text": {
+     "type": "string"
+    },
+    "record_kind": {
+     "type": "string"
+    },
+    "ref_id": {
+     "type": "string"
+    },
+    "schema_rev": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "source_key": {
+     "type": "string"
+    },
+    "source_ts": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "source_key",
+    "partner",
+    "source_ts",
+    "ref_id",
+    "record_kind",
+    "payload_text"
+   ],
+   "type": "object"
+  },
+  "idempotency_key": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "source": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "source",
+  "envelope"
+ ],
+ "title": "intake-envelope",
+ "type": "object"
+}

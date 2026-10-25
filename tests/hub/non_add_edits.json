@@ -112,6 +112,12 @@
    "reason": "Served accepts an optional read_timeout (default unchanged)"
   },
   {
+   "path": "tests/hub/regression_groups.json",
+   "work_item": "S27 groups",
+   "deviation": "S27-DEV-13",
+   "reason": "adds regression groups S27 (STG27) and E27 (E27EGRESS); no existing group changed"
+  },
+  {
    "path": "tests/hub/test_inc03_supplementary.py",
    "work_item": "DQ-S24-09 / RS-12",
    "deviation": "S27-DEV-08",

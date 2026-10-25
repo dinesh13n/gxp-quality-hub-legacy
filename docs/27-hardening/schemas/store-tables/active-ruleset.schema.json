@@ -1,0 +1,27 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "activated_event": {
+   "type": "string"
+  },
+  "function": {
+   "type": "string"
+  },
+  "ruleset_id": {
+   "type": "string"
+  },
+  "version": {
+   "type": "integer"
+  }
+ },
+ "required": [
+  "activated_event",
+  "function",
+  "ruleset_id",
+  "version"
+ ],
+ "title": "hub store table active_ruleset",
+ "type": "object"
+}

@@ -24,6 +24,8 @@
   {"id": "S24", "selectors": ["STG24"]},
   {"id": "E24", "selectors": ["E24EGRESS"]},
   {"id": "S26", "selectors": ["STG26"]},
-  {"id": "E26", "selectors": ["E26EGRESS"]}
+  {"id": "E26", "selectors": ["E26EGRESS"]},
+  {"id": "S27", "selectors": ["STG27"]},
+  {"id": "E27", "selectors": ["E27EGRESS"]}
  ]
 }

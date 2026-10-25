@@ -1,0 +1,27 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "description": {
+   "type": "string"
+  },
+  "item_id": {
+   "type": "string"
+  },
+  "owner": {
+   "type": "string"
+  },
+  "status": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "description",
+  "item_id",
+  "owner",
+  "status"
+ ],
+ "title": "hub store table coexistence_inventory",
+ "type": "object"
+}

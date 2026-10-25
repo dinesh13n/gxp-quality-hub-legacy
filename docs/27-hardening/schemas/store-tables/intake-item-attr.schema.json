@@ -1,0 +1,67 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "amount_text": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "notes": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "notes_trust": {
+   "type": "string"
+  },
+  "raw_id": {
+   "type": "string"
+  },
+  "record_kind": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "ref_id": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "source_quality_flag": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "source_state": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "source_subtype": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "source_ts": {
+   "type": [
+    "string",
+    "null"
+   ]
+  }
+ },
+ "required": [
+  "notes_trust",
+  "raw_id"
+ ],
+ "title": "hub store table intake_item_attr",
+ "type": "object"
+}

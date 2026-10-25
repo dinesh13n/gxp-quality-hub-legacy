@@ -1,0 +1,67 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "actor": {
+   "type": "string"
+  },
+  "authority_ref": {
+   "type": "string"
+  },
+  "event_id": {
+   "type": "string"
+  },
+  "event_type": {
+   "enum": [
+    "POLICY_VERSION_CREATED",
+    "POLICY_ADOPTED",
+    "POLICY_ACCEPTED_OPEN",
+    "POLICY_WITHDRAWN",
+    "RULE_ROW_CHANGED",
+    "RULESET_ACTIVATED",
+    "RULESET_DEACTIVATED",
+    "EXCEPTION_RULE_ACCEPTED",
+    "CLOSURE_ACTIVATED",
+    "DISPOSITION_MODE_CHANGED",
+    "SCHEDULE_CHANGED",
+    "CONTRACT_BINDING_CHANGED"
+   ],
+   "type": "string"
+  },
+  "holder_check_ref": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "new_value": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "occurred_at": {
+   "type": "string"
+  },
+  "old_value": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "policy_ref": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "actor",
+  "authority_ref",
+  "event_id",
+  "event_type",
+  "occurred_at",
+  "policy_ref"
+ ],
+ "title": "hub store table policy_events",
+ "type": "object"
+}

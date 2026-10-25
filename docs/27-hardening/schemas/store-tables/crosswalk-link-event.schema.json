@@ -1,0 +1,42 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "actor": {
+   "type": "string"
+  },
+  "event_id": {
+   "type": "string"
+  },
+  "event_type": {
+   "enum": [
+    "LINK_CREATED_RULE",
+    "LINK_CREATED_HUMAN",
+    "LINK_RETRACTED"
+   ],
+   "type": "string"
+  },
+  "link_id": {
+   "type": "string"
+  },
+  "occurred_at": {
+   "type": "string"
+  },
+  "reason": {
+   "type": [
+    "string",
+    "null"
+   ]
+  }
+ },
+ "required": [
+  "actor",
+  "event_id",
+  "event_type",
+  "link_id",
+  "occurred_at"
+ ],
+ "title": "hub store table crosswalk_link_event",
+ "type": "object"
+}

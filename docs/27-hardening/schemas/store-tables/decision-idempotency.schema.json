@@ -1,0 +1,27 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "body_hash": {
+   "type": "string"
+  },
+  "created_at": {
+   "type": "string"
+  },
+  "event_id": {
+   "type": "string"
+  },
+  "idem_key": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "body_hash",
+  "created_at",
+  "event_id",
+  "idem_key"
+ ],
+ "title": "hub store table decision_idempotency",
+ "type": "object"
+}
