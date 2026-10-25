@@ -26,6 +26,12 @@
    "work_item": "F-29-01 (same defect, second shape)",
    "deviation": "S30-DEV-01",
    "reason": "verify(): an anchor line that is valid JSON but not an object raised TypeError and escaped the anchor_unreadable branch; TypeError and AttributeError are now caught with ValueError and KeyError"
+  },
+  {
+   "path": "tests/hub/test_tst_hub_stg31_static_docs.py",
+   "work_item": "OD-27 DW-05 (list reset by Stage 30)",
+   "deviation": "S30-DEV-04",
+   "reason": "D01 pinned the non-add list to the Stage 31 one; after the per-stage reset it accepts stage 30 or 31 (the Stage 30 list is pinned by STG30_D01)"
   }
  ]
 }

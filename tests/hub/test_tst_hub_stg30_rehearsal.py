@@ -154,7 +154,7 @@ class TST_HUB_STG30_Rehearsal(unittest.TestCase):
         git("merge", "-q", "--no-ff", "-m", "merge feature", "feature")
         merged = git("rev-parse", "HEAD")
         self.assertNotEqual(git("rev-parse", "HEAD^{tree}"), base_tree)
-        git("revert", "-q", "--no-edit", "-m", "1", merged)
+        git("revert", "--no-edit", "-m", "1", merged)
         self.assertEqual(git("rev-parse", "HEAD^{tree}"), base_tree)
         self.assertEqual(git("rev-list", "--count", "HEAD"), "4")  # base, feature work, merge, revert: history only grows
         self.assertEqual(git("merge-base", "--is-ancestor", merged, "HEAD") or "", "")

@@ -25,7 +25,8 @@ ARTIFACTS = ("release-plan", "environment-promotion-plan", "deployment-strategy"
              "backup-validation", "release-approvals", "deployment-evidence", "release-outcome")
 SECTIONS = ("## Summary", "## Findings", "## Evidence References", "## Assumptions", "## Unknowns", "## Unresolved Issues", "## Residual Risks", "## Change History")
 FORBIDDEN = ("time", "datetime", "random", "secrets", "socket", "subprocess", "urllib", "http")
-EXPECTED_EDITS = ["hub/admin/cli.py", "hub/security/audit.py", "tests/hub/non_add_edits.json", "tests/hub/regression_groups.json"]
+EXPECTED_EDITS = ["hub/admin/cli.py", "hub/security/audit.py", "tests/hub/non_add_edits.json", "tests/hub/regression_groups.json",
+                  "tests/hub/test_tst_hub_stg31_static_docs.py"]
 
 
 def setUpModule():
