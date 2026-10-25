@@ -5,7 +5,7 @@
   D02  the 11 required artifacts exist with the front matter and the eight sections, a status that is not APPROVED, and the synthetic label
   D03  docs agree with the register: every approval id is in release-approvals.md, every criterion id in go-no-go-criteria.md, every carried decision
        (D-27-nn, D-28-nn, D-31-nn) is listed, and the outcome document says the release was not executed
-  D04  shipped state: no .github directory, no config file sets an authority switch, the shipped posture is clean, zone_h.holders is empty, no real holder is named
+  D04  shipped state: the hub-hardening workflow is not installed under .github, no config file sets an authority switch, the shipped posture is clean, zone_h.holders is empty, no real holder is named
   D05  the evidence folder's SHA256SUMS verifies and covers every file in it
 """
 import ast
@@ -100,7 +100,7 @@ class TST_HUB_STG30_Static(unittest.TestCase):
             self.assertIn(c, crit, c)
         out = read("docs/30-release/release-outcome.md")
         self.assertIn("NOT RELEASED", out)
-        self.assertIn("cutover was not executed", out.replace("\n", " "))
+        self.assertIn("cutover were not executed", out.replace("\n", " "))
         for a in ARTIFACTS:
             text = read("docs/30-release/%s.md" % a)
             self.assertNotRegex(text, r"(?i)approved by dinesh", a)
@@ -109,8 +109,8 @@ class TST_HUB_STG30_Static(unittest.TestCase):
             self.assertIn(lvl, rb)
 
     def test_TST_HUB_STG30_D04_shipped_state_is_unchanged_and_safe(self):
-        """D04: no .github directory; no repo config file sets an authority switch; shipped defaults pass the posture check; Zone H holders empty; no holder named."""
-        self.assertFalse(os.path.exists(os.path.join(S.CODE_ROOT, ".github")))
+        """D04: the hub-hardening workflow is not installed under .github; no repo config file sets an authority switch; shipped defaults pass the posture check; Zone H holders empty; no holder named."""
+        self.assertFalse(os.path.exists(os.path.join(S.CODE_ROOT, ".github", "workflows", "hub-hardening.yml")))  # D-27-03 / HAR-07: not installed
         offenders = []
         for rel in ("domain.json", "domain-profile.json", "compose.yaml", "Dockerfile", "pyproject.toml", "run.sh"):
             p = os.path.join(S.CODE_ROOT, rel)

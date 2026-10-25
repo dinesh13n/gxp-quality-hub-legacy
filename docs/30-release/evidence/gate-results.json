@@ -85,7 +85,7 @@
   "T-07": {
    "result": "pass",
    "evidence_path": "docs/30-release/evidence/s30-log-23-posture-after-restore.txt",
-   "note": "hub.release posture clean on shipped defaults; no .github; no config sets an authority switch"
+   "note": "hub.release posture clean on shipped defaults; hub-hardening workflow not installed (only the legacy verify.yml exists); no config sets an authority switch"
   },
   "T-08": {
    "result": "pass",
