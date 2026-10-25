@@ -21,11 +21,17 @@ _LEDGER_DDL = ("CREATE TABLE IF NOT EXISTS hardening_schema_migrations(version T
                " BEGIN SELECT RAISE(ABORT,'E-SEC-RETAINED'); END;\n")
 
 
+_CACHE = {}
+
+
 def migration():
-    fn = [f for f in sorted(os.listdir(HARDENING_DIR)) if f.startswith(VERSION + "_") and f.endswith(".sql")][0]
-    with open(os.path.join(HARDENING_DIR, fn), "rb") as f:
-        body = f.read()
-    return hashlib.sha256(body).hexdigest(), body.decode("utf-8")
+    """(sha256, sql) of the H001 file, read once per process (open_hub runs for every web request; the file is part of the code and does not change at run time)."""
+    if "m" not in _CACHE:
+        fn = [f for f in sorted(os.listdir(HARDENING_DIR)) if f.startswith(VERSION + "_") and f.endswith(".sql")][0]
+        with open(os.path.join(HARDENING_DIR, fn), "rb") as f:
+            body = f.read()
+        _CACHE["m"] = (hashlib.sha256(body).hexdigest(), body.decode("utf-8"))
+    return _CACHE["m"]
 
 
 def applied(con):

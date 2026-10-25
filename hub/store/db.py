@@ -30,10 +30,12 @@ def open_hub(data_dir, clock=_utc_now):
     data_dir = sandbox.assert_safe_path(data_dir, "hub data directory")
     os.makedirs(data_dir, mode=0o700, exist_ok=True)  # Stage 27 S27-DEV-14: a newly created data directory is owner-only
     con = sqlite3.connect(os.path.join(data_dir, HUB_DB_NAME))
-    try:  # the store holds password hashes and session digests: owner read / write only (best effort: a file owned by someone else keeps its mode)
-        os.chmod(os.path.join(data_dir, HUB_DB_NAME), 0o600)
+    try:  # the store holds password hashes and session digests: drop the group / other bits, never ADD a bit (a deliberately read-only 0444 file stays read-only)
+        mode = os.stat(os.path.join(data_dir, HUB_DB_NAME)).st_mode & 0o777
+        if mode & 0o077:
+            os.chmod(os.path.join(data_dir, HUB_DB_NAME), mode & 0o700)
     except OSError:
-        pass
+        pass  # best effort: a file owned by someone else keeps its mode
     con.execute("PRAGMA foreign_keys = ON")
     con.execute("CREATE TABLE IF NOT EXISTS schema_migrations (version TEXT PRIMARY KEY, sha256 TEXT NOT NULL, applied_at TEXT NOT NULL)")
     applied = dict(con.execute("SELECT version, sha256 FROM schema_migrations"))

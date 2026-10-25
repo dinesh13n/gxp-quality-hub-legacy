@@ -106,7 +106,7 @@ class TST_HUB_STG27_Hardening(_Base):
 
     def test_TST_HUB_STG27_H04_store_files_are_owner_only(self):
         """H04 (S27-DEV-14): a data directory created by open_hub is 0700, the store file is 0600 even under a permissive umask and after a reopen of a file that was group / world
-        readable, and an audit anchor file created by write_anchor is 0600 (an existing anchor file keeps its mode)."""
+        readable (only group / other bits are removed: a read-only 0444 file becomes 0400, never writable), and an audit anchor file created by write_anchor is 0600 (an existing anchor file keeps its mode)."""
         from hub.security import audit
         old = os.umask(0)
         try:
@@ -120,6 +120,13 @@ class TST_HUB_STG27_Hardening(_Base):
             os.chmod(dbp, 0o666)
             db.open_hub(d).close()
             self.assertEqual(os.stat(dbp).st_mode & 0o777, 0o600)
+            os.chmod(dbp, 0o444)  # a deliberately read-only store is NOT made writable by the open (S26 C01); only the group / other bits go
+            try:
+                db.open_hub(d).close()
+            except sqlite3.DatabaseError:
+                pass
+            self.assertEqual(os.stat(dbp).st_mode & 0o777, 0o400)
+            os.chmod(dbp, 0o600)
             st = self.wstore(loaded=False)
             con = st.con
             audit.append(con, st.clock, actor="a", actor_kind="human", action="LOGIN", outcome="success", correlation_id="t-h04")
