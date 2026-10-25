@@ -49,3 +49,11 @@ Every stage agent MUST read this file and honour it.
 - Full hub regression (31 groups incl. S30/E30) green on rebased branch; CI green.
 - Dinesh-owned open items: DV-01..DV-11, CUT-1..CUT-5, release decision, G1..G10 acknowledgement, 13 operational decisions, D-27/D-28/D-31 carried decisions. Recorded by editing the approvals register; Stage 30 then re-issued as v0.2.
 - Next: Stages 38, 41, 42, 43 (documents; each depends on Stage 30 outcome and inherits BLOCKED release status).
+
+## OD-38 - Stages 38, 41, 42 merged (PRs #28, #30, #29) (2026-10-25)
+- Stage 38 Handover: BLOCKED (no receiving team, 0/10 operator exercises, acceptance sign-off blank; HO-01..HO-21 open, Dinesh-owned).
+- Stage 41 Retirement: BLOCKED (legal-hold check not completable by agent work, treated as hold-all; Stage 30 BLOCKED). Nothing retired; legacy stays authoritative. D-41-01..16 open.
+- Stage 42 Executive Defence: CONDITIONAL PASS for the defence documents; release BLOCKED inherited; value NOT COMPUTABLE. 14 decisions open.
+- Orchestrator ruling (default-answer authority, OD-32): later document stages run despite upstream BLOCKED so the project record is complete; every document states the inherited BLOCKED status. This accepts no risk and approves nothing.
+- Stages 39/40 merged before Stage 38 (HO-18): Dinesh to rule.
+- Next: Stage 43 FINAL as-built PRD (documents the shadow build as built and not released).
