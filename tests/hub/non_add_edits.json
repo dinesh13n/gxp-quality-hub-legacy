@@ -1,25 +1,31 @@
 {
  "schema": "hub-non-add-edits/v1",
- "stage": "31",
- "note": "Stage 31 (Observability and SLO/SLA Engineering, BUILD): reset per OD-27 (S31-DEV-02). The add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD or VALIDATE stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
+ "stage": "30",
+ "note": "Stage 30 (Release, Cutover and Rollback, BUILD): reset per OD-27 (S30-DEV-02). The add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD or VALIDATE stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
  "edits": [
   {
    "path": "tests/hub/non_add_edits.json",
    "work_item": "OD-27 DW-05 (each build stage resets this list)",
-   "deviation": "S31-DEV-02",
-   "reason": "list reset for Stage 31"
+   "deviation": "S30-DEV-02",
+   "reason": "list reset for Stage 30"
   },
   {
    "path": "tests/hub/regression_groups.json",
-   "work_item": "Stage 31 regression groups",
-   "deviation": "S31-DEV-02",
-   "reason": "two groups appended (S31 = STG31, E31 = E31EGRESS); no existing group changed"
+   "work_item": "Stage 30 regression groups",
+   "deviation": "S30-DEV-02",
+   "reason": "two groups appended (S30 = STG30, E30 = E30EGRESS); no existing group changed"
   },
   {
-   "path": "tests/hub/test_tst_hub_stg28_policy.py",
-   "work_item": "DW-31",
-   "deviation": "S31-DEV-08",
-   "reason": "P07 listed the only importers of hub.resilience; hub/obs/resilience_samples.py (Stage 31, read-only resilience telemetry, nothing wired) is a second importer, so the expected list gains it"
+   "path": "hub/admin/cli.py",
+   "work_item": "F-29-01 (Stage 29 defect routed to Stage 30; C-3)",
+   "deviation": "S30-DEV-01",
+   "reason": "_Run.close: for verify-audit only, an unreadable anchor file no longer aborts the end-of-run anchor write with a traceback (exit 1); the run ends with the tamper exit code 17 and the anchor file is not appended to; all other commands keep the old behaviour"
+  },
+  {
+   "path": "hub/security/audit.py",
+   "work_item": "F-29-01 (same defect, second shape)",
+   "deviation": "S30-DEV-01",
+   "reason": "verify(): an anchor line that is valid JSON but not an object raised TypeError and escaped the anchor_unreadable branch; TypeError and AttributeError are now caught with ValueError and KeyError"
   }
  ]
 }

@@ -178,7 +178,7 @@ def verify(con, anchor_path=None):
         prev, expected = stored, expected + 1
     try:
         anchors = read_anchors(anchor_path)
-    except (ValueError, KeyError) as e:
+    except (ValueError, KeyError, TypeError, AttributeError) as e:  # S30-DEV-01: a line that is valid JSON but not an object raised TypeError and escaped
         return broken(None, "anchor_unreadable", detail=str(e)[:200])
     for a in anchors:
         if by_seq.get(a["audit_seq"]) != a["hash"]:
