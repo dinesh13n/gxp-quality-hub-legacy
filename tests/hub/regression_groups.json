@@ -28,6 +28,8 @@
   {"id": "S27", "selectors": ["STG27"]},
   {"id": "E27", "selectors": ["E27EGRESS"]},
   {"id": "S28", "selectors": ["STG28"]},
-  {"id": "E28", "selectors": ["E28EGRESS"]}
+  {"id": "E28", "selectors": ["E28EGRESS"]},
+  {"id": "S31", "selectors": ["STG31"]},
+  {"id": "E31", "selectors": ["E31EGRESS"]}
  ]
 }
