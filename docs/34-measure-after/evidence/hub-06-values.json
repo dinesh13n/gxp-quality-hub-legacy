@@ -1,0 +1,410 @@
+{
+ "values": [
+  {
+   "basis": "event_derived",
+   "code_version": "0.2.0-inc02+inc07",
+   "computed_at": "2026-10-25T05:15:23.867456Z",
+   "data_origin": "synthetic",
+   "definition_tag": "C-EVID",
+   "denominator": "completed cycles (a start and a stop event of the clock exist in the cycle)",
+   "detail": {
+    "calendar_basis": "wall_clock",
+    "clock": "C-EVID",
+    "invalid_order": 0,
+    "median": null,
+    "method": {
+     "median": "arithmetic mean of the two middle values for even n",
+     "p90": "nearest rank: ceil(0.9 x n)-th smallest value"
+    },
+    "open_count": 125,
+    "p90": null,
+    "unit": "hours",
+    "verdict": "not_available_no_adopted_policy"
+   },
+   "errors": [],
+   "exclusions": "incomplete cycles (counted as open_count); never pooled with another clock",
+   "inputs_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-TTC-C-EVID",
+   "metric_version": 1,
+   "n": 0,
+   "null_reason": "no_completed_cycles",
+   "partial": false,
+   "policy_status": "candidate",
+   "policy_version": "C-EVID@1",
+   "value": null,
+   "value_id": "MV-00000001",
+   "window_end": "2026-10-25T05:15:23.867456Z",
+   "window_start": null
+  },
+  {
+   "basis": "event_derived",
+   "code_version": "0.2.0-inc02+inc07",
+   "computed_at": "2026-10-25T05:15:23.867456Z",
+   "data_origin": "synthetic",
+   "definition_tag": "C-OPS",
+   "denominator": "completed cycles (a start and a stop event of the clock exist in the cycle)",
+   "detail": {
+    "calendar_basis": "wall_clock",
+    "clock": "C-OPS",
+    "invalid_order": 0,
+    "median": null,
+    "method": {
+     "median": "arithmetic mean of the two middle values for even n",
+     "p90": "nearest rank: ceil(0.9 x n)-th smallest value"
+    },
+    "open_count": 125,
+    "p90": null,
+    "unit": "hours",
+    "verdict": "not_available_no_adopted_policy"
+   },
+   "errors": [],
+   "exclusions": "incomplete cycles (counted as open_count); never pooled with another clock",
+   "inputs_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-TTC-C-OPS",
+   "metric_version": 1,
+   "n": 0,
+   "null_reason": "no_completed_cycles",
+   "partial": false,
+   "policy_status": "candidate",
+   "policy_version": "C-OPS@1",
+   "value": null,
+   "value_id": "MV-00000002",
+   "window_end": "2026-10-25T05:15:23.867456Z",
+   "window_start": null
+  },
+  {
+   "basis": "event_derived",
+   "code_version": "0.2.0-inc02+inc07",
+   "computed_at": "2026-10-25T05:15:23.882051Z",
+   "data_origin": "synthetic",
+   "definition_tag": "D-OPS",
+   "denominator": "cases existing at as_of",
+   "detail": {
+    "age_buckets_days": [
+     "<=90",
+     "91-365",
+     "366-730",
+     ">730"
+    ],
+    "as_of": "2026-10-25T05:15:23.882012Z",
+    "by_site": {
+     "BR-SP": {
+      "backlog": 22,
+      "buckets": {
+       "366-730": 6,
+       "91-365": 1,
+       "<=90": 0,
+       ">730": 15
+      },
+      "cases": 25
+     },
+     "DE-BY": {
+      "backlog": 18,
+      "buckets": {
+       "366-730": 6,
+       "91-365": 2,
+       "<=90": 0,
+       ">730": 10
+      },
+      "cases": 30
+     },
+     "GB-ENG": {
+      "backlog": 14,
+      "buckets": {
+       "366-730": 8,
+       "91-365": 1,
+       "<=90": 0,
+       ">730": 5
+      },
+      "cases": 25
+     },
+     "IN-BLR": {
+      "backlog": 10,
+      "buckets": {
+       "366-730": 4,
+       "91-365": 0,
+       "<=90": 0,
+       ">730": 6
+      },
+      "cases": 13
+     },
+     "JP-KN": {
+      "backlog": 11,
+      "buckets": {
+       "366-730": 4,
+       "91-365": 1,
+       "<=90": 0,
+       ">730": 6
+      },
+      "cases": 16
+     },
+     "US-TX": {
+      "backlog": 14,
+      "buckets": {
+       "366-730": 1,
+       "91-365": 1,
+       "<=90": 0,
+       ">730": 12
+      },
+      "cases": 16
+     }
+    },
+    "cases_considered": 125,
+    "closing_states": [
+     "CLOSED"
+    ],
+    "closure_basis": "label",
+    "closure_policy": null
+   },
+   "errors": [],
+   "exclusions": "cases whose state is in the closing-state set; cases created after as_of",
+   "inputs_hash": "5ed1d39f08c8cd33ffdbadd746dd05f22e9158977adb5a995af54070fc2ca8f3",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-BACKLOG-D-OPS",
+   "metric_version": 1,
+   "n": 125,
+   "null_reason": null,
+   "partial": false,
+   "policy_status": "candidate",
+   "policy_version": "D-OPS@1",
+   "value": "89",
+   "value_id": "MV-00000003",
+   "window_end": "2026-10-25T05:15:23.882012Z",
+   "window_start": null
+  },
+  {
+   "basis": "event_derived",
+   "code_version": "0.2.0-inc02+inc07",
+   "computed_at": "2026-10-25T05:15:23.894958Z",
+   "data_origin": "synthetic",
+   "definition_tag": "D-OPS",
+   "denominator": "all items that ever sat in an exception queue",
+   "detail": {
+    "all": 0,
+    "by_site": {},
+    "formula": "open exception-queue items / all exception-queue items (A-12-F07-2)",
+    "open": 0
+   },
+   "errors": [],
+   "exclusions": "items that never entered an exception queue; unmatched items are reported under site 'unknown'",
+   "inputs_hash": "88353803f9b636494f66c60d65aa5c9989c16fa21442ecce91ea1354c4c45e79",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-UNRESOLVED-EXC-RATE-D-OPS",
+   "metric_version": 1,
+   "n": 0,
+   "null_reason": "no_exception_queue_items",
+   "partial": false,
+   "policy_status": "candidate",
+   "policy_version": "D-OPS@1",
+   "value": null,
+   "value_id": "MV-00000004",
+   "window_end": "2026-10-25T05:15:23.894958Z",
+   "window_start": null
+  },
+  {
+   "basis": "event_derived",
+   "code_version": "0.2.0-inc02+inc07",
+   "computed_at": "2026-10-25T05:15:24.030285Z",
+   "data_origin": "synthetic",
+   "definition_tag": "C-EVID",
+   "denominator": "completed cycles (a start and a stop event of the clock exist in the cycle)",
+   "detail": {
+    "calendar_basis": "wall_clock",
+    "clock": "C-EVID",
+    "invalid_order": 0,
+    "median": null,
+    "method": {
+     "median": "arithmetic mean of the two middle values for even n",
+     "p90": "nearest rank: ceil(0.9 x n)-th smallest value"
+    },
+    "open_count": 125,
+    "p90": null,
+    "unit": "hours",
+    "verdict": "not_available_no_adopted_policy"
+   },
+   "errors": [],
+   "exclusions": "incomplete cycles (counted as open_count); never pooled with another clock",
+   "inputs_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-TTC-C-EVID",
+   "metric_version": 1,
+   "n": 0,
+   "null_reason": "no_completed_cycles",
+   "partial": false,
+   "policy_status": "candidate",
+   "policy_version": "C-EVID@1",
+   "value": null,
+   "value_id": "MV-00000005",
+   "window_end": "2026-10-25T05:15:24.030285Z",
+   "window_start": null
+  },
+  {
+   "basis": "event_derived",
+   "code_version": "0.2.0-inc02+inc07",
+   "computed_at": "2026-10-25T05:15:24.030285Z",
+   "data_origin": "synthetic",
+   "definition_tag": "C-OPS",
+   "denominator": "completed cycles (a start and a stop event of the clock exist in the cycle)",
+   "detail": {
+    "calendar_basis": "wall_clock",
+    "clock": "C-OPS",
+    "invalid_order": 0,
+    "median": null,
+    "method": {
+     "median": "arithmetic mean of the two middle values for even n",
+     "p90": "nearest rank: ceil(0.9 x n)-th smallest value"
+    },
+    "open_count": 125,
+    "p90": null,
+    "unit": "hours",
+    "verdict": "not_available_no_adopted_policy"
+   },
+   "errors": [],
+   "exclusions": "incomplete cycles (counted as open_count); never pooled with another clock",
+   "inputs_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-TTC-C-OPS",
+   "metric_version": 1,
+   "n": 0,
+   "null_reason": "no_completed_cycles",
+   "partial": false,
+   "policy_status": "candidate",
+   "policy_version": "C-OPS@1",
+   "value": null,
+   "value_id": "MV-00000006",
+   "window_end": "2026-10-25T05:15:24.030285Z",
+   "window_start": null
+  },
+  {
+   "basis": "event_derived",
+   "code_version": "0.2.0-inc02+inc07",
+   "computed_at": "2026-10-25T05:15:24.042415Z",
+   "data_origin": "synthetic",
+   "definition_tag": "D-OPS",
+   "denominator": "cases existing at as_of",
+   "detail": {
+    "age_buckets_days": [
+     "<=90",
+     "91-365",
+     "366-730",
+     ">730"
+    ],
+    "as_of": "2026-10-25T05:15:24.042376Z",
+    "by_site": {
+     "BR-SP": {
+      "backlog": 22,
+      "buckets": {
+       "366-730": 6,
+       "91-365": 1,
+       "<=90": 0,
+       ">730": 15
+      },
+      "cases": 25
+     },
+     "DE-BY": {
+      "backlog": 18,
+      "buckets": {
+       "366-730": 6,
+       "91-365": 2,
+       "<=90": 0,
+       ">730": 10
+      },
+      "cases": 30
+     },
+     "GB-ENG": {
+      "backlog": 14,
+      "buckets": {
+       "366-730": 8,
+       "91-365": 1,
+       "<=90": 0,
+       ">730": 5
+      },
+      "cases": 25
+     },
+     "IN-BLR": {
+      "backlog": 10,
+      "buckets": {
+       "366-730": 4,
+       "91-365": 0,
+       "<=90": 0,
+       ">730": 6
+      },
+      "cases": 13
+     },
+     "JP-KN": {
+      "backlog": 11,
+      "buckets": {
+       "366-730": 4,
+       "91-365": 1,
+       "<=90": 0,
+       ">730": 6
+      },
+      "cases": 16
+     },
+     "US-TX": {
+      "backlog": 14,
+      "buckets": {
+       "366-730": 1,
+       "91-365": 1,
+       "<=90": 0,
+       ">730": 12
+      },
+      "cases": 16
+     }
+    },
+    "cases_considered": 125,
+    "closing_states": [
+     "CLOSED"
+    ],
+    "closure_basis": "label",
+    "closure_policy": null
+   },
+   "errors": [],
+   "exclusions": "cases whose state is in the closing-state set; cases created after as_of",
+   "inputs_hash": "5ed1d39f08c8cd33ffdbadd746dd05f22e9158977adb5a995af54070fc2ca8f3",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-BACKLOG-D-OPS",
+   "metric_version": 1,
+   "n": 125,
+   "null_reason": null,
+   "partial": false,
+   "policy_status": "candidate",
+   "policy_version": "D-OPS@1",
+   "value": "89",
+   "value_id": "MV-00000007",
+   "window_end": "2026-10-25T05:15:24.042376Z",
+   "window_start": null
+  },
+  {
+   "basis": "event_derived",
+   "code_version": "0.2.0-inc02+inc07",
+   "computed_at": "2026-10-25T05:15:24.053091Z",
+   "data_origin": "synthetic",
+   "definition_tag": "D-OPS",
+   "denominator": "all items that ever sat in an exception queue",
+   "detail": {
+    "all": 0,
+    "by_site": {},
+    "formula": "open exception-queue items / all exception-queue items (A-12-F07-2)",
+    "open": 0
+   },
+   "errors": [],
+   "exclusions": "items that never entered an exception queue; unmatched items are reported under site 'unknown'",
+   "inputs_hash": "88353803f9b636494f66c60d65aa5c9989c16fa21442ecce91ea1354c4c45e79",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-UNRESOLVED-EXC-RATE-D-OPS",
+   "metric_version": 1,
+   "n": 0,
+   "null_reason": "no_exception_queue_items",
+   "partial": false,
+   "policy_status": "candidate",
+   "policy_version": "D-OPS@1",
+   "value": null,
+   "value_id": "MV-00000008",
+   "window_end": "2026-10-25T05:15:24.053091Z",
+   "window_start": null
+  }
+ ]
+}

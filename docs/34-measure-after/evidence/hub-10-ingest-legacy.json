@@ -1,0 +1,146 @@
+{
+ "counts": {
+  "noop_duplicate": 67,
+  "outcomes": 8583,
+  "raw": 8583,
+  "runs": 3
+ },
+ "legacy_db_sha256": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+ "queue_snapshot": {
+  "ages_seconds": {
+   "flagged_value": {
+    "max": 1.7817740440368652,
+    "min": 1.7817740440368652,
+    "sum": 5.345322132110596
+   },
+   "quarantine_invalid": {
+    "max": 1.7817740440368652,
+    "min": 1.7817740440368652,
+    "sum": 397.33561182022095
+   },
+   "unmatched": {
+    "max": 1.7817740440368652,
+    "min": 1.7817740440368652,
+    "sum": 14448.40572309494
+   }
+  },
+  "queues": {
+   "flagged_value": 3,
+   "quarantine_invalid": 223,
+   "unmatched": 8109
+  },
+  "reasons": {
+   "NEGATIVE_VALUE": 161,
+   "NO_BUSINESS_KEY": 208,
+   "UNMATCHED_REF": 7903,
+   "UNSUPPORTED_REVISION": 223
+  },
+  "total_items": 8516,
+  "totals": {
+   "EXCEPTION": 8109,
+   "QUARANTINED": 223,
+   "VALIDATED": 181,
+   "VALIDATED_WITH_FLAGS": 3
+  }
+ },
+ "runs": {
+  "gateway": {
+   "binding": {
+    "contract_file": "source-contract-v1",
+    "mode": "record_only",
+    "origin": "default",
+    "source": "gateway"
+   },
+   "contract_check": {
+    "fail": 1
+   },
+   "first_raw_id": "RAW-0000008583",
+   "last_raw_id": "RAW-0000008583",
+   "linked": 0,
+   "noop_duplicate": 0,
+   "outcomes": {
+    "VALIDATED": 1
+   },
+   "outcomes_digest": "221e9a830f4c8b816544231d6f47ed6d2f2881775144865182ec164442f5b78b",
+   "queues": {},
+   "reasons": {},
+   "received": 1,
+   "revised_conflict": 0,
+   "run_id": "legacy-gateway-cli-23715a9ac43ad8d3",
+   "skipped_existing": 0,
+   "source": "gateway",
+   "status": "finished",
+   "stored": 1
+  },
+  "partner_feed": {
+   "binding": {
+    "contract_file": "source-contract-v1",
+    "mode": "record_only",
+    "origin": "default",
+    "source": "partner_feed"
+   },
+   "contract_check": {
+    "fail": 8567
+   },
+   "first_raw_id": "RAW-0000000001",
+   "last_raw_id": "RAW-0000008567",
+   "linked": 168,
+   "noop_duplicate": 67,
+   "outcomes": {
+    "EXCEPTION": 8109,
+    "NOOP_DUPLICATE": 67,
+    "QUARANTINED": 223,
+    "VALIDATED": 165,
+    "VALIDATED_WITH_FLAGS": 3
+   },
+   "outcomes_digest": "4a50d7151ced475024419ffe4e867e3da2fc1605f89e7c93f5a0c65604f0b98a",
+   "queues": {
+    "flagged_value": 3,
+    "quarantine_invalid": 223,
+    "unmatched": 8109
+   },
+   "reasons": {
+    "NEGATIVE_VALUE": 161,
+    "NO_BUSINESS_KEY": 208,
+    "UNMATCHED_REF": 7903,
+    "UNSUPPORTED_REVISION": 223
+   },
+   "received": 8567,
+   "revised_conflict": 0,
+   "run_id": "legacy-partner_feed-cli-23715a9ac43ad8d3",
+   "skipped_existing": 0,
+   "source": "partner_feed",
+   "status": "finished",
+   "stored": 8567
+  },
+  "source_message": {
+   "binding": {
+    "contract_file": "source-contract-v1",
+    "mode": "record_only",
+    "origin": "default",
+    "source": "source_message"
+   },
+   "contract_check": {
+    "pass": 15
+   },
+   "first_raw_id": "RAW-0000008568",
+   "last_raw_id": "RAW-0000008582",
+   "linked": 0,
+   "noop_duplicate": 0,
+   "outcomes": {
+    "VALIDATED": 15
+   },
+   "outcomes_digest": "1aa6d98762010efb17d4390033da23db9073212e38f8dc7675954d4347b2ad30",
+   "queues": {},
+   "reasons": {},
+   "received": 15,
+   "revised_conflict": 0,
+   "run_id": "legacy-source_message-cli-23715a9ac43ad8d3",
+   "skipped_existing": 0,
+   "source": "source_message",
+   "status": "finished",
+   "stored": 15
+  }
+ },
+ "vendor_csv_sha256": null
+}

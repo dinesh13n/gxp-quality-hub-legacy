@@ -1,0 +1,15 @@
+{
+ "applied": true,
+ "backup": {
+  "files": {
+   "audit-anchor.jsonl": "b0ad340b74bcbb34dee047eb2b0ff34e0a6ec6babfd41ce8fe8af1cfa52ab229",
+   "hub.sqlite3": "d632957f86b0a2346ac40b092a7329cd5cdeb5595b39e4a22e861822ff16171f"
+  },
+  "label": "pre-intake-M004-20261025T051523113902Z",
+  "path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s34-scratch/premig4/pre-intake-M004-20261025T051523113902Z",
+  "schema_versions": [
+   "M000",
+   "M001"
+  ]
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "kpis": [
+  {
+   "definition_tag": "D-OPS",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-BACKLOG-D-OPS",
+   "n": 125,
+   "policy_status": "candidate",
+   "policy_version": "D-OPS@1",
+   "reason": null,
+   "status": "computed",
+   "value": "89",
+   "value_id": "MV-00000007"
+  },
+  {
+   "definition_tag": null,
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-MONTH-END-TOTAL",
+   "n": 0,
+   "policy_status": null,
+   "policy_version": null,
+   "reason": "cutoff_ts and denominator_ref are required parameters and no cut-off is adopted (E-MET-CUTOFF-REQUIRED, OD-S12-08)",
+   "status": "no_value",
+   "value": null,
+   "value_id": null
+  },
+  {
+   "definition_tag": "C-EVID",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-TTC-C-EVID",
+   "n": 0,
+   "policy_status": "candidate",
+   "policy_version": "C-EVID@1",
+   "reason": "no_completed_cycles",
+   "status": "no_value",
+   "value": null,
+   "value_id": "MV-00000005"
+  },
+  {
+   "definition_tag": "C-OPS",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-TTC-C-OPS",
+   "n": 0,
+   "policy_status": "candidate",
+   "policy_version": "C-OPS@1",
+   "reason": "no_completed_cycles",
+   "status": "no_value",
+   "value": null,
+   "value_id": "MV-00000006"
+  },
+  {
+   "definition_tag": "D-OPS",
+   "label": "synthetic, unvalidated",
+   "metric_id": "MET-UNRESOLVED-EXC-RATE-D-OPS",
+   "n": 0,
+   "policy_status": "candidate",
+   "policy_version": "D-OPS@1",
+   "reason": "no_exception_queue_items",
+   "status": "no_value",
+   "value": null,
+   "value_id": "MV-00000008"
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "values": [
+  {
+   "metric_id": "MET-TTC-C-EVID",
+   "null_reason": "no_completed_cycles",
+   "value": null,
+   "value_id": "MV-00000005"
+  },
+  {
+   "metric_id": "MET-TTC-C-OPS",
+   "null_reason": "no_completed_cycles",
+   "value": null,
+   "value_id": "MV-00000006"
+  },
+  {
+   "metric_id": "MET-BACKLOG-D-OPS",
+   "null_reason": null,
+   "value": "89",
+   "value_id": "MV-00000007"
+  },
+  {
+   "metric_id": "MET-UNRESOLVED-EXC-RATE-D-OPS",
+   "null_reason": "no_exception_queue_items",
+   "value": null,
+   "value_id": "MV-00000008"
+  }
+ ]
+}

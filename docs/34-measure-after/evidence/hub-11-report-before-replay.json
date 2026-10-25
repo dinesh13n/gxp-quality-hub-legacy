@@ -1,0 +1,37 @@
+{
+ "ages_seconds": {
+  "flagged_value": {
+   "max": 2.0085999965667725,
+   "min": 2.0085999965667725,
+   "sum": 6.025799989700317
+  },
+  "quarantine_invalid": {
+   "max": 2.0085999965667725,
+   "min": 2.0085999965667725,
+   "sum": 447.91779923439026
+  },
+  "unmatched": {
+   "max": 2.0085999965667725,
+   "min": 2.0085999965667725,
+   "sum": 16287.737372159958
+  }
+ },
+ "queues": {
+  "flagged_value": 3,
+  "quarantine_invalid": 223,
+  "unmatched": 8109
+ },
+ "reasons": {
+  "NEGATIVE_VALUE": 161,
+  "NO_BUSINESS_KEY": 208,
+  "UNMATCHED_REF": 7903,
+  "UNSUPPORTED_REVISION": 223
+ },
+ "total_items": 8516,
+ "totals": {
+  "EXCEPTION": 8109,
+  "QUARANTINED": 223,
+  "VALIDATED": 181,
+  "VALIDATED_WITH_FLAGS": 3
+ }
+}

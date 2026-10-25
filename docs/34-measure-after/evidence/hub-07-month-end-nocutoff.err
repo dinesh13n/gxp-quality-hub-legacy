@@ -1,0 +1,11 @@
+{
+ "code": "E-MET-CUTOFF-REQUIRED",
+ "correlation_id": "cli-4542356e3fbc19a0",
+ "details": {
+  "missing": [
+   "cutoff_ts",
+   "denominator_ref"
+  ]
+ },
+ "message": "month-end total needs an explicit cut-off and denominator"
+}

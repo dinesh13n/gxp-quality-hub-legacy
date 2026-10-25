@@ -1,0 +1,148 @@
+{
+ "documentation": [
+  {
+   "basis": "event_derived",
+   "code_reference": "hub/metrics/service.py",
+   "cutoff_ref": null,
+   "definition_tag": "D-OPS",
+   "denominator": "cases existing at as_of",
+   "exclusions": "cases whose state is in the closing-state set; cases created after as_of",
+   "metric_id": "MET-BACKLOG-D-OPS",
+   "text": "Cases not in the closing-state set at as_of, per site, with ageing buckets <=90, 91-365, 366-730, >730 days from creation; one declared definition per table.",
+   "title": "Backlog and ageing per site (D-OPS)",
+   "version": 1,
+   "window": "state at the as_of instant"
+  },
+  {
+   "basis": "event_derived",
+   "code_reference": "hub/metrics/service.py",
+   "cutoff_ref": "CUTOFF policy (explicit parameter, no default)",
+   "definition_tag": null,
+   "denominator": "all rows of cases.amount at the cut-off (one row per case)",
+   "exclusions": "none; unparsable amounts raise unless allow_partial",
+   "metric_id": "MET-MONTH-END-TOTAL",
+   "text": "Exact decimal sum of cases.amount read with one query on one table (no join, no fan-out); quantised to 2 decimals ROUND_HALF_EVEN at presentation. Reference on the shipped baseline: 622826.44 for 125 cases.",
+   "title": "Month-end total of case amounts",
+   "version": 1,
+   "window": "cases created up to the explicit cut-off"
+  },
+  {
+   "basis": "event_derived",
+   "code_reference": "hub/metrics/service.py",
+   "cutoff_ref": null,
+   "definition_tag": "C-EVID",
+   "denominator": "completed cycles (a start and a stop event of the clock exist in the cycle)",
+   "exclusions": "incomplete cycles (counted as open_count); never pooled with another clock",
+   "metric_id": "MET-TTC-C-EVID",
+   "text": "Same method as MET-TTC-C-OPS under the evidence-complete clock; a different definition, never combined with it.",
+   "title": "Time to evidence-complete (clock C-EVID)",
+   "version": 1,
+   "window": "all completed cycles recorded"
+  },
+  {
+   "basis": "event_derived",
+   "code_reference": "hub/metrics/service.py",
+   "cutoff_ref": null,
+   "definition_tag": "C-OPS",
+   "denominator": "completed cycles (a start and a stop event of the clock exist in the cycle)",
+   "exclusions": "incomplete cycles (counted as open_count); never pooled with another clock",
+   "metric_id": "MET-TTC-C-OPS",
+   "text": "Median and p90 of the elapsed hours between the clock's start and stop events per completed cycle (decision_events); method: median = mean of the two middle values, p90 = nearest rank. n = 0 gives null, never 0.",
+   "title": "Time to ops-closed (clock C-OPS)",
+   "version": 1,
+   "window": "all completed cycles recorded"
+  },
+  {
+   "basis": "event_derived",
+   "code_reference": "hub/metrics/service.py",
+   "cutoff_ref": null,
+   "definition_tag": "D-OPS",
+   "denominator": "all items that ever sat in an exception queue",
+   "exclusions": "items that never entered an exception queue; unmatched items are reported under site 'unknown'",
+   "metric_id": "MET-UNRESOLVED-EXC-RATE-D-OPS",
+   "text": "Open exception-queue items / all exception-queue items, per site of the matched case (A-12-F07-2: formula is a spec choice).",
+   "title": "Unresolved-exception rate per site (D-OPS)",
+   "version": 1,
+   "window": "exception-queue history up to the computation instant"
+  }
+ ],
+ "metrics": [
+  {
+   "basis": "event_derived",
+   "category": "count",
+   "cutoff_ref": null,
+   "definition_tag": "D-OPS",
+   "denominator": "cases existing at as_of",
+   "documentation": "Cases not in the closing-state set at as_of, per site, with ageing buckets <=90, 91-365, 366-730, >730 days from creation; one declared definition per table.",
+   "exclusions": "cases whose state is in the closing-state set; cases created after as_of",
+   "involves_definition": false,
+   "metric_id": "MET-BACKLOG-D-OPS",
+   "name": "Backlog and ageing per site (D-OPS)",
+   "version": 1,
+   "window": "state at the as_of instant"
+  },
+  {
+   "basis": "event_derived",
+   "category": "money",
+   "cutoff_ref": "CUTOFF policy (explicit parameter, no default)",
+   "definition_tag": null,
+   "denominator": "all rows of cases.amount at the cut-off (one row per case)",
+   "documentation": "Exact decimal sum of cases.amount read with one query on one table (no join, no fan-out); quantised to 2 decimals ROUND_HALF_EVEN at presentation. Reference on the shipped baseline: 622826.44 for 125 cases.",
+   "exclusions": "none; unparsable amounts raise unless allow_partial",
+   "involves_definition": false,
+   "metric_id": "MET-MONTH-END-TOTAL",
+   "name": "Month-end total of case amounts",
+   "version": 1,
+   "window": "cases created up to the explicit cut-off"
+  },
+  {
+   "basis": "event_derived",
+   "category": "time",
+   "cutoff_ref": null,
+   "definition_tag": "C-EVID",
+   "denominator": "completed cycles (a start and a stop event of the clock exist in the cycle)",
+   "documentation": "Same method as MET-TTC-C-OPS under the evidence-complete clock; a different definition, never combined with it.",
+   "exclusions": "incomplete cycles (counted as open_count); never pooled with another clock",
+   "involves_definition": true,
+   "metric_id": "MET-TTC-C-EVID",
+   "name": "Time to evidence-complete (clock C-EVID)",
+   "version": 1,
+   "window": "all completed cycles recorded"
+  },
+  {
+   "basis": "event_derived",
+   "category": "time",
+   "cutoff_ref": null,
+   "definition_tag": "C-OPS",
+   "denominator": "completed cycles (a start and a stop event of the clock exist in the cycle)",
+   "documentation": "Median and p90 of the elapsed hours between the clock's start and stop events per completed cycle (decision_events); method: median = mean of the two middle values, p90 = nearest rank. n = 0 gives null, never 0.",
+   "exclusions": "incomplete cycles (counted as open_count); never pooled with another clock",
+   "involves_definition": true,
+   "metric_id": "MET-TTC-C-OPS",
+   "name": "Time to ops-closed (clock C-OPS)",
+   "version": 1,
+   "window": "all completed cycles recorded"
+  },
+  {
+   "basis": "event_derived",
+   "category": "rate",
+   "cutoff_ref": null,
+   "definition_tag": "D-OPS",
+   "denominator": "all items that ever sat in an exception queue",
+   "documentation": "Open exception-queue items / all exception-queue items, per site of the matched case (A-12-F07-2: formula is a spec choice).",
+   "exclusions": "items that never entered an exception queue; unmatched items are reported under site 'unknown'",
+   "involves_definition": false,
+   "metric_id": "MET-UNRESOLVED-EXC-RATE-D-OPS",
+   "name": "Unresolved-exception rate per site (D-OPS)",
+   "version": 1,
+   "window": "exception-queue history up to the computation instant"
+  }
+ ],
+ "seeded": [
+  "MET-TTC-C-OPS",
+  "MET-TTC-C-EVID",
+  "MET-MONTH-END-TOTAL",
+  "MET-BACKLOG-D-OPS",
+  "MET-UNRESOLVED-EXC-RATE-D-OPS"
+ ]
+}

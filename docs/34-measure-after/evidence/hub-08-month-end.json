@@ -1,0 +1,32 @@
+{
+ "text": "MET-MONTH-END-TOTAL [tag=None policy=None status=None] 622826.44 n=125 -- synthetic, unvalidated",
+ "value": {
+  "basis": "event_derived",
+  "code_version": "0.2.0-inc02+inc07",
+  "computed_at": "2026-10-25T05:15:24.534228Z",
+  "data_origin": "synthetic",
+  "definition_tag": null,
+  "denominator": "cases",
+  "detail": {
+   "currency_minor_unit": 2,
+   "flags": [],
+   "rounding": "ROUND_HALF_EVEN at presentation only",
+   "source": "cases.amount"
+  },
+  "errors": [],
+  "exclusions": "none",
+  "inputs_hash": "667ee35d44234c857a6c4a5df141f926f665a531899cb61be334bb5e3a2e7df6",
+  "label": "synthetic, unvalidated",
+  "metric_id": "MET-MONTH-END-TOTAL",
+  "metric_version": 1,
+  "n": 125,
+  "null_reason": null,
+  "partial": false,
+  "policy_status": null,
+  "policy_version": null,
+  "value": "622826.44",
+  "value_id": "MV-00000009",
+  "window_end": "2025-12-31T23:59:59.000000Z",
+  "window_start": null
+ }
+}

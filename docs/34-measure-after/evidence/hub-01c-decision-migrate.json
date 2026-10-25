@@ -1,0 +1,15 @@
+{
+ "applied": true,
+ "backup": {
+  "files": {
+   "audit-anchor.jsonl": "376b63b1c3a17d0e8cf903c67a75ad9585642f5524b9e1f960397fec769bd5b3",
+   "hub.sqlite3": "5c77465836ff451106d1d0b7b293ab507da0d365d80e01859a6f11380479f58f"
+  },
+  "label": "pre-decision-M003-20261025T051523025934Z",
+  "path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s34-scratch/premig3/pre-decision-M003-20261025T051523025934Z",
+  "schema_versions": [
+   "M000",
+   "M001"
+  ]
+ }
+}

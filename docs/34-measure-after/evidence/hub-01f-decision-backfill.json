@@ -1,0 +1,29 @@
+{
+ "already_imported": 0,
+ "cases_in_source": 125,
+ "chain": {
+  "cases": 125,
+  "events": 250,
+  "status": "ok"
+ },
+ "events_written": 250,
+ "imported_now": 125,
+ "marked_legacy_reopen": 8,
+ "priority_distribution": null,
+ "priority_ruleset": null,
+ "projection": {
+  "cases": 125,
+  "detail": [],
+  "mismatches": 0,
+  "projection_rows": 125,
+  "status": "ok"
+ },
+ "source_db_sha256": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
+ "state_counts": {
+  "CLOSED": 36,
+  "ESCALATED": 9,
+  "OPEN": 42,
+  "REOPENED": 8,
+  "UNDER_REVIEW": 30
+ }
+}
