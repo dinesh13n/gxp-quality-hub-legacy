@@ -1,0 +1,22 @@
+# e41-01 legal-hold related terms, git grep -n -i -I at main b1de232 (worktree branch stage-41-retirement), excluding docs/41-retirement
+# command: git grep -n -i -I -e 'legal hold' -e litigation -e subpoena -e e-discovery -e ediscovery -e 'preservation order' -e 'regulatory inspection' -e 'audit inspection' -- . ':!docs/41-retirement'
+.fde/stage-prompts/41_Retirement-Decommissioning.md:108:- retention, legal hold, archival
+.fde/stage-prompts/41_Retirement-Decommissioning.md:123:2. Retention/legal hold
+.fde/stage-prompts/41_Retirement-Decommissioning.md:168:- delete data under legal hold
+.fde/stage-prompts/41_Retirement-Decommissioning.md:196:| 5 | `legal-hold-check.md` | Legal hold |
+.fde/stage-prompts/41_Retirement-Decommissioning.md:233:3. Check retention and legal hold.
+docs/05-current-state/control-points.md:46:| CG-11 | **Retention/legal hold not acted on**: `retention_events` (2,084 rows, expiry +7 years, legal_hold flag) read by nothing | grep | Retention is data only | Retention breach/hold ignored | 
+docs/06-root-cause/fishbone-analysis.md:58:| Policy | Retention/legal hold not acted on | CG-11 | Latent risk | [Verified Fact] | Medium |
+docs/11-data-context/data-context-risks.md:33:| DR-13 | Retention policy unset; hold-all may cause unbounded growth; legal hold semantics unknown | OPD-09; `retention_events` | M | M | No-delete rule; archive only by human decision | Engage
+docs/11-data-context/data-source-inventory.md:26:| DS-06 | `data/enterprise_legacy.sqlite3` (12 tables; `operational_objects`/`state_history`/`document_links`/`evidence_events` 12,500 each; `workflow_tasks` 6,250; `access_audit` 4,167; `cro
+docs/11-data-context/metadata-model.md:26:| `retention_class`, `legal_hold`, `retention_policy_ref` | records | hold-all until policy; legal hold overrides | [INF]; policy [UNK] |
+docs/11-data-context/metadata-model.md:37:| C3 Restricted | highest sensitivity | documents with `access_level=restricted` (328 of 1,200); anything under legal hold (123 `legal_hold=1`); audit trail |
+docs/11-data-context/metadata-model.md:65:| Retention / legal hold | no | R | R | no | no | change (Zone H) |
+docs/11-data-context/metadata-model.md:82:- MR-1 [Verified Fact] No retention job/code exists; `retention_events` has 2,084 rows all class `standard`, expiries 2027+, 123 under legal hold.
+docs/25-governance/evidence-retention-policy.md:38:5. **Legal hold.** No mechanism exists; hold-all is the only hold. [Verified Fact]
+docs/29-incident-bcdr/forensics-evidence-policy.md:69:- U-29-FE-1 Retention period, legal hold, disposal authority (OPD-09).
+# erasure terms
+docs/24-security-privacy/data-protection-controls.md:34:Mutable tables `active_ruleset`, `run_lock`, `schema_migrations` (the last has no trigger), derived `case_state`; unsealed anchor by default; no
+docs/24-security-privacy/privacy-impact-assessment.md:39:| Data subject rights (access, correction, erasure) | **not built**: insert-only design conflicts with erasure; no subject-access function | Un
+docs/24-security-privacy/privacy-impact-assessment.md:52:(a) Which privacy regime would apply (U-11-17: for example India DPDP, GDPR for German data)? (b) Retention period and erasure position (OD-30 
+docs/24-security-privacy/privacy-impact-assessment.md:68:RS-06 (privacy regime / tenant / erasure), RS-09, RS-12.

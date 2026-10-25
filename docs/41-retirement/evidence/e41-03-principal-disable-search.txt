@@ -1,0 +1,20 @@
+# e41-03 principal status / disable operation search (ARF-01)
+# command: git grep -n -e 'UPDATE principal' -e 'SET status' -- hub
+hub/ops/release.py:71:        con.execute("UPDATE release_record SET status = 'ready' WHERE release_id = ?", (release_id,))
+# result above (blank = none besides release_record)
+# admin CLI subcommands:
+    p = sub.add_parser("user")
+    usub = p.add_subparsers(dest="ucmd")
+    u = usub.add_parser("create")
+    u.add_argument("--data-dir", required=True)
+    u.add_argument("--principal", required=True)
+    u.add_argument("--role", action="append", default=[])
+    u.add_argument("--kind", choices=["human", "service"], default="human")
+    u = usub.add_parser("list")
+    u.add_argument("--data-dir", required=True)
+    store("verify-audit")
+    store("anchor")
+    p = store("backup")
+    p.add_argument("--dest-root", required=True)
+# tables.py principal rule:
+    "principal": (RETAINED, "users and service principals; no deletion, status change only"),

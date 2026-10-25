@@ -19,12 +19,12 @@ supersedes: "none"
 
 ## Findings
 <!-- each tagged [Verified Fact] / [Inference] / [Assumption] / [Unknown] -->
-### LH-1 What was searched (read-only, `git grep -i -I`, excluding this stage's own folder)
+### LH-1 What was searched (read-only, `git grep -i -I`, excluding this stage's own folder; raw output in `evidence/e41-01-legal-hold-grep.txt`)
 Terms: `legal hold`, `litigation`, `subpoena`, `e-discovery` / `ediscovery`, `preservation order`, `regulatory inspection`, `audit inspection`, `subject access`, `erasure`, `right to be forgotten`.
 
 | Term group | Result | Meaning | Tag |
 |---|---|---|---|
-| litigation, subpoena, e-discovery, preservation order, regulatory / audit inspection | 0 matches outside the stage prompt copies (`.fde/stage-prompts/`) | no matter, notice or inspection is recorded | [Verified Fact] |
+| litigation, subpoena, e-discovery, preservation order, regulatory / audit inspection | 0 matches anywhere | no matter, notice or inspection is recorded | [Verified Fact] |
 | legal hold | 8 files, one of them the stage-prompt copy under `.fde/stage-prompts/`; the others are analysis text about the synthetic `legal_hold` column, the missing retention policy, or the Stage 25 statement "No mechanism exists; hold-all is the only hold" | no real hold; modelling data only | [Verified Fact] |
 | erasure | privacy-impact-assessment: data-subject erasure "not built"; insert-only design conflicts with erasure | a future erasure duty would conflict with the design, not a current duty | [Verified Fact] |
 

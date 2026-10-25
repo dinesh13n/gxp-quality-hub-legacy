@@ -1,0 +1,9 @@
+# e41-04 retention_events generator and readers (LH-3)
+app/enterprise_legacy.py:23:    CREATE TABLE IF NOT EXISTS retention_events(retention_id TEXT PRIMARY KEY,object_id TEXT NOT NULL REFERENCES operational_objects(object_id),retention_class TEXT,expiry_date TEXT,legal_hold INTEGER);
+app/enterprise_legacy.py:25:    for table in ('retention_events','access_audit','integration_attempts','financial_adjustments','workflow_tasks','cross_references','policy_register','evidence_events','document_links','state_history','operational_objects','organ
+app/enterprise_legacy.py:35:    batch={name:[] for name in ('operational_objects','state_history','document_links','evidence_events','cross_references','workflow_tasks','financial_adjustments','integration_attempts','access_audit','retention_events')}
+app/enterprise_legacy.py:51:        if i%6==0:batch['retention_events'].append((f'R-{i:08d}',object_id,['standard','regulated','disputed'][i%3],(t+datetime.timedelta(days=365*7)).date().isoformat(),int(i%17==0)))
+app/enterprise_legacy.py:55:    checks={'integrity':conn.execute('PRAGMA integrity_check').fetchone()[0], 'fk_violations':len(conn.execute('PRAGMA foreign_key_check').fetchall()),'entities':{t:conn.execute('SELECT COUNT(*) FROM '+t).fetchone()[0] for t in ['or
+hub/adapters/baseline_pins.json:89:    "retention_events": [
+# legal_hold in code:
+app/enterprise_legacy.py:23:    CREATE TABLE IF NOT EXISTS retention_events(retention_id TEXT PRIMARY KEY,object_id TEXT NOT NULL REFERENCES operational_objects(object_id),retention_class TEXT,expiry_

@@ -1,0 +1,6 @@
+# e41-05 tags, remotes, commit count (read-only)
+baseline-as-found
+origin	https://github.com/dinesh13n/gxp-quality-hub-legacy.git (fetch)
+origin	https://github.com/dinesh13n/gxp-quality-hub-legacy.git (push)
+74
+b1de232f726496704c6a572b4732b5356ef5d093
