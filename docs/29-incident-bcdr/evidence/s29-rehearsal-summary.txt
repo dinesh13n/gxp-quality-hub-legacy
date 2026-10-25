@@ -1,0 +1,9 @@
+Stage 29 sandbox rehearsal (2026-10-25). Sandbox copy of git HEAD 5efe271 (git archive, no .git) under ~/fde_sbx/s29-reh (deleted after the run).
+Data: a freshly migrated hub store (M000->M001, 7 audit records) created in the sandbox; NO working-tree data/ and NO legacy data touched.
+Python 3.10.12. Elapsed times are wall-clock of the CLI on a 104 KB store; they measure tooling only and are NOT an RTO.
+01-migrate rc=0 0.16s | 02-status rc=0 | 03-verify-audit-clean rc=0 | 04-backup rc=0 | 05-verify-backup-manifest rc=0
+06-verify-audit-after-backup rc=0 | 07-verify-audit-after-damage rc=1 (E-SEC-AUDIT-TAMPER-DETECTED printed, then unhandled KeyError traceback; documented exit is 17) 
+08-restore rc=0 checksum_match=true, damaged anchor + prior store set aside under data/pre-restore/ | 09-verify-audit-after-restore rc=0
+10-restore-corrupt-backup rc=21 E-STORE-BACKUP-INVALID (nothing touched) | 11-verify-audit-after-refused-restore rc=0
+12-kill-switch rc=3 E-HUB-KILLED | 13-startup-check rc=0 bind 127.0.0.1 loopback
+Working-tree data checks: sha256sum -c ../_data-backup-2026-10-17/SHA256SUMS.txt rc=0 before and after.

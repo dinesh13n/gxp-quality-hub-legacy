@@ -1,0 +1,5 @@
+{
+ "code": "E-HUB-KILLED",
+ "details": null,
+ "message": "hub.kill is set; command refused"
+}
