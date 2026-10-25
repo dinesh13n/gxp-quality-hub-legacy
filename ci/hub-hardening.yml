@@ -30,7 +30,7 @@ jobs:
           python -B - <<'PY'
           import json, sys
           from hub.security import scan
-          r = scan.run("hub")
+          r = scan.run(".")
           print(json.dumps(r, indent=1, sort_keys=True)[:4000])
           sys.exit(0 if r["clean"] else 1)
           PY

@@ -46,6 +46,12 @@
    "reason": "import moved from module level to function level only; behaviour identical; breaks a package import cycle"
   },
   {
+   "path": "hub/security/audit.py",
+   "work_item": "S27 file modes (secrets)",
+   "deviation": "S27-DEV-14",
+   "reason": "hub store file and data directory 0600/0700 when created or opened; new audit anchor file 0600; behaviour otherwise unchanged"
+  },
+  {
    "path": "hub/security/datamap.py",
    "work_item": "DQ-S24-09 / RS-12",
    "deviation": "S27-DEV-08",
@@ -65,9 +71,9 @@
   },
   {
    "path": "hub/store/db.py",
-   "work_item": "DQ-S24-09 / RS-12",
-   "deviation": "S27-DEV-08",
-   "reason": "open_hub applies the H001 hardening migration (insert-only triggers on schema_migrations)"
+   "work_item": "DQ-S24-09 / RS-12; S27 file modes",
+   "deviation": "S27-DEV-08; S27-DEV-14",
+   "reason": "open_hub applies the H001 hardening migration (S27-DEV-08) and keeps the store file owner-only 0600 and a newly created data directory 0700 (S27-DEV-14)"
   },
   {
    "path": "hub/store/migrate.py",

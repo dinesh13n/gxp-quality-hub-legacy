@@ -2,6 +2,7 @@
 
   H01  H001: schema_migrations is insert-only (UPDATE and DELETE abort with E-SEC-RETAINED, INSERT of a new version still works), the ledger row carries the file sha256
   H02  H001 is idempotent, applied to a store that was created without it, and drift of the applied file is E-STORE-MIGRATION-DRIFT; its own ledger is insert-only too
+  H04  the store file is 0600, a newly created data directory 0700, a new anchor file 0600 (S27-DEV-14)
   H03  the hardening tables are in the retained-table register and the data map (a new table without a decision fails there)
   C01  FAC-09: the 23 committed store-table schemas equal the live DDL, use only validator-supported keywords, accept the real rows of a full scenario, reject drift
   C02  the 17th schema (OP-INT-01 intake envelope): equals the handler's field table, accepts what the endpoint accepts, rejects what it refuses
@@ -102,6 +103,40 @@ class TST_HUB_STG27_Hardening(_Base):
         self.assertEqual(sorted(r[0] for r in c2.execute("SELECT name FROM sqlite_master WHERE type='trigger' AND tbl_name='schema_migrations'")),
                          ["schema_migrations_no_delete", "schema_migrations_no_update"])
         c2.close()
+
+    def test_TST_HUB_STG27_H04_store_files_are_owner_only(self):
+        """H04 (S27-DEV-14): a data directory created by open_hub is 0700, the store file is 0600 even under a permissive umask and after a reopen of a file that was group / world
+        readable, and an audit anchor file created by write_anchor is 0600 (an existing anchor file keeps its mode)."""
+        from hub.security import audit
+        old = os.umask(0)
+        try:
+            base = T.S.tmpdir("s27-h04-")
+            d = os.path.join(base, "newdir")
+            con = db.open_hub(d)
+            self.assertEqual(os.stat(d).st_mode & 0o777, 0o700)
+            dbp = os.path.join(d, db.HUB_DB_NAME)
+            self.assertEqual(os.stat(dbp).st_mode & 0o777, 0o600)
+            con.close()
+            os.chmod(dbp, 0o666)
+            db.open_hub(d).close()
+            self.assertEqual(os.stat(dbp).st_mode & 0o777, 0o600)
+            st = self.wstore(loaded=False)
+            con = st.con
+            audit.append(con, st.clock, actor="a", actor_kind="human", action="LOGIN", outcome="success", correlation_id="t-h04")
+            con.commit()
+            fresh = os.path.join(base, "anchors", "a.log")
+            audit.write_anchor(con, fresh)
+            self.assertEqual(os.stat(fresh).st_mode & 0o777, 0o600)
+            old_anchor = os.path.join(base, "old.log")
+            with open(old_anchor, "w") as f:
+                f.write("")
+            os.chmod(old_anchor, 0o640)
+            audit.append(con, st.clock, actor="a", actor_kind="human", action="LOGIN", outcome="success", correlation_id="t-h04b")
+            con.commit()
+            audit.write_anchor(con, old_anchor)
+            self.assertEqual(os.stat(old_anchor).st_mode & 0o777, 0o640)
+        finally:
+            os.umask(old)
 
     def test_TST_HUB_STG27_H03_registers_know_the_hardening_tables(self):
         """H03: schema_migrations and hardening_schema_migrations are RETAINED in the table register and have a data class in the data map."""
