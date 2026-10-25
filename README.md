@@ -52,7 +52,9 @@ Roles: `reviewer`, `quality_lead` and `compliance` can use the queue, trace and 
 python -m hub.web --config $C serve --data-dir $D --port 8081
 ```
 
-**Log in.** Open `http://127.0.0.1:8081/ui/login` on the same machine and enter the principal (for example `alice`) and the password you set. Repeated wrong passwords lock the account (`E-AUTH-LOCKED`). The exception queue is empty until intake data is loaded (`python -m hub.intake gateway-pull`, `python -m hub.web produce-traces ...`).
+**Log in.** Open `http://127.0.0.1:8081/ui/login` on the same machine and enter the principal (for example `alice`) and the password you set. Repeated wrong passwords lock the account (`E-AUTH-LOCKED`). The exception queue is empty until intake data is loaded.
+
+**Populated demo in one step.** `sh scripts/hub_ui_demo.sh C:/hub-sandbox <path-to-shipped-legacy.sqlite3>` builds a sandbox copy, loads the as-found rule sets, ingests the legacy feeds (about 10,900 queue items), imports the 125 cases, records PRIORITY and MANUAL_REVIEW traces, creates `alice` (reviewer), `carol` (quality_lead) and `bob` (dispositioner), then serves the UI. The second argument must be the shipped 125-case database (sha256 `c254649f…`, pinned in `hub/adapters/baseline_pins.json`). Running the quick start above with `--reset` replaces it, so keep a backup. Disposition and evidence-pack pages return `E-GATE-NO-HOLDERS` until `zone_h.holders` is configured with a recorded approval reference (OD-S12-06).
 
 ## Available evidence
 - `docs/business-context.md` — initial business context, stakeholders and workflow
