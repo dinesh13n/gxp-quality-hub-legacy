@@ -56,6 +56,24 @@ python -m hub.web --config $C serve --data-dir $D --port 8081
 
 **Populated demo in one step.** `sh scripts/hub_ui_demo.sh C:/hub-sandbox <path-to-shipped-legacy.sqlite3>` builds a sandbox copy, loads the as-found rule sets, ingests the legacy feeds (about 10,900 queue items), imports the 125 cases, records PRIORITY and MANUAL_REVIEW traces, creates `alice` (reviewer), `carol` (quality_lead) and `bob` (dispositioner), then serves the UI. The second argument must be the shipped 125-case database (sha256 `c254649f…`, pinned in `hub/adapters/baseline_pins.json`). Running the quick start above with `--reset` replaces it, so keep a backup. Disposition and evidence-pack pages return `E-GATE-NO-HOLDERS` until `zone_h.holders` is configured with a recorded approval reference (OD-S12-06).
 
+## Graph explorer (FalkorDB)
+
+A read-only graph projection of the legacy estate for browsing relationships. It's separate from the hub; the documented product position (OD-08) is still "no graph database", and this explorer makes no decisions. Code is in `graph/`, starter queries are in `graph/queries.cypher`.
+
+- **Quality graph** (`data/legacy.sqlite3`): Site, Material, Batch, LabResult, Deviation, CAPA, Case, Account and CaseEvent, linked by `SOURCED_AT`, `OF_MATERIAL`, `MADE_AT`, `HAS_RESULT`, `HAS_DEVIATION`, `HAS_CAPA`, `AT_SITE`, `FOR_ACCOUNT` and `HAS_EVENT`.
+- **Enterprise graph** (`data/enterprise_legacy.sqlite3`): 12,500 OperationalObject nodes, 96 Organization nodes, 4,166 `RELATES_TO` links and `BELONGS_TO`. Skip it with `--no-enterprise`.
+- Free text (case notes, payloads) is not projected. The source databases are opened read-only. Each load drops and rebuilds the graph.
+
+Requires Docker Desktop and Python 3.10+:
+
+```bash
+docker compose --profile graph up -d falkordb      # FalkorDB v4.22.0 on 127.0.0.1:6379, browser on 127.0.0.1:3000
+py -3.12 -m venv .venv-graph && .venv-graph/Scripts/python -m pip install -r graph/requirements.txt
+.venv-graph/Scripts/python -m graph.load_falkordb  # add --dry-run to print counts without connecting
+```
+
+Open `http://localhost:3000`, connect to `localhost:6379` and select the graph `gxp_quality`. Then paste a query from `graph/queries.cypher`. Both ports are bound to loopback because no password is configured.
+
 ## Available evidence
 - `docs/business-context.md` — initial business context, stakeholders and workflow
 - `docs/interface-notes.md` — current API and external-feed notes

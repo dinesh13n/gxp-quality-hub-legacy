@@ -41,5 +41,16 @@ services:
       source-gateway:
         condition: service_healthy
     restart: "no"
+  # Optional graph explorer: `docker compose --profile graph up -d falkordb`, then `python -m graph.load_falkordb`.
+  # Bound to loopback only (no auth configured). Browser UI on :3000.
+  falkordb:
+    image: falkordb/falkordb:v4.22.0
+    profiles: ["graph"]
+    ports:
+      - "127.0.0.1:${FALKORDB_PORT:-6379}:6379"
+      - "127.0.0.1:${FALKORDB_BROWSER_PORT:-3000}:3000"
+    volumes:
+      - falkordb_data:/var/lib/falkordb/data
 volumes:
   legacy_data:
+  falkordb_data:
