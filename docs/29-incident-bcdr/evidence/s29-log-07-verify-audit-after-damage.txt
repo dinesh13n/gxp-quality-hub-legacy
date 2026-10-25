@@ -1,0 +1,28 @@
+{
+ "code": "E-SEC-AUDIT-TAMPER-DETECTED",
+ "details": {
+  "detail": "'audit_seq'",
+  "first_broken_seq": null,
+  "kind": "anchor_unreadable",
+  "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
+  "records": 6,
+  "status": "broken"
+ },
+ "message": "verify-audit found a broken chain or anchor mismatch"
+}
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "~/fde_sbx/s29-reh/repo/hub/admin/__main__.py", line 5, in <module>
+    sys.exit(main())
+  File "~/fde_sbx/s29-reh/repo/hub/admin/cli.py", line 278, in main
+    r.close()
+  File "~/fde_sbx/s29-reh/repo/hub/admin/cli.py", line 122, in close
+    audit.write_anchor(self.con, self.anchor_path)  # end of every run (BEH-SEC-06)
+  File "~/fde_sbx/s29-reh/repo/hub/security/audit.py", line 129, in write_anchor
+    anchors = read_anchors(path)
+  File "~/fde_sbx/s29-reh/repo/hub/security/audit.py", line 119, in read_anchors
+    out.append({"audit_seq": int(a["audit_seq"]), "hash": str(a["hash"]), "occurred_at": a.get("occurred_at"),
+KeyError: 'audit_seq'

@@ -1,0 +1,14 @@
+~/fde_sbx/s29-reh/scratch/backups/reh-001:
+total 124
+drwxr-xr-x 2 rcw-01u6mkug9rq1jbve7eyrt7in rcw-01u6mkug9rq1jbve7eyrt7in   4096 Oct 25 04:22 .
+drwxr-xr-x 3 rcw-01u6mkug9rq1jbve7eyrt7in rcw-01u6mkug9rq1jbve7eyrt7in   4096 Oct 25 04:22 ..
+-rw-r--r-- 1 rcw-01u6mkug9rq1jbve7eyrt7in rcw-01u6mkug9rq1jbve7eyrt7in    476 Oct 25 04:22 MANIFEST.json
+-rw-r--r-- 1 rcw-01u6mkug9rq1jbve7eyrt7in rcw-01u6mkug9rq1jbve7eyrt7in    163 Oct 25 04:22 SHA256SUMS
+-rw------- 1 rcw-01u6mkug9rq1jbve7eyrt7in rcw-01u6mkug9rq1jbve7eyrt7in    402 Oct 25 04:22 audit-anchor.jsonl
+-rw-r--r-- 1 rcw-01u6mkug9rq1jbve7eyrt7in rcw-01u6mkug9rq1jbve7eyrt7in 106496 Oct 25 04:22 hub.sqlite3
+
+~/fde_sbx/s29-reh/scratch/data:
+total 116
+drwxr-xr-x 2 rcw-01u6mkug9rq1jbve7eyrt7in rcw-01u6mkug9rq1jbve7eyrt7in   4096 Oct 25 04:22 .
+drwxr-xr-x 6 rcw-01u6mkug9rq1jbve7eyrt7in rcw-01u6mkug9rq1jbve7eyrt7in   4096 Oct 25 04:22 ..
+-rw------- 1 rcw-01u6mkug9rq1jbve7eyrt7in rcw-01u6mkug9rq1jbve7eyrt7in 106496 Oct 25 04:22 hub.sqlite3

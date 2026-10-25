@@ -1,0 +1,33 @@
+{
+ "audit_head": {
+  "audit_seq": 5,
+  "hash": "2987b8c4d7519c9434fdce58b3a21d1ff104a75c54b0ffa51b6fdc75082b26c3"
+ },
+ "backup": "reh-001",
+ "checksum_match": true,
+ "restored": {
+  "audit-anchor.jsonl": "e1168b35e0ad80ce9312fcf34f5d6db26807791eb57432565ab6aae8d16422dc",
+  "hub.sqlite3": "e328992f2c379ce670eb707a1aca5cc413d030b268c146f0f715b8c4b933563d"
+ },
+ "schema_after_restore": [
+  "M000",
+  "M001"
+ ],
+ "schema_versions": [
+  "M000",
+  "M001"
+ ],
+ "set_aside": [
+  "hub.sqlite3",
+  "audit-anchor.jsonl"
+ ],
+ "set_aside_dir": "~/fde_sbx/s29-reh/scratch/data/pre-restore/20261025T042209285373Z",
+ "verify_audit": {
+  "anchors_checked": 3,
+  "head_hash": "2987b8c4d7519c9434fdce58b3a21d1ff104a75c54b0ffa51b6fdc75082b26c3",
+  "head_seq": 5,
+  "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
+  "records": 5,
+  "status": "ok"
+ }
+}
