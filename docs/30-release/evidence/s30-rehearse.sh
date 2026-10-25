@@ -41,6 +41,8 @@ c=sqlite3.connect("$R/scratch/backups/rel-pre-001/hub.sqlite3"); print("audit he
 PY
 note "--- R3 release record refuses 'ready' without evidence (mark-ready attempted with every unevaluated gate not_run)"
 step 09-release-checklist-mark-ready $A release-checklist --data-dir $D --release R-S30-REHEARSAL-1 --evidence-dir $R/scratch/ev1 --scratch-root $R/scratch/g7 --mark-ready
+step 09b-release-checklist-no-mark $A release-checklist --data-dir $D --release R-S30-REHEARSAL-2 --evidence-dir $R/scratch/ev2 --scratch-root $R/scratch/g7b --gate G1=fail:docs/30-release/evidence/s30-log-06-golden-compare.txt:UNAPPROVED --gate G2=pass:docs/30-release/evidence/s30-regression-groups.txt:I6 --gate G4=pass:docs/30-release/evidence/s30-regression-groups.txt:I45 --gate G8=pass:docs/30-release/evidence/s30-regression-groups.txt:I8a --gate G9=pass:docs/30-release/evidence/s30-regression-groups.txt:I6 --gate G10=pass:docs/30-release/evidence/s30-regression-groups.txt:B
+cp $R/scratch/ev2/checklist-R-S30-REHEARSAL-2.json $EV/s30-checklist-R-S30-REHEARSAL-2.json 2>/dev/null; clean $EV/s30-checklist-R-S30-REHEARSAL-2.json
 step 10-verify-audit-after-refusal $A verify-audit --data-dir $D
 note "--- R4 cutover dry-run on the sandbox (the shipped config is NOT touched; the reference below is a rehearsal marker, not an approval)"
 step 11-flags-before $C flags
