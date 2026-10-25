@@ -1,5 +1,5 @@
-"""Stage 27 tests, part 1: the Stage 26 findings F-01 .. F-09 and the mutant gaps (DW-25; AC-HAR-01 .. AC-HAR-06). Synthetic, unvalidated.
-The Stage 26 tests were updated to assert the fixed behaviour (S27-DEV-02); these tests pin each fix once more from the point of view of Stage 27 and add what a
+"""Stage 27 tests, part 1: the Stage 26 findings F-01 .. F-09 and the mutant gaps (DW-25; AC-HRD-01 .. AC-HRD-06). Synthetic, unvalidated.
+The Stage 26 tests were updated to assert the fixed behaviour (S27-DEV-01); these tests pin each fix once more from the point of view of Stage 27 and add what a
 mutation run showed missing (M5, M9, M10: each layer is now tested on its own).
 
   F01  OP-GATE-02: authentication before validation (anonymous 401 for every action text, authenticated unknown action still 422)
@@ -174,7 +174,7 @@ class TST_HUB_STG27_Findings(_Base):
             props = schema.get("properties", {})
             expect = set(props)
             if where == "$":
-                expect |= {"rate_limit", "crosswalk_view", "intake_reports"}  # S27-DEV-04; the two INC-09 sections are read by hub.r2 but absent from the v0.2 schema (spec addendum open)
+                expect |= {"rate_limit", "crosswalk_view", "intake_reports"}  # S27-DEV-07 (rate_limit), S27-DEV-03 (INC-09 sections); the two INC-09 sections are read by hub.r2 but absent from the v0.2 schema (spec addendum open)
             self.assertEqual(set(known), expect, where)
             for k, sub in props.items():
                 if sub.get("type") == "object" and sub.get("properties") and isinstance(known[k], dict):

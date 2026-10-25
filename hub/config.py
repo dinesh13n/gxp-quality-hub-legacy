@@ -33,7 +33,7 @@ def _merge(base, over):
     return base
 
 
-# Stage 27 S26-F-05: the known configuration keys (docs/23-human-control/stage12-v0.2/schemas/hub-config.schema.json plus `rate_limit`, S27-DEV-04, plus the two INC-09 sections `crosswalk_view` and `intake_reports`).
+# Stage 27 S26-F-05: the known configuration keys (docs/23-human-control/stage12-v0.2/schemas/hub-config.schema.json plus `rate_limit`, S27-DEV-07, plus the two INC-09 sections `crosswalk_view` and `intake_reports`).
 # A dict value is a nested closed key set; None = free-form map (the keys are data: capability names, flag paths, workflow states); a list =
 # a list of closed objects. A key that is not listed is refused with E-CFG-INVALID instead of being ignored (a mistyped safety key such as
 # `hub.kil` used to be inert).

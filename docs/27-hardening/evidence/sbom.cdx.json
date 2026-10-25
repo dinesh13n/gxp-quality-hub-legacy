@@ -28,7 +28,7 @@
    "hashes": [
     {
      "alg": "SHA-256",
-     "content": "ecf76f22e48b04de1f710b725d01d52f1c6a6d175d37865879f9cfa488546010"
+     "content": "c3648c405b35fc7a17105485b60cf7ad75e3964c831efdb8b00eaa75d4694de6"
     }
    ],
    "name": "hub",
@@ -468,7 +468,7 @@
    "hashes": [
     {
      "alg": "SHA-256",
-     "content": "32c5d1f90d6c73820def9ab0282aa8af6ef8e9774068ad1f38bfdd2e7cac9245"
+     "content": "9dfcb66f729f678e4144dd237c864106018f6bcaea2e918503bcbcce81db120c"
     }
    ],
    "name": "hub.security",
@@ -490,7 +490,7 @@
    "hashes": [
     {
      "alg": "SHA-256",
-     "content": "378adc315f72fa2069c523704b182b0b3ab6375ae26fa2fcaa181a1078be62ee"
+     "content": "ab9b849bc8413e847a1511b8bc270f30816929527159171a5808fbcb25716b01"
     }
    ],
    "name": "hub.store",
@@ -512,7 +512,7 @@
    "hashes": [
     {
      "alg": "SHA-256",
-     "content": "371e0f740730a7592b360f96b9d7dafef8d6b79c50fff05f51592bad6c6b4f6d"
+     "content": "1be2fb9a1ec6e3928da21bcfdc62aade917f6ede9c837c0c163b084c661b6d63"
     }
    ],
    "name": "hub.web",
@@ -1149,7 +1149,7 @@
    }
   ]
  },
- "serialNumber": "urn:uuid:21952f1c-1f8b-ffe8-4159-5789a1710ab6",
+ "serialNumber": "urn:uuid:3a786f92-e192-5e01-d858-134918dfc2f7",
  "specVersion": "1.5",
  "version": 1
 }

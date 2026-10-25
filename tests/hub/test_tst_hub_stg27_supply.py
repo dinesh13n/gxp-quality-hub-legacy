@@ -1,4 +1,4 @@
-"""Stage 27 tests, part 4: SBOM, CI additions and the structure ratchet (DW-27; AC-HAR-07 .. AC-HAR-10; deviations S27-DEV-11, S27-DEV-12). Synthetic, unvalidated.
+"""Stage 27 tests, part 4: SBOM, CI additions and the structure ratchet (DW-27; AC-HRD-07 .. AC-HRD-10; deviations S27-DEV-11, S27-DEV-12). Synthetic, unvalidated.
 
   B01  SBOM: CycloneDX 1.5, deterministic, every hub package listed, stdlib only (no third-party import), file digests change when a file changes, a third-party import is flagged
   B02  the committed SBOM (docs/27-hardening/evidence/sbom.cdx.json) is well-formed and lists no third-party component; the tool itself imports only stdlib and no time / random

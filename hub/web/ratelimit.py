@@ -1,4 +1,4 @@
-"""Per-peer limiter for REJECTED requests (Stage 27, S24 DQ-S24-09 / RS-04, S27-DEV-04). Pure standard library, no clock of its own.
+"""Per-peer limiter for REJECTED requests (Stage 27, S24 DQ-S24-09 / RS-04, S27-DEV-07). Pure standard library, no clock of its own.
 
 What it counts: requests that were refused before any identity was established - 401 (no / unknown / bad credentials) and 403 for a route that is not
 registered. What it does when a peer has `max_rejected` such refusals inside `window_seconds`: every further request from that peer is answered

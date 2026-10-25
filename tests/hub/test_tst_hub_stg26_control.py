@@ -30,7 +30,7 @@ EXCLUDED = ("OP-SEC-01", "OP-SEC-02")  # login is public, logout revokes the ver
 BOGUS = "f" * 64
 # Findings REGISTERED by this stage (docs/26-tevv/red-team-findings.md). The test still fails on any OTHER mismatch; it never hides a new one.
 # S26-F-01 was REGISTERED here in Stage 26 (OP-GATE-02 answered 422 E-GATE-UNKNOWN-ACTION before it looked at the session). Fixed in Stage 27 (hub/gate/service.py,
-# S27-DEV-01): authentication first, 401 E-AUTH-UNAUTHENTICATED. The registry is now empty and A01 asserts that no registered deviation remains.
+# S27-DEV-05): authentication first, 401 E-AUTH-UNAUTHENTICATED. The registry is now empty and A01 asserts that no registered deviation remains.
 REGISTERED_A01 = {}
 
 

@@ -1,0 +1,17 @@
+{
+ "data_origin": "synthetic",
+ "dependencies": "stdlib only (OD-08)",
+ "runtime": {
+  "floor": "3.10",
+  "floor_python": "3.10",
+  "floor_source": "OD-S12-12 default (OD-14)",
+  "floor_sqlite": "3.37.0",
+  "fts5": true,
+  "python": "3.10.12",
+  "sqlite": "3.37.2"
+ },
+ "tripwires": {
+  "egress_attempts_total": 0,
+  "model_calls_total": 0
+ }
+}
