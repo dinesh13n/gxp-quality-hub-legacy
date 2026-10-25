@@ -28,7 +28,7 @@
     "reason": "MISSING_ENVELOPE_FIELD",
     "received": 1
    },
-   "new_source": "observed:intake.missing_envelope_field (built module; code 47877bba3d7e)",
+   "new_source": "observed:intake.missing_envelope_field (built module; code c09c8cae073c)",
    "register": [
     {
      "dev_id": "DV-09",
@@ -44,7 +44,7 @@
     "NEGATIVE_VALUE_items": 161,
     "flagged_value_queue": 3
    },
-   "new_source": "observed:intake.partner_negative_quantity (built module; code 47877bba3d7e)",
+   "new_source": "observed:intake.partner_negative_quantity (built module; code c09c8cae073c)",
    "register": [
     {
      "dev_id": "DV-03",
@@ -60,7 +60,7 @@
     "NOOP_DUPLICATE": 67,
     "REVISED_CONFLICT": 0
    },
-   "new_source": "observed:intake.partner_replay (built module; code 47877bba3d7e)",
+   "new_source": "observed:intake.partner_replay (built module; code c09c8cae073c)",
    "register": [
     {
      "dev_id": "DV-02",
@@ -96,7 +96,7 @@
      "VALIDATED_WITH_FLAGS": 3
     }
    },
-   "new_source": "observed:intake.partner_outcomes (built module; code 47877bba3d7e)",
+   "new_source": "observed:intake.partner_outcomes (built module; code c09c8cae073c)",
    "register": [
     {
      "dev_id": "DV-07",
@@ -126,7 +126,7 @@
     "no_business_key": 206,
     "unmatched_ref": 7903
    },
-   "new_source": "observed:intake.partner_ref_match (built module; code 47877bba3d7e)",
+   "new_source": "observed:intake.partner_ref_match (built module; code c09c8cae073c)",
    "register": [
     {
      "dev_id": "DV-10",
@@ -228,7 +228,7 @@
     "UNPARSABLE_AMOUNT": 10,
     "kept_rows": 2390
    },
-   "new_source": "observed:intake.vendor_tiny (built module; code 47877bba3d7e)",
+   "new_source": "observed:intake.vendor_tiny (built module; code c09c8cae073c)",
    "register": [
     {
      "dev_id": "DV-04",
@@ -277,7 +277,7 @@
     "abc": "E-POL-INPUT-INVALID",
     "null": "E-POL-INPUT-INVALID"
    },
-   "new_source": "observed:policy.js_invalid_amount (built module; code 47877bba3d7e)",
+   "new_source": "observed:policy.js_invalid_amount (built module; code c09c8cae073c)",
    "register": [
     {
      "dev_id": "DV-05",
@@ -299,7 +299,7 @@
     "threshold": 999999,
     "year": 2019
    },
-   "new_source": "observed:policy.js_unknown_year (built module; code 47877bba3d7e)",
+   "new_source": "observed:policy.js_unknown_year (built module; code c09c8cae073c)",
    "register": [
     {
      "dev_id": "DV-06",
@@ -330,7 +330,7 @@
      "threshold": 999999
     }
    },
-   "new_source": "observed:policy.js_partial_year (built module; code 47877bba3d7e)",
+   "new_source": "observed:policy.js_partial_year (built module; code c09c8cae073c)",
    "register": [
     {
      "dev_id": "DV-11",
@@ -346,7 +346,7 @@
    "legacy.sqlite3": "c254649f57e2f05a0b54229923597a5a82a37633d455270b9ee40577071d70aa",
    "partner_export.csv(tiny)": "d5f841003e666012a16a78b73e5d2fd28a4bf39a609fdf76650d0fa8154f6a85"
   },
-  "code_digest": "47877bba3d7e4162b686cb51692c9917913a11271911dfe6e67f152c610a11e9",
+  "code_digest": "c09c8cae073ccd5393d13c325b9815daa2412ccd472877abda748cfa1ad6cb4a",
   "status": "used",
   "taken": "inline"
  },

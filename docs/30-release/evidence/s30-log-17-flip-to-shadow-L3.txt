@@ -1,6 +1,6 @@
 {
  "approval_ref": null,
- "audit_seq": 15,
+ "audit_seq": 17,
  "changed": true,
  "direction": "to_default",
  "flag": "capability_authority.CUT-2",

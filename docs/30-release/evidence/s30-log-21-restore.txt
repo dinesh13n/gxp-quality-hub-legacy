@@ -1,13 +1,13 @@
 {
  "audit_head": {
   "audit_seq": 5,
-  "hash": "d76130a2c472b4c17eba1dca4b2e0f05294ae10f0aa47280b8260c4f8d9a820e"
+  "hash": "8da953391bf7938717d1a7076da9a329855523b4062d51c38120e2a4e3709a1d"
  },
  "backup": "rel-pre-001",
  "checksum_match": true,
  "restored": {
-  "audit-anchor.jsonl": "7e88ee88eaa16bf3f07940755c420595d72c4f4592bc04e0fe37602d1c6375e5",
-  "hub.sqlite3": "53783daf77bc44482e94235d4f2ca76eae01f5edadf49fea0dd805959759fef3"
+  "audit-anchor.jsonl": "7473022098b1e577c3130dad7b84c0fbf0933da753d8b75b4f679e4db75a07ee",
+  "hub.sqlite3": "1f2483fa3ef01c59f86338c1a969b2a381737b64ed79b7e73559c6932a574b88"
  },
  "schema_after_restore": [
   "M000",
@@ -21,10 +21,10 @@
   "hub.sqlite3",
   "audit-anchor.jsonl"
  ],
- "set_aside_dir": "~/fde_sbx/s30-reh/scratch/data/pre-restore/20261025T070816129603Z",
+ "set_aside_dir": "~/fde_sbx/s30-reh/scratch/data/pre-restore/20261025T082825145940Z",
  "verify_audit": {
   "anchors_checked": 3,
-  "head_hash": "d76130a2c472b4c17eba1dca4b2e0f05294ae10f0aa47280b8260c4f8d9a820e",
+  "head_hash": "8da953391bf7938717d1a7076da9a329855523b4062d51c38120e2a4e3709a1d",
   "head_seq": 5,
   "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
   "records": 5,

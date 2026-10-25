@@ -2,12 +2,12 @@
  "anchor_included": true,
  "audit_head": {
   "audit_seq": 5,
-  "hash": "d76130a2c472b4c17eba1dca4b2e0f05294ae10f0aa47280b8260c4f8d9a820e"
+  "hash": "8da953391bf7938717d1a7076da9a329855523b4062d51c38120e2a4e3709a1d"
  },
- "created_at": "2026-10-25T07:08:12.716205Z",
+ "created_at": "2026-10-25T08:28:20.894931Z",
  "files": {
-  "audit-anchor.jsonl": "7e88ee88eaa16bf3f07940755c420595d72c4f4592bc04e0fe37602d1c6375e5",
-  "hub.sqlite3": "53783daf77bc44482e94235d4f2ca76eae01f5edadf49fea0dd805959759fef3"
+  "audit-anchor.jsonl": "7473022098b1e577c3130dad7b84c0fbf0933da753d8b75b4f679e4db75a07ee",
+  "hub.sqlite3": "1f2483fa3ef01c59f86338c1a969b2a381737b64ed79b7e73559c6932a574b88"
  },
  "label": "rel-pre-001",
  "path": "~/fde_sbx/s30-reh/scratch/backups/rel-pre-001",

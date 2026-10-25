@@ -3,6 +3,8 @@ backups
 config.json
 data
 ev1
+ev2
 g7
+g7b
 gc
 premig

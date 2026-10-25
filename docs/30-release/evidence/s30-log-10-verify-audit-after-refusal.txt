@@ -1,8 +1,8 @@
 {
- "anchors_checked": 4,
- "head_hash": "96b69817093818d31c711ddc9941fa656766eeef633cd2b77aaa963d54d9c430",
- "head_seq": 8,
+ "anchors_checked": 5,
+ "head_hash": "bdb6576093b9998e610051f516fb0f38df8329ef5136eee5cef3cb783ed1d1e1",
+ "head_seq": 10,
  "limitation": "records appended after the last anchor and then deleted are not detectable (residual risk R-SEC-1)",
- "records": 8,
+ "records": 10,
  "status": "ok"
 }

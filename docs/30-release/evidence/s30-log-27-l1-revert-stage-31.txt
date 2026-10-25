@@ -1,5 +1,5 @@
-[rehearsal-l1 57c7581] Revert "stage-31: Observability and SLO/SLA Engineering v0.1 (CONDITIONAL PASS) (#23)"
- Date: Sun Oct 25 07:08:27 2026 +0000
+[rehearsal-l1 a40d1d6] Revert "stage-31: Observability and SLO/SLA Engineering v0.1 (CONDITIONAL PASS) (#23)"
+ Date: Sun Oct 25 08:28:37 2026 +0000
  31 files changed, 21 insertions(+), 2242 deletions(-)
  delete mode 100644 docs/31-observability/agent-telemetry-spec.md
  delete mode 100644 docs/31-observability/ai-telemetry-spec.md
