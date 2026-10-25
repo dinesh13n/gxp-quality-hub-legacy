@@ -10,3 +10,10 @@ S27  rc=0 wall= 75.2s ok=25 FAIL=0 expected=25 executed=25
 S28  rc=0 wall= 76.2s ok=19 FAIL=0 expected=19 executed=19
 S31  rc=1 wall= 69.4s ok=18 FAIL=1 expected=19 executed=19  -- STG31_D01 pinned the non-add list to stage 31; fixed by S30-DEV-04; rerun result is in the final section below
 Groups not run by this stage: A, C1, C2, C3, I7, I8b, E8, I9, E9, S21, S23, S26, E20, E21, E23, E24, E26, E27, E28, E31 (the orchestrator's full regression, OD-23, covers them).
+
+Final section (after the S30-DEV-04 fix and the documents; same runner):
+S31  rc=0 wall= 58.1s ok=19 FAIL=0 expected=19 executed=19
+S30  rc=0 wall= 67.2s ok=19 FAIL=0 expected=19 executed=19
+E30  rc=0 wall= 77.5s ok=1 FAIL=0 expected=1 executed=1
+S20  rc=0 wall= 94.8s ok=18 FAIL=0 expected=18 executed=18  (rerun with all Stage 30 files present; change-safety check selects every method once)
+Characterization (tests/characterization/run_characterization.py): OVERALL FAIL only because CT-13 fails (Node patch drift, S24-DEV-04); see s30-characterization.txt.
