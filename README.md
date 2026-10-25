@@ -23,6 +23,37 @@ Open `http://127.0.0.1:8080/health`, `/api/cases`, `/api/cases/C00000001`, and `
 
 Docker: `docker compose up --build` (the container copies the preloaded synthetic database into its persistent volume on first startup). The data stays in a named local Docker volume. If port 8080 is already used, set `HOST_PORT=8081` before invoking Compose.
 
+## Reviewer web UI (GxP Quality Hub)
+
+The legacy server above returns JSON only. The modernized hub (`hub/`) has a server-rendered reviewer UI: login, home, exception queue, case trace, flag override, evidence pack and disposition. It runs on `127.0.0.1:8081` and only accepts loopback connections.
+
+**One-time setup.** The hub store and audit anchor must live **outside this git working tree** (the hub refuses paths inside it). On Windows keep that directory path short: migration backups nest several levels deep, and paths over 260 characters fail with `sqlite3.OperationalError: unable to open database file`. In Git Bash:
+
+```bash
+S=C:/hub-sandbox            # any absolute directory outside the repo (on Linux/macOS e.g. ~/hub-sandbox)
+C=$S/hub-config.json; D=$S/hubdata; B=$S/hubbak
+mkdir -p $S/anchor $D $B
+echo "{\"audit\":{\"anchor_path\":\"$S/anchor/audit-anchor.jsonl\",\"anchor_every\":100}}" > $C
+
+# Apply schema migrations M001..M006 (order matters)
+for m in admin policy decision intake runs web; do
+  python -m hub.$m --config $C migrate --data-dir $D --backup-root $B
+done
+
+# Create a login (the password is read from the env var, never echoed)
+HUB_NEW_USER_PASSWORD='<choose-a-password>' python -m hub.admin --config $C user create --data-dir $D --principal alice --role reviewer
+```
+
+Roles: `reviewer`, `quality_lead` and `compliance` can use the queue, trace and override pages. Only `dispositioner` can open the evidence pack and disposition form. Create one user per role you need.
+
+**Start the UI:**
+
+```bash
+python -m hub.web --config $C serve --data-dir $D --port 8081
+```
+
+**Log in.** Open `http://127.0.0.1:8081/ui/login` on the same machine and enter the principal (for example `alice`) and the password you set. Repeated wrong passwords lock the account (`E-AUTH-LOCKED`). The exception queue is empty until intake data is loaded (`python -m hub.intake gateway-pull`, `python -m hub.web produce-traces ...`).
+
 ## Available evidence
 - `docs/business-context.md` — initial business context, stakeholders and workflow
 - `docs/interface-notes.md` — current API and external-feed notes
