@@ -23,7 +23,7 @@ import _stg28 as T
 from hub.adapters import gateway_client
 from hub.intake import errors as E
 from hub.resilience import policy
-from hub.resilience.bounded_server import make_bounded_server
+from hub.web.bounded_server import make_bounded_server
 from hub.resilience.guarded import GuardedGateway, classify
 
 

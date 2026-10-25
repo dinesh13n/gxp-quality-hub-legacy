@@ -5,7 +5,7 @@ version: "v0.1"
 date: "2026-10-25"
 author_agent: "claude-fde-agent"
 status: "IN REVIEW"
-evidence_sources: ["hub/resilience/policy.py", "hub/resilience/guarded.py", "hub/resilience/bounded_server.py", "hub/adapters/gateway_client.py", "hub/web/server.py", "hub/web/app.py", "hub/web/ratelimit.py", "hub/runs/service.py", "docs/21-integration/failure-semantics.md", "docs/26-tevv/tevv-results.md", "docs/27-hardening/runtime-hardening.md", "tests/hub/test_tst_hub_stg28_policy.py", "tests/hub/test_tst_hub_stg28_injection.py", "tests/hub/test_tst_hub_stg28_ai_capacity.py"]
+evidence_sources: ["hub/resilience/policy.py", "hub/resilience/guarded.py", "hub/web/bounded_server.py", "hub/adapters/gateway_client.py", "hub/web/server.py", "hub/web/app.py", "hub/web/ratelimit.py", "hub/runs/service.py", "docs/21-integration/failure-semantics.md", "docs/26-tevv/tevv-results.md", "docs/27-hardening/runtime-hardening.md", "tests/hub/test_tst_hub_stg28_policy.py", "tests/hub/test_tst_hub_stg28_injection.py", "tests/hub/test_tst_hub_stg28_ai_capacity.py"]
 supersedes: "none"
 ---
 **Label: synthetic repository, unvalidated. Status IN REVIEW: nothing here is an approval, no risk is accepted, no real holder, stakeholder or production system is named or touched. The product is No-AI (OD-08); `zone_h.holders` ships EMPTY. Every default below is an AGENT ASSUMPTION under OD-32, not a measured need and not approved by Dinesh Naik.**
@@ -25,7 +25,7 @@ The hub is a single-process, single-store, loopback-only system with exactly one
 | RA-C6 | Audit chain + anchor `hub/security/audit.py` | store, anchor file | insert-only triggers, tamper detected by `verify`, clock rollback does not revive sessions (S26 C05) | [Verified Fact] |
 | RA-C7 | **`hub/resilience/policy.py`** (new) | none (pure) | settings validation, back-off, RetryBudget, Breaker (+ snapshot/restore), Bulkhead | [Verified Fact] built + tested |
 | RA-C8 | **`hub/resilience/guarded.py`** (new) | gateway client | bulkhead -> breaker -> budgeted retries; failures are `E-INT-SOURCE-UNREACHABLE` with `details.reason` | [Verified Fact] built + tested |
-| RA-C9 | **`hub/resilience/bounded_server.py`** (new) | listener | hard connection cap, shed with 429 `E-REQ-RATE-LIMITED` | [Verified Fact] built + tested |
+| RA-C9 | **`hub/web/bounded_server.py`** (new) | listener | hard connection cap, shed with 429 `E-REQ-RATE-LIMITED` | [Verified Fact] built + tested |
 
 ### RA-2 Design principles (each backed by a test)
 1. **A dependency failure is a run failure, never data** (FS-1 rule 1; STG28 F08: RUN_FAILED, 0 raw rows, 0 outcomes).

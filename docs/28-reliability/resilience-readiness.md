@@ -5,7 +5,7 @@ version: "v0.1"
 date: "2026-10-25"
 author_agent: "claude-fde-agent"
 status: "IN REVIEW"
-evidence_sources: ["hub/resilience/policy.py", "hub/resilience/guarded.py", "hub/resilience/bounded_server.py", "hub/adapters/gateway_client.py", "hub/web/server.py", "hub/web/app.py", "hub/web/ratelimit.py", "hub/runs/service.py", "docs/21-integration/failure-semantics.md", "docs/26-tevv/tevv-results.md", "docs/27-hardening/runtime-hardening.md", "tests/hub/test_tst_hub_stg28_policy.py", "tests/hub/test_tst_hub_stg28_injection.py", "tests/hub/test_tst_hub_stg28_ai_capacity.py"]
+evidence_sources: ["hub/resilience/policy.py", "hub/resilience/guarded.py", "hub/web/bounded_server.py", "hub/adapters/gateway_client.py", "hub/web/server.py", "hub/web/app.py", "hub/web/ratelimit.py", "hub/runs/service.py", "docs/21-integration/failure-semantics.md", "docs/26-tevv/tevv-results.md", "docs/27-hardening/runtime-hardening.md", "tests/hub/test_tst_hub_stg28_policy.py", "tests/hub/test_tst_hub_stg28_injection.py", "tests/hub/test_tst_hub_stg28_ai_capacity.py"]
 supersedes: "none"
 ---
 **Label: synthetic repository, unvalidated. Status IN REVIEW: nothing here is an approval, no risk is accepted, no real holder, stakeholder or production system is named or touched. The product is No-AI (OD-08); `zone_h.holders` ships EMPTY. Every default below is an AGENT ASSUMPTION under OD-32, not a measured need and not approved by Dinesh Naik.**
@@ -29,7 +29,7 @@ supersedes: "none"
 |---|---|---|
 | `hub/resilience/policy.py` | validated defaults, back-off, RetryBudget, Breaker (+ snapshot / restore), Bulkhead | STG28 P01-P07 |
 | `hub/resilience/guarded.py` | `GuardedGateway` around the AD-04 client | F01-F06, F08 |
-| `hub/resilience/bounded_server.py` | `BoundedLoopbackServer` / `make_bounded_server` | F07 |
+| `hub/web/bounded_server.py` | `BoundedLoopbackServer` / `make_bounded_server` | F07 |
 | `tests/hub/_stg28.py`, `test_tst_hub_stg28_{policy,injection,ai_capacity,egress_guard}.py` | 19 + 1 tests | - |
 | `tests/hub/regression_groups.json` | groups S28 (STG28) and E28 (E28EGRESS) appended | `_groups` static coverage |
 | `tests/hub/non_add_edits.json` | reset for this stage | TST-CO-05 c |
