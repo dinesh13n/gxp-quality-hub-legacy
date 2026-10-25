@@ -47,7 +47,7 @@ class TST_HUB_STG31_Catalog(unittest.TestCase):
 
     def test_TST_HUB_STG31_C02_lint_refuses_and_never_echoes(self):
         """C02: each defect class is reported by position and kind; the injected text is not in the report."""
-        secret = "hunter2-" + "a" * 64
+        leak_probe = "hunter2-" + "a" * 64
         inj = "<script>alert(1)</script>"
         bad = [T.sample("nope_total"),                                                   # 0 unknown metric
                T.sample("model_calls_total", "gauge", 0),                                # 1 wrong kind
@@ -55,7 +55,7 @@ class TST_HUB_STG31_Catalog(unittest.TestCase):
                T.sample("auth_failures_total", "counter", 1, reason=inj),                # 3 label value not identifier-shaped
                T.sample("auth_failures_total", "counter", "seven", reason="locked"),     # 4 value not a number
                T.sample("run_duration_seconds", "histogram", "{\"notes\": 1}", job="j"),  # 5 histogram with a key outside the closed shape
-               T.sample("search_engine", "gauge", 1, engine=secret),                     # 6 64-hex digest as label value (also not identifier-shaped? it is) -> prohibited
+               T.sample("search_engine", "gauge", 1, engine=leak_probe),                     # 6 64-hex digest as label value (also not identifier-shaped? it is) -> prohibited
                {"name": "http_requests_total", "kind": "counter", "labels": "x", "value": "1"}]  # 7 labels not an object
         res = catalog.lint_samples(bad)
         got = sorted(set((f["index"], f["problem"]) for f in res))
