@@ -1,0 +1,12 @@
+{
+ "bound_budget_only": 250,
+ "budget_only_requests": 249,
+ "calls": 200,
+ "default_requests": 12,
+ "label": "synthetic, unvalidated",
+ "reasons_default": {
+  "circuit_open": 197,
+  "retries_exhausted": 3
+ },
+ "unguarded_requests": 800
+}

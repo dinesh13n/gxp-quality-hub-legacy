@@ -1,0 +1,11 @@
+{
+ "attempts": 12,
+ "backoff": [
+  0.5,
+  1.0,
+  2.0
+ ],
+ "calls_failed": 3,
+ "fast_fail_attempts": 0,
+ "label": "synthetic, unvalidated"
+}

@@ -1,0 +1,20 @@
+{
+ "authorised_read": {
+  "per_second": 41.2,
+  "requests": 300,
+  "seconds": 7.28
+ },
+ "healthz": {
+  "per_second": 558.9,
+  "requests": 300,
+  "seconds": 0.537
+ },
+ "ingest": {
+  "batches": 5,
+  "items": 500,
+  "per_second": 1326.3,
+  "seconds": 0.377
+ },
+ "label": "synthetic, unvalidated",
+ "note": "sandbox proxy on the reference laptop: one process, in-process calls or a loopback double, synthetic data; not a production capacity, availability or latency figure"
+}
