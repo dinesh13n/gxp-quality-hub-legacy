@@ -50,10 +50,14 @@ supersedes: "none"
 ### OV-4 Test evidence (run on the reference laptop, Python 3.10.12, sandbox copies, checksum gate rc 0 before and after every call)
 | Group | Selectors | Executed methods | Counts | Wall s |
 |---|---|---|---|---|
+| B | TST_CO_01 TST_CO_02 TST_CO_04 TST_CO_05 TST_CO_06 TST_CO_07 TST_CO_11 TST_CO_13 TST_CO_14 INC02 | 42 of 42 | {'ERROR': 0, 'FAIL': 0, 'ok': 41, 'skipped': 1} | 126.7 |
+| E31 | E31EGRESS | 1 of 1 | {'ERROR': 0, 'FAIL': 0, 'ok': 1, 'skipped': 0} | 57.9 |
+| S20 | STG20 | 18 of 18 | {'ERROR': 0, 'FAIL': 0, 'ok': 18, 'skipped': 0} | 80.1 |
+| S27 | STG27 | 25 of 25 | {'ERROR': 0, 'FAIL': 0, 'ok': 25, 'skipped': 0} | 62.0 |
+| S31 | STG31 | 19 of 19 | {'ERROR': 0, 'FAIL': 0, 'ok': 19, 'skipped': 0} | 58.8 |
 
-
-Characterization harness: pending
-Data backup checksum (`sha256sum -c ../_data-backup-2026-10-17/SHA256SUMS.txt`): rc ? before and rc ? after.
+Characterization harness: 133/134 CT checks passed; OVERALL FAIL only from CT-13 (Node patch drift, S24-DEV-04); CT-17 and CT-18 NOT-RUN as before (U-07-05, HAR-05)
+Data backup checksum (`sha256sum -c ../_data-backup-2026-10-17/SHA256SUMS.txt`): rc 0 before and rc 0 after.
 Not run on the laptop (speed rule, S31-DEV-05): the other groups; the orchestrator runs the full regression in the cloud workspace (OD-23).
 
 ### OV-5 Open items and decisions for Dinesh Naik (recommended default in brackets; defaults are NOT approvals)
