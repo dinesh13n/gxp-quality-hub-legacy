@@ -1,0 +1,46 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "approval_ref": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "dev_id": {
+   "type": "string"
+  },
+  "golden_ref": {
+   "type": "string"
+  },
+  "justification": {
+   "type": "string"
+  },
+  "legacy_value": {
+   "type": "string"
+  },
+  "new_value": {
+   "type": "string"
+  },
+  "status": {
+   "enum": [
+    "proposed",
+    "approved",
+    "rejected"
+   ],
+   "type": "string"
+  }
+ },
+ "required": [
+  "dev_id",
+  "golden_ref",
+  "justification",
+  "legacy_value",
+  "new_value",
+  "status"
+ ],
+ "title": "hub store table deviation_register",
+ "type": "object"
+}

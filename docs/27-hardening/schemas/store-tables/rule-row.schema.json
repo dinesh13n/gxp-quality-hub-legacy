@@ -1,0 +1,57 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "conditions": {
+   "type": "string"
+  },
+  "effective_from": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "effective_to": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "is_default": {
+   "type": "integer"
+  },
+  "ordinal": {
+   "type": "integer"
+  },
+  "outcome": {
+   "type": "string"
+  },
+  "owner": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "row_id": {
+   "type": "string"
+  },
+  "ruleset_id": {
+   "type": "string"
+  },
+  "version": {
+   "type": "integer"
+  }
+ },
+ "required": [
+  "conditions",
+  "is_default",
+  "ordinal",
+  "outcome",
+  "row_id",
+  "ruleset_id",
+  "version"
+ ],
+ "title": "hub store table rule_row",
+ "type": "object"
+}

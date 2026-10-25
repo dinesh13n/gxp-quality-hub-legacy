@@ -1,0 +1,235 @@
+{
+ "label": "synthetic, unvalidated - method validation only",
+ "run_on": "git clone of commit d89be6f (+ data/ overlay from the working tree for the checksum gate) in a throwaway directory; three batches because of the 180 s call cap",
+ "summary": {
+  "mutants": 13,
+  "killed": 13,
+  "survived": 0,
+  "other": 0
+ },
+ "results": [
+  {
+   "id": "M5",
+   "increment": "INC-08",
+   "selectors": [
+    "STG27_M5"
+   ],
+   "file": "hub/web/authz.py",
+   "mutation": "unregistered route allowed in the authorizer layer (deny-by-default branch removed)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_M5_deny_by_default_holds_in_the_authorizer_layer_alone"
+   ],
+   "seconds": 24.8,
+   "tail": ""
+  },
+  {
+   "id": "M9",
+   "increment": "INC-07",
+   "selectors": [
+    "STG27_M9"
+   ],
+   "file": "hub/obs/collect.py",
+   "mutation": "Zone H service-actor tripwire counts the wrong actor kind",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_M9_service_actor_tripwire_counts_non_human_successes_only"
+   ],
+   "seconds": 22.7,
+   "tail": ""
+  },
+  {
+   "id": "M10",
+   "increment": "INC-07",
+   "selectors": [
+    "STG27_M10"
+   ],
+   "file": "hub/runs/schedule.py",
+   "mutation": "schedule enable without authority_ref accepted",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 0, 'ERROR': 1, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_M10_schedule_enable_needs_a_real_authority_ref"
+   ],
+   "seconds": 22.5,
+   "tail": ""
+  },
+  {
+   "id": "X1",
+   "increment": "S27 F-01",
+   "selectors": [
+    "STG27_F01"
+   ],
+   "file": "hub/gate/service.py",
+   "mutation": "OP-GATE-02 validates the action name before authentication again",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_F01_authentication_before_validation_on_the_gate_route"
+   ],
+   "seconds": 22.9,
+   "tail": ""
+  },
+  {
+   "id": "X2",
+   "increment": "S27 F-02",
+   "selectors": [
+    "STG27_F02"
+   ],
+   "file": "hub/decision/service.py",
+   "mutation": "restricted-evidence note shown to every role again",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_F02_restricted_evidence_note_is_withheld_from_non_readers"
+   ],
+   "seconds": 23.2,
+   "tail": ""
+  },
+  {
+   "id": "X3",
+   "increment": "S27 F-03",
+   "selectors": [
+    "STG27_F03"
+   ],
+   "file": "hub/web/wire.py",
+   "mutation": "lone surrogate no longer refused at the wire",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_F03_lone_surrogate_is_a_400_on_every_json_surface"
+   ],
+   "seconds": 22.6,
+   "tail": ""
+  },
+  {
+   "id": "X4",
+   "increment": "S27 F-05",
+   "selectors": [
+    "STG27_F05"
+   ],
+   "file": "hub/config.py",
+   "mutation": "unknown configuration keys accepted again",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_F05_unknown_config_keys_are_refused_and_match_the_schema"
+   ],
+   "seconds": 20.1,
+   "tail": ""
+  },
+  {
+   "id": "X5",
+   "increment": "S27 F-07",
+   "selectors": [
+    "STG27_F07"
+   ],
+   "file": "hub/web/app.py",
+   "mutation": "store fault is the generic error again",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_F07_store_fault_is_503_and_other_errors_stay_500"
+   ],
+   "seconds": 22.8,
+   "tail": ""
+  },
+  {
+   "id": "X6",
+   "increment": "S27 F-06",
+   "selectors": [
+    "STG26_C06"
+   ],
+   "file": "hub/web/server.py",
+   "mutation": "listener read timeout removed",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 0, 'ERROR': 1, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG26_C06_transport_anomalies_on_the_listener"
+   ],
+   "seconds": 42.1,
+   "tail": ""
+  },
+  {
+   "id": "X7",
+   "increment": "S27 RS-04",
+   "selectors": [
+    "STG27_L0"
+   ],
+   "file": "hub/web/ratelimit.py",
+   "mutation": "limiter never blocks",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 2, 'FAIL': 3, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_L02_limiter_unit_behaviour",
+    "test_TST_HUB_STG27_L03_over_the_limit_is_429_without_audit_rows",
+    "test_TST_HUB_STG27_L04_blocked_peer_never_reaches_the_store"
+   ],
+   "seconds": 23.7,
+   "tail": ""
+  },
+  {
+   "id": "X8",
+   "increment": "S27 RS-12",
+   "selectors": [
+    "STG27_H0"
+   ],
+   "file": "hub/store/hardening/H001_migration_ledger_triggers.sql",
+   "mutation": "schema_migrations UPDATE no longer aborts",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 2, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_H01_schema_migrations_is_insert_only"
+   ],
+   "seconds": 22.8,
+   "tail": ""
+  },
+  {
+   "id": "X9",
+   "increment": "S27 OD-27",
+   "selectors": [
+    "STG27_S01"
+   ],
+   "file": "hub/store/migrate.py",
+   "mutation": "package import cycle re-introduced (ops <-> store)",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_S01_structure_ratchet"
+   ],
+   "seconds": 22.3,
+   "tail": ""
+  },
+  {
+   "id": "X10",
+   "increment": "S27 SBOM",
+   "selectors": [
+    "STG27_B01"
+   ],
+   "file": "hub/security/sbom.py",
+   "mutation": "package digest no longer depends on file content",
+   "status": "KILLED",
+   "rc": 1,
+   "counts": "{'ok': 0, 'FAIL': 1, 'ERROR': 0, 'skipped': 0}",
+   "killed_by": [
+    "test_TST_HUB_STG27_B01_sbom_is_deterministic_stdlib_only_and_hash_sensitive"
+   ],
+   "seconds": 20.3,
+   "tail": ""
+  }
+ ]
+}

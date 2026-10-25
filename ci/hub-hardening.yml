@@ -1,0 +1,64 @@
+# Stage 27 (HAR-07, S27-DEV-12): CI additions for the hub. NOT ACTIVE: this file lives under ci/ because .github/ is a protected legacy path (TST-CO-05 a) and
+# the existing workflow .github/workflows/verify.yml must not be changed in Stage 27. Installing it = copy to .github/workflows/hub-hardening.yml,
+# which needs Dinesh's approval (decision D-27-03). Nothing below has been run on a hosted runner: the hosted 3.12 / 3.13 evidence is Unknown until it is.
+#
+# What it adds to verify.yml: a Python 3.12 and 3.13 job (ADR-018 target, OD-S12-12) for the hub, and the No-AI / supply-chain checks as hard gates.
+# Every command works offline from the checkout; no third-party package is installed (the product is stdlib-only, see docs/27-hardening/sbom-summary.md).
+# Action versions are tags, as in verify.yml; pinning them to commit SHAs is open (docs/27-hardening/supply-chain-controls.md, SC-04) - a SHA can not be invented here.
+name: hub-hardening
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  hardening:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Runtime floor 3.12 (SQLite >= 3.37)
+        run: python -B -m hub --floor 3.12 selfcheck
+      - name: No-AI dependency and import deny-list (exit 9 on a finding)
+        run: python -B -m hub no-ai-check
+      - name: Secret scan and deletion-path grep over the product code
+        run: |
+          python -B - <<'PY'
+          import json, sys
+          from hub.security import scan
+          r = scan.run(".")
+          print(json.dumps(r, indent=1, sort_keys=True)[:4000])
+          sys.exit(0 if r["clean"] else 1)
+          PY
+      - name: SBOM is reproducible and lists no third-party package
+        run: |
+          python -B -m hub.security.sbom . --out "$RUNNER_TEMP/sbom-1.json"
+          python -B -m hub.security.sbom . --out "$RUNNER_TEMP/sbom-2.json"
+          cmp "$RUNNER_TEMP/sbom-1.json" "$RUNNER_TEMP/sbom-2.json"
+          python -B - <<'PY'
+          import sys
+          from hub.security import sbom
+          extra = sbom.third_party(".")
+          print("third-party imports:", extra)
+          sys.exit(1 if extra else 0)
+          PY
+      - name: Static checks (import cycles, complexity, unused, layering)
+        run: |
+          python -B docs/20-application/evidence/s20_static_checks.py . --out "$RUNNER_TEMP/static.json"
+          python -B - <<'PY'
+          import json, os, sys
+          c = json.load(open(os.path.join(os.environ["RUNNER_TEMP"], "static.json")))["counts"]
+          print(c)
+          sys.exit(1 if (c["two_cycles"] or c["three_cycles"] or c["domain_to_web_files"]) else 0)
+          PY
+      - name: Hub tests (sandbox copy; needs the Stage 0A data backup next to the checkout)
+        run: |
+          if [ -f ../_data-backup-2026-10-17/SHA256SUMS.txt ]; then
+            python -B tests/hub/run_hub_tests.py --sandbox-root "$RUNNER_TEMP/hub-sbx" --label ci
+          else
+            echo "::warning::Stage 0A backup not present on this runner: the hub tests were NOT run (HAR-07 open)"
+          fi

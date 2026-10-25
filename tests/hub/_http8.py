@@ -14,12 +14,13 @@ from hub.web import server
 class Served(object):
     """Start a WebApp on 127.0.0.1 with an ephemeral port; use as a context manager."""
 
-    def __init__(self, app):
+    def __init__(self, app, read_timeout=None):
         self.app = app
+        self.read_timeout = read_timeout  # Stage 27 (S26-F-06): None = the listener default (hub.web.server.READ_TIMEOUT_SECONDS)
         self.srv = None
 
     def __enter__(self):
-        self.srv = server.make_server(self.app, 0)
+        self.srv = server.make_server(self.app, 0) if self.read_timeout is None else server.make_server(self.app, 0, self.read_timeout)
         self.port = self.srv.server_address[1]
         self.host = self.srv.server_address[0]
         self.thread = threading.Thread(target=self.srv.serve_forever, kwargs={"poll_interval": 0.05}, daemon=True)

@@ -19,7 +19,9 @@ import _support as S
 import _stg23 as T
 from hub.control import registry as R
 
-REG_DIR = os.path.join(S.CODE_ROOT, "docs", "23-human-control", "stage12-v0.2")
+# Stage 27 (S27-DEV-10): the committed registry is the regenerated one in docs/27-hardening/error-registry (three new HTTP codes: E-REQ-TIMEOUT, E-REQ-RATE-LIMITED,
+# E-STORE-UNAVAILABLE). The Stage 12 v0.2 registry (docs/23-human-control/stage12-v0.2) stays untouched as the baseline; test_tst_hub_stg27_registry.py proves the new one only ADDS.
+REG_DIR = os.path.join(S.CODE_ROOT, "docs", "27-hardening", "error-registry")
 REFERENCED_ONLY = {"E-RUN-ABANDONED", "E-STORE-DB-BUSY"}
 
 

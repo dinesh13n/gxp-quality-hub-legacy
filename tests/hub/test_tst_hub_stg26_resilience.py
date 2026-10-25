@@ -31,9 +31,12 @@ from hub.store import db
 from hub.web import server
 from hub.web.app import Request, WebApp
 
-REGISTERED = {"S26-F-04": "config file unreadable / not JSON / not an object: Python traceback and exit 1 instead of an E-CFG-* code (operator CLI, host trusted)",
-              "S26-F-05": "unknown configuration keys (top level and nested) are accepted silently: a mistyped safety key is inert",
-              "S26-F-06": "the listener has no per-connection read timeout: a client that declares a longer body than it sends holds a handler thread until it closes"}
+# Stage 26 REGISTERED S26-F-04 (traceback instead of a code), S26-F-05 (unknown keys ignored), S26-F-06 (no read timeout) and S26-F-07 (generic 500 for a store fault).
+# All four are FIXED in Stage 27 (S27-DEV-01 .. ); the tests below assert the fixed behaviour and the evidence files record the old observation for comparison.
+REGISTERED = {"S26-F-04": "FIXED in Stage 27: an unreadable / non-JSON / non-object config file ends with E-CFG-INVALID (exit 2), no traceback",
+              "S26-F-05": "FIXED in Stage 27: an unknown configuration key (top level or nested) is refused with E-CFG-INVALID",
+              "S26-F-06": "FIXED in Stage 27: the listener sets a per-connection read timeout (hub.web.server.READ_TIMEOUT_SECONDS) and answers 408 E-REQ-TIMEOUT",
+              "S26-F-07": "FIXED in Stage 27: a store fault answers 503 E-STORE-UNAVAILABLE (also /healthz), content-free"}
 
 
 def setUpModule():
@@ -41,16 +44,18 @@ def setUpModule():
 
 
 def generic_500(tc, resp, where):
-    tc.assertEqual(resp.status, 500, where)
+    """Stage 27 (S26-F-07): a store fault is 503 E-STORE-UNAVAILABLE - still content-free (name kept; it is the 'fail closed, nothing on the wire' check)."""
+    tc.assertEqual(resp.status, 503, where)
     body = resp.body.decode("utf-8", "replace")
     doc = json.loads(body)
-    tc.assertEqual(doc["error"]["code"], "E-HUB-INTERNAL", where)
+    tc.assertEqual(doc["error"]["code"], "E-STORE-UNAVAILABLE", where)
     for bad in (T.S.SANDBOX_ROOT, T.S.CODE_ROOT, "Traceback", "sqlite3", "OperationalError", "DatabaseError", "hub.sqlite3"):
         tc.assertNotIn(bad, body, (where, bad))
 
 
 class TST_HUB_STG26_Resilience(unittest.TestCase):
     def store(self, **kw):
+        kw["extra"] = dict({"rate_limit": {"enabled": False}}, **(kw.get("extra") or {}))  # Stage 27: some probes send > 100 refused requests
         st = W.WStore(**kw)
         self.addCleanup(st.close)
         return st
@@ -67,8 +72,8 @@ class TST_HUB_STG26_Resilience(unittest.TestCase):
         return r
 
     def test_TST_HUB_STG26_C01_store_faults_fail_closed(self):
-        """C01 (RT-12, FD-01 / FD-02): a read-only store file and a corrupt header answer every request with the generic 500 (nothing about paths, SQL or stack on the
-        wire), change no data, and the very next request after the fault is removed succeeds with an intact chain and integrity_check ok. A missing store is refused at
+        """C01 (RT-12, FD-01 / FD-02): a read-only store file and a corrupt header answer every request with 503 E-STORE-UNAVAILABLE (Stage 27, S26-F-07; before: the generic 500;
+        nothing about paths, SQL or stack on the wire), change no data, and the very next request after the fault is removed succeeds with an intact chain and integrity_check ok. A missing store is refused at
         start-up with E-STORE-NOT-MIGRATED."""
         st = self.store(loaded=False)
         case = st.new_case("C91000001")
@@ -124,8 +129,8 @@ class TST_HUB_STG26_Resilience(unittest.TestCase):
         self.assertFalse(started)
         self.assertEqual(code, "E-STORE-NOT-MIGRATED")
         T.write_evidence("store-faults.json", {"label": T.LABEL, "outcomes": outcomes, "missing_store_start": code, "recovery_request": 201, "integrity_check": "ok",
-                                              "audit_chain": "ok", "observation": "S26-F-07: a fault surfaces as the generic E-HUB-INTERNAL 500 (by design: fail closed), "
-                                              "also on /healthz; no E-STORE-* code is mapped over HTTP"})
+                                              "audit_chain": "ok", "observation": "S26-F-07 fixed in Stage 27: a fault surfaces as 503 E-STORE-UNAVAILABLE (fail closed, content-free), "
+                                              "also on /healthz; before it was the generic E-HUB-INTERNAL 500"})
 
     def cli(self, cfg, st, command="status", extra=()):
         d = T.S.tmpdir("c02-")
@@ -145,8 +150,8 @@ class TST_HUB_STG26_Resilience(unittest.TestCase):
 
     def test_TST_HUB_STG26_C02_configuration_faults(self):
         """C02 (RT-12, FD-03 / FD-04, T-23): invalid VALUES in safety settings are refused with E-CFG-INVALID (exit 2) and change nothing; hub.kill refuses with
-        E-HUB-KILLED (exit 3); a non-default authority without approval_ref is refused; an unreadable / non-JSON / non-object file refuses to run (registered S26-F-04:
-        traceback, exit 1, no hub code); unknown keys are accepted silently (registered S26-F-05)."""
+        E-HUB-KILLED (exit 3); a non-default authority without approval_ref is refused; an unreadable / non-JSON / non-object file and an unknown key (top level or nested)
+        are refused with E-CFG-INVALID, exit 2, no traceback (S26-F-04 / S26-F-05, fixed in Stage 27)."""
         import copy
         st = self.store(loaded=False)
         base = T.S.json.load(open(st.cfg_path)) if hasattr(T.S, "json") else json.load(open(st.cfg_path))
@@ -177,18 +182,14 @@ class TST_HUB_STG26_Resilience(unittest.TestCase):
             if (rc, code) != want or tb:
                 wrong.append((name, rc, code, tb))
         self.assertEqual(wrong, [], "configuration fault not refused as designed")
-        # registered findings: record exactly what happens, so a fix shows up as a change in the evidence
+        # Stage 27: S26-F-04 / S26-F-05 are fixed - these now refuse with a hub code, exit 2, no traceback
         reg = {}
-        for name, cfg in (("file missing", "MISSING"), ("truncated JSON", '{"data_origin": "synth'), ("not JSON", "hello"), ("JSON array", [])):
-            rc, code, tb = self.cli(cfg, st)
-            reg[name] = [rc, code, tb]
-            self.assertNotEqual(rc, 0, name)  # it does refuse to run
-            self.assertIsNone(code, name)     # ... but not with a hub error code (S26-F-04)
-        for name, cfg in (("unknown top-level key", mod(lambda c: c.update(bogus_key=1))), ("unknown zone_h key", mod(lambda c: c.setdefault("zone_h", {}).update(holderz=["x"]))),
+        for name, cfg in (("file missing", "MISSING"), ("truncated JSON", '{"data_origin": "synth'), ("not JSON", "hello"), ("JSON array", []),
+                          ("unknown top-level key", mod(lambda c: c.update(bogus_key=1))), ("unknown zone_h key", mod(lambda c: c.setdefault("zone_h", {}).update(holderz=["x"]))),
                           ("mistyped kill key", mod(lambda c: c.setdefault("hub", {}).update(kil=True)))):
             rc, code, tb = self.cli(cfg, st)
             reg[name] = [rc, code, tb]
-            self.assertEqual(rc, 0, name)  # accepted silently (S26-F-05)
+            self.assertEqual((rc, code, tb), (2, "E-CFG-INVALID", False), name)
         self.assertEqual(T.diff(before, T.snapshot(st)), [], "a refused configuration changed state")
         T.write_evidence("config-faults.json", {"label": T.LABEL, "refused_as_designed": observed, "registered": reg, "registered_findings": REGISTERED})
 
@@ -362,11 +363,11 @@ class TST_HUB_STG26_Resilience(unittest.TestCase):
 
     def test_TST_HUB_STG26_C06_transport_anomalies_on_the_listener(self):
         """C06 (RT-12, T-19): raw-socket anomalies against the real loopback listener. Each ends in a defined 4xx or a closed socket, never a 5xx, and /healthz answers
-        afterwards. Measured and registered (S26-F-06): the handler class has no read timeout, and a client that sends fewer body bytes than it declared is still
-        waiting after 1.5 s."""
+        afterwards. S26-F-06 (fixed in Stage 27): the handler class has a read timeout (10 s) and a client that sends fewer body bytes than it declared is
+        answered 408 E-REQ-TIMEOUT (here with a 1 s timeout) instead of holding a thread."""
         st = self.store(loaded=False)
         seen = {}
-        with H.Served(st.app) as srv:
+        with H.Served(st.app, read_timeout=1.0) as srv:
             host, port = srv.host, srv.port
             base = "Host: 127.0.0.1:%d\r\n" % port
 
@@ -409,23 +410,22 @@ class TST_HUB_STG26_Resilience(unittest.TestCase):
             finally:
                 for s in idle:
                     s.close()
-            # S26-F-06: short body, no timeout
-            s = socket.create_connection((host, port), timeout=3)
+            # S26-F-06 (fixed): a short body is answered 408 after the read timeout
+            s = socket.create_connection((host, port), timeout=5)
             try:
                 s.sendall(("POST /api/v2/policies HTTP/1.1\r\n" + base + "Content-Type: application/json\r\nContent-Length: 1000\r\n\r\n{}").encode())
-                s.settimeout(1.5)
-                try:
-                    waiting = s.recv(1) == b""
-                    waiting = not waiting and False
-                except socket.timeout:
-                    waiting = True
+                t0 = time.time()
+                head = s.recv(12)
+                waited = time.time() - t0
             finally:
                 s.close()
-            self.assertTrue(waiting, "the server answered or closed within 1.5 s: S26-F-06 may be fixed - update the finding")
-            self.assertIsNone(server.make_handler(st.app).timeout, "a read timeout was added: S26-F-06 may be fixed")
+            self.assertEqual(head, b"HTTP/1.1 408", head)
+            self.assertLess(waited, 4.0)
+            self.assertEqual(server.make_handler(st.app).timeout, server.READ_TIMEOUT_SECONDS)
+            self.assertEqual(server.READ_TIMEOUT_SECONDS, 10)
             self.assertEqual(rawreq(("GET /healthz HTTP/1.1\r\n" + base + "\r\n").encode())[0], 200)
         T.write_evidence("transport-anomalies.json", {"label": T.LABEL, "statuses": dict((k, str(v)) for k, v in seen.items()), "http_5xx": 0,
-                                                     "short_body_client_still_waiting_after_1.5s": True, "handler_timeout": None, "registered": REGISTERED["S26-F-06"]})
+                                                     "short_body_answered": 408, "handler_timeout_seconds": server.READ_TIMEOUT_SECONDS, "registered": REGISTERED["S26-F-06"]})
 
 
 if __name__ == "__main__":

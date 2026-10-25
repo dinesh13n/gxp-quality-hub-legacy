@@ -133,7 +133,8 @@ def write_anchor(con, path):
     if d:
         os.makedirs(d, exist_ok=True)
     line = canonical({"audit_seq": seq, "hash": h, "occurred_at": ts})
-    with open(path, "a", encoding="utf-8") as f:
+    # Stage 27 S27-DEV-14: a NEW anchor file is created owner-only (0600); an existing file keeps its mode. Content and fsync are unchanged.
+    with os.fdopen(os.open(path, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o600), "a", encoding="utf-8") as f:
         f.write(line + "\n")
         f.flush()
         os.fsync(f.fileno())

@@ -1,0 +1,38 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 91,
+    "skipped": 0
+   },
+   "executed_methods": 91,
+   "expected_methods": 91,
+   "group": "I45",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 101.9,
+   "selectors": [
+    "INC04",
+    "TST_POL",
+    "TST_DEC",
+    "TST_ID",
+    "INC05",
+    "E05EGRESS",
+    "TST_CO_03"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 91, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-03,TST-DEC-01,TST-DEC-02,TST-DEC-03,TST-DEC-04,TST-DEC-05,TST-DEC-06,TST-DEC-07,TST-DEC-08,TST-DEC-09,TST-DEC-10,TST-DEC-11,TST-DEC-12,TST-DEC-13,TST-DEC-14,TST-DEC-15,TST-DEC-16,TST-DEC-17,TST-DEC-18,TST-DEC-19,TST-DEC-20,TST-DEC-21,TST-DEC-23,TST-DEC-24,TST-DEC-25,TST-DEC-26,TST-DEC-27,TST-DEC-28,TST-ID-01,TST-ID-02,TST-ID-03,TST-ID-04,TST-ID-05,TST-ID-06,TST-ID-07,TST-ID-08,TST-ID-09,TST-ID-10,TST-ID-11,TST-ID-12,TST-POL-01,TST-POL-02,TST-POL-03,TST-POL-04,TST-POL-05,TST-POL-06,TST-POL-07,TST-POL-08,TST-POL-09,TST-POL-10,TST-POL-11,TST-POL-12,TST-POL-13,TST-POL-14,TST-POL-15,TST-POL-16,TST-POL-17,TST-POL-18,TST-POL-19,TST-POL-20,TST-POL-21,TST-POL-22,TST-POL-23,TST-POL-25 seconds=101.9 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s27-verify/I45/I45/report.json"
+   ],
+   "wall_seconds": 101.9
+  }
+ ],
+ "schema": "hub-regression-log/v1",
+ "total_executed": 91,
+ "total_expected": 91
+}

@@ -1,0 +1,35 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 43,
+    "skipped": 0
+   },
+   "executed_methods": 43,
+   "expected_methods": 43,
+   "group": "I8b",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 73.9,
+   "selectors": [
+    "TST_CO_08",
+    "TST_NFR",
+    "I8_",
+    "INC08_S"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 43, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-08,TST-NFR-01,TST-NFR-02,TST-NFR-05,TST-NFR-06,TST-NFR-07,TST-NFR-08,TST-NFR-09,TST-NFR-10,TST-NFR-11,TST-NFR-13,TST-NFR-14,TST-NFR-15,TST-NFR-16,TST-NFR-17,TST-NFR-18,TST-NFR-19,TST-NFR-20 seconds=73.9 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s27-verify/I8b/I8b/report.json"
+   ],
+   "wall_seconds": 73.9
+  }
+ ],
+ "schema": "hub-regression-log/v1",
+ "total_executed": 43,
+ "total_expected": 43
+}

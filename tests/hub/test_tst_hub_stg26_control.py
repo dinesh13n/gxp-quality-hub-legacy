@@ -29,9 +29,9 @@ GATE_OPS = ("OP-GATE-01", "OP-GATE-02", "UI-PACK", "UI-DISPOSITION")
 EXCLUDED = ("OP-SEC-01", "OP-SEC-02")  # login is public, logout revokes the very session under test (A06)
 BOGUS = "f" * 64
 # Findings REGISTERED by this stage (docs/26-tevv/red-team-findings.md). The test still fails on any OTHER mismatch; it never hides a new one.
-# S26-F-01: OP-GATE-02 validates the action name before it looks at the session, so an unauthenticated request with a missing / unknown action gets
-# 422 E-GATE-UNKNOWN-ACTION instead of 401 (error-handling-spec ER-1: authentication before validation). Safe in effect: nothing is written but one audit row.
-REGISTERED_A01 = {("OP-GATE-02", "none"): (422, "E-GATE-UNKNOWN-ACTION", "S26-F-01"), ("OP-GATE-02", "bogus"): (422, "E-GATE-UNKNOWN-ACTION", "S26-F-01")}
+# S26-F-01 was REGISTERED here in Stage 26 (OP-GATE-02 answered 422 E-GATE-UNKNOWN-ACTION before it looked at the session). Fixed in Stage 27 (hub/gate/service.py,
+# S27-DEV-05): authentication first, 401 E-AUTH-UNAUTHENTICATED. The registry is now empty and A01 asserts that no registered deviation remains.
+REGISTERED_A01 = {}
 
 
 def setUpModule():
@@ -40,6 +40,7 @@ def setUpModule():
 
 class _Base(unittest.TestCase):
     def store(self, loaded=False, **kw):
+        kw["extra"] = dict({"rate_limit": {"enabled": False}}, **(kw.get("extra") or {}))  # Stage 27: the sweeps below send > 100 refused requests; A07 turns the limiter on
         st = W.WStore(loaded=loaded, **kw)
         self.addCleanup(st.close)
         st.authn.create_user("fin", st.pw, ["finance_read"], "op")
@@ -96,7 +97,8 @@ class TST_HUB_STG26_Control(_Base):
         self.assertEqual(T.diff(before, T.snapshot(st)), [], "refused cells changed state")
         registered = [m for m in mism if REGISTERED_A01.get((m[0], m[1])) == (m[2], m[3], REGISTERED_A01.get((m[0], m[1]), (0, 0, ""))[2])]
         unexpected = [m for m in mism if m not in registered]
-        self.assertEqual(unexpected, [], "authorisation mismatches (RT-09) beyond the registered findings")
+        self.assertEqual(registered, [], "S26-F-01 is fixed in Stage 27: no registered deviation remains")
+        self.assertEqual(unexpected, [], "authorisation mismatches (RT-09)")
         self.assertGreaterEqual(denied_delta, len(deny_cells), "every refused request leaves an audit trace")
         # allowed cells: never 401, never the generic role refusal, never 500
         allow_cells, dist, bad = 0, {}, []
@@ -402,27 +404,34 @@ class TST_HUB_STG26_Control(_Base):
         T.write_evidence("session-abuse.json", {"label": T.LABEL, "idle_seconds": idle, "absolute_seconds": absolute, "absolute_probe_steps": len(st_codes)})
 
     def test_TST_HUB_STG26_A07_unauthenticated_flood_audit_amplification(self):
-        """A07 (RT-A13, T-19, informational): N unauthenticated requests to unknown routes. Measures the audit rows and bytes added per request (an unauthenticated
-        client can grow the audit table: Low while loopback-only, RS-04), and proves the hostile path text itself is never stored (only a 16-hex path digest)."""
-        st = self.store()
+        """A07 (RT-A13, T-19; Stage 27 RS-04 fix): N unauthenticated requests to unknown routes. Before Stage 27 every one added an audit row (an unauthenticated
+        client could grow the audit table). Now the per-peer limiter (rate_limit.max_rejected, default 100 per 60 s) answers 429 E-REQ-RATE-LIMITED with NO audit row
+        once the peer is over the limit, so the growth is bounded by the limit; the hostile path text itself is never stored (only a 16-hex path digest)."""
+        st = self.store(extra={"rate_limit": {"enabled": True}})
+        limit = st.app.limiter.limit
         n, a0 = 200, T.audit_n(st)
         evil = "/api/v2/<script>alert(1)</script>/../../etc/passwd?x=1"
         b0 = st.con.execute("SELECT coalesce(sum(length(details)),0) FROM audit_log").fetchone()[0]
-        for i in range(n):
-            r = st.call("GET", "/nope/%d" % i if i % 2 else "/api/v2/x%d" % i, None)
-            self.assertEqual((r.status, r.code), (403, "E-AUTH-FORBIDDEN"))
         r = st.call("GET", up.quote(evil, safe="/<>()"), None)
         self.assertEqual(r.status, 403)
+        statuses = []
+        for i in range(n):
+            r = st.call("GET", "/nope/%d" % i if i % 2 else "/api/v2/x%d" % i, None)
+            statuses.append(r.status)
+            self.assertIn((r.status, r.code), ((403, "E-AUTH-FORBIDDEN"), (429, "E-REQ-RATE-LIMITED")))
         added = T.audit_n(st) - a0
         b1 = st.con.execute("SELECT coalesce(sum(length(details)),0) FROM audit_log").fetchone()[0]
-        self.assertEqual(added, n + 1)
+        self.assertEqual(statuses.count(403), limit - 1)       # the evil-path request used one place of the window
+        self.assertEqual(statuses.count(429), n - (limit - 1))
+        self.assertEqual(added, limit)                          # bounded by the limit, not by the number of requests
+        self.assertEqual(r.headers.get("retry-after") is not None, True)
         blob = " ".join(row[0] for row in st.con.execute("SELECT details FROM audit_log ORDER BY audit_seq DESC LIMIT 20"))
         self.assertNotIn("script", blob)
         self.assertNotIn("passwd", blob)
         self.assertEqual(T.verify_chain(st)["status"], "ok")
-        T.write_evidence("audit-amplification.json", {"label": T.LABEL, "unauthenticated_requests": n + 1, "audit_rows_added": added,
-                                                     "detail_bytes_added": b1 - b0, "bytes_per_request": round((b1 - b0) / float(n + 1), 1),
-                                                     "raw_path_stored": False, "severity_if_loopback": "Low (RS-04)"})
+        T.write_evidence("audit-amplification.json", {"label": T.LABEL, "unauthenticated_requests": n + 1, "audit_rows_added": added, "limit": limit,
+                                                     "answered_429": statuses.count(429), "detail_bytes_added": b1 - b0,
+                                                     "raw_path_stored": False, "severity_if_loopback": "Low (RS-04, bounded by the Stage 27 limiter)"})
 
 
 if __name__ == "__main__":

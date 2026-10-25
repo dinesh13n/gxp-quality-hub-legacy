@@ -19,8 +19,6 @@ from hub.decision import access, schema, settings as dsettings
 from hub.decision.errors import (CaseExists, CaseIdInvalid, CaseNotFound, ChainBroken, CreationDisabled, EvidenceRequired,
                                  EvidenceUnresolved, FactInvalid, FieldTooLong, IdempotencyMismatch, Immutable, NoOp,
                                  NotYetExists, ReopenExplicit, SeqConflict, StateUnknown, TimeOrder, TransitionNotAllowed)
-from hub.gate.errors import GateNotAuthorised
-from hub.gate.service import GateService
 from hub.policy import withdrawal
 from hub.security import audit
 from hub.security.canonical import GENESIS, canonical, fmt, parse, sha256_hex
@@ -33,6 +31,7 @@ READ_ROLES = STATE_ROLES + ("dispositioner",)
 FACT_TYPES = ("FACT_OPS_CLOSED", "FACT_EVIDENCE_COMPLETE")
 EVIDENCE_KINDS = ("document", "intake_item", "crosswalk_object", "external_ref")
 LEGACY_REOPEN_MARKER = "LEGACY_UNEVIDENCED_REOPEN"
+WITHHELD_BASIS = "[withheld: the note of restricted evidence is not readable with your role]"  # Stage 27 S26-F-02
 _CASE_ID = re.compile(r"^C[0-9]{8}$")
 _REF = re.compile(r"^[A-Za-z0-9._:-]{1,64}$")
 COLS = ("event_id", "case_id", "seq", "event_type", "from_state", "to_state", "affects_state", "actor", "actor_kind",
@@ -99,6 +98,7 @@ class DecisionService(object):
         self.con, self.s, self.clock, self.anchor = con, s, clock, anchor
         self.d = d if d is not None else dsettings.resolve({})
         schema.require(con)
+        from hub.gate.service import GateService  # function-level since Stage 27: breaks the decision <-> gate package cycle (OD-27 debt)
         self.gate = GateService(con, s, clock, anchor)
 
     # ------------------------------------------------------------------ helpers
@@ -196,6 +196,7 @@ class DecisionService(object):
         if "E-DEC-IMMUTABLE" in msg:
             raise Immutable()
         if "E-GATE-NOT-AUTHORISED" in msg:
+            from hub.gate.errors import GateNotAuthorised  # function-level (cycle debt, Stage 27)
             raise GateNotAuthorised({"reason": "database trigger: Zone H event needs a human actor and a holder_check_ref"})
 
     def _idem_replay(self, key, body_hash):
@@ -312,6 +313,7 @@ class DecisionService(object):
             p = sess.principal
             declared = close_exception.get("actor")
             if declared is not None and declared != p.principal_id:
+                from hub.gate.errors import GateNotAuthorised  # function-level (cycle debt, Stage 27)
                 raise GateNotAuthorised({"reason": "close_exception actor differs from the authenticated holder"})
             exc["actor"] = p.principal_id
         else:
@@ -453,7 +455,19 @@ class DecisionService(object):
             raise CaseNotFound({"case_id": str(case_id)[:40]})
         rows = self.con.execute("SELECT " + ", ".join(COLS) + " FROM decision_events WHERE case_id = ? AND seq > ? ORDER BY seq LIMIT ?",
                                 (case_id, int(after_seq), limit)).fetchall()
-        return [_decode(r) for r in rows]
+        return [self._withhold_note(sess, _decode(r)) for r in rows]
+
+    def _withhold_note(self, sess, ev):
+        """Stage 27 S26-F-02 (assumption A-27-02, safest default): the free-text note of an EVIDENCE_ATTACHED event is the `basis` of that event, so the
+        access rule of the evidence record (AC-DEC-13) must also cover it. A reader whose roles may not read the record's level gets the fixed placeholder
+        and basis_withheld = true; the stored row, its hash and the chain are unchanged (verify_chain still passes). An event whose record can not be
+        resolved is withheld too (fail closed). Every other event type is returned as stored."""
+        if ev["event_type"] != "EVIDENCE_ATTACHED":
+            return ev
+        row = self.con.execute("SELECT access_level FROM evidence_record WHERE ev_id = ?", (ev["payload"].get("ev_id"),)).fetchone()
+        if row is not None and access.can_read(sess.principal.roles, row[0]):
+            return ev
+        return dict(ev, basis=WITHHELD_BASIS, basis_withheld=True)
 
     def all_events(self, case_id):
         """Internal / report use: every event of a case, ordered (no role check)."""
@@ -490,6 +504,7 @@ class DecisionService(object):
         ev = self._get_event(event_id)
         if ev is None:
             raise CaseNotFound({"event_id": str(event_id)[:40]})
+        ev = self._withhold_note(sess, ev)  # Stage 27 S26-F-02
         refs = list(ev["evidence_refs"])
         if ev["event_type"] == "EVIDENCE_ATTACHED" and ev["payload"].get("ev_id") not in refs:
             refs.append(ev["payload"]["ev_id"])

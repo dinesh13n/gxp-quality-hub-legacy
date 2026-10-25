@@ -1,0 +1,55 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "body": {
+   "type": "string"
+  },
+  "event_type": {
+   "enum": [
+    "RUN_STARTED",
+    "RUN_CHECKPOINT",
+    "RUN_FINISHED",
+    "RUN_FAILED",
+    "RUN_ABANDONED",
+    "RUN_REFUSED"
+   ],
+   "type": "string"
+  },
+  "job": {
+   "type": "string"
+  },
+  "occurred_at": {
+   "type": "string"
+  },
+  "run_id": {
+   "type": "string"
+  },
+  "run_seq": {
+   "type": "integer"
+  },
+  "trigger": {
+   "enum": [
+    "manual",
+    "scheduled"
+   ],
+   "type": "string"
+  },
+  "triggered_by": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "body",
+  "event_type",
+  "job",
+  "occurred_at",
+  "run_id",
+  "run_seq",
+  "trigger",
+  "triggered_by"
+ ],
+ "title": "hub store table run_event",
+ "type": "object"
+}

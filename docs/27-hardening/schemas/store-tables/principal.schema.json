@@ -1,0 +1,63 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "created_at": {
+   "type": "string"
+  },
+  "created_by": {
+   "type": "string"
+  },
+  "principal_id": {
+   "type": "string"
+  },
+  "principal_kind": {
+   "enum": [
+    "human",
+    "service"
+   ],
+   "type": "string"
+  },
+  "pw_algo": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "pw_hash": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "pw_iterations": {
+   "type": [
+    "integer",
+    "null"
+   ]
+  },
+  "pw_salt": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "status": {
+   "enum": [
+    "active",
+    "disabled"
+   ],
+   "type": "string"
+  }
+ },
+ "required": [
+  "created_at",
+  "created_by",
+  "principal_id",
+  "principal_kind",
+  "status"
+ ],
+ "title": "hub store table principal",
+ "type": "object"
+}

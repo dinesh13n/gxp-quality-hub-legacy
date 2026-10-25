@@ -18,7 +18,6 @@ import re
 import sqlite3
 
 from hub.decision import access
-from hub.r2.errors import IndexAbsent, ReasonRequired
 from hub.review import search as rsearch
 from hub.review.errors import QueryInvalid, QueryTooLong, SearchDisabled
 from hub.search import fts, schema, settings as ssettings, text
@@ -115,6 +114,7 @@ class R2SearchService(rsearch.SearchService):
         schema.require(con)
         load = con.execute("SELECT event FROM search_corpus_load ORDER BY load_id DESC LIMIT 1").fetchone()
         if load is None or load[0] != "LOADED":
+            from hub.r2.errors import IndexAbsent  # function-level since Stage 27: breaks the r2 <-> search package cycle (OD-27 debt)
             raise IndexAbsent({"hint": "python -m hub.search build-index"})
         engine, why, _ = self.engine_for(con)
         levels = _readable_levels(p.roles)
@@ -131,6 +131,7 @@ class R2SearchService(rsearch.SearchService):
         why_c3 = reason.strip() if isinstance(reason, str) else ""
         if c3 and self.settings["require_c3_reason"]:
             if not why_c3:
+                from hub.r2.errors import ReasonRequired  # function-level (cycle debt, Stage 27)
                 raise ReasonRequired({"op": "OP-REV-03", "c3_rows": len(c3)})
             audit.append(con, self.clock, anchor=self.anchor, actor=p.principal_id, actor_kind=p.actor_kind, action="C3_READ", outcome="success",
                          correlation_id=correlation_id, object_ref="OP-REV-03", reason=why_c3[:500],

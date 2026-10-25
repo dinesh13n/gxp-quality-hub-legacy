@@ -29,11 +29,10 @@ ACTIVE = (re.compile(r"<[^>]*\son[a-z]+\s*=", re.I), re.compile(r"""<[a-z][^<>]*
 EVIL_HDR = re.compile(r"x-injected|\r|\n")
 
 
-# Findings REGISTERED by this stage (docs/26-tevv/red-team-findings.md); a test still fails on any other occurrence.
-# S26-F-03: a JSON string holding a lone UTF-16 surrogate escape (corpus UN #10, "\ud800") passes json.loads but can not be encoded to UTF-8 by SQLite: HTTP 500
-# E-HUB-INTERNAL on every write surface that stores the text (intake, evidence, policy, login, flag override). B08 proves no state changes.
-REGISTERED_500 = {("UN", 10): "S26-F-03"}
-# S26-F-02: the evidence `note` is copied to the `basis` of the EVIDENCE_ATTACHED event; restricted evidence is redacted in the evidence object only.
+# Findings REGISTERED by Stage 26 (docs/26-tevv/red-team-findings.md), FIXED in Stage 27 (S27-DEV-01 .. ): the registries are empty and the tests assert it.
+# S26-F-03: a JSON string holding a lone UTF-16 surrogate escape (corpus UN #10, "\ud800") used to give HTTP 500; hub.web.wire.parse_json now answers 400 E-REQ-INVALID.
+REGISTERED_500 = {}
+# S26-F-02: the evidence `note` is copied to the `basis` of the EVIDENCE_ATTACHED event; Stage 27 withholds it from roles that may not read the record.
 ROLES_WITHOUT_RESTRICTED = ("rev", "fin", "svc")
 
 
@@ -59,6 +58,7 @@ def hostile_ok(tc, resp, where):
 
 class _Base(unittest.TestCase):
     def store(self, **kw):
+        kw["extra"] = dict({"rate_limit": {"enabled": False}}, **(kw.get("extra") or {}))  # Stage 27: the corpus sweeps send > 100 refused requests
         st = W.WStore(loaded=False, **kw)
         self.addCleanup(st.close)
         st.authn.create_user("svc-int", st.pw, ["integration"], "op", kind="service")
@@ -137,7 +137,7 @@ class TST_HUB_STG26_Input(_Base):
                                                 st.csrf_for(cookie)}), cookie=cookie, ctype="application/x-www-form-urlencoded", csrf=False) if False else
                  st.call("GET", "/ui/cases/%s/trace" % case, cookie=cookie), cls, i, s)
         unregistered = [(a, b, c) for a, b, c, d in errors500 if (b, c) not in REGISTERED_500]
-        self.assertEqual(unregistered, [], "M-07: HTTP 500 on hostile input beyond the registered finding")
+        self.assertEqual(unregistered, [], "M-07: HTTP 500 on hostile input (S26-F-03 is fixed in Stage 27: none is registered any more)")
         registered_500 = sorted(set("%s #%d %s" % (b, c, REGISTERED_500[(b, c)]) for a, b, c, d in errors500)), sorted(set(a for a, b, c, d in errors500))
         # read back every place the text can surface
         pages = 0
@@ -263,7 +263,7 @@ class TST_HUB_STG26_Input(_Base):
         return res
 
     def test_TST_HUB_STG26_B08_registered_500_changes_no_state(self):
-        """B08 (RT-07 / RT-12, S26-F-03): the registered lone-surrogate 500 is a refusal in effect: for each write surface the store, the audit chain and SQLite's
+        """B08 (RT-07 / RT-12, S26-F-03, FIXED in Stage 27 -> 400 E-REQ-INVALID on every write surface): the lone-surrogate refusal changes no state: for each write surface the store, the audit chain and SQLite's
         integrity check are identical before and after, and the next valid request succeeds. Also: other encodings that look similar (a pair of valid escapes, NUL,
         a 4-byte emoji, a BOM) are accepted or refused with a defined code, never 500."""
         st = self.store()
@@ -282,13 +282,17 @@ class TST_HUB_STG26_Input(_Base):
         }
         before = T.snapshot(st)
         outcomes = {}
+        intake = calls.pop("intake")
         for name, fn in calls.items():
-            try:
-                outcomes[name] = fn().status
-            except AssertionError as e:
-                self.assertIn("surrogates not allowed", str(e), name)
-                outcomes[name] = 500
-        self.assertEqual(T.diff(before, T.snapshot(st)), [], "a 500 left state behind")
+            resp = fn()  # Stage 27: no AssertionError any more - the lone surrogate is refused at the wire
+            outcomes[name] = resp.status
+            self.assertEqual((resp.status, resp.code), (400, "E-REQ-INVALID"), name)
+        self.assertEqual(T.diff(before, T.snapshot(st)), [], "a refused request left state behind")
+        # the intake surface: the surrogate sits in the PAYLOAD TEXT (a JSON document inside a string), so the request is valid and the ITEM is quarantined as INVALID_JSON
+        resp = intake()
+        outcomes["intake"] = resp.status
+        self.assertEqual(resp.status, 201, resp.text)
+        self.assertEqual((resp.json()["outcome"], resp.json()["primary_reason"], resp.json()["queue"]), ("QUARANTINED", "INVALID_JSON", "quarantine_invalid"))
         self.assertEqual(T.verify_chain(st)["status"], "ok")
         self.assertEqual(st.con.execute("PRAGMA integrity_check").fetchone()[0], "ok")
         self.assertEqual(st.post("/api/v2/cases/%s/evidence" % case, {"kind": "document", "source": "s", "source_ref": "ok", "access_level": "quality"}, "rev").status, 201)
@@ -296,7 +300,7 @@ class TST_HUB_STG26_Input(_Base):
             t = json.loads('"%s"' % text) if text.startswith("\\u") or text.startswith("\\ud") else text
             resp = st.post("/api/v2/cases/%s/evidence" % case, {"kind": "document", "source": "s", "source_ref": "r-" + str(len(t)), "access_level": "quality", "note": t}, "rev")
             self.assertIn(resp.status, (201, 400, 422), (text, resp.text))
-        T.write_evidence("registered-500-surrogate.json", {"label": T.LABEL, "finding": "S26-F-03", "outcomes": outcomes, "state_changed_tables": [], "audit_chain": "ok",
+        T.write_evidence("registered-500-surrogate.json", {"label": T.LABEL, "finding": "S26-F-03 (fixed in Stage 27)", "outcomes": outcomes, "state_changed_tables": [], "audit_chain": "ok",
                                                           "integrity_check": "ok", "next_valid_request": 201})
 
 
@@ -354,9 +358,9 @@ class TST_HUB_STG26_Input(_Base):
         scan(resp, "login", allow=("token:rev", "token:ql") + tuple(k for k in secrets if k.startswith("digest:")))  # the caller's own new token is the point of login
         self.assertEqual(hits, [], "M-13: leakage hits")
         # restricted evidence: the reviewer and finance roles must not see the marker anywhere
-        # S26-F-02 (registered, Medium): the evidence `note` is stored as the `basis` of the EVIDENCE_ATTACHED event, so the event LIST (OP-DEC-02) shows a restricted
-        # evidence note to every role that may read events, while AC-DEC-13 only redacts the evidence record in OP-DEC-04. Any OTHER place showing the marker fails.
-        registered = {("rev", "/api/v2/cases/%s/events" % case): "S26-F-02", ("rev", "/api/v2/events/EV-00000002"): "S26-F-02"}
+        # S26-F-02 (FIXED in Stage 27, A-27-02): the evidence `note` is the `basis` of the EVIDENCE_ATTACHED event; roles that may not read the restricted record get a
+        # fixed placeholder there. NO place shows the marker to these roles any more.
+        registered = {}
         leaks = {}
         for who in ROLES_WITHOUT_RESTRICTED:
             for p in ("/api/v2/cases/%s/events" % case, "/api/v2/events/EV-00000002", "/api/v2/cases/%s/state" % case, "/api/v2/cases/%s/rule-trace" % case,
@@ -364,7 +368,9 @@ class TST_HUB_STG26_Input(_Base):
                 resp = st.call("GET", p, token=st.tokens[who])
                 if marker in resp.text:
                     leaks[(who, p)] = registered.get((who, p), "UNREGISTERED")
-        self.assertEqual([k for k, v in leaks.items() if v == "UNREGISTERED"], [], "restricted evidence text visible outside the registered finding")
+        self.assertEqual(leaks, {}, "restricted evidence text visible to a role that may not read it (S26-F-02 is fixed in Stage 27)")
+        ev_list = st.get("/api/v2/cases/%s/events" % case, "ql")
+        self.assertIn(marker, ev_list.text)  # the readers named by the rule still see the note
         full = st.get("/api/v2/events/EV-00000002", "ql")
         self.assertEqual(full.status, 200, full.text)
         # audit rows never carry the credential material either

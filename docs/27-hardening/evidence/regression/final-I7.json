@@ -1,0 +1,36 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 59,
+    "skipped": 0
+   },
+   "executed_methods": 59,
+   "expected_methods": 59,
+   "group": "I7",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 84.9,
+   "selectors": [
+    "TST_RUN",
+    "TST_MET",
+    "TST_OBS",
+    "INC07",
+    "E07EGRESS"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 59, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-MET-01,TST-MET-03,TST-MET-04,TST-MET-05,TST-MET-06,TST-MET-07,TST-MET-08,TST-MET-09,TST-MET-10,TST-MET-11,TST-MET-13,TST-MET-14,TST-MET-15,TST-MET-16,TST-MET-17,TST-MET-18,TST-OBS-01,TST-OBS-02,TST-OBS-03,TST-OBS-04,TST-OBS-05,TST-OBS-06,TST-OBS-07,TST-OBS-08,TST-OBS-09,TST-RUN-01,TST-RUN-02,TST-RUN-03,TST-RUN-05,TST-RUN-06,TST-RUN-07,TST-RUN-08,TST-RUN-09,TST-RUN-10,TST-RUN-11,TST-RUN-12,TST-RUN-13,TST-RUN-14,TST-RUN-15 seconds=84.9 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s27-verify/I7/I7/report.json"
+   ],
+   "wall_seconds": 84.9
+  }
+ ],
+ "schema": "hub-regression-log/v1",
+ "total_executed": 59,
+ "total_expected": 59
+}

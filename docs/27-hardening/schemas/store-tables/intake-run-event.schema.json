@@ -1,0 +1,41 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "body": {
+   "type": "string"
+  },
+  "event_type": {
+   "enum": [
+    "RUN_STARTED",
+    "RUN_CHECKPOINT",
+    "RUN_FINISHED",
+    "RUN_FAILED"
+   ],
+   "type": "string"
+  },
+  "occurred_at": {
+   "type": "string"
+  },
+  "run_id": {
+   "type": "string"
+  },
+  "run_seq": {
+   "type": "integer"
+  },
+  "source": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "body",
+  "event_type",
+  "occurred_at",
+  "run_id",
+  "run_seq",
+  "source"
+ ],
+ "title": "hub store table intake_run_event",
+ "type": "object"
+}

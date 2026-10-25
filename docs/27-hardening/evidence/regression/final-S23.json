@@ -1,0 +1,32 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 26,
+    "skipped": 0
+   },
+   "executed_methods": 26,
+   "expected_methods": 26,
+   "group": "S23",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 113.2,
+   "selectors": [
+    "STG23"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 26, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=113.2 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s27-verify/S23/S23/report.json"
+   ],
+   "wall_seconds": 113.3
+  }
+ ],
+ "schema": "hub-regression-log/v1",
+ "total_executed": 26,
+ "total_expected": 26
+}

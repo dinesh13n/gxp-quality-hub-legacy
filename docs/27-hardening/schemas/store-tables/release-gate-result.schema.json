@@ -1,0 +1,54 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "evidence_path": {
+   "type": "string"
+  },
+  "gate": {
+   "enum": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G10"
+   ],
+   "type": "string"
+  },
+  "note": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "recorded_at": {
+   "type": "string"
+  },
+  "release_id": {
+   "type": "string"
+  },
+  "result": {
+   "enum": [
+    "pass",
+    "fail",
+    "not_run"
+   ],
+   "type": "string"
+  }
+ },
+ "required": [
+  "evidence_path",
+  "gate",
+  "recorded_at",
+  "release_id",
+  "result"
+ ],
+ "title": "hub store table release_gate_result",
+ "type": "object"
+}

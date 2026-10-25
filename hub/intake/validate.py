@@ -9,6 +9,7 @@ import json
 import re
 import unicodedata
 
+from hub.core.unitext import has_lone_surrogate
 from hub.intake import canon
 from hub.intake.profiles import get_path
 
@@ -32,6 +33,8 @@ def parse_object(text):
         return None, "invalid_json"
     if not isinstance(value, dict):
         return None, "not_object"
+    if has_lone_surrogate(value):  # Stage 27 S26-F-03: not storable text; a reason code (INVALID_JSON -> quarantine), never an exception
+        return None, "invalid_json"
     return value, None
 
 

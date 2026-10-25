@@ -471,7 +471,9 @@ class TST_GATE_Gate(_Base):
         # behaviour: the obvious switches do not open the door
         os.environ["HUB_ZONE_H_DISABLE"] = "1"
         try:
-            st = self.store(extra={"zone_h": {"holders": ["holder-1"], "enforce": False, "disabled": True}, **EVENT_CFG})
+            with self.assertRaises(ConfigInvalid):  # Stage 27 (S26-F-05): the obvious switch keys are not just inert any more, the configuration refuses them
+                self.store(extra={"zone_h": {"holders": ["holder-1"], "enforce": False, "disabled": True}, **EVENT_CFG})
+            st = self.store(extra={"zone_h": {"holders": ["holder-1"]}, **EVENT_CFG})
             case = st.new_case()
             r = st.zh("nonholder", "ZH-01", {"decision": "accept", "basis": "b"}, case, "0" * 64)
             self.assertEqual((r.status, r.code), (403, "E-GATE-NOT-AUTHORISED"), r.text)

@@ -35,18 +35,19 @@ class GateService(object):
     def require_holder(self, sess, zh, correlation_id, object_ref):
         """Return the audit_seq of the accepted ZONE_H_ATTEMPT record (the holder_check_ref) or raise."""
         holders = self.s["zone_h"]["holders"]
+        if sess is None:  # Stage 27 S26-F-01 (ER-1): authenticate BEFORE the action name is looked at, so an anonymous caller learns nothing about valid names
+            audit.append(self.con, self.clock, anchor=self.anchor, actor="anonymous", actor_kind="system",
+                         action="ZONE_H_ATTEMPT", outcome="denied", correlation_id=correlation_id, object_ref=object_ref,
+                         reason="unauthenticated", details={"zh": zh if zh in ZONE_H_ACTIONS else "unrecognised",
+                                                            "zone_h_action": ZONE_H_ACTIONS.get(zh, "unrecognised"),
+                                                            "reason": "unauthenticated", "holders_configured": len(holders)})
+            raise AuthUnauthenticated()
         if zh not in ZONE_H_ACTIONS:
-            audit.append(self.con, self.clock, anchor=self.anchor, actor=sess.principal.principal_id if sess else "anonymous",
-                         actor_kind=sess.principal.actor_kind if sess else "system", action="ZONE_H_ATTEMPT", outcome="denied",
+            audit.append(self.con, self.clock, anchor=self.anchor, actor=sess.principal.principal_id,
+                         actor_kind=sess.principal.actor_kind, action="ZONE_H_ATTEMPT", outcome="denied",
                          correlation_id=correlation_id, object_ref=object_ref, reason="unknown_action",
                          details={"zh": str(zh)[:16], "reason": "unknown_action"})
             raise GateUnknownAction({"zh": str(zh)[:16]})
-        if sess is None:
-            audit.append(self.con, self.clock, anchor=self.anchor, actor="anonymous", actor_kind="system",
-                         action="ZONE_H_ATTEMPT", outcome="denied", correlation_id=correlation_id, object_ref=object_ref,
-                         reason="unauthenticated", details={"zh": zh, "zone_h_action": ZONE_H_ACTIONS[zh],
-                                                            "reason": "unauthenticated", "holders_configured": len(holders)})
-            raise AuthUnauthenticated()
         p = sess.principal
         reason = zone_h.refusal(p, sess.reauth_at, self.clock, self.s["zone_h"], reject_integration=True)  # Stage 20 DW-06: the one rule
         err = {None: None, zone_h.NO_HOLDERS: GateNoHolders, zone_h.REAUTH: GateReauthRequired}.get(reason, GateNotAuthorised)

@@ -19,7 +19,6 @@ import copy
 import os
 
 from hub.core.errors import ConfigInvalid
-from hub.guards import sandbox
 from hub.security.canonical import canonical, sha256_hex
 
 DEFAULTS = {
@@ -87,6 +86,7 @@ def anchor_path(settings, data_dir):
     if not p:
         raise ConfigInvalid({"audit.anchor_path": None,
                              "reason": "must be set in config (OD-S12-18 default accepted under OD-15)"})
+    from hub.guards import sandbox  # function-level since Stage 27: breaks the guards -> obs -> security -> guards cycle (OD-27 debt)
     p = os.path.expanduser(p)
     if not os.path.isabs(p):
         raise ConfigInvalid({"audit.anchor_path": p, "reason": "must be absolute"})

@@ -1,0 +1,23 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "revoked_at": {
+   "type": "string"
+  },
+  "revoked_by": {
+   "type": "string"
+  },
+  "token_sha256": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "revoked_at",
+  "revoked_by",
+  "token_sha256"
+ ],
+ "title": "hub store table service_token_revocation",
+ "type": "object"
+}

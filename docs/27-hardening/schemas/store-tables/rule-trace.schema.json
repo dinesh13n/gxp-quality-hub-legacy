@@ -1,0 +1,63 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "authoritative": {
+   "type": "integer"
+  },
+  "case_id": {
+   "type": "string"
+  },
+  "data_origin": {
+   "enum": [
+    "synthetic",
+    "production"
+   ],
+   "type": "string"
+  },
+  "flag_id": {
+   "type": "string"
+  },
+  "function": {
+   "type": "string"
+  },
+  "inputs": {
+   "type": "string"
+  },
+  "recorded_at": {
+   "type": "string"
+  },
+  "recorded_by": {
+   "type": "string"
+  },
+  "result": {
+   "type": "string"
+  },
+  "ruleset_ref": {
+   "type": "string"
+  },
+  "template_version": {
+   "type": "string"
+  },
+  "trace_id": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "authoritative",
+  "case_id",
+  "data_origin",
+  "flag_id",
+  "function",
+  "inputs",
+  "recorded_at",
+  "recorded_by",
+  "result",
+  "ruleset_ref",
+  "template_version",
+  "trace_id"
+ ],
+ "title": "hub store table rule_trace",
+ "type": "object"
+}

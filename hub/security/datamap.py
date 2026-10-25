@@ -25,7 +25,7 @@ TABLE_CLASS = {
     "policy_object": "C1", "policy_events": "C1", "rule_set": "C1", "rule_row": "C1", "active_ruleset": "C1", "run_event": "C1", "run_lock": "C1",
     "metric_definition": "C1", "metric_value": "C1", "obs_metric": "C1", "release_record": "C1", "release_gate_result": "C1",
     "deviation_register": "C1", "coexistence_inventory": "C1", "search_corpus_load": "C1",
-    "schema_migrations": "C1", "decision_schema_migrations": "C1", "intake_schema_migrations": "C1", "policy_schema_migrations": "C1",
+    "schema_migrations": "C1", "hardening_schema_migrations": "C1", "decision_schema_migrations": "C1", "intake_schema_migrations": "C1", "policy_schema_migrations": "C1",
     "runs_schema_migrations": "C1", "web_schema_migrations": "C1", "search_schema_migrations": "C1",
 }
 # tag -> (columns, minimum class). A column is matched by NAME in any table, or as "table.column" for one table only.

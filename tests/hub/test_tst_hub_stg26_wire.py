@@ -23,7 +23,7 @@ def setUpModule():
 
 class TST_HUB_STG26_Wire(unittest.TestCase):
     def store(self):
-        st = W.WStore(loaded=False)
+        st = W.WStore(loaded=False, extra={"rate_limit": {"enabled": False}})  # Stage 27: B06 sends hundreds of unregistered-route probes
         self.addCleanup(st.close)
         return st
 

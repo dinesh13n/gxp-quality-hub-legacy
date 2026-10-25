@@ -1,0 +1,32 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 18,
+    "skipped": 0
+   },
+   "executed_methods": 18,
+   "expected_methods": 18,
+   "group": "S20",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 104.2,
+   "selectors": [
+    "STG20"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 18, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids= seconds=104.2 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s27-verify/S20/S20/report.json"
+   ],
+   "wall_seconds": 104.3
+  }
+ ],
+ "schema": "hub-regression-log/v1",
+ "total_executed": 18,
+ "total_expected": 18
+}

@@ -1,0 +1,27 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "additionalProperties": false,
+ "description": "Stage 27 (FAC-09): derived from the live DDL by tests/hub/_stg27.table_schema; synthetic, unvalidated",
+ "properties": {
+  "heartbeat_at": {
+   "type": "string"
+  },
+  "job": {
+   "type": "string"
+  },
+  "run_id": {
+   "type": "string"
+  },
+  "started_at": {
+   "type": "string"
+  }
+ },
+ "required": [
+  "heartbeat_at",
+  "job",
+  "run_id",
+  "started_at"
+ ],
+ "title": "hub store table run_lock",
+ "type": "object"
+}

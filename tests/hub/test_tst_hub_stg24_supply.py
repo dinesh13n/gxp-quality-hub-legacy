@@ -49,6 +49,7 @@ SQL_REVIEWED = {
     "search/schema.py": {"indirect": 1},
     "security/audit.py": {"dynamic": 1},
     "store/db.py": {"indirect": 1},
+    "store/hardening.py": {"indirect": 2},  # Stage 27 H001: the ledger DDL constant and the migration file text; both are constants (reviewed in Stage 27)
     "store/migrate.py": {"indirect": 1},
     "web/api.py": {"dynamic": 1, "indirect": 1},
     "web/schema.py": {"indirect": 1},

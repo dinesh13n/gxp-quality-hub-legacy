@@ -14,12 +14,12 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from hub.intake.errors import SourceUnreachable, UrlSchemeRefused
 
 MAX_BYTES = 5 * 1024 * 1024
 
 
 def check_url(url):
+    from hub.intake.errors import UrlSchemeRefused  # function-level since Stage 27: breaks the adapters -> intake edge of two package cycles (OD-27 debt)
     if not isinstance(url, str):
         raise UrlSchemeRefused({"reason": "not a string"})
     u = urllib.parse.urlsplit(url.strip())
@@ -75,4 +75,5 @@ def fetch_events(url, offset=0, limit=50, retries=3, timeout=5, sleep=_sleep, ba
             last = e.__class__.__name__
         if i < int(retries):
             sleep(backoff * (2 ** i))
+    from hub.intake.errors import SourceUnreachable  # function-level (cycle debt, Stage 27)
     raise SourceUnreachable({"attempts": attempts, "last_error": last, "retries": int(retries)})
