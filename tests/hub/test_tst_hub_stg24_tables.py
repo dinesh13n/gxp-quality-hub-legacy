@@ -67,11 +67,11 @@ class TST_HUB_STG24_Tables(unittest.TestCase):
             "tst_nfr_10_names_zone_h_action_which_is_not_a_table": "zone_h_action" not in live})
 
     def test_TST_HUB_STG24_S02_scan_list_is_the_register_and_the_grep_catches_every_new_table(self):
-        """S02 (DW-19): RETAINED_TABLES = register; Stage 15's 18 names are inside; a planted delete / drop of each of the 21 newly covered tables is found."""
+        """S02 (DW-19): RETAINED_TABLES = register; Stage 15's 18 names are inside; a planted delete / drop of each of the newly covered tables (21 in Stage 24, 23 since Stage 27 H001) is found."""
         self.assertEqual(tuple(scan.RETAINED_TABLES), tuple(tables.RETAINED_TABLES))
         self.assertTrue(set(OLD_STAGE15) <= set(scan.RETAINED_TABLES))
         added = sorted(set(scan.RETAINED_TABLES) - set(OLD_STAGE15))
-        self.assertEqual(len(added), 21)
+        self.assertEqual(len(added), 23)  # Stage 27 H001: schema_migrations (now insert-only) and hardening_schema_migrations
         d = S.tmpdir("s24-grep-")
         p = os.path.join(d, "planted.py")
         with open(p, "w", encoding="utf-8") as f:

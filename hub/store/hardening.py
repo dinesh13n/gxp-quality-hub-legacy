@@ -43,12 +43,9 @@ def apply(con, clock):
         return False
     if have is not None:
         raise MigrationDrift({"changed_versions": [VERSION]})
-    script = "BEGIN;\n%s\n%s\nINSERT OR IGNORE INTO hardening_schema_migrations(version, sha256, applied_at) VALUES ('%s','%s','%s');\nCOMMIT;\n" % (
-        _LEDGER_DDL, sql, VERSION, digest, clock())
-    try:
-        con.executescript(script)
-    except Exception:
-        if con.in_transaction:
-            con.execute("ROLLBACK")
-        raise
+    # Every statement is idempotent (IF NOT EXISTS) and the ledger row is written LAST: a crash in between leaves a store that simply re-applies on the next open.
+    con.executescript(_LEDGER_DDL)
+    con.executescript(sql)
+    with con:
+        con.execute("INSERT OR IGNORE INTO hardening_schema_migrations(version, sha256, applied_at) VALUES (?,?,?)", (VERSION, digest, clock()))
     return True

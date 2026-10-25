@@ -28,6 +28,12 @@
    "reason": "payload text holding a lone UTF-16 surrogate is INVALID_JSON (quarantine) instead of an unhandled exception"
   },
   {
+   "path": "hub/security/datamap.py",
+   "work_item": "DQ-S24-09 / RS-12",
+   "deviation": "S27-DEV-08",
+   "reason": "the new ledger table hardening_schema_migrations is classified C1"
+  },
+  {
    "path": "hub/security/tables.py",
    "work_item": "DQ-S24-09 / RS-12",
    "deviation": "S27-DEV-08",
@@ -92,6 +98,18 @@
    "work_item": "S26-F-06 / F-07 / RS-04",
    "deviation": "S27-DEV-10",
    "reason": "the committed error-code registry is now the regenerated docs/27-hardening/error-registry (adds E-REQ-TIMEOUT, E-REQ-RATE-LIMITED, E-STORE-UNAVAILABLE); the v0.2 files are not edited"
+  },
+  {
+   "path": "tests/hub/test_tst_hub_stg24_supply.py",
+   "work_item": "DQ-S24-09 / RS-12",
+   "deviation": "S27-DEV-08",
+   "reason": "SQL_REVIEWED gains store/hardening.py (two constant executescript sites)"
+  },
+  {
+   "path": "tests/hub/test_tst_hub_stg24_tables.py",
+   "work_item": "DQ-S24-09 / RS-12",
+   "deviation": "S27-DEV-08",
+   "reason": "S02: 23 newly covered retained tables (schema_migrations and hardening_schema_migrations added)"
   },
   {
    "path": "tests/hub/test_tst_hub_stg26_control.py",
