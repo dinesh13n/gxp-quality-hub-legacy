@@ -199,7 +199,7 @@ class TST_HUB_STG28_Policy(unittest.TestCase):
             for fn in fns:
                 if fn.endswith(".py") and "hub.resilience" in open(os.path.join(d, fn), encoding="utf-8").read():
                     users.append(os.path.relpath(os.path.join(d, fn), root))
-        self.assertEqual(users, [])
+        self.assertEqual(users, [os.path.join("web", "bounded_server.py")])  # S28-DEV-08: the capped listener lives in hub/web (S20-S22); it is the only importer and is itself not wired into `hub web serve`
 
 
 if __name__ == "__main__":
