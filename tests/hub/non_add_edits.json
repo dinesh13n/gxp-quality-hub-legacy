@@ -4,6 +4,12 @@
  "note": "Stage 28 (Reliability and Resilience Engineering, BUILD): reset per OD-27 (S28-DEV-06). The add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD or VALIDATE stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
  "edits": [
   {
+   "path": "tests/hub/non_add_edits.json",
+   "work_item": "OD-27 DW-05 (each build stage resets this list)",
+   "deviation": "S28-DEV-06",
+   "reason": "list reset for Stage 28"
+  },
+  {
    "path": "tests/hub/regression_groups.json",
    "work_item": "DW-32 / Stage 28 regression groups",
    "deviation": "S28-DEV-06",
