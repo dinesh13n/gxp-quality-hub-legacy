@@ -48,7 +48,7 @@ All steps run on a FULL COPY outside the working tree (OD-03a); the working-tree
 | Format neutrality | SQLite files, JSON, CSV, plain-text Markdown and git objects only; no proprietary format is introduced | [Verified Fact] (stdlib-only stack, DM-08) |
 
 ### AR-4 What is NOT archived
-- Derived, rebuildable material: FTS5 index, 6,000-case regenerated dataset (OD-09), generated reports (RC-11); [Inference] rebuild test required at clearance.
+- Derived, rebuildable material: FTS5 index, generated reports (RC-11); [Inference] rebuild test required at clearance. The regenerated 6,000-case dataset (OD-09) is not part of the baseline, and regeneration is NOT a valid substitute for archiving the baseline (BV-10: different hash).
 - Sandbox copies and scratch stores (RC-6): already disposable by OD-16; evidence is the excerpt-plus-hash in artifacts.
 - Secrets: never archived. Hashes in the hub store travel inside AU-3 only because they are part of the retained tables; plaintext secrets do not exist in the repo (SH-1).
 
