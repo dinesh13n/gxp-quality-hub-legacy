@@ -1,0 +1,31 @@
+{
+ "cap": 10,
+ "label": "synthetic, unvalidated",
+ "percent": 20,
+ "rows": [
+  {
+   "bound": 10.2,
+   "calls": 1,
+   "retries_granted": 3,
+   "retries_unbudgeted": 3
+  },
+  {
+   "bound": 12.0,
+   "calls": 10,
+   "retries_granted": 11,
+   "retries_unbudgeted": 30
+  },
+  {
+   "bound": 30.0,
+   "calls": 100,
+   "retries_granted": 29,
+   "retries_unbudgeted": 300
+  },
+  {
+   "bound": 210.0,
+   "calls": 1000,
+   "retries_granted": 209,
+   "retries_unbudgeted": 3000
+  }
+ ]
+}
