@@ -21,7 +21,7 @@ from hub.guards import no_ai
 from hub.obs import collect
 from hub.web.app import Request
 
-AI_ENV = {"OPENAI_API_KEY": "sk-synthetic-not-real", "AZURE_OPENAI_API_KEY": "synthetic", "AZURE_OPENAI_ENDPOINT": "https://example.invalid", "ANTHROPIC_API_KEY": "synthetic",
+AI_ENV = {"OPENAI_API_KEY": "synthetic-value", "AZURE_OPENAI_API_KEY": "synthetic", "AZURE_OPENAI_ENDPOINT": "https://example.invalid", "ANTHROPIC_API_KEY": "synthetic",
           "HUB_AI_ENABLED": "1", "HUB_MODEL": "gpt-synthetic", "LLM_PROVIDER": "synthetic"}
 AI_WORDS = re.compile(r"openai|anthropic|azure|llm|gpt|embedding|model|provider|prompt|completion", re.I)
 
