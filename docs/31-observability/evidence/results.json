@@ -1,0 +1,64 @@
+{
+ "characterization": "133/134 CT checks passed; OVERALL FAIL only from CT-13 (Node patch drift, S24-DEV-04); CT-17 and CT-18 NOT-RUN as before (U-07-05, HAR-05)",
+ "checksum_post": 0,
+ "checksum_pre": 0,
+ "groups": {
+  "B": {
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 41,
+    "skipped": 1
+   },
+   "executed": "42 of 42",
+   "selectors": "TST_CO_01 TST_CO_02 TST_CO_04 TST_CO_05 TST_CO_06 TST_CO_07 TST_CO_11 TST_CO_13 TST_CO_14 INC02",
+   "wall_s": 126.7
+  },
+  "E31": {
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 1,
+    "skipped": 0
+   },
+   "executed": "1 of 1",
+   "selectors": "E31EGRESS",
+   "wall_s": 57.9
+  },
+  "S20": {
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 18,
+    "skipped": 0
+   },
+   "executed": "18 of 18",
+   "selectors": "STG20",
+   "wall_s": 80.1
+  },
+  "S27": {
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 25,
+    "skipped": 0
+   },
+   "executed": "25 of 25",
+   "selectors": "STG27",
+   "wall_s": 62.0
+  },
+  "S31": {
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 19,
+    "skipped": 0
+   },
+   "executed": "19 of 19",
+   "selectors": "STG31",
+   "wall_s": 58.8
+  }
+ },
+ "label": "synthetic, unvalidated",
+ "python": "3.10.12"
+}
