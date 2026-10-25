@@ -1,0 +1,35 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 45,
+    "skipped": 0
+   },
+   "executed_methods": 45,
+   "expected_methods": 45,
+   "group": "A",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 81.5,
+   "selectors": [
+    "TST_SEC",
+    "TST_CO_10",
+    "TST_CO_15",
+    "INC03"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 45, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-10,TST-CO-15,TST-SEC-01,TST-SEC-04,TST-SEC-05,TST-SEC-06,TST-SEC-09,TST-SEC-10,TST-SEC-11,TST-SEC-12,TST-SEC-13,TST-SEC-14,TST-SEC-15,TST-SEC-16,TST-SEC-18,TST-SEC-21 seconds=81.5 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s27-verify/A/A/report.json"
+   ],
+   "wall_seconds": 81.6
+  }
+ ],
+ "schema": "hub-regression-log/v1",
+ "total_executed": 45,
+ "total_expected": 45
+}

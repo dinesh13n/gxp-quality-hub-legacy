@@ -1,0 +1,33 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 35,
+    "skipped": 0
+   },
+   "executed_methods": 35,
+   "expected_methods": 35,
+   "group": "I8a",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 78.7,
+   "selectors": [
+    "TST_GATE",
+    "TST_REV"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 35, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-GATE-01,TST-GATE-02,TST-GATE-03,TST-GATE-04,TST-GATE-05,TST-GATE-06,TST-GATE-07,TST-GATE-08,TST-GATE-09,TST-GATE-10,TST-GATE-11,TST-GATE-12,TST-GATE-13,TST-GATE-14,TST-GATE-15,TST-GATE-16,TST-GATE-17,TST-GATE-18,TST-GATE-19,TST-GATE-20,TST-GATE-21,TST-GATE-22,TST-REV-01,TST-REV-02,TST-REV-03,TST-REV-04,TST-REV-05,TST-REV-06,TST-REV-07,TST-REV-08,TST-REV-10,TST-REV-14,TST-REV-16,TST-REV-17,TST-REV-19 seconds=78.7 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s27-verify/I8a/I8a/report.json"
+   ],
+   "wall_seconds": 78.8
+  }
+ ],
+ "schema": "hub-regression-log/v1",
+ "total_executed": 35,
+ "total_expected": 35
+}

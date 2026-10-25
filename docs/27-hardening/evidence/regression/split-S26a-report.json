@@ -1,0 +1,121 @@
+{
+ "checksum_rc_post": 0,
+ "checksum_rc_pre": 0,
+ "counts": {
+  "ERROR": 0,
+  "FAIL": 0,
+  "ok": 17,
+  "skipped": 0
+ },
+ "label": "s26a",
+ "python": "3.10.12",
+ "schema": "hub-test-run/v1",
+ "seconds": 153.6,
+ "tail": "access) an altered row, a ... ok\ntest_TST_HUB_STG26_C04_concurrent_clients_on_the_loopback_listener (test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience)\nC04 (RT-12, FD-06, T-19): 8 client threads x 8 requests (health, an authorised read, a CSRF-refused write, an unauthorised read, a valid evidence write, and the ... ok\ntest_TST_HUB_STG26_C05_clock_rollback_does_not_revive_sessions_or_proofs (test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience)\nC05 (RT-12, FD-07): a session that expired is revoked on first sight; moving the clock back afterwards does not revive it, and a re-authentication proof of the ... ok\ntest_TST_HUB_STG26_C06_transport_anomalies_on_the_listener (test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience)\nC06 (RT-12, T-19): raw-socket anomalies against the real loopback listener. Each ends in a defined 4xx or a closed socket, never a 5xx, and /healthz answers ... ok\ntest_TST_HUB_STG26_B05_body_structure_abuse (test_tst_hub_stg26_wire.TST_HUB_STG26_Wire)\nB05 (RT-07, ED-02 / ED-09 / ED-10 / ED-12, T-19): no 500 and no state change for any malformed or extreme body; 1 MiB passes the transport check and ... ok\ntest_TST_HUB_STG26_B06_url_and_verb_abuse (test_tst_hub_stg26_wire.TST_HUB_STG26_Wire)\nB06 (RT-07 / RT-09, ED-08, T-09 / T-13): every verb that is not registered for a path is refused 403 (deny by default) and writes only an audit row; traversal ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 53.043s\n\nOK\n",
+ "test_ids": [],
+ "tests": [
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A01_route_by_principal_matrix_matches_the_registries"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A02_zone_h_with_the_shipped_empty_holder_list_refuses_every_actor"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A03_identity_confusion_and_reauthentication_boundary"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A04_mass_assignment_and_spoofed_identity_have_no_effect"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A05_csrf_and_cors"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A06_session_abuse_and_expiry_boundaries"
+  },
+  {
+   "case": "test_tst_hub_stg26_control.TST_HUB_STG26_Control",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_A07_unauthenticated_flood_audit_amplification"
+  },
+  {
+   "case": "test_tst_hub_stg26_noai_walkthrough.TST_HUB_STG26_NoAI",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_D01_no_model_or_network_client"
+  },
+  {
+   "case": "test_tst_hub_stg26_noai_walkthrough.TST_HUB_STG26_NoAI",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_D02_agent_rehearsal_of_walkthroughs_REV_03_04_08"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C01_store_faults_fail_closed"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C02_configuration_faults"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C03_audit_tamper_is_detected_and_the_known_limit_is_shown"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C04_concurrent_clients_on_the_loopback_listener"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C05_clock_rollback_does_not_revive_sessions_or_proofs"
+  },
+  {
+   "case": "test_tst_hub_stg26_resilience.TST_HUB_STG26_Resilience",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_C06_transport_anomalies_on_the_listener"
+  },
+  {
+   "case": "test_tst_hub_stg26_wire.TST_HUB_STG26_Wire",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B05_body_structure_abuse"
+  },
+  {
+   "case": "test_tst_hub_stg26_wire.TST_HUB_STG26_Wire",
+   "detail": null,
+   "status": "ok",
+   "test": "test_TST_HUB_STG26_B06_url_and_verb_abuse"
+  }
+ ],
+ "unittest_rc": 0
+}

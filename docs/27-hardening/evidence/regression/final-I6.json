@@ -1,0 +1,35 @@
+{
+ "label": "synthetic, unvalidated",
+ "results": [
+  {
+   "checksum_rc_post": 0,
+   "checksum_rc_pre": 0,
+   "complete": true,
+   "counts": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "ok": 43,
+    "skipped": 0
+   },
+   "executed_methods": 43,
+   "expected_methods": 43,
+   "group": "I6",
+   "python": "3.10.12",
+   "rc": 0,
+   "runner_seconds": 100.3,
+   "selectors": [
+    "TST_INT",
+    "TST_CO_09",
+    "INC06",
+    "E06EGRESS"
+   ],
+   "summary": [
+    "summary: unittest_rc=0 counts={'ok': 43, 'FAIL': 0, 'ERROR': 0, 'skipped': 0} ids=TST-CO-09,TST-INT-01,TST-INT-03,TST-INT-04,TST-INT-05,TST-INT-06,TST-INT-07,TST-INT-08,TST-INT-09,TST-INT-10,TST-INT-11,TST-INT-12,TST-INT-13,TST-INT-14,TST-INT-15,TST-INT-16,TST-INT-17,TST-INT-18,TST-INT-19,TST-INT-20,TST-INT-21,TST-INT-22,TST-INT-23,TST-INT-24,TST-INT-25,TST-INT-26,TST-INT-27,TST-INT-29 seconds=100.3 report=/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s27-verify/I6/I6/report.json"
+   ],
+   "wall_seconds": 100.4
+  }
+ ],
+ "schema": "hub-regression-log/v1",
+ "total_executed": 43,
+ "total_expected": 43
+}

@@ -93,32 +93,32 @@ supersedes: "none"
 ### PRC-R Regression after hardening [Verified Fact: one group per call on the laptop, Python 3.10.12, data checksum rc 0 before and after each]
 | Group | Executed / expected | ok | FAIL | ERROR | skipped | Wall (s, laptop) | Checksum rc pre / post |
 |---|---|---|---|---|---|---|---|
-| A | 45 / 45 | 45 | 0 | 0 | 0 | 72 | 0 / 0 |
-| B | 42 / 42 | 41 | 0 | 0 | 1 | 94 | 0 / 0 |
-| C1 | 5 / 5 | 5 | 0 | 0 | 0 | 66 | 0 / 0 |
-| C2 | 1 / 1 | 1 | 0 | 0 | 0 | 94 | 0 / 0 |
-| C3 | 1 / 1 | 1 | 0 | 0 | 0 | 67 | 0 / 0 |
-| I45 | 91 / 91 | 91 | 0 | 0 | 0 | 106 | 0 / 0 |
-| I6 | 43 / 43 | 43 | 0 | 0 | 0 | 99 | 0 / 0 |
-| I7 | 59 / 59 | 59 | 0 | 0 | 0 | 84 | 0 / 0 |
-| I8a | 35 / 35 | 35 | 0 | 0 | 0 | 71 | 0 / 0 |
-| I8b | 43 / 43 | 43 | 0 | 0 | 0 | 72 | 0 / 0 |
-| E8 | NOT RUN | | | | | | |
-| I9 | 33 / 33 | 33 | 0 | 0 | 0 | 64 | 0 / 0 |
-| E9 | 1 / 1 | 1 | 0 | 0 | 0 | 67 | 0 / 0 |
-| S20 | 18 / 18 | 18 | 0 | 0 | 0 | 71 | 0 / 0 |
-| E20 | 1 / 1 | 1 | 0 | 0 | 0 | 71 | 0 / 0 |
-| S21 | 7 / 7 | 7 | 0 | 0 | 0 | 59 | 0 / 0 |
-| E21 | 1 / 1 | 1 | 0 | 0 | 0 | 60 | 0 / 0 |
-| S23 | 26 / 26 | 26 | 0 | 0 | 0 | 65 | 0 / 0 |
-| E23 | 1 / 1 | 1 | 0 | 0 | 0 | 64 | 0 / 0 |
-| S24 | 21 / 21 | 21 | 0 | 0 | 0 | 63 | 0 / 0 |
-| E24 | 1 / 1 | 1 | 0 | 0 | 0 | 75 | 0 / 0 |
+| A | 45 / 45 | 45 | 0 | 0 | 0 | 82 | 0 / 0 |
+| B | 42 / 42 | 41 | 0 | 0 | 1 | 95 | 0 / 0 |
+| C1 | 5 / 5 | 5 | 0 | 0 | 0 | 67 | 0 / 0 |
+| C2 | 1 / 1 | 1 | 0 | 0 | 0 | 92 | 0 / 0 |
+| C3 | 1 / 1 | 1 | 0 | 0 | 0 | 68 | 0 / 0 |
+| I45 | 91 / 91 | 91 | 0 | 0 | 0 | 102 | 0 / 0 |
+| I6 | 43 / 43 | 43 | 0 | 0 | 0 | 100 | 0 / 0 |
+| I7 | 59 / 59 | 59 | 0 | 0 | 0 | 85 | 0 / 0 |
+| I8a | 35 / 35 | 35 | 0 | 0 | 0 | 79 | 0 / 0 |
+| I8b | 43 / 43 | 43 | 0 | 0 | 0 | 74 | 0 / 0 |
+| E8 | 1 / 1 | 1 | 0 | 0 | 0 | 90 | 0 / 0 |
+| I9 | 33 / 33 | 33 | 0 | 0 | 0 | 67 | 0 / 0 |
+| E9 | 1 / 1 | 1 | 0 | 0 | 0 | 66 | 0 / 0 |
+| S20 | 18 / 18 | 18 | 0 | 0 | 0 | 104 | 0 / 0 |
+| E20 | 1 / 1 | 1 | 0 | 0 | 0 | 110 | 0 / 0 |
+| S21 | 7 / 7 | 7 | 0 | 0 | 0 | 97 | 0 / 0 |
+| E21 | 1 / 1 | 1 | 0 | 0 | 0 | 100 | 0 / 0 |
+| S23 | 26 / 26 | 26 | 0 | 0 | 0 | 113 | 0 / 0 |
+| E23 | 1 / 1 | 1 | 0 | 0 | 0 | 111 | 0 / 0 |
+| S24 | 21 / 21 | 21 | 0 | 0 | 0 | 102 | 0 / 0 |
+| E24 | 1 / 1 | 1 | 0 | 0 | 0 | 105 | 0 / 0 |
 | S26 | 23 / 23 | 23 | 0 | 0 | 0 | 142 | 0 / 0 |
 | E26 | 1 / 1 | 1 | 0 | 0 | 0 | 144 | 0 / 0 |
-| S27 | 24 / 24 | 24 | 0 | 0 | 0 | 61 | 0 / 0 |
-| E27 | 1 / 1 | 1 | 0 | 0 | 0 | 60 | 0 / 0 |
-| **total** | **524 / 524** | **523** | **0** | **0** | **1** | | |
+| S27 | 25 / 25 | 25 | 0 | 0 | 0 | 110 | 0 / 0 |
+| E27 | 1 / 1 | 1 | 0 | 0 | 0 | 98 | 0 / 0 |
+| **total** | **526 / 526** | **525** | **0** | **0** | **1** | | |
 
 Characterization harness (`tests/characterization/run_characterization.py`): 133 of 134 checks pass; the only failing check is CT-13 (Node patch drift, golden v22.23.2 vs v22.23.4, known S24-DEV-04); CT-17 and CT-18 NOT-RUN as before. Data checksum (`sha256sum -c ../_data-backup-2026-10-17/SHA256SUMS.txt`) rc 0 before and after the whole run. TST-CO-05 (legacy byte-identical, only declared edits) is in group B: green.
 
@@ -165,3 +165,8 @@ Proceed to Stage 28. Before any real data or exposure: take D-27-01, D-27-02 and
 | Version | Date | Author/agent | Change |
 |---|---|---|---|
 | v0.1 | 2026-10-25 | claude-fde-agent | First issue (Stage 27 BUILD). |
+
+### Addendum: verification notes at hand-off
+- Per the coordinator, the laptop re-ran only S27, E27, B and the characterization harness at the final tree; the other group logs are from earlier runs in this stage (hub code identical apart from comments) and the orchestrator's cloud run of all 27 groups is the authoritative regression.
+- S26 and E26 exceeded the 180 s call cap late in the stage (host I/O slowed; sandbox build alone took 95 s). S26 was verified as two parts (17 + 6 ok, `evidence/regression/split-S26*-report.json`); E26 was verified in the dev sandbox copy (1 ok, 127 s); the logs `final-S26/E26.json` are the earlier whole-group runs (142 s / 144 s, 23 / 1 ok).
+- Open items registered, not started: further complexity refactors (9 functions), remaining mutants beyond 13, SHA pinning, CI installation, hub container recipe.
