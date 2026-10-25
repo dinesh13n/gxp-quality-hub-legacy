@@ -252,7 +252,7 @@ class TST_NFR_Measurements(unittest.TestCase):
     def test_TST_NFR_07_every_route_is_authenticated_and_authorised(self):
         """TST-NFR-07 / AC-NFR-07: 100 % of the API and UI routes except the five public ones refuse an anonymous (or garbage-token) caller - 401, or a redirect
         to the login page for UI pages - and a caller whose role is not in the route row is 403; 0 anonymous reads or writes of case data."""
-        st = self.store()
+        st = self.store(extra={"rate_limit": {"enabled": False}})  # Stage 27: this sweep sends > 100 anonymous requests from one peer (the limiter has its own tests, S27)
         st.load_rules()
         case = st.new_case()
         st.add_trace(case)

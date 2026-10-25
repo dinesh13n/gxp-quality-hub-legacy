@@ -76,6 +76,24 @@
    "reason": "Served accepts an optional read_timeout (default unchanged)"
   },
   {
+   "path": "tests/hub/test_inc03_supplementary.py",
+   "work_item": "DQ-S24-09 / RS-12",
+   "deviation": "S27-DEV-08",
+   "reason": "S01 plants a changed ledger row: it drops the new insert-only trigger first (same pattern as the INC-04 / INC-05 ledger tests)"
+  },
+  {
+   "path": "tests/hub/test_tst_gate_01_22_disposition_gate.py",
+   "work_item": "S26-F-05",
+   "deviation": "S27-DEV-03",
+   "reason": "TST_GATE_21 tried 'enforce' / 'disabled' keys that used to be ignored; the configuration now refuses them (E-CFG-INVALID), the test asserts that and then runs with the ordinary holder list"
+  },
+  {
+   "path": "tests/hub/test_tst_hub_stg23_registry.py",
+   "work_item": "S26-F-06 / F-07 / RS-04",
+   "deviation": "S27-DEV-10",
+   "reason": "the committed error-code registry is now the regenerated docs/27-hardening/error-registry (adds E-REQ-TIMEOUT, E-REQ-RATE-LIMITED, E-STORE-UNAVAILABLE); the v0.2 files are not edited"
+  },
+  {
    "path": "tests/hub/test_tst_hub_stg26_control.py",
    "work_item": "S26-F-01 / RS-04",
    "deviation": "S27-DEV-05",
@@ -98,6 +116,12 @@
    "work_item": "RS-04",
    "deviation": "S27-DEV-07",
    "reason": "B06 unregistered-route sweep runs with the limiter off"
+  },
+  {
+   "path": "tests/hub/test_tst_nfr_measurements.py",
+   "work_item": "RS-04",
+   "deviation": "S27-DEV-07",
+   "reason": "NFR-07 anonymous route sweep sends more than 100 refused requests from one peer: it runs with rate_limit.enabled = false"
   },
   {
    "path": "tests/hub/non_add_edits.json",

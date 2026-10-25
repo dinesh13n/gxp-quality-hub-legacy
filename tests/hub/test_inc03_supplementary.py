@@ -50,6 +50,7 @@ class TST_HUB_INC03_Supplementary(unittest.TestCase):
             shutil.copytree(d, d2)
             con = sqlite3.connect(os.path.join(d2, "hub.sqlite3"))
             with con:
+                con.execute("DROP TRIGGER IF EXISTS schema_migrations_no_update")  # Stage 27 H001: the ledger is insert-only; a host-level tamper has to remove the trigger first (as for the other ledgers)
                 con.execute(sql)
             con.close()
             with self.assertRaises(MigrationDrift) as cm:
