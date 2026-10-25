@@ -1,0 +1,134 @@
+# e41-02 hub and test references to legacy paths (DF-01..DF-06)
+# command: git grep -n -e legacy_root -e 'app/legacy_logic' -e 'legacy_js/legacy_policy' -e 'legacy_batch/shift' -- hub tests/hub tests/characterization
+hub/adapters/intake_sources.py:67:def csv_path(legacy_root, tier="tiny"):
+hub/adapters/intake_sources.py:68:    sandbox.assert_safe_path(legacy_root, "legacy source root")
+hub/adapters/intake_sources.py:69:    return os.path.join(legacy_root, CSV_REL % tier)
+hub/adapters/legacy_sqlite.py:82:def open_snapshot(legacy_root, store, run_dir, pinned=True):
+hub/adapters/legacy_sqlite.py:83:    """Copy <legacy_root>/<rel_path> into <run_dir>/snapshots/, verify, open read-only."""
+hub/adapters/legacy_sqlite.py:88:    src = os.path.join(legacy_root, pin["rel_path"])
+hub/adapters/legacy_sqlite.py:89:    sandbox.assert_safe_path(legacy_root, "legacy source root")
+hub/cli.py:92:            report = run.run(args.data_dir, args.legacy_root, args.probes, args.golden_dir, args.observations,
+hub/cli.py:102:            rec = observe.observe(args.data_dir, args.legacy_root)
+hub/crosswalk/sources.py:34:def document_items(legacy_root):
+hub/crosswalk/sources.py:36:    sandbox.assert_safe_path(legacy_root, "legacy source root")
+hub/crosswalk/sources.py:37:    path = os.path.join(legacy_root, DOC_REL)
+hub/decision/backfill.py:40:def run(svc, legacy_root, run_dir, correlation_id="backfill", expected=EXPECTED_CASES, policy_service=None):
+hub/decision/backfill.py:42:    handle = legacy_sqlite.open_snapshot(legacy_root, "legacy.sqlite3", run_dir, pinned=True)
+hub/decision/cli.py:86:                pol.load_as_found(os.path.abspath(a.legacy_root), os.path.abspath(a.run_dir), r.cid)
+hub/decision/cli.py:87:        return backfill.run(svc, os.path.abspath(a.legacy_root), os.path.abspath(a.run_dir), r.cid, policy_service=pol), 0
+hub/decision/cli.py:101:        handle = legacy_sqlite.open_snapshot(os.path.abspath(a.legacy_root), "legacy.sqlite3", os.path.abspath(a.run_dir), pinned=True)
+hub/decision/cli.py:110:        docs, dsha = sources.document_items(os.path.abspath(a.legacy_root))
+hub/golden/observe.py:114:def observe(data_dir, legacy_root):
+hub/golden/observe.py:128:    legacy_root = sandbox.assert_safe_path(legacy_root, "legacy source root")
+hub/golden/observe.py:137:    legacy_db = os.path.join(legacy_root, "data", "legacy.sqlite3")
+hub/golden/observe.py:138:    csv_file = intake_sources.csv_path(legacy_root, CSV_TIER)
+hub/golden/observe.py:152:            pol.load_as_found(legacy_root, snap, cid)
+hub/golden/observe.py:154:            backfill.run(DecisionService(con, s, clock, anchor, dsettings.resolve(cfg)), legacy_root, snap, cid)
+hub/golden/observe.py:156:            h = legacy_sqlite.open_snapshot(legacy_root, "legacy.sqlite3", snap, pinned=True)
+hub/golden/observe.py:183:def baseline_shas(legacy_root):
+hub/golden/observe.py:185:    legacy_root = sandbox.assert_safe_path(legacy_root, "legacy source root")
+hub/golden/observe.py:186:    return {"legacy.sqlite3": _sha(os.path.join(legacy_root, "data", "legacy.sqlite3")),
+hub/golden/observe.py:187:            "partner_export.csv(%s)" % CSV_TIER: _sha(intake_sources.csv_path(legacy_root, CSV_TIER))}
+hub/golden/observe.py:190:def check_record(rec, legacy_root):
+hub/golden/observe.py:196:    if not legacy_root:
+hub/golden/observe.py:198:    if rec.get("baseline") != baseline_shas(legacy_root):
+hub/golden/run.py:52:def _baseline_values(probes, data_dir, legacy_root, new_values):
+hub/golden/run.py:57:    if not legacy_root:
+hub/golden/run.py:66:            handles[store] = legacy_sqlite.open_snapshot(legacy_root, store, run_dir, pinned=True)
+hub/golden/run.py:77:def _observation(probes, data_dir, legacy_root, observe, observed_path):
+hub/golden/run.py:82:        if not legacy_root:
+hub/golden/run.py:84:        rec = observe_mod.observe(data_dir, legacy_root)
+hub/golden/run.py:90:    why = observe_mod.check_record(rec, legacy_root)
+hub/golden/run.py:112:def run(data_dir, legacy_root=None, probes_path=None, golden_dir=None, observations_path=None, observe=False, observed_path=None):
+hub/golden/run.py:114:    if legacy_root:
+hub/golden/run.py:115:        sandbox.assert_safe_path(legacy_root, "legacy source root")
+hub/golden/run.py:124:    baseline = _baseline_values(probes, data_dir, legacy_root, new_values)
+hub/golden/run.py:125:    rec, obs_status = _observation(probes, data_dir, legacy_root, observe, observed_path)
+hub/intake/cli.py:61:    handle = legacy_sqlite.open_snapshot(os.path.abspath(a.legacy_root), "legacy.sqlite3", os.path.abspath(a.run_dir), pinned=True)
+hub/intake/cli.py:99:            rows, csv_sha = intake_sources.vendor_csv_deliveries(intake_sources.csv_path(os.path.abspath(a.legacy_root), a.csv_tier))
+hub/metrics/cli.py:55:    return legacy_sqlite.open_snapshot(os.path.abspath(a.legacy_root), "legacy.sqlite3", os.path.abspath(a.run_dir), pinned=True)
+hub/metrics/cli.py:68:        if a.legacy_root:
+hub/metrics/cli.py:76:        if not a.legacy_root:
+hub/metrics/cli.py:90:        if a.legacy_root:
+hub/policy/as_found_pins.json:5:  "app/legacy_logic.py": "432be534193beedfb2df29735a1c89b72fbbe47d983f4b3142db97d5b6c2edd0",
+hub/policy/as_found_pins.json:6:  "legacy_js/legacy_policy.js": "1d67b590d4a34ee293fd66cb6d1c558244dad7741400fc5d0b4b5fd081231cf5",
+hub/policy/asfound.py:4:  app/legacy_logic.py                       -> as-found-python  (PRIORITY, MANUAL_REVIEW); constants taken from the AST
+hub/policy/asfound.py:5:  legacy_js/legacy_policy.js                -> as-found-js      (AMOUNT_LIMIT) tolerance factor / fallback from the text
+hub/policy/asfound.py:29:def _read_pinned(legacy_root, rel):
+hub/policy/asfound.py:30:    with open(os.path.join(legacy_root, rel), "rb") as f:
+hub/policy/asfound.py:59:def build_python(legacy_root):
+hub/policy/asfound.py:60:    body = _read_pinned(legacy_root, "app/legacy_logic.py")
+hub/policy/asfound.py:67:        raise AsFoundDrift({"source": "app/legacy_logic.py", "reason": "constants differ from the transcription",
+hub/policy/asfound.py:83:                     "name": "As-found Python rules (app/legacy_logic.py: priority > %d, manual review)" % limit,
+hub/policy/asfound.py:87:def build_js(legacy_root):
+hub/policy/asfound.py:88:    js = _read_pinned(legacy_root, "legacy_js/legacy_policy.js").decode("utf-8")
+hub/policy/asfound.py:89:    data = json.loads(_read_pinned(legacy_root, "contracts/decision-policies-archive.json").decode("utf-8"))
+hub/policy/asfound.py:93:        raise AsFoundDrift({"source": "legacy_js/legacy_policy.js", "reason": "expected threshold/legacyAllows shape not found"})
+hub/policy/asfound.py:107:                     "name": "As-found JS rules (legacy_js/legacy_policy.js: regional limit x%s, fallback %s)" % (
+hub/policy/asfound.py:112:def build_batch(legacy_root, run_dir):
+hub/policy/asfound.py:114:    with legacy_sqlite.open_snapshot(legacy_root, "enterprise_legacy.sqlite3", run_dir, pinned=True) as lg:
+hub/policy/asfound.py:129:                     "name": "As-found night-shift rules (legacy_batch/shift_reconciliation.py: status HOLD/REVIEW or value > "
+hub/policy/asfound.py:134:def build_all(legacy_root, run_dir):
+hub/policy/asfound.py:135:    """The three as-found documents, in a fixed order. `legacy_root` must be a sandbox copy (the adapter guards it)."""
+hub/policy/asfound.py:136:    return [build_python(legacy_root), build_js(legacy_root), build_batch(legacy_root, run_dir)]
+hub/policy/cli.py:77:        return {"rulesets": svc.load_as_found(os.path.abspath(a.legacy_root), os.path.abspath(a.run_dir), r.cid), "active": svc.active()}, 0
+hub/policy/service.py:343:    def load_as_found(self, legacy_root, run_dir, correlation_id="load-as-found"):
+hub/policy/service.py:346:        for doc in asfound.build_all(legacy_root, run_dir):
+hub/r2/cli.py:58:        if a.legacy_root:
+hub/r2/cli.py:59:            fx, cases = rfacts.load(os.path.abspath(a.legacy_root), _run_dir(r))
+hub/r2/cli.py:73:        fx, _ = rfacts.load(os.path.abspath(a.legacy_root), _run_dir(r))
+hub/r2/cli.py:78:        _, cases = rfacts.load(os.path.abspath(a.legacy_root), _run_dir(r))
+hub/r2/facts.py:17:def load(legacy_root, run_dir):
+hub/r2/facts.py:20:    with legacy_sqlite.open_snapshot(legacy_root, "legacy.sqlite3", run_dir, pinned=True) as h:
+hub/review/producer.py:26:def load_case_inputs(legacy_root, run_dir):
+hub/review/producer.py:30:    h = legacy_sqlite.open_snapshot(legacy_root, "legacy.sqlite3", run_dir, pinned=True)
+hub/runs/cli.py:85:    if a.legacy_root:
+hub/runs/cli.py:89:        handle = legacy_sqlite.open_snapshot(os.path.abspath(a.legacy_root), "legacy.sqlite3", os.path.abspath(a.run_dir), pinned=True)
+hub/runs/cli.py:95:                    os.path.abspath(a.legacy_root), a.csv_tier))
+hub/search/cli.py:49:        docs, arch, inputs = corpus.read_shipped(os.path.abspath(a.legacy_root))
+hub/search/corpus.py:86:def read_shipped(legacy_root, pinned=True):
+hub/search/corpus.py:88:    legacy_root = sandbox.assert_safe_path(legacy_root, "legacy source root")
+hub/search/corpus.py:91:    path = os.path.join(legacy_root, DOC_REL)
+hub/search/corpus.py:102:    adir = os.path.join(legacy_root, ARCHIVE_REL)
+hub/web/cli.py:96:        cases = producer.load_case_inputs(sandbox.assert_safe_path(os.path.abspath(a.legacy_root), "legacy source root"),
+tests/characterization/capture/batch.py:137:G['node_default'] = sh(['node', 'legacy_js/legacy_policy.js'], d)
+tests/characterization/capture/batch.py:138:G['node_cwd_other'] = sh(['node', d + '/legacy_js/legacy_policy.js'], '/tmp')
+tests/characterization/capture/batch.py:150:js = '''const p=require("./legacy_js/legacy_policy.js");const fs=require("fs");const pol=JSON.parse(fs.readFileSync("contracts/decision-policies-archive.jso
+tests/characterization/catalogue.json:579:     "given": "node 22 running legacy_js/legacy_policy.js",
+tests/characterization/golden/stage7/batch_golden_run1.json:870:  "cmd": "node /sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/stage7/c_jvm/legacy_js/legacy_policy.js",
+tests/characterization/golden/stage7/batch_golden_run1.json:872:  "stderr": "rectory, open 'contracts/decision-policies-archive.json'\n    at Object.readFileSync (node:fs:440:20)\n    at Object.<anony
+tests/characterization/golden/stage7/batch_golden_run1.json:876:  "cmd": "node legacy_js/legacy_policy.js",
+tests/characterization/mutants.json:8:   "file": "app/legacy_logic.py",
+tests/characterization/mutants.json:15:   "file": "app/legacy_logic.py",
+tests/characterization/mutants.json:22:   "file": "app/legacy_logic.py",
+tests/characterization/mutants.json:29:   "file": "app/legacy_logic.py",
+tests/characterization/mutants.json:57:   "file": "legacy_batch/shift_reconciliation.py",
+tests/characterization/mutants.json:92:   "file": "legacy_js/legacy_policy.js",
+tests/hub/_inc04.py:126:       "spec = importlib.util.spec_from_file_location('legacy_logic', 'app/legacy_logic.py')\n"
+tests/hub/_inc04.py:130:_JS = ("const p = require('./legacy_js/legacy_policy.js');\n"
+tests/hub/_inc04.py:136:    """Run the as-found app/legacy_logic.py (in the SANDBOX legacy copy) over [status, severity, amount] rows."""
+tests/hub/_inc04.py:141:    """Run the as-found legacy_js/legacy_policy.js (sandbox copy, cwd = copy root) over [amount, region, year] rows."""
+tests/hub/_stg21.py:197:    ("LO-01", "CUT-2", "priority() / manual_review_required() rule results", ["app/legacy_logic.py"],
+tests/hub/_stg21.py:200:    ("LO-03", "CUT-2", "JS threshold() / legacyAllows() output", ["legacy_js/legacy_policy.js"], [r"legacy_policy", r"legacyAllows"]),
+tests/hub/_stg21.py:209:    ("LO-11", "CUT-4", "night-shift reconciliation output", ["legacy_batch/shift_reconciliation.py"], [r"shift_reconciliation", r"flagged_count"]),
+tests/hub/test_inc04_supplementary.py:169:            for rel in ("app/legacy_logic.py", "legacy_js/legacy_policy.js", "contracts/decision-policies-archive.json"):
+tests/hub/test_inc04_supplementary.py:173:            for rel, old, new in (("app/legacy_logic.py", "50000", "60000"), ("legacy_js/legacy_policy.js", "1.05", "1.10"),
+tests/hub/test_tst_co_03_golden_parity.py:3:with the legacy code itself, executed in the sandbox copy (app/legacy_logic.py under python, legacy_js under node).
+tests/hub/test_tst_co_03_golden_parity.py:85:        """TST-CO-03: python grid (5 statuses x 4 severities x 12 amounts) vs legacy app/legacy_logic.py, and a JS grid
+tests/hub/test_tst_co_03_golden_parity.py:86:        (5 regions x 9 years x 14 amounts incl. every x1.05 boundary) vs legacy_js/legacy_policy.js under node; zero differences."""
+tests/hub/test_tst_co_06_sandbox_guard.py:19:    def _refused(self, data_dir, legacy_root=None):
+tests/hub/test_tst_co_06_sandbox_guard.py:21:        args = ["golden-compare", "--json", "--data-dir", data_dir, "--legacy-root", legacy_root or S.LEGACY_ROOT]
+tests/hub/test_tst_co_06_sandbox_guard.py:42:    def test_TST_CO_06_c_legacy_root_in_worktree_refused(self):
+tests/hub/test_tst_co_06_sandbox_guard.py:45:        self._refused(d, legacy_root=S.WORKTREE)
+# TST-CO-05 diff basis
+
+    def test_TST_CO_05_a_no_diff_vs_baseline_as_found(self):
+        """TST-CO-05 / AC-CO-05: git diff baseline-as-found (committed + working tree) on legacy paths is empty."""
+        p = git("diff", "--name-status", "baseline-as-found", "--", *LEGACY_PATHS)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertEqual(p.stdout.strip(), "")
+
+    def test_TST_CO_05_b_no_untracked_files_in_legacy_paths(self):
+        """TST-CO-05: no new untracked (non-ignored) files appear under the legacy paths."""
+        p = git("ls-files", "--others", "--exclude-standard", "--", *LEGACY_PATHS)
+        self.assertEqual(p.returncode, 0, p.stderr)
