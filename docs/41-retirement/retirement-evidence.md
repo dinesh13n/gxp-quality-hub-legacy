@@ -54,7 +54,7 @@ Gate definitions applied as written: CONDITIONAL PASS requires "no blocking gap"
 | No legal-hold content other than analysis of a synthetic column | `evidence/e41-01-legal-hold-grep.txt` | 8 files for "legal hold", 0 for litigation, subpoena, e-discovery, preservation order, inspection | [Verified Fact] |
 | `retention_events.legal_hold` unused by code | `evidence/e41-04-retention-events.txt` | only the generator and a schema pin mention it | [Verified Fact] |
 | No code path disables a hub principal | `evidence/e41-03-principal-disable-search.txt` | `UPDATE principal` absent; admin CLI `user create`/`list` only | [Verified Fact] |
-| Single remote, single baseline tag, 74 commits visible in the worktree | `evidence/e41-05-repo-facts.txt` | `origin` github.com/dinesh13n/gxp-quality-hub-legacy; tag `baseline-as-found`; main b1de232 | [Verified Fact] |
+| Single remote, single baseline tag, 69 commits on main b1de232 (the captured count of 74 includes this branch's own WIP commits) | `evidence/e41-05-repo-facts.txt` | `origin` github.com/dinesh13n/gxp-quality-hub-legacy; tag `baseline-as-found`; main b1de232 | [Verified Fact] |
 | No retention period, authority, contract or QA/legal owner | `evidence-retention-policy.md` RF-01; `compliance-obligations.md` OB-05, OB-14; `data-ownership.md` DAF-01 | as stated | [Verified Fact] |
 | 0 of 28 production assets have an accepted steady-state owner | OD-34; `service-ownership-map.md` Summary | as stated | [Verified Fact] |
 | All data synthetic; no real credentials | OD-04, OD-28 (a); `secrets-hardening.md` SH-3 | as stated | [Verified Fact] |
