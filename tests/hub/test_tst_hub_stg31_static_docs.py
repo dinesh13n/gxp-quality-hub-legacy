@@ -67,7 +67,7 @@ class TST_HUB_STG31_Static(unittest.TestCase):
         self.assertEqual(users, [], "Stage 31 modules are built but not wired (S31-DEV-01 / D-31-02)")
         edits = json.loads(read("tests/hub/non_add_edits.json"))
         self.assertEqual(edits["stage"], "31")
-        self.assertEqual(sorted(e["path"] for e in edits["edits"]), ["tests/hub/non_add_edits.json", "tests/hub/regression_groups.json"])
+        self.assertEqual(sorted(e["path"] for e in edits["edits"]), ["tests/hub/non_add_edits.json", "tests/hub/regression_groups.json", "tests/hub/test_tst_hub_stg28_policy.py"])  # S31-DEV-08 adds the P07 expectation
 
     def test_TST_HUB_STG31_D02_artifacts_exist_with_structure(self):
         """D02: 12 artifacts, front matter (stage, artifact, version, date, author_agent, status, evidence_sources, supersedes), eight sections, status not APPROVED, label present."""
