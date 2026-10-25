@@ -14,7 +14,6 @@ import re
 import sqlite3
 
 from hub.core.errors import MigrationDrift
-from hub.ops import backup as backup_mod
 from hub.store import db
 
 FORWARD_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "forward")
@@ -89,6 +88,7 @@ def migrate(data_dir, backup_root, anchor_path, clock, target=None):
     frm = sorted(app)[-1] if app else None
     if not pending:
         return {"from": frm, "to": frm, "applied": [], "backup": None}
+    from hub.ops import backup as backup_mod  # function-level since Stage 27: breaks the ops <-> store package cycle (OD-27 debt)
     label = "pre-migrate-%s-to-%s-%s" % (frm, pending[-1][0], backup_mod._stamp(clock()))
     bk = backup_mod.backup(data_dir, anchor_path, backup_root, label, clock)
     con = db.open_hub(data_dir)

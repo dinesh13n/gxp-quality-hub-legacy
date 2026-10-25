@@ -23,7 +23,6 @@ from hub.gate.errors import GateReauthRequired, GateUnknownAction
 from hub.gate.policy_binding import GatedPolicyService
 from hub.gate.service import GateService
 from hub.policy.errors import AuthorityRequired
-from hub.runs.flag import schedule_state
 from hub.security import audit
 from hub.core.req_errors import ReqInvalid
 
@@ -81,6 +80,7 @@ class _ActionPolicy(GatedPolicyService):
 
     def set_schedule(self, sess, enabled, authority_ref, hcr_seq, correlation_id):
         self._need_authority(authority_ref)
+        from hub.runs.flag import schedule_state  # function-level since Stage 27: breaks the gate <-> runs package cycle (OD-27 debt)
         old = schedule_state(self.con)
         actor, akind = self._actor(sess)
         with audit.change(self.con, self.clock, anchor=self.anchor, actor=actor, actor_kind=akind, action="SCHEDULE_CHANGED",

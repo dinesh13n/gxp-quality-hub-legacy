@@ -4,6 +4,12 @@
  "note": "Stage 27 (Production Hardening, BUILD): reset per OD-27 (S27-DEV-02). The add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD or VALIDATE stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06): every behaviour change is a proposed deviation S27-DEV-nn in docs/27-hardening/ awaiting Dinesh Naik.",
  "edits": [
   {
+   "path": "hub/adapters/gateway_client.py",
+   "work_item": "OD-27 cycle debt",
+   "deviation": "S27-DEV-11",
+   "reason": "import moved from module level to function level only; behaviour identical; breaks a package import cycle"
+  },
+  {
    "path": "hub/config.py",
    "work_item": "S26-F-04 / S26-F-05",
    "deviation": "S27-DEV-03",
@@ -14,6 +20,12 @@
    "work_item": "S26-F-02",
    "deviation": "S27-DEV-04",
    "reason": "note of restricted evidence withheld from roles that may not read the record (events list and event view)"
+  },
+  {
+   "path": "hub/gate/actions.py",
+   "work_item": "OD-27 cycle debt",
+   "deviation": "S27-DEV-11",
+   "reason": "import moved from module level to function level only; behaviour identical; breaks a package import cycle"
   },
   {
    "path": "hub/gate/service.py",
@@ -28,10 +40,22 @@
    "reason": "payload text holding a lone UTF-16 surrogate is INVALID_JSON (quarantine) instead of an unhandled exception"
   },
   {
+   "path": "hub/search/engine.py",
+   "work_item": "OD-27 cycle debt",
+   "deviation": "S27-DEV-11",
+   "reason": "import moved from module level to function level only; behaviour identical; breaks a package import cycle"
+  },
+  {
    "path": "hub/security/datamap.py",
    "work_item": "DQ-S24-09 / RS-12",
    "deviation": "S27-DEV-08",
    "reason": "the new ledger table hardening_schema_migrations is classified C1"
+  },
+  {
+   "path": "hub/security/settings.py",
+   "work_item": "OD-27 cycle debt",
+   "deviation": "S27-DEV-11",
+   "reason": "import moved from module level to function level only; behaviour identical; breaks a package import cycle"
   },
   {
    "path": "hub/security/tables.py",
@@ -44,6 +68,12 @@
    "work_item": "DQ-S24-09 / RS-12",
    "deviation": "S27-DEV-08",
    "reason": "open_hub applies the H001 hardening migration (insert-only triggers on schema_migrations)"
+  },
+  {
+   "path": "hub/store/migrate.py",
+   "work_item": "OD-27 cycle debt",
+   "deviation": "S27-DEV-11",
+   "reason": "import moved from module level to function level only; behaviour identical; breaks a package import cycle"
   },
   {
    "path": "hub/web/app.py",

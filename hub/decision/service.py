@@ -19,8 +19,6 @@ from hub.decision import access, schema, settings as dsettings
 from hub.decision.errors import (CaseExists, CaseIdInvalid, CaseNotFound, ChainBroken, CreationDisabled, EvidenceRequired,
                                  EvidenceUnresolved, FactInvalid, FieldTooLong, IdempotencyMismatch, Immutable, NoOp,
                                  NotYetExists, ReopenExplicit, SeqConflict, StateUnknown, TimeOrder, TransitionNotAllowed)
-from hub.gate.errors import GateNotAuthorised
-from hub.gate.service import GateService
 from hub.policy import withdrawal
 from hub.security import audit
 from hub.security.canonical import GENESIS, canonical, fmt, parse, sha256_hex
@@ -100,6 +98,7 @@ class DecisionService(object):
         self.con, self.s, self.clock, self.anchor = con, s, clock, anchor
         self.d = d if d is not None else dsettings.resolve({})
         schema.require(con)
+        from hub.gate.service import GateService  # function-level since Stage 27: breaks the decision <-> gate package cycle (OD-27 debt)
         self.gate = GateService(con, s, clock, anchor)
 
     # ------------------------------------------------------------------ helpers
@@ -197,6 +196,7 @@ class DecisionService(object):
         if "E-DEC-IMMUTABLE" in msg:
             raise Immutable()
         if "E-GATE-NOT-AUTHORISED" in msg:
+            from hub.gate.errors import GateNotAuthorised  # function-level (cycle debt, Stage 27)
             raise GateNotAuthorised({"reason": "database trigger: Zone H event needs a human actor and a holder_check_ref"})
 
     def _idem_replay(self, key, body_hash):
@@ -313,6 +313,7 @@ class DecisionService(object):
             p = sess.principal
             declared = close_exception.get("actor")
             if declared is not None and declared != p.principal_id:
+                from hub.gate.errors import GateNotAuthorised  # function-level (cycle debt, Stage 27)
                 raise GateNotAuthorised({"reason": "close_exception actor differs from the authenticated holder"})
             exc["actor"] = p.principal_id
         else:
