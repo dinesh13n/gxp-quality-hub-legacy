@@ -57,3 +57,8 @@ Every stage agent MUST read this file and honour it.
 - Orchestrator ruling (default-answer authority, OD-32): later document stages run despite upstream BLOCKED so the project record is complete; every document states the inherited BLOCKED status. This accepts no risk and approves nothing.
 - Stages 39/40 merged before Stage 38 (HO-18): Dinesh to rule.
 - Next: Stage 43 FINAL as-built PRD (documents the shadow build as built and not released).
+
+## OD-39 - Stage 43 FINAL merged (PR #31), gate BLOCKED (2026-10-25)
+- Final as-built PRD in docs/final-prd/ (not docs/43-final/). Authoritative only as "as-built, NOT released". 52 requirements dispositioned. Sign-off OPEN (Dinesh), release not executed, handover BLOCKED.
+- All 46 stage prompts have now been executed (stages 0-43 incl. FINAL). Full hub regression on merged main: 31 groups green.
+- Remaining work is Dinesh-owned decisions only: 40 approvals, HO-*, D-41-*, D-27/28/31/34/39, Q-29, Zone H holders, RTO/RPO pair, CT-13 resolution; re-issue v0.2 of Stages 25, 29, 34, 35, 36, 40 and 30 after his answers.
