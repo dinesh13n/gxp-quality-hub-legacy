@@ -73,6 +73,12 @@ Read rules: **Verified Fact** = observed in a cited source (I read the cited doc
 ### EI-3 Stage 42 inputs not read in full
 [Verified Fact] I read the Summary/Findings of the cited documents and OD-01..OD-37. I did not read every one of the ~600 stage documents line by line, and I re-ran no test. Where a claim relies on a number from a stage document, that stage is the evidence, and its own caveats apply.
 
+### EI-4 Deviations recorded for Stage 42
+- S42-DEV-01 [Verified Fact] The stage prompt names `docs/42-executive/`; this run wrote to `docs/42-executive-defence/` on the explicit instruction of the caller. Downstream stages (FINAL) must reference the folder actually used.
+- S42-DEV-02 [Verified Fact] The prompt's `{{ARTIFACT_VERSION}}` is v0.1 and every artifact is DRAFT; the gate is the agent's computation, not an approval.
+- S42-DEV-03 [Verified Fact] The prompt lists Stage 6/19-22 evidence; Stages 19 and 22 are NOT APPLICABLE (OD-08), Stages 38 and 41 do not exist yet, and some earlier-stage counts (hub size, regression totals) are those recorded at the time of the stage.
+- S42-DEV-04 [Verified Fact] No test, script or hub command was executed in Stage 42 (docs-only, worktree outside the main tree).
+
 ## Evidence References
 See EI-1 per row. Decision log: `.fde/orchestrator-decisions.md`.
 

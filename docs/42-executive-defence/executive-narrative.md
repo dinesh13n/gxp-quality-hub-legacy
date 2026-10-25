@@ -69,6 +69,17 @@ Only Dinesh Naik can decide these (single approver; see `next-step-recommendatio
 ### EN-5 Presentation rule (mandatory)
 Any number from this engagement spoken or shown must carry one of: "synthetic, unvalidated", "sandbox", "agent assumption" or "Unknown". A number with no label is not to be presented.
 
+### EN-6 Stage 42 gate computation (agent's computation; a recommendation, not an approval)
+| Gate condition | Met? | Evidence |
+|---|---|---|
+| Every material claim maps to lifecycle evidence | Met | `executive-evidence-index.md` C-01..C-34, EI-2 lists claims deliberately not made |
+| Failures and trade-offs are included | Met | `lessons-learned.md`, `tevv-summary.md` TS-2/TS-3, `architecture-defence.md` AD-4, `residual-risks.md` |
+| All 14 required artifacts exist | Met | `docs/42-executive-defence/` (path deviation S42-DEV-01) |
+| Critical gaps resolved or explicitly documented | Met (documented) | `residual-risks.md`, `next-step-recommendations.md` NS-1 |
+| Evidence supports the stage conclusion | Met, because the conclusion is limited to "diagnosis and discipline defensible; value unproven; release blocked" | C-19, C-21, C-25 |
+
+**Outcome: CONDITIONAL PASS for the defence documents.** The conditions are the human decisions in `next-step-recommendations.md` NS-1. **The underlying project status is BLOCKED and is inherited, not cleared:** Stage 30 release gate BLOCKED (0 of 40 approvals), Stage 36 benefits sign-off UNSIGNED, ROI/NPV/payback NOT COMPUTABLE, Stages 38 and 41 not produced. If the gate is read as requiring a released, value-proven outcome, Stage 42 is BLOCKED. Stage FINAL (as-built PRD) may document the shadow build as built, labelled "not released", only on Dinesh's instruction; it must not state value or release.
+
 ## Evidence References
 `docs/42-executive-defence/executive-evidence-index.md` C-01..C-34; `.fde/orchestrator-decisions.md`.
 
