@@ -33,7 +33,7 @@ def _merge(base, over):
     return base
 
 
-# Stage 27 S26-F-05: the known configuration keys (docs/23-human-control/stage12-v0.2/schemas/hub-config.schema.json plus `rate_limit`, S27-DEV-04).
+# Stage 27 S26-F-05: the known configuration keys (docs/23-human-control/stage12-v0.2/schemas/hub-config.schema.json plus `rate_limit`, S27-DEV-04, plus the two INC-09 sections `crosswalk_view` and `intake_reports`).
 # A dict value is a nested closed key set; None = free-form map (the keys are data: capability names, flag paths, workflow states); a list =
 # a list of closed objects. A key that is not listed is refused with E-CFG-INVALID instead of being ignored (a mistyped safety key such as
 # `hub.kil` used to be inert).
@@ -53,6 +53,8 @@ KNOWN_KEYS = {
     "gateway": {"retries": _FREE},
     "contract_bindings": [{"source": _FREE, "contract_file": _FREE, "mode": _FREE}],
     "rate_limit": {"enabled": _FREE, "window_seconds": _FREE, "max_rejected": _FREE},
+    # read by the INC-09 code (hub.r2.joined, hub.r2.intake_reports) but missing from the v0.2 schema: listed here so that a shipped option is not refused (S27-DEV-03)
+    "crosswalk_view": {"depth_cap": _FREE, "size_cap": _FREE}, "intake_reports": {"delay_threshold_hours": _FREE, "freshness_hours": _FREE},
 }
 
 

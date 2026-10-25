@@ -154,7 +154,7 @@ class TST_HUB_STG27_Findings(_Base):
 
     def test_TST_HUB_STG27_F05_unknown_config_keys_are_refused_and_match_the_schema(self):
         """F05 (S26-F-05): an unknown key at the top level or in any section is refused with ConfigInvalid naming the key path (not the value); the closed key sets equal the
-        properties of the v0.2 hub-config schema plus the Stage 27 rate_limit section (A-27-04), so the two cannot drift apart silently."""
+        properties of the v0.2 hub-config schema plus the Stage 27 rate_limit section (A-27-04) and the two INC-09 sections crosswalk_view / intake_reports that the code reads but the v0.2 schema lacks, so the two cannot drift apart silently."""
         base = json.loads(json.dumps(hubconfig.DEFAULTS))
         for path in (("kil",), ("hub", "kil"), ("zone_h", "holderz"), ("audit", "anchor_pathh"), ("rate_limit", "burst")):
             doc = json.loads(json.dumps(base))
@@ -174,12 +174,21 @@ class TST_HUB_STG27_Findings(_Base):
             props = schema.get("properties", {})
             expect = set(props)
             if where == "$":
-                expect.add("rate_limit")
+                expect |= {"rate_limit", "crosswalk_view", "intake_reports"}  # S27-DEV-04; the two INC-09 sections are read by hub.r2 but absent from the v0.2 schema (spec addendum open)
             self.assertEqual(set(known), expect, where)
             for k, sub in props.items():
                 if sub.get("type") == "object" and sub.get("properties") and isinstance(known[k], dict):
                     compare(sub, known[k], where + "." + k)
         compare(sch, hubconfig.KNOWN_KEYS, "$")
+        # every option the code actually reads is accepted (the I9 regression of the first closed-set draft: crosswalk_view.size_cap was refused)
+        from hub.decision import settings as dset
+        from hub.r2 import intake_reports, joined
+        from hub.runs import settings as rset
+        from hub.security import settings as sset
+        self.assertEqual(hubconfig.unknown_keys(dset.DEFAULTS), [])
+        self.assertEqual(hubconfig.unknown_keys(rset.DEFAULTS), [])
+        self.assertEqual(hubconfig.unknown_keys(sset.DEFAULTS), [])
+        self.assertEqual(hubconfig.unknown_keys({"crosswalk_view": joined.DEFAULTS, "intake_reports": intake_reports.DEFAULTS, "search": {"enabled": True, "fts": "off"}}), [])
 
     def test_TST_HUB_STG27_F07_store_fault_is_503_and_other_errors_stay_500(self):
         """F07 (S26-F-07): sqlite3.OperationalError / DatabaseError while serving -> 503 E-STORE-UNAVAILABLE (retryable, content-free), /healthz included; an IntegrityError
