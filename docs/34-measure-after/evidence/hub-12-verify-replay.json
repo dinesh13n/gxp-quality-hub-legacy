@@ -1,0 +1,19 @@
+{
+ "checks": {
+  "all_noop_duplicate": true,
+  "no_conflicts": true,
+  "noop_counted_out": true,
+  "queues_totals_identical": true,
+  "raw_grew_by_n": true
+ },
+ "ok": true,
+ "redelivered": 8567,
+ "report": {
+  "noop_duplicate": 8567,
+  "outcomes": {
+   "NOOP_DUPLICATE": 8567
+  },
+  "received": 8567,
+  "stored": 8567
+ }
+}

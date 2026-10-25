@@ -1,0 +1,8 @@
+{
+  "records": 125,
+  "open_cases": 89,
+  "urgent_cases": 2,
+  "mean_amount": 4982.61,
+  "sites": 6,
+  "hours_per_case": 0.603
+}

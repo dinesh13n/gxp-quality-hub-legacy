@@ -1,0 +1,15 @@
+{
+ "applied": true,
+ "backup": {
+  "files": {
+   "audit-anchor.jsonl": "bd4bdfc308fae3fe82992ed62e9720b147ff83f1cc3c1bcdeaec45d1d59b2452",
+   "hub.sqlite3": "19eb68300e91794ce304e0cc8d21086e3213cd8f72df6dd0615ae5d1b7a2b9bc"
+  },
+  "label": "pre-policy-M002-20261025T051522839622Z",
+  "path": "/sessions/rcw-01u6mkug9rq1jbve7eyrt7in/fde_sbx/s34-scratch/premig2/pre-policy-M002-20261025T051522839622Z",
+  "schema_versions": [
+   "M000",
+   "M001"
+  ]
+ }
+}

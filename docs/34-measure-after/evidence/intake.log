@@ -1,0 +1,7 @@
+10-ingest-legacy rc=0 s=2
+11-report-before-replay rc=0 s=0
+12-verify-replay rc=0 s=2
+13-report-after-replay rc=0 s=0
+snap rc=0
+audit rc=0
+DONE
