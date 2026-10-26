@@ -31,6 +31,7 @@ DECISION_FLAGS = (
     ("search.fts", "off", "OD-S12-12 / OD-S12-14"),
     ("templates.enabled", False, "PCH-22"),
     ("zone_h.holders", [], "OD-S12-06 + HAR-11"),
+    ("ai.enabled", False, "OD-40 (Stage 44: optional advisory Azure OpenAI document Q&A; ships OFF)"),
 )
 AUTHORITY_LINK = "CUT step approval (HAR-11) + approved DV rows (HAR-06)"
 # flags that already have their own, stricter control; listed so the register is complete (not checked here)
