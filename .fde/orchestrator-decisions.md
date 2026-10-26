@@ -70,3 +70,7 @@ Every stage agent MUST read this file and honour it.
 - Only permitted model/network path: hub/adapters/azure_openai.py (env AZURE_OPENAI_ENDPOINT / DEPLOYMENT / API_VERSION / API_KEY). Kill switch hub.kill wins. Output is advisory, cited, audited, not a GxP record.
 - Web route skipped (route registry/OpenAPI frozen by TST-SEC-01); CLI `python -m hub.ai` only. Documents in docs/44-genai-qa/.
 - Open (Dinesh-owned): real-data use, validation, approvals, real-deployment test.
+
+## OD-41 - Command Centre advisory assistant (recorded 2026-10-26 from the Deliverables folder)
+- The Deliverables folder (outside this repo) records that on 2026-10-25 Dinesh chose to add an advisory OpenAI / Azure OpenAI assistant at autonomy A1 to the Quality Command Centre (Deliverables/04_Quality_Command_Centre). The Deliverables files first labelled it OD-40; the label was changed to OD-41 on 2026-10-26 because the repo's OD-40 is the hub-level Stage 44 Q&A.
+- Source: Deliverables/semantic-layer/ai-context-policy.yaml. Recorded here from those documents; the original answer was given in an earlier session and was not re-verified. Distinct from OD-40: OD-41 is a separate app that reads the hub; OD-40 is hub/ai. Nothing here is released or approved.
