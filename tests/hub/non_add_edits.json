@@ -67,7 +67,7 @@
    "path": "tests/hub/test_tst_hub_stg28_ai_capacity.py",
    "work_item": "OD-40 AI environment / config words",
    "deviation": "S44-DEV-03",
-   "reason": "A02: the AZURE_OPENAI_* reads of hub/adapters/azure_openai.py and the `ai` config section are the two named exceptions; all other env names and config keys stay free of AI words"
+   "reason": "A02: the AZURE_OPENAI_* reads of hub/adapters/azure_openai.py and the `ai` config section are the two named exceptions; all other env names and config keys stay free of AI words; A02 also takes the four names from the adapter's ENV_NAMES (read dynamically)"
   },
   {
    "path": "tests/hub/test_tst_hub_stg30_static_docs.py",
@@ -80,6 +80,12 @@
    "work_item": "OD-27 DW-05 (list reset by Stage 44)",
    "deviation": "S44-DEV-02",
    "reason": "D01 accepts stage 31, 30 or 44 for the current list"
+  },
+  {
+   "path": "tests/hub/test_tst_hub_stg27_store.py",
+   "work_item": "OD-40 (error registry regenerated)",
+   "deviation": "S44-DEV-04",
+   "reason": "R01 accepts the 14 new E-AI-* codes (area AI, exit 40/41) on top of the three Stage 27 additions; the Stage 12 codes are still asserted unchanged"
   }
  ],
  "dated_doc_notes": [

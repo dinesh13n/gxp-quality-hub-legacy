@@ -73,6 +73,8 @@ class TST_HUB_STG28_AiCapacity(unittest.TestCase):
                             names.add(n.args[0].value)
         self.assertTrue({"HUB_OPERATOR", "HUB_NEW_USER_PASSWORD", "HUB_RUN_PASSWORD"} <= names, sorted(names))
         self.assertEqual([x for x in names if AI_WORDS.search(x)], [])
+        from hub.adapters import azure_openai as _aoai   # the adapter reads its names through ENV_NAMES (dynamic), so the constant is the evidence
+        azure_names = azure_names | set(_aoai.ENV_NAMES)
         self.assertEqual(azure_names, {"AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_DEPLOYMENT", "AZURE_OPENAI_API_VERSION", "AZURE_OPENAI_API_KEY"})
 
         def keys(o, acc):

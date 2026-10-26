@@ -29,7 +29,6 @@ import urllib.request
 from hub.core.ai_errors import (AiDisabled, AiNotConfigured, AiProviderBadResponse, AiProviderRateLimited, AiProviderRejected,
                                 AiProviderTimeout, AiProviderUnavailable)
 from hub.guards import egress
-from hub.obs import metrics
 
 ENV_NAMES = ("AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_DEPLOYMENT", "AZURE_OPENAI_API_VERSION", "AZURE_OPENAI_API_KEY")
 HOST_SUFFIXES = (".openai.azure.com", ".cognitiveservices.azure.com", ".services.ai.azure.com")
@@ -156,6 +155,7 @@ class AzureOpenAIClient(object):
     def complete(self, messages, max_output_tokens):
         """-> {text, finish_reason, model, request_id, usage: {prompt, completion, total}}. Raises HubError subclasses (E-AI-*) only."""
         if self.enabled is not True:
+            from hub.obs import metrics   # function-level: avoids the adapters -> obs -> resilience -> adapters 3-cycle (S27 ratchet, same precedent as gateway_client)
             metrics.record_model_call("azure_openai")  # the Stage 32 tripwire: a model path was reached without the AI gate
             raise AiDisabled({"where": "azure_openai.complete"})
         st = self.settings
@@ -164,6 +164,7 @@ class AzureOpenAIClient(object):
         if len(body) > MAX_REQUEST_BYTES:
             raise AiProviderRejected({"reason": "request over %d bytes" % MAX_REQUEST_BYTES})
         req = urllib.request.Request(st.url(), data=body, headers=st._headers(), method="POST")
+        from hub.obs import metrics   # function-level, see above
         metrics.inc("ai_advisory_calls_total")
         try:
             with egress.permit(st.host):
