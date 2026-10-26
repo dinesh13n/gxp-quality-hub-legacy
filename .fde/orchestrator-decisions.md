@@ -62,3 +62,11 @@ Every stage agent MUST read this file and honour it.
 - Final as-built PRD in docs/final-prd/ (not docs/43-final/). Authoritative only as "as-built, NOT released". 52 requirements dispositioned. Sign-off OPEN (Dinesh), release not executed, handover BLOCKED.
 - All 46 stage prompts have now been executed (stages 0-43 incl. FINAL). Full hub regression on merged main: 31 groups green.
 - Remaining work is Dinesh-owned decisions only: 40 approvals, HO-*, D-41-*, D-27/28/31/34/39, Q-29, Zone H holders, RTO/RPO pair, CT-13 resolution; re-issue v0.2 of Stages 25, 29, 34, 35, 36, 40 and 30 after his answers.
+
+
+## OD-40 - Stage 44 Optional Azure OpenAI document Q&A, OFF by default (2026-10-26)
+- Dinesh answered three AskUserQuestion prompts on 2026-10-26: use case = document Q&A over existing search; posture = off by default, advisory only; connection = config placeholders only, tested against a local fake, no real key/endpoint/call.
+- This reverses OD-08 ONLY for T3 advisory Q&A: off by default (`ai.enabled=false`, decision flag), synthetic data only (corpus guard), config placeholders, no real key or Azure call made, nothing released or approved.
+- Only permitted model/network path: hub/adapters/azure_openai.py (env AZURE_OPENAI_ENDPOINT / DEPLOYMENT / API_VERSION / API_KEY). Kill switch hub.kill wins. Output is advisory, cited, audited, not a GxP record.
+- Web route skipped (route registry/OpenAPI frozen by TST-SEC-01); CLI `python -m hub.ai` only. Documents in docs/44-genai-qa/.
+- Open (Dinesh-owned): real-data use, validation, approvals, real-deployment test.

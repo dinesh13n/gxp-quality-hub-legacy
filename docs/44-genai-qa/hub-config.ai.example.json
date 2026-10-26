@@ -1,0 +1,30 @@
+{
+ "ai": {
+  "enabled": false,
+  "provider": "azure_openai",
+  "azure_openai": {
+   "endpoint": "",
+   "deployment": "",
+   "api_version": "",
+   "timeout_seconds": 20,
+   "token_param": "max_tokens"
+  },
+  "retrieval": {
+   "top_k": 4,
+   "max_chars_per_source": 1200,
+   "max_question_chars": 300,
+   "max_query_terms": 6
+  },
+  "answer": {
+   "max_output_tokens": 300
+  },
+  "budget": {
+   "daily_token_budget": 20000,
+   "max_request_tokens": 3000
+  },
+  "rate_limit": {
+   "max_requests_per_minute": 5
+  },
+  "injection_policy": "exclude"
+ }
+}

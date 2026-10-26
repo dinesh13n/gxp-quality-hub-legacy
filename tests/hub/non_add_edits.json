@@ -82,5 +82,51 @@
    "reason": "D01 accepts stage 31, 30 or 44 for the current list"
   }
  ],
- "dated_doc_notes": []
+ "dated_doc_notes": [
+  {
+   "path": "docs/08-ai-qualification/qualification-decision.md",
+   "work_item": "OD-40 (Stage 44)",
+   "reason": "OD-40 re-qualification of T3 (advisory document Q&A), dated note"
+  },
+  {
+   "path": "docs/final-prd/final-ai-agent-baseline.md",
+   "work_item": "OD-40 (Stage 44)",
+   "reason": "OD-40 dated note on the AI baseline"
+  },
+  {
+   "path": "docs/final-prd/implemented-vs-deferred.md",
+   "work_item": "OD-40 (Stage 44)",
+   "reason": "OD-40 dated note: optional AI Q&A implemented, off by default"
+  },
+  {
+   "path": "docs/final-prd/residual-risk-register.md",
+   "work_item": "OD-40 (Stage 44)",
+   "reason": "OD-40 dated note: AI residual risks, see docs/44-genai-qa"
+  },
+  {
+   "path": "docs/final-prd/requirement-disposition-matrix.md",
+   "work_item": "OD-40 (Stage 44)",
+   "reason": "OD-40 dated note on FR-CO-04 / PNFR-18 (default state unchanged)"
+  },
+  {
+   "path": "docs/32-finops/model-usage-analysis.md",
+   "work_item": "OD-40 (Stage 44)",
+   "reason": "OD-40 dated note on the Stage 32 zero-model-call tripwire (MU-F4 / MU-2 T3)"
+  },
+  {
+   "path": ".fde/orchestrator-decisions.md",
+   "work_item": "OD-40 (Stage 44)",
+   "reason": "OD-40 appended"
+  },
+  {
+   "path": "docs/27-hardening/error-registry/error-code-registry.json",
+   "work_item": "OD-40 (Stage 44)",
+   "reason": "regenerated to include the 14 AI error codes (exit 40/41)"
+  },
+  {
+   "path": "docs/27-hardening/error-registry/error-code-registry.md",
+   "work_item": "OD-40 (Stage 44)",
+   "reason": "regenerated to include the 14 AI error codes (exit 40/41)"
+  }
+ ]
 }
