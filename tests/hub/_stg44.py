@@ -87,7 +87,7 @@ class FakeAoai(object):
         return json.loads(self.requests[-1]["body"].decode("utf-8"))["messages"]
 
     def last_user(self):
-        return self.last_messages()[1]["content"]
+        return self.last_messages()[-1]["content"]
 
     def sources(self):
         return _SRC.findall(self.last_user())
