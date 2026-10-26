@@ -13,7 +13,24 @@ Fake modes: ok, uncited, invented, number, obey, insufficient, s429, s500, s401,
 CO-05 c (accepts dated_doc_notes), CO-12 (model-call site is only azure_openai.py), stg26 D01, stg27 F05, stg28 A02, stg30/31 D01.
 
 ## Results
-See the results table appended below by the final run (per group, sandbox copies, never the working-tree data/). Backup manifest `SHA256SUMS.txt` checked rc 0 before and after.
+Run 2026-10-26 on sandbox copies (never the working-tree data/), one group per run, checksum of the backup manifest rc 0 pre and post each run.
+
+| Group | Result |
+|---|---|
+| S44 | 26 ok |
+| E44 | 1 ok |
+| B | 41 ok, 1 skipped (expected inner-run skip) |
+| A | 45 ok |
+| S20 | 18 ok |
+| S23 | 26 ok |
+| S24 | 21 ok |
+| S26 | 23 ok |
+| S27 | 25 ok (ratchet kept: 0 cycles, grounding.check refactored under complexity 16) |
+| S28 | 19 ok |
+| S30 | 19 ok |
+| S31 | 19 ok |
+
+Ripple fixes found by these runs: S27 R01 (error registry additions), S27 S01 (adapter metrics import made function-level; grounding helper split), S28 A02 (adapter env names read via ENV_NAMES). The full characterization harness was not run (not required).
 
 ## Evidence samples
 evidence/c01-success.json and evidence/l04-cli-success.json (fake only, synthetic data).
