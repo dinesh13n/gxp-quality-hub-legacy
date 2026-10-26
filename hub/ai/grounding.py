@@ -27,6 +27,37 @@ def _content(sentence):
     return [t for t in text.tokens(_CITE.sub(" ", sentence)) if len(t) >= 4 and t not in retrieve.STOP and not t.isdigit()]
 
 
+def _sentences(a, by_id, out):
+    """G2 / G3 / G4 per sentence; appends to out["reasons"], counts out["sentences"]; -> the lowest overlap seen."""
+    worst = 1.0
+    for sent in [x.strip() for x in _SENT.split(a) if x.strip()]:
+        words = _content(sent)
+        if not words:
+            continue
+        out["sentences"] += 1
+        ids = [c for c in _CITE.findall(sent) if c in by_id]
+        if not ids:
+            out["reasons"].append("G2 sentence without a valid citation")
+            continue
+        src_text = " ".join(by_id[c]["text"] for c in ids)
+        src_tokens = set(text.tokens(src_text))
+        _numbers(sent, src_text, src_tokens, out)
+        frac = sum(1 for w in words if w in src_tokens) / float(len(words))
+        worst = min(worst, frac)
+        if frac < MIN_OVERLAP:
+            out["reasons"].append("G4 sentence overlaps %.2f with its cited source (< %.2f)" % (frac, MIN_OVERLAP))
+    return worst
+
+
+def _numbers(sent, src_text, src_tokens, out):
+    for n in _NUM.findall(_CITE.sub(" ", sent)):
+        if n.replace(",", ".") not in src_text.replace(",", ".") and n not in src_text:
+            out["reasons"].append("G3 number %s not in the cited source" % n[:20])
+    for w in text.tokens(_CITE.sub(" ", sent)):
+        if w in _NUMWORDS and w not in src_tokens:
+            out["reasons"].append("G3 number word '%s' not in the cited source" % w[:20])
+
+
 def check(answer, sources):
     """-> {ok, no_answer, reasons: [...], cited: [ids], sentences, overlap_min}. `sources` as produced by hub.ai.retrieve."""
     by_id = dict((s["id"], s) for s in sources)
@@ -56,28 +87,7 @@ def check(answer, sources):
             break
     if guard.looks_like_instruction(_CITE.sub("", a)) and not guard.looks_like_instruction(" ".join(by_id[c]["text"] for c in cited_all if c in by_id)):
         out["reasons"].append("G1 answer contains instruction-like text that is not in a cited source")
-    worst = 1.0
-    for sent in [x.strip() for x in _SENT.split(a) if x.strip()]:
-        words = _content(sent)
-        if not words:
-            continue
-        out["sentences"] += 1
-        ids = [c for c in _CITE.findall(sent) if c in by_id]
-        if not ids:
-            out["reasons"].append("G2 sentence without a valid citation")
-            continue
-        src_text = " ".join(by_id[c]["text"] for c in ids)
-        src_tokens = set(text.tokens(src_text))
-        for n in _NUM.findall(_CITE.sub(" ", sent)):
-            if n.replace(",", ".") not in src_text.replace(",", ".") and n not in src_text:
-                out["reasons"].append("G3 number %s not in the cited source" % n[:20])
-        for w in text.tokens(_CITE.sub(" ", sent)):
-            if w in _NUMWORDS and w not in src_tokens:
-                out["reasons"].append("G3 number word '%s' not in the cited source" % w[:20])
-        frac = sum(1 for w in words if w in src_tokens) / float(len(words))
-        worst = min(worst, frac)
-        if frac < MIN_OVERLAP:
-            out["reasons"].append("G4 sentence overlaps %.2f with its cited source (< %.2f)" % (frac, MIN_OVERLAP))
+    worst = _sentences(a, by_id, out)
     out["overlap_min"] = round(worst, 3)
     out["reasons"] = out["reasons"][:10]
     out["ok"] = not out["reasons"]
