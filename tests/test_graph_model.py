@@ -38,4 +38,13 @@ class GraphModelTests(unittest.TestCase):
   g=model.build(self.db,str(ent));nodes,edges=g.counts()
   self.assertEqual(edges['RELATES_TO:OperationalObject->OperationalObject'],4166)
   self.assertNoDangling(g)
+ def test_exports_consistent(self):
+  import json,xml.dom.minidom
+  from graph import export
+  out=str(Path(self.tmp.name)/'kg');export.main(['--legacy-db',self.db,'--no-enterprise','--out',out])
+  d=json.load(open(Path(out)/'knowledge-graph.json',encoding='utf-8'));keys={n['key'] for n in d['nodes']}
+  self.assertTrue(all(e['source'] in keys and e['target'] in keys for e in d['links']))
+  x=xml.dom.minidom.parse(str(Path(out)/'knowledge-graph.graphml'))
+  self.assertEqual(len(x.getElementsByTagName('node')),len(d['nodes']));self.assertEqual(len(x.getElementsByTagName('edge')),len(d['links']))
+  self.assertIn('vis-network@9.1.9',(Path(out)/'knowledge-graph.html').read_text(encoding='utf-8'))
 if __name__=='__main__':unittest.main()

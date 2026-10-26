@@ -86,6 +86,17 @@ py -3.12 -m venv .venv-graph
 
 FalkorDB v4.22.0 listens on `127.0.0.1:6379`, with the browser on `127.0.0.1:3000`. Add `--dry-run` to the loader to print counts without connecting.
 
+**Lightweight export (no Docker, no FalkorDB).** `python -m graph.export` writes the same knowledge graph to `exports/knowledge-graph/`, which git ignores:
+
+| File | Use |
+|---|---|
+| `knowledge-graph.html` | Single-file interactive viewer: the quality graph plus 100 enterprise pairs. Has filters, search and property inspection. Opens in a browser; loads vis-network 9.1.9 from unpkg, so it needs internet. |
+| `knowledge-graph.json` | Full graph as node-link JSON for D3, Cytoscape.js or NetworkX |
+| `knowledge-graph.graphml` | Full graph for Gephi, yEd or Cytoscape desktop |
+| `nodes.csv`, `edges.csv` | Flat tables for spreadsheets or bulk loaders |
+
+Options: `--no-enterprise` (quality graph only), `--html-enterprise-pairs N` and `--out DIR`.
+
 Open `http://localhost:3000`, connect to `localhost:6379` and select the graph `gxp_quality`. Then paste a query from `graph/queries.cypher`. Both ports are bound to loopback because no password is configured.
 
 ## Available evidence

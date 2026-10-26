@@ -11,3 +11,6 @@ data/lake/
 
 data/lake/
 *.class
+
+# generated graph exports (python -m graph.export)
+exports/
