@@ -221,13 +221,27 @@ class TST_HUB_STG44_Boundary(unittest.TestCase):
         self.assertEqual(users, [])
 
     def test_TST_HUB_STG44_B06_no_redirect_and_no_environment_proxy(self):
-        """B06: the opener has a ProxyHandler({}) (HTTP(S)_PROXY from the environment is ignored) and a redirect handler that refuses; a 302 from the endpoint is E-AI-PROVIDER-REJECTED
-        and the Location target is never contacted."""
+        """B06: HTTP(S)_PROXY from the environment is ignored (the opener holds no proxy handler; a dead proxy address in the environment does not matter) and the redirect handler
+        refuses; a 302 from the endpoint is E-AI-PROVIDER-REJECTED and the Location target is never contacted."""
         op = azure_openai._opener()
         names = [type(h).__name__ for h in op.handlers]
-        self.assertIn("ProxyHandler", names)
+        self.assertNotIn("ProxyHandler", names)
         self.assertIn("_NoRedirect", names)
         self.assertNotIn("HTTPRedirectHandler", names)
+        with T.FakeAoai("ok") as f:
+            ps = azure_openai.resolve(None, _env(AZURE_OPENAI_ENDPOINT=f.url))
+            old = dict((k, os.environ.get(k)) for k in ("http_proxy", "HTTP_PROXY", "https_proxy", "HTTPS_PROXY"))
+            for k in old:
+                os.environ[k] = "http://127.0.0.1:9"  # nothing listens there
+            try:
+                out = azure_openai.AzureOpenAIClient(ps, enabled=True).complete([{"role": "user", "content": "x"}], 20)
+            finally:
+                for k, v in old.items():
+                    if v is None:
+                        os.environ.pop(k, None)
+                    else:
+                        os.environ[k] = v
+            self.assertEqual((len(f.requests), out["usage"]["total"]), (1, 440))
         with T.FakeAoai("s302") as f, T.FakeAoai("ok") as target:
             ps = azure_openai.resolve(None, _env(AZURE_OPENAI_ENDPOINT=f.url))
             with self.assertRaises(E.AiProviderRejected):

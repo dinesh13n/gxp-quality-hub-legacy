@@ -22,6 +22,7 @@ from hub.adapters import azure_openai
 from hub.ai import LABEL, service, settings as aisettings
 from hub.core import ai_errors as E
 from hub.security import audit
+from hub.store import db
 
 
 def setUpModule():
@@ -190,7 +191,7 @@ class TST_HUB_STG44_Core(_Base):
                 if mode == "s401":
                     self.assertEqual(cm.exception.details["http_status"], 401)
                     self.assertIn("[REDACTED]", cm.exception.details["provider_message"])
-                self.assertNotIn(key.encode(), open(st.db_path, "rb").read())
+                self.assertNotIn(key.encode(), open(os.path.join(st.data, db.HUB_DB_NAME), "rb").read())
 
     def test_TST_HUB_STG44_C07_the_key_never_leaks(self):
         """C07: after a success and a key-echoing 401: the key is in no audit row, no result, no error, no repr of the settings / client, and in no file under the store directory."""
