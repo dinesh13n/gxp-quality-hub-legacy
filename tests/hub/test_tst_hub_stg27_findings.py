@@ -174,7 +174,7 @@ class TST_HUB_STG27_Findings(_Base):
             props = schema.get("properties", {})
             expect = set(props)
             if where == "$":
-                expect |= {"rate_limit", "crosswalk_view", "intake_reports"}  # S27-DEV-07 (rate_limit), S27-DEV-03 (INC-09 sections); the two INC-09 sections are read by hub.r2 but absent from the v0.2 schema (spec addendum open)
+                expect |= {"rate_limit", "crosswalk_view", "intake_reports", "ai"}  # S27-DEV-07 (rate_limit), S27-DEV-03 (INC-09 sections); the two INC-09 sections are read by hub.r2 but absent from the v0.2 schema (spec addendum open); Stage 44 adds the `ai` section (OD-40, off by default; spec addendum open)
             self.assertEqual(set(known), expect, where)
             for k, sub in props.items():
                 if sub.get("type") == "object" and sub.get("properties") and isinstance(known[k], dict):

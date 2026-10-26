@@ -97,3 +97,7 @@ See `evidence_sources` in the header and the per-row evidence columns.
 | Version | Date | Author/agent | Change |
 |---|---|---|---|
 | v0.1 | 2026-10-25 | claude-fde-agent | First issue. |
+
+## Update 2026-10-26 (Stage 44, OD-40)
+
+Dated note; earlier text above is unchanged. On 2026-10-26 Dinesh Naik authorised an OPTIONAL, OFF-BY-DEFAULT, ADVISORY-ONLY Azure OpenAI document Q&A (T3 re-qualified from OD-08, synthetic data only). It ships disabled (`ai.enabled=false`, decision flag needing an approval reference), with config placeholders only. The only permitted model/network path is `hub/adapters/azure_openai.py`, and only when `ai.enabled` is true. No real endpoint, key or Azure call was made; evidence is from a local fake server. Nothing is released or approved. The statements above that say 0 model calls / no AI describe the default (flag off) state, which is unchanged. See docs/44-genai-qa/.

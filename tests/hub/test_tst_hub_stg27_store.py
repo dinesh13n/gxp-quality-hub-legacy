@@ -271,10 +271,12 @@ class TST_HUB_STG27_Schemas(_Base):
             self.assertIn(code, n, code)
             for k in ("area", "classes", "exit_code", "http", "in_stage12_spec", "module"):
                 self.assertEqual(n[code][k], c[k], (code, k))
-        self.assertEqual(sorted(set(n) - set(o)), ["E-REQ-RATE-LIMITED", "E-REQ-TIMEOUT", "E-STORE-UNAVAILABLE"])
+        ai_codes = sorted(c for c in n if c.startswith("E-AI-"))      # Stage 44 (OD-40): the 14 advisory-Q&A codes, area AI, exit 40 / 41
+        self.assertEqual(len(ai_codes), 14, ai_codes)
+        self.assertEqual(sorted(set(n) - set(o) - set(ai_codes)), ["E-REQ-RATE-LIMITED", "E-REQ-TIMEOUT", "E-STORE-UNAVAILABLE"])
         self.assertEqual((n["E-REQ-TIMEOUT"]["http"], n["E-REQ-RATE-LIMITED"]["http"], n["E-STORE-UNAVAILABLE"]["http"]), (408, 429, 503))
         self.assertEqual(cur["exit_code_problems"], [])
-        self.assertEqual(cur["count"], old["count"] + 3)
+        self.assertEqual(cur["count"], old["count"] + 3 + len(ai_codes))
 
 
 def table_schema_of(st, t):

@@ -84,7 +84,8 @@ class TST_CO_12_EgressAndTripwire(unittest.TestCase):
             metrics.check_tripwires()
 
     def test_TST_CO_12_d_no_model_call_sites_in_product(self):
-        """TST-CO-12: no hub module calls record_model_call (the sensor exists only for future re-qualification)."""
+        """TST-CO-12: no hub module calls record_model_call except hub/adapters/azure_openai.py (Stage 44, OD-40: the ONE permitted model path; it calls the sensor only when it
+        is reached without the ai.enabled gate, which trips the tripwire)."""
         calls = []
         for d, _, fns in os.walk(os.path.join(S.CODE_ROOT, "hub")):
             for fn in fns:
@@ -93,7 +94,7 @@ class TST_CO_12_EgressAndTripwire(unittest.TestCase):
                     for n in ast.walk(ast.parse(open(p, encoding="utf-8").read())):
                         if isinstance(n, ast.Call) and getattr(n.func, "attr", getattr(n.func, "id", None)) == "record_model_call":
                             calls.append(p)
-        self.assertEqual(calls, [])
+        self.assertEqual(sorted(set(os.path.relpath(c, S.CODE_ROOT).replace(os.sep, "/") for c in calls)), ["hub/adapters/azure_openai.py"])
 
     def _inner_shard(self, k):
         out = os.path.join(S.tmpdir("co12e%d-" % k), "inner.json")

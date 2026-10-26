@@ -1,9 +1,10 @@
 """Process-local counters and the No-AI zero-tripwires (observability-spec BEH-OBS-06, PNFR-18, OD-08).
 
-`model_calls_total` is the Stage 32 tripwire: the product has no model client, so nothing increments it.
-`record_model_call` exists only as the sensor any future (re-qualified, Dinesh-approved) AI element would be
-obliged to call; calling it makes the release gate G5 fail. `egress_attempts_total` is incremented by the
-egress guard. Both are exported at the end of every CLI run and must equal 0.
+`model_calls_total` is the Stage 32 tripwire. Since Stage 44 (OD-40) the product has ONE optional model client,
+hub/adapters/azure_openai.py (off by default). It is the only caller of `record_model_call`, and it calls it only when it is
+reached WITHOUT the ai.enabled gate (then it opens no socket and refuses): a model path used outside the gate makes the
+release gate G5 fail. A gated advisory call increments `ai_advisory_calls_total` instead (a counter, not a tripwire).
+`egress_attempts_total` is incremented by the egress guard. The two tripwires are exported at the end of every CLI run and must equal 0.
 """
 import threading
 
@@ -40,7 +41,7 @@ def tripwires():
 
 
 def record_model_call(provider="unknown"):
-    """Tripwire sensor. Must never be reached in a No-AI product (OD-08)."""
+    """Tripwire sensor. Called only by hub/adapters/azure_openai.py when its client is used without the ai.enabled gate (OD-08, OD-40)."""
     inc("model_calls_total")
 
 

@@ -1,0 +1,68 @@
+{
+ "fake_only": true,
+ "label": "synthetic, unvalidated",
+ "status": {
+  "corpus_origins": [
+   "synthetic"
+  ],
+  "data_origin": "synthetic",
+  "enabled": true,
+  "environment_variables_set": {
+   "AZURE_OPENAI_API_KEY": true,
+   "AZURE_OPENAI_API_VERSION": true,
+   "AZURE_OPENAI_DEPLOYMENT": true,
+   "AZURE_OPENAI_ENDPOINT": true
+  },
+  "injection_policy": "exclude",
+  "kill": false,
+  "limits": {
+   "daily_token_budget": 20000,
+   "max_requests_per_minute": 5,
+   "requests_last_minute": 2,
+   "units_left_today": 19120,
+   "units_today": 880
+  },
+  "model_call_made": false,
+  "provider": "azure_openai"
+ },
+ "stdout": {
+  "advisory_model_calls": 1,
+  "answer": "Batch records are retained for five years after batch release [S1].",
+  "audit_seq": 25,
+  "citations": [
+   {
+    "doc_id": "DOC-90000001",
+    "effective_at": "2025-01-01",
+    "hash_prefix": "ecf9ac057123",
+    "id": "S1",
+    "linked_case": "no linked case",
+    "source": "synthetic",
+    "version": "v1"
+   }
+  ],
+  "data_label": "synthetic, unvalidated",
+  "excluded": {
+   "instruction_like": 0,
+   "restricted": 0,
+   "unreadable": 0
+  },
+  "grounding": {
+   "checked": true,
+   "note": "lexical check only; it does not prove the answer is true or complete",
+   "overlap_min": 1.0,
+   "sentences": 1
+  },
+  "label": "AI-generated, advisory, not a GxP record, human verification required",
+  "latency_ms": 3,
+  "model": "fake-model-0",
+  "query_used": "retained batch",
+  "request_audit_seq": 24,
+  "sources_considered": 1,
+  "status": "answered",
+  "usage": {
+   "completion": 40,
+   "prompt": 400,
+   "total": 440
+  }
+ }
+}

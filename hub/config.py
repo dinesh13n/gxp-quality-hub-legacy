@@ -53,6 +53,10 @@ KNOWN_KEYS = {
     "gateway": {"retries": _FREE},
     "contract_bindings": [{"source": _FREE, "contract_file": _FREE, "mode": _FREE}],
     "rate_limit": {"enabled": _FREE, "window_seconds": _FREE, "max_rejected": _FREE},
+    # Stage 44 (OD-40): the optional, OFF-by-default advisory document Q&A. Defaults and ranges live in hub.ai.settings (kept literal here so hub.config imports nothing from hub.ai).
+    "ai": {"enabled": _FREE, "provider": _FREE, "azure_openai": {"endpoint": _FREE, "deployment": _FREE, "api_version": _FREE, "timeout_seconds": _FREE, "token_param": _FREE},
+           "retrieval": {"top_k": _FREE, "max_chars_per_source": _FREE, "max_question_chars": _FREE, "max_query_terms": _FREE}, "answer": {"max_output_tokens": _FREE},
+           "budget": {"daily_token_budget": _FREE, "max_request_tokens": _FREE}, "rate_limit": {"max_requests_per_minute": _FREE}, "injection_policy": _FREE},
     # read by the INC-09 code (hub.r2.joined, hub.r2.intake_reports) but missing from the v0.2 schema: listed here so that a shipped option is not refused (S27-DEV-03)
     "crosswalk_view": {"depth_cap": _FREE, "size_cap": _FREE}, "intake_reports": {"delay_threshold_hours": _FREE, "freshness_hours": _FREE},
 }

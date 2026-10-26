@@ -150,3 +150,7 @@ All queries used `sqlite3` with `file:data/legacy.sqlite3?mode=ro&immutable=1` o
 |---|---|---|---|
 | v0.1 | 2026-10-17 | claude-fde-agent | Initial recommendation; status DRAFT, approval pending Dinesh Naik. |
 | v0.1 | 2026-10-17 | claude-fde-agent | Integrity check after work: `sha256sum -c --quiet ../_data-backup-2026-10-17/SHA256SUMS.txt` passed (no output, exit 0); `git status --porcelain` shows only `docs/08-ai-qualification/` untracked. |
+
+## Update 2026-10-26 (Stage 44, OD-40)
+
+Dated note; earlier text above is unchanged. On 2026-10-26 Dinesh Naik authorised an OPTIONAL, OFF-BY-DEFAULT, ADVISORY-ONLY Azure OpenAI document Q&A (T3 re-qualified from OD-08, synthetic data only). It ships disabled (`ai.enabled=false`, decision flag needing an approval reference), with config placeholders only. The only permitted model/network path is `hub/adapters/azure_openai.py`, and only when `ai.enabled` is true. No real endpoint, key or Azure call was made; evidence is from a local fake server. Nothing is released or approved. The statements above that say 0 model calls / no AI describe the default (flag off) state, which is unchanged. See docs/44-genai-qa/.

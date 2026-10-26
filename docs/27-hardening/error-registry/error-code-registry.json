@@ -1,6 +1,202 @@
 {
- "added_beyond_stage12_spec": 33,
+ "added_beyond_stage12_spec": 47,
  "codes": [
+  {
+   "area": "AI",
+   "classes": [
+    "AiBudgetExceeded"
+   ],
+   "code": "E-AI-BUDGET-EXCEEDED",
+   "exit_code": 40,
+   "http": 429,
+   "in_stage12_spec": false,
+   "messages": [
+    "AI usage budget would be exceeded; no model call was made"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiDisabled"
+   ],
+   "code": "E-AI-DISABLED",
+   "exit_code": 40,
+   "http": 501,
+   "in_stage12_spec": false,
+   "messages": [
+    "the optional AI document Q&A is not enabled (ai.enabled is false)"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiNoRetrieval"
+   ],
+   "code": "E-AI-NO-RETRIEVAL",
+   "exit_code": 40,
+   "http": 404,
+   "in_stage12_spec": false,
+   "messages": [
+    "no usable source was retrieved; no model call was made"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiNonSynthetic"
+   ],
+   "code": "E-AI-NON-SYNTHETIC",
+   "exit_code": 40,
+   "http": 403,
+   "in_stage12_spec": false,
+   "messages": [
+    "refused: the data or corpus is not flagged synthetic"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiNotConfigured"
+   ],
+   "code": "E-AI-NOT-CONFIGURED",
+   "exit_code": 40,
+   "http": 501,
+   "in_stage12_spec": false,
+   "messages": [
+    "the AI provider settings are missing or invalid"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiPrincipalRefused"
+   ],
+   "code": "E-AI-PRINCIPAL-REFUSED",
+   "exit_code": 40,
+   "http": 403,
+   "in_stage12_spec": false,
+   "messages": [
+    "the principal is unknown, inactive or has no search role"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiProviderBadResponse"
+   ],
+   "code": "E-AI-PROVIDER-BAD-RESPONSE",
+   "exit_code": 41,
+   "http": 502,
+   "in_stage12_spec": false,
+   "messages": [
+    "the model provider answer was not usable"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiProviderRateLimited"
+   ],
+   "code": "E-AI-PROVIDER-RATE-LIMITED",
+   "exit_code": 41,
+   "http": 429,
+   "in_stage12_spec": false,
+   "messages": [
+    "the model provider answered 429 (rate limit)"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiProviderRejected"
+   ],
+   "code": "E-AI-PROVIDER-REJECTED",
+   "exit_code": 41,
+   "http": 502,
+   "in_stage12_spec": false,
+   "messages": [
+    "the model provider refused the request (HTTP 4xx, authentication or content filter)"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiProviderTimeout"
+   ],
+   "code": "E-AI-PROVIDER-TIMEOUT",
+   "exit_code": 41,
+   "http": 504,
+   "in_stage12_spec": false,
+   "messages": [
+    "the model provider did not answer in time"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiProviderUnavailable"
+   ],
+   "code": "E-AI-PROVIDER-UNAVAILABLE",
+   "exit_code": 41,
+   "http": 502,
+   "in_stage12_spec": false,
+   "messages": [
+    "the model provider is unreachable or answered HTTP 5xx"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiQuestionInvalid"
+   ],
+   "code": "E-AI-QUESTION-INVALID",
+   "exit_code": 40,
+   "http": 422,
+   "in_stage12_spec": false,
+   "messages": [
+    "the question is empty, too long or malformed"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiRateLimited"
+   ],
+   "code": "E-AI-RATE-LIMITED",
+   "exit_code": 40,
+   "http": 429,
+   "in_stage12_spec": false,
+   "messages": [
+    "AI request rate limit reached; no model call was made"
+   ],
+   "module": "hub.core.ai_errors"
+  },
+  {
+   "area": "AI",
+   "classes": [
+    "AiUngrounded"
+   ],
+   "code": "E-AI-UNGROUNDED",
+   "exit_code": 40,
+   "http": 422,
+   "in_stage12_spec": false,
+   "messages": [
+    "the model answer failed the grounding / citation check and was withheld"
+   ],
+   "module": "hub.core.ai_errors"
+  },
   {
    "area": "AUTH",
    "classes": [
@@ -1572,7 +1768,7 @@
    "module": "hub.web.errors"
   }
  ],
- "count": 112,
+ "count": 126,
  "exit_code_problems": [],
  "exit_codes": [
   {
@@ -1995,6 +2191,40 @@
    ],
    "exit_code": 32,
    "note": "R2 family: E-R2-INPUT-INVALID, E-REV-INDEX-ABSENT (INC-09)"
+  },
+  {
+   "areas": [
+    "AI"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-AI-BUDGET-EXCEEDED",
+    "E-AI-DISABLED",
+    "E-AI-NO-RETRIEVAL",
+    "E-AI-NON-SYNTHETIC",
+    "E-AI-NOT-CONFIGURED",
+    "E-AI-PRINCIPAL-REFUSED",
+    "E-AI-QUESTION-INVALID",
+    "E-AI-RATE-LIMITED",
+    "E-AI-UNGROUNDED"
+   ],
+   "exit_code": 40,
+   "note": null
+  },
+  {
+   "areas": [
+    "AI"
+   ],
+   "classification": "shared_within_area",
+   "codes": [
+    "E-AI-PROVIDER-BAD-RESPONSE",
+    "E-AI-PROVIDER-RATE-LIMITED",
+    "E-AI-PROVIDER-REJECTED",
+    "E-AI-PROVIDER-TIMEOUT",
+    "E-AI-PROVIDER-UNAVAILABLE"
+   ],
+   "exit_code": 41,
+   "note": null
   }
  ],
  "in_stage12_spec": 79,
