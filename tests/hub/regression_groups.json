@@ -32,6 +32,8 @@
   {"id": "S31", "selectors": ["STG31"]},
   {"id": "E31", "selectors": ["E31EGRESS"]},
   {"id": "S30", "selectors": ["STG30"]},
-  {"id": "E30", "selectors": ["E30EGRESS"]}
+  {"id": "E30", "selectors": ["E30EGRESS"]},
+  {"id": "S44", "selectors": ["STG44"]},
+  {"id": "E44", "selectors": ["E44EGRESS"]}
  ]
 }

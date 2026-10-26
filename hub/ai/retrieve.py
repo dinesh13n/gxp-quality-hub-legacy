@@ -3,8 +3,8 @@
 * The caller's roles go through hub.search.engine.R2SearchService unchanged: access is applied inside the search (rows the caller may not read are never
   ranked, counted or returned). Restricted (C3) rows are then LEFT OUT of the AI context altogether - a model call is never a justified C3 read, so no
   reason is accepted and no C3_READ record is needed (the service runs with require_c3_reason off; the rows are dropped here and counted in `excluded`).
-* The question becomes a search query by a fixed, deterministic rule (stop words removed, longest words first, at most max_query_terms, then fewer terms
-  until something matches - at most 4 searches). `query` (the operator's own search grammar) bypasses the rule. No model is involved in retrieval.
+* The question becomes a search query by a fixed, deterministic rule (stop words removed, longest words first, at most max_query_terms, then the shortest ones are
+  dropped until something matches - at most 4 searches). `query` (the operator's own search grammar) bypasses the rule. No model is involved in retrieval.
 * Passage text is read from the derived corpus row of a hit that was just returned (same doc_id + version) - nothing else is read - then sanitised.
 """
 from hub.ai import guard
@@ -26,8 +26,7 @@ def keywords(question, max_terms):
         if len(t) >= 3 and t not in STOP and not t.isdigit() and t not in seen:
             seen.add(t)
             words.append(t)
-    keep = sorted(words, key=lambda w: (-len(w), words.index(w)))[:max_terms]
-    return [w for w in words if w in keep]
+    return sorted(words, key=lambda w: (-len(w), words.index(w)))[:max_terms]  # most informative (longest) first: the LAST ones are dropped when nothing matches
 
 
 def _attempts(terms):

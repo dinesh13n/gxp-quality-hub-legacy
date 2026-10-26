@@ -55,8 +55,10 @@ class TST_HUB_STG28_AiCapacity(unittest.TestCase):
 
     def test_TST_HUB_STG28_A02_no_ai_environment_or_configuration(self):
         """A02: the environment variables read by hub/ are exactly the operator ones (HUB_OPERATOR, HUB_NEW_USER_PASSWORD, HUB_RUN_PASSWORD, HUB_ANCHOR_SEAL_KEY and the test-only guards); none matches an AI word; the
-        configuration key set (DEFAULTS and KNOWN_KEYS, every depth) has no AI word."""
+        configuration key set (DEFAULTS and KNOWN_KEYS, every depth) has no AI word. Stage 44 (OD-40) exception, exactly two and nothing else: hub/adapters/azure_openai.py reads the four AZURE_OPENAI_* variables
+        (the optional advisory model client, off by default) and KNOWN_KEYS carries the one `ai` section (DEFAULTS still has none)."""
         names = set()
+        azure_names = set()
         for d, _, fns in os.walk(os.path.join(S.CODE_ROOT, "hub")):
             for fn in fns:
                 if not fn.endswith(".py"):
@@ -65,10 +67,13 @@ class TST_HUB_STG28_AiCapacity(unittest.TestCase):
                     if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr in ("get", "getenv", "pop") and n.args \
                             and isinstance(n.args[0], ast.Constant) and isinstance(n.args[0].value, str):
                         v = ast.unparse(n.func.value) if hasattr(ast, "unparse") else ""
-                        if "environ" in v or n.func.attr == "getenv":
+                        if ("environ" in v or n.func.attr == "getenv") and fn == "azure_openai.py" and os.path.basename(d) == "adapters":
+                            azure_names.add(n.args[0].value)
+                        elif "environ" in v or n.func.attr == "getenv":
                             names.add(n.args[0].value)
         self.assertTrue({"HUB_OPERATOR", "HUB_NEW_USER_PASSWORD", "HUB_RUN_PASSWORD"} <= names, sorted(names))
         self.assertEqual([x for x in names if AI_WORDS.search(x)], [])
+        self.assertEqual(azure_names, {"AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_DEPLOYMENT", "AZURE_OPENAI_API_VERSION", "AZURE_OPENAI_API_KEY"})
 
         def keys(o, acc):
             if isinstance(o, dict):
@@ -79,7 +84,10 @@ class TST_HUB_STG28_AiCapacity(unittest.TestCase):
                 for v in o:
                     keys(v, acc)
             return acc
-        allk = keys(hubconfig.DEFAULTS, []) + keys(hubconfig.KNOWN_KEYS, [])
+        known = dict((k, v) for k, v in hubconfig.KNOWN_KEYS.items() if k != "ai")
+        self.assertIn("ai", hubconfig.KNOWN_KEYS)
+        self.assertNotIn("ai", hubconfig.DEFAULTS)
+        allk = keys(hubconfig.DEFAULTS, []) + keys(known, [])
         self.assertTrue(allk)
         self.assertEqual([k for k in allk if AI_WORDS.search(k)], [])
 

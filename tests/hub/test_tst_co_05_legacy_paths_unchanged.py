@@ -45,11 +45,19 @@ class TST_CO_05_LegacyPathsUnchanged(unittest.TestCase):
         modification listed in tests/hub/non_add_edits.json with its work item and reason. Deletions / renames are never accepted;
         an allow-list entry may not name a legacy path."""
         with open(os.path.join(S.CODE_ROOT, "tests", "hub", "non_add_edits.json"), encoding="utf-8") as f:
-            edits = json.load(f)["edits"]
+            doc = json.load(f)
+        edits = doc["edits"]
         allowed = set()
         for e in edits:
             self.assertTrue(str(e.get("work_item", "")).strip() and str(e.get("reason", "")).strip(), e)
             self.assertTrue(e["path"].startswith(("hub/", "tests/hub/")), e["path"])
+            allowed.add(e["path"])
+        # Stage 44 (S44-DEV-01, OD-40): dated notes appended to existing project documents (never a rewrite of history) are listed the same way, under their own key; a path must be
+        # a document under docs/<stage folder>/ or .fde/ - never a legacy path (top-level docs/*.md, docs/correspondence, docs/decisions) and never code.
+        for e in doc.get("dated_doc_notes", []):
+            self.assertTrue(str(e.get("work_item", "")).strip() and str(e.get("reason", "")).strip(), e)
+            self.assertTrue(e["path"].startswith(("docs/", ".fde/")) and e["path"].count("/") >= (2 if e["path"].startswith("docs/") else 1), e["path"])
+            self.assertFalse(e["path"].startswith(("docs/correspondence", "docs/decisions")), e["path"])
             allowed.add(e["path"])
         p = git("diff", "--name-status", "main", "--")
         self.assertEqual(p.returncode, 0, p.stderr)

@@ -66,7 +66,7 @@ class TST_HUB_STG31_Static(unittest.TestCase):
                     users.append(rel)
         self.assertEqual(users, [], "Stage 31 modules are built but not wired (S31-DEV-01 / D-31-02)")
         edits = json.loads(read("tests/hub/non_add_edits.json"))
-        self.assertIn(edits["stage"], ("31", "30"))  # S30-DEV-04: each build stage resets the list; the Stage 30 list is pinned by STG30_D01, the Stage 31 list by this stage's own branch
+        self.assertIn(edits["stage"], ("31", "30", "44"))  # S30-DEV-04: each build stage resets the list; the Stage 30 list is pinned by STG30_D01, the Stage 31 list by this stage's own branch
 
     def test_TST_HUB_STG31_D02_artifacts_exist_with_structure(self):
         """D02: 12 artifacts, front matter (stage, artifact, version, date, author_agent, status, evidence_sources, supersedes), eight sections, status not APPROVED, label present."""

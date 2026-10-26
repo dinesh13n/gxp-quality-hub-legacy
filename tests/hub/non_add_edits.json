@@ -1,37 +1,86 @@
 {
  "schema": "hub-non-add-edits/v1",
- "stage": "30",
- "note": "Stage 30 (Release, Cutover and Rollback, BUILD): reset per OD-27 (S30-DEV-02). The add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason. Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD or VALIDATE stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06).",
+ "stage": "44",
+ "note": "Stage 44 (Optional Azure OpenAI Document Q&A, OFF by default, OD-40): reset per OD-27 (S44-DEV-02). The add-only rule (TST-CO-05 c) is kept: a non-add edit of an EXISTING hub / tests/hub file vs main is accepted when - and only when - it is listed here with the work item that requires it and the reason. Dated notes appended to existing project documents are listed under `dated_doc_notes` (S44-DEV-01; never a rewrite of history, only docs/<stage>/ or .fde/ paths). Legacy paths stay unchangeable (TST-CO-05 a / b). Deletions and renames are never accepted. The next BUILD or VALIDATE stage must replace this list with its own. No entry is an approval of any behaviour deviation (HAR-06) or of the AI element.",
  "edits": [
   {
    "path": "tests/hub/non_add_edits.json",
    "work_item": "OD-27 DW-05 (each build stage resets this list)",
-   "deviation": "S30-DEV-02",
-   "reason": "list reset for Stage 30"
+   "deviation": "S44-DEV-02",
+   "reason": "list reset for Stage 44"
   },
   {
    "path": "tests/hub/regression_groups.json",
-   "work_item": "Stage 30 regression groups",
-   "deviation": "S30-DEV-02",
-   "reason": "two groups appended (S30 = STG30, E30 = E30EGRESS); no existing group changed"
+   "work_item": "Stage 44 regression groups",
+   "deviation": "S44-DEV-02",
+   "reason": "two groups appended (S44 = STG44, E44 = E44EGRESS); no existing group changed"
   },
   {
-   "path": "hub/admin/cli.py",
-   "work_item": "F-29-01 (Stage 29 defect routed to Stage 30; C-3)",
-   "deviation": "S30-DEV-01",
-   "reason": "_Run.close: for verify-audit only, an unreadable anchor file no longer aborts the end-of-run anchor write with a traceback (exit 1); the run ends with the tamper exit code 17 and the anchor file is not appended to; all other commands keep the old behaviour"
+   "path": "hub/guards/egress.py",
+   "work_item": "OD-40 (the single permitted model path)",
+   "deviation": "S44-DEV-03",
+   "reason": "adds permit(host): inside the scope opened by hub/adapters/azure_openai.py the ONE validated Azure OpenAI host may be resolved and the addresses it resolved to may be connected to; _check / _getaddrinfo consult it; everything else stays refused and counted"
   },
   {
-   "path": "hub/security/audit.py",
-   "work_item": "F-29-01 (same defect, second shape)",
-   "deviation": "S30-DEV-01",
-   "reason": "verify(): an anchor line that is valid JSON but not an object raised TypeError and escaped the anchor_unreadable branch; TypeError and AttributeError are now caught with ValueError and KeyError"
+   "path": "hub/config.py",
+   "work_item": "OD-40 (config placeholders)",
+   "deviation": "S44-DEV-04",
+   "reason": "KNOWN_KEYS gains the closed `ai` section (enabled false by default; endpoint / deployment / api_version placeholders; caps); DEFAULTS is NOT changed, so no existing config hash moves"
+  },
+  {
+   "path": "hub/control/flags.py",
+   "work_item": "OD-40 (ai.enabled is a decision flag)",
+   "deviation": "S44-DEV-04",
+   "reason": "DECISION_FLAGS gains ai.enabled (default false): true needs approval_refs['ai.enabled'] (FF-2 rule 3)"
+  },
+  {
+   "path": "hub/obs/metrics.py",
+   "work_item": "OD-40 / Stage 32 tripwire",
+   "deviation": "S44-DEV-03",
+   "reason": "docstring and record_model_call docstring updated: the sensor is called only by hub/adapters/azure_openai.py when reached without the ai.enabled gate; no behaviour change"
+  },
+  {
+   "path": "tests/hub/test_tst_co_05_legacy_paths_unchanged.py",
+   "work_item": "OD-40 dated notes on existing documents",
+   "deviation": "S44-DEV-01",
+   "reason": "test c also accepts the paths listed under `dated_doc_notes` (docs/<stage>/ or .fde/ only, never legacy paths) as modified files; the code/test rule is unchanged"
+  },
+  {
+   "path": "tests/hub/test_tst_co_12_egress_tripwire.py",
+   "work_item": "OD-40 / Stage 32 tripwire",
+   "deviation": "S44-DEV-03",
+   "reason": "d: record_model_call call sites must be exactly hub/adapters/azure_openai.py (was: none)"
+  },
+  {
+   "path": "tests/hub/test_tst_hub_stg26_noai_walkthrough.py",
+   "work_item": "OD-40 No-AI R2 documented exceptions",
+   "deviation": "S44-DEV-03",
+   "reason": "D01: the network-client import set is exactly gateway_client.py and azure_openai.py (was gateway_client.py only)"
+  },
+  {
+   "path": "tests/hub/test_tst_hub_stg27_findings.py",
+   "work_item": "OD-40 config key set",
+   "deviation": "S44-DEV-04",
+   "reason": "F05: the expected closed top-level key set also contains `ai`"
+  },
+  {
+   "path": "tests/hub/test_tst_hub_stg28_ai_capacity.py",
+   "work_item": "OD-40 AI environment / config words",
+   "deviation": "S44-DEV-03",
+   "reason": "A02: the AZURE_OPENAI_* reads of hub/adapters/azure_openai.py and the `ai` config section are the two named exceptions; all other env names and config keys stay free of AI words"
+  },
+  {
+   "path": "tests/hub/test_tst_hub_stg30_static_docs.py",
+   "work_item": "OD-27 DW-05 (list reset by Stage 44)",
+   "deviation": "S44-DEV-02",
+   "reason": "D01 pinned the non-add list to the Stage 30 one; it now accepts stage 30 or 44"
   },
   {
    "path": "tests/hub/test_tst_hub_stg31_static_docs.py",
-   "work_item": "OD-27 DW-05 (list reset by Stage 30)",
-   "deviation": "S30-DEV-04",
-   "reason": "D01 pinned the non-add list to the Stage 31 one; after the per-stage reset it accepts stage 30 or 31 (the Stage 30 list is pinned by STG30_D01)"
+   "work_item": "OD-27 DW-05 (list reset by Stage 44)",
+   "deviation": "S44-DEV-02",
+   "reason": "D01 accepts stage 31, 30 or 44 for the current list"
   }
- ]
+ ],
+ "dated_doc_notes": []
 }

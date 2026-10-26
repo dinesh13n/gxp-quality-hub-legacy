@@ -56,7 +56,9 @@ class TST_HUB_STG26_NoAI(unittest.TestCase):
                     if hit:
                         found[os.path.relpath(os.path.join(dp, f), S.CODE_ROOT)] = hit
         # the ONE documented exception: the loopback-only, GET-only gateway adapter (ADR-002 R2, AD-04); it is not a model client and its URL guard is probed below
-        self.assertEqual(found, {"hub/adapters/gateway_client.py": ["urllib.request"]}, "client library imported in hub/ outside the documented adapter")
+        # Stage 44 (OD-40): the second documented exception is the optional advisory model client (off by default, https to an Azure OpenAI host only, loopback for the local fake)
+        self.assertEqual(found, {"hub/adapters/azure_openai.py": ["urllib.request"], "hub/adapters/gateway_client.py": ["urllib.request"]},
+                         "client library imported in hub/ outside the documented adapters")
         from hub.adapters import gateway_client
         from hub.intake.errors import UrlSchemeRefused
         refused = 0

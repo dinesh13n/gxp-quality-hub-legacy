@@ -69,8 +69,9 @@ class TST_HUB_STG30_Static(unittest.TestCase):
                     users.append(rel)
         self.assertEqual(users, [], "hub.release is a stand-alone tool: nothing in the product imports it (S30-DEV-03)")
         edits = T.read_json(os.path.join(S.CODE_ROOT, "tests", "hub", "non_add_edits.json"))
-        self.assertEqual(edits["stage"], "30")
-        self.assertEqual(sorted(e["path"] for e in edits["edits"]), EXPECTED_EDITS)
+        self.assertIn(edits["stage"], ("30", "44"))  # S44-DEV-02: each build stage resets the list; the Stage 30 list is pinned here only while it is the current one
+        if edits["stage"] == "30":
+            self.assertEqual(sorted(e["path"] for e in edits["edits"]), EXPECTED_EDITS)
 
     def test_TST_HUB_STG30_D02_artifacts_exist_with_structure(self):
         """D02: 11 artifacts, front matter keys, eight sections, status not APPROVED, synthetic label, stage 30."""
