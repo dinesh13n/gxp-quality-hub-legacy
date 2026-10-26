@@ -30,8 +30,8 @@ class _Base(unittest.TestCase):
         self.addCleanup(st.close)
         return st
 
-    def fake(self, mode="ok", **kw):
-        f = T.FakeAoai(mode, **kw)
+    def fake(self, mode="ok", key=None, **kw):
+        f = T.FakeAoai(mode, key, **kw)
         f.__enter__()
         self.addCleanup(f.__exit__)
         return f
